@@ -89,7 +89,7 @@
     </Reference>
     <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\eProjectWeb\ExternalAssemblies\Newtonsoft.Json.dll</HintPath>
+      <HintPath>..\..\..\Releases\eLog.Base\v7.2.0.0\Binaries\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />

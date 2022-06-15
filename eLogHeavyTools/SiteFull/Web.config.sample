@@ -9,17 +9,17 @@
 -->
 <configuration xmlns="http://schemas.microsoft.com/.NetConfiguration/v2.0">
     <appSettings>
-        <add key="LangFolder" value="..\Site\Lang\;..\..\..\CodaInt\Bank\Base\Site\Lang\;..\..\Finance\Coda\Site\Lang\;..\..\..\CodaInt\Base\Site\Lang\;..\..\Finance\Base\Site\Lang\;..\..\Base\Site\Lang\;%FINREPSVN%\U4Reports\Base\Lang\"/>
-        <add key="XmlFolder" value="..\Site\Xml\;..\..\..\CodaInt\Bank\Base\Site\Xml\;..\..\Finance\Coda\Site\Xml\;..\..\..\CodaInt\Base\Site\Xml\;..\..\Finance\Base\Site\Xml\;..\..\Base\Site\Xml\;%FINREPSVN%\U4Reports\Base\Xml\"/>
-        <add key="ColorizerFolder" value="..\Site\GridColors\;..\..\..\CodaInt\Bank\Base\Site\GridColors\;..\..\..\CodaInt\Base\Site\GridColors\;..\..\Finance\Base\Site\GridColors\;..\..\Base\Site\GridColors\"/>
-        <add key="ReportFolder" value="..\Site\Reports\;..\..\..\CodaInt\Bank\Base\Site\Reports\;..\..\Finance\Coda\Site\Reports\;..\..\..\CodaInt\Base\Site\Reports\;..\..\Finance\Base\Site\Reports\;..\..\Base\Site\Reports\;%FINREPSVN%\U4Reports\Base\Reports\"/>
-        <add key="LogFolder" value="Log"/>
+		<add key="LangFolder" value="..\Site\Lang\;..\..\..\Releases\Bank.Base\v7.2.0.0\Site\Lang\;..\..\..\Releases\eLog.Finance.CODA\v7.0.0.0\Site\Lang\;..\..\..\Releases\CodaInt.Base\v7.0.0.0\Site\Lang\;..\..\..\Releases\eLog.Finance.Base\v7.0.0.0\Site\Lang\;..\..\..\Releases\eLog.Base\v7.2.0.0\Site\Lang\;d:\Projects\Calliditas\eLog_SVN\U4Reports\HeavyTools\Lang\;d:\Projects\Calliditas\eLog_SVN\U4Reports\Base\Lang\"/>
+		<add key="XmlFolder" value="..\Site\Xml\;..\..\..\Releases\Bank.Base\v7.2.0.0\Site\Xml\;..\..\..\Releases\eLog.Finance.CODA\v7.0.0.0\Site\Xml\;..\..\..\Releases\CodaInt.Base\v7.0.0.0\Site\Xml\;..\..\..\Releases\eLog.Finance.Base\v7.0.0.0\Site\Xml\;..\..\..\Releases\eLog.Base\v7.2.0.0\Site\Xml\;d:\Projects\Calliditas\eLog_SVN\U4Reports\HeavyTools\Xml\;d:\Projects\Calliditas\eLog_SVN\U4Reports\Base\Xml\"/>
+		<add key="ColorizerFolder" value="..\Site\GridColors\;..\..\..\Releases\Bank.Base\v7.2.0.0\Site\GridColors\;..\..\..\Releases\eLog.Finance.CODA\v7.0.0.0\Site\GridColors\;..\..\..\Releases\CodaInt.Base\v7.0.0.0\Site\GridColors\;..\..\..\Releases\eLog.Finance.Base\v7.0.0.0\Site\GridColors\;..\..\..\Releases\eLog.Base\v7.2.0.0\Site\GridColors\"/>
+		<add key="ReportFolder" value="..\Site\Reports\;..\..\..\Releases\Bank.Base\v7.2.0.0\Site\Reports\;..\..\..\Releases\eLog.Finance.CODA\v7.0.0.0\Site\Reports\;..\..\..\Releases\CodaInt.Base\v7.0.0.0\Site\Reports\;..\..\..\Releases\eLog.Finance.Base\v7.0.0.0\Site\Reports\;..\..\..\Releases\eLog.Base\v7.2.0.0\Site\Reports\;d:\Projects\Calliditas\eLog_SVN\U4Reports\HeavyTools\Reports\;d:\Projects\Calliditas\eLog_SVN\U4Reports\Base\Reports\"/>
+		<add key="LogFolder" value="Log"/>
         <add key="ReportTempFolder" value="Temp"/>
-        <add key="ScriptsFolder" value="..\..\..\eProjectWeb\Site\Scripts\;..\..\..\eProjectWeb\Site\Scripts.dev\"/>
-        <add key="CssFolder" value="..\..\..\eProjectWeb\Site\Styles\;.\"/>
-        <add key="StylesFolder" value="..\..\..\eProjectWeb\Site\Images\"/>
-        <add key="FontsFolder" value="..\..\..\eProjectWeb\Site\Fonts\"/>
-        <add key="ScriptsCompress" value="False" />
+		<add key="ScriptsFolder" value="..\..\..\Releases\eLog.Base\v7.2.0.0\SiteFull\Scripts\;..\..\..\Releases\eLog.Base\v7.2.0.0\SiteFull\Scripts.dev\"/>
+		<add key="CssFolder" value="..\..\..\Releases\eLog.Base\v7.2.0.0\SiteFull\Styles\;.\"/>
+		<add key="StylesFolder" value="..\..\..\Releases\eLog.Base\v7.2.0.0\SiteFull\Images\"/>
+		<add key="FontsFolder" value="..\..\..\Releases\eLog.Base\v7.2.0.0\SiteFull\Fonts\"/>
+		<add key="ScriptsCompress" value="False" />
         <add key="ShowClock" value="True" />
         <add key="RSAPrivateKey" value="RSAPrivateKey.xml" />
 

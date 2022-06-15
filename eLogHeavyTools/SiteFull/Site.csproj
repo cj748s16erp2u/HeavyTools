@@ -84,27 +84,31 @@
     <Reference Include="eProjectWeb.Framework">
       <HintPath>..\..\..\..\Releases\eLog.Base\v7.2.0.0\Binaries\eProjectWeb.Framework.dll</HintPath>
     </Reference>
-    <Reference Include="eProjectWeb.Framework.Package.Zip, Version=7.0.8201.27334, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\..\..\Releases\eLog.Base\v7.2.0.0\Binaries\eProjectWeb.Framework.Package.Zip.dll</HintPath>
+    <Reference Include="eProjectWeb.Framework.Package.Zip, Version=7.0.8201.29976, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\..\Releases\eLog.Base\v7.2.0.0\Binaries\eProjectWeb.Framework.Package.Zip.dll</HintPath>
     </Reference>
-    <Reference Include="eProjectWeb.Framework.Reports.CR, Version=7.0.8201.27334, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\..\..\Releases\eLog.Base\v7.2.0.0\Binaries\eProjectWeb.Framework.Reports.CR.dll</HintPath>
+    <Reference Include="eProjectWeb.Framework.Reports.CR, Version=7.0.8201.29976, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\..\Releases\eLog.Base\v7.2.0.0\Binaries\eProjectWeb.Framework.Reports.CR.dll</HintPath>
     </Reference>
-    <Reference Include="eProjectWeb.Framework.Reports.Csv, Version=7.0.8201.27334, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\..\..\Releases\eLog.Base\v7.2.0.0\Binaries\eProjectWeb.Framework.Reports.Csv.dll</HintPath>
+    <Reference Include="eProjectWeb.Framework.Reports.Csv, Version=7.0.8201.29976, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\..\Releases\eLog.Base\v7.2.0.0\Binaries\eProjectWeb.Framework.Reports.Csv.dll</HintPath>
     </Reference>
-    <Reference Include="eProjectWeb.Framework.Reports.SSRS, Version=7.0.8201.27334, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\..\..\Releases\eLog.Base\v7.2.0.0\Binaries\eProjectWeb.Framework.Reports.SSRS.dll</HintPath>
+    <Reference Include="eProjectWeb.Framework.Reports.SSRS, Version=7.0.8201.29976, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\..\Releases\eLog.Base\v7.2.0.0\Binaries\eProjectWeb.Framework.Reports.SSRS.dll</HintPath>
     </Reference>
-    <Reference Include="eProjectWeb.Framework.Reports.Xls, Version=7.0.8201.27334, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\..\..\Releases\eLog.Base\v7.2.0.0\Binaries\eProjectWeb.Framework.Reports.Xls.dll</HintPath>
+    <Reference Include="eProjectWeb.Framework.Reports.Xls, Version=7.0.8201.29976, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\..\Releases\eLog.Base\v7.2.0.0\Binaries\eProjectWeb.Framework.Reports.Xls.dll</HintPath>
     </Reference>
-    <Reference Include="eProjectWeb.Framework.Reports.Xlsx, Version=7.0.8201.27334, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\..\..\Releases\eLog.Base\v7.2.0.0\Binaries\eProjectWeb.Framework.Reports.Xlsx.dll</HintPath>
+    <Reference Include="eProjectWeb.Framework.Reports.Xlsx, Version=7.0.8201.29976, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\..\Releases\eLog.Base\v7.2.0.0\Binaries\eProjectWeb.Framework.Reports.Xlsx.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.ReportViewer.WebForms, Version=12.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\eProjectWeb\Report.SSRS\lib\12.0.2402.20\Microsoft.ReportViewer.WebForms.dll</HintPath>
+      <HintPath>..\..\..\Releases\eLog.Base\v7.2.0.0\Binaries\Microsoft.ReportViewer.WebForms.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\Releases\eLog.Base\v7.2.0.0\Binaries\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
