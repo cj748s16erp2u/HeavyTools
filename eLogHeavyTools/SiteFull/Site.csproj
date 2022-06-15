@@ -66,6 +66,9 @@
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="BitFactory.Logging">
+      <HintPath>..\..\..\Releases\eLog.Base\v7.2.0.0\Binaries\BitFactory.Logging.dll</HintPath>
+    </Reference>
     <Reference Include="CodaInt.Base">
       <HintPath>..\..\..\..\Releases\CodaInt.Base\v7.0.0.0\Binaries\CodaInt.Base.dll</HintPath>
     </Reference>
@@ -109,6 +112,10 @@
     <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\Releases\eLog.Base\v7.2.0.0\Binaries\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="org.in2bits.MyXls, Version=0.6.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\Releases\eLog.Base\v7.2.0.0\Binaries\org.in2bits.MyXls.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
