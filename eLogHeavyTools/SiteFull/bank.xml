@@ -1,0 +1,7 @@
+<Bank>
+  <DLLPath>..\..\..\CodaInt\eFwIntf\Main\bin\Debug\</DLLPath>
+  <Login>SUPERUSER</Login>
+  <DateFormat>yyyy. MM. dd</DateFormat>
+  <TimeFormat>H:mm:ss</TimeFormat>
+  <DirectoryStructureFolder>..\Site\eFw</DirectoryStructureFolder>
+</Bank>

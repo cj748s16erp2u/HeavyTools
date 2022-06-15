@@ -1,0 +1,41 @@
+$ptel=Privát telefon
+
+$oldcode=Régi kód
+$glnnum=GLN szám
+$bname=Épület neve
+
+$wsemail=Weshop email
+$secpaymid=Másodlagos fiz. mód
+$secpaycid=Másodlagos fiz. felt.
+$invlngid=Számla nyelve
+
+$action_partnerimport=Partner betöltés
+$err_partnerimport_missingsettings=Hiányzó beállítás: {0}
+$partnerimport=Partner betöltés
+
+$err_partnervatnum_not_unique=A megadott adószám a következő partner által már használva van ({0})
+$foundpartner= | partner: {0} - {1}
+
+; eredmény fájl oszlopok
+$filename=Import fájl
+$logfilename=Log fájl
+$errfilename=Hibajegyzés
+$error=Hiba
+$errors=Hibák
+$exceptions=Krtikus
+$entity=Adat típus
+$partner=Partner
+$partnaddr=Cím
+$partnaddrcmp=Cím - vállalat
+$partnbank=Bank
+$partnbankcmp=Bank - vállalat
+$import_title=Beolvasás
+$importresult_processedrows={0} sorból {1} beolvasása volt sikeres.
+$importresult_savedrows={0} beolvasott sorból {1} mentése volt sikeres.
+$importresult_ok={0} sor feldolgozása hiba nélkül befejeződött.
+$importresult_message={0}: {1}
+$import_columnname_not_unique=A következő oszlop nevek többször kerültek meghatározásra: {0}
+$import_invalidfieldvalue=A '{0}.{1}' mezőbe a '{2}' érték nem menthető\n{3}
+$import_invalidfield=A következő mező '{1}' nem található a '{0}' táblában
+$import_importresult=Beolvasás eredménye
+$import_importresult_ok=OK

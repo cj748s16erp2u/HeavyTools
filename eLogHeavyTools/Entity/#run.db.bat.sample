@@ -1,0 +1,2 @@
+@echo off
+..\..\Base\Entity\EntityGenerator.exe -T ..\..\Base\Entity\EntityTemplate.txt -CF ConfigFile.csv -M ..\..\..\eProjectWeb\Tools.Bin\EntityDB2PDM\eLog_Physical_v1.0.pdm -SF Generated -CCC missing.csv

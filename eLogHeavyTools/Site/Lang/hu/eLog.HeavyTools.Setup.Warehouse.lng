@@ -1,0 +1,40 @@
+﻿; Zóna
+$tabName_OlcWhZone=Zóna
+
+$noroot_OlcWhZone=A zónák megtekintéséhez kérem válasszon egy raktárat!
+
+$group_warehouseinfo=Raktár
+$whid_=Raktár
+
+$whzoneid=Azon.
+$whzonecode=Kód
+$pickingtype=Szedés módja
+$pickingcartaccessible=Szedőkocsi bevihető
+$isbackground=Háttér
+$ispuffer=Puffer
+$olcwhzone_location_defaults=Helykód alapértelmezés
+$locdefvolume=Térfogat (m3)
+$locdefoverfillthreshold=Túltöltési küszöb (%)
+$locdefismulti=Csak egy cikk
+
+$validation_error_unique_whzone=A(z) "{0}" mező alapján a zóna nem egyedi
+
+; Helykód
+$tabName_OlcWhLocation=Helykód
+
+$group_whzoneinfo=Zóna
+$whzonecode_=Zóna
+$whzonename=Zóna név
+
+$noroot_OlcWhLocation=A helykódok megtekintéséhez kérem válasszon egy raktárat vagy egy zónát!
+
+$whloccode=Kód
+$loctype=Helykód típus
+$movloctype=Mozgó típus
+$volume=Térfogat (m3)
+$overfillthreshold=Túltöltési küszöb (%)
+$ismulti=Csak egy cikk
+$crawlorder=Bejárási sorrend
+$capacity=Kapacitás
+$capunitid=M.egys.
+$whlocid=Azon.

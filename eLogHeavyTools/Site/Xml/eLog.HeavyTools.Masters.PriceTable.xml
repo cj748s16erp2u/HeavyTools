@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Schema xmlns="http://tempuri.org/RenderableSchema.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://tempuri.org/RenderableSchema.xsd RenderableSchema.xsd">
+  <Search Name="OlcPrctableSearchProvider">
+    <Column FieldName="prcid" PKFieldName="prcid" Hidden="true" Width="100" />
+    <Column FieldName="name" Width="130" />
+    <Column FieldName="ptid" Width="150" Align="Left" FieldFunction="listlookup" FieldFuncArg="eLog.HeavyTools.Setup.PriceTable.OlcPrcTypeList" />
+    <Column FieldName="startdate" Width="80" format="D" DisplayName="$startdate2" />
+    <Column FieldName="enddate" Width="80" format="D" DisplayName="$enddate2" />
+    <Column FieldName="curid" Width="60" />
+	
+    <Column FieldName="prc" Width="100" format="C2" />
+    <Column FieldName="code" Width="80" />
+
+    <Column FieldName="isid" Width="100" Align="Left" FieldFunction="listlookup" FieldFuncArg="eLog.HeavyTools.Masters.Item.Season.OlcItemSeasonList" />
+    <Column FieldName="icid" Width="100" Align="Left" FieldFunction="listlookup" FieldFuncArg="eLog.HeavyTools.Masters.Item.Color.OlcItemColorList" />
+    <Column FieldName="itemcode" Width="130" />
+    <Column FieldName="name01" Width="200" />
+    <Column FieldName="pname" Width="200" />
+    <Column FieldName="aname" Width="200" />    <Column FieldName="imid" Width="100" Align="Left" FieldFunction="listlookup" FieldFuncArg="eLog.HeavyTools.Masters.Item.Model.OlcItemModelAllList" />
+    <Column FieldName="delstat" Width="60" Align="Left" FieldFunction="listlookup" FieldFuncArg="eLog.Base.Setup.Parameters.DelstatTypeList,abbr" />
+  </Search>
+  <TabPage Name="OlcPrctableSearchTab">
+    <SearchFilterBar ID="SrcBar">
+      <Combo Field="ptid" Width="100" ListID="eLog.HeavyTools.Setup.PriceTable.OlcPrcTypeList" width="100" />
+      <Textbox Field="partnname" Width="150" />
+      <Textbox Field="addrname" Width="150" />
+      <DatePickerbox Field="date" Width="100" width="100" />
+      <ForceNextRow />
+      <Combo Field="curid" Width="100" ListID="eLog.Base.Setup.Currency.CurrencyList" width="100" />
+      <Combo Field="imid" ListID="eLog.HeavyTools.Masters.Item.Model.OlcItemModelAllList" ComboFlags="None" />
+      <Combo Field="isid" ListID="eLog.HeavyTools.Masters.Item.Season.OlcItemSeasonList" ComboFlags="None" />
+      <Combo Field="icid" ListID="eLog.HeavyTools.Masters.Item.Color.OlcItemColorList" ComboFlags="None" />
+      <ForceNextRow />
+      <Textbox Field="itemcode" Width="150" />
+      <Textbox Field="itemname" Width="150" />
+      <Combo Field="delstat" Width="100" ListID="eLog.Base.Setup.Parameters.DelstatTypeList" ComboFlags="AllowBlank AutoSelectFirst" />
+    </SearchFilterBar>
+    <Grid ID="searchResults" Label="$search_results" ColsToSpan="-1" />
+  </TabPage>
+  <TabPage Name="OlcPrctableEditTab">
+    <LayoutTable ControlGroup="OlcPrctable" Columns="{135, None}; {180, None}; {20, Empty}; {90, None}; {180, None};" ID="EditGroup1">
+      <Combo Field="ptid" Width="100" ListID="eLog.HeavyTools.Setup.PriceTable.OlcPrcTypeList" width="100" />
+      <ForceNextRow />
+      <DatePickerbox Field="startdate" Width="100" width="100" />
+      <ForceNextRow />
+      <DatePickerbox Field="enddate" Width="100" width="100" />
+      <ForceNextRow />
+      <Combo Field="curid" Width="100" ListID="eLog.Base.Setup.Currency.CurrencyList" width="100" />
+      <ForceNextRow />
+      <Combo Field="imid" ListID="eLog.HeavyTools.Masters.Item.Model.OlcItemModelAllList" ComboFlags="None" />
+      <ForceNextRow />
+      <Numberbox Field="prc" DecDigits="2" ThousandSep="True" />
+    </LayoutTable>
+    <LayoutTable ControlGroup="OlcPrctable3" Columns="{135, None}; {180, None}; {20, Empty}; {90, None}; {180, None};" ID="EditGroup3">
+      <Combo Field="isid" ListID="eLog.HeavyTools.Masters.Item.Season.OlcItemSeasonList" ComboFlags="None" />
+      <ForceNextRow />
+      <Combo Field="icid" ListID="eLog.HeavyTools.Masters.Item.Color.OlcItemColorList" ComboFlags="None" />
+      <ForceNextRow />
+      <Selector Field="itemid" Label="$itemid_code" ValueField="itemid" TextField="itemcode" SelectionID="eLog.Base.Masters.Item.ItemSelectionProvider" />
+      <Selector Field="itemid" Label="$itemid_name1" ValueField="itemid" TextField="name01" SelectionID="eLog.Base.Masters.Item.ItemSelectionProvider" />
+    </LayoutTable>
+    <LayoutTable ControlGroup="OlcPrctable2" Columns="{135, None}; {180, None}; {20, Empty}; {90, None}; {180, None};" ID="EditGroup2">
+      <Selector Field="partnid" Label="$partn_code" ValueField="partnid" TextField="partncode" SelectionID="eLog.Base.Masters.Partner.PartnerSelectionProvider" />
+      <ForceNextRow />
+      <Selector Field="partnid" Label="$partn_name" ValueField="partnid" TextField="name" SelectionID="eLog.Base.Masters.Partner.PartnerSelectionProvider" ColsToSpan="3" />
+      <ForceNextRow />
+      <Combo Field="addrid" ListID="eLog.Base.Masters.Partner.PartnAddrList" DependentField="partnid" DependentCtrlID="partnid_partncode" ColsToSpan="3" />
+    </LayoutTable>
+  </TabPage>
+  <TabPage Name="OlcPrctableSearchTab2">
+	<Control ControlType="ItemSearchTab3Info" ID="ItemSearchTab3Info" />
+    <SearchFilterBar ID="SrcBar">
+      <Combo Field="ptid" Width="100" ListID="eLog.HeavyTools.Setup.PriceTable.OlcPrcTypeList" width="100" />
+      <Textbox Field="partnname" Width="150" />
+      <Textbox Field="addrname" Width="150" />
+      <DatePickerbox Field="date" Width="100" width="100" />
+      <ForceNextRow />
+      <Combo Field="curid" Width="100" ListID="eLog.Base.Setup.Currency.CurrencyList" width="100" />
+      <Combo Field="isid" ListID="eLog.HeavyTools.Masters.Item.Season.OlcItemSeasonList" ComboFlags="None" />
+      <Combo Field="icid" ListID="eLog.HeavyTools.Masters.Item.Color.OlcItemColorList" ComboFlags="None" />
+      <ForceNextRow />
+      <Textbox Field="itemcode" Width="150" />
+      <Textbox Field="itemname" Width="150" />
+      <Combo Field="delstat" Width="100" ListID="eLog.Base.Setup.Parameters.DelstatTypeList" ComboFlags="AllowBlank AutoSelectFirst" />
+    </SearchFilterBar>
+    <Grid ID="searchResults" Label="$search_results" ColsToSpan="-1" />
+  </TabPage>
+</Schema>

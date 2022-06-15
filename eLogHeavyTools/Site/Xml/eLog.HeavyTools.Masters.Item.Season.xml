@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Schema xmlns="http://tempuri.org/RenderableSchema.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://tempuri.org/RenderableSchema.xsd RenderableSchema.xsd">
+  <Search Name="OlcItemSeasonSearchProvider">
+    <Column FieldName="isid" PKFieldName="isid" Hidden="false" Width="100" />
+    <Column FieldName="name" Width="130" />
+	<Column FieldName="delstat" Width="60" Align="Left" FieldFunction="listlookup" FieldFuncArg="eLog.Base.Setup.Parameters.DelstatTypeList,abbr" />
+  </Search>
+  <TabPage Name="OlcItemSeasonSearchTab">
+    <SearchFilterBar ID="SrcBar">
+      <Textbox Field="isid" Width="100" />
+      <Textbox Field="name" Width="150" />
+      <Combo Field="delstat" Width="100" ListID="eLog.Base.Setup.Parameters.DelstatTypeList" ComboFlags="AllowBlank AutoSelectFirst" />
+    </SearchFilterBar>
+    <Grid ID="searchResults" Label="$search_results" ColsToSpan="-1" />
+  </TabPage>
+  <TabPage Name="OlcItemSeasonEditTab">
+    <LayoutTable ControlGroup="OlcItemSeason" Columns="{135, None}; {180, None}; {20, Empty}; {90, None}; {180, None};" ID="EditGroup1">
+      <Textbox Field="isid" />
+      <ForceNextRow />
+      <Textbox Field="name" />
+      <ForceNextRow />
+    </LayoutTable>
+  </TabPage>
+</Schema>

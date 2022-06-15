@@ -1,0 +1,20 @@
+﻿[
+  {
+    "outputFile": "../../../eProjectWeb/Site/Styles/CODAstyle.css",
+    "inputFile": "../../../eProjectWeb/Site/Styles.dev/CODAstyle.less",
+    "minify": {
+      "enabled": true,
+      "gzip": false,
+      "commentMode": "all"
+    }
+  },
+  {
+    "outputFile": "../../../eProjectWeb/Site/Styles/style.css",
+    "inputFile": "../../../eProjectWeb/Site/Styles.dev/style.less",
+    "minify": {
+      "enabled": true,
+      "gzip": false,
+      "commentMode": "all"
+    }
+  }
+]

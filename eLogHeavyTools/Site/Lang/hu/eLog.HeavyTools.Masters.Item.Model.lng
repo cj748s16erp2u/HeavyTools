@@ -1,0 +1,40 @@
+$pageName_OlcItemModel=Modell
+$tabName_OlcItemModel=Modell
+
+
+$code=Kód
+$imgid=Cikk főcsoport
+$exclusivetype=Exkluzív jel
+$volume=Térfogat (m<sup>3</sup>)
+
+
+$colortype=Szín
+$colorname=Szín neve
+$xx=
+
+
+$item_matrix_tabname=Modell szezon-színállás
+
+
+$action_build=Mátrix megnyitása
+$action_savechange=Mátrix mentése
+$action_nosave=Mátrix bezárása
+
+$tabName_OlcItemModelSeason=Modell szezon-színállás
+
+$modelsessionmatrixtitle=Szezonok
+$modelsessiongrouptitle=2
+$modelsessionmatrixsingtitle=3
+$modelsessiontoottitle=Modell adatok
+			
+$modelMatrixResultTitle=Modell szezon-színállás eredmény
+$modelMatrixResult={0} db elem változott, {1} db jött létre
+
+$imid=Modell
+
+$group_modelinfo=Modell adatok
+
+$tabName_itemsearch=Cikkek
+
+
+$noroot=Nincs modell kiválasztva

@@ -1,0 +1,41 @@
+$notletter=Csak betű lehet
+
+$pageName_OlcItemMainGroupType1=Főcsoport típus 1.
+$tabName_OlcItemMainGroupType1=Főcsoport típus 1.
+$imgt1id=Főcs.t.1.
+$groupname=Megnevezés
+$grouplastnum=U.s.szám
+
+$imgt2id=Főcs.t.2.
+$pageName_OlcItemMainGroupType2=Főcsoport típus 2.
+$tabName_OlcItemMainGroupType2=Főcsoport típus 2.
+
+$pageName_OlcItemSizeRange=Méretsor fej
+$tabName_OlcItemSizeRange=Méretsor fej
+$tabName_OlcItemSizeRangeLine=Méretsor
+
+$group_olcitemsizerange=Méretsor fej
+
+$code=Kód
+
+$noroot=Nincs méretsor fej kiválasztva
+
+$size=Méret
+
+$ordernum=Sorrend
+ 
+$pageName_OlcItemMainGroup=Cikk főcsoport
+$tabName_OlcItemMainGroup=Cikk főcsoport
+
+$isrhid=Méretsor
+
+$oldcode=Régi kód
+
+$itemmaingrouptoolong=Nincs több sorszám!
+
+$isrhname=Méretsor
+$groupname2=Főcs.t.2.
+
+$duplicaterecord=Már szerepel ilyen azonosító
+
+$colortype=Szín

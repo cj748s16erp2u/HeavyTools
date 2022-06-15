@@ -1,0 +1,103 @@
+﻿<?xml version="1.0"?>
+<configuration xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../eProjectWeb/Schemas/customsettings.xsd">
+  <!-- Financials v14 SSL certificate hash -->
+  <add key="ValidSSLCertificates" value="x" />
+  <!-- Financials v14 - Remove XMLi response namespaces -->
+  <add key="codalink-xmlremovenamespaces-enabled" value="True" />
+
+  <!-- WSInterface - WebService eseteben melyik adatbazis katalogust (databases.config) kell hasznalni? Ha nincs megadva, akkor az elsot hasznalja -->
+  <!--<add key="WSInterface-DBCatalog" value="Test" />-->
+
+  <!-- Partnertorzs - Finance (CODA) feladással kapcsolatos gombok láthatósága (1-Feladas, 2-Ujrafeladas, 4-Feladas/ujrafeladas, 8-Feladas..., 16-Torles, 32-Osszes uj feladasa, 64-(Ujra)atvetel) -->
+  <add key="PartnerCODAButtons" value="28" />
+
+  <!-- Szallitoi szamla - Szallitoi rendeles egyeztetes tulteljesitesenek megengedett erteke -->
+  <add key="CostLine-PordOverload-Limit" value="1" />
+  <!-- Szallitoi szamla - Szallitoi rendeles egyeztetes - Milyen koltsegtipusok szamitanak bele az egyenlegbe? Tobb is megadhato szokozzel, vesszovel, | jellel elvalasztva -->
+  <add key="CostLine-PordOverload-CostType" value="BAR" />
+  <!-- Szallitoi szamla jogositas/egyeztetes - Partner egyezoseg vizsgalat (szamla - bevet/rendeles) -->
+  <add key="CostLine-PartnerCheck" value="false" />
+  <!-- Szallitoi szamla jogositas/egyeztetes - Partner egyezoseg vizsgalat (szamla - bevet/rendeles) - Keszletmozgas eseten milyen koltsegtipusu sorokat kell ellenorizni? Tobb is megadhato szokozzel, vesszovel, | jellel elvalasztva -->
+  <add key="CostLine-PartnerCheck-StockTranCostType" value="BAR" />
+
+  <!-- Szallitoi rendeles javahagyas e-mail kuldes - Felado e-mail cim -->
+  <add key="pordapprovalemail-senderaddr" value="valaki@akarki.hu" />
+  <!-- Szallitoi rendeles javahagyas e-mail kuldes - Masolat minden e-mailrol -->
+  <!--<add key="pordapprovalemail-bccaddr" value="valaki@akarki.hu" />-->
+  <!-- Szallitoi rendeles javahagyas e-mail kuldes - Tiltas -->
+  <add key="pordapprovalemail-disabled" value="false" />
+  <!-- Szallitoi rendeles javahagyas e-mail kuldes - Muvelet (save, send, save&send) -->
+  <add key="pordapprovalemail-operation" value="save" />
+
+  <!-- Szallitoi rendeles - Partner modosithato akkor is, ha mar van tetel -->
+  <add key="PordPartnerModifiable" value="true" />
+  <!-- Szallitoi rendeles - Penznem modosithato akkor is, ha mar van tetel -->
+  <add key="PordCurrencyModifiable" value="true" />
+  <!-- Szallitoi rendeles - Cikkszam modosithato -->
+  <add key="PordItemModifiable" value="true" />
+
+  <!-- Penzugyi egyeztetes - XMLi naplozasa -->
+  <add key="Finance-DocMatch-LogXMLi" value="true" />
+
+  <!-- Szallitoi szamla eloleg beszamitas: elkuldott XMLi kerest es valaszt, mentse-e a temp konyvtarba (DEBUG funkcio, nem logolas) -->
+  <add key="MatchingRequest-PinvMatching-SaveToFile" value="false" />
+
+  <!-- Pénztárban bankkártyával kifizetett vevői számla referencia jelelölés: elkuldott XMLi kerest es valaszt, mentse-e a temp konyvtarba (DEBUG funkcio, nem logolas) -->
+  <add key="PCashRequest-Linkeddocchange-SaveToFile" value="false" />
+
+  <!-- NAV Online Szamla -->
+  <!--<add key="NAVOnlineInvoice-Enabled" value="false" />-->
+  <add key="NAVOnlineInvoice-SaveXMLOnly" value="true" />
+  <!-- live | test -->
+  <add key="NAVOnlineInvoice-ConnType" value="test" />
+  <add key="NAVOnlineInvoice-SchemaPath" value="..\..\Base\Site\Other\NAV\" />
+  <!-- NAV 2.0 -->  
+  <add key="NAVOnlineInvoice-SchemaApiPath" value="..\..\Base\Site\Other\NAV\invoiceApi.xsd" />
+  <add key="NAVOnlineInvoice-SchemaDataPath" value="..\..\Base\Site\Other\NAV\invoiceData.xsd" />
+
+  <add key="NAVOnlineInvoice-AutoSenderPath" value=".\NAVAutoSender" />
+  <add key="NAVOnlineInvoice-AutoSender" value="off" />
+  <add key="NAVOnlineInvoice-AutoSender-Login" value="elog user" />
+  <add key="NAVOnlineInvoice-AutoSender-Password" value="elog password" />
+  <add key="NAVOnlineInvoice-AutoSender-DelaySeconds" value="300" />
+  <add key="NAVOnlineInvoice-NAVStatNotifierEmail-Operation" value="save" />
+  
+  <add key="Microsoft.ReportViewer.WebForms.dll" value="..\..\..\eProjectWeb\Report.SSRS\lib\12.0.2402.20\Microsoft.ReportViewer.WebForms.dll" />
+
+  <!-- Finance-be feladott partner modositast azonnal adjuk fel a Finance-be is? (partner, cim, bank szerkesztő kepernyo, mentes gomb) -->
+  <add key="ChangedPartnerFinanceAutoRepost" value="0" />
+  <!-- A szerkeszto kepernyon keresztul felvitt partnereket azonnal feladjuk-e a Finance-be? -->
+  <add key="NewPartnerFinanceAutoPost" value="0" />
+  <!-- Uj partner felvitelnel az osszes vallalathoz hozzunk letre partncmp rekordot, se csak ahhoz, melybe be van jelentkezve, vagy joga van -->
+  <add key="PartnerCreatePartnCmpForAllCompanies" value="0" />
+
+  <!-- Kontirozas fulon (vevoi-/szallitoi szamla, egyeb dokumentum) Elhatarolas gomb tipusa -->  
+  <!-- <ures> - nem jelenik meg a gomb, Normal - onallo gomb, OtherPopup - Egyeb popup gombon -->
+  <add key="AccRual-ButtonType" value="Normal" />
+
+  <!-- ERP eleres -->
+  <add key="ERP-URL" value="http://localhost/unit4_erp_live/" />
+
+  <!-- Szallitoi szamla jovahagyas e-mail kuldes - Felado e-mail cim -->
+  <add key="pinvapprovalemail-senderaddr" value="erp@unit4.hu" />
+  <!-- Szallitoi szamla jovahagyas e-mail kuldes - Tiltas -->
+  <add key="pinvapprovalemail-disabled" value="false" />
+  <!-- Szallitoi szamla jovahagyas e-mail kuldes - Muvelet (save, send, save&send) -->
+  <add key="pinvapprovalemail-operation" value="save" />
+  <!-- Szallitoi szamla jovahagyas e-mail kuldes - Teszt mod - A valos cimzett e-mail cimet kicsereli az aktualis felhasznalo e-mail cimere -->
+  <add key="pinvapprovalemail-testmode" value="1" />
+
+  <!-- A fizetesi mod mely kategoriaba esik (kartya/keszpenz) cash:KP,CASH;card:BK,BANKK -->
+  <add key="Sinv2PcTran-paymethod" value="cash:KP;card:KARTYA" />
+
+  <!-- Financials authentikacio - kijelentkezes utan toroljuk a beragadt slotusage-et -->
+  <add key="U4Fin-DeleteSlotUsage" value="yes" />
+
+  <!-- NAV szallitoi szamla atvetel -->
+  <add key="PinvNAVShowButton" value="no" />
+
+  <!-- Partner betoltes import file leiro helye -->
+  <add key="PartnerImportDescrFileName" value="PartnerImportDescr.json" />
+  <!-- Leiro konyvtarak nevei -->
+  <add key="ImportDescrFolders" value="..\Site\Json" />
+</configuration>

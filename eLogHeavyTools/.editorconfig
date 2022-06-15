@@ -1,0 +1,13 @@
+﻿[*.cs]
+
+# IDE0007: Use implicit type
+dotnet_diagnostic.IDE0007.severity = suggestion
+
+# S2933: Fields that are only assigned in the constructor should be "readonly"
+dotnet_diagnostic.S2933.severity = none
+
+# IDE0044: Add readonly modifier
+dotnet_diagnostic.IDE0044.severity = none
+
+# S3260: Non-derived "private" classes and records should be "sealed"
+dotnet_diagnostic.S3260.severity = silent

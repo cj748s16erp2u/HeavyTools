@@ -1,0 +1,272 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema xmlns="http://tempuri.org/RenderableSchema.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://tempuri.org/RenderableSchema.xsd RenderableSchema.xsd">
+	<ControlType Name="PartnerInfoPart" Label="$group_partnerinfo">
+		<Textbox Field="partncode" Width="80" Disabled="True"/>
+		<Textbox Field="name" Width="300" Disabled="True"/>
+	</ControlType>
+
+	<Search Name="PartnerSearchProvider">
+		<Column FieldName="partnid" Hidden="True" PKFieldName="partnid"/>
+		<Column FieldName="partncode" Width="70"/>
+		<Column FieldName="cmpcodes_" DisplayName="$cmpcodes" Width="60" />
+		<Column FieldName="grp" Width="50"/>
+		<Column FieldName="extcode" Width="70"/>
+		<Column FieldName="type" Width="60" FieldFunction="flaglookup" FieldFuncArg="eLog.Base.Masters.Partner.PartnerTypeList"/>
+		<!--<Column FieldName="grp" Width="100" />-->
+		<Column FieldName="name" Width="200"/>
+		<Column FieldName="sname" Hidden="True"/>
+		<Column FieldName="countryid" Width="40"/>
+		<Column FieldName="postcode" Width="40"/>
+		<Column FieldName="add01" Width="100"/>
+		<Column FieldName="add02" Width="220"/>
+		<Column FieldName="paymid" Width="50"/>
+		<Column FieldName="vatnum" Width="100"/>
+		<Column FieldName="vatnumeu" Width="100"/>
+		<Column FieldName="groupvatnum" Width="100"/>
+		<Column FieldName="bankaccno" Width="200"/>
+		<!--<Column FieldName="webpage" Hidden="True" />-->
+		<Column FieldName="note" Hidden="True"/>
+		<Column FieldName="addusrid" Hidden="True"/>
+		<Column FieldName="adddate" Hidden="True"/>
+		<Column FieldName="delstat" FieldFunction="listlookup" FieldFuncArg="eLog.Base.Setup.Parameters.DelstatTypeList,abbr" Align="Left" Width="30" />
+		<Column FieldName="oldcode" Width="100"/>
+	</Search>
+
+	<TabPage Name="PartnerEditTab">
+		<LayoutTable ControlGroup="Partner" Columns="{120, None}; {180, None}; {20, Empty}; {120, None}; {180, None}" ID="EditGroup1" Label="$group_partner">
+			<!--CODA specifikus start-->
+			<Selector Field="coda_partncode" Label="$coda_partncode" ValueField="code" TextField="code" SelectionID="CodaInt.Base.Common.Element.ElementSelectionProvider" DependentCtrlID="Partner.coda_cmpid,Partner.coda_elmlevel" DependentField="cmpid,elmlevel" WaitLayer="true" />
+			<ForceNextRow />
+			<Selector Field="coda_partncode" Label="$coda_partnname" ValueField="code" TextField="name" SelectionID="CodaInt.Base.Common.Element.ElementSelectionProvider" ColsToSpan="-1" WaitLayer="true" />
+			<ForceNextRow />
+			<!--CODA specifikus end-->
+			<Textbox Field="partncode" ColsToSpan="1" />
+			<ForceNextRow />
+			<Textbox Field="name" ColsToSpan="-1" />
+			<Textbox Field="sname" />
+			<!--<Textbox Field="grp" />-->
+			<ForceNextRow />
+			<FlagSelector Field="type" ColsToSpan="-1" ListID="eLog.Base.Masters.Partner.PartnerTypeList" />
+			<ForceNextRow />
+			<Combo Field="ptvattypid" ListID="eLog.Base.Setup.PartnVatType.PartnVatTypList#vistype=1" ComboFlags="AllowBlank" ColsToSpan="-1" />
+			<ForceNextRow />
+			<Textbox Field="vatnum" />
+			<Textbox Field="vatnumeu" />
+			<Textbox Field="groupvatnum" />
+			<Combo Field="invlngid" ListID="eProjectWeb.Framework.UI.Maintenance.Language.LanguageList" ComboFlags="None" CustomData="olc"/>
+			<ForceNextRow />
+			<Textbox Field="bankaccno" />
+			<Textbox Field="regnum" />
+			<Textbox Field="extcode" />
+			<Textbox Field="grp" />
+			<ForceNextRow />
+			<CompanyCodesControl Field="cmpcodes" ListID="eLog.Base.Setup.Company.CompanyCodeList#grantedonly#showall" ComboFlags="AutoSelectOne" ColsToSpan="-1" />
+			<Textbox Field="note" Rows="3" ColsToSpan="-1" />
+			<ForceNextRow />
+			<Textbox Field="wsemail" ColsToSpan="-1" CustomData="olc"/>
+			<!--CODA specifikus start-->
+			<ForceNextRow />
+			<Intbox Field="coda_cmpid" Visible="false" />
+			<Intbox Field="coda_elmlevel" Visible="false" />
+			<Intbox Field="tagb" Visible="false" />
+			<!--CODA specifikus end-->
+		</LayoutTable>
+		<LayoutTable ControlGroup="Defaddr" Columns="{120, None}; {180, None}; {20, Empty}; {120, None}; {180, None}" ID="EditGroup2" Label="$group_partnaddr">
+			<Textbox Field="name" ColsToSpan="-1" />
+			<Combo Field="countryid" ListID="eLog.Base.Setup.Country.CountryList" ComboFlags="None" />
+			<Combo Field="regid" ListID="eLog.Base.Setup.Country.RegionList" ComboFlags="None" DependentField="countryid" DependentCtrlID="Defaddr.countryid" />
+			<Selector Field="postcode" Label="$postcode" MasterKey="postcode" DoNotPropagateNullValue="True" ValueField="postcode" TextField="postcode" SelectionID="eLog.Base.Setup.Country.PostcodeSelectionProvider" DependentField="countryid" DependentCtrlID="countryid" />
+			<Selector Field="add01" Label="$city" MasterKey="postcode" DoNotPropagateNullValue="True" ValueField="city" TextField="city" SelectionID="eLog.Base.Setup.Country.PostcodeSelectionProvider" DependentField="countryid" DependentCtrlID="countryid" />
+			<Textbox Field="add02" ColsToSpan="-1" />
+			<Textbox Field="district" />
+			<ForceNextRow />
+			<Textbox Field="place" ColsToSpan="3" />
+			<ForceNextRow />
+			<Textbox Field="placetype" />
+			<ForceNextRow />
+			<Textbox Field="hnum" />
+			<ForceNextRow />
+			<Textbox Field="building" />
+			<Textbox Field="stairway" />
+			<Textbox Field="floor" />
+			<Textbox Field="door" />
+			<Textbox Field="tel" />
+			<Textbox Field="fax" />
+			<Textbox Field="email" ColsToSpan="-1" />
+			<ForceNextRow />
+			<Combo Field="backordertype" ListID="eLog.Base.Masters.Partner.PartnAddrBackorderTypeList" ComboFlags="None" />
+			<ForceNextRow />
+			<FlagSelector Field="type" ColsToSpan="-1" ListID="eLog.Base.Masters.Partner.PartnAddrTypeList" />
+			<Intbox Field="taga" Visible="false" />
+		</LayoutTable>
+		<LayoutContainer ControlGroup="xx" Columns="{140, None}; {180, None}; {20, Empty}; {140, None}; {180, None}" ID="CmpGroup" Label="">
+			<!--<FlagSelector Field="type" ColsToSpan="-1" ListID="eLog.Base.Masters.Partner.PartnerTypeList"/>
+            <ForceNextRow/>-->
+			<Combo Field="paymid" ListID="eLog.Base.Setup.PayMethod.PayMethodList" ComboFlags="AllowBlank" />
+			<Combo Field="paycid" ListID="eLog.Base.Setup.PayMethod.PayCondList" ComboFlags="AllowBlank" DependentField="paymid" DependentCtrlID="xx.paymid" />
+			<ForceNextRow/>
+			<Combo Field="secpaymid" ListID="eLog.Base.Setup.PayMethod.PayMethodList" ComboFlags="AllowBlank"/>
+			<Combo Field="secpaycid" ListID="eLog.Base.Setup.PayMethod.PayCondList" ComboFlags="AllowBlank" DependentField="paymid" DependentCtrlID="xx.secpaymid" />
+			<ForceNextRow/>
+			<Numberbox Field="credlimit" DecDigits="0" ThousandSep="True" Mandatory="True" />
+			<Combo Field="prcgrpidprc" ListID="eLog.Base.Setup.PriceTable.PrcGroupList_Price_Partner" DependentField="cmpid" DependentCtrlID="xx.cmpid" />
+			<Combo Field="prcgrpiddiscnt" ListID="eLog.Base.Setup.PriceTable.PrcGroupList_Discount_Partner" CDependentField="cmpid" DependentCtrlID="xx.cmpid" />
+			<Combo Field="selprcincdiscnttype" ListID="eLog.Base.Masters.Partner.PartnCmpSelprcIncDiscntType" ComboFlags="None" Mandatory="True" />
+			<CheckedCombo Field="pcstat" ListID="eLog.Base.Masters.Partner.PartnCmpPcStatTypeList" ComboFlags="FlagValues" />
+			<Combo Field="curid" ListID="eLog.Base.Setup.Currency.CurrencyList" ComboFlags="AllowBlank" />
+			<ForceNextRow />
+			<!--<Combo Field="codacode" ListID="CodaInt.Base.Masters.Partner.PartnerElementList" DependentCtrlID="xx.cmpid" DependentField="cmpid" ColsToSpan="4" />-->
+			<Textbox Field="cmpid" Visible="False" />
+			<ForceNextRow />
+			<Combo Field="posttype" ListID="eLog.Base.Masters.Partner.PartnCmpPostTypeList" ComboFlags="None" Mandatory="true" />
+			<!--CODA specifikus start-->
+			<Textbox Field="codacode" Disabled="True" />
+			<!--CODA specifikus end-->
+		</LayoutContainer>
+	</TabPage>
+
+	<Search Name="PartnAddrSearchProvider">
+		<Column FieldName="partnid" Hidden="True"/>
+		<Column FieldName="def" Width="20" FieldFunction="bool1"/>
+		<Column FieldName="extcode" Width="70"/>
+		<Column FieldName="tag" Align="Right" Hidden="True"/>
+		<Column FieldName="type" Width="80" FieldFunction="flaglookup" FieldFuncArg="eLog.Base.Masters.Partner.PartnAddrTypeList"/>
+		<Column FieldName="name" Width="160"/>
+		<Column FieldName="countryid" Width="40"/>
+		<Column FieldName="regid" Hidden="True"/>
+		<Column FieldName="postcode" Width="40"/>
+		<Column FieldName="add01" Width="100"/>
+		<Column FieldName="add02" Width="220"/>
+		<Column FieldName="add03" Hidden="True"/>
+		<Column FieldName="add04" Hidden="True"/>
+		<Column FieldName="add05" Hidden="True"/>
+		<Column FieldName="add06" Hidden="True"/>
+		<Column FieldName="tel" Width="100"/>
+		<Column FieldName="fax" Width="100"/>
+		<Column FieldName="glnnum" Width="100"/>
+		<Column FieldName="buildingname" Width="100"/>
+		<Column FieldName="email" Hidden="True"/>
+		<Column FieldName="note" Hidden="True"/>
+		<Column FieldName="addusrid" Hidden="True"/>
+		<Column FieldName="adddate" Hidden="True"/>
+		<Column FieldName="delstat" FieldFunction="listlookup" FieldFuncArg="eLog.Base.Setup.Parameters.DelstatTypeList,abbr" Align="Left" Width="30" />
+		<Column FieldName="addrid" Width="70" PKFieldName="addrid" Hidden="False" DisplayName="$addridname"/>
+		<Column FieldName="oldcode" Width="100"/>
+	</Search>
+
+	<TabPage Name="PartnAddrEditTab">
+		<Control ID="partnerInfoPart" ControlType="PartnerInfoPart" />
+		<LayoutTable ControlGroup="PartnAddr" Columns="{140, None}; {180, None}; {20, Empty}; {140, None}; {180, None}" ID="EditGroup1">
+			<!--CODA specifikus start-->
+			<Combo Field="coda_partnaddr" ListID="CodaInt.Base.Common.XmlImport.PartnAddrList" DependentCtrlID="info.partncode" DependentField="partncode" />
+			<ForceNextRow />
+			<!--CODA specifikus end-->
+			<Textbox Field="extcode" />
+			<ForceNextRow />
+			<Checkbox Field="def" ColsToSpan="-1" Label="$deflong" />
+			<Textbox Field="name" ColsToSpan="-1" />
+			<Combo Field="countryid" ListID="eLog.Base.Setup.Country.CountryList" ComboFlags="None" />
+			<Combo Field="regid" ListID="eLog.Base.Setup.Country.RegionList" ComboFlags="None" DependentField="countryid" DependentCtrlID="PartnAddr.countryid" />
+			<Selector Field="postcode" Label="$postcode" MasterKey="postcode" DoNotPropagateNullValue="True" ValueField="postcode" TextField="postcode" SelectionID="eLog.Base.Setup.Country.PostcodeSelectionProvider" DependentField="countryid" DependentCtrlID="countryid" />
+			<Selector Field="add01" Label="$city" MasterKey="postcode" DoNotPropagateNullValue="True" ValueField="city" TextField="city" SelectionID="eLog.Base.Setup.Country.PostcodeSelectionProvider" DependentField="countryid" DependentCtrlID="countryid" />
+			<Textbox Field="add02" ColsToSpan="-1" />
+			<Textbox Field="district" />
+			<ForceNextRow />
+			<Textbox Field="place" ColsToSpan="3" />
+			<ForceNextRow />
+			<Textbox Field="placetype" />
+			<ForceNextRow />
+			<Textbox Field="hnum" />
+			<ForceNextRow />
+			<Textbox Field="building" />
+			<Textbox Field="stairway" />
+			<Textbox Field="floor" />
+			<Textbox Field="door" />
+			<!--<Textbox Field="add03" ColsToSpan="-1" />
+            <Textbox Field="add04" ColsToSpan="-1" />
+            <Textbox Field="add05" ColsToSpan="-1" />
+            <Textbox Field="add06" ColsToSpan="-1" />-->
+			<Textbox Field="tel" />
+			<Textbox Field="fax" />
+			<Textbox Field="email" ColsToSpan="-1" />
+			<FlagSelector Field="type" ListID="eLog.Base.Masters.Partner.PartnAddrTypeList" ColsToSpan="-1" />
+			<ForceNextRow />
+			<Textbox Field="glnnum" CustomData="olc"/>
+			<ForceNextRow />
+			<Textbox Field="bname" CustomData="olc"/>
+			<ForceNextRow />
+			<Combo Field="backordertype" ListID="eLog.Base.Masters.Partner.PartnAddrBackorderTypeList" ComboFlags="None" />
+			<ForceNextRow />
+			<Textbox Field="note" Rows="4" ColsToSpan="-1" />
+			<Textbox Field="partnid" Visible="False" />
+		</LayoutTable>
+		<LayoutContainer ControlGroup="xx" Columns="{120, None}; {180, None}; {20, Empty}; {120, None}; {180, None}" ID="CmpGroup" Label="">
+			<Combo Field="salesagent" ListID="eLog.Base.Masters.Partner.SalesAgentList" ComboFlags="FilterFlag" DependentCtrlID="xx.cmpid" DependentField="cmpid" />
+			<Combo Field="prcgrpidprc" ListID="eLog.Base.Setup.PriceTable.PrcGroupList_Price_PartnerAddr" DependentField="cmpid" DependentCtrlID="xx.cmpid" />
+			<Combo Field="prcgrpiddiscnt" ListID="eLog.Base.Setup.PriceTable.PrcGroupList_Discount_PartnerAddr" DependentField="cmpid" DependentCtrlID="xx.cmpid" />
+			<!--CODA specifikus start-->
+			<Combo Field="codatag" ListID="CodaInt.Base.Masters.Partner.PartnAddrList" ComboFlags="None" DependentCtrlID="xx.cmpid,info.partncode" DependentField="cmpid,partncode" ColsToSpan="-1" />
+			<!--CODA specifikus end-->
+			<Textbox Field="cmpid" Visible="False" />
+		</LayoutContainer>
+	</TabPage>
+
+	<TabPage Name="EmployeeSearchTab">
+		<Control ID="partnerInfoPart" ControlType="PartnerInfoPart"/>
+		<SearchFilterBar ID="SrcBar">
+			<Combo Field="addrid" ListID="eLog.Base.Masters.Partner.PartnAddrList" ComboFlags="AllowBlank ListKey_RootEntity FindAnywhere" Width="200"/>
+			<Textbox Field="lastname" Width="150"/>
+			<Textbox Field="firstname" Width="150"/>
+			<Textbox Field="ptel" Width="150"/>
+			<Combo Field="delstat" Width="100" ListID="eLog.Base.Setup.Parameters.DelstatTypeList" ComboFlags="AllowBlank AutoSelectFirst"/>
+		</SearchFilterBar>
+		<Grid StatusBar="True" FilterBar="True" ID="searchResults" Label="$employee_search_results"/>
+	</TabPage>
+	<Search Name="EmployeeSearchProvider">
+		<Column FieldName="empid" Hidden="True" PKFieldName="empid"/>
+		<Column FieldName="partnid" Hidden="True"/>
+		<!--<Column FieldName="cmpid" Width="60" FieldFunction="flaglookup" FieldFuncArg="eLog.Base.Setup.Company.CompanyGrantedList"/>-->
+		<Column FieldName="cmpcodes_" DisplayName="$cmpcodes" Width="60" />
+		<Column FieldName="type" Width="100" FieldFunction="flaglookup" FieldFuncArg="eLog.Base.Masters.Partner.EmployeeTypeList"/>
+		<Column FieldName="lastname" Width="120"/>
+		<Column FieldName="firstname" Width="120"/>
+		<Column FieldName="sex" Hidden="True"/>
+		<Column FieldName="position" Width="120"/>
+		<Column FieldName="department" Width="120"/>
+		<Column FieldName="tel" Width="100"/>
+		<Column FieldName="fax" Hidden="True"/>
+		<Column FieldName="mobile"/>
+		<Column FieldName="ptel" />
+		<Column FieldName="email" Width="120"/>
+		<Column FieldName="ref1" Width="120" DisplayName="$empref1"/>
+		<Column FieldName="ref2" Width="120" DisplayName="$empref2"/>
+		<Column FieldName="birthdate" Hidden="True"/>
+		<Column FieldName="note" Hidden="True"/>
+		<Column FieldName="countryid" Width="40"/>
+		<Column FieldName="addrname" Width="120"/>
+		<Column FieldName="addusrid" Hidden="True"/>
+		<Column FieldName="adddate" Hidden="True"/>
+		<Column FieldName="delstat" FieldFunction="listlookup" FieldFuncArg="eLog.Base.Setup.Parameters.DelstatTypeList,abbr" Align="Left" Width="30" />
+	</Search>
+	<TabPage Name="EmployeeEditTab">
+		<Control ID="partnerInfoPart" ControlType="PartnerInfoPart"/>
+		<LayoutTable ControlGroup="Employee" Columns="{80, None}; {180, None}; {20, Empty}; {80, None}; {180, None}" ID="EditGroup1">
+			<Combo Field="addrid" ColsToSpan="-1" ListID="eLog.Base.Masters.Partner.PartnAddrList" ComboFlags="AllowBlank ListKey_RootEntity FindAnywhere"/>
+			<!--<FlagSelector Field="cmpid" ColsToSpan="-1" ListID="eLog.Base.Setup.Company.CompanyGrantedList"/>-->
+			<CompanyCodesControl Field="cmpcodes" ListID="eLog.Base.Setup.Company.CompanyCodeList#grantedonly#showall" ComboFlags="AutoSelectOne" ColsToSpan="-1"/>
+			<FlagSelector Field="type" ColsToSpan="-1" ListID="eLog.Base.Masters.Partner.EmployeeTypeList"/>
+			<Textbox Field="lastname"/>
+			<Textbox Field="firstname"/>
+			<Textbox Field="position"/>
+			<Textbox Field="department"/>
+			<Textbox Field="tel"/>
+			<Textbox Field="fax"/>
+			<Textbox Field="mobile"/>
+			<Textbox Field="email"/>
+			<Textbox Field="ptel" CustomData="olc"/>
+			<Textbox Field="ref1" Label="$empref1"/>
+			<Textbox Field="ref2" Label="$empref2"/>
+			<Textbox Field="note" Rows="3" ColsToSpan="-1"/>
+		</LayoutTable>
+	</TabPage>
+</Schema>

@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Schema xmlns="http://tempuri.org/RenderableSchema.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://tempuri.org/RenderableSchema.xsd RenderableSchema.xsd">
+  <Search Name="OlcItemMainGroupType1SearchProvider">
+    <Column FieldName="imgt1id" PKFieldName="imgt1id" Hidden="false" Width="30" />
+    <Column FieldName="groupname" Width="130" />
+    <Column FieldName="grouplastnum" Width="50" />
+	<Column FieldName="delstat" Width="60" Align="Left" FieldFunction="listlookup" FieldFuncArg="eLog.Base.Setup.Parameters.DelstatTypeList,abbr" />
+  </Search>
+  <TabPage Name="OlcItemMainGroupType1SearchTab">
+	<SearchFilterBar ID="SrcBar"> 
+      <Combo Field="delstat" Width="100" ListID="eLog.Base.Setup.Parameters.DelstatTypeList" ComboFlags="AllowBlank AutoSelectFirst" />
+    </SearchFilterBar>	
+    <Grid ID="searchResults" Label="$search_results" ColsToSpan="-1" />
+  </TabPage>
+  <TabPage Name="OlcItemMainGroupType1EditTab">
+    <LayoutTable ControlGroup="OlcItemMainGroupType1" Columns="{135, None}; {180, None}; {20, Empty}; {90, None}; {180, None};" ID="EditGroup1">
+      <Textbox Field="imgt1id" />
+      <ForceNextRow />
+      <Textbox Field="groupname" />
+      <ForceNextRow />
+    </LayoutTable>
+  </TabPage>
+  
+  
+  <Search Name="OlcItemMainGroupType2SearchProvider">
+    <Column FieldName="imgt2id" PKFieldName="imgt2id" Hidden="false" Width="30" />
+    <Column FieldName="groupname" Width="130" />
+	<Column FieldName="delstat" Width="60" Align="Left" FieldFunction="listlookup" FieldFuncArg="eLog.Base.Setup.Parameters.DelstatTypeList,abbr" />
+  </Search>
+  <TabPage Name="OlcItemMainGroupType2SearchTab">
+  	<SearchFilterBar ID="SrcBar"> 
+      <Combo Field="delstat" Width="100" ListID="eLog.Base.Setup.Parameters.DelstatTypeList" ComboFlags="AllowBlank AutoSelectFirst" />
+    </SearchFilterBar>	
+    <Grid ID="searchResults" Label="$search_results" ColsToSpan="-1" />
+  </TabPage>
+  <TabPage Name="OlcItemMainGroupType2EditTab">
+    <LayoutTable ControlGroup="OlcItemMainGroupType2" Columns="{135, None}; {180, None}; {20, Empty}; {90, None}; {180, None};" ID="EditGroup1">
+      <Textbox Field="imgt2id" />
+      <ForceNextRow />
+      <Textbox Field="groupname" />
+      <ForceNextRow />
+    </LayoutTable>
+  </TabPage>
+  
+    
+  <Search Name="OlcItemSizeRangeSearchProvider">
+    <Column FieldName="isrhid" PKFieldName="isrhid" Hidden="true" Width="30" />
+    <Column FieldName="code" Width="80" />
+    <Column FieldName="name" Width="130" />
+	<Column FieldName="delstat" Width="60" Align="Left" FieldFunction="listlookup" FieldFuncArg="eLog.Base.Setup.Parameters.DelstatTypeList,abbr" />
+  </Search>
+  <TabPage Name="OlcItemSizeRangeSearchTab">
+  	<SearchFilterBar ID="SrcBar"> 
+      <Combo Field="delstat" Width="100" ListID="eLog.Base.Setup.Parameters.DelstatTypeList" ComboFlags="AllowBlank AutoSelectFirst" />
+    </SearchFilterBar>	
+    <Grid ID="searchResults" Label="$search_results" ColsToSpan="-1" />
+  </TabPage>
+  <TabPage Name="OlcItemSizeRangeEditTab">
+    <LayoutTable ControlGroup="OlcItemSizeRange" Columns="{135, None}; {180, None}; {20, Empty}; {90, None}; {180, None};" ID="EditGroup1">
+      <Textbox Field="code" />
+      <ForceNextRow />
+      <Textbox Field="name" />
+      <ForceNextRow />
+    </LayoutTable>
+  </TabPage>
+  
+  <ControlType Name="OlcItemSizeRangeInfo" Label="$group_olcitemsizerange">
+    <Textbox Field="code" Width="50"  />
+    <Textbox Field="name" Width="130" />
+  </ControlType>
+  
+    
+  <Search Name="OlcItemSizeRangeLineSearchProvider">
+    <Column FieldName="isrlid" PKFieldName="isrlid" Hidden="true" Width="30" />
+    <Column FieldName="size" Width="130" />
+	<Column FieldName="delstat" Width="60" Align="Left" FieldFunction="listlookup" FieldFuncArg="eLog.Base.Setup.Parameters.DelstatTypeList,abbr" />
+  </Search>
+  <TabPage Name="OlcItemSizeRangeLineSearchTab">
+	<Control ControlType="OlcItemSizeRangeInfo" ID="OlcItemSizeRangeInfo" />
+	<SearchFilterBar ID="SrcBar"> 
+      <Combo Field="delstat" Width="100" ListID="eLog.Base.Setup.Parameters.DelstatTypeList" ComboFlags="AllowBlank AutoSelectFirst" />
+    </SearchFilterBar>	
+    <Grid ID="searchResults" Label="$search_results" ColsToSpan="-1" />
+  </TabPage>
+  <TabPage Name="OlcItemSizeRangeLineEditTab">
+    <LayoutTable ControlGroup="OlcItemSizeRangeLine" Columns="{135, None}; {180, None}; {20, Empty}; {90, None}; {180, None};" ID="EditGroup1">
+      <Textbox Field="size" />
+	  <ForceNextRow />
+	  <Intbox Field="ordernum" />
+    </LayoutTable>
+  </TabPage>
+  
+  
+  
+  
+  
+   <Search Name="OlcItemMainGroupSearchProvider">
+    <Column FieldName="imgidid" PKFieldName="imgidid" Hidden="true" Width="100" />
+    <Column FieldName="code" Width="40" />
+    <Column FieldName="name" Width="130" />
+    <Column FieldName="groupname2" Width="130" />
+    <Column FieldName="isrhname" Width="130" />
+    <Column FieldName="itemgrpid" Width="130" />
+    <Column FieldName="oldcode" Width="70" />
+  </Search>
+  <TabPage Name="OlcItemMainGroupSearchTab">
+    <SearchFilterBar ID="SrcBar">
+      <Textbox Field="code" Width="100" />
+      <Textbox Field="name" Width="150" />
+      <Textbox Field="oldcode" Width="150" />
+	<Column FieldName="delstat" Width="60" Align="Left" FieldFunction="listlookup" FieldFuncArg="eLog.Base.Setup.Parameters.DelstatTypeList,abbr" />
+    </SearchFilterBar>
+    <Grid ID="searchResults" Label="$search_results" ColsToSpan="-1" />
+  </TabPage>
+  <TabPage Name="OlcItemMainGroupEditTab">
+    <LayoutTable ControlGroup="OlcItemMainGroup" Columns="{135, None}; {180, None}; {20, Empty}; {90, None}; {180, None};" ID="EditGroup1">
+      <Combo Field="imgt1id" ListID="eLog.HeavyTools.Masters.Item.MainGroup.OlcItemMainGroupType1List"  />
+      <Textbox Field="code" Disabled="true"/>
+      <ForceNextRow />
+      <Textbox Field="name" />
+      <ForceNextRow />
+	  <Combo Field="imgt2id" ListID="eLog.HeavyTools.Masters.Item.MainGroup.OlcItemMainGroupType2List"  />
+	  <ForceNextRow />
+	  <Combo Field="isrhid" ListID="eLog.HeavyTools.Masters.Item.MainGroup.OlcItemSizeRangeHeadList"  />
+	  <ForceNextRow />
+	  <Combo Field="itemgrpid" ListID="eLog.Base.Setup.ItemGroup.ItemGroupList" />
+      <ForceNextRow />				
+      <Textbox Field="oldcode" />
+      <ForceNextRow />
+    </LayoutTable>
+  </TabPage>
+  
+  
+  
+</Schema>

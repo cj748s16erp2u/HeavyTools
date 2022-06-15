@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<configuration>
+    <Configs>
+        <Config>
+            <Catalogs>
+                <Catalog ID="Dev" LogicalServerID="FIDev" />
+            </Catalogs>
+            <LogicalServers>
+                <LogicalServer ID="FIDev" NameServer="?" NameServerPort="8443" LogicalServer="?" AppServerCharEncoding="iso-8859-2" LoginName="?" Password="?" />
+            </LogicalServers>
+            <DefaultCompany>DEV</DefaultCompany>
+        </Config>
+    </Configs>
+    <RouterDLL Path="..\..\..\CodaInt\CODALink\Lib\Coda.Xml.Router.14.000.0008.0.dll" XmliVersion="14.0" />
+    <XMLi>
+        <Versions>
+            <Function Name="ElementMaster">12.0</Function>
+            <Function Name="SelectorRequest">13.0</Function>
+            <Function Name="TaxRequest">11.3</Function>
+            <Function Name="MediaRequest">12.0</Function>
+            <Function Name="CheckAccountCodes">12.0</Function>
+            <Function Name="AssetRequest">12.0</Function>
+            <Function Name="DisposalRequest">12.0</Function>
+            <Function Name="DepreciationRequest">12.0</Function>
+            <Function Name="CancelDepreciationRequest">12.0</Function>
+            <Function Name="VAdjustmentDepreciationRequest">12.0</Function>
+        </Versions>
+    </XMLi>
+    <MessageLogging Enabled="true" Path=".\Log\" Type="indented" />
+    <Groups>
+        <Group Name="Partner">
+            <Item Name="partncode">Code</Item>
+            <Item Name="cmpcodes" Parameter="true">cmpid</Item>
+            <Item Name="name">Name</Item>
+            <Item Name="sname">ShortName</Item>
+            <Item Name="vatnum">VAT</Item>
+            <Item Name="type" Condition="true" ConditionValueTrue="20" ConditionValueFalse="0">CustomerSupplier</Item>
+            <Item Name="bankaccno">
+                <Relation Name="Element_Banks">
+                    <Relation Name="Banks_Bank">
+                        <Condition Name="DefaultBank">true</Condition>
+                        <Item>SortCode</Item>
+                        <Item Static="true">-</Item>
+                        <Item>AccountNumber</Item>
+                    </Relation>
+                </Relation>
+            </Item>
+            <Item Name="note">
+                <Relation Name="Element_Comments">
+                    <Relation Name="Comments_Comment">
+                        <Item>Comment_Text</Item>
+                    </Relation>
+                </Relation>
+            </Item>
+        </Group>
+        <Group Name="PartnAddr">
+            <Item Name="def" Condition="true" ConditionValueTrue="1" ConditionValueFalse="0">DefaultAddress</Item>
+            <Item Name="tag" Process="false">Tag</Item>
+            <Item Name="name">Name</Item>
+            <Item Name="add01">Address1</Item>
+            <Item Name="add02">Address2</Item>
+            <Item Name="postcode">PostCode</Item>
+            <Item Name="countryid">Country</Item>
+            <Item Name="tel">Tel</Item>
+            <Item Name="fax">Fax</Item>
+            <Item Name="email">EMail</Item>
+        </Group>
+    </Groups>
+</configuration>

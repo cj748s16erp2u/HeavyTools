@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CurRate>
+    <Common>
+        <!--<Proxy Address="10.10.10.10" Port="8080">
+            <Credential UserName="domain\user" Password="?" />
+        </Proxy>-->
+    </Common>
+    <Options>
+        <Option Id="EKB" Url="http://www.ecb.europa.eu/stats/eurofxref/eurofxref-{0}.xml">
+            <Cases>
+                <Case Id="daily" Value="daily" />
+                <Case Id="hist90" Value="hist-90d" />
+                <Case Id="hist" Value="hist" />
+            </Cases>
+        </Option>
+        <Option Id="MNB" Url="http://www.mnb.hu/arfolyamok.asmx" />
+        <Option Id="BNR" Url="http://www.infovalutar.ro/curs.asmx" />
+    </Options>
+</CurRate>

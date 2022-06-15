@@ -1,0 +1,32 @@
+
+$xx=
+$action_build=Mátrix megnyitása
+$action_savechange=Mátrix mentése
+$action_nosave=Mátrix bezárása
+
+$isid=Szezon
+
+$itemmatrixsingtitle=Színállásonkénti adatok
+
+
+$itemgrouptitle=Összes adatok
+
+
+$colortype1=Szín 1.
+$colortype2=Szín 2.
+$colortype3=Szín 3.
+$colorname=Szín név
+$materialtype=Anyagösszetétel
+$patterntype=Mintázat 1.
+$patterntype2=Mintázat 2.
+$itemmatrixtitle=Méretek
+
+$tabName_OlcItemModelSeason=Cikk mátrix
+
+$code=Kód
+
+
+$missingcolortype1=Hiányzik a Szín 1.
+
+$modelMatrixResultTitle=Modell szezon-színállás eredmény
+$modelMatrixResult={0} db cikk változott, {1} db jött létre

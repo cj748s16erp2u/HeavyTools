@@ -1,0 +1,418 @@
+<?xml version="1.0" encoding="iso-8859-2"?>
+<xs:schema attributeFormDefault="qualified" elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+    <xs:simpleType name="enumType">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="string"/>
+            <xs:enumeration value="numeric"/>
+            <xs:enumeration value="datetime"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="enumInterfaceOperation">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="BankHandling"/>
+            <xs:enumeration value="TransactionHandling"/>
+            <xs:enumeration value="TransactionWithElementHandling"/>
+            <xs:enumeration value="ElementHandling"/>
+            <xs:enumeration value="QueryHandling"/>
+            <xs:enumeration value="QueryHandlingStatus"/>
+            <xs:enumeration value="CompanyHandling"/>
+            <xs:enumeration value="CompanyHandlingBasic" />
+            <xs:enumeration value="AltInn"/>
+            <xs:enumeration value="AltInnPin"/>
+            <xs:enumeration value="ViewOnly"/>
+            <xs:enumeration value="Export"/>
+            <xs:enumeration value="ExportWebReport"/>
+            <xs:enumeration value="InterCompany"/>
+            <xs:enumeration value="DocLineEditor"/>
+            <xs:enumeration value="BackgroundMatching"/>
+            <xs:enumeration value="IntrayAutoPost"/>
+            <xs:enumeration value="BusinessAction"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="enumFolderStructure">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="InterfaceNameFirst"/>
+            <xs:enumeration value="InterfaceNameLast"/>
+            <xs:enumeration value="None"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="enumInterfaceSource">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="FileSystem"/>
+            <xs:enumeration value="Database"/>
+            <xs:enumeration value="Upload"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="enumExportType">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="FixLength"/>
+            <xs:enumeration value="CSV"/>
+            <xs:enumeration value="FastExport"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="enumControlType">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="DateTime"/>
+            <xs:enumeration value="SearchElement"/>
+            <xs:enumeration value="SearchDocument"/>
+            <xs:enumeration value="TextBox"/>
+            <xs:enumeration value="DropDownList"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="enumWebControlType">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="TextBox"/>
+            <xs:enumeration value="DropDownList"/>
+            <xs:enumeration value="CheckBox"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="enumFileType">
+        <xs:annotation>
+            <xs:documentation>The base structure of the file.</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="separated">
+                <xs:annotation>
+                    <xs:documentation>Can be separated by comma, etc.</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="fixlength">
+                <xs:annotation>
+                    <xs:documentation>Can be fixed length.</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="typeCtDocDest">
+        <xs:annotation>
+            <xs:documentation>The document destination.</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="books">
+                <xs:annotation>
+                    <xs:documentation>Post to the books.</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="intray">
+                <xs:annotation>
+                    <xs:documentation>Send to the Intray.</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="anywhere">
+                <xs:annotation>
+                    <xs:documentation>Send to Intray or post to the books.</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="enumReportType">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="CrystalReports"/>
+            <xs:enumeration value="MicrosoftReportingServices"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="enumEditableFields">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="checkbox"/>
+            <xs:enumeration value="textbox"/>
+            <xs:enumeration value="both"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:element name="Interface">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="InterfaceParams" maxOccurs="1" nillable="true" minOccurs="0">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element name="InterfaceOperation" nillable="false" minOccurs="1" maxOccurs="1">
+                                <xs:complexType>
+                                    <xs:simpleContent>
+                                        <xs:extension base="enumInterfaceOperation">
+                                            <xs:attribute name="postOtherCompanies" type="xs:boolean" use="optional" />
+                                        </xs:extension>
+                                    </xs:simpleContent>
+                                </xs:complexType>
+                            </xs:element>
+                            <xs:element name="InterfaceSource" type="enumInterfaceSource" nillable="false" minOccurs="1" maxOccurs="1"/>
+                            <xs:element name="ExportType" type="enumExportType" nillable="true" minOccurs="0" maxOccurs="1"/>
+                            <xs:element name="HasHeader" type="xs:boolean" nillable="true" minOccurs="0" maxOccurs="1"/>
+                            <xs:element name="FolderStructure" type="enumFolderStructure" nillable="true" minOccurs="0" maxOccurs="1"/>
+                            <xs:element name="UpdateDocuments" type="xs:boolean" nillable="true" minOccurs="0" maxOccurs="1"/>
+                            <xs:element name="MatchDocuments" type="xs:boolean" nillable="true" minOccurs="0" maxOccurs="1"/>
+                            <xs:element name="CodaPostTarget" type="typeCtDocDest" nillable="true" minOccurs="0" maxOccurs="1"/>
+                            <xs:element name="ReferenceNumber" type="xs:short" nillable="true" minOccurs="0" maxOccurs="1"/>
+                            <xs:element name="StoredProcedureName" type="xs:string" nillable="true" minOccurs="0" maxOccurs="1"/>
+                            <xs:element name="BankStoredProcedureName" type="xs:string" nillable="true" minOccurs="0" maxOccurs="1"/>
+                            <xs:element name="DeleteLinkcodeStoredProcedureName" type="xs:string" nillable="true" minOccurs="0" maxOccurs="1"/>
+                            <xs:element name="ShowLoadStoredProcedureName" type="xs:string" nillable="true" minOccurs="0" maxOccurs="1"/>
+                            <xs:element name="UpdateFinalStatusStoredProcedureName" type="xs:string" nillable="true" minOccurs="0" maxOccurs="1"/>
+                            <xs:element name="MatchStoredProcedureName" type="xs:string" nillable="true" minOccurs="0" maxOccurs="1"/>
+                            <xs:element name="UnMatchStoredProcedureName" type="xs:string" nillable="true" minOccurs="0" maxOccurs="1"/>
+                            <xs:element name="UpdateStatusStoredProcedureName" type="xs:string" nillable="true" minOccurs="0" maxOccurs="1"/>
+                            <xs:element name="UpdateUpdateStatusStoredProcedureName" type="xs:string" nillable="true" minOccurs="0" maxOccurs="1"/>
+                            <xs:element name="CancelDocStoredProcedureName" type="xs:string" nillable="true" minOccurs="0" maxOccurs="1"/>
+                            <xs:element name="UpdateCancelStatusStoredProcedureName" type="xs:string" nillable="true" minOccurs="0" maxOccurs="1"/>
+                            <xs:element name="IntrayAutoPostDocStoredProcedureName" type="xs:string" nillable="true" minOccurs="0" maxOccurs="1"/>
+                            <xs:element name="UpdateIntrayAutoPostStatusStoredProcedureName" type="xs:string" nillable="true" minOccurs="0" maxOccurs="1"/>
+                            <xs:element name="ShowCODAPostingStoredProcedureName" type="xs:string" nillable="true" minOccurs="0" maxOccurs="1"/>
+                            <xs:element name="SPBetweenElementAndTransPosting" type="xs:string" nillable="true" minOccurs="0" maxOccurs="1"/>
+                            <xs:element name="AdminEmails" type="xs:string" nillable="true" minOccurs="0" maxOccurs="1"/>
+                            <xs:element name="ReportName" type="xs:string" nillable="true" minOccurs="0" maxOccurs="1"/>
+                            <xs:element name="ReportType" type="xs:string" nillable="true" minOccurs="0" maxOccurs="1"/>
+                            <xs:element name="SplitBankAccounts" type="xs:boolean" nillable="true" minOccurs="0" maxOccurs="1"/>
+                            <xs:element name="CustomSourceFolder" type="xs:boolean" nillable="true" minOccurs="0" maxOccurs="1"/>
+                            <xs:element name="OldLinkManager" type="xs:boolean" nillable="true" minOccurs="0" maxOccurs="1"/>
+                            <xs:element name="RedirectUrl" type="xs:string" nillable="true" minOccurs="0" maxOccurs="1"/>
+                            <xs:element name="EditableFields" type="enumEditableFields" nillable="true" minOccurs="0" maxOccurs="1"/>
+                            <xs:element name="RedirectFromEditListIfNoItemsSelected" type="xs:boolean" nillable="true" minOccurs="0" maxOccurs="1"/>
+                            <xs:element name="ExportFileName" type="xs:string" nillable="true" minOccurs="0" maxOccurs="1"/>
+                            <xs:element name="ExportFileSeparator" type="xs:string" nillable="true" minOccurs="0" maxOccurs="1"/>
+                            <xs:element name="ExportFileEncoding" type="xs:string" nillable="true" minOccurs="0" maxOccurs="1"/>
+                            <xs:element name="NewLineSeparatorPerLine" type="xs:boolean" nillable="true" minOccurs="0" maxOccurs="1"/>
+                            <xs:element name="NewLineSeparatorPerColumn" type="xs:boolean" nillable="true" minOccurs="0" maxOccurs="1"/>
+                            <xs:element name="CustomFunctionAfterInterfaceLoad" type="xs:string" nillable="true" minOccurs="0" maxOccurs="1"/>
+                            <xs:element name="CustomFunctionAfterCodaPosting" type="xs:string" nillable="true" minOccurs="0" maxOccurs="1"/>
+                            <xs:element name="ValidateBeforePost" type="xs:boolean" nillable="true" minOccurs="0" maxOccurs="1"/>
+                            <xs:element name="QuickLink" type="xs:boolean" nillable="true" minOccurs="0" maxOccurs="1"/>
+                            <xs:element name="MaxRequestCount" type="xs:integer" nillable="true" minOccurs="0" maxOccurs="1"/>
+                            <xs:element name="BLActionName" type="xs:string" nillable="true" minOccurs="0" maxOccurs="1" />
+                            <xs:element name="ParameterTables" nillable="true" minOccurs="0" maxOccurs="1">
+                                <xs:complexType>
+                                    <xs:sequence>
+                                        <xs:element maxOccurs="unbounded" name="ParameterTable">
+                                            <xs:complexType>
+                                                <xs:sequence>
+                                                    <xs:element name="ColumnSettings" maxOccurs="1">
+                                                        <xs:complexType>
+                                                            <xs:sequence>
+                                                                <xs:element maxOccurs="unbounded" name="ColumnSetting">
+                                                                    <xs:complexType>
+                                                                        <xs:attribute name="name" type="xs:string" use="required" />
+                                                                        <xs:attribute name="type" type="enumType" use="required" />
+                                                                        <xs:attribute name="webControlType" type="enumWebControlType" use="optional" />
+                                                                        <xs:attribute name="regex" type="xs:string" use="optional" />
+                                                                        <xs:attribute name="required" type="xs:boolean" use="optional" />
+                                                                        <xs:attribute name="descr" type="xs:string" use="optional" />
+                                                                        <xs:attribute name="textresourcename" type="xs:string" use="optional" />
+                                                                        <xs:attribute name="editable" type="xs:boolean" use="required" />
+                                                                        <xs:attribute name="searchable" type="xs:boolean" use="optional" />
+                                                                        <xs:attribute name="visible" type="xs:boolean" use="required" />
+                                                                        <xs:attribute name="identity" type="xs:boolean" use="optional" />
+                                                                        <xs:attribute name="format" type="xs:string" use="optional" />
+                                                                        <xs:attribute name="defaultvalue" type="xs:string" use="optional" />
+                                                                        <xs:attribute name="maskFormat" type="xs:string" use="optional" />
+                                                                        <xs:attribute name="hiddenMaskFormat" type="xs:string" use="optional" />
+                                                                        <xs:attribute name="uppercase" type="xs:boolean" use="optional" />
+                                                                        <xs:attribute name="enumerator" type="xs:string" use="optional" />
+                                                                        <xs:attribute name="connectionStringId" type="xs:string" use="optional" />
+                                                                        <xs:attribute name="sqlFillCommand" type="xs:string" use="optional" />
+                                                                        <xs:attribute name="width" type="xs:integer" use="optional" />
+                                                                        <xs:attribute name="cssClass" type="xs:string" use="optional" />
+                                                                    </xs:complexType>
+                                                                </xs:element>
+                                                            </xs:sequence>
+                                                        </xs:complexType>
+                                                    </xs:element>
+                                                </xs:sequence>
+                                                <xs:attribute name="name" type="xs:string" use="required" />
+                                                <xs:attribute name="sortExpression" type="xs:string" use="optional" />
+                                                <xs:attribute name="companyDependent" type="xs:string" use="optional" />
+                                            </xs:complexType>
+                                        </xs:element>
+                                    </xs:sequence>
+                                </xs:complexType>
+                            </xs:element>
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+                <xs:element name="PageSettings" minOccurs ="0" maxOccurs="1" nillable="true">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element name="StartPage" minOccurs ="0" maxOccurs="1" nillable="false">
+                                <xs:complexType>
+                                    <xs:sequence>
+                                        <xs:element name="UILines" minOccurs ="0" maxOccurs="1" nillable="false">
+                                            <xs:complexType>
+                                                <xs:sequence>
+                                                    <xs:element name="UILine" minOccurs ="0" maxOccurs="unbounded" nillable="false">
+                                                        <xs:complexType>
+                                                            <xs:sequence>
+                                                                <xs:element name="Controls" minOccurs ="0" maxOccurs="1" nillable="false">
+                                                                    <xs:complexType>
+                                                                        <xs:sequence>
+                                                                            <xs:element name="Control" minOccurs ="0" maxOccurs="unbounded" nillable="false">
+                                                                                <xs:complexType>
+                                                                                    <xs:attribute name="name" type="xs:string" use="required" />
+                                                                                    <xs:attribute name="type" type="enumControlType" use="required" />
+                                                                                    <xs:attribute name="descr" type="xs:string" use="optional" />
+                                                                                    <xs:attribute name="elmlevel" type="xs:string" use="optional" />
+                                                                                    <xs:attribute name="textresourcename" type="xs:string" use="optional" />
+                                                                                    <xs:attribute name="defaultvalue" type="xs:string" use="optional" />
+                                                                                    <xs:attribute name="dateFormat" type="xs:string" use="optional" />
+                                                                                    <xs:attribute name="maskFormat" type="xs:string" use="optional" />
+                                                                                    <xs:attribute name="hiddenMaskFormat" type="xs:string" use="optional" />
+                                                                                    <xs:attribute name="required" type="xs:boolean" use="optional" />
+                                                                                    <xs:attribute name="isPassword" type="xs:boolean" use="optional" />
+                                                                                    <xs:attribute name="regex" type="xs:string" use="optional" default="true" />
+                                                                                    <xs:attribute name="sqlFillCommand" type="xs:string" use="optional" default="true" />
+                                                                                </xs:complexType>
+                                                                            </xs:element>
+                                                                        </xs:sequence>
+                                                                    </xs:complexType>
+                                                                </xs:element>
+                                                            </xs:sequence>
+                                                        </xs:complexType>
+                                                    </xs:element>
+                                                </xs:sequence>
+                                            </xs:complexType>
+                                        </xs:element>
+                                    </xs:sequence>
+                                </xs:complexType>
+                            </xs:element>
+                            <xs:element name="PostPage" minOccurs ="0" maxOccurs="1" nillable="false">
+                                <xs:complexType>
+                                    <xs:sequence>
+                                        <xs:element name="UILines" minOccurs ="0" maxOccurs="1" nillable="false">
+                                            <xs:complexType>
+                                                <xs:sequence>
+                                                    <xs:element name="UILine" minOccurs ="0" maxOccurs="unbounded" nillable="false">
+                                                        <xs:complexType>
+                                                            <xs:sequence>
+                                                                <xs:element name="Controls" minOccurs ="0" maxOccurs="1" nillable="false">
+                                                                    <xs:complexType>
+                                                                        <xs:sequence>
+                                                                            <xs:element name="Control" minOccurs ="0" maxOccurs="unbounded" nillable="false">
+                                                                                <xs:complexType>
+                                                                                    <xs:attribute name="name" type="xs:string" use="required" />
+                                                                                    <xs:attribute name="type" type="enumControlType" use="required" />
+                                                                                    <xs:attribute name="descr" type="xs:string" use="optional" />
+                                                                                    <xs:attribute name="elmlevel" type="xs:string" use="optional" />
+                                                                                    <xs:attribute name="textresourcename" type="xs:string" use="optional" />
+                                                                                    <xs:attribute name="defaultvalue" type="xs:string" use="optional" />
+                                                                                    <xs:attribute name="dateFormat" type="xs:string" use="optional" />
+                                                                                    <xs:attribute name="maskFormat" type="xs:string" use="optional" />
+                                                                                    <xs:attribute name="hiddenMaskFormat" type="xs:string" use="optional" />
+                                                                                    <xs:attribute name="sqlFillCommand" type="xs:string" use="optional" default="true" />
+                                                                                </xs:complexType>
+                                                                            </xs:element>
+                                                                        </xs:sequence>
+                                                                    </xs:complexType>
+                                                                </xs:element>
+                                                            </xs:sequence>
+                                                        </xs:complexType>
+                                                    </xs:element>
+                                                </xs:sequence>
+                                            </xs:complexType>
+                                        </xs:element>
+                                    </xs:sequence>
+                                </xs:complexType>
+                            </xs:element>
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+                <xs:element name="Files" maxOccurs="1" nillable="true" minOccurs="0">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element maxOccurs="unbounded" name="File">
+                                <xs:complexType>
+                                    <xs:sequence>
+                                        <xs:element maxOccurs="1" name="FileParams">
+                                            <xs:complexType mixed="false">
+                                                <xs:sequence minOccurs="0" maxOccurs="1">
+                                                    <!--<xs:choice minOccurs="0" maxOccurs="unbounded">-->
+                                                    <xs:element name="Type" type="enumFileType" nillable="false" minOccurs="1" maxOccurs="1" />
+                                                    <xs:element name="Separator" type="xs:string" nillable="true" minOccurs="0" maxOccurs="1" />
+                                                    <xs:element name="TextMarker" type="xs:string" nillable="true" minOccurs="0" maxOccurs="1" />
+                                                    <xs:element name="TableName" type="xs:string" nillable="false" minOccurs="1" maxOccurs="1" />
+                                                    <xs:element name="HasHeadLine" type="xs:boolean" nillable="false" minOccurs="1" maxOccurs="1" />
+                                                    <xs:element name="Encoding" type="xs:string" nillable="false" minOccurs="1" maxOccurs="1" />
+                                                    <xs:element name="FileNamePrefix" type="xs:string" nillable="true" minOccurs="0" maxOccurs="1" />
+                                                    <xs:element name="DriverFile" type="xs:boolean" nillable="false" minOccurs="1" maxOccurs="1" />
+                                                    <xs:element name="FilePartDefinitionPosition" type="xs:string" nillable="true" minOccurs="0" maxOccurs="1" />
+                                                    <xs:element name="FirstRowIsHeader" type="xs:boolean" nillable="true" minOccurs="0" maxOccurs="1" />
+                                                    <!--</xs:choice>-->
+                                                </xs:sequence>
+                                            </xs:complexType>
+                                        </xs:element>
+                                        <xs:element name="FileParts" maxOccurs="1" nillable="true" minOccurs="0">
+                                            <xs:complexType>
+                                                <xs:sequence>
+                                                    <xs:element maxOccurs="unbounded" name="FilePart" minOccurs="1" nillable="false">
+                                                        <xs:complexType>
+                                                            <xs:sequence>
+                                                                <xs:element name="Prefixes" maxOccurs="1">
+                                                                    <xs:complexType>
+                                                                        <xs:sequence>
+                                                                            <xs:element maxOccurs="unbounded" name="Prefix" minOccurs="1" nillable="false">
+                                                                                <xs:complexType>
+                                                                                    <xs:attribute name="value" type="xs:string" use="required" />
+                                                                                </xs:complexType>
+                                                                            </xs:element>
+                                                                        </xs:sequence>
+                                                                    </xs:complexType>
+                                                                </xs:element>
+                                                                <xs:element maxOccurs="1" name="ColumnParams">
+                                                                    <xs:complexType>
+                                                                        <xs:sequence>
+                                                                            <xs:element maxOccurs="unbounded" name="Column">
+                                                                                <xs:complexType>
+                                                                                    <xs:attribute name="type" type="enumType" use="required" />
+                                                                                    <xs:attribute name="length" type="xs:short" use="required" />
+                                                                                    <xs:attribute name="name" type="xs:string" use="required" />
+                                                                                    <xs:attribute name="descr" type="xs:string" use="optional" />
+                                                                                    <xs:attribute name="insert" type="xs:boolean" use="required" />
+                                                                                    <xs:attribute name="format" type="xs:string" use="optional" />
+                                                                                    <xs:attribute name="noTrim" type="xs:boolean" use="optional" />
+                                                                                </xs:complexType>
+                                                                            </xs:element>
+                                                                        </xs:sequence>
+                                                                    </xs:complexType>
+                                                                </xs:element>
+                                                            </xs:sequence>
+                                                            <xs:attribute name="tablename" type="xs:string" use="required" />
+                                                            <xs:attribute name="descr" type="xs:string" use="optional" />
+                                                        </xs:complexType>
+                                                    </xs:element>
+                                                </xs:sequence>
+                                            </xs:complexType>
+                                        </xs:element>
+                                        <xs:element maxOccurs="1" name="ColumnParams" nillable="true" minOccurs="0">
+                                            <xs:complexType>
+                                                <xs:sequence>
+                                                    <xs:element maxOccurs="unbounded" name="Column">
+                                                        <xs:complexType>
+                                                            <xs:attribute name="type" type="enumType" use="required" />
+                                                            <xs:attribute name="length" type="xs:short" use="required" />
+                                                            <xs:attribute name="name" type="xs:string" use="required" />
+                                                            <xs:attribute name="descr" type="xs:string" use="optional" />
+                                                            <xs:attribute name="insert" type="xs:boolean" use="required" />
+                                                            <xs:attribute name="format" type="xs:string" use="optional" />
+                                                            <xs:attribute name="noTrim" type="xs:boolean" use="optional" />
+                                                        </xs:complexType>
+                                                    </xs:element>
+                                                </xs:sequence>
+                                            </xs:complexType>
+                                        </xs:element>
+                                    </xs:sequence>
+                                </xs:complexType>
+                            </xs:element>
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+                <xs:element name="CustomArgs" minOccurs="0" maxOccurs="1" nillable="true"></xs:element>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+</xs:schema>

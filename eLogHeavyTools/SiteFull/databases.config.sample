@@ -1,0 +1,8 @@
+﻿<?xml version="1.0"?>
+<Databases>
+  <Catalog ID="Dev" CODABaseUrl="http://coda-hun/coda/">
+    <DB ID="main" Server="?" Database="?" UserID="sa" Password="?" />
+    <DB ID="coda" Server="?" Database="?" UserID="sa" Password="?" />
+    <DB ID="U4ExtBank" AliasID="coda" />
+  </Catalog>
+</Databases>

@@ -1,0 +1,261 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.30729</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{6142C576-2116-4709-8839-D661D4DAAE6A}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>eLog.HeavyTools</RootNamespace>
+    <AssemblyName>eLog.HeavyTools</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <UpgradeBackupLocation>
+    </UpgradeBackupLocation>
+    <OldToolsVersion>3.5</OldToolsVersion>
+    <TargetFrameworkProfile />
+    <SccProjectName>Plastic SCM</SccProjectName>
+    <SccLocalPath>Plastic SCM</SccLocalPath>
+    <SccAuxPath>Plastic SCM</SccAuxPath>
+    <SccProvider>Plastic SCM Source Control Service:{774e58ba-f1b9-40a7-b676-834fa2c220fe}</SccProvider>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
+    <OutputPath>bin\x86\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="CodaInt.Base, Version=7.0.8201.28858, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\Releases\CodaInt.Base\v7.0.0.0\Binaries\CodaInt.Base.dll</HintPath>
+    </Reference>
+    <Reference Include="CODALink, Version=7.0.8201.28856, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\Releases\CodaInt.Base\v7.0.0.0\Binaries\CODALink.dll</HintPath>
+    </Reference>
+    <Reference Include="eLog.Base">
+      <HintPath>..\..\..\..\Releases\eLog.Base\v7.2.0.0\Binaries\eLog.Base.dll</HintPath>
+    </Reference>
+    <Reference Include="eLog.Finance.Base, Version=7.0.8201.28858, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\Releases\eLog.Finance.Base\v7.0.0.0\Binaries\eLog.Finance.Base.dll</HintPath>
+    </Reference>
+    <Reference Include="eLog.Finance.Coda, Version=7.0.8201.28860, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\Releases\eLog.Finance.CODA\v7.0.0.0\Binaries\eLog.Finance.Coda.dll</HintPath>
+    </Reference>
+    <Reference Include="EPPlus">
+      <HintPath>..\..\..\eProjectWeb\ExternalAssemblies\EPPlus.dll</HintPath>
+    </Reference>
+    <Reference Include="eProjectWeb.Framework, Version=7.2.8201.28852, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\Releases\eLog.Base\v7.2.0.0\Binaries\eProjectWeb.Framework.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\eProjectWeb\ExternalAssemblies\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Data.Linq" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="U4Ext.Bank.Base, Version=7.2.8201.28861, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\Releases\Bank.Base\v7.2.0.0\Binaries\U4Ext.Bank.Base.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="ImportBase\DictionaryProxy.cs" />
+    <Compile Include="ImportBase\FieldValue.cs" />
+    <Compile Include="ImportBase\ImportConditional.cs" />
+    <Compile Include="ImportBase\ImportDictionary.cs" />
+    <Compile Include="ImportBase\ImportField.cs" />
+    <Compile Include="ImportBase\ImportFieldBase.cs" />
+    <Compile Include="ImportBase\ImportFieldExpr.cs" />
+    <Compile Include="ImportBase\ImportLookup.cs" />
+    <Compile Include="ImportBase\ImportResultSetBase.cs" />
+    <Compile Include="ImportBase\ImportResultSetsBase.cs" />
+    <Compile Include="ImportBase\ImportSequence.cs" />
+    <Compile Include="ImportBase\ImportServiceBase.cs" />
+    <Compile Include="ImportBase\ImportSheet.cs" />
+    <Compile Include="ImportBase\ImportSplit.cs" />
+    <Compile Include="ImportBase\ImportTable.cs" />
+    <Compile Include="ImportBase\Logger.cs" />
+    <Compile Include="ImportBase\ProcessResult.cs" />
+    <Compile Include="ImportBase\RowContextBase.cs" />
+    <Compile Include="ImportBase\SplitValue.cs" />
+    <Compile Include="ImportBase\TableEntry.cs" />
+    <Compile Include="ImportBase\Xlsx\XlsxWorkbook.cs" />
+    <Compile Include="ImportBase\Xlsx\XlsxWorksheet.cs" />
+    <Compile Include="ImportBase\Xlsx\XlsxWorksheets.cs" />
+    <Compile Include="Common\Matrix\MatrixData.cs" />
+    <Compile Include="Common\Matrix\MatrixStoredEntity.cs" />
+    <Compile Include="Common\Matrix\MatrixTabPageData.cs" />
+    <Compile Include="Common\Matrix\MatrixTabPage2.cs" />
+    <Compile Include="Initializer.cs" />
+    <Compile Include="Masters\Item\Color\OlcItemColor.cs" />
+    <Compile Include="Masters\Item\Color\OlcItemColorGenerated.cs" />
+    <Compile Include="Masters\Item\Color\OlcItemColorList.cs" />
+    <Compile Include="Masters\Item\Color\OlcItemColors.cs" />
+    <Compile Include="Masters\Item\Color\OlcItemColorSearchPage.cs" />
+    <Compile Include="Masters\Item\ItemBL2.cs" />
+    <Compile Include="Masters\Item\ItemEditTab2.cs" />
+    <Compile Include="Masters\Item\ItemMatrix\Items.cs" />
+    <Compile Include="Masters\Item\ColorTypeList.cs" />
+    <Compile Include="Masters\Item\ItemMatrix\OlcItemSearchTab.cs" />
+    <Compile Include="Masters\Item\MainGroup\OlcItemMainGroup.cs" />
+    <Compile Include="Masters\Item\MainGroup\OlcItemMainGroupGenerated.cs" />
+    <Compile Include="Masters\Item\MainGroup\OlcItemMainGroupList.cs" />
+    <Compile Include="Masters\Item\MainGroup\OlcItemMainGroupSearchPage.cs" />
+    <Compile Include="Masters\Item\MainGroup\OlcItemMainGroupType1.cs" />
+    <Compile Include="Masters\Item\MainGroup\OlcItemMainGroupType1Generated.cs" />
+    <Compile Include="Masters\Item\MainGroup\OlcItemMainGroupType1List.cs" />
+    <Compile Include="Masters\Item\MainGroup\OlcItemMainGroupType1SearchPage.cs" />
+    <Compile Include="Masters\Item\MainGroup\OlcItemMainGroupType2.cs" />
+    <Compile Include="Masters\Item\MainGroup\OlcItemMainGroupType2Generated.cs" />
+    <Compile Include="Masters\Item\MainGroup\OlcItemMainGroupType2List.cs" />
+    <Compile Include="Masters\Item\MainGroup\OlcItemMainGroupType2SearchPage.cs" />
+    <Compile Include="Masters\Item\MainGroup\OlcItemSizeRangeHead.cs" />
+    <Compile Include="Masters\Item\MainGroup\OlcItemSizeRangeHeadGenerated.cs" />
+    <Compile Include="Masters\Item\MainGroup\OlcItemSizeRangeHeadList.cs" />
+    <Compile Include="Masters\Item\MainGroup\OlcItemSizeRangeInfo.cs" />
+    <Compile Include="Masters\Item\MainGroup\OlcItemSizeRangeLine.cs" />
+    <Compile Include="Masters\Item\MainGroup\OlcItemSizeRangeLineGenerated.cs" />
+    <Compile Include="Masters\Item\MainGroup\OlcItemSizeRangeLineList.cs" />
+    <Compile Include="Masters\Item\MainGroup\OlcItemSizeRangeLines.cs" />
+    <Compile Include="Masters\Item\MainGroup\OlcItemSizeRangeSearchPage.cs" />
+    <Compile Include="Masters\Item\MaterialTypeList.cs" />
+    <Compile Include="Masters\Item\Model\ExclusiveTypeList.cs" />
+    <Compile Include="Masters\Item\Model\ItemSearchProvider3.cs" />
+    <Compile Include="Masters\Item\Model\ItemSearchTab3.cs" />
+    <Compile Include="Masters\Item\Model\ItemSearchTab3Info.cs" />
+    <Compile Include="Masters\Item\Model\OlcItemModelAllList.cs" />
+    <Compile Include="Masters\Item\Model\OlcItemModelList.cs" />
+    <Compile Include="Masters\Item\Model\OlcItemModelSearchPage.cs" />
+    <Compile Include="Masters\Item\Model\OlcItemModel.cs" />
+    <Compile Include="Masters\Item\Model\OlcItemModelGenerated.cs" />
+    <Compile Include="Masters\Item\Model\OlcItemModelSeason.cs" />
+    <Compile Include="Masters\Item\Model\OlcItemModelSeasonGenerated.cs" />
+    <Compile Include="Masters\Item\Model\OlcItemModelSeasonList.cs" />
+    <Compile Include="Masters\Item\Model\OlcItemModelSeasons.cs" />
+    <Compile Include="Masters\Item\Model\OlcItemModelSessionSearchPage.cs" />
+    <Compile Include="Masters\Item\OlcItem.cs" />
+    <Compile Include="Masters\Item\OlcItemGenerated.cs" />
+    <Compile Include="Masters\Item\OlcItemRules.cs" />
+    <Compile Include="Masters\Item\OlcItems.cs" />
+    <Compile Include="Masters\Item\PatternTypeList.cs" />
+    <Compile Include="Masters\Item\Season\OlcItemSeason.cs" />
+    <Compile Include="Masters\Item\Season\OlcItemSeasonList.cs" />
+    <Compile Include="Masters\Item\Season\OlcItemSeasons.cs" />
+    <Compile Include="Masters\Item\Season\OlcItemSeasonGenerated.cs" />
+    <Compile Include="Masters\Item\Season\OlcItemSeasonSearchPage.cs" />
+    <Compile Include="Masters\PriceTable\OlcPrctable.cs" />
+    <Compile Include="Masters\PriceTable\OlcPrctableGenerated.cs" />
+    <Compile Include="Masters\PriceTable\OlcPrctableSearchPage.cs" />
+    <Compile Include="Masters\Partner\EmployeeBL3.cs" />
+    <Compile Include="Masters\Partner\EmployeeEditTab3.cs" />
+    <Compile Include="Masters\Partner\EmployeeSearchProvider3.cs" />
+    <Compile Include="Masters\Partner\Import\ImportConditionalConverter.cs" />
+    <Compile Include="Masters\Partner\Import\PartnerImportConditional.cs" />
+    <Compile Include="Masters\Partner\Import\PartnerImportResultSet.cs" />
+    <Compile Include="Masters\Partner\Import\PartnerImportResultSets.cs" />
+    <Compile Include="Masters\Partner\Import\PartnerImportService.cs" />
+    <Compile Include="Masters\Partner\Import\PartnerRowContext.cs" />
+    <Compile Include="Masters\Partner\OlcPartnCmpRules.cs" />
+    <Compile Include="Masters\Partner\OlcPartnerRules.cs" />
+    <Compile Include="Masters\Partner\PartnerSearchTab3.cs" />
+    <Compile Include="Masters\Partner\OlcEmployee.cs" />
+    <Compile Include="Masters\Partner\OlcEmployeeGenerated.cs" />
+    <Compile Include="Masters\Partner\OlcPartnAddr.cs" />
+    <Compile Include="Masters\Partner\OlcPartnAddrGenerated.cs" />
+    <Compile Include="Masters\Partner\OlcPartnCmp.cs" />
+    <Compile Include="Masters\Partner\OlcPartnCmpGenerated.cs" />
+    <Compile Include="Masters\Partner\OlcPartnCmps.cs" />
+    <Compile Include="Masters\Partner\OlcPartner.cs" />
+    <Compile Include="Masters\Partner\OlcPartnerGenerated.cs" />
+    <Compile Include="Masters\Partner\PartnAddrBL3.cs" />
+    <Compile Include="Masters\Partner\PartnAddrEditTab3.cs" />
+    <Compile Include="Masters\Partner\PartnAddrSearchProvider3.cs" />
+    <Compile Include="Masters\Partner\PartnerBL3.cs" />
+    <Compile Include="Masters\Partner\PartnerEditTab3.cs" />
+    <Compile Include="Masters\Partner\PartnerSearchProvider3.cs" />
+    <Compile Include="Module.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Setup\PriceTable\OlcPrcType.cs" />
+    <Compile Include="Setup\PriceTable\OlcPrcTypeGenerated.cs" />
+    <Compile Include="Setup\PriceTable\OlcPrcTypeList.cs" />
+    <Compile Include="Setup\PriceTable\OlcPrcTypeSearchPage.cs" />
+    <Compile Include="Setup\Warehouse\OlcWhLocation.cs" />
+    <Compile Include="Setup\Warehouse\OlcWhLocationBL.cs" />
+    <Compile Include="Setup\Warehouse\OlcWhLocationEditPage.cs" />
+    <Compile Include="Setup\Warehouse\OlcWhLocationEditTab.cs" />
+    <Compile Include="Setup\Warehouse\OlcWhLocationGenerated.cs" />
+    <Compile Include="Setup\Warehouse\OlcWhLocationRules.cs" />
+    <Compile Include="Setup\Warehouse\OlcWhLocationSearchProvider.cs" />
+    <Compile Include="Setup\Warehouse\OlcWhLocationSearchTab.cs" />
+    <Compile Include="Setup\Warehouse\OlcWhZone.cs" />
+    <Compile Include="Setup\Warehouse\OlcWhZoneBL.cs" />
+    <Compile Include="Setup\Warehouse\OlcWhZoneEditPage.cs" />
+    <Compile Include="Setup\Warehouse\OlcWhZoneEditTab.cs" />
+    <Compile Include="Setup\Warehouse\OlcWhZoneGenerated.cs" />
+    <Compile Include="Setup\Warehouse\OlcWhZoneInfoPart.cs" />
+    <Compile Include="Setup\Warehouse\OlcWhZoneList.cs" />
+    <Compile Include="Setup\Warehouse\OlcWhZoneRules.cs" />
+    <Compile Include="Setup\Warehouse\OlcWhZoneSearchProvider.cs" />
+    <Compile Include="Setup\Warehouse\OlcWhZoneSearchTab.cs" />
+    <Compile Include="Setup\Warehouse\WarehouseSearchPage3.cs" />
+    <Compile Include="Setup\Warehouse\WarehouseSearchTab3.cs" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

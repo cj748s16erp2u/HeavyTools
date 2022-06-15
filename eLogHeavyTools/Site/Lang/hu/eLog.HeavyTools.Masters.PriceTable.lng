@@ -1,0 +1,33 @@
+$pageName_OlcPrctable=Ártábla
+$tabName_OlcPrctable=Ártábla
+$ptid=Ártípus
+$partnname=Partner név
+$addrname=Cím név
+$date=Dátum
+$imid=Modell
+$code=Modell kód
+$isid=Szezon
+$icid=Színállás
+$itemname=Cikk megnevezés
+$itemcode=Cikkszám
+$enddate=Vég dátum
+
+$startdate2=Kezd. dátum
+$enddate2=Vég dátum
+$startdate=Kezd. dátum
+
+$itemid_code=Cikk kód
+$itemid_name1=Cikk megnevezés
+$prc=Ár
+
+
+$pname=Partner név
+$aname=Cím megnevezés
+
+$overmaperror=Mentés esetén ár átfedés lenne
+$wringitemid=A megadott cikkszám nem a megadott modellhez tartozik
+
+
+$group_modelinfo=Modell adatok
+
+$noroot=Nincs modell kiválasztva

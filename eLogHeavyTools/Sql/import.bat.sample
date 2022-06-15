@@ -1,0 +1,2 @@
+..\..\Base\Sql\SQLExecuter.exe <server> <login> <password> <db> .\ .\deplist.txt
+pause

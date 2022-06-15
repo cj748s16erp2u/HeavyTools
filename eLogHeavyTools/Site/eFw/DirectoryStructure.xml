@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="iso-8859-2" ?>
+<DirectoryStructure>
+    <Folders>
+        <Folders>
+            <Folder name="appdata" parent="approot" value=""/>
+            <Folder name="xml" parent="appdata"  value="XML\"/>
+            <Folder name="interfaces" parent="xml" value="Interfaces\"/>
+            <Folder name="schemas" parent="xml" value="Schemas\"/>
+            <Folder name="sourceroot" parent="approot" value=""/>
+            <Folder name="sources" parent="sourceroot" value="InterfaceFiles\"/>
+            <Folder name="archive" parent="sourceroot" value="Archive\"/>
+
+
+            <Folder name="log" parent="xml" value="Log\"/>
+            <Folder name="temp" parent="xml" value="Temp\"/>
+            <Folder name="errors" parent="xml" value="Errors\"/>
+            <Folder name="defaults" parent="xml" value="Defaults\"/>
+            <Folder name="languages" parent="xml" value="Languages\"/>
+            <Folder name="publicarchive" parent="sourceroot" value="archive\"/>
+            <Folder name="export" parent="xml" value="Export\"/>
+            <Folder name="transformations" parent="xml" value="Transformations\"/>
+            <Folder name="webreport" parent="xml" value="WebReport\"/>
+            <!--<Folder name="webreports" parent="xml" value="WebReport\Reports\"/>-->
+            <Folder name="webreports" parent="webreport" value="Reports\"/>
+            <Folder name="webreportforms" parent="webreport" value="Forms\"/>
+            <Folder name="webreportformsdefault" parent="webreportforms" value="Defaults\"/>
+            <Folder name="webreportcommon" parent="webreport" value="Common\"/>
+        </Folders>
+    </Folders>
+    <Files>
+        <Files>
+            <File name="interfacesettingsschema" folder="schemas" value="InterfaceSettings.xsd"/>
+
+            <File name="application" folder="xml" value="application.xml"/>
+            <File name="codasettings" folder="xml" value="CodaSettings.xml"/>
+            <File name="errormessages" folder="languages" value="ErrorMessages.xml"/>
+            <File name="interfacesettings" folder="interfaces" value="InterfaceSettings.xml"/>
+            <File name="lastrunarchive" folder="xml" value="LastRunArchive.xml"/>
+            <File name="license" folder="approot" value="eFramework.licx"/>
+            <File name="licenseschema" folder="schemas" value="License.xsd"/>
+            <File name="roletreetransformation" folder="transformations" value="RoleTree.xslt"/>
+            <File name="webreportsettingsschema" folder="schemas" value="WebReport.xsd"/>
+            <File name="webreportsnippets" folder="webreportcommon" value="Snippets.xml"/>
+            <File name="webreportdefaultvalues" folder="schemas" value="WebReportDefaultValues.xsd"/>
+        </Files>
+    </Files>
+</DirectoryStructure>

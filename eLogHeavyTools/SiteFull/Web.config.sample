@@ -1,0 +1,128 @@
+﻿<?xml version="1.0"?>
+<!-- 
+    Note: As an alternative to hand editing this file you can use the 
+    web admin tool to configure settings for your application. Use
+    the Website->Asp.Net Configuration option in Visual Studio.
+    A full list of settings and comments can be found in 
+    machine.config.comments usually located in 
+    \Windows\Microsoft.Net\Framework\v2.x\Config 
+-->
+<configuration xmlns="http://schemas.microsoft.com/.NetConfiguration/v2.0">
+    <appSettings>
+        <add key="LangFolder" value="..\Site\Lang\;..\..\..\CodaInt\Bank\Base\Site\Lang\;..\..\Finance\Coda\Site\Lang\;..\..\..\CodaInt\Base\Site\Lang\;..\..\Finance\Base\Site\Lang\;..\..\Base\Site\Lang\;%FINREPSVN%\U4Reports\Base\Lang\"/>
+        <add key="XmlFolder" value="..\Site\Xml\;..\..\..\CodaInt\Bank\Base\Site\Xml\;..\..\Finance\Coda\Site\Xml\;..\..\..\CodaInt\Base\Site\Xml\;..\..\Finance\Base\Site\Xml\;..\..\Base\Site\Xml\;%FINREPSVN%\U4Reports\Base\Xml\"/>
+        <add key="ColorizerFolder" value="..\Site\GridColors\;..\..\..\CodaInt\Bank\Base\Site\GridColors\;..\..\..\CodaInt\Base\Site\GridColors\;..\..\Finance\Base\Site\GridColors\;..\..\Base\Site\GridColors\"/>
+        <add key="ReportFolder" value="..\Site\Reports\;..\..\..\CodaInt\Bank\Base\Site\Reports\;..\..\Finance\Coda\Site\Reports\;..\..\..\CodaInt\Base\Site\Reports\;..\..\Finance\Base\Site\Reports\;..\..\Base\Site\Reports\;%FINREPSVN%\U4Reports\Base\Reports\"/>
+        <add key="LogFolder" value="Log"/>
+        <add key="ReportTempFolder" value="Temp"/>
+        <add key="ScriptsFolder" value="..\..\..\eProjectWeb\Site\Scripts\;..\..\..\eProjectWeb\Site\Scripts.dev\"/>
+        <add key="CssFolder" value="..\..\..\eProjectWeb\Site\Styles\;.\"/>
+        <add key="StylesFolder" value="..\..\..\eProjectWeb\Site\Images\"/>
+        <add key="FontsFolder" value="..\..\..\eProjectWeb\Site\Fonts\"/>
+        <add key="ScriptsCompress" value="False" />
+        <add key="ShowClock" value="True" />
+        <add key="RSAPrivateKey" value="RSAPrivateKey.xml" />
+
+        <add key="AttachmentFolder" value=".\Attachments\" />
+
+        <!-- Email setup -->
+        <add key="SmtpAddress" value="?" />
+        <add key="SmtpPort" value="25" />
+        <!--<add key="SmtpUser" value="?" />-->
+        <!--<add key="SmtpPassword" value="?" />-->
+        <add key="SenderAddress" value="erp@unit4.com" />
+        <add key="SenderName" value="Unit4 ERP" />
+        <add key="SendingType" value="Separately" />
+        <add key="SmtpEnableSsl" value="false" />
+        <add key="SkipAuthenticationException" value="true" />
+
+        <!-- eLog Scheduler -->
+        <add key="SchedulerAddress" value="localhost" />
+        <add key="SchedulerPort" value="3456" />
+
+        <add key="AllowAnimate" value="false" />
+        <add key="AnimationSpeed" value="fast" />
+        <add key="providerMaxRecords" value="1000" />
+        <add key="checkDBPing" value="false" />
+
+        <!-- CODA design -->
+        <add key="useCODAStyle" value="true" />
+        <!-- Ki vegezze az bejelentkeztetest: eLog,CODA -->
+        <add key="Authorizer" value="eLog" />
+        <!-- Hova jelentkezzen be: eLog,CODA -->
+        <add key="LoginTo" value="eLog" />
+        <!-- CheckedCombo vs Grid a vallalat valasztasnal -->
+        <add key="Login-comboForCompany" value="false" />
+
+        <add key="SwapNumberSeparators" value="false" />
+        <add key="jsDevelop" value="false" />
+
+        <add key="CurRate" value="CurRate.xml" />
+
+        <!-- xlsx export engedelyezese -->
+        <add key="allowXlsx" value="true" />
+    </appSettings>
+    <!--
+    For a description of web.config changes see http://go.microsoft.com/fwlink/?LinkId=235367.
+
+    The following attributes can be set on the <httpRuntime> tag.
+      <system.Web>
+        <httpRuntime targetFramework="4.5.2" />
+      </system.Web>
+    -->
+    <system.web>
+        <!-- 
+            Set compilation debug="true" to insert debugging 
+            symbols into the compiled page. Because this 
+            affects performance, set this value to true only 
+            during development.
+        -->
+    <compilation debug="true" targetFramework="4.5.2">
+      <buildProviders>
+        <add extension=".rdlc" type="Microsoft.Reporting.RdlBuildProvider, Microsoft.ReportViewer.WebForms, Version=12.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91" />
+      </buildProviders>
+    </compilation>
+        <!--
+            The <authentication> section enables configuration 
+            of the security authentication mode used by 
+            ASP.NET to identify an incoming user. 
+        -->
+        <!--<authentication mode="Windows"/>-->
+        <!--<authentication mode="Forms"/>-->
+        <!--
+            The <customErrors> section enables configuration 
+            of what to do if/when an unhandled error occurs 
+            during the execution of a request. Specifically, 
+            it enables developers to configure html error pages 
+            to be displayed in place of a error stack trace.
+
+            <customErrors mode="RemoteOnly" defaultRedirect="GenericErrorPage.htm">
+                <error statusCode="403" redirect="NoAccess.htm" />
+                <error statusCode="404" redirect="FileNotFound.htm" />
+            </customErrors>
+        -->
+
+        <httpRuntime maxRequestLength="40960" />
+    </system.web>
+    <system.webServer>
+        <security>
+            <requestFiltering>
+                <requestLimits maxAllowedContentLength="40960" />
+            </requestFiltering>
+        </security>
+        <handlers>
+            <!-- JavaScript/Service handler (IIS7 Integrated Mode) -->
+            <!-- file level access -->
+            <add name="JSHandler" verb="*" path="*.js" type="eProjectWeb.Framework.JSHandler,eProjectWeb.Framework" resourceType="Unspecified"/>
+            <add name="CSSHandler" verb="*" path="*.css" type="eProjectWeb.Framework.CSSHandler,eProjectWeb.Framework" resourceType="Unspecified" />
+            <!-- directory level access -->
+            <add name="StylesHandler" verb="*" path="Styles/*.*" type="eProjectWeb.Framework.StylesHandler,eProjectWeb.Framework" resourceType="Unspecified" />
+            <add name="ImagesHandler" verb="*" path="images/*.*" type="eProjectWeb.Framework.StylesHandler,eProjectWeb.Framework" resourceType="Unspecified" />
+            <add name="FontHandler" verb="*" path="Fonts/*.*" type="eProjectWeb.Framework.FontHandler,eProjectWeb.Framework" resourceType="Unspecified" />
+            <!-- service level access -->
+            <add name="ServicesHandler" verb="*" path="Services/*.ashx" type="eProjectWeb.Framework.ServicesHandler,eProjectWeb.Framework" resourceType="Unspecified" />
+            <add name="ReportViewerWebControlHandler" preCondition="integratedMode" verb="*" path="Reserved.ReportViewerWebControl.axd" type="Microsoft.Reporting.WebForms.HttpHandler, Microsoft.ReportViewer.WebForms, Version=12.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91" />
+        </handlers>
+        <validation validateIntegratedModeConfiguration="false" />
+    </system.webServer>
+</configuration>

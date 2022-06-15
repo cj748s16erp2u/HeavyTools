@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Schema xmlns="http://tempuri.org/RenderableSchema.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://tempuri.org/RenderableSchema.xsd RenderableSchema.xsd">
+  <TabPage Name="ItemEditTab2">
+    <LayoutTable ControlGroup="Item" Columns="{130, None}; {180, None}; {20, Empty}; {130, None}; {180, None};" ID="EditGroup1" Label="$group_item">
+      <!--<GroupSeparator Label="$group_item" ColsToSpan="-1"/>-->
+      <Textbox Field="itemcode" />
+      <Textbox Field="barcode" />
+      <ForceNextRow />
+      <Textbox Field="name01" ColsToSpan="4" />
+      <ForceNextRow />
+      <!--<Textbox Field="sname" />-->
+      <Textbox Field="name02" ColsToSpan="4" />
+      <ForceNextRow />
+      <!--<Textbox Field="type" />-->
+      <DatePickerbox Field="releasedate" />
+      <ForceNextRow />
+      <Selector Field="rootitemid" Label="$rootitem_code" ValueField="itemid" TextField="itemcode" SelectionID="eLog.Base.Masters.Item.ItemSelectionProvider" />
+      <Selector Field="rootitemid" Label="$rootitem_name1" ValueField="itemid" TextField="name01" SelectionID="eLog.Base.Masters.Item.ItemSelectionProvider" />
+      <ForceNextRow />
+      <Combo Field="itemgrpid" ListID="eLog.Base.Setup.ItemGroup.ItemGroupList" ComboFlags="None" />
+      <Combo Field="custtarid" ListID="eLog.Base.Setup.CustTariff.CustTariffList" ComboFlags="None" />
+      <ForceNextRow />
+      <Combo Field="unitid" ListID="eLog.Base.Setup.Unit.UnitList" ComboFlags="None" />
+      <ForceNextRow />
+      <CompanyCodesControl Field="cmpcodes" ListID="eLog.Base.Setup.Company.CompanyCodeList#grantedonly#showall" ComboFlags="AutoSelectOne" ColsToSpan="-1" />
+      <ForceNextRow />
+      <Textbox Field="note" Rows="3" ColsToSpan="-1" />
+    </LayoutTable>
+    <LayoutTable ControlGroup="olc" Columns="{130, None}; {180, None}; {20, Empty}; {130, None}; {180, None};" ID="OlcGroup" Label="">
+      <Combo Field="imgid" ListID="eLog.HeavyTools.Masters.Item.MainGroup.OlcItemMainGroupList" ComboFlags="None" />
+      <Combo Field="imid" ListID="eLog.HeavyTools.Masters.Item.Model.OlcItemModelList" ComboFlags="None" DependentField="imgid" DependentCtrlID="olc.imgid" />
+      <Intbox Field="isrhid" Visible="false"/> <ForceNextRow />
+      <Combo Field="imsid" ListID="eLog.HeavyTools.Masters.Item.Model.OlcItemModelSeasonList" ComboFlags="None" DependentField="imid" DependentCtrlID="olc.imid" ColsToSpan="-1" />
+      <ForceNextRow />
+      <Combo Field="isrlid" ListID="eLog.HeavyTools.Masters.Item.MainGroup.OlcItemSizeRangeLineList" ComboFlags="None" DependentField="isrhid" DependentCtrlID="olc.isrhid" />
+      <ForceNextRow />
+      <Combo Field="colortype1" ListID="eLog.HeavyTools.Masters.Item.ColorTypeList" ComboFlags="None" /> 
+      <Textbox Field="colorname"/>
+	  <ForceNextRow />
+      <Combo Field="colortype2" ListID="eLog.HeavyTools.Masters.Item.ColorTypeList" ComboFlags="None" />
+      <Combo Field="colortype3" ListID="eLog.HeavyTools.Masters.Item.ColorTypeList" ComboFlags="None" />
+      <ForceNextRow />
+      <Combo Field="materialtype" ListID="eLog.HeavyTools.Masters.Item.MaterialTypeList" ComboFlags="None" />
+      <Combo Field="patterntype" ListID="eLog.HeavyTools.Masters.Item.PatternTypeList" ComboFlags="None" />
+      <Combo Field="patterntype2" ListID="eLog.HeavyTools.Masters.Item.PatternTypeList" ComboFlags="None" />
+    </LayoutTable>
+    <LayoutContainer ControlGroup="xx" Columns="{130, None}; {180, None}; {20, Empty}; {130, None}; {180, None};" ID="CmpGroup" Label="">
+      <!--<FlagSelector Field="type" ColsToSpan="-1" ListID="eLog.Base.Masters.Item.ItemTypeList"/>
+            <ForceNextRow/>-->
+      <Combo Field="prcgrpidprc" ListID="eLog.Base.Setup.PriceTable.PrcGroupList_Price_Item" DependentField="cmpid" DependentCtrlID="xx.cmpid" />
+      <Combo Field="prcgrpiddiscnt" ListID="eLog.Base.Setup.PriceTable.PrcGroupList_Discount_Item" DependentField="cmpid" DependentCtrlID="xx.cmpid" />
+      <ForceNextRow />
+      <CheckedCombo Field="icstat" ListID="eLog.Base.Masters.Item.ItemCmpIcStatTypeList" ComboFlags="FlagValues" />
+      <Checkbox Field="mrppassthrough" />
+      <ForceNextRow />
+      <Combo Field="safestocktype" ListID="eLog.Base.Masters.Item.ItemCmpSafeStockTypeList" ComboFlags="None" />
+      <Intbox Field="safestockdyntime" />
+      <ForceNextRow />
+      <Numberbox Field="stockminqty" DecDigits="2" ThousandSep="True" />
+      <Numberbox Field="stockmaxqty" DecDigits="2" ThousandSep="True" />
+      <ForceNextRow />
+      <Textbox Field="cmpid" Visible="False" />
+    </LayoutContainer>
+  </TabPage>
+</Schema>

@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<WSInterface>
+  <Authentication>
+    <Accounts>
+    </Accounts>
+  </Authentication>
+  <Log>
+    <Item Function="Item">
+      <RequestHeaders>
+        <Header>Host</Header>
+        <Header>Authorization</Header>
+        <Header>SOAPAction</Header>
+      </RequestHeaders>
+    </Item>
+  </Log>
+</WSInterface>

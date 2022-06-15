@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Schema xmlns="http://tempuri.org/RenderableSchema.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://tempuri.org/RenderableSchema.xsd ../../../base/Site/Xml/RenderableSchema.xsd">
+	<ControlType Name="OlcWhZoneInfoPart" Label="$group_whzoneinfo">
+		<Textbox Field="whid" Label="$whid_" Width="120" Disabled="true" />
+		<Textbox Field="whname" Width="300" Disabled="true" ColsToSpan="3" />
+		<ForceNextRow />
+		<Textbox Field="whzonecode" Label="$whzonecode_" Width="120" Disabled="true" />
+		<Textbox Field="whzonename" Width="300" Disabled="true" ColsToSpan="3" />
+		<ForceNextRow />
+		<Numberbox Field="locdefvolume" DecDigits="6" Width="120" Disabled="true" />
+		<Numberbox Field="locdefoverfillthreshold" DecDigits="2" Width="120" Disabled="true" />
+		<Combo Field="locdefismulti" ListID="eLog.Base.Setup.Parameters.YesNoTypeList" Width="120" Disabled="true" />
+	</ControlType>
+	<TabPage Name="OlcWhZoneSearchTab">
+		<Control ID="warehouseInfoPart" ControlType="WarehouseInfoPart" />
+		<SearchFilterBar ID="SrcBar">
+			<Textbox Field="whzonecode" Width="150" />
+			<Textbox Field="name" Width="280" />
+			<Combo Field="delstat" Width="100" ListID="eLog.Base.Setup.Parameters.DelstatTypeList" ComboFlags="AutoSelectFirst" />
+		</SearchFilterBar>
+		<Grid ID="searchResults" />
+	</TabPage>
+
+	<TabPage Name="OlcWhZoneEditTab">
+		<Control ID="warehouseInfoPart" ControlType="WarehouseInfoPart" />
+		<LayoutTable ControlGroup="OlcWhZone" Columns="{120, None}; {180, None}; {20, Empty}; {120, None}; {180, None};" ID="EditGroup1">
+			<Textbox Field="whzonecode" />
+			<ForceNextRow />
+			<Textbox Field="name" ColsToSpan="-1" />
+			<ForceNextRow />
+			<Combo Field="pickingtype" ListID="eProjectWeb.Framework.Data.TypeListProviderPublic#olc_whzone.pickingtype" />
+			<ForceNextRow />
+			<Combo Field="pickingcartaccessible" ListID="eLog.Base.Setup.Parameters.YesNoTypeList" />
+			<ForceNextRow />
+			<Combo Field="isbackground" ListID="eLog.Base.Setup.Parameters.YesNoTypeList" />
+			<Combo Field="ispuffer" ListID="eLog.Base.Setup.Parameters.YesNoTypeList" />
+			<Textbox Field="note" Rows="3" ColsToSpan="-1" />
+			<GroupSeparator ID="x1" Label="$olcwhzone_location_defaults" />
+			<Numberbox Field="locdefvolume" DecDigits="6" />
+			<Numberbox Field="locdefoverfillthreshold" DecDigits="2" />
+			<Combo Field="locdefismulti" ListID="eLog.Base.Setup.Parameters.YesNoTypeList" />
+		</LayoutTable>
+	</TabPage>
+
+	<Search Name="OlcWhZoneSearchProvider">
+		<Column FieldName="whzonecode" Width="80" />
+		<Column FieldName="name" Width="180" />
+		<Column FieldName="pickingtype" Width="50" Align="Left" FieldFunction="listlookup" FieldFuncArg="eProjectWeb.Framework.Data.TypeListProviderPublic#olc_whzone.pickingtype,abbr" />
+		<Column FieldName="pickingcartaccessible" Width="50" Align="Left" FieldFunction="listlookup" FieldFuncArg="eLog.Base.Setup.Parameters.YesNoTypeList,abbr" />
+		<Column FieldName="isbackground" Width="50" Align="Left" FieldFunction="listlookup" FieldFuncArg="eLog.Base.Setup.Parameters.YesNoTypeList,abbr" />
+		<Column FieldName="ispuffer" Width="50" Align="Left" FieldFunction="listlookup" FieldFuncArg="eLog.Base.Setup.Parameters.YesNoTypeList,abbr" />
+		<Column FieldName="delstat" Width="50" Align="Left" FieldFunction="listlookup" FieldFuncArg="eLog.Base.Setup.Parameters.DelstatTypeList,abbr" />
+		<Column FieldName="whzoneid" PKFieldName="true" Width="80" />
+	</Search>
+
+	<TabPage Name="OlcWhLocationSearchTab">
+		<Control ID="olcWhZoneInfoPart" ControlType="OlcWhZoneInfoPart" />
+		<SearchFilterBar ID="SrcBar">
+
+		</SearchFilterBar>
+		<Grid ID="searchResults" />
+	</TabPage>
+
+	<TabPage Name="OlcWhLocationEditTab">
+		<Control ID="olcWhZoneInfoPart" ControlType="OlcWhZoneInfoPart" />
+		<LayoutTable ControlGroup="OlcWhZone" Columns="{120, None}; {180, None}; {20, Empty}; {120, None}; {180, None};" ID="EditGroup1">
+			<Textbox Field="whloccode" />
+			<Combo Field="whzoneid" Label="$whzonecode_" ListID="eLog.HeavyTools.Setup.Warehouse.OlcWhZoneList" DependentCtrlID="info.whid" DependentField="whid" Disabled="true" />
+			<Textbox Field="name" ColsToSpan="-1" />
+			<ForceNextRow />
+			<Combo Field="loctype" ListID="eProjectWeb.Framework.Data.TypeListProviderPublic#olc_whlocation.loctype" />
+			<Combo Field="movloctype" ListID="eProjectWeb.Framework.Data.TypeListProviderPublic#olc_whlocation.movloctype" />
+			<ForceNextRow />
+			<Numberbox Field="volume" DecDigits="6" />
+			<Numberbox Field="overfillthreshold" DecDigits="2" />
+			<Combo Field="ismulti" ListID="eLog.Base.Setup.Parameters.YesNoTypeList" />
+			<ForceNextRow />
+			<Numberbox Field="crawlorder" />
+			<ForceNextRow />
+			<Numberbox Field="capacity" DecDigits="6" />
+			<Combo Field="capunitid" ListID="eLog.Base.Setup.Unit.UnitList" />
+			<ForceNextRow />
+			<Textbox Field="note" Rows="3" ColsToSpan="-1" />
+		</LayoutTable>
+	</TabPage>
+
+	<Search Name="OlcWhLocationSearchProvider">
+		<Column FieldName="whid" Width="80" />
+		<Column FieldName="whzonecode" Width="80" />
+		<Column FieldName="whloccode" Width="80" />
+		<Column FieldName="loctype" Width="50" Align="Left" FieldFunction="listlookup" FieldFuncArg="eProjectWeb.Framework.Data.TypeListProviderPublic#olc_whlocation.loctype,abbr" />
+		<Column FieldName="movloctype" Width="50" Align="Left" FieldFunction="listlookup" FieldFuncArg="eProjectWeb.Framework.Data.TypeListProviderPublic#olc_whlocation.movloctype,abbr" />
+		<Column FieldName="volume" Width="80" Format="C6" />
+		<Column FieldName="overfillthreshold" Width="80" Format="C2" />
+		<Column FieldName="ismulti" Width="50" Align="Left" FieldFunction="listlookup" FieldFuncArg="eLog.Base.Setup.Parameters.YesNoTypeList,abbr" />
+		<Column FieldName="crawlorder" Width="50" />
+		<Column FieldName="capacity" Width="80" Format="C6" />
+		<Column FieldName="capunitid" Width="50" />
+		<Column FieldName="name" Width="180" />
+		<Column FieldName="whlocid" PKFieldName="true" Width="80" />
+	</Search>
+</Schema>

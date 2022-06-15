@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Schema xmlns="http://tempuri.org/RenderableSchema.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://tempuri.org/RenderableSchema.xsd RenderableSchema.xsd">
+  <Search Name="OlcItemColorSearchProvider">
+    <Column FieldName="icid" PKFieldName="icid" Hidden="false" Width="100" />
+    <Column FieldName="name" Width="130" />
+	<Column FieldName="delstat" Width="60" Align="Left" FieldFunction="listlookup" FieldFuncArg="eLog.Base.Setup.Parameters.DelstatTypeList,abbr" />
+  </Search>
+  <TabPage Name="OlcItemColorSearchTab">
+    <SearchFilterBar ID="SrcBar">
+      <Textbox Field="icid" Width="100" />
+      <Textbox Field="name" Width="150" />
+      <Combo Field="delstat" Width="100" ListID="eLog.Base.Setup.Parameters.DelstatTypeList" ComboFlags="AllowBlank AutoSelectFirst" />
+    </SearchFilterBar>
+    <Grid ID="searchResults" Label="$search_results" ColsToSpan="-1" />
+  </TabPage>
+  <TabPage Name="OlcItemColorEditTab">
+    <LayoutTable ControlGroup="OlcItemColor" Columns="{135, None}; {180, None}; {20, Empty}; {90, None}; {180, None};" ID="EditGroup1">
+      <Textbox Field="icid" />
+      <ForceNextRow />
+      <Textbox Field="name" />
+      <ForceNextRow />
+    </LayoutTable>
+  </TabPage>
+</Schema>

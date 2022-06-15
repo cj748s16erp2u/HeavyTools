@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Application Title="Unit4 ERP" Version="V7.01" LookAndFeel="0" >
+  <Module Name="eProjectWeb_Framework" AssemblyName="eProjectWeb.Framework" Preload="True" />
+  <Module Name="eLog_Base" AssemblyName="eLog.Base" Preload="True" />
+  <Module Name="eProjectWeb_Framework_Package_Zip" AssemblyName="eProjectWeb.Framework.Package.Zip" Preload="False" />
+  <Module Name="eProjectWeb_Framework_Reports_Csv" AssemblyName="eProjectWeb.Framework.Reports.Csv" Preload="False" />
+  <Module Name="eProjectWeb_Framework_Reports_Xls" AssemblyName="eProjectWeb.Framework.Reports.Xls" Preload="False" />
+  <Module Name="eProjectWeb_Framework_Reports_Xlsx" AssemblyName="eProjectWeb.Framework.Reports.Xlsx" Preload="False" />
+  <Module Name="eProjectWeb_Framework_Reports_CR" AssemblyName="eProjectWeb.Framework.Reports.CR" Preload="False" />
+  <Module Name="eProjectWeb_Framework_Reports_SSRS" AssemblyName="eProjectWeb.Framework.Reports.SSRS" Preload="False" />
+  <Module Name="eLog_Finance" AssemblyName="eLog.Finance.Base" Preload="True"/>
+  <Module Name="CodaInt_Base" AssemblyName="CodaInt.Base" Preload="True" />
+  <Module Name="eLog_Finance_Coda" AssemblyName="eLog.Finance.Coda" Preload="True" />
+  <Module Name="U4Ext_Bank_Base" AssemblyName="U4Ext.Bank.Base" Preload="True" />
+  <Module Name="eLog_HeavyTools" AssemblyName="eLog.HeavyTools" Preload="True" />
+</Application>

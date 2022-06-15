@@ -1,0 +1,39 @@
+.MatrixCell{
+	width: 60px;
+	max-width: 60px;
+}
+.MatrixCheckTable{
+}
+.MatrixCellTitle{
+	width: 120px;
+}
+.SubItemsTable label{
+	min-width:0px;
+	max-width:0px;
+}
+.SubItemsTableTitle {
+	min-width: 120px;
+	padding-left:10px;
+}
+
+.MatrixTitle{
+    border-radius: 0;
+    width: 100%;
+    line-height: 25px;
+	display: inline-block;
+	position: relative;
+    background-color: #dee8f2;
+    padding: 0 10px;
+    border: 1px solid #dee8f2;
+    overflow: hidden;
+    font-weight: bold;
+	transition: border-color ease-in-out .1s,box-shadow ease-in-out .1s,text-shadow ease-in-out .1s,background-color ease-in-out .1s,color ease-in-out .1s;
+	cursor: default;
+	white-space: nowrap;
+	color: #54637d;
+	background-clip: padding-box; 
+    border: 3px solid transparent;
+    min-height: 20px;
+    min-width: 20px; 
+	transition: all ease .1s;
+}
