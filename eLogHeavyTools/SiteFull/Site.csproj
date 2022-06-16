@@ -66,26 +66,27 @@
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="BitFactory.Logging">
+    <Reference Include="BitFactory.Logging, Version=1.4.1.0, Culture=neutral, PublicKeyToken=de68848483a294a9, processorArchitecture=MSIL">
       <HintPath>..\..\..\Releases\eLog.Base\v7.2.0.0\Binaries\BitFactory.Logging.dll</HintPath>
+      <SpecificVersion>False</SpecificVersion>
     </Reference>
-    <Reference Include="CodaInt.Base">
-      <HintPath>..\..\..\..\Releases\CodaInt.Base\v7.0.0.0\Binaries\CodaInt.Base.dll</HintPath>
+    <Reference Include="CodaInt.Base, Version=7.0.8201.29971, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\..\Releases\CodaInt.Base\v7.0.0.0\Binaries\CodaInt.Base.dll</HintPath>
     </Reference>
-    <Reference Include="CODALink">
-      <HintPath>..\..\..\..\Releases\CodaInt.Base\v7.0.0.0\Binaries\CODALink.dll</HintPath>
+    <Reference Include="CODALink, Version=7.0.8201.29967, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\..\Releases\CodaInt.Base\v7.0.0.0\Binaries\CODALink.dll</HintPath>
     </Reference>
-    <Reference Include="eLog.Base">
-      <HintPath>..\..\..\..\Releases\eLog.Base\v7.2.0.0\Binaries\eLog.Base.dll</HintPath>
+    <Reference Include="eLog.Base, Version=7.2.8201.29968, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\..\Releases\eLog.Base\v7.2.0.0\Binaries\eLog.Base.dll</HintPath>
     </Reference>
-    <Reference Include="eLog.Finance.Base">
-      <HintPath>..\..\..\..\Releases\eLog.Finance.Base\v7.0.0.0\Binaries\eLog.Finance.Base.dll</HintPath>
+    <Reference Include="eLog.Finance.Base, Version=7.0.8201.29971, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\..\Releases\eLog.Finance.Base\v7.0.0.0\Binaries\eLog.Finance.Base.dll</HintPath>
     </Reference>
-    <Reference Include="eLog.Finance.Coda">
-      <HintPath>..\..\..\..\Releases\eLog.Finance.CODA\v7.0.0.0\Binaries\eLog.Finance.Coda.dll</HintPath>
+    <Reference Include="eLog.Finance.Coda, Version=7.0.8201.29974, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\..\Releases\eLog.Finance.CODA\v7.0.0.0\Binaries\eLog.Finance.Coda.dll</HintPath>
     </Reference>
-    <Reference Include="eProjectWeb.Framework">
-      <HintPath>..\..\..\..\Releases\eLog.Base\v7.2.0.0\Binaries\eProjectWeb.Framework.dll</HintPath>
+    <Reference Include="eProjectWeb.Framework, Version=7.2.8201.29966, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\..\Releases\eLog.Base\v7.2.0.0\Binaries\eProjectWeb.Framework.dll</HintPath>
     </Reference>
     <Reference Include="eProjectWeb.Framework.Package.Zip, Version=7.0.8201.29976, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\..\Releases\eLog.Base\v7.2.0.0\Binaries\eProjectWeb.Framework.Package.Zip.dll</HintPath>
@@ -106,16 +107,16 @@
       <HintPath>..\..\..\Releases\eLog.Base\v7.2.0.0\Binaries\eProjectWeb.Framework.Reports.Xlsx.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.ReportViewer.WebForms, Version=12.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\Releases\eLog.Base\v7.2.0.0\Binaries\Microsoft.ReportViewer.WebForms.dll</HintPath>
+      <SpecificVersion>False</SpecificVersion>
     </Reference>
     <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\Releases\eLog.Base\v7.2.0.0\Binaries\Newtonsoft.Json.dll</HintPath>
+      <SpecificVersion>False</SpecificVersion>
     </Reference>
     <Reference Include="org.in2bits.MyXls, Version=0.6.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\Releases\eLog.Base\v7.2.0.0\Binaries\org.in2bits.MyXls.dll</HintPath>
+      <SpecificVersion>False</SpecificVersion>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
