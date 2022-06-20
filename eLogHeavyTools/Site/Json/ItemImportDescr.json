@@ -1,0 +1,183 @@
+[
+  {
+    "Sheet": "Cikktörzs",
+    "HeaderRow": "1:2",
+    "ColumnNameRow": 1,
+    "Tables": [
+      {
+        "Table": "ols_item",
+        "Fields": 
+		[
+          {
+            "Field": "cmpid",
+            "Const": -1
+          },{
+            "Field": "itemcode",
+            "ColumnName": "Termek_Kod",
+            "Required": true
+          },
+          {
+            "Field": "cmpcodes",
+            "Const": "*"
+          },
+          {
+            "Field": "type",
+			"Const": 0
+          },
+          {
+            "Field": "itemgrpid", 
+			"Const": "ARU"
+          },
+          {
+            "Field": "name01",
+            "ColumnName": "Termek_Nev_Eladasi",
+            "Required": true
+          },
+          {
+            "Field": "unitid",
+            "ColumnName": "Mennyisegi_egyseg",
+            "Required": true
+          },
+          {
+            "Field": "note", 
+			"Const": "Megjegyzes"
+          },
+          {
+            "Field": "releasedate",
+            "ColumnName": "Kezdet_datuma",
+            "Required": true
+          },
+          {
+            "Field": "delstat",
+            "Const": 0
+          }
+        ]
+      },
+      {
+        "Table": "olc_item",
+        "Fields": [
+          {
+            "Field": "catalogpagenumber",
+            "ColumnName": "Oszlop1"
+          },
+		  {
+            "Field": "colortype1",
+            "ColumnName": "Termek_Kod",
+			"SubString": "8,2",
+            "Type": "dictionary",
+			"Lookup": {
+              "TypeKey": "olc_itemmaingroup.ColorType",
+              "KeyField": "str1",
+              "ValueField": "value"
+            },
+          },
+        ]
+      },
+      {
+        "Table": "ols_itemcmp",
+        "Fields": [
+          {
+            "Field": "cmpid",
+            "Type": "sequence",
+            "Sequence": {
+              "Table": "ols_company",
+              "Collection": "ols_partncmp",
+              "Field": "cmpid"
+            }
+          },
+          {
+            "Field": "type",
+            "Const": 0
+          },
+          {
+            "Field": "mrppassthrough",
+            "Const": 0
+          }
+        ]
+      },
+      {
+        "Table": "olc_itemmodel",
+        "Fields": [
+          {
+            "Field": "name",
+            "ColumnName": "Arlista_nev"
+          },
+		  {
+            "Field": "grossweight",
+            "ColumnName": "Brutto_Suly"
+          },
+          {
+            "Field": "netweight",
+            "ColumnName": "Netto_Suly"
+          },
+          {
+            "Field": "volume",
+            "ColumnName": "Hossz"
+          }
+        ]
+      },
+      {
+        "Table": "olc_prctable",
+        "Fields": [
+          {
+            "Field": "curid",
+             "Const": "HUF"
+          },
+		  {
+            "Field": "prc",
+            "ColumnName": "Szallitoi_ar"
+          }
+        ]
+      },
+      {
+        "Table": "ols_itemext",
+        "Fields": [
+          {
+            "Field": "extcode",
+            "ColumnName": "VonalKod"
+          }
+        ]
+      },
+      {
+        "Table": "olc_itemseason",
+        "Fields": [
+          {
+            "Field": "isid",
+            "ColumnName": "Termek_tipus"
+          }
+        ]
+      },
+      {
+        "Table": "ols_itemsup",
+        "Fields": [
+          {
+            "Field": "cmpid",
+            "Const": "3"
+          },
+		  {
+            "Field": "suppartnid",
+            "ColumnName": "Beszallito_kodja"
+          },
+		  {
+            "Field": "ordunitqty",
+            "ColumnName": "Rendelesi_egyseg"
+          },
+		  {
+            "Field": "ordminqty",
+            "Const": "0"
+          },
+		  {
+            "Field": "ordmaxqty",
+            "Const": "0"
+          },
+		  {
+            "Field": "unitid",
+            "Const": "db"
+          }
+        ]
+      }
+    ],
+    "Dictionaries": [
+    ]
+  }
+]

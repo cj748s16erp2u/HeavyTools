@@ -87,6 +87,7 @@
             <Item ID="CostPrc" Name="$costprc" PageID="eLog.Base.Masters.Cost.CostPrcSearchPage"/>
             <Item ID="Property2" Name="$property" PageID="eLog.Base.Setup.Property.PropHeadSearchPage2"/>
             <Item ID="ItemImport" Name="$itemimport" PageID="eLog.Base.Masters.Import.Item.ItemImportPage"/>
+            <Item ID="ExcelItemImport" Name="$excelitemimport" PageID="eLog.HeavyTools.Masters.Item.Import.ItemImportPage"/>
             <Item ID="UqCard" Name="$uqcard" PageID="eLog.Base.Masters.UniqueCard.UqCardSearchPage"/>
         </Item>
         <Item ID="ProjectG" Name="$projectG" Group="Project">

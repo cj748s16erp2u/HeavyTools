@@ -3,32 +3,50 @@ using eLog.HeavyTools.ImportBase.ImportResult;
 using eProjectWeb.Framework;
 using eProjectWeb.Framework.Extensions;
 using eProjectWeb.Framework.UI.Controls;
+using eProjectWeb.Framework.UI.PageParts;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace eLog.HeavyTools.Masters.Partner
+namespace eLog.HeavyTools.Masters.Item.Import
 {
-    public class PartnerSearchTab3 : CodaInt.Base.Masters.Partner.PartnerSearchTab2
+    class ItemImportPage : TabbedPageInfoProvider
     {
-        protected UploadButton partnerImportButton;
-
-        protected override void CreateBase()
+        public static readonly string ID = typeof(ItemImportPage).FullName;
+         
+        public ItemImportPage()
+            : base("ItemImport")
         {
-            base.CreateBase();
+            Tabs.AddTab(delegate { return ItemImportTab.New(); });
+        }
+    }
+    internal class ItemImportTab : TabPage2
+    {
+        protected DialogBox dlgSimpleMessage;
 
-            this.partnerImportButton = this.AddCmd(new UploadButton("partnerimport", 950));
-            this.SetButtonAction(this.partnerImportButton.ID, this.PartnerImportButtonClicked);
+        public static ItemImportTab New()
+        {
+            var t = (ItemImportTab)ObjectFactory.New(typeof(ItemImportTab));
+            t.Initialize("ItemImport");
+            return t;
+        }
+        protected override void Initialize(string labelID)
+        {
+            base.Initialize(labelID);
+            CreateControls();
+            itemImportButton = this.AddCmd(new UploadButton("itemimport", 950));
+            this.SetButtonAction(this.itemImportButton.ID, this.OnImport);
+            dlgSimpleMessage = new DialogBox(DialogBoxType.Ok);
+            RegisterDialog(dlgSimpleMessage);
         }
 
-        private void PartnerImportButtonClicked(PageUpdateArgs args)
+        UploadButton itemImportButton;
+        private void OnImport(PageUpdateArgs args)
         {
-            var uploadInfo = this.partnerImportButton.GetUploadData(args);
+            var uploadInfo = this.itemImportButton.GetUploadData(args);
 
-            var partnerBL = PartnerBL3.New();
-            var processResult = partnerBL.PartnerImport(uploadInfo);
+            var itemBL = (ItemBL2)ItemBL2.New();
+            var processResult = itemBL.ItemImport(uploadInfo);
 
             var message = this.FormatImportResult(processResult?.ImportProcessResults);
             if (!string.IsNullOrWhiteSpace(message))
@@ -133,6 +151,6 @@ namespace eLog.HeavyTools.Masters.Partner
             }
 
             return "OK";
-        }
-    }
+        } 
+    } 
 }

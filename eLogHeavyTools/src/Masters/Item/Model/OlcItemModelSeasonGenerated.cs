@@ -86,6 +86,21 @@ namespace eLog.HeavyTools.Masters.Item.Model
 
         /// <summary>
         /// <para>Field</para>
+        /// ? - int
+        /// </summary>
+        [Field("oldcode")]
+        public static Field FieldOldcode { get; protected set; }
+        /// <summary>
+        /// ? - int
+        /// </summary>
+        public int? Oldcode
+        {
+            get { return (int?)this[FieldOldcode]; }
+            set { this[FieldOldcode] = value; }
+        }
+
+        /// <summary>
+        /// <para>Field</para>
         /// ? - varchar
         /// </summary>
         [Field("addusrid")]

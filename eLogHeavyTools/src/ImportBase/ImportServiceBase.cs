@@ -787,6 +787,21 @@ namespace eLog.HeavyTools.ImportBase
                     value = str.Substring(0, rowContext.CurrentField.Left.Value);
                 }
             }
+            if (value != null && !string.IsNullOrEmpty(rowContext.CurrentField.SubString))
+            {
+                var pars = rowContext.CurrentField.SubString.Split(',');
+                if (pars.Length == 2)
+                {
+                    var startIndex = int.Parse(pars[0]);
+                    var length = int.Parse(pars[1]); 
+                    var str = ConvertUtils.ToString(value);
+                    var len = str.Length;
+                    if (len > startIndex + length)
+                    {
+                        value = str.Substring(startIndex, length);
+                    }
+                }
+            }
 
             if (rowContext.CurrentField.Type.HasValue)
             {

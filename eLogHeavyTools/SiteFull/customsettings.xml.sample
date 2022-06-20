@@ -100,4 +100,6 @@
   <add key="PartnerImportDescrFileName" value="PartnerImportDescr.json" />
   <!-- Leiro konyvtarak nevei -->
   <add key="ImportDescrFolders" value="..\Site\Json" />
+  <!-- Cikk betoltes import file leiro helye -->
+  <add key="ItemImportDescrFileName" value="ItemImportDescr.json" />
 </configuration>

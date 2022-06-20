@@ -116,7 +116,8 @@ go
 create table olc_itemcolor (
 	icid 	    		varchar(3),
 	name				varchar(200) NOT NULL,	
- 
+	oldcode				int null,
+	
 	addusrid			varchar(12),
 	adddate				datetime,
 	delstat				int not null,
@@ -174,10 +175,10 @@ create table olc_item (
 	materialtype		int,
 	patterntype			int,
 	patterntype2		int,
-	
+	catalogpagenumber	int null, 
+	iscollectionarticlenumber int null
 	addusrid			varchar(12),
 	adddate				datetime,
-	delstat				int not null,
 	constraint pk_olc_item primary key (itemid),
 	constraint fk_olc_item_imsid foreign key (imsid) references olc_itemmodelseason(imsid),
 	constraint fk_olc_item_isrlid foreign key (isrlid) references olc_itemsizerangeline(isrlid),

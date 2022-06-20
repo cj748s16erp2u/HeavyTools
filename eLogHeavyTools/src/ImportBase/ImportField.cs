@@ -11,6 +11,7 @@
         public bool? Required { get; set; }
         public object Const { get; set; }
         public int? Left { get; set; }
+        public string SubString { get; set; }
         public string SplitPart { get; set; }
         public bool? DefIfExists { get; set; }
         public ImportSequence Sequence { get; set; }
