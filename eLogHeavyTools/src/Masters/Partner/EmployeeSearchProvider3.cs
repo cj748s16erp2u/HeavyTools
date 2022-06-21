@@ -5,7 +5,7 @@ using eProjectWeb.Framework.Xml;
 
 namespace eLog.HeavyTools.Masters.Partner
 {
-    public class EmployeeSearchProvider3 : EmployeeSearchProvider, IXmlObjectName
+    public class EmployeeSearchProvider3 : EmployeeSearchProvider
     {
         #region IXmlObjectName
 
@@ -32,7 +32,7 @@ namespace eLog.HeavyTools.Masters.Partner
         {
             var query = base.CreateQueryString(args, fmtonly);
 
-            query = query.Replace("--$$morefields$$", " , olc.ptel --$$morefields$$ ");
+            query = query.Replace("--$$morefields$$", " , olc.oldcode, olc.privtel --$$morefields$$ ");
 
             query = query.Replace("--$$morejoins$$", " left join olc_employee olc (nolock) on olc.empid = e.empid --$$morejoins$$ ");
 

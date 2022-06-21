@@ -7,16 +7,26 @@ namespace eLog.HeavyTools.Masters.Partner
 {
     public class EmployeeBL3 : EmployeeBL
     {
-        public static EmployeeBL3 New()
+        public static EmployeeBL3 New3()
         {
-            return (EmployeeBL3)ObjectFactory.New(typeof(PartnerBL));
+            return (EmployeeBL3)New();
+        }
+
+        public override void Validate(BLObjectMap objects)
+        {
+            base.Validate(objects);
+
+            var olc = objects.Get<OlcEmployee>();
+            if (olc != null)
+            {
+                RuleServer.Validate<OlcEmployee, OlcEmployeeRules>(objects);
+            }
         }
 
         protected override bool PreSave(BLObjectMap objects, Entity e)
         {
-            if (e is OlcEmployee)
+            if (e is OlcEmployee olc)
             {
-                var olc = (OlcEmployee)e;
                 var ols = objects.Get<Employee>();
 
                 olc.Empid = ols.Empid;
@@ -28,8 +38,11 @@ namespace eLog.HeavyTools.Masters.Partner
         public override void Delete(Key k)
         {
 		    var olc = OlcEmployee.Load(k);
-		    olc.State = DataRowState.Deleted;
-		    olc.Save();
+            if (olc != null)
+            {
+                olc.State = DataRowState.Deleted;
+                olc.Save();
+            }
 
             base.Delete(k);
         }

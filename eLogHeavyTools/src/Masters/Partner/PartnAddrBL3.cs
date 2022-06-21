@@ -7,16 +7,26 @@ namespace eLog.HeavyTools.Masters.Partner
 {
     public class PartnAddrBL3 : PartnAddrBL
     {
-        public static new PartnAddrBL3 New()
+        public static PartnAddrBL3 New3()
         {
-            return (PartnAddrBL3)ObjectFactory.New(typeof(PartnerBL));
+            return (PartnAddrBL3)New();
+        }
+
+        public override void Validate(BLObjectMap objects)
+        {
+            base.Validate(objects);
+
+            var olc = objects.Get<OlcPartnAddr>();
+            if (olc != null)
+            {
+                RuleServer.Validate<OlcPartnAddr, OlcPartnAddrRules>(objects);
+            }
         }
 
         protected override bool PreSave(BLObjectMap objects, Entity e)
         {
-            if (e is OlcPartnAddr)
+            if (e is OlcPartnAddr olc)
             {
-                var olc = (OlcPartnAddr)e;
                 var ols = objects.Get<PartnAddr>();
 
                 olc.Addrid = ols.Addrid;
@@ -28,8 +38,11 @@ namespace eLog.HeavyTools.Masters.Partner
         public override void Delete(Key k)
         {
             var olc = OlcPartnAddr.Load(k);
-            olc.State = DataRowState.Deleted;
-            olc.Save();
+            if (olc != null)
+            {
+                olc.State = DataRowState.Deleted;
+                olc.Save();
+            }
 
             base.Delete(k);
         }

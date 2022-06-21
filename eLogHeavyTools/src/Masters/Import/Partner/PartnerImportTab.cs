@@ -1,31 +1,53 @@
-﻿using eProjectWeb.Framework;
-using eProjectWeb.Framework.Extensions;
-using eProjectWeb.Framework.UI.Controls;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using eLog.HeavyTools.Masters.Partner;
+using eProjectWeb.Framework;
+using eProjectWeb.Framework.Extensions;
+using eProjectWeb.Framework.UI.Controls;
+using eProjectWeb.Framework.UI.PageParts;
 
-namespace eLog.HeavyTools.Masters.Partner
+namespace eLog.HeavyTools.Masters.Import.Partner
 {
-    public class PartnerSearchTab3 : CodaInt.Base.Masters.Partner.PartnerSearchTab2
+    public class PartnerImportTab : eProjectWeb.Framework.UI.PageParts.TabPage2
     {
-        protected UploadButton partnerImportButton;
-
-        protected override void CreateBase()
+        public static PartnerImportTab New()
         {
-            base.CreateBase();
+            var t = eProjectWeb.Framework.ObjectFactory.New<PartnerImportTab>();
+            t.Initialize("partnerimport");
+            return t;
+        }
+
+        protected PartnerImportTab() : base() { }
+
+        protected UploadButton partnerImportButton;
+        protected DialogBox dlgSimpleMessage;
+
+        protected override void Initialize(string labelID)
+        {
+            base.Initialize(labelID);
+
+            this.CreateControls();
+        }
+
+        protected override void CreateControls()
+        {
+            base.CreateControls();
 
             this.partnerImportButton = this.AddCmd(new UploadButton("partnerimport", 950));
             this.SetButtonAction(this.partnerImportButton.ID, this.PartnerImportButtonClicked);
+
+            this.dlgSimpleMessage = new DialogBox(DialogBoxType.Ok);
+            this.RegisterDialog(this.dlgSimpleMessage);
         }
 
         private void PartnerImportButtonClicked(PageUpdateArgs args)
         {
             var uploadInfo = this.partnerImportButton.GetUploadData(args);
 
-            var partnerBL = PartnerBL3.New();
+            var partnerBL = PartnerBL3.New3();
             var processResult = partnerBL.PartnerImport(uploadInfo);
 
             var message = this.FormatImportResult(processResult?.ImportProcessResults);

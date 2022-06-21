@@ -43,15 +43,30 @@ namespace eLog.HeavyTools.Masters.Partner
         /// <para>Field</para>
         /// ? - varchar
         /// </summary>
-        [Field("ptel")]
-        public static Field FieldPtel { get; protected set; }
+        [Field("oldcode")]
+        public static Field FieldOldcode { get; protected set; }
         /// <summary>
         /// ? - varchar
         /// </summary>
-        public StringN Ptel
+        public StringN Oldcode
         {
-            get { return new StringN(this[FieldPtel]); }
-            set { this[FieldPtel] = value; }
+            get { return new StringN(this[FieldOldcode]); }
+            set { this[FieldOldcode] = value; }
+        }
+
+        /// <summary>
+        /// <para>Field</para>
+        /// ? - varchar
+        /// </summary>
+        [Field("privtel")]
+        public static Field FieldPrivtel { get; protected set; }
+        /// <summary>
+        /// ? - varchar
+        /// </summary>
+        public StringN Privtel
+        {
+            get { return new StringN(this[FieldPrivtel]); }
+            set { this[FieldPrivtel] = value; }
         }
 
         /// <summary>
