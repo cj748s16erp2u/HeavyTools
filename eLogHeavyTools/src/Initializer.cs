@@ -195,6 +195,10 @@ namespace eLog.HeavyTools
             // Item
             ObjectFactory.AddRemap(typeof(Base.Masters.Item.ItemEditTab), typeof(Masters.Item.ItemEditTab2));
             ObjectFactory.AddRemap(typeof(Base.Masters.Item.ItemBL), typeof(Masters.Item.ItemBL2));
+
+            // Bank
+            ObjectFactory.AddRemap(typeof(U4Ext.Bank.Base.Transaction.EfxBankTranHeadSearchTab), typeof(BankTran.EfxBankTranHeadSearchTab3));
+
         }
     }
 }

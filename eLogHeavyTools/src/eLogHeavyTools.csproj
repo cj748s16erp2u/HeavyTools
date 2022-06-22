@@ -98,6 +98,7 @@
     <Reference Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BankTran\EfxBankTranHeadSearchTab3.cs" />
     <Compile Include="ImportBase\DictionaryProxy.cs" />
     <Compile Include="ImportBase\FieldValue.cs" />
     <Compile Include="ImportBase\IImportExcelColumn.cs" />
