@@ -100,8 +100,10 @@
   <ItemGroup>
     <Compile Include="ImportBase\DictionaryProxy.cs" />
     <Compile Include="ImportBase\FieldValue.cs" />
+    <Compile Include="ImportBase\IImportExcelColumn.cs" />
     <Compile Include="ImportBase\ImportConditional.cs" />
     <Compile Include="ImportBase\ImportDictionary.cs" />
+    <Compile Include="ImportBase\ImportExcelColumn.cs" />
     <Compile Include="ImportBase\ImportField.cs" />
     <Compile Include="ImportBase\ImportFieldBase.cs" />
     <Compile Include="ImportBase\ImportFieldExpr.cs" />
@@ -126,6 +128,8 @@
     <Compile Include="Common\Matrix\MatrixTabPageData.cs" />
     <Compile Include="Common\Matrix\MatrixTabPage2.cs" />
     <Compile Include="Initializer.cs" />
+    <Compile Include="Masters\Import\Partner\PartnerImportPage.cs" />
+    <Compile Include="Masters\Import\Partner\PartnerImportTab.cs" />
     <Compile Include="Masters\Item\Color\OlcItemColor.cs" />
     <Compile Include="Masters\Item\Color\OlcItemColorGenerated.cs" />
     <Compile Include="Masters\Item\Color\OlcItemColorList.cs" />
@@ -182,6 +186,8 @@
     <Compile Include="Masters\Item\Season\OlcItemSeasons.cs" />
     <Compile Include="Masters\Item\Season\OlcItemSeasonGenerated.cs" />
     <Compile Include="Masters\Item\Season\OlcItemSeasonSearchPage.cs" />
+    <Compile Include="Masters\Partner\OlcEmployeeRules.cs" />
+    <Compile Include="Masters\Partner\OlcPartnAddrRules.cs" />
     <Compile Include="Masters\PriceTable\OlcPrctable.cs" />
     <Compile Include="Masters\PriceTable\OlcPrctableGenerated.cs" />
     <Compile Include="Masters\PriceTable\OlcPrctableSearchPage.cs" />
@@ -196,7 +202,6 @@
     <Compile Include="Masters\Partner\Import\PartnerRowContext.cs" />
     <Compile Include="Masters\Partner\OlcPartnCmpRules.cs" />
     <Compile Include="Masters\Partner\OlcPartnerRules.cs" />
-    <Compile Include="Masters\Partner\PartnerSearchTab3.cs" />
     <Compile Include="Masters\Partner\OlcEmployee.cs" />
     <Compile Include="Masters\Partner\OlcEmployeeGenerated.cs" />
     <Compile Include="Masters\Partner\OlcPartnAddr.cs" />

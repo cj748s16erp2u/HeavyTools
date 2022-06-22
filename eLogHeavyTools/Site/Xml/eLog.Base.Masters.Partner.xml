@@ -236,7 +236,7 @@
 		<Column FieldName="tel" Width="100"/>
 		<Column FieldName="fax" Hidden="True"/>
 		<Column FieldName="mobile"/>
-		<Column FieldName="ptel" />
+		<Column FieldName="privtel" />
 		<Column FieldName="email" Width="120"/>
 		<Column FieldName="ref1" Width="120" DisplayName="$empref1"/>
 		<Column FieldName="ref2" Width="120" DisplayName="$empref2"/>
@@ -247,6 +247,7 @@
 		<Column FieldName="addusrid" Hidden="True"/>
 		<Column FieldName="adddate" Hidden="True"/>
 		<Column FieldName="delstat" FieldFunction="listlookup" FieldFuncArg="eLog.Base.Setup.Parameters.DelstatTypeList,abbr" Align="Left" Width="30" />
+		<Column FieldName="oldcode" Width="100"/>
 	</Search>
 	<TabPage Name="EmployeeEditTab">
 		<Control ID="partnerInfoPart" ControlType="PartnerInfoPart"/>
@@ -263,9 +264,11 @@
 			<Textbox Field="fax"/>
 			<Textbox Field="mobile"/>
 			<Textbox Field="email"/>
-			<Textbox Field="ptel" CustomData="olc"/>
+			<Textbox Field="privtel" CustomData="olc"/>
+			<ForceNextRow />			
 			<Textbox Field="ref1" Label="$empref1"/>
 			<Textbox Field="ref2" Label="$empref2"/>
+			<ForceNextRow />
 			<Textbox Field="note" Rows="3" ColsToSpan="-1"/>
 		</LayoutTable>
 	</TabPage>

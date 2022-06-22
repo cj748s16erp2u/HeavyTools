@@ -1,7 +1,9 @@
-﻿namespace eLog.HeavyTools.ImportBase
+﻿using System.Collections.Generic;
+
+namespace eLog.HeavyTools.ImportBase
 {
     [System.Diagnostics.DebuggerDisplay("{Field,nq}")]
-    public class ImportField : ImportFieldBase
+    public class ImportField : ImportFieldBase, IImportExcelColumn
     {
         public string Column { get; set; }
         public string ColumnName { get; set; }
@@ -13,7 +15,10 @@
         public int? Left { get; set; }
         public string SplitPart { get; set; }
         public bool? DefIfExists { get; set; }
+        public string Prefix { get; set; }
         public ImportSequence Sequence { get; set; }
+
+        public IEnumerable<ImportExcelColumn> Columns { get; set; }
 
         public new ImportFieldType? Type
         {
@@ -53,6 +58,7 @@
         Dictionary,
         Sequence,
         Boolean,
+        Concat,
         VirtualID
     }
 }

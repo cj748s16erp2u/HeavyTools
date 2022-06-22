@@ -10,6 +10,7 @@ using eProjectWeb.Framework.Data;
 using eProjectWeb.Framework.Extensions;
 using eProjectWeb.Framework.Lang;
 using OfficeOpenXml;
+using OfficeOpenXml.FormulaParsing.Excel.Functions.Text;
 
 namespace eLog.HeavyTools.Masters.Partner.Import
 {
@@ -330,8 +331,10 @@ namespace eLog.HeavyTools.Masters.Partner.Import
                 }
 
                 var origPartnCmps = origPartner != null ? Base.Masters.Partner.PartnCmps.Load(origPartner.PK) : null;
+                var origOlcPartnCmps = origPartnCmps != null ? OlcPartnCmps.Load(origPartner.PK) : null;
                 var partnCmps = Base.Masters.Partner.PartnCmps.New();
-                foreach (var pc in result.PartnCmps)
+                var olcPartnCmps = OlcPartnCmps.New();
+                foreach (var pc in result.PartnCmps.Where(pc => pc.Valid))
                 {
                     var origPc = origPartnCmps?.FirstOrDefault(x => Utils.Equals(x["cmpid"], pc.Entity["cmpid"]));
                     if (origPc != null)
@@ -342,11 +345,34 @@ namespace eLog.HeavyTools.Masters.Partner.Import
                     }
 
                     partnCmps.AddRow(pc.Entity);
+
+                    var olcPc = result.OlcPartnCmps.FirstOrDefault(x => x.Valid && Utils.Equals(x.Entity["cmpid"], pc.Entity["cmpid"]));
+                    var origOlcPc = (OlcPartnCmp)origOlcPartnCmps?.FirstOrDefault(x => Utils.Equals(x["cmpid"], pc.Entity["cmpid"]));
+                    if (olcPc != null)
+                    {
+                        if (origOlcPc != null)
+                        {
+                            origOlcPc.MergeTo(olcPc.Entity);
+                            olcPc.Entity["partnid"] = origOlcPc["partnid"];
+                            olcPc.Entity.State = DataRowState.Modified;
+                        }
+
+                        if (olcPc.Entity["secpaycid"] == null)
+                        {
+                            olcPc.Entity["secpaymid"] = null;
+                        }
+
+                        olcPartnCmps.AddRow(olcPc.Entity);
+                    }
+                    else if (origOlcPc != null)
+                    {
+                        origOlcPc.State = DataRowState.Deleted;
+                        origOlcPc.Save();
+                    }
                 }
 
-                //foreach (var cpc in result.PartnCmps)
-
                 map.Add(partnCmps);
+                map.Add(olcPartnCmps);
 
                 this.partnerBL.Save(map);
 
@@ -361,54 +387,78 @@ namespace eLog.HeavyTools.Masters.Partner.Import
 
         private void SavePartnAddr(PartnerImportResultSet result)
         {
-            if (result.PartnAddrs?.Any() == true)
+            if (result.PartnAddrs?.Any(pa => pa.Valid) == true)
             {
                 var map = new BLObjectMap();
 
-                foreach (var pa in result.PartnAddrs)
+                foreach (var pa in result.PartnAddrs.Where(pa => pa.Valid))
                 {
                     map.SysParams.ActionID = ActionID.New;
 
-                    var partnId = result.Partner?.Entity["partnid"] ?? pa.Entity["partnid"];
-                    var partnAddrKey = new Key
-                    {
-                        [Base.Masters.Partner.PartnAddr.FieldPartnid.Name] = partnId,
-                        [Base.Masters.Partner.PartnAddr.FieldCountryid.Name] = pa.Entity["countryid"],
-                        [Base.Masters.Partner.PartnAddr.FieldPostcode.Name] = pa.Entity["postcode"],
-                        [Base.Masters.Partner.PartnAddr.FieldAdd01.Name] = pa.Entity["add01"],
-                        [Base.Masters.Partner.PartnAddr.FieldAdd02.Name] = pa.Entity["add02"],
-                    };
-
                     var addrid = ConvertUtils.ToInt32(pa.Entity["addrid"]);
+                    var olcPA = result.OlcPartnAddrs?.FirstOrDefault(e => e.Valid && Utils.Equals(e.Entity["addrid"], addrid));
+                    var oldcode = ConvertUtils.ToString(olcPA?.Entity["oldcode"]);
+
+                    var partnId = result.Partner?.Entity["partnid"] ?? pa.Entity["partnid"];
+
+                    OlcPartnAddr origOlcPA = null;
+
+                    Key partnAddrKey;
+                    if (!string.IsNullOrWhiteSpace(oldcode))
+                    {
+                        partnAddrKey = new Key
+                        {
+                            ["e." + Base.Masters.Partner.PartnAddr.FieldPartnid.Name] = partnId,
+                            ["c." + OlcPartnAddr.FieldOldcode.Name] = oldcode
+                        };
+
+                        var sql = $"select c.* from olc_partnaddr c (nolock) join ols_partnaddr e (nolock) on e.addrid = c.addrid where {partnAddrKey.ToSql()}";
+                        try
+                        {
+                            origOlcPA = OlcPartnAddr.New();
+                            SqlDataAdapter.FillSingleRow(DB.Main, origOlcPA, sql);
+                        }
+                        catch (RecordNotFoundException)
+                        {
+                            origOlcPA = null;
+                        }
+                    }
+
+                    Base.Masters.Partner.PartnAddr origAddr = null;
+                    if (origOlcPA != null)
+                    {
+                        origAddr = Base.Masters.Partner.PartnAddr.Load(origOlcPA.Addrid);
+                    }
+
                     pa.Entity["partnid"] = partnId;
                     pa.Entity["addrid"] = null;
 
-                    var origAddr = Base.Masters.Partner.PartnAddr.Load(partnAddrKey);
+                    if (olcPA != null)
+                    {
+                        olcPA.Entity["addrid"] = null;
+                    }
+
                     if (origAddr != null)
                     {
                         origAddr.MergeTo(pa.Entity);
                         pa.Entity["addrid"] = origAddr["addrid"];
                         pa.Entity.State = DataRowState.Modified;
                         map.SysParams.ActionID = ActionID.Modify;
+
+                        if (origOlcPA != null)
+                        {
+                            origOlcPA.MergeTo(olcPA.Entity);
+                            olcPA.Entity["addrid"] = pa.Entity["addrid"];
+                            olcPA.Entity.State = DataRowState.Modified;
+                        }
                     }
 
                     map.Default = pa.Entity;
 
-                    var olcPA = result.OlcPartnAddrs?.FirstOrDefault(cpa => Utils.Equals(cpa.Entity["addrid"], addrid));
+                    map.Remove<OlcPartnAddr>();
                     if (olcPA != null)
                     {
-                        if (origAddr != null)
-                        {
-                            var origOlcAddr = OlcPartnAddr.Load(origAddr.Addrid);
-                            if (origOlcAddr != null)
-                            {
-                                origOlcAddr.MergeTo(olcPA.Entity);
-                                olcPA.Entity.State = DataRowState.Modified;
-                            }
-                        }
-
-                        olcPA.Entity["addrid"] = pa.Entity["addrid"];
-                        map.Add(olcPA.Entity);
+                        map.Add((OlcPartnAddr)olcPA.Entity);
                     }
 
                     map.Remove<Base.Masters.Partner.PartnAddrCmps>();
@@ -416,7 +466,7 @@ namespace eLog.HeavyTools.Masters.Partner.Import
                     {
                         var origPartnAddrCmps = origAddr != null ? Base.Masters.Partner.PartnAddrCmps.Load(origAddr.PK) : null;
                         var partnAddrCmps = Base.Masters.Partner.PartnAddrCmps.New();
-                        foreach (var pac in result.PartnAddrCmps.Where(pac => ConvertUtils.ToInt32(pac.Entity["addrid"]) == addrid.Value))
+                        foreach (var pac in result.PartnAddrCmps.Where(pac => pac.Valid && ConvertUtils.ToInt32(pac.Entity["addrid"]) == addrid.Value))
                         {
                             pac.Entity["addrid"] = null;
 
@@ -446,11 +496,11 @@ namespace eLog.HeavyTools.Masters.Partner.Import
 
         private void SavePartnBank(PartnerImportResultSet result)
         {
-            if (result.PartnBanks?.Any() == true)
+            if (result.PartnBanks?.Any(pb => pb.Valid) == true)
             {
                 var map = new BLObjectMap();
 
-                foreach (var pb in result.PartnBanks)
+                foreach (var pb in result.PartnBanks.Where(pb => pb.Valid))
                 {
                     map.SysParams.ActionID = ActionID.New;
 
@@ -491,7 +541,7 @@ namespace eLog.HeavyTools.Masters.Partner.Import
                     {
                         var origPartnBankCmps = origBank != null ? Base.Masters.Partner.PartnBankCmps.Load(origBank.PK) : null;
                         var partnBankCmps = Base.Masters.Partner.PartnBankCmps.New();
-                        foreach (var pbc in result.PartnBankCmps.Where(pbc => ConvertUtils.ToInt32(pbc.Entity["bankid"]) == bankid.Value))
+                        foreach (var pbc in result.PartnBankCmps.Where(pbc => pbc.Valid && ConvertUtils.ToInt32(pbc.Entity["bankid"]) == bankid.Value))
                         {
                             pbc.Entity["bankid"] = null;
 
@@ -516,13 +566,17 @@ namespace eLog.HeavyTools.Masters.Partner.Import
 
         private void SaveEmployee(PartnerImportResultSet result)
         {
-            if (result.Employees?.Any() == true)
+            if (result.Employees?.Any(e => e.Valid) == true)
             {
                 var map = new BLObjectMap();
 
-                foreach (var emp in result.Employees)
+                foreach (var emp in result.Employees.Where(e => e.Valid))
                 {
                     map.SysParams.ActionID = ActionID.New;
+
+                    var empid = ConvertUtils.ToInt32(emp.Entity["empid"]);
+                    var olcEmp = result.OlcEmployees?.FirstOrDefault(e => e.Valid && Utils.Equals(e.Entity["empid"], empid));
+                    var oldcode = ConvertUtils.ToString(olcEmp?.Entity["oldcode"]);
 
                     var partnId = result.Partner?.Entity["partnid"] ?? emp.Entity["partnid"];
                     var addrId = ConvertUtils.ToInt32(emp.Entity["addrid"]);
@@ -546,26 +600,43 @@ namespace eLog.HeavyTools.Masters.Partner.Import
                         }
                     }
 
-                    var type = ConvertUtils.ToInt32(emp.Entity["type"]) ?? -1;
-                    var empKey = new Key
+                    OlcEmployee origOlcEmp = null;
+
+                    Key empKey;
+                    if (!string.IsNullOrWhiteSpace(oldcode))
                     {
-                        [Base.Masters.Partner.Employee.FieldPartnid.Name] = partnId,
-                        [Base.Masters.Partner.Employee.FieldAddrid.Name] = addrId,
-                        [Base.Masters.Partner.Employee.FieldType.Name] = new Key.BitwiseAndOperationAtToSql(type),
-                        [Base.Masters.Partner.Employee.FieldFirstname.Name] = emp.Entity["firstname"],
-                        [Base.Masters.Partner.Employee.FieldLastname.Name] = emp.Entity["lastname"]
-                    };
+                        empKey = new Key
+                        {
+                            ["e." + Base.Masters.Partner.Employee.FieldPartnid.Name] = partnId,
+                            ["e." + Base.Masters.Partner.Employee.FieldAddrid.Name] = addrId,
+                            ["c." + OlcEmployee.FieldOldcode.Name] = oldcode
+                        };
+
+                        var sql = $"select c.* from olc_employee c (nolock) join ols_employee e (nolock) on e.empid = c.empid where {empKey.ToSql()}";
+                        try
+                        {
+                            origOlcEmp = OlcEmployee.New();
+                            SqlDataAdapter.FillSingleRow(DB.Main, origOlcEmp, sql);
+                        }
+                        catch (RecordNotFoundException)
+                        {
+                            origOlcEmp = null;
+                        }
+                    }
+
+                    Base.Masters.Partner.Employee origEmp = null;
+                    if (origOlcEmp != null)
+                    {
+                        origEmp = Base.Masters.Partner.Employee.Load(origOlcEmp.Empid);
+                    }
 
                     emp.Entity["partnid"] = partnId;
                     emp.Entity["addrid"] = addrId;
                     emp.Entity["empid"] = null;
 
-                    var origEmp = Base.Masters.Partner.Employee.Load(empKey);
-                    if (origEmp == null)
+                    if (olcEmp != null)
                     {
-                        empKey.Remove(Base.Masters.Partner.Employee.FieldFirstname.Name);
-                        empKey.Remove(Base.Masters.Partner.Employee.FieldLastname.Name);
-                        origEmp = Base.Masters.Partner.Employee.Load(empKey);
+                        olcEmp.Entity["empid"] = null;
                     }
 
                     if (origEmp != null)
@@ -574,9 +645,22 @@ namespace eLog.HeavyTools.Masters.Partner.Import
                         emp.Entity["empid"] = origEmp["empid"];
                         emp.Entity.State = DataRowState.Modified;
                         map.SysParams.ActionID = ActionID.Modify;
+
+                        if (origOlcEmp != null)
+                        {
+                            origOlcEmp.MergeTo(olcEmp.Entity);
+                            olcEmp.Entity["empid"] = emp.Entity["empid"];
+                            olcEmp.Entity.State = DataRowState.Modified;
+                        }
                     }
 
                     map.Default = emp.Entity;
+
+                    map.Remove<OlcEmployee>();
+                    if (olcEmp != null)
+                    {
+                        map.Add((OlcEmployee)olcEmp.Entity);
+                    }
 
                     this.employeeBL.Save(map);
                 }
@@ -590,12 +674,14 @@ namespace eLog.HeavyTools.Masters.Partner.Import
                 Partner = rowContext.Partner,
                 OlcPartner = rowContext.OlcPartner,
                 PartnCmps = rowContext.PartnCmps.ToList(),
+                OlcPartnCmps = rowContext.OlcPartnCmps.ToList(),
                 PartnAddrs = rowContext.PartnAddrs.ToList(),
                 OlcPartnAddrs = rowContext.OlcPartnAddrs.ToList(),
                 PartnAddrCmps = rowContext.PartnAddrCmps.ToList(),
                 PartnBanks = rowContext.PartnBanks.ToList(),
                 PartnBankCmps = rowContext.PartnBankCmps.ToList(),
                 Employees = rowContext.Employees.ToList(),
+                OlcEmployees = rowContext.OlcEmployees.ToList(),
 
                 LogText = rowContext.LogText,
                 Row = rowContext.Row,
@@ -646,6 +732,17 @@ namespace eLog.HeavyTools.Masters.Partner.Import
                     };
                     rowContext.CurrentEntry = entry;
                     rowContext.PartnCmps.Add(entry);
+                    break;
+                case "olc_partncmp":
+                    entry = new TableEntry
+                    {
+                        Alias = alias,
+                        Table = rowContext.CurrentTable,
+                        Schema = OlcPartnCmp.GetSchema(),
+                        Entity = OlcPartnCmp.CreateNew()
+                    };
+                    rowContext.CurrentEntry = entry;
+                    rowContext.OlcPartnCmps.Add(entry);
                     break;
                 case "ols_partnaddr":
                     entry = new TableEntry
@@ -702,18 +799,6 @@ namespace eLog.HeavyTools.Masters.Partner.Import
                     rowContext.CurrentEntry = entry;
                     rowContext.PartnBankCmps.Add(entry);
                     break;
-                // todo : olc del
-                //case "olc_partner":
-                //    entry = new TableEntry
-                //    {
-                //        Alias = alias,
-                //        Table = rowContext.CurrentTable,
-                //        Schema = OlcPartner.GetSchema(),
-                //        Entity = OlcPartner.CreateNew()
-                //    };
-                //rowContext.CurrentEntry = entry;
-                //rowContext.OlcPartner = entry;
-                //break;
                 case "ols_employee":
                     entry = new TableEntry
                     {
@@ -725,8 +810,21 @@ namespace eLog.HeavyTools.Masters.Partner.Import
                     rowContext.CurrentEntry = entry;
                     rowContext.Employees.Add(entry);
                     break;
+                case "olc_employee":
+                    entry = new TableEntry
+                    {
+                        Alias = alias,
+                        Table = rowContext.CurrentTable,
+                        Schema = OlcEmployee.GetSchema(),
+                        Entity = OlcEmployee.CreateNew()
+                    };
+                    rowContext.CurrentEntry = entry;
+                    rowContext.OlcEmployees.Add(entry);
+                    break;
                 default:
+#pragma warning disable S3928 // Parameter names used into ArgumentException constructors should match an existing one 
                     throw new ArgumentOutOfRangeException(nameof(rowContext.CurrentTable.Table), rowContext.CurrentTable.Table, nameof(this.CreateEntity));
+#pragma warning restore S3928 // Parameter names used into ArgumentException constructors should match an existing one 
             }
         }
 
@@ -742,6 +840,9 @@ namespace eLog.HeavyTools.Masters.Partner.Import
                     break;
                 case "ols_partncmp":
                     rowContext.PartnCmps.Remove(rowContext.CurrentEntry);
+                    break;
+                case "olc_partncmp":
+                    rowContext.OlcPartnCmps.Remove(rowContext.CurrentEntry);
                     break;
                 case "ols_partnaddr":
                     rowContext.PartnAddrs.Remove(rowContext.CurrentEntry);
@@ -761,8 +862,13 @@ namespace eLog.HeavyTools.Masters.Partner.Import
                 case "ols_employee":
                     rowContext.Employees.Remove(rowContext.CurrentEntry);
                     break;
+                case "olc_employee":
+                    rowContext.OlcEmployees.Remove(rowContext.CurrentEntry);
+                    break;
                 default:
+#pragma warning disable S3928 // Parameter names used into ArgumentException constructors should match an existing one 
                     throw new ArgumentOutOfRangeException(nameof(rowContext.CurrentTable.Table), rowContext.CurrentTable.Table, nameof(this.RemoveEntity));
+#pragma warning restore S3928 // Parameter names used into ArgumentException constructors should match an existing one 
             }
         }
 
@@ -789,19 +895,86 @@ namespace eLog.HeavyTools.Masters.Partner.Import
                 entity = entry?.Entity;
             }
 
+            if (entity == null)
+            {
+                var entry = rowContext.Employees.FirstOrDefault(e => string.Equals(e.Alias, alias, StringComparison.InvariantCultureIgnoreCase));
+                entity = entry?.Entity;
+            }
+
+            if (entity == null)
+            {
+                entity = this.DetermineSelfLookupPartnAddrPartnidValueSpec(rowContext, alias, value);
+            }
+
             if (entity != null)
             {
                 return entity[rowContext.CurrentField.Lookup.ValueField];
             }
 
+            //var retValue = this.DetermineSelfLookupEmployeeAddridValue(rowContext, alias, value);
+            //if (retValue != null)
+            //{
+            //    return retValue;
+            //}
+
             return base.DetermineSelfLookupValue(value, rowContext);
         }
+
+        private Base.Masters.Partner.Partner DetermineSelfLookupPartnAddrPartnidValueSpec(PartnerRowContext rowContext, string alias, object value)
+        {
+            if (string.Equals(alias, "ols_partner", StringComparison.InvariantCultureIgnoreCase) && !string.IsNullOrWhiteSpace(rowContext.CurrentField.Lookup.KeyField) &&
+                rowContext.CurrentEntry.Schema.Fields[rowContext.CurrentField.Lookup.KeyField] != null)
+            {
+                var keyValue = rowContext.CurrentEntry.Entity[rowContext.CurrentField.Lookup.KeyField];
+                if (keyValue != null)
+                {
+                    var key = new Key
+                    {
+                        [rowContext.CurrentField.Lookup.KeyField] = keyValue
+                    };
+
+                    return Base.Masters.Partner.Partner.Load(key);
+                }
+            }
+
+            return null;
+        }
+
+        //        private object DetermineSelfLookupEmployeeAddridValue(PartnerRowContext rowContext, string alias, object value)
+        //        {
+        //            if (string.Equals(alias, "CustomPartnAddrId", StringComparison.InvariantCultureIgnoreCase) && value != null)
+        //            {
+        //                var sql = $@"select top 2 [pa].[addrid]
+        //from [olc_partner] [p] (nolock)
+        //  join [ols_partnaddr] [pa] (nolock) on [pa].[partnid] = [p].[partnid]
+        //where [p].[oldcode] = {Utils.SqlToString(value)}
+        //  and [pa].[def] = 1
+        //";
+
+        //                var list = new List<int>();
+        //                Base.Common.SqlFunctions.QueryData(DB.Main, sql, r =>
+        //                {
+        //                    list.Add(Convert.ToInt32(r.GetValue(0)));
+        //                });
+
+        //                if (list.Count == 1)
+        //                {
+        //                    return list[0];
+        //                }
+        //            }
+
+        //            return null;
+        //        }
 
         protected override bool ProcessCustomConditionals(PartnerRowContext rowContext, ImportConditional cond, object value)
         {
             if ((PartnerImportConditionalType)cond.Type == PartnerImportConditionalType.CheckCompanyHierarchy)
             {
                 return this.ProcessCompanyHierarchyConditionals(rowContext, cond, value);
+            }
+            else if ((PartnerImportConditionalType)cond.Type == PartnerImportConditionalType.CheckCompanyHierarchyNot)
+            {
+                return !this.ProcessCompanyHierarchyConditionals(rowContext, cond, value);
             }
 
             return base.ProcessCustomConditionals(rowContext, cond, value);
@@ -843,7 +1016,7 @@ where [key] = {Utils.SqlToString(value)}";
                     }
                 }
 
-                if (o == null)
+                if (o == null || Utils.Equals(o, 0))
                 {
                     return true;
                 }

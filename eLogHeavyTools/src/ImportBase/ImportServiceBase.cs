@@ -9,6 +9,7 @@ using eProjectWeb.Framework;
 using eProjectWeb.Framework.Data;
 using eProjectWeb.Framework.Extensions;
 using Newtonsoft.Json;
+using OfficeOpenXml.FormulaParsing.Excel.Functions.Text;
 
 namespace eLog.HeavyTools.ImportBase
 {
@@ -75,7 +76,11 @@ namespace eLog.HeavyTools.ImportBase
                         }
 
                         this.logger.LogLine($"Processing sheet: {sheet.Sheet}");
-                        var logWorksheet = logWorkbook.Sheets.Add(worksheet.Name);
+                        var logWorksheet = logWorkbook.Sheets.FirstOrDefault(s => string.Equals(s.Name, worksheet.Name, StringComparison.OrdinalIgnoreCase));
+                        if (logWorksheet == null)
+                        {
+                            logWorksheet = logWorkbook.Sheets.Add(worksheet.Name);
+                        }
 
                         var results = this.ProcessWorksheet(worksheet, sheet, logWorksheet);
 
@@ -305,21 +310,19 @@ namespace eLog.HeavyTools.ImportBase
                     this.ResolveColumnNames(worksheet, cellObjs, cond);
                 }
             }
+
+            if (table.Splits != null)
+            {
+                foreach (var split in table.Splits)
+                {
+                    this.ResolveColumnNames(worksheet, cellObjs, split.Field);
+                }
+            }
         }
 
         protected virtual void ResolveColumnNames(XlsxWorksheet worksheet, IEnumerable<Tuple<string, string>> cellObjs, ImportConditional cond)
         {
-            if (string.IsNullOrWhiteSpace(cond.Column) && !string.IsNullOrWhiteSpace(cond.ColumnName))
-            {
-                var obj = cellObjs.FirstOrDefault(c => string.Equals(c.Item1, cond.ColumnName, StringComparison.InvariantCultureIgnoreCase));
-                cond.Column = obj?.Item2;
-                cond.Valid = !string.IsNullOrWhiteSpace(cond.Column);
-            }
-
-            if (!string.IsNullOrWhiteSpace(cond.Column))
-            {
-                cond.ColumnIndex = XlsxWorksheet.GetColumnIndex(cond.Column);
-            }
+            this.ResolveColumnNames(worksheet, cellObjs, (IImportExcelColumn)cond);
 
             if (!string.IsNullOrWhiteSpace(cond.Field))
             {
@@ -327,18 +330,26 @@ namespace eLog.HeavyTools.ImportBase
             }
         }
 
-        protected virtual void ResolveColumnNames(XlsxWorksheet worksheet, IEnumerable<Tuple<string, string>> cellObjs, ImportField field)
+        protected virtual void ResolveColumnNames(XlsxWorksheet worksheet, IEnumerable<Tuple<string, string>> cellObjs, IImportExcelColumn column)
         {
-            if (string.IsNullOrWhiteSpace(field.Column) && !string.IsNullOrWhiteSpace(field.ColumnName))
+            if (string.IsNullOrWhiteSpace(column.Column) && !string.IsNullOrWhiteSpace(column.ColumnName))
             {
-                var obj = cellObjs.FirstOrDefault(c => string.Equals(c.Item1, field.ColumnName, StringComparison.InvariantCultureIgnoreCase));
-                field.Column = obj?.Item2;
-                field.Valid = !string.IsNullOrWhiteSpace(field.Column);
+                var obj = cellObjs.FirstOrDefault(c => string.Equals(c.Item1, column.ColumnName, StringComparison.InvariantCultureIgnoreCase));
+                column.Column = obj?.Item2;
+                column.Valid = !string.IsNullOrWhiteSpace(column.Column);
             }
 
-            if (!string.IsNullOrWhiteSpace(field.Column))
+            if (!string.IsNullOrWhiteSpace(column.Column))
             {
-                field.ColumnIndex = XlsxWorksheet.GetColumnIndex(field.Column);
+                column.ColumnIndex = XlsxWorksheet.GetColumnIndex(column.Column);
+            }
+
+            if (column is ImportField field && field.Columns?.Any() == true)
+            {
+                foreach (var c in field.Columns)
+                {
+                    this.ResolveColumnNames(worksheet, cellObjs, c);
+                }
             }
         }
 
@@ -369,29 +380,45 @@ namespace eLog.HeavyTools.ImportBase
 
         private int CopyRowToLog(XlsxWorksheet worksheet, XlsxWorksheet logWorksheet, int row, bool setColWidth = false, int maxColCount = 0)
         {
+            var noMaxColCount = maxColCount <= 0;
+
             var lastValuableCell = 0;
             var cells = worksheet.Cells($"{row}:{row}");
             var start = cells.Start.Column;
             var end = cells.End.Column;
-            if (maxColCount <= 0)
+            if (noMaxColCount)
             {
                 maxColCount = end;
             }
 
+            var emptyCell = 0;
             for (var i = start; i <= end && i <= maxColCount; i++)
             {
                 var cell = cells[row, i];
                 var destCell = logWorksheet.CopyCell(row, i, cell);
-                if (!string.IsNullOrWhiteSpace(Convert.ToString(destCell.Value)) ||
-                    !string.IsNullOrWhiteSpace(destCell.Formula) &&
-                    i > lastValuableCell)
+                if (string.IsNullOrWhiteSpace(Convert.ToString(destCell.Value)) &&
+                    string.IsNullOrWhiteSpace(destCell.Formula))
                 {
-                    lastValuableCell = i;
+                    emptyCell++;
+                }
+                else
+                {
+                    emptyCell = 0;
+
+                    if (i > lastValuableCell)
+                    {
+                        lastValuableCell = i;
+                    }
                 }
 
                 if (setColWidth)
                 {
                     logWorksheet.Column(i).Width = worksheet.Column(i).Width;
+                }
+
+                if (noMaxColCount && emptyCell >= 5)
+                {
+                    maxColCount = lastValuableCell;
                 }
             }
 
@@ -401,9 +428,12 @@ namespace eLog.HeavyTools.ImportBase
         private void CreateDictionaries(ImportSheet sheet)
         {
             var dictDescrs = sheet.Dictionaries;
-            foreach (var dictDescr in dictDescrs)
+            if (dictDescrs?.Any() == true)
             {
-                this.CreateDictionary(dictDescr);
+                foreach (var dictDescr in dictDescrs)
+                {
+                    this.CreateDictionary(dictDescr);
+                }
             }
         }
 
@@ -743,17 +773,96 @@ namespace eLog.HeavyTools.ImportBase
 
             rowContext.CurrentEntry.Entity.ApplyChanges();
         }
+        private object DetermineColumnValue(TRowContext rowContext, int col)
+        {
+            var value = rowContext.Sheet.GetCellValue(rowContext.Row, col);
+            if (string.IsNullOrWhiteSpace(ConvertUtils.ToString(value)))
+            {
+                value = null;
+            }
+
+            return value;
+        }
+
+        private object DetermineColumnValue(TRowContext rowContext, string[] splitId)
+        {
+            object value = null;
+
+            var split = rowContext.Splits.FirstOrDefault(s => string.Equals(s.Split.Name, splitId[0], StringComparison.InvariantCultureIgnoreCase));
+            var partId = ConvertUtils.ToInt32(splitId[1]).GetValueOrDefault(-1);
+            if (split?.Valid == true && partId >= 0 && partId < split.Split.PartsCount)
+            {
+                value = split.Value[partId];
+            }
+            else
+            {
+                value = null;
+            }
+
+            return value;
+        }
+
+        private object DetermineColumnValueLeft(TRowContext rowContext, int left, object value)
+        {
+            var str = ConvertUtils.ToString(value);
+            var len = str.Length;
+            if (len > rowContext.CurrentField.Left)
+            {
+                value = str.Substring(0, left);
+            }
+
+            return value;
+        }
+
+        private object ProcessColumnValue(TRowContext rowContext, ImportFieldType type, object value)
+        {
+            switch (type)
+            {
+                case ImportFieldType.Company:
+                    value = this.DetermineCompanyValue(value, rowContext.CurrentField.Lookup);
+                    break;
+                case ImportFieldType.Type:
+                    value = this.DetermineTypeValue(value, rowContext.CurrentField.Lookup);
+                    break;
+                case ImportFieldType.FlagType:
+                    value = this.DetermineFlagTypeValue(value, rowContext.CurrentField.Lookup);
+                    break;
+                case ImportFieldType.Lookup:
+                    value = this.DetermineLookupValue(value, rowContext.CurrentField.Lookup, rowContext);
+                    break;
+                case ImportFieldType.SelfLookup:
+                    value = this.DetermineSelfLookupValue(value, rowContext);
+                    break;
+                case ImportFieldType.Dictionary:
+                    value = this.DetermineDictionaryValue(value, rowContext.CurrentField.Lookup);
+                    break;
+                case ImportFieldType.Sequence:
+                    value = this.DetermineSequenceValue(rowContext);
+                    break;
+                case ImportFieldType.Boolean:
+                    value = this.DetermineBooleanValue(value, rowContext);
+                    break;
+                case ImportFieldType.Concat:
+                    value = this.DetermineConcatValue(value, rowContext);
+                    break;
+                case ImportFieldType.VirtualID:
+                    value = this.DetermineVirtualID(rowContext);
+                    break;
+                default:
+#pragma warning disable S3928 // Parameter names used into ArgumentException constructors should match an existing one 
+                    throw new ArgumentOutOfRangeException(nameof(rowContext.CurrentField.Type), rowContext.CurrentField.Type, nameof(this.ProcessColumnValue));
+#pragma warning restore S3928 // Parameter names used into ArgumentException constructors should match an existing one 
+            }
+
+            return value;
+        }
 
         private FieldValue DetermineFieldValue(TRowContext rowContext)
         {
             object value = null;
             if (rowContext.CurrentField.ColumnIndex != null)
             {
-                value = rowContext.Sheet.GetCellValue(rowContext.Row, rowContext.CurrentField.ColumnIndex.Value);
-                if (string.IsNullOrWhiteSpace(ConvertUtils.ToString(value)))
-                {
-                    value = null;
-                }
+                value = this.DetermineColumnValue(rowContext, rowContext.CurrentField.ColumnIndex.Value);
             }
 
             if (!string.IsNullOrWhiteSpace(rowContext.CurrentField.SplitPart))
@@ -761,16 +870,7 @@ namespace eLog.HeavyTools.ImportBase
                 var splitId = rowContext.CurrentField.SplitPart.Split(new[] { '#' }, 2);
                 if (splitId.Length == 2)
                 {
-                    var split = rowContext.Splits.FirstOrDefault(s => string.Equals(s.Split.Name, splitId[0], StringComparison.InvariantCultureIgnoreCase));
-                    var partId = ConvertUtils.ToInt32(splitId[1]).GetValueOrDefault(-1);
-                    if (split?.Valid == true && partId >= 0 && partId < split.Split.PartsCount)
-                    {
-                        value = split.Value[partId];
-                    }
-                    else
-                    {
-                        value = null;
-                    }
+                    value = this.DetermineColumnValue(rowContext, splitId);
                 }
                 else
                 {
@@ -780,55 +880,22 @@ namespace eLog.HeavyTools.ImportBase
 
             if (value != null && rowContext.CurrentField.Left != null)
             {
-                var str = ConvertUtils.ToString(value);
-                var len = str.Length;
-                if (len > rowContext.CurrentField.Left)
-                {
-                    value = str.Substring(0, rowContext.CurrentField.Left.Value);
-                }
+                value = this.DetermineColumnValueLeft(rowContext, rowContext.CurrentField.Left.Value, value);
             }
 
             if (rowContext.CurrentField.Type.HasValue)
             {
-                switch (rowContext.CurrentField.Type)
-                {
-                    case ImportFieldType.Company:
-                        value = this.DetermineCompanyValue(value, rowContext.CurrentField.Lookup);
-                        break;
-                    case ImportFieldType.Type:
-                        value = this.DetermineTypeValue(value, rowContext.CurrentField.Lookup);
-                        break;
-                    case ImportFieldType.FlagType:
-                        value = this.DetermineFlagTypeValue(value, rowContext.CurrentField.Lookup);
-                        break;
-                    case ImportFieldType.Lookup:
-                        value = this.DetermineLookupValue(value, rowContext.CurrentField.Lookup, rowContext);
-                        break;
-                    case ImportFieldType.SelfLookup:
-                        value = this.DetermineSelfLookupValue(value, rowContext);
-                        break;
-                    case ImportFieldType.Dictionary:
-                        value = this.DetermineDictionaryValue(value, rowContext.CurrentField.Lookup);
-                        break;
-                    case ImportFieldType.Sequence:
-                        value = this.DetermineSequenceValue(rowContext);
-                        break;
-                    case ImportFieldType.Boolean:
-                        value = this.DetermineBooleanValue(value, rowContext);
-                        break;
-                    case ImportFieldType.VirtualID:
-                        value = this.DetermineVirtualID(rowContext);
-                        break;
-                    default:
-#pragma warning disable S3928 // Parameter names used into ArgumentException constructors should match an existing one 
-                        throw new ArgumentOutOfRangeException(nameof(rowContext.CurrentField.Type), rowContext.CurrentField.Type, nameof(this.DetermineFieldValue));
-#pragma warning restore S3928 // Parameter names used into ArgumentException constructors should match an existing one 
-                }
+                value = this.ProcessColumnValue(rowContext, rowContext.CurrentField.Type.Value, value);
             }
 
             if (value == null)
             {
                 value = rowContext.CurrentField.Const;
+            }
+
+            if (value != null && !string.IsNullOrWhiteSpace(rowContext.CurrentField.Prefix))
+            {
+                value = $"{rowContext.CurrentField.Prefix}{Convert.ToString(value)}";
             }
 
             return new FieldValue
@@ -1269,6 +1336,26 @@ where {key.ToSql("[t]")}";
             }
 
             return null;
+        }
+
+        private object DetermineConcatValue(object value, TRowContext rowContext)
+        {
+            if (rowContext.CurrentField.Columns?.Any(c => c.Valid) == true)
+            {
+                var bldr = new StringBuilder();
+                foreach (var c in rowContext.CurrentField.Columns.Where(c => c.Valid))
+                {
+                    var val = ConvertUtils.ToString(this.DetermineColumnValue(rowContext, c.ColumnIndex.Value));
+                    if (!string.IsNullOrWhiteSpace(val))
+                    {
+                        bldr.AppendLine(val);
+                    }
+                }
+
+                return bldr.ToString();
+            }
+
+            return value;
         }
 
         private object DetermineVirtualID(TRowContext rowContext)

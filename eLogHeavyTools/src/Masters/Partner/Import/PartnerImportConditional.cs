@@ -46,6 +46,7 @@ namespace eLog.HeavyTools.Masters.Partner.Import
         IsNotEmpty = ImportConditionalType.IsNotEmpty,
         Expression = ImportConditionalType.Expression,
 
-        CheckCompanyHierarchy
+        CheckCompanyHierarchy,
+        CheckCompanyHierarchyNot
     }
 }

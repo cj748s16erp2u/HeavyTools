@@ -1,0 +1,5 @@
+﻿@parent=eLog.HeavyTools.Masters.Partner
+
+$pageName_partnerimport=Partner import
+$tabName_partnerimport=Partner import
+$partnerimport=Partner betöltés

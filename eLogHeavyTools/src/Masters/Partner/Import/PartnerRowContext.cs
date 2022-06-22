@@ -8,16 +8,21 @@ namespace eLog.HeavyTools.Masters.Partner.Import
         public TableEntry Partner { get; internal set; }
         public TableEntry OlcPartner { get; internal set; }
         public List<TableEntry> PartnCmps { get; internal set; } = new List<TableEntry>();
+        public List<TableEntry> OlcPartnCmps { get; internal set; } = new List<TableEntry>();
         public List<TableEntry> PartnAddrs { get; internal set; } = new List<TableEntry>();
         public List<TableEntry> OlcPartnAddrs { get; internal set; } = new List<TableEntry>();
         public List<TableEntry> PartnAddrCmps { get; internal set; } = new List<TableEntry>();
         public List<TableEntry> PartnBanks { get; internal set; } = new List<TableEntry>();
         public List<TableEntry> PartnBankCmps { get; internal set; } = new List<TableEntry>();
         public List<TableEntry> Employees { get; internal set; } = new List<TableEntry>();
+        public List<TableEntry> OlcEmployees { get; internal set; } = new List<TableEntry>();
 
         public override void Dispose()
         {
             base.Dispose();
+
+            this.OlcEmployees?.Clear();
+            this.OlcEmployees = null;
 
             this.Employees?.Clear();
             this.Employees = null;
@@ -36,6 +41,9 @@ namespace eLog.HeavyTools.Masters.Partner.Import
 
             this.PartnAddrs?.Clear();
             this.PartnAddrs = null;
+
+            this.OlcPartnCmps?.Clear();
+            this.OlcPartnCmps = null;
 
             this.PartnCmps?.Clear();
             this.PartnCmps = null;

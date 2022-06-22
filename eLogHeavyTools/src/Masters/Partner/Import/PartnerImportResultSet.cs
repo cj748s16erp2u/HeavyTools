@@ -8,11 +8,13 @@ namespace eLog.HeavyTools.Masters.Partner.Import
         public TableEntry Partner { get; set; }
         public TableEntry OlcPartner { get; set; }
         public IEnumerable<TableEntry> PartnCmps { get; set; }
+        public IEnumerable<TableEntry> OlcPartnCmps { get; set; }
         public IEnumerable<TableEntry> PartnAddrs { get; set; }
         public IEnumerable<TableEntry> OlcPartnAddrs { get; set; }
         public IEnumerable<TableEntry> PartnAddrCmps { get; set; }
         public IEnumerable<TableEntry> PartnBanks { get; set; }
         public IEnumerable<TableEntry> PartnBankCmps { get; set; }
         public IEnumerable<TableEntry> Employees { get; set; }
+        public IEnumerable<TableEntry> OlcEmployees { get; set; }
     }
 }

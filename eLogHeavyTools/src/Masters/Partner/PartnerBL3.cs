@@ -15,9 +15,9 @@ namespace eLog.HeavyTools.Masters.Partner
 {
     public class PartnerBL3 : PartnerBL2
     {
-        public static new PartnerBL3 New()
+        public static PartnerBL3 New3()
         {
-            return (PartnerBL3)PartnerBL.New();
+            return (PartnerBL3)New();
         }
 
         public override void Validate(BLObjectMap objects)
@@ -64,8 +64,11 @@ namespace eLog.HeavyTools.Masters.Partner
         public override void Delete(Key k)
         {
             var olc = OlcPartner.Load(k);
-            olc.State = DataRowState.Deleted;
-            olc.Save();
+            if (olc != null)
+            {
+                olc.State = DataRowState.Deleted;
+                olc.Save();
+            }
 
             base.Delete(k);
         }

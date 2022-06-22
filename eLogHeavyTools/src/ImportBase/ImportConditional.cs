@@ -1,7 +1,7 @@
 ﻿namespace eLog.HeavyTools.ImportBase
 {
     [System.Diagnostics.DebuggerDisplay("{DebuggerDisplay,nq}")]
-    public class ImportConditional
+    public class ImportConditional : IImportExcelColumn
     {
         public string Column { get; set; }
         public string ColumnName { get; set; }
