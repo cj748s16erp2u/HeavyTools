@@ -15,8 +15,9 @@ namespace eLog.HeavyTools.BankTran
 {
     public class EfxBankTranHeadSearchTab3 : U4Ext.Bank.Base.Transaction.EfxBankTranHeadSearchTab, eProjectWeb.Framework.Xml.IXmlObjectName
     {
-        protected Button btnReadBankFiles2;
-        protected DialogBox dlgReadBankFiles2;
+        protected PopupButton btnBankStatementImport;
+
+        protected UploadButton btnFoxPostImportButton;
 
         #region IXmlObjectName
 
@@ -43,101 +44,37 @@ namespace eLog.HeavyTools.BankTran
         {
             base.CreateBase();
 
-            btnReadBankFiles2 = new Button("readbankfiles2", 9999);
-            AddCmd(btnReadBankFiles2);
-            SetButtonAction(btnReadBankFiles2.ID, new ControlEvent(ReadBankFiles2));
+            // import
+            btnBankStatementImport = new PopupButton("bankstatement_import");
+            btnBankStatementImport.Order = 9999998;
+            btnBankStatementImport.Default = null;
+            btnBankStatementImport.AllowDropDown = true;
+            btnBankStatementImport.ForceDropDown = true;
+            AddCmd(btnBankStatementImport);
 
-            dlgReadBankFiles2 = new DialogBox(DialogBoxType.InputOkCancel);
-            dlgReadBankFiles2.OnButton1Clicked += dlgReadBankFiles2_OnButton1Clicked;
-            RegisterDialog(dlgReadBankFiles2);
+            //var btnFoxPostImport = new PopupChildButton("foxpost_import");
+            //btnBankStatementImport.Add(btnFoxPostImport);
+            //SetButtonAction(btnFoxPostImport.ID, new ControlEvent(btnFoxPost_Import_OnClick));
+
+            var btnFoxPostImport = new UploadButton("foxpost_import");
+            btnBankStatementImport.Add(btnFoxPostImport);
+            //SetButtonAction(btnFoxPostImport.ID, new ControlEvent(btnFoxPost_Import_OnClick));
+
+            this.btnFoxPostImportButton = this.AddCmd(new UploadButton("partnerimport", 950));
+            this.SetButtonAction(this.btnFoxPostImportButton.ID, this.btnFoxPost_Import_OnClick);
+
         }
 
-        protected void ReadBankFiles2(PageUpdateArgs args)
+        private void btnFoxPost_Import_OnClick(PageUpdateArgs args)
         {
-            var tbl = new LayoutTable(new TableColumn[]
-            {
-                new TableColumn(100, TableColumnFlags.None),
-                new TableColumn(250, TableColumnFlags.None),
-            })
-            { ControlGroup = "dlg01" };
+            //var bl = (ProjectBL3)ProjectBL3.New();
+            //bool doRefresh = bl.GetEPProjectIssueFile();
 
-            tbl.AddControl(new Combo()
-            {
-                Field = "cmpcode",
-                ListID = $"{CodaInt.Base.Setup.Company.CompanyList.ID}#sessioncmp",
-                Flags = ComboFlags.AutoSelectOne,
-                Mandatory = true,
-                //Value = cmpId,
-                //Disabled = true
-            });
-            tbl.AddControl(new Combo()
-            {
-                Field = "bankid",
-                ListID = U4Ext.Bank.Base.Setup.Bank.EfxBankListProvider.ID,
-                Flags = ComboFlags.AutoSelectOne,
-                Mandatory = true,
-                DependentCtrlID = "dlg01.cmpcode",
-                DependentField = "cmpcode",
-                DependentAllowNullField = "cmpcode"
-            });
-            tbl.AddControl(new Combo()
-            {
-                // ha a fajlt archivaltuk es mar nincs a konyvtarban, akkor a listaban se jelenjen meg, ezert:
-                // a random lista parameter miatt mindig olvassa ujra az elemeket
-                Field = "filename",
-                ListID = U4Ext.Bank.Base.Transaction.EfxBankFileList.ID + "#" + Guid.NewGuid().ToString("n"),
-                Flags = ComboFlags.AutoSelectOne,
-                Mandatory = true,
-                DependentCtrlID = "dlg01.cmpcode,dlg01.bankid",
-                DependentField = "cmpcode,bankid",
-            });
-            tbl.AddControl(new Checkbox()
-            {
-                Field = "movethefile",
-                Value = true,
-            });
+            var uploadInfo = this.btnFoxPostImportButton.GetUploadData(args);
 
-            args.ShowInputDialog(dlgReadBankFiles2, null, null, tbl);
-        }
+            var partnerBL = (CifEbankTransBL3)CifEbankTransBL3.New3();
+            //var processResult = CifEbankTransBL3.FoxPostBankStatementImport(uploadInfo);
 
-        protected void dlgReadBankFiles2_OnButton1Clicked(PageUpdateArgs args)
-        {
-            var cmpCode = dlgReadBankFiles.GetStringValue("cmpcode");
-            var bankId = dlgReadBankFiles.GetInputValue<Int32>("bankid");
-            var fileName = dlgReadBankFiles.GetStringValue("filename");
-            var moveFile = dlgReadBankFiles.GetInputValue<Boolean>("movethefile");
-            if (string.IsNullOrEmpty(cmpCode) || !bankId.HasValue || string.IsNullOrEmpty(fileName))
-                return;
-
-            var bl = U4Ext.Bank.Base.Transaction.EfxBankTranHeadBL.New();
-
-            List<string> errors = new List<string>();
-            try
-            {
-                errors = bl.BankDocProcess(cmpCode, bankId, fileName, (bool)moveFile, null);
-            }
-            catch (Exception ex)
-            {
-                //throw new MessageException(ex.Message);
-                Log.Error(ex.Message);
-                args.ShowDialog(dlgSimpleMessage, "$msg_readbankfiles_title", "$msg_bankdocprocess_error");
-            }
-
-            if (errors.Count > 0)
-            {
-                args.ShowDialog(dlgSimpleMessage, null, string.Join("<br/>", errors));
-                //args.ShowDialog(dlgSimpleMessage, "$msg_calc_title", "$msg_calcstep_finished");
-            }
-            else
-            {
-                args.Continue = true;
-                SearchResults.KeysToRefresh.Add(new eProjectWeb.Framework.Data.Key
-                {
-                    ["cmpcode"] = cmpCode,
-                    ["bankid"] = bankId,
-                    ["filename"] = fileName,
-                });
-            }
         }
 
     }

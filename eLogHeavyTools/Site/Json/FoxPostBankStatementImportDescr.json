@@ -1,0 +1,1080 @@
+[
+  {
+    "Sheet": "Partnertörzs->Partner",
+    "HeaderRow": "1:2",
+    "ColumnNameRow": 1,
+    "Ignore": false,
+    "Tables": [
+      {
+        "Table": "ols_partner",
+        "Fields": [
+          {
+            "Field": "cmpid",
+            "Const": -1
+          },
+          {
+            "Field": "cmpcodes",
+            "Const": "*"
+          },
+          {
+            "Field": "type",
+            "ColumnName": "Partner_kategoria",
+            "Type": "dictionary",
+            "Lookup": {
+              "Alias": "PartnerType",
+              "ValueField": "u4partntype"
+            }
+          },
+          {
+            "Field": "name",
+            "ColumnName": "Nev",
+            "Required": true
+          },
+          {
+            "Field": "sname",
+            "ColumnName": "Nev",
+            "Left": 20
+          },
+          {
+            "Field": "delstat",
+            "ColumnName": "Partner_allapot",
+            "Type": "dictionary",
+            "Lookup": {
+              "Alias": "PartnDelstat",
+              "ValueField": "u4delstat"
+            }
+          },
+          {
+            "Field": "note",
+            "Type": "concat",
+            "Columns": [
+              {
+                "ColumnName": "Fontos_Megjegyzes"
+              },
+              {
+                "ColumnName": "Web_oldal"
+              },
+              {
+                "ColumnName": "Megjegyzes"
+              }
+            ]
+          },
+          {
+            "Field": "vatnum",
+            "ColumnName": "Adoszam"
+          },
+          {
+            "Field": "vatnumeu",
+            "ColumnName": "Kozossegi_adoszam"
+          },
+          {
+            "Field": "groupvatnum",
+            "ColumnName": "Csoport adószám"
+          },
+          {
+            "Field": "extcode",
+            "ColumnName": "Szallitonal_mi_kod"
+          },
+          {
+            "Field": "ptvattypid",
+            "ColumnName": "Adozas_jellege",
+            "Type": "dictionary",
+            "Lookup": {
+              "Alias": "PartnerVatType",
+              "ValueField": "u4partnvattyp"
+            }
+          }
+        ],
+        "Conditionals": [
+          {
+            "ColumnName": "Ceglanc",
+            "Type": "CheckCompanyHierarchy",
+            "RefColumnName": "Partner_Kod"
+          }
+        ]
+      },
+      {
+        "Table": "olc_partner",
+        "Fields": [
+          {
+            "Field": "oldcode",
+            "ColumnName": "Partner_Kod"
+          },
+          {
+            "Field": "wsemail",
+            "ColumnName": "Email"
+          },
+          {
+            "Field": "invlngid",
+            "ColumnName": "Nyelv",
+            "Type": "dictionary",
+            "Lookup": {
+              "Alias": "PartnerInvLang",
+              "ValueField": "u4lngid"
+            }
+          }
+        ]
+      },
+      {
+        "Table": "ols_partncmp",
+        "Fields": [
+          {
+            "Field": "cmpid",
+            "Type": "sequence",
+            "Sequence": {
+              "Table": "ols_company",
+              "Collection": "ols_partncmp",
+              "Field": "cmpid"
+            }
+          },
+          {
+            "Field": "type",
+            "Const": 0
+          },
+          {
+            "Field": "paymid",
+            "ColumnName": "Fizetesi_Mod",
+            "Type": "dictionary",
+            "Lookup": {
+              "Alias": "PayMethod",
+              "ValueField": "u4paymid"
+            }
+          },
+          {
+            "Field": "paycid",
+            "ColumnName": "Fizetesi_Nap",
+            "Type": "lookup",
+            "Lookup": {
+              "Table": "ols_paycond",
+              "KeyFieldExpr": {
+                "Field": "params",
+                "Expr": "NoD={value}"
+              },
+              "ValueField": "paycid",
+              "DependentFields": [
+                {
+                  "Field": "paymid",
+                  "Type": "current",
+                  "Lookup": {
+                    "ValueField": "paymid"
+                  }
+                }
+              ]
+            }
+          },
+          {
+            "Field": "credlimit",
+            "ColumnName": "HitelKorlat"
+          },
+          {
+            "Field": "curid",
+            "ColumnName": "Deviza_Nem",
+            "Type": "lookup",
+            "Lookup": {
+              "Table": "ols_currency",
+              "KeyField": "curid",
+              "ValueField": "curid"
+            },
+            "Const": "HUF"
+          },
+          {
+            "Field": "selprcincdiscnttype",
+            "Const": 1
+          },
+          {
+            "Field": "posttype",
+            "Const": 1
+          }
+        ]
+      },
+      {
+        "Table": "olc_partncmp",
+        "Fields": [
+          {
+            "Field": "cmpid",
+            "Type": "sequence",
+            "Sequence": {
+              "Table": "ols_company",
+              "Collection": "ols_partncmp",
+              "Field": "cmpid"
+            }
+          },
+          {
+            "Field": "secpaymid",
+            "ColumnName": "Fizetesi_Mod",
+            "Type": "dictionary",
+            "Lookup": {
+              "Alias": "PayMethod",
+              "ValueField": "u4paymid"
+            }
+          },
+          {
+            "Field": "secpaycid",
+            "ColumnName": "Másodlagos fiz. Felt.",
+            "Type": "lookup",
+            "Lookup": {
+              "Table": "ols_paycond",
+              "KeyFieldExpr": {
+                "Field": "params",
+                "Expr": "NoD={value}"
+              },
+              "ValueField": "paycid",
+              "DependentFields": [
+                {
+                  "Field": "paymid",
+                  "Type": "current",
+                  "Lookup": {
+                    "ValueField": "secpaymid"
+                  }
+                }
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "Alias": "PA1",
+        "Table": "ols_partnaddr",
+        "Fields": [
+          {
+            "Field": "addrid",
+            "Type": "virtualID"
+          },
+          {
+            "FIeld": "def",
+            "Const": 1
+          },
+          {
+            "Field": "extcode",
+            "ColumnName": "Aruhaz_kod"
+          },
+          {
+            "Field": "type",
+            "Type": "flagtype",
+            "Lookup": {
+              "TypeKey": "ols_partnaddr.type",
+              "KeyField": "value",
+              "ValueField": "value"
+            },
+            "Const": 3
+          },
+          {
+            "Field": "countryid",
+            "ColumnName": "Megye_Orszag",
+            "Type": "dictionary",
+            "Lookup": {
+              "Alias": "CountryRegion",
+              "ValueField": "u4countryid"
+            }
+          },
+          {
+            "Field": "add01",
+            "ColumnName": "Varos"
+          },
+          {
+            "Field": "add02",
+            "ColumnName": "Utca"
+          },
+          {
+            "Field": "postcode",
+            "ColumnName": "Iranyito_Szam"
+          },
+          {
+            "Field": "tel",
+            "ColumnName": "Telefon"
+          },
+          {
+            "Field": "fax",
+            "ColumnName": "TeleFax"
+          },
+          {
+            "Field": "xml:Xmldata:addr/place",
+            "ColumnName": "Kozterulet_neve"
+          },
+          {
+            "Field": "xml:Xmldata:addr/placetype",
+            "ColumnName": "Kozterulet_jellege"
+          },
+          {
+            "Field": "xml:Xmldata:addr/hnum",
+            "ColumnName": "Hazszam"
+          },
+          {
+            "Field": "xml:Xmldata:addr/building",
+            "ColumnName": "Epulet"
+          },
+          {
+            "Field": "xml:Xmldata:addr/stairway",
+            "ColumnName": "Lepcsohaz"
+          },
+          {
+            "Field": "xml:Xmldata:addr/floor",
+            "ColumnName": "Szint"
+          },
+          {
+            "Field": "xml:Xmldata:addr/door",
+            "ColumnName": "Ajto"
+          },
+          {
+            "Field": "xml:Xmldata:addr/district",
+            "ColumnName": "Kerulet"
+          },
+          {
+            "Field": "name",
+            "Type": "selflookup",
+            "Lookup": {
+              "Alias": "ols_partner",
+              "ValueField": "sname"
+            }
+          }
+        ],
+        "Conditionals": [
+          {
+            "Field": "add01",
+            "Type": "IsNotEmpty"
+          },
+          {
+            "Field": "add02",
+            "Type": "IsNotEmpty"
+          },
+          {
+            "Field": "postcode",
+            "Type": "IsNotEmpty"
+          }
+        ]
+      },
+      {
+        "Table": "olc_partnaddr",
+        "Fields": [
+          {
+            "Field": "addrid",
+            "Type": "selflookup",
+            "Lookup": {
+              "Alias": "PA1",
+              "ValueField": "addrid"
+            }
+          },
+          {
+            "Field": "buildingname",
+            "ColumnName": "Epulet_nev"
+          },
+          {
+            "Field": "glnnum",
+            "ColumnName": "GLN"
+          },
+          {
+            "Field": "oldcode",
+            "ColumnName": "Partner_Kod",
+            "Prefix": "P"
+          }
+        ]
+      },
+      {
+        "Table": "ols_partnaddrcmp",
+        "Fields": [
+          {
+            "Field": "addrid",
+            "Type": "selflookup",
+            "Lookup": {
+              "Alias": "PA1",
+              "ValueField": "addrid"
+            }
+          },
+          {
+            "Field": "cmpid",
+            "Type": "sequence",
+            "Sequence": {
+              "Table": "ols_company",
+              "Field": "cmpid"
+            }
+          }
+        ]
+      },
+      {
+        "Alias": "PB1",
+        "Table": "ols_partnbank",
+        "Optional": true,
+        "Fields": [
+          {
+            "Field": "bankid",
+            "Type": "virtualID"
+          },
+          {
+            "Field": "accno",
+            "ColumnName": "Bankszamla"
+          },
+          {
+            "Field": "name",
+            "ColumnName": "Bank adatok"
+          },
+          {
+            "Field": "def",
+            "Const": 1
+          }
+        ],
+        "Conditionals": [
+          {
+            "Field": "accno",
+            "Type": "IsNotEmpty"
+          }
+        ]
+      },
+      {
+        "Table": "ols_partnbankcmp",
+        "Optional": true,
+        "Fields": [
+          {
+            "Field": "bankid",
+            "Type": "selflookup",
+            "Lookup": {
+              "Alias": "PB1",
+              "ValueField": "bankid"
+            }
+          },
+          {
+            "Field": "cmpid",
+            "Type": "sequence",
+            "Sequence": {
+              "Table": "ols_company",
+              "Field": "cmpid"
+            }
+          }
+        ]
+      }
+    ],
+    "Dictionaries": [
+      {
+        "Name": "PartnerType",
+        "Table": "imp_partnertype",
+        "Type": "flagtype",
+        "KeyField": "key",
+        "ValueFields": [
+          {
+            "Field": "u4partntype",
+            "Type": "type",
+            "Lookup": {
+              "TypeKey": "ols_partner.type",
+              "KeyField": "abbr",
+              "ValueField": "value"
+            }
+          }
+        ]
+      },
+      {
+        "Name": "PartnerVatType",
+        "Table": "imp_partnvattyp",
+        "KeyField": "key",
+        "ValueFields": [
+          {
+            "Field": "u4partnvattyp",
+            "Type": "lookup",
+            "Lookup": {
+              "Table": "ols_partnvattyp",
+              "KeyField": "ptvattypid",
+              "ValueField": "ptvattypid"
+            }
+          }
+        ]
+      },
+      {
+        "Name": "PartnDelstat",
+        "Table": "imp_partndelstat",
+        "KeyField": "key",
+        "ValueFields": [
+          {
+            "Field": "u4delstat",
+            "Type": "type",
+            "Lookup": {
+              "TypeKey": "common.delstat",
+              "KeyField": "abbr",
+              "ValueField": "value"
+            }
+          }
+        ]
+      },
+      {
+        "Name": "PartnerInvLang",
+        "Table": "imp_partninvlngid",
+        "KeyField": "key",
+        "ValueFields": [
+          {
+            "Field": "u4lngid",
+            "Type": "lookup",
+            "Lookup": {
+              "Table": "cfw_language",
+              "KeyField": "langid",
+              "ValueField": "langid"
+            }
+          }
+        ]
+      },
+      {
+        "Name": "CountryRegion",
+        "Table": "imp_countryregion",
+        "KeyField": "key",
+        "ValueFields": [
+          {
+            "Field": "u4countryid",
+            "Type": "lookup",
+            "Lookup": {
+              "Table": "ols_country",
+              "KeyField": "countryid",
+              "ValueField": "countryid"
+            }
+          },
+          {
+            "Field": "u4regionid"
+          }
+        ]
+      },
+      {
+        "Name": "PayMethod",
+        "Table": "imp_paymethod",
+        "KeyField": "key",
+        "Valuefields": [
+          {
+            "Field": "u4paymid",
+            "Type": "lookup",
+            "Lookup": {
+              "Table": "ols_paymethod",
+              "KeyField": "paymid",
+              "ValueField": "paymid"
+            }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "Sheet": "Partnertörzs->Partner",
+    "HeaderRow": "1:2",
+    "ColumnNameRow": 1,
+    "Ignore": false,
+    "Tables": [
+      {
+        "Alias": "PA1",
+        "Table": "ols_partnaddr",
+        "Fields": [
+          {
+            "Field": "partnid",
+            "ColumnName": "Ceglanc",
+            "Type": "dictionary",
+            "Lookup": {
+              "Alias": "CompanyHierarchy",
+              "ValueField": "mainkey"
+            }
+          },
+          {
+            "Field": "addrid",
+            "Type": "virtualID"
+          },
+          {
+            "FIeld": "def",
+            "Const": 0
+          },
+          {
+            "Field": "extcode",
+            "ColumnName": "Aruhaz_kod"
+          },
+          {
+            "Field": "type",
+            "Type": "flagtype",
+            "Lookup": {
+              "TypeKey": "ols_partnaddr.type",
+              "KeyField": "value",
+              "ValueField": "value"
+            },
+            "Const": 32
+          },
+          {
+            "Field": "countryid",
+            "ColumnName": "Megye_Orszag",
+            "Type": "dictionary",
+            "Lookup": {
+              "Alias": "CountryRegion",
+              "ValueField": "u4countryid"
+            }
+          },
+          {
+            "Field": "add01",
+            "ColumnName": "Varos"
+          },
+          {
+            "Field": "add02",
+            "ColumnName": "Utca"
+          },
+          {
+            "Field": "postcode",
+            "ColumnName": "Iranyito_Szam"
+          },
+          {
+            "Field": "tel",
+            "ColumnName": "Telefon"
+          },
+          {
+            "Field": "fax",
+            "ColumnName": "TeleFax"
+          },
+          {
+            "Field": "xml:Xmldata:addr/place",
+            "ColumnName": "Kozterulet_neve"
+          },
+          {
+            "Field": "xml:Xmldata:addr/placetype",
+            "ColumnName": "Kozterulet_jellege"
+          },
+          {
+            "Field": "xml:Xmldata:addr/hnum",
+            "ColumnName": "Hazszam"
+          },
+          {
+            "Field": "xml:Xmldata:addr/building",
+            "ColumnName": "Epulet"
+          },
+          {
+            "Field": "xml:Xmldata:addr/stairway",
+            "ColumnName": "Lepcsohaz"
+          },
+          {
+            "Field": "xml:Xmldata:addr/floor",
+            "ColumnName": "Szint"
+          },
+          {
+            "Field": "xml:Xmldata:addr/door",
+            "ColumnName": "Ajto"
+          },
+          {
+            "Field": "xml:Xmldata:addr/district",
+            "ColumnName": "Kerulet"
+          },
+          {
+            "Field": "name",
+            "Type": "selflookup",
+            "Lookup": {
+              "Alias": "ols_partner",
+              "KeyField": "partnid",
+              "ValueField": "sname"
+            }
+          }
+        ],
+        "Conditionals": [
+          {
+            "Field": "add01",
+            "Type": "IsNotEmpty"
+          },
+          {
+            "Field": "add02",
+            "Type": "IsNotEmpty"
+          },
+          {
+            "Field": "postcode",
+            "Type": "IsNotEmpty"
+          },
+          {
+            "ColumnName": "Ceglanc",
+            "Type": "CheckCompanyHierarchyNot",
+            "RefColumnName": "Partner_Kod"
+          }
+        ]
+      },
+      {
+        "Table": "olc_partnaddr",
+        "Fields": [
+          {
+            "Field": "addrid",
+            "Type": "selflookup",
+            "Lookup": {
+              "Alias": "PA1",
+              "ValueField": "addrid"
+            }
+          },
+          {
+            "Field": "buildingname",
+            "ColumnName": "Epulet_nev"
+          },
+          {
+            "Field": "glnnum",
+            "ColumnName": "GLN"
+          },
+          {
+            "Field": "oldcode",
+            "ColumnName": "Partner_Kod",
+            "Prefix": "P"
+          }
+        ]
+      },
+      {
+        "Table": "ols_partnaddrcmp",
+        "Fields": [
+          {
+            "Field": "addrid",
+            "Type": "selflookup",
+            "Lookup": {
+              "Alias": "PA1",
+              "ValueField": "addrid"
+            }
+          },
+          {
+            "Field": "cmpid",
+            "Type": "sequence",
+            "Sequence": {
+              "Table": "ols_company",
+              "Field": "cmpid"
+            }
+          }
+        ]
+      }
+    ],
+    "Dictionaries": [
+      {
+        "Name": "CountryRegion",
+        "Table": "imp_countryregion",
+        "KeyField": "key",
+        "ValueFields": [
+          {
+            "Field": "u4countryid",
+            "Type": "lookup",
+            "Lookup": {
+              "Table": "ols_country",
+              "KeyField": "countryid",
+              "ValueField": "countryid"
+            }
+          },
+          {
+            "Field": "u4regionid"
+          }
+        ]
+      },
+      {
+        "Name": "CompanyHierarchy",
+        "Table": "imp_companyhierarchy",
+        "KeyField": "key",
+        "ValueFields": [
+          {
+            "Field": "mainkey",
+            "Type": "lookup",
+            "Lookup": {
+              "Table": "olc_partner",
+              "KeyField": "oldcode",
+              "ValueField": "partnid"
+            }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "Sheet": "Partner címek->Cím",
+    "HeaderRow": "1:2",
+    "ColumnNameRow": 1,
+    "Ignore": false,
+    "Tables": [
+      {
+        "Alias": "PA1",
+        "Table": "ols_partnaddr",
+        "Fields": [
+          {
+            "Field": "partnid",
+            "ColumnName": "Partner_Kod",
+            "Type": "lookup",
+            "Lookup": {
+              "Table": "olc_partner",
+              "KeyField": "oldcode",
+              "ValueField": "partnid"
+            }
+          },
+          {
+            "FIeld": "def",
+            "Const": 0
+          },
+          {
+            "Field": "extcode",
+            "ColumnName": "Aruhaz_kod"
+          },
+          {
+            "Field": "type",
+            "Type": "flagtype",
+            "Lookup": {
+              "TypeKey": "ols_partnaddr.type",
+              "KeyField": "value",
+              "ValueField": "value"
+            },
+            "Const": 32
+          },
+          {
+            "Field": "countryid",
+            "ColumnName": "Ország",
+            "Type": "lookup",
+            "Lookup": {
+              "Table": "ols_country",
+              "KeyField": "countryid",
+              "ValueField": "countryid"
+            },
+            "Const": "HU"
+          },
+          {
+            "Field": "postcode",
+            "ColumnName": "IranyitoSzam"
+          },
+          {
+            "Field": "add01",
+            "ColumnName": "Varos"
+          },
+          {
+            "Field": "add02",
+            "ColumnName": "Utca"
+          },
+          {
+            "Field": "tel",
+            "ColumnName": "Telefon"
+          },
+          {
+            "Field": "fax",
+            "ColumnName": "TeleFax"
+          },
+          {
+            "Field": "name",
+            "Type": "selflookup",
+            "Lookup": {
+              "Alias": "ols_partner",
+              "KeyField": "partnid",
+              "ValueField": "sname"
+            }
+          },
+          {
+            "Field": "note",
+            "ColumnName": "Megjegyzes"
+          }
+        ],
+        "Conditionals": [
+          {
+            "Field": "partnid",
+            "Type": "IsNotEmpty"
+          },
+          {
+            "Field": "add01",
+            "Type": "IsNotEmpty"
+          },
+          {
+            "Field": "add02",
+            "Type": "IsNotEmpty"
+          },
+          {
+            "Field": "postcode",
+            "Type": "IsNotEmpty"
+          }
+        ]
+      },
+      {
+        "Table": "olc_partnaddr",
+        "Fields": [
+          {
+            "Field": "addrid",
+            "Type": "selflookup",
+            "Lookup": {
+              "Alias": "PA1",
+              "ValueField": "addrid"
+            }
+          },
+          {
+            "Field": "buildingname",
+            "ColumnName": "Epulet_nev"
+          },
+          {
+            "Field": "glnnum",
+            "ColumnName": "GLN"
+          },
+          {
+            "Field": "oldcode",
+            "ColumnName": "ID",
+            "Prefix": "C"
+          }
+        ]
+      },
+      {
+        "Table": "ols_partnaddrcmp",
+        "Fields": [
+          {
+            "Field": "addrid",
+            "Type": "selflookup",
+            "Lookup": {
+              "Alias": "PA1",
+              "ValueField": "addrid"
+            }
+          },
+          {
+            "Field": "cmpid",
+            "Type": "sequence",
+            "Sequence": {
+              "Table": "ols_company",
+              "Field": "cmpid"
+            }
+          }
+        ]
+      }
+    ],
+    "Dictionaries": [
+      {
+        "Name": "CountryRegion",
+        "Table": "imp_countryregion",
+        "KeyField": "key",
+        "ValueFields": [
+          {
+            "Field": "u4countryid",
+            "Type": "lookup",
+            "Lookup": {
+              "Table": "ols_country",
+              "KeyField": "countryid",
+              "ValueField": "countryid"
+            }
+          },
+          {
+            "Field": "u4regionid"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "Sheet": "Partner nevek->Alkalmazott",
+    "HeaderRow": "1:2",
+    "ColumnNameRow": 1,
+    "Ignore": false,
+    "Tables": [
+      {
+        "Alias": "E1",
+        "Table": "ols_employee",
+        "Fields": [
+          {
+            "Field": "empid",
+            "Type": "virtualID"
+          },
+          {
+            "Field": "partnid",
+            "ColumnName": "Partner_Kod",
+            "Type": "lookup",
+            "Lookup": {
+              "Table": "olc_partner",
+              "KeyField": "oldcode",
+              "ValueField": "partnid"
+            }
+          },
+          {
+            "Field": "addrid",
+            "DefIfExists": true
+          },
+          {
+            "Field": "cmpid",
+            "Const": -1
+          },
+          {
+            "Field": "cmpcodes",
+            "Type": "company",
+            "Lookup": {
+              "KeyField": "codacode"
+            },
+            "Const": "*"
+          },
+          {
+            "Field": "type",
+            "Type": "flagtype",
+            "Lookup": {
+              "TypeKey": "ols_employee.type",
+              "KeyField": "value",
+              "ValueField": "value"
+            },
+            "Const": 1
+          },
+          {
+            "Field": "firstname",
+            "SplitPart": "Name#1"
+          },
+          {
+            "Field": "lastname",
+            "SplitPart": "Name#0"
+          },
+          {
+            "Field": "position",
+            "Column": "Beosztas"
+          },
+          {
+            "Field": "tel",
+            "ColumnName": "Telefon"
+          },
+          {
+            "Field": "fax",
+            "ColumnName": "TeleFax"
+          },
+          {
+            "Field": "email",
+            "ColumnName": "Email"
+          },
+          {
+            "Field": "mobile",
+            "ColumnName": "Mobil_szam"
+          },
+          {
+            "Field": "note",
+            "Type": "concat",
+            "Columns": [
+              {
+                "ColumnName": "Irsz"
+              },
+              {
+                "ColumnName": "Varos"
+              },
+              {
+                "ColumnName": "Utca"
+              }
+            ]
+          }
+        ],
+        "Splits": [
+          {
+            "Name": "Name",
+            "Field": {
+              "ColumnName": "Szemely_Nev"
+            },
+            "Separator": " ",
+            "PartsCount": 2
+          }
+        ],
+        "Conditionals": [
+          {
+            "Field": "partnid",
+            "Type": "IsNotEmpty"
+          },
+          {
+            "Field": "firstname",
+            "Type": "IsNotEmpty"
+          },
+          {
+            "Field": "lastname",
+            "Type": "IsNotEmpty"
+          }
+        ]
+      },
+      {
+        "Table": "olc_employee",
+        "Fields": [
+          {
+            "Field": "empid",
+            "Type": "selflookup",
+            "Lookup": {
+              "Alias": "E1",
+              "ValueField": "empid"
+            }
+          },
+          {
+            "Field": "oldcode",
+            "ColumnName": "ID"
+          },
+          {
+            "Field": "privtel",
+            "ColumnName": "Privat_Telefon"
+          }
+        ]
+      }
+    ]
+  }
+]
