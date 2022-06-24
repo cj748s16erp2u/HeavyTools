@@ -62,12 +62,14 @@ namespace eLog.HeavyTools.BankTran.Import
 
         private bool SaveImport(CifEbankTransImportResultSet result, int? pos = null, int? count = null)
         {
-            /*
-            var partnCode = result.OlcPartner?.Entity["oldcode"]
-                ?? result.Partner?.Entity["partnid"]
-                ?? result.PartnAddrs?.FirstOrDefault()?.Entity["partnid"]
-                ?? result.PartnBanks?.FirstOrDefault()?.Entity["partnid"]
-                ?? result.Employees?.FirstOrDefault()?.Entity["partnid"];
+
+            //var partnCode = result.OlcPartner?.Entity["oldcode"]
+            //    ?? result.Partner?.Entity["partnid"]
+            //    ?? result.PartnAddrs?.FirstOrDefault()?.Entity["partnid"]
+            //    ?? result.PartnBanks?.FirstOrDefault()?.Entity["partnid"]
+            //    ?? result.Employees?.FirstOrDefault()?.Entity["partnid"];
+
+            var partnCode = "PPA";
 
             if (pos != null && count != null)
             {
@@ -86,26 +88,27 @@ namespace eLog.HeavyTools.BankTran.Import
             {
                 using (var db = DB.GetConn(DB.Main, Transaction.Use))
                 {
-
+                    entityType = typeof(U4Ext.Bank.Base.Transaction.CifEbankTrans).Name;
+                    //this.SaveCifEbankTrans(result);
                     entityType = typeof(Base.Masters.Partner.Partner).Name;
-                    var partnerIsHidden = this.SavePartner(result);
+                    //var partnerIsHidden = this.SavePartner(result);
                     entityType = typeof(Base.Masters.Partner.PartnAddr).Name;
-                    this.SavePartnAddr(result);
+                    //this.SavePartnAddr(result);
                     entityType = typeof(Base.Masters.Partner.PartnBank).Name;
-                    this.SavePartnBank(result);
+                    //this.SavePartnBank(result);
                     entityType = typeof(Base.Masters.Partner.Employee).Name;
-                    this.SaveEmployee(result);
+                    //this.SaveEmployee(result);
 
-                    if (partnerIsHidden == true)
-                    {
-                        this.partnerBL.Hide(result.Partner.Entity.PK);
-                    }
-                    else if (partnerIsHidden == false)
-                    {
-                        this.partnerBL.Unhide(result.Partner.Entity.PK);
-                    }
+                    //if (partnerIsHidden == true)
+                    //{
+                    //    this.partnerBL.Hide(result.Partner.Entity.PK);
+                    //}
+                    //else if (partnerIsHidden == false)
+                    //{
+                    //    this.partnerBL.Unhide(result.Partner.Entity.PK);
+                    //}
 
-                    db.Commit();
+                    //db.Commit();
 
                     this.logger.LogLine("...done");
 
@@ -130,9 +133,9 @@ namespace eLog.HeavyTools.BankTran.Import
 
                 logText.AppendLine(message);
             }
-            
+
             result.LogText = logText.ToString();
-            */
+
             return false;
         }
 

@@ -197,7 +197,7 @@ namespace eLog.HeavyTools
             ObjectFactory.AddRemap(typeof(Base.Masters.Item.ItemBL), typeof(Masters.Item.ItemBL2));
 
             // Bank
-            ObjectFactory.AddRemap(typeof(U4Ext.Bank.Base.Transaction.EfxBankTranHeadSearchTab), typeof(BankTran.EfxBankTranHeadSearchTab3));
+            ObjectFactory.AddRemap(typeof(U4Ext.Bank.Base.Transaction.EfxBankTranLineSearchTab), typeof(BankTran.EfxBankTranLineSearchTab3));
             ObjectFactory.AddRemap(typeof(U4Ext.Bank.Base.Transaction.CifEbankTransBL), typeof(BankTran.CifEbankTransBL3));
         }
     }

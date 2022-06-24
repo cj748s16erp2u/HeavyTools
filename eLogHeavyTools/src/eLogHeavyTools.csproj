@@ -99,7 +99,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BankTran\CifEbankTransBL3.cs" />
-    <Compile Include="BankTran\EfxBankTranHeadSearchTab3.cs" />
+    <Compile Include="BankTran\EfxBankTranLineSearchTab3.cs" />
     <Compile Include="BankTran\Import\CifEbankTransImportService.cs" />
     <Compile Include="BankTran\Import\CifEbankTransImportResultSet.cs" />
     <Compile Include="BankTran\Import\CifEbankTransImportResultSets.cs" />

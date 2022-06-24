@@ -30,16 +30,16 @@ namespace eLog.HeavyTools.BankTran
         {
             string error = null;
 
-            var importDescrFileName = CustomSettings.GetString("PartnerImportDescrFileName");
+            var importDescrFileName = CustomSettings.GetString("FoxPostBankStatementImportDescrFileName");
             if (string.IsNullOrWhiteSpace(importDescrFileName))
             {
-                error = "$err_partnerimport_missingsettings".eLogTransl("PartnerImportDescrFileName");
+                error = "$err_bankstamentimport_missingsettings".eLogTransl("FoxPostBankStatementImportDescrFileName");
             }
 
             var descrDirs = CustomSettings.GetString("ImportDescrFolders");
             if (string.IsNullOrWhiteSpace(descrDirs))
             {
-                error = "$err_partnerimport_missingsettings".eLogTransl("ImportDescrFolders");
+                error = "$err_bankstatementimport_missingsettings".eLogTransl("ImportDescrFolders");
             }
             else
             {
@@ -48,7 +48,7 @@ namespace eLog.HeavyTools.BankTran
 
             if (uploadInfo?.Process == true && string.IsNullOrWhiteSpace(error))
             {
-                //return this.FoxPostBankStatementImportXlsxFiles(uploadInfo.Files, importDescrFileName, descrDirs);
+                return this.FoxPostBankStatementImportXlsxFiles(uploadInfo.Files, importDescrFileName, descrDirs);
             }
             else if (uploadInfo != null)
             {
@@ -61,6 +61,125 @@ namespace eLog.HeavyTools.BankTran
             }
 
             return null;
+        }
+
+        /// <summary>
+        /// Feltöltött Xlsx fájlok feldolgozása
+        /// </summary>
+        /// <param name="uploadFiles">Fájlok listája</param>
+        /// <param name="importDescrFileName">Import leíró fájl neve</param>
+        /// <param name="descrDirs">Import leíró keresési könyvtárok</param>
+        /// <returns>Feldolgozás eredménye</returns>
+        private ImportResult FoxPostBankStatementImportXlsxFiles(IEnumerable<eProjectWeb.Framework.UI.Controls.UploadFileInfo> uploadFiles, string importDescrFileName, string descrDirs)
+        {
+            importDescrFileName = Utils.GetFirstFileFromDirs(descrDirs, importDescrFileName);
+
+            var result = new List<ImportFileNames>();
+            string resultFileName;
+
+            var importResultFolder = Path.Combine(Globals.WritableRoot, "FoxPostBankStatementImport");
+            if (!Directory.Exists(importResultFolder))
+            {
+                Directory.CreateDirectory(importResultFolder);
+            }
+
+            var processResults = new List<ImportProcessResult>();
+
+            using (new eProjectWeb.Framework.Lang.NS(typeof(CifEbankTransBL3).Namespace))
+            {
+                foreach (var f in uploadFiles)
+                {
+                    var res = this.FoxPostBankStatementImportXlsxFiles(importDescrFileName, importResultFolder, f.FileName, f.StoredFileName);
+                    if (res.FileNames != null)
+                    {
+                        result.Add(res.FileNames);
+                    }
+
+                    if (res.ImportResult != null)
+                    {
+                        processResults.Add(res.ImportResult);
+                    }
+                }
+            }
+
+            resultFileName = this.CreateResultFile(result);
+
+            this.RemoveTemporaryFiles(result);
+
+            return new ImportResult
+            {
+                ResultFileName = resultFileName,
+                ImportProcessResults = processResults
+            };
+        }
+
+        /// <summary>
+        /// Xlsx fájl feldolgozása, tárolása későbbi elemzés céljából
+        /// </summary>
+        /// <param name="importDescrFileName">Import leíró fájl neve</param>
+        /// <param name="importResultFolder">Végeredményt tároló könyvtár neve</param>
+        /// <param name="fileName">Feldolgozandó fájl neve</param>
+        /// <param name="storedFileName">Feldolgozandó fájl fizikai neve</param>
+        private ImportXlsxResult FoxPostBankStatementImportXlsxFiles(string importDescrFileName, string importResultFolder, string fileName, string storedFileName)
+        {
+            var importService = new Import.CifEbankTransImportService();
+            var sFileName = Path.Combine(Globals.ReportsTempFolder, storedFileName);
+            var realFileName = Path.Combine(Globals.ReportsTempFolder, fileName);
+
+            try { File.Move(sFileName, realFileName); }
+            catch { realFileName = sFileName; }
+
+            var executeId = Guid.NewGuid();
+
+            try
+            {
+                Log.Info($"{executeId} - {Session.UserID} executing partner import: {fileName} ({storedFileName})");
+
+                var processResult = importService.Import(importDescrFileName, realFileName);
+                var importResult = new ImportProcessResult
+                {
+                    FileName = fileName,
+                    ProcessResult = processResult
+                };
+
+                var fileNames = new ImportFileNames
+                {
+                    RealFileName = realFileName,
+                    FileName = fileName,
+                    LogFileName = processResult.LogFileName,
+                    ErrorFileName = processResult.ErrorFileName,
+                    LogXlsxFileName = processResult.LogXlsxFileName,
+                };
+
+                var resultFileName = Path.Combine(importResultFolder, $"{Path.GetFileNameWithoutExtension(fileName)}-{DateTime.Now:yyyyMMddHHmmss}.zip");
+
+                this.ZipResult(fileNames, resultFileName);
+
+                Log.Info($"{executeId} - finished...");
+
+                return new ImportXlsxResult
+                {
+                    FileNames = fileNames,
+                    ImportResult = importResult
+                };
+            }
+            catch (Exception ex)
+            {
+                Log.Error(executeId, ex);
+
+                return new ImportXlsxResult
+                {
+                    FileNames = new ImportFileNames
+                    {
+                        RealFileName = realFileName,
+                        FileName = fileName,
+                    },
+                    ImportResult = new ImportProcessResult
+                    {
+                        Message = ex.Message
+                    }
+                };
+            }
         }
 
         /// <summary>
