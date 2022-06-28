@@ -1,5 +1,5 @@
 <Bank>
-  <DLLPath>..\..\..\CodaInt\eFwIntf\Main\bin\Debug\</DLLPath>
+  <DLLPath>..\..\..\Releases\Bank.Base\v7.2.0.0\Binaries\</DLLPath>
   <Login>SUPERUSER</Login>
   <DateFormat>yyyy. MM. dd</DateFormat>
   <TimeFormat>H:mm:ss</TimeFormat>
