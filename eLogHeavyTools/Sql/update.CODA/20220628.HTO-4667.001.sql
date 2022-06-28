@@ -1,4 +1,5 @@
-﻿CREATE TABLE [dbo].[cif_ebank_otp_card_all](
+﻿if object_id('cif_ebank_otp_card_all') is null
+CREATE TABLE [dbo].[cif_ebank_otp_card_all](
 	[id] [int] IDENTITY(1,1) NOT NULL,
 	[interfaceid] [nvarchar](50) NOT NULL,
 	[filname] [nvarchar](50) NOT NULL,
@@ -13,6 +14,8 @@
 ) ON [PRIMARY]
 GO
 
+
+if object_id('cif_ebank_otp_card_header') is null
 CREATE TABLE [cif_ebank_otp_card_header]
 (
     [id] [int] IDENTITY(1,1) NOT NULL,
@@ -35,6 +38,8 @@ CREATE TABLE [cif_ebank_otp_card_header]
 )
 GO
 
+
+if object_id('cif_ebank_otp_card_lines') is null
 CREATE TABLE [cif_ebank_otp_card_lines]
 (
     [id] [int] IDENTITY(1,1) NOT NULL,
@@ -67,6 +72,8 @@ CREATE TABLE [cif_ebank_otp_card_lines]
 )
 GO
 
+
+if object_id('cif_ebank_otp_card_footer') is null
 CREATE TABLE [cif_ebank_otp_card_footer]
 (
     [id] [int] IDENTITY(1,1) NOT NULL,
