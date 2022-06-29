@@ -63,10 +63,18 @@ namespace eLog.HeavyTools.BankTran
 
         private void btnFoxPost_Import_OnClick(PageUpdateArgs args)
         {
+            if (SearchResults.SelectedPKS.Count > 1)
+                return;
+
+            if (SearchResults.SelectedPK == null)
+                return;
+
+            var cifTrId = Convert.ToInt32(SearchResults.SelectedPK[U4Ext.Bank.Base.Transaction.CifEbankTrans.FieldId.Name]);
+
             var uploadInfo = this.btnFoxPostImportButton.GetUploadData(args);
 
             var partnerBL = (CifEbankTransBL3)CifEbankTransBL3.New3();
-            var processResult = partnerBL.FoxPostBankStatementImport(uploadInfo);
+            var processResult = partnerBL.FoxPostBankStatementImport(uploadInfo, cifTrId);
         }
 
     }

@@ -21,6 +21,11 @@ namespace eLog.HeavyTools.BankTran.Import
 
         private IDictionary<int, int> addrIdTranslateDict = new Dictionary<int, int>();
 
+        public class ImportData
+        {
+            public U4Ext.Bank.Base.Transaction.CifEbankTrans cifTrans { get; set; }
+        }
+
         public CifEbankTransImportService() : base()
         {
         }
@@ -28,6 +33,7 @@ namespace eLog.HeavyTools.BankTran.Import
         public override ProcessResult Import(string importDescrFileName, string importXlsxFileName)
         {
             return this.Import("CifEbankTrans", importDescrFileName, importXlsxFileName);
+            
         }
 
         protected override int SaveImport(CifEbankTransImportResultSets results)

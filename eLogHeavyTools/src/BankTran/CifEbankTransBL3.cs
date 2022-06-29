@@ -26,7 +26,8 @@ namespace eLog.HeavyTools.BankTran
         /// Feltöltött Xlsx fájlok importálása
         /// </summary>
         /// <param name="uploadInfo">Feltöltött fájlok tárolója</param>
-        public ImportResult FoxPostBankStatementImport(eProjectWeb.Framework.UI.Controls.UploadData uploadInfo)
+        /// <param name="cifTransId">Kivonat tétel id, amihez beolvassuk az állományt</param>
+        public ImportResult FoxPostBankStatementImport(eProjectWeb.Framework.UI.Controls.UploadData uploadInfo, int? cifTransId)
         {
             string error = null;
 
@@ -48,7 +49,7 @@ namespace eLog.HeavyTools.BankTran
 
             if (uploadInfo?.Process == true && string.IsNullOrWhiteSpace(error))
             {
-                return this.FoxPostBankStatementImportXlsxFiles(uploadInfo.Files, importDescrFileName, descrDirs);
+                return this.FoxPostBankStatementImportXlsxFiles(uploadInfo.Files, importDescrFileName, descrDirs, cifTransId);
             }
             else if (uploadInfo != null)
             {
@@ -69,8 +70,9 @@ namespace eLog.HeavyTools.BankTran
         /// <param name="uploadFiles">Fájlok listája</param>
         /// <param name="importDescrFileName">Import leíró fájl neve</param>
         /// <param name="descrDirs">Import leíró keresési könyvtárok</param>
+        /// <param name="cifTransId">Kivonat tétel id, amihez beolvassuk az állományt</param>
         /// <returns>Feldolgozás eredménye</returns>
-        private ImportResult FoxPostBankStatementImportXlsxFiles(IEnumerable<eProjectWeb.Framework.UI.Controls.UploadFileInfo> uploadFiles, string importDescrFileName, string descrDirs)
+        private ImportResult FoxPostBankStatementImportXlsxFiles(IEnumerable<eProjectWeb.Framework.UI.Controls.UploadFileInfo> uploadFiles, string importDescrFileName, string descrDirs, int? cifTransId)
         {
             importDescrFileName = Utils.GetFirstFileFromDirs(descrDirs, importDescrFileName);
 
@@ -89,7 +91,7 @@ namespace eLog.HeavyTools.BankTran
             {
                 foreach (var f in uploadFiles)
                 {
-                    var res = this.FoxPostBankStatementImportXlsxFiles(importDescrFileName, importResultFolder, f.FileName, f.StoredFileName);
+                    var res = this.FoxPostBankStatementImportXlsxFiles(importDescrFileName, importResultFolder, f.FileName, f.StoredFileName, cifTransId);
                     if (res.FileNames != null)
                     {
                         result.Add(res.FileNames);
@@ -119,10 +121,14 @@ namespace eLog.HeavyTools.BankTran
         /// <param name="importDescrFileName">Import leíró fájl neve</param>
         /// <param name="importResultFolder">Végeredményt tároló könyvtár neve</param>
         /// <param name="fileName">Feldolgozandó fájl neve</param>
+        /// <param name="cifTransId">Kivonat tétel id, amihez beolvassuk az állományt</param>
         /// <param name="storedFileName">Feldolgozandó fájl fizikai neve</param>
-        private ImportXlsxResult FoxPostBankStatementImportXlsxFiles(string importDescrFileName, string importResultFolder, string fileName, string storedFileName)
+        private ImportXlsxResult FoxPostBankStatementImportXlsxFiles(string importDescrFileName, string importResultFolder, string fileName, string storedFileName, int? cifTransId)
         {
             var importService = new Import.CifEbankTransImportService();
+            var importData = new Import.CifEbankTransImportService.ImportData();
+            if (importData.cifTrans == null)
+                importData.cifTrans = U4Ext.Bank.Base.Transaction.CifEbankTrans.Load(cifTransId);
             var sFileName = Path.Combine(Globals.ReportsTempFolder, storedFileName);
             var realFileName = Path.Combine(Globals.ReportsTempFolder, fileName);
 
