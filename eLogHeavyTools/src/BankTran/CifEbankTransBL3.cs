@@ -133,7 +133,7 @@ namespace eLog.HeavyTools.BankTran
 
             try
             {
-                Log.Info($"{executeId} - {Session.UserID} executing partner import: {fileName} ({storedFileName})");
+                Log.Info($"{executeId} - {Session.UserID} executing FOXPOST import: {fileName} ({storedFileName})");
 
                 var processResult = importService.Import(importDescrFileName, realFileName);
                 var importResult = new ImportProcessResult

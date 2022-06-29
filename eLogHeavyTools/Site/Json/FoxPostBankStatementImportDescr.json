@@ -34,8 +34,8 @@
             "Const": 111
           },
           {
-            "Field": "ownaccnum",
-            "Const": "ownaccnum"
+            "Field": "ownacnum",
+            "Const": "ownacnum"
           },
           {
             "Field": "curaccount",
@@ -68,18 +68,6 @@
           {
             "Field": "period",
             "Const": 2
-          },
-          {
-            "Field": "docdate",
-            "ColumnName": "Tranzakció dátuma"
-          },
-          {
-            "Field": "duedate",
-            "ColumnName": "Tranzakció dátuma"
-          },
-          {
-            "Field": "valdate",
-            "ColumnName": "Tranzakció dátuma"
           },
           {
             "Field": "curcode",
@@ -116,7 +104,11 @@
           {
             "Field": "partnernamefrombank",
             "ColumnName": "Címzett neve"
-          }
+          },
+          {
+            "Field": "errorcode",
+            "ColumnName": "Tranzakció dátuma"
+          },
         ]
       }
     ]

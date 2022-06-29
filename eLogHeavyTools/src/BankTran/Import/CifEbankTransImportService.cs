@@ -74,11 +74,11 @@ namespace eLog.HeavyTools.BankTran.Import
             if (pos != null && count != null)
             {
                 var percnt = Math.Round(pos.Value / (count.Value * 1M) * 100, 2, MidpointRounding.AwayFromZero);
-                this.logger.Log($"Saving partner [{pos} / {count} ({percnt:#.00}%)]: {partnCode} ");
+                this.logger.Log($"Saving cif_ebank_trans [{pos} / {count} ({percnt:#.00}%)]: {partnCode} ");
             }
             else
             {
-                this.logger.Log($"Saving partner: {partnCode} ");
+                this.logger.Log($"Saving cif_ebank_trans: {partnCode} ");
             }
 
             var logText = new StringBuilder(result.LogText);
@@ -89,24 +89,7 @@ namespace eLog.HeavyTools.BankTran.Import
                 using (var db = DB.GetConn(DB.Main, Transaction.Use))
                 {
                     entityType = typeof(U4Ext.Bank.Base.Transaction.CifEbankTrans).Name;
-                    //this.SaveCifEbankTrans(result);
-                    entityType = typeof(Base.Masters.Partner.Partner).Name;
-                    //var partnerIsHidden = this.SavePartner(result);
-                    entityType = typeof(Base.Masters.Partner.PartnAddr).Name;
-                    //this.SavePartnAddr(result);
-                    entityType = typeof(Base.Masters.Partner.PartnBank).Name;
-                    //this.SavePartnBank(result);
-                    entityType = typeof(Base.Masters.Partner.Employee).Name;
-                    //this.SaveEmployee(result);
-
-                    //if (partnerIsHidden == true)
-                    //{
-                    //    this.partnerBL.Hide(result.Partner.Entity.PK);
-                    //}
-                    //else if (partnerIsHidden == false)
-                    //{
-                    //    this.partnerBL.Unhide(result.Partner.Entity.PK);
-                    //}
+                    this.SaveCifEbankTrans(result);
 
                     //db.Commit();
 
@@ -137,6 +120,15 @@ namespace eLog.HeavyTools.BankTran.Import
             result.LogText = logText.ToString();
 
             return false;
+        }
+
+        private bool? SaveCifEbankTrans(CifEbankTransImportResultSet result)
+        {
+            if (result.CifEbankTrans != null)
+            { 
+            }
+
+            return null;
         }
 
         private string GetEntityName(string entityType)
