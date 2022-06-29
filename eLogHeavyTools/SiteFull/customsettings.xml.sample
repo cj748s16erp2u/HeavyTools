@@ -100,4 +100,7 @@
   <add key="PartnerImportDescrFileName" value="PartnerImportDescr.json" />
   <!-- Leiro konyvtarak nevei -->
   <add key="ImportDescrFolders" value="..\Site\Json" />
+  
+  <!-- Vevoi rendelesen alapertelmezett jovahagyasi ertek -->
+  <add key="SordHeadFefaultApproval" value="10" />
 </configuration>
