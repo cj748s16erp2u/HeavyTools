@@ -6,21 +6,8 @@
     "Ignore": false,
     "Tables": [
       {
-
         "Table": "cif_ebank_trans",
         "Fields": [
-          {
-            "Field": "interfaceid",
-            "Const": "interfaceid"
-          },
-          {
-            "Field": "cmpcode",
-            "Const": "cmpcode"
-          },
-          {
-            "Field": "fileid",
-            "Const": "fileid"
-          },
           {
             "Field": "doccode",
             "Const": ""
@@ -34,40 +21,16 @@
             "Const": 111
           },
           {
-            "Field": "ownacnum",
-            "Const": "ownacnum"
-          },
-          {
             "Field": "curaccount",
-            "Const": "curaccount"
-          },
-          {
-            "Field": "year",
-            "Const": 2022
-          },
-          {
-            "Field": "statement",
-            "Const": 1
+            "Const": "HUF"
           },
           {
             "Field": "trtypeid",
-            "Const": "999"
+            "ColumnName": ""
           },
           {
             "Field": "trid",
             "ColumnName": "Megrendelés száma"
-          },
-          {
-            "Field": "debcred",
-            "Const": "161"
-          },
-          {
-            "Field": "yr",
-            "Const": 2022
-          },
-          {
-            "Field": "period",
-            "Const": 2
           },
           {
             "Field": "curcode",
@@ -76,10 +39,6 @@
           {
             "Field": "valuedoc",
             "ColumnName": "Tranzakció díja (bruttó HUF)"
-          },
-          {
-            "Field": "amountsign",
-            "Const": 1
           },
           {
             "Field": "origcur",
@@ -108,6 +67,14 @@
           {
             "Field": "errorcode",
             "ColumnName": "Tranzakció dátuma"
+          },
+          {
+            "Field": "postable",
+            "Const": 1
+          },
+          {
+            "Field": "matched",
+            "Const": 0
           }
         ]
       }
@@ -120,21 +87,8 @@
     "Ignore": false,
     "Tables": [
       {
-
         "Table": "cif_ebank_trans",
         "Fields": [
-          {
-            "Field": "interfaceid",
-            "Const": "interfaceid"
-          },
-          {
-            "Field": "cmpcode",
-            "Const": "cmpcode"
-          },
-          {
-            "Field": "fileid",
-            "Const": "fileid"
-          },
           {
             "Field": "doccode",
             "Const": ""
@@ -148,40 +102,16 @@
             "Const": 111
           },
           {
-            "Field": "ownacnum",
-            "Const": "ownacnum"
-          },
-          {
             "Field": "curaccount",
-            "Const": "curaccount"
-          },
-          {
-            "Field": "year",
-            "Const": 2022
-          },
-          {
-            "Field": "statement",
-            "Const": 1
+            "Const": "HUF"
           },
           {
             "Field": "trtypeid",
-            "Const": "999"
+            "ColumnName": ""
           },
           {
             "Field": "trid",
             "ColumnName": "Megrendelés száma"
-          },
-          {
-            "Field": "debcred",
-            "Const": "161"
-          },
-          {
-            "Field": "yr",
-            "Const": 2022
-          },
-          {
-            "Field": "period",
-            "Const": 2
           },
           {
             "Field": "curcode",
@@ -190,10 +120,6 @@
           {
             "Field": "valuedoc",
             "ColumnName": "Utalandó (HUF)"
-          },
-          {
-            "Field": "amountsign",
-            "Const": 1
           },
           {
             "Field": "origcur",
@@ -211,7 +137,7 @@
                 "ColumnName": "Címzett neve"
               },
               {
-                "Const": " utánvét"
+                "ColumnName": "Tranzakció"
               }
             ]
           },
@@ -222,6 +148,14 @@
           {
             "Field": "errorcode",
             "ColumnName": "Tranzakció dátuma"
+          },
+          {
+            "Field": "postable",
+            "Const": 1
+          },
+          {
+            "Field": "matched",
+            "Const": 0
           }
         ]
       }

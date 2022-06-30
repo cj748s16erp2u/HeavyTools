@@ -22,6 +22,7 @@ namespace eLog.HeavyTools.BankTran.Import
         private IDictionary<int, int> addrIdTranslateDict = new Dictionary<int, int>();
 
         public U4Ext.Bank.Base.Transaction.CifEbankTrans cifTrans { get; set; }
+        public string importFileName { get; set; }
 
         public CifEbankTransImportService() : base()
         {
@@ -30,7 +31,6 @@ namespace eLog.HeavyTools.BankTran.Import
         public override ProcessResult Import(string importDescrFileName, string importXlsxFileName)
         {
             return this.Import("CifEbankTrans", importDescrFileName, importXlsxFileName);
-            
         }
 
         protected override int SaveImport(CifEbankTransImportResultSets results)
@@ -131,10 +131,53 @@ namespace eLog.HeavyTools.BankTran.Import
 
         private bool? SaveCifEbankTrans(CifEbankTransImportResultSet result)
         {
-            if (result.CifEbankTrans != null)
+            if (result.CifEbankTrans.Entity != null)
             {
-                // orig cif_ebank_rans-bol ertekadas fix mezoknek
-                // 
+                if (!string.IsNullOrEmpty(result.CifEbankTrans.Entity["errorcode"].ToString()))
+                {
+                    var map = new BLObjectMap();
+                    map.SysParams.ActionID = ActionID.New;
+
+                    // orig cif_ebank_rans-bol ertekadas
+                    result.CifEbankTrans.Entity["interfaceid"] = "U4ERP_FOXPOST";
+                    result.CifEbankTrans.Entity["cmpcode"] = cifTrans.Cmpcode;
+                    result.CifEbankTrans.Entity["fileid"] = importFileName;
+                    result.CifEbankTrans.Entity["ownacnum"] = cifTrans.Ownacnum;
+
+                    result.CifEbankTrans.Entity["statement"] = 0;
+                    result.CifEbankTrans.Entity["debcred"] = ConvertUtils.ToDecimal(result.CifEbankTrans.Entity["valuedoc"]) > 0 ? 161 : 160;
+
+                    string vDate = result.CifEbankTrans.Entity["errorcode"].ToString();
+                    DateTime d;
+                    if (DateTime.TryParseExact(vDate.ToString(), "yyyyMMdd", null, System.Globalization.DateTimeStyles.None, out d))
+                    {
+                        result.CifEbankTrans.Entity["docdate"] = d;
+                        result.CifEbankTrans.Entity["duedate"] = d;
+                        result.CifEbankTrans.Entity["valdate"] = d;
+                    }
+                    else
+                    {
+                        //error
+                    }
+                    result.CifEbankTrans.Entity["errorcode"] = null;
+
+                    result.CifEbankTrans.Entity["year"] = 2022;
+                    result.CifEbankTrans.Entity["yr"] = 2022;
+                    result.CifEbankTrans.Entity["period"] = 1;
+
+                    result.CifEbankTrans.Entity["period"] = 1;
+
+                    result.CifEbankTrans.Entity["amountsign"] = 1;
+                    //ConvertUtils.ToDecimal(result.CifEbankTrans.Entity["valuedoc"]) / Math.Abs(ConvertUtils.ToDecimal(result.CifEbankTrans.Entity["valuedoc"]));
+
+                    result.CifEbankTrans.Entity["partneracnum"] = cifTrans.Partneracnum;
+
+                    result.CifEbankTrans.Entity["createuser"] = Session.UserID;
+                    result.CifEbankTrans.Entity["createdate"] = DateTime.Now;
+
+                    map.Default = result.CifEbankTrans.Entity;
+                    this.cifEbankBL.Save(map);
+                }
             }
 
             return null;

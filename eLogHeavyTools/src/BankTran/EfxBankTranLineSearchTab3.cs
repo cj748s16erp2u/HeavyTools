@@ -19,6 +19,9 @@ namespace eLog.HeavyTools.BankTran
         protected UploadButton btnFoxPostHUFImportButton;
         protected UploadButton btnGLSHUFImportButton;
         protected UploadButton btnGLSEURImportButton;
+        protected UploadButton btnGLSRONImportButton;
+        protected UploadButton btnGLSCZKImportButton;
+        protected UploadButton btnSprinterHUHImportButton;
 
         #region IXmlObjectName
         protected static Type baseType = typeof(U4Ext.Bank.Base.Transaction.EfxBankTranLineSearchTab);
@@ -62,7 +65,19 @@ namespace eLog.HeavyTools.BankTran
             btnGLSEURImportButton = new UploadButton("gls_eur_import");
             btnBankStatementImport.Add(btnGLSEURImportButton);
             SetButtonAction(btnGLSEURImportButton.ID, new ControlEvent(btnGLS_EUR_Import_OnClick));
-       }
+
+            btnGLSRONImportButton = new UploadButton("gls_ron_import");
+            btnBankStatementImport.Add(btnGLSRONImportButton);
+            //SetButtonAction(btnGLSEURImportButton.ID, new ControlEvent(btnGLS_EUR_Import_OnClick));
+
+            btnGLSCZKImportButton = new UploadButton("gls_czk_import");
+            btnBankStatementImport.Add(btnGLSCZKImportButton);
+            //SetButtonAction(btnGLSEURImportButton.ID, new ControlEvent(btnGLS_EUR_Import_OnClick));
+
+            btnSprinterHUHImportButton = new UploadButton("sprinter_czk_import");
+            btnBankStatementImport.Add(btnSprinterHUHImportButton);
+            //SetButtonAction(btnGLSEURImportButton.ID, new ControlEvent(btnGLS_EUR_Import_OnClick));
+    }
 
         #region Fox Post HUF
         private void btnFoxPost_HUF_Import_OnClick(PageUpdateArgs args)

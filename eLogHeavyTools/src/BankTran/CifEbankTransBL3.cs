@@ -127,9 +127,11 @@ namespace eLog.HeavyTools.BankTran
         private ImportXlsxResult FoxPostBankStatementImportXlsxFiles(string importDescrFileName, string importResultFolder, string fileName, string storedFileName, int? cifTransId)
         {
             var importService = new Import.CifEbankTransImportService();
-            //var importData = new Import.CifEbankTransImportService.ImportData();
-            //if (importData.cifTrans == null)
-            //    importData.cifTrans = U4Ext.Bank.Base.Transaction.CifEbankTrans.Load(cifTransId);
+            if (importService.cifTrans == null)
+                importService.cifTrans = U4Ext.Bank.Base.Transaction.CifEbankTrans.Load(cifTransId);
+            if (importService.importFileName == null)
+                importService.importFileName = fileName;
+
             var sFileName = Path.Combine(Globals.ReportsTempFolder, storedFileName);
             var realFileName = Path.Combine(Globals.ReportsTempFolder, fileName);
 
