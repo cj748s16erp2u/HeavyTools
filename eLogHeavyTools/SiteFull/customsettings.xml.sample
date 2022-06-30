@@ -103,5 +103,8 @@
 
   <!-- FoxPost banki kivonat import file leiro helye -->
   <add key="FoxPostBankStatementImportDescrFileName" value="FoxPost_HUF_BankStatementImportDescr.json" />
-
+  <!-- GLS HUF banki kivonat import file leiro helye -->
+  <add key="GLS_HUF_BankStatementImportDescrFileName" value="GLS_HUF_BankStatementImportDescr.json" />
+  <!-- GLS EUR banki kivonat import file leiro helye -->
+  <add key="GLS_EUR_BankStatementImportDescrFileName" value="GLS_EUR_BankStatementImportDescr.json" />
 </configuration>

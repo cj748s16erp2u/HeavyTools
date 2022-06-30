@@ -22,6 +22,7 @@ namespace eLog.HeavyTools.BankTran
             return (CifEbankTransBL3)New();
         }
 
+        #region FoxPost HUF kivonat import
         /// <summary>
         /// Feltöltött Xlsx fájlok importálása
         /// </summary>
@@ -34,7 +35,7 @@ namespace eLog.HeavyTools.BankTran
             var importDescrFileName = CustomSettings.GetString("FoxPostBankStatementImportDescrFileName");
             if (string.IsNullOrWhiteSpace(importDescrFileName))
             {
-                error = "$err_bankstamentimport_missingsettings".eLogTransl("FoxPostBankStatementImportDescrFileName");
+                error = "$err_bankstamentimport_missingsettings".eLogTransl("BankStatementImportDescrFileName");
             }
 
             var descrDirs = CustomSettings.GetString("ImportDescrFolders");
@@ -126,9 +127,9 @@ namespace eLog.HeavyTools.BankTran
         private ImportXlsxResult FoxPostBankStatementImportXlsxFiles(string importDescrFileName, string importResultFolder, string fileName, string storedFileName, int? cifTransId)
         {
             var importService = new Import.CifEbankTransImportService();
-            var importData = new Import.CifEbankTransImportService.ImportData();
-            if (importData.cifTrans == null)
-                importData.cifTrans = U4Ext.Bank.Base.Transaction.CifEbankTrans.Load(cifTransId);
+            //var importData = new Import.CifEbankTransImportService.ImportData();
+            //if (importData.cifTrans == null)
+            //    importData.cifTrans = U4Ext.Bank.Base.Transaction.CifEbankTrans.Load(cifTransId);
             var sFileName = Path.Combine(Globals.ReportsTempFolder, storedFileName);
             var realFileName = Path.Combine(Globals.ReportsTempFolder, fileName);
 
@@ -187,6 +188,343 @@ namespace eLog.HeavyTools.BankTran
                 };
             }
         }
+        #endregion FoxPost HUF kivonat import
+
+        #region GLS HUF kivonat import
+        /// <summary>
+        /// Feltöltött Xlsx fájlok importálása
+        /// </summary>
+        /// <param name="uploadInfo">Feltöltött fájlok tárolója</param>
+        /// <param name="cifTransId">Kivonat tétel id, amihez beolvassuk az állományt</param>
+        public ImportResult GLSHUFBankStatementImport(eProjectWeb.Framework.UI.Controls.UploadData uploadInfo, int? cifTransId)
+        {
+            string error = null;
+
+            var importDescrFileName = CustomSettings.GetString("GLSHUFBankStatementImportDescrFileName");
+            if (string.IsNullOrWhiteSpace(importDescrFileName))
+            {
+                error = "$err_bankstamentimport_missingsettings".eLogTransl("BankStatementImportDescrFileName");
+            }
+
+            var descrDirs = CustomSettings.GetString("ImportDescrFolders");
+            if (string.IsNullOrWhiteSpace(descrDirs))
+            {
+                error = "$err_bankstatementimport_missingsettings".eLogTransl("ImportDescrFolders");
+            }
+            else
+            {
+                descrDirs = this.AddSiteRoot(descrDirs);
+            }
+
+            if (uploadInfo?.Process == true && string.IsNullOrWhiteSpace(error))
+            {
+                return this.GLSHUFBankStatementImportXlsxFiles(uploadInfo.Files, importDescrFileName, descrDirs, cifTransId);
+            }
+            else if (uploadInfo != null)
+            {
+                this.RemoveFiles(uploadInfo.Files);
+            }
+
+            if (!string.IsNullOrWhiteSpace(error))
+            {
+                throw new MessageException(error);
+            }
+
+            return null;
+        }
+
+        /// <summary>
+        /// Feltöltött Xlsx fájlok feldolgozása
+        /// </summary>
+        /// <param name="uploadFiles">Fájlok listája</param>
+        /// <param name="importDescrFileName">Import leíró fájl neve</param>
+        /// <param name="descrDirs">Import leíró keresési könyvtárok</param>
+        /// <param name="cifTransId">Kivonat tétel id, amihez beolvassuk az állományt</param>
+        /// <returns>Feldolgozás eredménye</returns>
+        private ImportResult GLSHUFBankStatementImportXlsxFiles(IEnumerable<eProjectWeb.Framework.UI.Controls.UploadFileInfo> uploadFiles, string importDescrFileName, string descrDirs, int? cifTransId)
+        {
+            importDescrFileName = Utils.GetFirstFileFromDirs(descrDirs, importDescrFileName);
+
+            var result = new List<ImportFileNames>();
+            string resultFileName;
+
+            var importResultFolder = Path.Combine(Globals.WritableRoot, "GLSBankStatementImport");
+            if (!Directory.Exists(importResultFolder))
+            {
+                Directory.CreateDirectory(importResultFolder);
+            }
+
+            var processResults = new List<ImportProcessResult>();
+
+            using (new eProjectWeb.Framework.Lang.NS(typeof(CifEbankTransBL3).Namespace))
+            {
+                foreach (var f in uploadFiles)
+                {
+                    var res = this.GLSHUFBankStatementImportXlsxFiles(importDescrFileName, importResultFolder, f.FileName, f.StoredFileName, cifTransId);
+                    if (res.FileNames != null)
+                    {
+                        result.Add(res.FileNames);
+                    }
+
+                    if (res.ImportResult != null)
+                    {
+                        processResults.Add(res.ImportResult);
+                    }
+                }
+            }
+
+            resultFileName = this.CreateResultFile(result);
+
+            this.RemoveTemporaryFiles(result);
+
+            return new ImportResult
+            {
+                ResultFileName = resultFileName,
+                ImportProcessResults = processResults
+            };
+        }
+
+        /// <summary>
+        /// Xlsx fájl feldolgozása, tárolása későbbi elemzés céljából
+        /// </summary>
+        /// <param name="importDescrFileName">Import leíró fájl neve</param>
+        /// <param name="importResultFolder">Végeredményt tároló könyvtár neve</param>
+        /// <param name="fileName">Feldolgozandó fájl neve</param>
+        /// <param name="cifTransId">Kivonat tétel id, amihez beolvassuk az állományt</param>
+        /// <param name="storedFileName">Feldolgozandó fájl fizikai neve</param>
+        private ImportXlsxResult GLSHUFBankStatementImportXlsxFiles(string importDescrFileName, string importResultFolder, string fileName, string storedFileName, int? cifTransId)
+        {
+            var importService = new Import.CifEbankTransImportService();
+            //var importData = new Import.CifEbankTransImportService.ImportData();
+            //if (importData.cifTrans == null)
+            //    importData.cifTrans = U4Ext.Bank.Base.Transaction.CifEbankTrans.Load(cifTransId);
+            var sFileName = Path.Combine(Globals.ReportsTempFolder, storedFileName);
+            var realFileName = Path.Combine(Globals.ReportsTempFolder, fileName);
+
+            try { File.Move(sFileName, realFileName); }
+            catch { realFileName = sFileName; }
+
+            var executeId = Guid.NewGuid();
+
+            try
+            {
+                Log.Info($"{executeId} - {Session.UserID} executing GLS HUF import: {fileName} ({storedFileName})");
+
+                var processResult = importService.Import(importDescrFileName, realFileName);
+                var importResult = new ImportProcessResult
+                {
+                    FileName = fileName,
+                    ProcessResult = processResult
+                };
+
+                var fileNames = new ImportFileNames
+                {
+                    RealFileName = realFileName,
+                    FileName = fileName,
+                    LogFileName = processResult.LogFileName,
+                    ErrorFileName = processResult.ErrorFileName,
+                    LogXlsxFileName = processResult.LogXlsxFileName,
+                };
+
+                var resultFileName = Path.Combine(importResultFolder, $"{Path.GetFileNameWithoutExtension(fileName)}-{DateTime.Now:yyyyMMddHHmmss}.zip");
+
+                this.ZipResult(fileNames, resultFileName);
+
+                Log.Info($"{executeId} - finished...");
+
+                return new ImportXlsxResult
+                {
+                    FileNames = fileNames,
+                    ImportResult = importResult
+                };
+            }
+            catch (Exception ex)
+            {
+                Log.Error(executeId, ex);
+
+                return new ImportXlsxResult
+                {
+                    FileNames = new ImportFileNames
+                    {
+                        RealFileName = realFileName,
+                        FileName = fileName,
+                    },
+                    ImportResult = new ImportProcessResult
+                    {
+                        Message = ex.Message
+                    }
+                };
+            }
+        }
+        #endregion GLS HUF kivonat import
+
+        #region GLS EUR kivonat import
+        /// <summary>
+        /// Feltöltött Xlsx fájlok importálása
+        /// </summary>
+        /// <param name="uploadInfo">Feltöltött fájlok tárolója</param>
+        /// <param name="cifTransId">Kivonat tétel id, amihez beolvassuk az állományt</param>
+        public ImportResult GLSEURBankStatementImport(eProjectWeb.Framework.UI.Controls.UploadData uploadInfo, int? cifTransId)
+        {
+            string error = null;
+
+            var importDescrFileName = CustomSettings.GetString("GLSEURBankStatementImportDescrFileName");
+            if (string.IsNullOrWhiteSpace(importDescrFileName))
+            {
+                error = "$err_bankstamentimport_missingsettings".eLogTransl("BankStatementImportDescrFileName");
+            }
+
+            var descrDirs = CustomSettings.GetString("ImportDescrFolders");
+            if (string.IsNullOrWhiteSpace(descrDirs))
+            {
+                error = "$err_bankstatementimport_missingsettings".eLogTransl("ImportDescrFolders");
+            }
+            else
+            {
+                descrDirs = this.AddSiteRoot(descrDirs);
+            }
+
+            if (uploadInfo?.Process == true && string.IsNullOrWhiteSpace(error))
+            {
+                return this.GLSEURBankStatementImportXlsxFiles(uploadInfo.Files, importDescrFileName, descrDirs, cifTransId);
+            }
+            else if (uploadInfo != null)
+            {
+                this.RemoveFiles(uploadInfo.Files);
+            }
+
+            if (!string.IsNullOrWhiteSpace(error))
+            {
+                throw new MessageException(error);
+            }
+
+            return null;
+        }
+
+        /// <summary>
+        /// Feltöltött Xlsx fájlok feldolgozása
+        /// </summary>
+        /// <param name="uploadFiles">Fájlok listája</param>
+        /// <param name="importDescrFileName">Import leíró fájl neve</param>
+        /// <param name="descrDirs">Import leíró keresési könyvtárok</param>
+        /// <param name="cifTransId">Kivonat tétel id, amihez beolvassuk az állományt</param>
+        /// <returns>Feldolgozás eredménye</returns>
+        private ImportResult GLSEURBankStatementImportXlsxFiles(IEnumerable<eProjectWeb.Framework.UI.Controls.UploadFileInfo> uploadFiles, string importDescrFileName, string descrDirs, int? cifTransId)
+        {
+            importDescrFileName = Utils.GetFirstFileFromDirs(descrDirs, importDescrFileName);
+
+            var result = new List<ImportFileNames>();
+            string resultFileName;
+
+            var importResultFolder = Path.Combine(Globals.WritableRoot, "GLSBankStatementImport");
+            if (!Directory.Exists(importResultFolder))
+            {
+                Directory.CreateDirectory(importResultFolder);
+            }
+
+            var processResults = new List<ImportProcessResult>();
+
+            using (new eProjectWeb.Framework.Lang.NS(typeof(CifEbankTransBL3).Namespace))
+            {
+                foreach (var f in uploadFiles)
+                {
+                    var res = this.GLSEURBankStatementImportXlsxFiles(importDescrFileName, importResultFolder, f.FileName, f.StoredFileName, cifTransId);
+                    if (res.FileNames != null)
+                    {
+                        result.Add(res.FileNames);
+                    }
+
+                    if (res.ImportResult != null)
+                    {
+                        processResults.Add(res.ImportResult);
+                    }
+                }
+            }
+
+            resultFileName = this.CreateResultFile(result);
+
+            this.RemoveTemporaryFiles(result);
+
+            return new ImportResult
+            {
+                ResultFileName = resultFileName,
+                ImportProcessResults = processResults
+            };
+        }
+
+        /// <summary>
+        /// Xlsx fájl feldolgozása, tárolása későbbi elemzés céljából
+        /// </summary>
+        /// <param name="importDescrFileName">Import leíró fájl neve</param>
+        /// <param name="importResultFolder">Végeredményt tároló könyvtár neve</param>
+        /// <param name="fileName">Feldolgozandó fájl neve</param>
+        /// <param name="cifTransId">Kivonat tétel id, amihez beolvassuk az állományt</param>
+        /// <param name="storedFileName">Feldolgozandó fájl fizikai neve</param>
+        private ImportXlsxResult GLSEURBankStatementImportXlsxFiles(string importDescrFileName, string importResultFolder, string fileName, string storedFileName, int? cifTransId)
+        {
+            var importService = new Import.CifEbankTransImportService();
+            //var importData = new Import.CifEbankTransImportService.ImportData();
+            //if (importData.cifTrans == null)
+            //    importData.cifTrans = U4Ext.Bank.Base.Transaction.CifEbankTrans.Load(cifTransId);
+            var sFileName = Path.Combine(Globals.ReportsTempFolder, storedFileName);
+            var realFileName = Path.Combine(Globals.ReportsTempFolder, fileName);
+
+            try { File.Move(sFileName, realFileName); }
+            catch { realFileName = sFileName; }
+
+            var executeId = Guid.NewGuid();
+
+            try
+            {
+                Log.Info($"{executeId} - {Session.UserID} executing GLS EUR import: {fileName} ({storedFileName})");
+
+                var processResult = importService.Import(importDescrFileName, realFileName);
+                var importResult = new ImportProcessResult
+                {
+                    FileName = fileName,
+                    ProcessResult = processResult
+                };
+
+                var fileNames = new ImportFileNames
+                {
+                    RealFileName = realFileName,
+                    FileName = fileName,
+                    LogFileName = processResult.LogFileName,
+                    ErrorFileName = processResult.ErrorFileName,
+                    LogXlsxFileName = processResult.LogXlsxFileName,
+                };
+
+                var resultFileName = Path.Combine(importResultFolder, $"{Path.GetFileNameWithoutExtension(fileName)}-{DateTime.Now:yyyyMMddHHmmss}.zip");
+
+                this.ZipResult(fileNames, resultFileName);
+
+                Log.Info($"{executeId} - finished...");
+
+                return new ImportXlsxResult
+                {
+                    FileNames = fileNames,
+                    ImportResult = importResult
+                };
+            }
+            catch (Exception ex)
+            {
+                Log.Error(executeId, ex);
+
+                return new ImportXlsxResult
+                {
+                    FileNames = new ImportFileNames
+                    {
+                        RealFileName = realFileName,
+                        FileName = fileName,
+                    },
+                    ImportResult = new ImportProcessResult
+                    {
+                        Message = ex.Message
+                    }
+                };
+            }
+        }
+        #endregion GLS EUR kivonat import
 
         /// <summary>
         /// Feltöltött Xlsx fájlok törlése

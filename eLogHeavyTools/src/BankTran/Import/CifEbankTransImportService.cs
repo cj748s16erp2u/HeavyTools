@@ -21,10 +21,7 @@ namespace eLog.HeavyTools.BankTran.Import
 
         private IDictionary<int, int> addrIdTranslateDict = new Dictionary<int, int>();
 
-        public class ImportData
-        {
-            public U4Ext.Bank.Base.Transaction.CifEbankTrans cifTrans { get; set; }
-        }
+        public U4Ext.Bank.Base.Transaction.CifEbankTrans cifTrans { get; set; }
 
         public CifEbankTransImportService() : base()
         {

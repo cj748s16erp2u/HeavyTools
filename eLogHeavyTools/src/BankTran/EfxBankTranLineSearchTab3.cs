@@ -17,6 +17,8 @@ namespace eLog.HeavyTools.BankTran
     {
         protected PopupButton btnBankStatementImport;
         protected UploadButton btnFoxPostHUFImportButton;
+        protected UploadButton btnGLSHUFImportButton;
+        protected UploadButton btnGLSEURImportButton;
 
         #region IXmlObjectName
         protected static Type baseType = typeof(U4Ext.Bank.Base.Transaction.EfxBankTranLineSearchTab);
@@ -52,8 +54,17 @@ namespace eLog.HeavyTools.BankTran
             btnFoxPostHUFImportButton = new UploadButton("foxpost_huf_import");
             btnBankStatementImport.Add(btnFoxPostHUFImportButton);
             SetButtonAction(btnFoxPostHUFImportButton.ID, new ControlEvent(btnFoxPost_HUF_Import_OnClick));
+
+            btnGLSHUFImportButton = new UploadButton("gls_huf_import");
+            btnBankStatementImport.Add(btnGLSHUFImportButton);
+            SetButtonAction(btnGLSHUFImportButton.ID, new ControlEvent(btnGLS_HUF_Import_OnClick));
+
+            btnGLSEURImportButton = new UploadButton("gls_eur_import");
+            btnBankStatementImport.Add(btnGLSEURImportButton);
+            SetButtonAction(btnGLSEURImportButton.ID, new ControlEvent(btnGLS_EUR_Import_OnClick));
        }
 
+        #region Fox Post HUF
         private void btnFoxPost_HUF_Import_OnClick(PageUpdateArgs args)
         {
             if (SearchResults.SelectedPKS.Count > 1)
@@ -66,9 +77,45 @@ namespace eLog.HeavyTools.BankTran
 
             var uploadInfo = this.btnFoxPostHUFImportButton.GetUploadData(args);
 
-            var partnerBL = (CifEbankTransBL3)CifEbankTransBL3.New3();
-            var processResult = partnerBL.FoxPostBankStatementImport(uploadInfo, cifTrId);
+            var ciftransBL = (CifEbankTransBL3)CifEbankTransBL3.New3();
+            var processResult = ciftransBL.FoxPostBankStatementImport(uploadInfo, cifTrId);
         }
+        #endregion Fox Post HUF
 
+        #region GLS HUF
+        private void btnGLS_HUF_Import_OnClick(PageUpdateArgs args)
+        {
+            if (SearchResults.SelectedPKS.Count > 1)
+                return;
+
+            if (SearchResults.SelectedPK == null)
+                return;
+
+            var cifTrId = Convert.ToInt32(SearchResults.SelectedPK[U4Ext.Bank.Base.Transaction.CifEbankTrans.FieldId.Name]);
+
+            var uploadInfo = this.btnGLSHUFImportButton.GetUploadData(args);
+
+            var ciftransBL = (CifEbankTransBL3)CifEbankTransBL3.New3();
+            var processResult = ciftransBL.GLSHUFBankStatementImport(uploadInfo, cifTrId);
+        }
+        #endregion GLS HUF
+
+        #region GLS EUR
+        private void btnGLS_EUR_Import_OnClick(PageUpdateArgs args)
+        {
+            if (SearchResults.SelectedPKS.Count > 1)
+                return;
+
+            if (SearchResults.SelectedPK == null)
+                return;
+
+            var cifTrId = Convert.ToInt32(SearchResults.SelectedPK[U4Ext.Bank.Base.Transaction.CifEbankTrans.FieldId.Name]);
+
+            var uploadInfo = this.btnGLSHUFImportButton.GetUploadData(args);
+
+            var ciftransBL = (CifEbankTransBL3)CifEbankTransBL3.New3();
+            var processResult = ciftransBL.GLSHUFBankStatementImport(uploadInfo, cifTrId);
+        }
+        #endregion GLS EUR
     }
 }
