@@ -46,21 +46,32 @@ namespace eLog.HeavyTools.BankTran.Import
             {
                 var count = results.Count();
                 var i = 0;
-                foreach (var r in results)
+
+                using (var db = DB.GetConn(DB.Main, Transaction.Use))
                 {
-                    var ret = this.SaveImport(r, ++i, count);
-                    if (ret)
+                    foreach (var r in results)
                     {
-                        success++;
+                        var ret = this.SaveImport(r, ++i, count);
+                        if (!ret)
+                        {
+                            db.Rollback();
+                            return 0;
+                        }
+                        if (ret)
+                        {
+                            success++;
+                        }
+
+                        if (i % 100 == 0)
+                        {
+                            this.logger.FlushFiles();
+                        }
                     }
 
-                    if (i % 100 == 0)
-                    {
-                        this.logger.FlushFiles();
-                    }
+                    this.logger.FlushFiles();
+                    db.Commit();
+                    return count;
                 }
-
-                this.logger.FlushFiles();
             }
 
             return success;
@@ -68,23 +79,16 @@ namespace eLog.HeavyTools.BankTran.Import
 
         private bool SaveImport(CifEbankTransImportResultSet result, int? pos = null, int? count = null)
         {
-
-            //var partnCode = result.OlcPartner?.Entity["oldcode"]
-            //    ?? result.Partner?.Entity["partnid"]
-            //    ?? result.PartnAddrs?.FirstOrDefault()?.Entity["partnid"]
-            //    ?? result.PartnBanks?.FirstOrDefault()?.Entity["partnid"]
-            //    ?? result.Employees?.FirstOrDefault()?.Entity["partnid"];
-
-            var partnCode = "PPA";
+            var recName = result.CifEbankTrans?.Entity["partnernamefrombank"];
 
             if (pos != null && count != null)
             {
                 var percnt = Math.Round(pos.Value / (count.Value * 1M) * 100, 2, MidpointRounding.AwayFromZero);
-                this.logger.Log($"Saving cif_ebank_trans [{pos} / {count} ({percnt:#.00}%)]: {partnCode} ");
+                this.logger.Log($"Saving cif_ebank_trans [{pos} / {count} ({percnt:#.00}%)]: {recName} ");
             }
             else
             {
-                this.logger.Log($"Saving cif_ebank_trans: {partnCode} ");
+                this.logger.Log($"Saving cif_ebank_trans: {recName} ");
             }
 
             var logText = new StringBuilder(result.LogText);
@@ -107,7 +111,7 @@ namespace eLog.HeavyTools.BankTran.Import
             catch (eProjectWeb.Framework.Rules.ValidateException ex)
             {
                 this.logger.LogLine();
-                this.logger.LogErrorLine($"Partner: {partnCode}, {"$entity".eLogTransl()}: {this.GetEntityName(entityType)}");
+                this.logger.LogErrorLine($"Cif_ebank_trans: {recName}, {"$entity".eLogTransl()}: {this.GetEntityName(entityType)}");
                 var message = ToTextValidate(ex);
                 this.logger.LogErrorLine(message);
 
@@ -116,7 +120,7 @@ namespace eLog.HeavyTools.BankTran.Import
             catch (Exception ex)
             {
                 this.logger.LogLine();
-                this.logger.LogErrorLine($"Partner: {partnCode}, {"$entity".eLogTransl()}: {this.GetEntityName(entityType)}");
+                this.logger.LogErrorLine($"Cif_ebank_trans: {recName}, {"$entity".eLogTransl()}: {this.GetEntityName(entityType)}");
                 var message = ex.Message;
                 this.logger.LogErrorLine(message);
 
@@ -131,7 +135,9 @@ namespace eLog.HeavyTools.BankTran.Import
         private bool? SaveCifEbankTrans(CifEbankTransImportResultSet result)
         {
             if (result.CifEbankTrans != null)
-            { 
+            {
+                // orig cif_ebank_rans-bol ertekadas fix mezoknek
+                // 
             }
 
             return null;

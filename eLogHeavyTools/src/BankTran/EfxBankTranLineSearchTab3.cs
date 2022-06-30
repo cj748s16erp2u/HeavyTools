@@ -16,7 +16,7 @@ namespace eLog.HeavyTools.BankTran
     public class EfxBankTranLineSearchTab3 : U4Ext.Bank.Base.Transaction.EfxBankTranLineSearchTab, eProjectWeb.Framework.Xml.IXmlObjectName
     {
         protected PopupButton btnBankStatementImport;
-        protected UploadButton btnFoxPostImportButton;
+        protected UploadButton btnFoxPostHUFImportButton;
 
         #region IXmlObjectName
         protected static Type baseType = typeof(U4Ext.Bank.Base.Transaction.EfxBankTranLineSearchTab);
@@ -42,26 +42,19 @@ namespace eLog.HeavyTools.BankTran
             base.CreateBase();
 
             // import
-            //btnBankStatementImport = new PopupButton("bankstatement_import");
-            //btnBankStatementImport.Order = 9999998;
-            //btnBankStatementImport.Default = null;
-            //btnBankStatementImport.AllowDropDown = true;
-            //btnBankStatementImport.ForceDropDown = true;
-            //AddCmd(btnBankStatementImport);
+            btnBankStatementImport = new PopupButton("bankstatement_import");
+            btnBankStatementImport.Order = 9999;
+            btnBankStatementImport.Default = null;
+            btnBankStatementImport.AllowDropDown = true;
+            btnBankStatementImport.ForceDropDown = true;
+            AddCmd(btnBankStatementImport);
 
-            //var btnFoxPostImport = new PopupChildButton("foxpost_import");
-            //btnBankStatementImport.Add(btnFoxPostImport);
-            //SetButtonAction(btnFoxPostImport.ID, new ControlEvent(btnFoxPost_Import_OnClick));
+            btnFoxPostHUFImportButton = new UploadButton("foxpost_huf_import");
+            btnBankStatementImport.Add(btnFoxPostHUFImportButton);
+            SetButtonAction(btnFoxPostHUFImportButton.ID, new ControlEvent(btnFoxPost_HUF_Import_OnClick));
+       }
 
-            //var btnFoxPostImport = new UploadButton("foxpost_import");
-            //btnBankStatementImport.Add(btnFoxPostImport);
-            //SetButtonAction(btnFoxPostImport.ID, new ControlEvent(btnFoxPost_Import_OnClick));
-
-            this.btnFoxPostImportButton = this.AddCmd(new UploadButton("foxpost_import", 950));
-            this.SetButtonAction(this.btnFoxPostImportButton.ID, this.btnFoxPost_Import_OnClick);
-        }
-
-        private void btnFoxPost_Import_OnClick(PageUpdateArgs args)
+        private void btnFoxPost_HUF_Import_OnClick(PageUpdateArgs args)
         {
             if (SearchResults.SelectedPKS.Count > 1)
                 return;
@@ -71,7 +64,7 @@ namespace eLog.HeavyTools.BankTran
 
             var cifTrId = Convert.ToInt32(SearchResults.SelectedPK[U4Ext.Bank.Base.Transaction.CifEbankTrans.FieldId.Name]);
 
-            var uploadInfo = this.btnFoxPostImportButton.GetUploadData(args);
+            var uploadInfo = this.btnFoxPostHUFImportButton.GetUploadData(args);
 
             var partnerBL = (CifEbankTransBL3)CifEbankTransBL3.New3();
             var processResult = partnerBL.FoxPostBankStatementImport(uploadInfo, cifTrId);

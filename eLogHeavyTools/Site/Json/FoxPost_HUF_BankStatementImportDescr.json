@@ -108,7 +108,121 @@
           {
             "Field": "errorcode",
             "ColumnName": "Tranzakció dátuma"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "Sheet": "utánvétek",
+    "HeaderRow": "1:10",
+    "ColumnNameRow": 9,
+    "Ignore": false,
+    "Tables": [
+      {
+
+        "Table": "cif_ebank_trans",
+        "Fields": [
+          {
+            "Field": "interfaceid",
+            "Const": "interfaceid"
           },
+          {
+            "Field": "cmpcode",
+            "Const": "cmpcode"
+          },
+          {
+            "Field": "fileid",
+            "Const": "fileid"
+          },
+          {
+            "Field": "doccode",
+            "Const": ""
+          },
+          {
+            "Field": "docnum",
+            "Const": ""
+          },
+          {
+            "Field": "status",
+            "Const": 111
+          },
+          {
+            "Field": "ownacnum",
+            "Const": "ownacnum"
+          },
+          {
+            "Field": "curaccount",
+            "Const": "curaccount"
+          },
+          {
+            "Field": "year",
+            "Const": 2022
+          },
+          {
+            "Field": "statement",
+            "Const": 1
+          },
+          {
+            "Field": "trtypeid",
+            "Const": "999"
+          },
+          {
+            "Field": "trid",
+            "ColumnName": "Megrendelés száma"
+          },
+          {
+            "Field": "debcred",
+            "Const": "161"
+          },
+          {
+            "Field": "yr",
+            "Const": 2022
+          },
+          {
+            "Field": "period",
+            "Const": 2
+          },
+          {
+            "Field": "curcode",
+            "Const": "HUF"
+          },
+          {
+            "Field": "valuedoc",
+            "ColumnName": "Utalandó (HUF)"
+          },
+          {
+            "Field": "amountsign",
+            "Const": 1
+          },
+          {
+            "Field": "origcur",
+            "Const": "HUF"
+          },
+          {
+            "Field": "origvalue",
+            "ColumnName": "Utalandó (HUF)"
+          },
+          {
+            "Field": "linedescr",
+            "Type": "concat",
+            "Columns": [
+              {
+                "ColumnName": "Címzett neve"
+              },
+              {
+                "Const": " utánvét"
+              }
+            ]
+          },
+          {
+            "Field": "partnernamefrombank",
+            "ColumnName": "Címzett neve"
+          },
+          {
+            "Field": "errorcode",
+            "ColumnName": "Tranzakció dátuma"
+          }
         ]
       }
     ]

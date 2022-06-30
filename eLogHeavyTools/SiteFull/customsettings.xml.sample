@@ -102,6 +102,6 @@
   <add key="ImportDescrFolders" value="..\Site\Json" />
 
   <!-- FoxPost banki kivonat import file leiro helye -->
-  <add key="FoxPostBankStatementImportDescrFileName" value="FoxPostBankStatementImportDescr.json" />
+  <add key="FoxPostBankStatementImportDescrFileName" value="FoxPost_HUF_BankStatementImportDescr.json" />
 
 </configuration>
