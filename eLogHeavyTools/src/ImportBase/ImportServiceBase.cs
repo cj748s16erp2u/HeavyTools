@@ -71,13 +71,11 @@ namespace eLog.HeavyTools.ImportBase
                         var worksheet = workbook.Sheets[sheet.Sheet];
                         if (worksheet == null)
                         {
-                            System.Diagnostics.Debugger.Launch();
                             this.logger.LogLine($"Excel missing sheet: {sheet.Sheet}");
                             continue;
                         }
 
                         this.logger.LogLine($"Processing sheet: {sheet.Sheet}");
-                        System.Diagnostics.Debugger.Launch();
                         var logWorksheet = logWorkbook.Sheets.FirstOrDefault(s => string.Equals(s.Name, worksheet.Name, StringComparison.OrdinalIgnoreCase));
                         if (logWorksheet == null)
                         {
