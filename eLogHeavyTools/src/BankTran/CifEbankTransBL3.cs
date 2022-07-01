@@ -843,6 +843,13 @@ namespace eLog.HeavyTools.BankTran
             public ImportFileNames FileNames { get; internal set; }
         }
 
+        public virtual string ImportRecords(int cifTransId, string importText, System.Globalization.NumberFormatInfo numberFormat, int? fieldListId, out List<Key> generatedRecords)
+        {
+            StringBuilder sbWrongLines = new StringBuilder();
+            generatedRecords = new List<Key>();
+
+            return sbWrongLines.ToString();
+        }
 
     }
 }
