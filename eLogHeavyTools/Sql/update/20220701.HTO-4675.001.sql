@@ -1,4 +1,3 @@
-
 insert ols_typehead (typegrpid, typekey, descr, protect, multipl, addusrid, adddate, delstat)
 values (510, 'cif_ebank_trans.importfields', 'Import Fields', 1, 0, 'dev', getdate(), 0)
 go

@@ -96,7 +96,7 @@ namespace eLog.HeavyTools.BankTran
 
             if (tbl != null)
             {
-                btnImport = new Button("importfunc", 1000);
+                btnImport = new Button("importfunc", 9999);
                 AddCmd(btnImport);
                 SetButtonAction(btnImport.ID, new ControlEvent(btnImport_OnClick));
             }
@@ -157,6 +157,13 @@ namespace eLog.HeavyTools.BankTran
         }
         #endregion GLS EUR
 
+        protected override void EfxBankTranLineSearchTab_OnPageActivate(PageUpdateArgs args)
+        {
+            base.EfxBankTranLineSearchTab_OnPageActivate(args);
+
+            SetImportColumnsText();
+        }
+
         #region Import
         protected void btnImport_OnClick(PageUpdateArgs args)
         {
@@ -184,12 +191,28 @@ namespace eLog.HeavyTools.BankTran
 
             if (string.IsNullOrEmpty(wrongLines))
             {
+                SetImportColumnsText();
             }
             else
                 ctrlImportText.Value = wrongLines;
 
-            SearchResults.KeysToRefresh.AddRange(generatedRecords);
-            RefreshTabInfoPart(args);
+            if (generatedRecords != null && generatedRecords.Count() > 0)
+            {
+                U4Ext.Bank.Base.Transaction.CifEbankTrans ct = U4Ext.Bank.Base.Transaction.CifEbankTrans.Load(generatedRecords.First());
+                if (ct != null)
+                {
+                    var msg = eProjectWeb.Framework.Lang.Translator.Translate("$msg_ciftrans_import_success", ct.Fileid, generatedRecords.Count());
+                    args.ShowDialog(dlgSimpleMessage, "$msg_ciftransimport_success_title", msg);
+                }
+
+                SearchResults.KeysToRefresh.AddRange(generatedRecords);
+                RefreshTabInfoPart(args);
+            }
+        }
+
+        protected virtual void SetImportColumnsText()
+        {
+            ctrlImportText.SetValue(null);
         }
         #endregion Import
     }

@@ -11,7 +11,9 @@ using eProjectWeb.Framework;
 using eProjectWeb.Framework.BL;
 using eProjectWeb.Framework.Data;
 using eProjectWeb.Framework.Extensions;
+using eProjectWeb.Framework.Lang;
 using eProjectWeb.Framework.Package;
+using U4Ext.Bank.Base.Transaction;
 
 namespace eLog.HeavyTools.BankTran
 {
@@ -843,12 +845,535 @@ namespace eLog.HeavyTools.BankTran
             public ImportFileNames FileNames { get; internal set; }
         }
 
-        public virtual string ImportRecords(int cifTransId, string importText, System.Globalization.NumberFormatInfo numberFormat, int? fieldListId, out List<Key> generatedRecords)
+        public virtual string ImportRecords(int? cifTransId, string importText, System.Globalization.NumberFormatInfo numberFormat, int? fieldListId, out List<Key> generatedRecords)
         {
-            StringBuilder sbWrongLines = new StringBuilder();
-            generatedRecords = new List<Key>();
+            generatedRecords = null;
+            List<string> wrongLines = null;
+            var list = new List<CifEbankTrans>();
 
-            return sbWrongLines.ToString();
+            var parentCifTrans = U4Ext.Bank.Base.Transaction.CifEbankTrans.Load(cifTransId);
+            if (parentCifTrans == null)
+            {
+                throw new MessageException("$import_exception_ciftransmising");
+            }
+
+            if (!fieldListId.HasValue)
+                throw new MessageException("$import_exception_fieldsunknown");
+
+            string[] fieldList = ImportRecordsGetFields(fieldListId.Value);
+            if (fieldList == null || fieldList.Length == 0)
+                throw new MessageException("$import_exception_fieldsinvalid");
+
+            var k = new Key(U4Ext.Bank.Base.Setup.Bank.EfxBank.FieldInterfaceid.Name, parentCifTrans.Interfaceid);
+            U4Ext.Bank.Base.Setup.Bank.EfxBank b = U4Ext.Bank.Base.Setup.Bank.EfxBank.Load(k);
+            //U4Ext.Bank.Base.Setup.Bank.EfxBank.EfxBank_BankType
+            if (b.Banktype >= 80)
+                throw new MessageException("$import_exception_banktypeinvalid");
+
+            using (var ns = new eProjectWeb.Framework.Lang.NS(typeof(CifEbankTransBL3).Namespace))
+            // create transaction
+            using (var db = DB.GetConn(DB.Main, Transaction.Use))
+            {
+                if (cifTransId.HasValue)
+                {
+                    var origCifTrans = CifEbankTrans.Load(cifTransId);
+
+                    Dictionary<CifEbankTrans, string> imported;
+
+                    wrongLines = ProcessImportLines(fieldListId, importText, numberFormat, origCifTrans, ref list, out imported);
+
+                    generatedRecords = SaveImportedLines(list, imported, wrongLines);
+
+                    if (wrongLines.Count() == 0)
+                    {
+                        var bankHeadList = U4Ext.Bank.Base.Common.U4ExtSqlFunctions.CreateEfxBankTranHeadFromCifTrans();
+                        db.Commit();
+                    }
+                    else
+                    {
+                        db.Rollback();
+
+                        generatedRecords = null;
+
+                        // returns the unprocessable lines
+                        return string.Join("\n", wrongLines.ToArray());
+                    }
+                }
+
+                return importText;
+            }
+        }
+
+        protected virtual List<string> ProcessImportLines(int? fieldListId, string importText, System.Globalization.NumberFormatInfo numberFormat, CifEbankTrans origCifTrans, ref List<CifEbankTrans> list, out Dictionary<CifEbankTrans, string> imported)
+        {
+            CifEbankTrans newCifTrans = null;
+            imported = new Dictionary<CifEbankTrans, string>();
+            var wrongLines = new List<string>();
+
+            var impLines = importText.Split(new char[] { '\n', '\r' }, StringSplitOptions.RemoveEmptyEntries);
+
+            ImportCifEbankData importCifData = new ImportCifEbankData();
+            importCifData.origCifTrans = origCifTrans;
+            importCifData.extRef1 = origCifTrans.Extref1;
+            importCifData.extRef2 = origCifTrans.Extref2;
+            importCifData.origCur = origCifTrans.Origcur;
+            importCifData.origValue = origCifTrans.Origvalue;
+            importCifData.valueAcc = origCifTrans.Valueacc;
+
+            // process each line
+            foreach (var il in impLines)
+            {
+                string wrongLine = null;
+                switch (fieldListId)
+                {
+                    case 1:
+                        wrongLine = ImportGLS(il, fieldListId, numberFormat, importCifData, out newCifTrans);
+                        break;
+                    case 2:
+                        wrongLine = ImportFoxPost(il, fieldListId, numberFormat, importCifData, out newCifTrans);
+                        break;
+                    case 3:
+                        wrongLine = ImportPPP(il, fieldListId, numberFormat, importCifData, out newCifTrans);
+                        break;
+                    case 4:
+                        wrongLine = ImportHervis(il, fieldListId, numberFormat, importCifData, out newCifTrans);
+                        break;
+                    case 5:
+                        wrongLine = ImportInterSport(il, fieldListId, numberFormat, importCifData, out newCifTrans);
+                        break;
+                    default:
+                        throw new eProjectWeb.Framework.MessageException("$import_invalidtype", fieldListId);
+                }
+                if (!string.IsNullOrEmpty(wrongLine))
+                {
+                    wrongLines.Add(wrongLine);
+                }
+                if (newCifTrans != null)
+                {
+                    list.Add(newCifTrans);
+                    imported.Add(newCifTrans, il);
+                }
+            }
+
+            return wrongLines;
+        }
+
+        protected virtual string ImportGLS(string importLine, int? fieldListId, System.Globalization.NumberFormatInfo numberFormat, ImportCifEbankData importCifData, out CifEbankTrans newCifTrans)
+        {
+            newCifTrans = null;
+
+            string[] parts = importLine.Split(new char[] { '\t' });
+
+            if (parts.Length != 3)
+            {
+                return importLine + "\t" + eProjectWeb.Framework.Lang.Translator.Translate("$import_error_numberofcolumns");
+            }
+
+            string[] fieldList = ImportRecordsGetFields(fieldListId.Value);
+            int? ref1NameFieldIndex = null;
+            int? ref2NameFieldIndex = null;
+            int? origvalueFieldIndex = null;
+            int? origcurFieldIndex = null;
+            int? valueaccFieldIndex = null;
+
+            int idx = 0;
+            foreach (string f in fieldList)
+            {
+                if (f.Equals("ref1", StringComparison.OrdinalIgnoreCase))
+                    ref1NameFieldIndex = idx;
+                if (f.Equals("ref2", StringComparison.OrdinalIgnoreCase))
+                    ref2NameFieldIndex = idx;
+                if (f.Equals("origvalue", StringComparison.OrdinalIgnoreCase))
+                    origvalueFieldIndex = idx;
+                if (f.Equals("origcur", StringComparison.OrdinalIgnoreCase))
+                    origcurFieldIndex = idx;
+                if (f.Equals("valueacc", StringComparison.OrdinalIgnoreCase))
+                    valueaccFieldIndex = idx;
+                idx++;
+            }
+
+            if (!ref1NameFieldIndex.HasValue)
+                throw new MessageException("$import_exception_ref1expected");
+
+            if (!origvalueFieldIndex.HasValue)
+                throw new MessageException("$import_exception_origvalueexpected");
+
+            if (!origcurFieldIndex.HasValue)
+                throw new MessageException("$import_exception_origcurexpected");
+
+            var interfaceId = CustomSettings.GetString("GLSBankStatementImportInterfaceId");
+            if (string.IsNullOrWhiteSpace(interfaceId))
+            {
+                throw new MessageException("$import_exception_interfaceid_missing");
+            }
+
+            string error = null;
+            decimal decOrigValue = 0.0M;
+
+            string dVal = parts[1].ToString();
+            if (string.IsNullOrEmpty(dVal))
+            {
+                return importLine + "\t" + eProjectWeb.Framework.Lang.Translator.Translate("$import_error_missingamount");
+            }
+            else
+            {
+                if (!decimal.TryParse(dVal, System.Globalization.NumberStyles.Any, numberFormat, out decOrigValue))
+                {
+                    return importLine + "\t" + eProjectWeb.Framework.Lang.Translator.Translate("$import_error_wrongvalue");
+                }
+            }
+
+            importCifData.interfaceId = interfaceId;
+            importCifData.fileId = interfaceId + "_" + DateTime.Now.ToString();
+            importCifData.extRef1 = parts[0].ToString().Length > 32 ? parts[0].ToString().Substring(0, 32) : parts[0].ToString();
+            importCifData.origValue = decOrigValue;
+            importCifData.origCur = parts[2].ToString().Length > 3 ? parts[2].ToString().Substring(0, 3) : parts[2].ToString();
+
+            if (importCifData.origCifTrans.Origcur != importCifData.origCur)
+            {
+                return importLine + "\t" + eProjectWeb.Framework.Lang.Translator.Translate("$import_error_wrongcurrency");
+            }
+
+            error = ImportLine(importCifData, out newCifTrans);
+
+            if (!string.IsNullOrEmpty(error))
+            {
+                return importLine + "\t" + error;
+            }
+            return string.Empty;
+        }
+
+        protected virtual string ImportFoxPost(string importLine, int? fieldListId, System.Globalization.NumberFormatInfo numberFormat, ImportCifEbankData importCifData, out CifEbankTrans newCifTrans)
+        {
+            newCifTrans = null;
+
+            string[] parts = importLine.Split(new char[] { '\t' });
+
+            if (parts.Length != 3)
+            {
+                return importLine + "\t" + eProjectWeb.Framework.Lang.Translator.Translate("$import_error_numberofcolumns");
+            }
+
+            string[] fieldList = ImportRecordsGetFields(fieldListId.Value);
+            int? ref1NameFieldIndex = null;
+            int? ref2NameFieldIndex = null;
+            int? origvalueFieldIndex = null;
+            int? origcurFieldIndex = null;
+            int? valueaccFieldIndex = null;
+
+            int idx = 0;
+            foreach (string f in fieldList)
+            {
+                if (f.Equals("ref1", StringComparison.OrdinalIgnoreCase))
+                    ref1NameFieldIndex = idx;
+                if (f.Equals("ref2", StringComparison.OrdinalIgnoreCase))
+                    ref2NameFieldIndex = idx;
+                if (f.Equals("origvalue", StringComparison.OrdinalIgnoreCase))
+                    origvalueFieldIndex = idx;
+                if (f.Equals("origcur", StringComparison.OrdinalIgnoreCase))
+                    origcurFieldIndex = idx;
+                if (f.Equals("valueacc", StringComparison.OrdinalIgnoreCase))
+                    valueaccFieldIndex = idx;
+                idx++;
+            }
+
+            if (!ref1NameFieldIndex.HasValue)
+                throw new MessageException("$import_exception_ref1expected");
+
+            if (!ref2NameFieldIndex.HasValue)
+                throw new MessageException("$import_exception_ref2expected");
+
+            if (!origvalueFieldIndex.HasValue)
+                throw new MessageException("$import_exception_origvalueexpected");
+
+            var interfaceId = CustomSettings.GetString("FoxPostBankStatementImportInterfaceId");
+            if (string.IsNullOrWhiteSpace(interfaceId))
+            {
+                throw new MessageException("$import_exception_interfaceid_missing");
+            }
+
+            string error = null;
+            decimal decOrigValue = 0.0M;
+
+            string dVal = parts[2].ToString();
+            if (string.IsNullOrEmpty(dVal))
+            {
+                return importLine + "\t" + eProjectWeb.Framework.Lang.Translator.Translate("$import_error_missingamount");
+            }
+            else
+            {
+                if (!decimal.TryParse(dVal, System.Globalization.NumberStyles.Any, numberFormat, out decOrigValue))
+                {
+                    return importLine + "\t" + eProjectWeb.Framework.Lang.Translator.Translate("$import_error_wrongvalue");
+                }
+            }
+
+            importCifData.interfaceId = interfaceId;
+            importCifData.fileId = interfaceId + "_" + DateTime.Now.ToString();
+            importCifData.extRef1 = parts[0].ToString().Length > 32 ? parts[0].ToString().Substring(0, 32) : parts[0].ToString();
+            importCifData.extRef2 = parts[1].ToString().Length > 32 ? parts[1].ToString().Substring(0, 32) : parts[1].ToString();
+
+
+            error = ImportLine(importCifData, out newCifTrans);
+
+            if (!string.IsNullOrEmpty(error))
+            {
+                return importLine + "\t" + error;
+            }
+            return string.Empty;
+        }
+
+        protected virtual string ImportPPP(string importLine, int? fieldListId, System.Globalization.NumberFormatInfo numberFormat, ImportCifEbankData importCifData, out CifEbankTrans newCifTrans)
+        {
+            newCifTrans = null;
+
+            string[] parts = importLine.Split(new char[] { '\t' });
+
+            if (parts.Length != 3)
+            {
+                return importLine + "\t" + eProjectWeb.Framework.Lang.Translator.Translate("$import_error_numberofcolumns");
+            }
+
+            string[] fieldList = ImportRecordsGetFields(fieldListId.Value);
+            int? ref1NameFieldIndex = null;
+            int? ref2NameFieldIndex = null;
+            int? origvalueFieldIndex = null;
+            int? origcurFieldIndex = null;
+            int? valueaccFieldIndex = null;
+
+            int idx = 0;
+            foreach (string f in fieldList)
+            {
+                if (f.Equals("ref1", StringComparison.OrdinalIgnoreCase))
+                    ref1NameFieldIndex = idx;
+                if (f.Equals("ref2", StringComparison.OrdinalIgnoreCase))
+                    ref2NameFieldIndex = idx;
+                if (f.Equals("origvalue", StringComparison.OrdinalIgnoreCase))
+                    origvalueFieldIndex = idx;
+                if (f.Equals("origcur", StringComparison.OrdinalIgnoreCase))
+                    origcurFieldIndex = idx;
+                if (f.Equals("valueacc", StringComparison.OrdinalIgnoreCase))
+                    valueaccFieldIndex = idx;
+                idx++;
+            }
+
+            if (!ref1NameFieldIndex.HasValue)
+                throw new MessageException("$import_exception_ref1expected");
+
+            if (!origvalueFieldIndex.HasValue)
+                throw new MessageException("$import_exception_origvalueexpected");
+
+            if (!origcurFieldIndex.HasValue)
+                throw new MessageException("$import_exception_origcurexpected");
+
+            var interfaceId = CustomSettings.GetString("HervisBankStatementImportInterfaceId");
+            if (string.IsNullOrWhiteSpace(interfaceId))
+            {
+                throw new MessageException("$import_exception_interfaceid_missing");
+            }
+
+            string error = null;
+            decimal decOrigValue = 0.0M;
+
+            string dVal = parts[1].ToString();
+            if (string.IsNullOrEmpty(dVal))
+            {
+                return importLine + "\t" + eProjectWeb.Framework.Lang.Translator.Translate("$import_error_missingamount");
+            }
+            else
+            {
+                if (!decimal.TryParse(dVal, System.Globalization.NumberStyles.Any, numberFormat, out decOrigValue))
+                {
+                    return importLine + "\t" + eProjectWeb.Framework.Lang.Translator.Translate("$import_error_wrongvalue");
+                }
+            }
+
+            importCifData.interfaceId = interfaceId;
+            importCifData.fileId = interfaceId + "_" + DateTime.Now.ToString();
+            importCifData.extRef1 = parts[0].ToString().Length > 32 ? parts[0].ToString().Substring(0, 32) : parts[0].ToString();
+            importCifData.origValue = decOrigValue;
+            importCifData.origCur = parts[2].ToString().Length > 3 ? parts[2].ToString().Substring(0, 3) : parts[2].ToString();
+
+            if (importCifData.origCifTrans.Origcur != importCifData.origCur)
+            {
+                return importLine + "\t" + eProjectWeb.Framework.Lang.Translator.Translate("$import_error_wrongcurrency");
+            }
+
+            error = ImportLine(importCifData, out newCifTrans);
+
+            if (!string.IsNullOrEmpty(error))
+            {
+                return importLine + "\t" + error;
+            }
+            return string.Empty;
+        }
+
+        protected virtual string ImportInterSport(string importLine, int? fieldListId, System.Globalization.NumberFormatInfo numberFormat, ImportCifEbankData importCifData, out CifEbankTrans newCifTrans)
+        {
+            newCifTrans = null;
+
+            string[] parts = importLine.Split(new char[] { '\t' });
+
+            if (parts.Length != 3)
+            {
+                return importLine + "\t" + eProjectWeb.Framework.Lang.Translator.Translate("$import_error_numberofcolumns");
+            }
+
+            string[] fieldList = ImportRecordsGetFields(fieldListId.Value);
+            int? ref1NameFieldIndex = null;
+            int? ref2NameFieldIndex = null;
+            int? origvalueFieldIndex = null;
+            int? origcurFieldIndex = null;
+            int? valueaccFieldIndex = null;
+
+            int idx = 0;
+            foreach (string f in fieldList)
+            {
+                if (f.Equals("ref1", StringComparison.OrdinalIgnoreCase))
+                    ref1NameFieldIndex = idx;
+                if (f.Equals("ref2", StringComparison.OrdinalIgnoreCase))
+                    ref2NameFieldIndex = idx;
+                if (f.Equals("origvalue", StringComparison.OrdinalIgnoreCase))
+                    origvalueFieldIndex = idx;
+                if (f.Equals("origcur", StringComparison.OrdinalIgnoreCase))
+                    origcurFieldIndex = idx;
+                if (f.Equals("valueacc", StringComparison.OrdinalIgnoreCase))
+                    valueaccFieldIndex = idx;
+                idx++;
+            }
+
+            if (!ref1NameFieldIndex.HasValue)
+                throw new MessageException("$import_exception_ref1expected");
+
+            if (!valueaccFieldIndex.HasValue)
+                throw new MessageException("$import_exception_valueaccexpected");
+
+            if (!origvalueFieldIndex.HasValue)
+                throw new MessageException("$import_exception_origvalueexpected");
+
+            var interfaceId = CustomSettings.GetString("InterSportBankStatementImportInterfaceId");
+            if (string.IsNullOrWhiteSpace(interfaceId))
+            {
+                throw new MessageException("$import_exception_interfaceid_missing");
+            }
+
+            string error = null;
+            decimal decOrigValue = 0.0M;
+            decimal decValueAcc = 0.0M;
+
+            string dVal = parts[2].ToString();
+            if (string.IsNullOrEmpty(dVal))
+            {
+                return importLine + "\t" + eProjectWeb.Framework.Lang.Translator.Translate("$import_error_missingamount");
+            }
+            else
+            {
+                if (!decimal.TryParse(dVal, System.Globalization.NumberStyles.Any, numberFormat, out decValueAcc))
+                {
+                    return importLine + "\t" + eProjectWeb.Framework.Lang.Translator.Translate("$import_error_wrongvalue");
+                }
+            }
+
+            dVal = parts[1].ToString();
+            if (string.IsNullOrEmpty(dVal))
+            {
+                return importLine + "\t" + eProjectWeb.Framework.Lang.Translator.Translate("$import_error_missingamount");
+            }
+            else
+            {
+                if (!decimal.TryParse(dVal, System.Globalization.NumberStyles.Any, numberFormat, out decOrigValue))
+                {
+                    return importLine + "\t" + eProjectWeb.Framework.Lang.Translator.Translate("$import_error_wrongvalue");
+                }
+            }
+
+            importCifData.interfaceId = interfaceId;
+            importCifData.fileId = interfaceId + "_" + DateTime.Now.ToString();
+            importCifData.extRef1 = parts[0].ToString().Length > 32 ? parts[0].ToString().Substring(0, 32) : parts[0].ToString();
+            importCifData.valueAcc = decValueAcc;
+            importCifData.origValue = decOrigValue;
+
+            error = ImportLine(importCifData, out newCifTrans);
+
+            if (!string.IsNullOrEmpty(error))
+            {
+                return importLine + "\t" + error;
+            }
+            return string.Empty;
+        }
+
+        private static string ImportLine(ImportCifEbankData importCifData, out CifEbankTrans newCifTrans)
+        {
+            newCifTrans = null;
+
+            newCifTrans = CifEbankTrans.CreateNew();
+            importCifData.origCifTrans.CopyTo(newCifTrans);
+            newCifTrans.ApplyChanges();
+            newCifTrans.Id = null;
+            newCifTrans.Interfaceid = importCifData.interfaceId;
+            newCifTrans.Fileid = importCifData.fileId;
+            newCifTrans.Extref1 = importCifData.extRef1;
+            newCifTrans.Extref2 = importCifData.extRef2;
+            newCifTrans.Origcur = importCifData.origCur;
+            newCifTrans.Origvalue = importCifData.origValue;
+            newCifTrans.Valueacc = importCifData.valueAcc;
+            newCifTrans.Createdate = DateTime.Now;
+            newCifTrans.State = DataRowState.Added;
+
+            return string.Empty;
+        }
+
+        private static List<Key> SaveImportedLines(List<CifEbankTrans> list, Dictionary<CifEbankTrans, string> imported, List<string> wrongLines)
+        {
+            var generatedRecords = new List<Key>();
+
+            var bl = CifEbankTransBL3.New();
+
+            foreach (var item in list)
+            {
+                if (item.State == DataRowState.Added)
+                {
+                    // save
+                    var blObjectMap = new BLObjectMap();
+                    blObjectMap.Default = item;
+                    var pk = bl.Save(blObjectMap);
+                    generatedRecords.Add(pk);
+                }
+            }
+
+            // returns the saved new records PK
+            return generatedRecords;
+        }
+
+        protected string[] ImportRecordsGetFields(int id)
+        {
+            string typekey = new CifEbankTransImportFieldList().Key;
+
+            Key k = new Key(new Field[] { eLog.Base.Setup.Type.TypeHead.FieldTypekey }, new object[] { typekey });
+            eLog.Base.Setup.Type.TypeHead th = eLog.Base.Setup.Type.TypeHead.Load(k);
+            if (th != null)
+            {
+                eLog.Base.Setup.Type.TypeLine tl = eLog.Base.Setup.Type.TypeLine.Load(th.Typegrpid, id);
+                if (tl != null)
+                {
+                    string fieldsStr = StringN.ConvertToString(tl.Str1);
+                    if (fieldsStr != null)
+                        return fieldsStr.Split(',');
+                }
+            }
+            return null;
+        }
+
+        protected class ImportCifEbankData
+        {
+            public CifEbankTrans origCifTrans { get; set; }
+            public string interfaceId { get; set; }
+            public string fileId { get; set; }
+            public string extRef1 { get; set; }
+            public string extRef2 { get; set; }
+            public string origCur { get; set; }
+            public decimal? origValue { get; set; }
+            public decimal? valueAcc { get; set; }
         }
 
     }

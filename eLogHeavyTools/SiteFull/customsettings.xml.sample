@@ -107,4 +107,16 @@
   <add key="GLS_HUF_BankStatementImportDescrFileName" value="GLS_HUF_BankStatementImportDescr.json" />
   <!-- GLS EUR banki kivonat import file leiro helye -->
   <add key="GLS_EUR_BankStatementImportDescrFileName" value="GLS_EUR_BankStatementImportDescr.json" />
+
+  <!-- FoxPost banki kivonat import interface nev -->
+  <add key="FoxPostBankStatementImportInterfaceId" value="U4ERP_FOXPOST" />
+  <!-- GLS banki kivonat import interface nev -->
+  <add key="GLSBankStatementImportInterfaceId" value="U4ERP_GLS" />
+  <!-- Sprinter banki kivonat import interface nev -->
+  <add key="SprinterBankStatementImportInterfaceId" value="U4ERP_SPRINTER" />
+  <!-- Hervis banki kivonat import interface nev -->
+  <add key="SprinterBankStatementImportInterfaceId" value="U4ERP_HERVIS" />
+  <!-- INTERSPORT banki kivonat import interface nev -->
+  <add key="SprinterBankStatementImportInterfaceId" value="U4ERP_INTERSPORT" />
+
 </configuration>
