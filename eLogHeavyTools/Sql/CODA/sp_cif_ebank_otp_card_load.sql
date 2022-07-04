@@ -341,9 +341,11 @@ BEGIN
 				CURRENT_TIMESTAMP,
 				authorization_id,	-- extref1
 				'', -- extref2
-				external_unique_id,	-- extref3
+				--external_unique_id,	-- extref3
+				store_name, -- extref3
 				transaction_id,	-- extref4
-				store_name, -- extref5
+				--store_name, -- extref5
+				external_unique_id, -- extref5
 				terminal_id, -- extref6
 				commission_amount -- valueacc
 			FROM cif_ebank_otp_card_lines L WITH (NOLOCK)
