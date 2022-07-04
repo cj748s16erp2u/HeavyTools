@@ -95,9 +95,9 @@ namespace eLog.HeavyTools.Common.Matrix
         RootEntity rootEntity;
 
 
-        private Button buildButton;
-        private Button saveChangeButton;
-        private Button noSaveButton;
+        protected Button buildButton;
+        protected Button saveChangeButton;
+        protected Button noSaveButton;
 
         private DialogBox dialogBox;
 

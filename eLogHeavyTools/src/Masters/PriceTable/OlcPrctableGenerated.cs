@@ -58,6 +58,36 @@ namespace eLog.HeavyTools.Masters.PriceTable
         /// <para>Field</para>
         /// ? - int
         /// </summary>
+        [Field("prctype")]
+        public static Field FieldPrctype { get; protected set; }
+        /// <summary>
+        /// ? - int
+        /// </summary>
+        public int? Prctype
+        {
+            get { return (int?)this[FieldPrctype]; }
+            set { this[FieldPrctype] = value; }
+        }
+
+        /// <summary>
+        /// <para>Field</para>
+        /// ? - varchar
+        /// </summary>
+        [Field("wid")]
+        public static Field FieldWid { get; protected set; }
+        /// <summary>
+        /// ? - varchar
+        /// </summary>
+        public StringN Wid
+        {
+            get { return new StringN(this[FieldWid]); }
+            set { this[FieldWid] = value; }
+        }
+
+        /// <summary>
+        /// <para>Field</para>
+        /// ? - int
+        /// </summary>
         [Field("partnid")]
         public static Field FieldPartnid { get; protected set; }
         /// <summary>

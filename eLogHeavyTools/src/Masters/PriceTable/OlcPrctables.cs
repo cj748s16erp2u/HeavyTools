@@ -5,9 +5,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace eLog.HeavyTools.Masters.Item.Model
+namespace eLog.HeavyTools.Masters.PriceTable
 {
-    class OlcItemModelSeasons : EntityCollection<OlcItemModelSeason, OlcItemModelSeasons>
-    { 
+    class OlcPrctables : EntityCollection<OlcPrctable, OlcPrctables>
+    {
     }
 }

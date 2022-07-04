@@ -14,7 +14,7 @@ using static eLog.HeavyTools.Masters.Partner.PartnerBL3;
 
 namespace eLog.HeavyTools.Masters.Item
 {
-    public class ItemBL2: ItemBL
+    public class ItemBL3: ItemBL
     {
         protected override bool PreSave(eProjectWeb.Framework.BL.BLObjectMap objects, eProjectWeb.Framework.Data.Entity e)
         {
@@ -55,13 +55,13 @@ namespace eLog.HeavyTools.Masters.Item
             var importDescrFileName = CustomSettings.GetString("ItemImportDescrFileName");
             if (string.IsNullOrWhiteSpace(importDescrFileName))
             {
-                error = "$err_partnerimport_missingsettings".eLogTransl("PartnerImportDescrFileName");
+                error = "$err_itemimport_missingsettings".eLogTransl("ItemImportDescrFileName");
             }
 
             var descrDirs = CustomSettings.GetString("ImportDescrFolders");
             if (string.IsNullOrWhiteSpace(descrDirs))
             {
-                error = "$err_partnerimport_missingsettings".eLogTransl("ImportDescrFolders");
+                error = "$err_itemimport_missingsettings".eLogTransl("ImportDescrFolders");
             }
             else
             {
@@ -98,7 +98,7 @@ namespace eLog.HeavyTools.Masters.Item
             var result = new List<ImportFileNames>();
             string resultFileName;
 
-            var importResultFolder = Path.Combine(Globals.WritableRoot, "ParnterImport");
+            var importResultFolder = Path.Combine(Globals.WritableRoot, "ItemImport");
             if (!Directory.Exists(importResultFolder))
             {
                 Directory.CreateDirectory(importResultFolder);
@@ -106,7 +106,7 @@ namespace eLog.HeavyTools.Masters.Item
 
             var processResults = new List<ImportProcessResult>();
 
-            using (new eProjectWeb.Framework.Lang.NS(typeof(PartnerBL3).Namespace))
+            using (new eProjectWeb.Framework.Lang.NS(typeof(ItemBL3).Namespace))
             {
                 foreach (var f in uploadFiles)
                 {
@@ -154,7 +154,7 @@ namespace eLog.HeavyTools.Masters.Item
 
             try
             {
-                Log.Info($"{executeId} - {Session.UserID} executing partner import: {fileName} ({storedFileName})");
+                Log.Info($"{executeId} - {Session.UserID} executing item import: {fileName} ({storedFileName})");
 
                 var processResult = importService.Import(importDescrFileName, realFileName);
                 var importResult = new ImportProcessResult

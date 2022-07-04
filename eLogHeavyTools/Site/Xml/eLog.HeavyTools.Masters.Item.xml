@@ -23,8 +23,7 @@
       <Combo Field="unitid" ListID="eLog.Base.Setup.Unit.UnitList" ComboFlags="None" />
       <ForceNextRow />
       <CompanyCodesControl Field="cmpcodes" ListID="eLog.Base.Setup.Company.CompanyCodeList#grantedonly#showall" ComboFlags="AutoSelectOne" ColsToSpan="-1" />
-      <ForceNextRow />
-      <Textbox Field="note" Rows="3" ColsToSpan="-1" />
+    
     </LayoutTable>
     <LayoutTable ControlGroup="olc" Columns="{130, None}; {180, None}; {20, Empty}; {130, None}; {180, None};" ID="OlcGroup" Label="">
       <Combo Field="imgid" ListID="eLog.HeavyTools.Masters.Item.MainGroup.OlcItemMainGroupList" ComboFlags="None" />
@@ -43,6 +42,12 @@
       <Combo Field="materialtype" ListID="eLog.HeavyTools.Masters.Item.MaterialTypeList" ComboFlags="None" />
       <Combo Field="patterntype" ListID="eLog.HeavyTools.Masters.Item.PatternTypeList" ComboFlags="None" />
       <Combo Field="patterntype2" ListID="eLog.HeavyTools.Masters.Item.PatternTypeList" ComboFlags="None" />
+	  <ForceNextRow />
+	  <Intbox Field="catalogpagenumber" /> 
+	  <Combo Field="iscollectionarticlenumber" ListID="eLog.Base.Setup.Parameters.YesNoTypeList" ComboFlags="None" /> 
+	  <Textbox Field="webcategory"/>  
+	  <ForceNextRow />
+      <Textbox Field="note" Rows="3" ColsToSpan="-1" />
     </LayoutTable>
     <LayoutContainer ControlGroup="xx" Columns="{130, None}; {180, None}; {20, Empty}; {130, None}; {180, None};" ID="CmpGroup" Label="">
       <!--<FlagSelector Field="type" ColsToSpan="-1" ListID="eLog.Base.Masters.Item.ItemTypeList"/>

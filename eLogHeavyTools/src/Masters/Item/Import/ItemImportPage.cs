@@ -45,7 +45,7 @@ namespace eLog.HeavyTools.Masters.Item.Import
         {
             var uploadInfo = this.itemImportButton.GetUploadData(args);
 
-            var itemBL = (ItemBL2)ItemBL2.New();
+            var itemBL = (ItemBL3)ItemBL3.New();
             var processResult = itemBL.ItemImport(uploadInfo);
 
             var message = this.FormatImportResult(processResult?.ImportProcessResults);
@@ -59,8 +59,8 @@ namespace eLog.HeavyTools.Masters.Item.Import
             {
                 var ext = System.IO.Path.GetExtension(fileName);
 
-                var partnerImportTransl = "$partnerimport".eLogTransl();
-                var realFileName = $"{partnerImportTransl}_{DateTime.Now:yyyyMMddHhmmss}";
+                var itemImportTransl = "$itemimport".eLogTransl();
+                var realFileName = $"{itemImportTransl}_{DateTime.Now:yyyyMMddHhmmss}";
                 realFileName = $"{realFileName}{ext}";
 
                 fileName = System.IO.Path.GetFileName(fileName);

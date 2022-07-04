@@ -16,3 +16,5 @@ olc_itemmodelseason,eLog.HeavyTools.Masters.Item.Model,OlcItemModelSeason
 
 olc_prctype,eLog.HeavyTools.Setup.PriceTable,OlcPrcType
 olc_prctable,eLog.HeavyTools.Masters.PriceTable,OlcPrctable
+
+olc_webshop,eLog.HeavyTools.Webshop,OlcWebshop

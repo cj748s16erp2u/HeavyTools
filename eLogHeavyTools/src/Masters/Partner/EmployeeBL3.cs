@@ -7,7 +7,7 @@ namespace eLog.HeavyTools.Masters.Partner
 {
     public class EmployeeBL3 : EmployeeBL
     {
-        public static EmployeeBL3 New()
+        public static new EmployeeBL3 New()
         {
             return (EmployeeBL3)ObjectFactory.New(typeof(PartnerBL));
         }

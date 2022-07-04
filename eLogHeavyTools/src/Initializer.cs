@@ -194,7 +194,7 @@ namespace eLog.HeavyTools
             ObjectFactory.AddRemap(typeof(Base.Setup.Warehouse.WarehouseSearchTab), typeof(Setup.Warehouse.WarehouseSearchTab3));
 
             ObjectFactory.AddRemap(typeof(eLog.Base.Masters.Item.ItemEditTab), typeof(eLog.HeavyTools.Masters.Item.ItemEditTab2));
-            ObjectFactory.AddRemap(typeof(eLog.Base.Masters.Item.ItemBL), typeof(eLog.HeavyTools.Masters.Item.ItemBL2));
+            ObjectFactory.AddRemap(typeof(eLog.Base.Masters.Item.ItemBL), typeof(eLog.HeavyTools.Masters.Item.ItemBL3));
         }
     }
 }

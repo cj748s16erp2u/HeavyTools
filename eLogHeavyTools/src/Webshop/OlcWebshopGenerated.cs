@@ -4,39 +4,39 @@ using System.Text;
 using eProjectWeb.Framework;
 using eProjectWeb.Framework.Data;
 
-namespace eLog.HeavyTools.Setup.PriceTable
+namespace eLog.HeavyTools.Webshop
 {
     /// <summary>
     /// <para>Generált Entity</para>
     /// ?
     /// </summary>
-    [Table("olc_prctype")]
-    public partial class OlcPrcType : Entity<OlcPrcType>
+    [Table("olc_webshop")]
+    public partial class OlcWebshop : Entity<OlcWebshop>
     {
         /// <summary>
         /// <para>Load by primary keys</para>
         /// </summary>
-        /// <param name="ptid"><see cref="int?" /> ptid</param>
-        public static OlcPrcType Load(int? ptid)
+        /// <param name="wid"><see cref="StringN" /> wid</param>
+        public static OlcWebshop Load(StringN wid)
         {
-            return Load(new Key(new Field[] { FieldPtid }, new object[] { ptid }));
+            return Load(new Key(new Field[] { FieldWid }, new object[] { wid }));
         }
 
         #region Field accessors
 
         /// <summary>
         /// <para>Field</para>
-        /// ? - int
+        /// ? - varchar
         /// </summary>
-        [Field("ptid")]
-        public static Field FieldPtid { get; protected set; }
+        [Field("wid")]
+        public static Field FieldWid { get; protected set; }
         /// <summary>
-        /// ? - int
+        /// ? - varchar
         /// </summary>
-        public int? Ptid
+        public StringN Wid
         {
-            get { return (int?)this[FieldPtid]; }
-            set { this[FieldPtid] = value; }
+            get { return new StringN(this[FieldWid]); }
+            set { this[FieldWid] = value; }
         }
 
         /// <summary>
@@ -52,21 +52,6 @@ namespace eLog.HeavyTools.Setup.PriceTable
         {
             get { return new StringN(this[FieldName]); }
             set { this[FieldName] = value; }
-        }
-
-        /// <summary>
-        /// <para>Field</para>
-        /// ? - int
-        /// </summary>
-        [Field("isnet")]
-        public static Field FieldIsnet { get; protected set; }
-        /// <summary>
-        /// ? - int
-        /// </summary>
-        public int? Isnet
-        {
-            get { return (int?)this[FieldIsnet]; }
-            set { this[FieldIsnet] = value; }
         }
 
         /// <summary>

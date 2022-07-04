@@ -138,13 +138,17 @@
     <Compile Include="Masters\Item\Color\OlcItemColorSearchPage.cs" />
     <Compile Include="Masters\Item\Import\ImportConditionalConverter.cs" />
     <Compile Include="Masters\Item\Import\ItemImportConditional.cs" />
+    <Compile Include="Masters\Item\Import\ItemImportMessageException.cs" />
     <Compile Include="Masters\Item\Import\ItemImportPage.cs" />
     <Compile Include="Masters\Item\Import\ItemImportResultSet.cs" />
     <Compile Include="Masters\Item\Import\ItemImportResultSets.cs" />
     <Compile Include="Masters\Item\Import\ItemImportService.cs" />
     <Compile Include="Masters\Item\Import\ItemRowContext.cs" />
-    <Compile Include="Masters\Item\ItemBL2.cs" />
+    <Compile Include="Masters\Item\Import\OlcMultiplePrcTable.cs" />
+    <Compile Include="Masters\Item\ItemBL3.cs" />
+    <Compile Include="Masters\Item\ItemCmps2.cs" />
     <Compile Include="Masters\Item\ItemEditTab2.cs" />
+    <Compile Include="Masters\Item\ItemExts.cs" />
     <Compile Include="Masters\Item\ItemMatrix\Items.cs" />
     <Compile Include="Masters\Item\ColorTypeList.cs" />
     <Compile Include="Masters\Item\ItemMatrix\OlcItemSearchTab.cs" />
@@ -197,6 +201,7 @@
     <Compile Include="Masters\Item\Season\OlcItemSeasonSearchPage.cs" />
     <Compile Include="Masters\PriceTable\OlcPrctable.cs" />
     <Compile Include="Masters\PriceTable\OlcPrctableGenerated.cs" />
+    <Compile Include="Masters\PriceTable\OlcPrctables.cs" />
     <Compile Include="Masters\PriceTable\OlcPrctableSearchPage.cs" />
     <Compile Include="Masters\Partner\EmployeeBL3.cs" />
     <Compile Include="Masters\Partner\EmployeeEditTab3.cs" />
@@ -225,6 +230,7 @@
     <Compile Include="Masters\Partner\PartnerBL3.cs" />
     <Compile Include="Masters\Partner\PartnerEditTab3.cs" />
     <Compile Include="Masters\Partner\PartnerSearchProvider3.cs" />
+    <Compile Include="Masters\PriceTable\PrcType.cs" />
     <Compile Include="Module.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Setup\PriceTable\OlcPrcType.cs" />
@@ -251,6 +257,9 @@
     <Compile Include="Setup\Warehouse\OlcWhZoneSearchTab.cs" />
     <Compile Include="Setup\Warehouse\WarehouseSearchPage3.cs" />
     <Compile Include="Setup\Warehouse\WarehouseSearchTab3.cs" />
+    <Compile Include="Webshop\OlcWebshop.cs" />
+    <Compile Include="Webshop\OlcWebshopGenerated.cs" />
+    <Compile Include="Webshop\WebshopType.cs" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -1,5 +1,94 @@
 [
   {
+	"Sheet": "Főcsoport",
+    "HeaderRow": "1:1",
+    "ColumnNameRow": 1,
+    "Tables": [
+      {
+        "Table": "olc_itemmaingroup",
+        "Fields": 
+		[
+          {
+            "Field": "imgt1id",
+            "ColumnName": "Főcsoport Típus 1",
+			"Type": "lookup",
+              "Lookup": {
+                "Table": "olc_itemmaingrouptype1",
+                "KeyField": "groupname",
+				"ValueField": "imgt1id"
+            },
+            "Required": true
+          },{
+            "Field": "code",
+            "ColumnName": "Főcsoport kód U4",
+            "Required": true
+          },{
+            "Field": "name",
+            "ColumnName": "Megnevezés",
+            "Required": true
+          },
+		  {
+            "Field": "imgt2id",
+            "ColumnName": "Főcsoport Típus 2",
+			"Type": "lookup",
+              "Lookup": {
+                "Table": "olc_itemmaingrouptype2",
+                "KeyField": "groupname",
+				"ValueField": "imgt2id"
+            },
+            "Required": true
+          },{
+            "Field": "isrhid",
+            "ColumnName": "Méretsor",
+			"Type": "lookup",
+              "Lookup": {
+                "Table": "olc_itemsizerangehead",
+                "KeyField": "name",
+				"ValueField": "isrhid"
+            }
+          },
+          {
+            "Field": "itemgrpid",
+            "Const": "ARU"
+          }, 
+		  {
+            "Field": "oldcode",
+            "ColumnName": "Csoport kód régi"
+          }
+        ]
+      }
+	],
+    "Dictionaries": [
+    ]
+  },  {
+	"Sheet": "Szezon",
+    "HeaderRow": "1:1",
+    "ColumnNameRow": 1,
+    "Tables": [
+      {
+        "Table": "olc_itemseason",
+        "Fields": 
+		[
+          {
+            "Field": "isid",
+            "ColumnName": "Szezon kód",
+            "Required": true
+          },{
+            "Field": "name",
+            "ColumnName": "Szezon megnevezése",
+            "Required": true
+          },{
+            "Field": "oldcode",
+            "ColumnName": "Alternatív"
+          },	  
+			 
+        ]
+      }
+	],
+    "Dictionaries": [
+    ]
+  },
+  {
     "Sheet": "Cikktörzs",
     "HeaderRow": "1:2",
     "ColumnNameRow": 1,
@@ -28,6 +117,10 @@
             "Field": "itemgrpid", 
 			"Const": "ARU"
           },
+		  {
+            "Field": "custtarid", 
+			"ColumnName": "Vamtarifa_szam_szaml"
+          },
           {
             "Field": "name01",
             "ColumnName": "Termek_Nev_Eladasi",
@@ -36,11 +129,6 @@
           {
             "Field": "unitid",
             "ColumnName": "Mennyisegi_egyseg",
-            "Required": true
-          },
-          {
-            "Field": "note", 
-			"Const": "Megjegyzes"
           },
           {
             "Field": "releasedate",
@@ -59,18 +147,50 @@
           {
             "Field": "catalogpagenumber",
             "ColumnName": "Oszlop1"
+          },{
+            "Field": "webcategory",
+            "ColumnName": "Webes_kategoria"
           },
-		  {
-            "Field": "colortype1",
-            "ColumnName": "Termek_Kod",
-			"SubString": "8,2",
-            "Type": "dictionary",
-			"Lookup": {
-              "TypeKey": "olc_itemmaingroup.ColorType",
-              "KeyField": "str1",
-              "ValueField": "value"
-            },
-          },
+//		  {
+//            "Field": "colortype1",
+//            "ColumnName": "Termek_Kod",
+//			"SubString": "8,2",
+//           "Type": "type",
+//			"Lookup": {
+//             "TypeKey": "olc_itemmaingroup.ColorType",
+//              "KeyField": "str1,str2",
+//              "ValueField": "value"
+//            },
+//          }, 
+//		  {
+//            "Field": "colorname",
+//            "ColumnName": "Termek_Kod",
+//			"SubString": "8,2",
+//            "Type": "type",
+//			"Lookup": {
+//              "TypeKey": "olc_itemmaingroup.ColorType",
+//              "KeyField": "str1,str2",
+//              "ValueField": "name"
+//            },
+//          },
+          {
+            "Field": "note", 
+			"ColumnName": "Megjegyzes"
+          }, {
+            "Field": "patterntype", 
+			"Const": 0
+          }, 
+//		  {
+//            "Field": "isrlid",
+//            "ColumnName": "Termek_Kod",
+//			"SubString": "11",
+//			"Type": "lookup",
+//            "Lookup": {
+//              "Table": "olc_itemsizerangeline",
+//              "KeyField": "size",
+//              "ValueField": "isrlid"
+//            } 
+//          }
         ]
       },
       {
@@ -126,7 +246,23 @@
 		  {
             "Field": "prc",
             "ColumnName": "Szallitoi_ar"
-          }
+          },	  
+		  {
+            "Field": "ptid",
+            "Const": 1
+          },{
+            "Field": "startdate",
+             "Const": "2001.01.01"
+          },{
+            "Field": "enddate",
+             "Const": "2099.12.31"
+          },{
+            "Field": "curid",
+             "Const": "HUF"
+          },{
+            "Field": "prctype",
+             "Const": "1"
+          },
         ]
       },
       {
@@ -135,7 +271,13 @@
           {
             "Field": "extcode",
             "ColumnName": "VonalKod"
-          }
+          },{
+            "Field": "type",
+            "Const": 2
+          },{
+            "Field": "def",
+            "Const": 1
+          },
         ]
       },
       {
@@ -177,6 +319,43 @@
         ]
       }
     ],
+    "Dictionaries": [
+    ]
+  },
+  {
+    "Sheet": "Eladási árak",
+    "HeaderRow": "1:1",
+    "ColumnNameRow": 1,
+    "Tables": [
+      {
+        "Table": "olc_multipleprctable",
+        "Fields": 
+		[
+           {
+            "Field": "itemcode",
+            "ColumnName": "Termek_Kod"
+          },		  
+			{"Field": "Ar1", "ColumnName": "Ar1"},
+			{"Field": "Ar2", "ColumnName": "Ar2"},
+			{"Field": "Ar3", "ColumnName": "Ar3"},
+			{"Field": "Ar4", "ColumnName": "Ar4"},
+			{"Field": "Ar5", "ColumnName": "Ar5"},
+			{"Field": "Ar6", "ColumnName": "Ar6"},
+			{"Field": "Ar7", "ColumnName": "Ar7"},
+			{"Field": "Ar8", "ColumnName": "Ar8"},
+			{"Field": "Ar9", "ColumnName": "Ar9"},
+			{"Field": "Ar10", "ColumnName": "Ar10"},
+			{"Field": "Ar11", "ColumnName": "Ar11"},
+			{"Field": "Ar12", "ColumnName": "Ar12"},
+			{"Field": "Ar13", "ColumnName": "Ar13"},
+			{"Field": "Ar14", "ColumnName": "Ar14"},
+			{"Field": "Ar15", "ColumnName": "Ar15"},
+			{"Field": "Ar16", "ColumnName": "Ar16"},
+			{"Field": "Ar17", "ColumnName": "Ar17"},
+			{"Field": "Ar18", "ColumnName": "Ar18"}
+        ]
+      }
+	],
     "Dictionaries": [
     ]
   }

@@ -12,7 +12,7 @@ namespace eLog.HeavyTools.Masters.Item.Model
     {
         public static new readonly string ID = typeof(ItemSearchProvider3).FullName;
 
-
+         
         protected ItemSearchProvider3() : base()
         {
             ArgsTemplate = MergeQueryArgs(ArgsTemplate, argsTemplate2);
@@ -20,10 +20,10 @@ namespace eLog.HeavyTools.Masters.Item.Model
         
         protected static QueryArg[] argsTemplate2 = new QueryArg[]
         {
-            new QueryArg("imid", "ims", FieldType.String, QueryFlags.Like)
+            new QueryArg("imid", "ims", FieldType.Integer, QueryFlags.Equals)
         };
 
-        protected const string SQL_Fields = @"";
+        protected const string SQL_Fields = @", ic.note note2";
 
         protected const string SQL_Joins = @"
 	left join olc_item ic (nolock) on ic.itemid=itm.itemid

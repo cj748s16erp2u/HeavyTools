@@ -176,6 +176,66 @@ namespace eLog.HeavyTools.Masters.Item
 
         /// <summary>
         /// <para>Field</para>
+        /// ? - int
+        /// </summary>
+        [Field("catalogpagenumber")]
+        public static Field FieldCatalogpagenumber { get; protected set; }
+        /// <summary>
+        /// ? - int
+        /// </summary>
+        public int? Catalogpagenumber
+        {
+            get { return (int?)this[FieldCatalogpagenumber]; }
+            set { this[FieldCatalogpagenumber] = value; }
+        }
+
+        /// <summary>
+        /// <para>Field</para>
+        /// ? - int
+        /// </summary>
+        [Field("iscollectionarticlenumber")]
+        public static Field FieldIscollectionarticlenumber { get; protected set; }
+        /// <summary>
+        /// ? - int
+        /// </summary>
+        public int? Iscollectionarticlenumber
+        {
+            get { return (int?)this[FieldIscollectionarticlenumber]; }
+            set { this[FieldIscollectionarticlenumber] = value; }
+        }
+
+        /// <summary>
+        /// <para>Field</para>
+        /// ? - varchar
+        /// </summary>
+        [Field("webcategory")]
+        public static Field FieldWebcategory { get; protected set; }
+        /// <summary>
+        /// ? - varchar
+        /// </summary>
+        public StringN Webcategory
+        {
+            get { return new StringN(this[FieldWebcategory]); }
+            set { this[FieldWebcategory] = value; }
+        }
+
+        /// <summary>
+        /// <para>Field</para>
+        /// ? - varchar
+        /// </summary>
+        [Field("note")]
+        public static Field FieldNote { get; protected set; }
+        /// <summary>
+        /// ? - varchar
+        /// </summary>
+        public StringN Note
+        {
+            get { return new StringN(this[FieldNote]); }
+            set { this[FieldNote] = value; }
+        }
+
+        /// <summary>
+        /// <para>Field</para>
         /// ? - varchar
         /// </summary>
         [Field("addusrid")]
@@ -202,21 +262,6 @@ namespace eLog.HeavyTools.Masters.Item
         {
             get { return (DateTime?)this[FieldAdddate]; }
             set { this[FieldAdddate] = value; }
-        }
-
-        /// <summary>
-        /// <para>Field</para>
-        /// ? - int
-        /// </summary>
-        [Field("delstat")]
-        public static Field FieldDelstat { get; protected set; }
-        /// <summary>
-        /// ? - int
-        /// </summary>
-        public int? Delstat
-        {
-            get { return (int?)this[FieldDelstat]; }
-            set { this[FieldDelstat] = value; }
         }
 
         #endregion

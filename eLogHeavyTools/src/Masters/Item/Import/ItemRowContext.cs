@@ -13,7 +13,9 @@ namespace eLog.HeavyTools.Masters.Item.Import
         public TableEntry ItemExt { get; internal set; }
         public TableEntry ItemSeason { get; internal set; }
         public TableEntry ItemSup { get; internal set; }
-         
+        public TableEntry MultiplePrcTable { get; internal set; }
+        public TableEntry ItemMainGroup { get; internal set; }
+
         public override void Dispose()
         {
             base.Dispose();
@@ -28,6 +30,8 @@ namespace eLog.HeavyTools.Masters.Item.Import
             this.ItemExt = null;
             this.ItemSeason = null;
             this.ItemSup = null;
+            this.MultiplePrcTable = null;
+            this.ItemMainGroup = null;
         }
     }
 }

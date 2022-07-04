@@ -39,7 +39,7 @@
   </TabPage>
   <Search Name="ItemSearchProvider3">
     <Column FieldName="itemid" Hidden="True" Align="Right" PKFieldName="itemid" />
-    <Column FieldName="itemcode" Width="100" />
+    <Column FieldName="itemcode" Width="140" />
     <Column FieldName="name01" Width="200" />
     <Column FieldName="custtarid" Width="80" Align="Left" />
     <Column FieldName="itemgrpid" Width="80" />
@@ -47,7 +47,7 @@
     <Column FieldName="releasedate" Width="80" Format="D" />
     <Column FieldName="barcode" Width="100" />
     <Column FieldName="cmpcodes_" DisplayName="$cmpcodes" Width="80" />
-    <Column FieldName="note" Width="150" />
+    <Column FieldName="note2" Width="150" />
     <Column FieldName="taxid" Width="100" />
     <Column FieldName="delstat" Width="50" FieldFunction="listlookup" FieldFuncArg="eLog.Base.Setup.Parameters.DelstatTypeList,abbr" />
   </Search>

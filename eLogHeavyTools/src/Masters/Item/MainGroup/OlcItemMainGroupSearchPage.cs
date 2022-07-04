@@ -1,4 +1,5 @@
-﻿using eLog.Base.Common; 
+﻿using eLog.Base.Common;
+using eLog.HeavyTools.Masters.Item.Import;
 using eProjectWeb.Framework;
 using eProjectWeb.Framework.BL;
 using eProjectWeb.Framework.Data;
@@ -115,28 +116,43 @@ namespace eLog.HeavyTools.Masters.Item.MainGroup
         protected override bool PreSave(BLObjectMap objects, Entity e)
         {
             var ee=base.PreSave(objects, e);
-
+           
             var olcitemmaingroup = e as OlcItemMainGroup;
-            if (olcitemmaingroup != null)
-            {
-                if (olcitemmaingroup.State == DataRowState.Added)
-                {
-                    var t1 = OlcItemMainGroupType1.Load(olcitemmaingroup.Imgt1id);
-                    t1.Grouplastnum = t1.Grouplastnum.GetValueOrDefault(0) + 1;
-                    t1.Save();
-                    var num = t1.Grouplastnum.ToString();
-                    if (num.Length < 2)
-                    {
-                        num = "0" + num;
-                    }
-                    if (num.Length > 3)
-                    {
-                        throw new MessageException("$itemmaingrouptoolong");
-                    }
-                    olcitemmaingroup.Code = olcitemmaingroup.Imgt1id + num;
-                }
-            } 
 
+            var ismigrate = false;
+
+            try
+            {
+                ismigrate = (bool)Session.Current[ItemImportService.ItemImportRuning];
+            }
+            catch (System.Exception)
+            {
+                 
+            }
+              
+
+            if (!ismigrate)
+            {
+                if (olcitemmaingroup != null)
+                {
+                    if (olcitemmaingroup.State == DataRowState.Added)
+                    {
+                        var t1 = OlcItemMainGroupType1.Load(olcitemmaingroup.Imgt1id);
+                        t1.Grouplastnum = t1.Grouplastnum.GetValueOrDefault(0) + 1;
+                        t1.Save();
+                        var num = t1.Grouplastnum.ToString();
+                        if (num.Length < 2)
+                        {
+                            num = "0" + num;
+                        }
+                        if (num.Length > 3)
+                        {
+                            throw new MessageException("$itemmaingrouptoolong");
+                        }
+                        olcitemmaingroup.Code = olcitemmaingroup.Imgt1id + num;
+                    }
+                }
+            }
             return ee;
         }
     }

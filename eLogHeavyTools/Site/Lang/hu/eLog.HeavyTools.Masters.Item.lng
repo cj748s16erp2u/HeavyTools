@@ -14,4 +14,19 @@ $patterntype2=Mintázat 2.
 $colorname=Szín neve
 
 
+$catalogpagenumber=Katalógus
+$iscollectionarticlenumber=Gyüjtő cikkszám
+$webcategory=Web kategória
 
+
+$import_importresult=Beolvasás eredménye
+$import_importresult_ok=OK
+ 
+ 
+$errors=Hibák
+$itemimport=CikkImport
+
+$import_columnname_not_unique=A következő oszlop nevek többször kerültek meghatározásra: {0}
+$import_invalidfieldvalue=A '{0}.{1}' mezőbe a '{2}' érték nem menthető\n{3}
+$import_invalidfield=A következő mező '{1}' nem található a '{0}' táblában
+$import_importresult=Beolvasás eredménye

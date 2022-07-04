@@ -13,5 +13,8 @@ namespace eLog.HeavyTools.Masters.Item.Import
         public TableEntry ItemExt { get; set; }
         public TableEntry ItemSeason { get; set; }
         public TableEntry ItemSup { get; set; }
+        public TableEntry MultiplePrcTable { get; set; }
+
+        public TableEntry ItemMainGroup { get; set; }
     }
 }

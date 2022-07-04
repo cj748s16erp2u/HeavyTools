@@ -6,11 +6,6 @@ $error=Hiba
 $errors=Hibák
 $exceptions=Krtikus
 $entity=Adat típus
-$partner=Partner
-$partnaddr=Cím
-$partnaddrcmp=Cím - vállalat
-$partnbank=Bank
-$partnbankcmp=Bank - vállalat
 $import_title=Beolvasás
 $importresult_processedrows={0} sorból {1} beolvasása volt sikeres.
 $importresult_savedrows={0} beolvasott sorból {1} mentése volt sikeres.
@@ -22,12 +17,31 @@ $import_invalidfield=A következő mező '{1}' nem található a '{0}' táblába
 $import_importresult=Beolvasás eredménye
 $import_importresult_ok=OK
 
-
 $itemcoderror=Cikkszám felépítési hiba: {0}
 $missing_imgOldCode=Cikk főcsoport nem található: {0}
 $missing_season=Cikk szezon nem található: {0}
 $itemmodelcreateerror=Model létrehozási hiba: {0}
 $missing_icid=Szín nem található: {0}
 $nonoreicid=Elfogyott a színállás
-$missingpartneroldcode=Beszállító régi kód nem található: {0} 
+$missingpartneroldcode=OK. Beszállító régi kód nem található: {0} 
+$cannotcreatecusttariff=Vámtarifa hiba: {0} 
 
+$pageName_ItemImport=Cikktörzs Excel beolvasás 
+$tabName_ItemImport=Cikktörzs Excel beolvasás 
+
+$action_itemimport=Feltöltés
+
+$missing_item=Hiányzó cikk: {0}
+$missing_prcerror=OK Ár mentési hiba: {0}
+
+$itemimport=CikkImport
+$errors=Hibák
+
+$invalidcolor=Szín nem található
+
+$sessionsaveerror=Szezon mentési hiba: {0}
+$itemmaingroupsaveerror=Főcsoport mentési hiba: {0}
+
+$colornamecannotfound=A szín nem határozható meg a cikkszámból: {0}
+
+$missingisrhid=Nincs méretsor
