@@ -1166,7 +1166,7 @@ namespace eLog.HeavyTools.BankTran
             if (!origcurFieldIndex.HasValue)
                 throw new MessageException("$import_exception_origcurexpected");
 
-            var interfaceId = CustomSettings.GetString("HervisBankStatementImportInterfaceId");
+            var interfaceId = CustomSettings.GetString("SprinterBankStatementImportInterfaceId");
             if (string.IsNullOrWhiteSpace(interfaceId))
             {
                 throw new MessageException("$import_exception_interfaceid_missing");
@@ -1198,6 +1198,100 @@ namespace eLog.HeavyTools.BankTran
             {
                 return importLine + "\t" + eProjectWeb.Framework.Lang.Translator.Translate("$import_error_wrongcurrency");
             }
+
+            error = ImportLine(importCifData, out newCifTrans);
+
+            if (!string.IsNullOrEmpty(error))
+            {
+                return importLine + "\t" + error;
+            }
+            return string.Empty;
+        }
+
+        protected virtual string ImportHervis(string importLine, int? fieldListId, System.Globalization.NumberFormatInfo numberFormat, ImportCifEbankData importCifData, out CifEbankTrans newCifTrans)
+        {
+            newCifTrans = null;
+
+            string[] parts = importLine.Split(new char[] { '\t' });
+
+            if (parts.Length != 3)
+            {
+                return importLine + "\t" + eProjectWeb.Framework.Lang.Translator.Translate("$import_error_numberofcolumns");
+            }
+
+            string[] fieldList = ImportRecordsGetFields(fieldListId.Value);
+            int? ref1NameFieldIndex = null;
+            int? ref2NameFieldIndex = null;
+            int? origvalueFieldIndex = null;
+            int? origcurFieldIndex = null;
+            int? valueaccFieldIndex = null;
+
+            int idx = 0;
+            foreach (string f in fieldList)
+            {
+                if (f.Equals("ref1", StringComparison.OrdinalIgnoreCase))
+                    ref1NameFieldIndex = idx;
+                if (f.Equals("ref2", StringComparison.OrdinalIgnoreCase))
+                    ref2NameFieldIndex = idx;
+                if (f.Equals("origvalue", StringComparison.OrdinalIgnoreCase))
+                    origvalueFieldIndex = idx;
+                if (f.Equals("origcur", StringComparison.OrdinalIgnoreCase))
+                    origcurFieldIndex = idx;
+                if (f.Equals("valueacc", StringComparison.OrdinalIgnoreCase))
+                    valueaccFieldIndex = idx;
+                idx++;
+            }
+
+            if (!ref1NameFieldIndex.HasValue)
+                throw new MessageException("$import_exception_ref1expected");
+
+            if (!valueaccFieldIndex.HasValue)
+                throw new MessageException("$import_exception_valueaccexpected");
+
+            if (!origvalueFieldIndex.HasValue)
+                throw new MessageException("$import_exception_origvalueexpected");
+
+            var interfaceId = CustomSettings.GetString("HervisBankStatementImportInterfaceId");
+            if (string.IsNullOrWhiteSpace(interfaceId))
+            {
+                throw new MessageException("$import_exception_interfaceid_missing");
+            }
+
+            string error = null;
+            decimal decOrigValue = 0.0M;
+            decimal decValueAcc = 0.0M;
+
+            string dVal = parts[1].ToString();
+            if (string.IsNullOrEmpty(dVal))
+            {
+                return importLine + "\t" + eProjectWeb.Framework.Lang.Translator.Translate("$import_error_missingamount");
+            }
+            else
+            {
+                if (!decimal.TryParse(dVal, System.Globalization.NumberStyles.Any, numberFormat, out decValueAcc))
+                {
+                    return importLine + "\t" + eProjectWeb.Framework.Lang.Translator.Translate("$import_error_wrongvalue");
+                }
+            }
+
+            dVal = parts[2].ToString();
+            if (string.IsNullOrEmpty(dVal))
+            {
+                return importLine + "\t" + eProjectWeb.Framework.Lang.Translator.Translate("$import_error_missingamount");
+            }
+            else
+            {
+                if (!decimal.TryParse(dVal, System.Globalization.NumberStyles.Any, numberFormat, out decOrigValue))
+                {
+                    return importLine + "\t" + eProjectWeb.Framework.Lang.Translator.Translate("$import_error_wrongvalue");
+                }
+            }
+
+            importCifData.interfaceId = interfaceId;
+            importCifData.fileId = interfaceId + "_" + DateTime.Now.ToString();
+            importCifData.extRef1 = parts[0].ToString().Length > 32 ? parts[0].ToString().Substring(0, 32) : parts[0].ToString();
+            importCifData.valueAcc = decValueAcc;
+            importCifData.origValue = decOrigValue;
 
             error = ImportLine(importCifData, out newCifTrans);
 
@@ -1261,20 +1355,7 @@ namespace eLog.HeavyTools.BankTran
             decimal decOrigValue = 0.0M;
             decimal decValueAcc = 0.0M;
 
-            string dVal = parts[2].ToString();
-            if (string.IsNullOrEmpty(dVal))
-            {
-                return importLine + "\t" + eProjectWeb.Framework.Lang.Translator.Translate("$import_error_missingamount");
-            }
-            else
-            {
-                if (!decimal.TryParse(dVal, System.Globalization.NumberStyles.Any, numberFormat, out decValueAcc))
-                {
-                    return importLine + "\t" + eProjectWeb.Framework.Lang.Translator.Translate("$import_error_wrongvalue");
-                }
-            }
-
-            dVal = parts[1].ToString();
+            string dVal = parts[1].ToString();
             if (string.IsNullOrEmpty(dVal))
             {
                 return importLine + "\t" + eProjectWeb.Framework.Lang.Translator.Translate("$import_error_missingamount");
@@ -1282,6 +1363,19 @@ namespace eLog.HeavyTools.BankTran
             else
             {
                 if (!decimal.TryParse(dVal, System.Globalization.NumberStyles.Any, numberFormat, out decOrigValue))
+                {
+                    return importLine + "\t" + eProjectWeb.Framework.Lang.Translator.Translate("$import_error_wrongvalue");
+                }
+            }
+
+            dVal = parts[2].ToString();
+            if (string.IsNullOrEmpty(dVal))
+            {
+                return importLine + "\t" + eProjectWeb.Framework.Lang.Translator.Translate("$import_error_missingamount");
+            }
+            else
+            {
+                if (!decimal.TryParse(dVal, System.Globalization.NumberStyles.Any, numberFormat, out decValueAcc))
                 {
                     return importLine + "\t" + eProjectWeb.Framework.Lang.Translator.Translate("$import_error_wrongvalue");
                 }

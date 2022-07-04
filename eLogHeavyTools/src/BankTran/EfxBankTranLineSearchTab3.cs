@@ -201,7 +201,7 @@ namespace eLog.HeavyTools.BankTran
                 U4Ext.Bank.Base.Transaction.CifEbankTrans ct = U4Ext.Bank.Base.Transaction.CifEbankTrans.Load(generatedRecords.First());
                 if (ct != null)
                 {
-                    var msg = eProjectWeb.Framework.Lang.Translator.Translate("$msg_ciftrans_import_success", ct.Fileid, generatedRecords.Count());
+                    var msg = eProjectWeb.Framework.Lang.Translator.Translate("$msg_ciftrans_import_success", ct.Fileid.ToString(), generatedRecords.Count().ToString());
                     args.ShowDialog(dlgSimpleMessage, "$msg_ciftransimport_success_title", msg);
                 }
 

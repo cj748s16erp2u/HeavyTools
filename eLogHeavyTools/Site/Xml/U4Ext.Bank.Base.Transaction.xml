@@ -7,7 +7,7 @@
         <Combo Field="importfields" ListID="eLog.HeavyTools.BankTran.CifEbankTransImportFieldList" ComboFlags="AutoSelectFirst" />
         <Combo Field="importnumberformat" ListID="eLog.Base.Setup.Parameters.NumberFormatTypeList" ComboFlags="AutoSelectFirst" />
         <ForceNextRow />
-        <Textbox Field="multipaste" Rows="5" ColsToSpan="-1" />
+        <Textbox Field="multipaste" Label="$banktransaction_rows" Rows="5" ColsToSpan="-1" />
       </LayoutTable>
       <SearchFilterBar ID="SrcBar">
         <Textbox Field="trtypeid" Width="120" />
