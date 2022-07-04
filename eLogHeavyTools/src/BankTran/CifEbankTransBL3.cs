@@ -867,7 +867,7 @@ namespace eLog.HeavyTools.BankTran
             var k = new Key(U4Ext.Bank.Base.Setup.Bank.EfxBank.FieldInterfaceid.Name, parentCifTrans.Interfaceid);
             U4Ext.Bank.Base.Setup.Bank.EfxBank b = U4Ext.Bank.Base.Setup.Bank.EfxBank.Load(k);
             //U4Ext.Bank.Base.Setup.Bank.EfxBank.EfxBank_BankType
-            if (b.Banktype >= 80)
+            if (b.Banktype >= 60)
                 throw new MessageException("$import_exception_banktypeinvalid");
 
             using (var ns = new eProjectWeb.Framework.Lang.NS(typeof(CifEbankTransBL3).Namespace))
@@ -1112,7 +1112,7 @@ namespace eLog.HeavyTools.BankTran
             importCifData.fileId = interfaceId + "_" + DateTime.Now.ToString();
             importCifData.extRef1 = parts[0].ToString().Length > 32 ? parts[0].ToString().Substring(0, 32) : parts[0].ToString();
             importCifData.extRef2 = parts[1].ToString().Length > 32 ? parts[1].ToString().Substring(0, 32) : parts[1].ToString();
-
+            importCifData.origValue = decOrigValue;
 
             error = ImportLine(importCifData, out newCifTrans);
 

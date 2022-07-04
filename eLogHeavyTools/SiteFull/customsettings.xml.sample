@@ -115,8 +115,8 @@
   <!-- Sprinter banki kivonat import interface nev -->
   <add key="SprinterBankStatementImportInterfaceId" value="U4ERP_SPRINTER" />
   <!-- Hervis banki kivonat import interface nev -->
-  <add key="SprinterBankStatementImportInterfaceId" value="U4ERP_HERVIS" />
+  <add key="HervisBankStatementImportInterfaceId" value="U4ERP_HERVIS" />
   <!-- INTERSPORT banki kivonat import interface nev -->
-  <add key="SprinterBankStatementImportInterfaceId" value="U4ERP_INTERSPORT" />
+  <add key="InterSportBankStatementImportInterfaceId" value="U4ERP_INTERSPORT" />
 
 </configuration>
