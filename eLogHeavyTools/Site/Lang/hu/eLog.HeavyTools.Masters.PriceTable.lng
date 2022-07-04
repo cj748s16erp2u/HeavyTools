@@ -31,3 +31,9 @@ $wringitemid=A megadott cikkszám nem a megadott modellhez tartozik
 $group_modelinfo=Modell adatok
 
 $noroot=Nincs modell kiválasztva
+
+$prctype=Ártípus 2.
+
+$prctype_original=Eredeti
+$prctype_actual=Aktuális
+$prctype_basisofaction=Akció alapja
