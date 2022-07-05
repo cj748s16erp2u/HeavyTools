@@ -3,12 +3,15 @@
   <Search Name="OlcPrctableSearchProvider">
     <Column FieldName="prcid" PKFieldName="prcid" Hidden="true" Width="100" />
     <Column FieldName="name" Width="130" />
-    <Column FieldName="ptid" Width="150" Align="Left" FieldFunction="listlookup" FieldFuncArg="eLog.HeavyTools.Setup.PriceTable.OlcPrcTypeList" />
-    <Column FieldName="startdate" Width="80" format="D" DisplayName="$startdate2" />
+    <Column FieldName="ptid" Width="200" Align="Left" FieldFunction="listlookup" FieldFuncArg="eLog.HeavyTools.Setup.PriceTable.OlcPrcTypeList" />
+ 	<Column FieldName="prctype" Width="100" Align="Left" FieldFunction="listlookup" FieldFuncArg="eLog.HeavyTools.Masters.PriceTable.PrcTypeList" />
+    
+	<Column FieldName="startdate" Width="80" format="D" DisplayName="$startdate2" />
     <Column FieldName="enddate" Width="80" format="D" DisplayName="$enddate2" />
+	
+   <Column FieldName="prc" Width="100" format="C2" />
     <Column FieldName="curid" Width="60" />
 	
-    <Column FieldName="prc" Width="100" format="C2" />
     <Column FieldName="code" Width="80" />
 
     <Column FieldName="isid" Width="100" Align="Left" FieldFunction="listlookup" FieldFuncArg="eLog.HeavyTools.Masters.Item.Season.OlcItemSeasonList" />
@@ -39,7 +42,9 @@
   </TabPage>
   <TabPage Name="OlcPrctableEditTab">
     <LayoutTable ControlGroup="OlcPrctable" Columns="{135, None}; {180, None}; {20, Empty}; {90, None}; {180, None};" ID="EditGroup1">
-      <Combo Field="ptid" Width="100" ListID="eLog.HeavyTools.Setup.PriceTable.OlcPrcTypeList" width="100" />
+      <Combo Field="ptid" Width="200" ListID="eLog.HeavyTools.Setup.PriceTable.OlcPrcTypeList" width="100" />
+      <ForceNextRow />
+	  <Combo Field="prctype" Width="100" ListID="eLog.HeavyTools.Masters.PriceTable.PrcTypeList" width="100" />
       <ForceNextRow />
       <DatePickerbox Field="startdate" Width="100" width="100" />
       <ForceNextRow />

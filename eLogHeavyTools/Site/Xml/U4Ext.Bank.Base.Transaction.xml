@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Schema xmlns="http://tempuri.org/RenderableSchema.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://tempuri.org/RenderableSchema.xsd ../../../../../eLog/Base/Site/Xml/RenderableSchema.xsd">
+    <TabPage Name="EfxBankTranLineSearchTab">
+      <Control ControlType="EfxBankTranHeadInfo" ID="efxBankTranHeadInfo1"/>
+      <Control ControlType="EfxBankTranHeadInfo" ID="efxBankTranHeadInfo1"/>
+      <LayoutTable ControlGroup="multi" Columns="{120, None}; {280, None}; {20, Empty}; {100, None}; {450, None}" ID="multi" Label="$banktransaction_multi" Open="False">
+        <Combo Field="importfields" ListID="eLog.HeavyTools.BankTran.CifEbankTransImportFieldList" ComboFlags="AutoSelectFirst" />
+        <Combo Field="importnumberformat" ListID="eLog.Base.Setup.Parameters.NumberFormatTypeList" ComboFlags="AutoSelectFirst" />
+        <ForceNextRow />
+        <Textbox Field="multipaste" Label="$banktransaction_rows" Rows="5" ColsToSpan="-1" />
+      </LayoutTable>
+      <SearchFilterBar ID="SrcBar">
+        <Textbox Field="trtypeid" Width="120" />
+        <Combo Field="curcode" ListID="CodaInt.Base.Setup.Currency.CurrencyList" Width="120" DependentCtrlID="info.cmpcode" DependentField="cmpcode" />
+        <Textbox Field="partnercode" Width="80" />
+        <Textbox Field="partnernamefrombank" Width="120" />
+        <Textbox Field="partneracnum" Width="120" />
+        <CheckedCombo Field="debcredind" ListID="CodaInt.Base.Setup.Dr.DrLineDebCredTypeList" Width="120"/>
+        <ForceNextRow />
+        <Textbox Field="comment" ColsToSpan="3" />
+        <Combo Field="accresult" ListID="eLog.Base.Setup.Status.StatListProviderPublic#cif_ebank_trans.matched" ComboFlags="AllowBlank" />
+        <CheckedCombo Field="dh_docstat" Label="$docstat" Width="150" ListID="CodaInt.Base.Bookkeeping.Common.CodaBookStatList" />
+        </SearchFilterBar>
+        <Grid ID="searchResults" MultiSelect="True" />
+    </TabPage>
+</Schema>

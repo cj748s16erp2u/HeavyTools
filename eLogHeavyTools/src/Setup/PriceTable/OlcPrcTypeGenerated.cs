@@ -16,10 +16,10 @@ namespace eLog.HeavyTools.Setup.PriceTable
         /// <summary>
         /// <para>Load by primary keys</para>
         /// </summary>
-        /// <param name="tpid"><see cref="int?" /> tpid</param>
-        public static OlcPrcType Load(int? tpid)
+        /// <param name="ptid"><see cref="int?" /> ptid</param>
+        public static OlcPrcType Load(int? ptid)
         {
-            return Load(new Key(new Field[] { FieldTpid }, new object[] { tpid }));
+            return Load(new Key(new Field[] { FieldPtid }, new object[] { ptid }));
         }
 
         #region Field accessors
@@ -28,15 +28,15 @@ namespace eLog.HeavyTools.Setup.PriceTable
         /// <para>Field</para>
         /// ? - int
         /// </summary>
-        [Field("tpid")]
-        public static Field FieldTpid { get; protected set; }
+        [Field("ptid")]
+        public static Field FieldPtid { get; protected set; }
         /// <summary>
         /// ? - int
         /// </summary>
-        public int? Tpid
+        public int? Ptid
         {
-            get { return (int?)this[FieldTpid]; }
-            set { this[FieldTpid] = value; }
+            get { return (int?)this[FieldPtid]; }
+            set { this[FieldPtid] = value; }
         }
 
         /// <summary>

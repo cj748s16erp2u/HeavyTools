@@ -1,0 +1,28 @@
+﻿;Excel import
+$action_importfunc=Kivonat import
+$banktransaction_multi=Kivonat import
+$importfields=Mezők
+$importnumberformat=Számformátum
+$banktransaction_rows=Tételek
+
+$msg_ciftransimport_success_title=Kivonat tétel import
+$msg_ciftrans_import_success=Kivonat tétel import sikeres (Filenév: {0}, Tételszám: {1})
+
+$import_exception_ciftransmising=Hiányzó kivonat tétel
+$import_exception_fieldsunknown=Ismeretlen mező
+$import_exception_fieldsinvalid=Hibás meződefiníció
+$import_exception_banktypeinvalid=Hibás bankkivonat típus
+$import_invalidtype=Ismeretlen import típus
+$import_error_numberofcolumns=Eltérő mezőszám
+$import_exception_ref1expected=Hiányzó referencia 1
+$import_exception_ref2expected=Hiányzó referencia 2
+$import_exception_origvalueexpected=Hiányzó érték
+$import_exception_valueaccexpected=Hiányzó kedvezmény
+$import_exception_origcurexpected=Hiányzó pénznem
+$import_error_missingamount=Hibás összeg
+$import_error_wrongvalue=Nem megfelelő összeg
+$import_error_wrongcurrency=Nem megfelelő pénznem
+
+$import_exception_interfaceid_missing=Interfész azonosító hiányzik
+
+

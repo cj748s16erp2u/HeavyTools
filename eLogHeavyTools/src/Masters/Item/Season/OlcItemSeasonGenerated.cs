@@ -58,6 +58,21 @@ namespace eLog.HeavyTools.Masters.Item.Season
         /// <para>Field</para>
         /// ? - varchar
         /// </summary>
+        [Field("oldcode")]
+        public static Field FieldOldcode { get; protected set; }
+        /// <summary>
+        /// ? - varchar
+        /// </summary>
+        public StringN Oldcode
+        {
+            get { return new StringN(this[FieldOldcode]); }
+            set { this[FieldOldcode] = value; }
+        }
+
+        /// <summary>
+        /// <para>Field</para>
+        /// ? - varchar
+        /// </summary>
         [Field("addusrid")]
         public static Field FieldAddusrid { get; protected set; }
         /// <summary>

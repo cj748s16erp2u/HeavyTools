@@ -18,3 +18,7 @@ values (506, 'olc_location.movloctype', 'Mozgó helykód típusa', 1, 0, 'dev', 
 
 insert into [ols_typehead] (typegrpid, typekey, descr, protect, multipl, addusrid, adddate, delstat)
 values (509, 'olc_partner.InvLangType', 'Partner tulajdonság: számla nyelve', 1, 0, 'dev', GETDATE(),0)
+
+insert ols_typehead (typegrpid, typekey, descr, protect, multipl, addusrid, adddate, delstat)
+values (510, 'cif_ebank_trans.importfields', 'Import Fields', 1, 0, 'dev', getdate(), 0)
+go

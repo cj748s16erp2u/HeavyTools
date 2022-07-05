@@ -13,6 +13,10 @@ olc_whlocation,eLog.HeavyTools.Setup.Warehouse,OlcWhLocation
 olc_itemseason,eLog.HeavyTools.Masters.Item.Season,OlcItemSeason
 olc_item,eLog.HeavyTools.Masters.Item,OlcItem
 olc_itemmodelseason,eLog.HeavyTools.Masters.Item.Model,OlcItemModelSeason
-
 olc_prctype,eLog.HeavyTools.Setup.PriceTable,OlcPrcType
 olc_prctable,eLog.HeavyTools.Masters.PriceTable,OlcPrctable
+
+olc_webshop,eLog.HeavyTools.Webshop,OlcWebshop
+
+olc_sordhead,eLog.HeavyTools.Sales.Sord,OlcSordHead
+olc_sordline,eLog.HeavyTools.Sales.Sord,OlcSordLine

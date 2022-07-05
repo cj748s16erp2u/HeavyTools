@@ -97,7 +97,7 @@ namespace eLog.HeavyTools.Masters.Import.Partner
             }
         }
 
-        private string FormatImportResult(IEnumerable<PartnerBL3.ImportProcessResult> result)
+        private string FormatImportResult(IEnumerable<ImportBase.ImportResult.ImportProcessResult> result)
         {
             if (result == null)
             {

@@ -85,6 +85,13 @@ namespace eLog.HeavyTools.Masters.Item.Model
         {
             codetextbox.Value = rootentity.Code;
             nametextbox.Value = rootentity.Name;
+
+            if (rootentity.Isimported == 1)
+            {
+                buildButton.Disabled = true;
+                saveChangeButton.Disabled = true;
+                noSaveButton.Disabled = true;
+            } 
         }
 
 

@@ -96,8 +96,33 @@
   <!-- NAV szallitoi szamla atvetel -->
   <add key="PinvNAVShowButton" value="no" />
 
-  <!-- Partner betoltes import file leiro helye -->
-  <add key="PartnerImportDescrFileName" value="PartnerImportDescr.json" />
   <!-- Leiro konyvtarak nevei -->
   <add key="ImportDescrFolders" value="..\Site\Json" />
+
+  <!-- Partner betoltes import file leiro helye -->
+  <add key="PartnerImportDescrFileName" value="PartnerImportDescr.json" />
+  
+  <!-- Cikk betoltes import file leiro helye -->
+  <add key="ItemImportDescrFileName" value="ItemImportDescr.json" />
+
+  <!-- FoxPost banki kivonat import file leiro helye -->
+  <add key="FoxPostBankStatementImportDescrFileName" value="FoxPost_HUF_BankStatementImportDescr.json" />
+  <!-- GLS HUF banki kivonat import file leiro helye -->
+  <add key="GLS_HUF_BankStatementImportDescrFileName" value="GLS_HUF_BankStatementImportDescr.json" />
+  <!-- GLS EUR banki kivonat import file leiro helye -->
+  <add key="GLS_EUR_BankStatementImportDescrFileName" value="GLS_EUR_BankStatementImportDescr.json" />
+
+  <!-- FoxPost banki kivonat import interface nev -->
+  <add key="FoxPostBankStatementImportInterfaceId" value="U4ERP_FOXPOST" />
+  <!-- GLS banki kivonat import interface nev -->
+  <add key="GLSBankStatementImportInterfaceId" value="U4ERP_GLS" />
+  <!-- Sprinter banki kivonat import interface nev -->
+  <add key="SprinterBankStatementImportInterfaceId" value="U4ERP_SPRINTER" />
+  <!-- Hervis banki kivonat import interface nev -->
+  <add key="HervisBankStatementImportInterfaceId" value="U4ERP_HERVIS" />
+  <!-- INTERSPORT banki kivonat import interface nev -->
+  <add key="InterSportBankStatementImportInterfaceId" value="U4ERP_INTERSPORT" />
+
+  <!-- Vevoi rendelesen alapertelmezett jovahagyasi ertek -->
+  <add key="SordHeadFefaultApproval" value="10" />
 </configuration>

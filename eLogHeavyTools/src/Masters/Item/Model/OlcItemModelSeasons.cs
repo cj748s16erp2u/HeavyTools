@@ -8,6 +8,6 @@ using System.Threading.Tasks;
 namespace eLog.HeavyTools.Masters.Item.Model
 {
     class OlcItemModelSeasons : EntityCollection<OlcItemModelSeason, OlcItemModelSeasons>
-    {
+    { 
     }
 }

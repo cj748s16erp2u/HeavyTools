@@ -161,6 +161,21 @@ namespace eLog.HeavyTools.Masters.Item.Model
 
         /// <summary>
         /// <para>Field</para>
+        /// ? - int
+        /// </summary>
+        [Field("isimported")]
+        public static Field FieldIsimported { get; protected set; }
+        /// <summary>
+        /// ? - int
+        /// </summary>
+        public int? Isimported
+        {
+            get { return (int?)this[FieldIsimported]; }
+            set { this[FieldIsimported] = value; }
+        }
+
+        /// <summary>
+        /// <para>Field</para>
         /// ? - varchar
         /// </summary>
         [Field("addusrid")]
