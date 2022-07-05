@@ -1,11 +1,12 @@
-﻿using eProjectWeb.Framework.UI.Templates;
+﻿using eLog.HeavyTools.Masters.Item.Model;
+using eProjectWeb.Framework.UI.Templates;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace eLog.HeavyTools.Masters.Item.Model
+namespace eLog.HeavyTools.Masters.Item
 {
     class ItemSearchTab3Info : TabInfoPartTemplate1
     {

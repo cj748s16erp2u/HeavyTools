@@ -413,7 +413,7 @@ namespace eLog.HeavyTools.Masters.Item.Import
                     }
                      
 
-                    var origItemCmps = origItem != null ? ItemCmps2.LoadAll(origItem.PK) : null;
+                    var origItemCmps = origItem != null ? ItemCmps3.LoadAll(origItem.PK) : null;
                     var itemCmps = ItemCmps.New();
                     foreach (var pc in result.ItemCmps)
                     {

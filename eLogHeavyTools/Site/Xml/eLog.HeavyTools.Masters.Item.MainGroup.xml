@@ -90,19 +90,17 @@
     </LayoutTable>
   </TabPage>
   
-  
-  
-  
-  
    <Search Name="OlcItemMainGroupSearchProvider">
-    <Column FieldName="imgidid" PKFieldName="imgidid" Hidden="true" Width="100" />
+    <Column FieldName="imgid" PKFieldName="imgid" Hidden="true" Width="100" />
+	<Column FieldName="groupname1" Width="80" />
     <Column FieldName="code" Width="40" />
     <Column FieldName="name" Width="130" />
     <Column FieldName="groupname2" Width="130" />
     <Column FieldName="isrhname" Width="130" />
     <Column FieldName="itemgrpid" Width="130" />
     <Column FieldName="oldcode" Width="70" />
-  </Search>
+    <Column FieldName="name_eng" Width="150" />
+  </Search> 
   <TabPage Name="OlcItemMainGroupSearchTab">
     <SearchFilterBar ID="SrcBar">
       <Textbox Field="code" Width="100" />
@@ -118,6 +116,8 @@
       <Textbox Field="code" Disabled="true"/>
       <ForceNextRow />
       <Textbox Field="name" />
+	   <ForceNextRow />
+      <Textbox Field="name_eng" />
       <ForceNextRow />
 	  <Combo Field="imgt2id" ListID="eLog.HeavyTools.Masters.Item.MainGroup.OlcItemMainGroupType2List"  />
 	  <ForceNextRow />
