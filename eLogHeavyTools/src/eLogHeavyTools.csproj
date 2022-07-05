@@ -236,6 +236,7 @@
     <Compile Include="Sales\Sord\SordHeadBL3.cs" />
     <Compile Include="Sales\Sord\SordHeadEditTab3.cs" />
     <Compile Include="Sales\Sord\SordHeadSearchProvider3.cs" />
+    <Compile Include="Sales\Sord\SordLineAllBL3.cs" />
     <Compile Include="Sales\Sord\SordLineAllEditTab3.cs" />
     <Compile Include="Sales\Sord\SordLineAllSearchProvider3.cs" />
     <Compile Include="Sales\Sord\SordLineBL3.cs" />

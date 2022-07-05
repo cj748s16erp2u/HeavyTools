@@ -52,31 +52,31 @@
             <Combo Field="paymid" ListID="eLog.Base.Setup.PayMethod.PayMethodList" ComboFlags="None"/>
             <Combo Field="paycid" ListID="eLog.Base.Setup.PayMethod.PayCondList" ComboFlags="AllowBlank" DependentField="paymid" DependentCtrlID="SordHead.paymid"/>
             <ForceNextRow/>
-			<Combo Field="regreprempid" ListID="eLog.Base.Masters.Partner.EmployeeList" ComboFlags="AllowBlank" DependentCtrlID="SordHead.partnid_partncode" DependentField="partnid" CustomData="olc" />
-			<Combo Field="clerkempid" ListID="eLog.Base.Masters.Partner.EmployeeList" ComboFlags="AllowBlank" DependentCtrlID="SordHead.partnid_partncode" DependentField="partnid" CustomData="olc" />
+			<Combo Field="regreprempid" ListID="eLog.Base.Masters.Partner.EmployeeList" ComboFlags="AllowBlank" DependentCtrlID="SordHead.partnid_partncode,#10" DependentField="partnid,valami" CustomData="olc" />
+			<Combo Field="clerkempid" ListID="eLog.Base.Masters.Partner.EmployeeList" ComboFlags="AllowBlank" DependentCtrlID="SordHead.partnid_partncode,#20" DependentField="partnid,valami" CustomData="olc" />
 			<ForceNextRow/>
 			<Numberbox Field="advval" ColsToSpan="4" CustomData="olc"/>
 			<ForceNextRow/>
             <Textbox Field="note" Rows="2" ColsToSpan="4"/>
 			<GroupSeparator ID="webshop" />
-			<Textbox Field="loyaltycardno" ColsToSpan="4" CustomData="olc"/>
+			<Textbox Field="loyaltycardno" ColsToSpan="4" CustomData="olc" Disabled="True"/>
 			<ForceNextRow/>
-			<Combo Field="transfcond" ColsToSpan="1" CustomData="olc" ListID="xml:eLog.Base.Sales.Sord_transfcond" ComboFlags="None" />
+			<Combo Field="transfcond" ColsToSpan="1" CustomData="olc" ListID="xml:eLog.Base.Sales.Sord_transfcond" ComboFlags="None" Disabled="True"/>
 			<ForceNextRow/>
-			<Textbox Field="deliverylocation" ColsToSpan="4" CustomData="olc"/>
+			<Textbox Field="deliverylocation" ColsToSpan="4" CustomData="olc" Disabled="True"/>
 			<ForceNextRow/>
 			<!-- szamlazasi adatok -->
-			<Textbox Field="customername" ColsToSpan="4"/>
+			<Textbox Field="customername" ColsToSpan="4" Disabled="True"/>
 			<ForceNextRow/>
-			<Textbox Field="customercountry" ColsToSpan="4"/>
+			<Textbox Field="customercountry" ColsToSpan="4" Disabled="True"/>
 			<ForceNextRow/>
-			<Textbox Field="customerzipcode" ColsToSpan="4"/>
+			<Textbox Field="customerzipcode" ColsToSpan="4" Disabled="True"/>
 			<ForceNextRow/>
-			<Textbox Field="customercity" ColsToSpan="4"/>
+			<Textbox Field="customercity" ColsToSpan="4" Disabled="True"/>
 			<ForceNextRow/>
-			<Textbox Field="customeraddress" ColsToSpan="4"/>
+			<Textbox Field="customeraddress" ColsToSpan="4" Disabled="True"/>
 			<ForceNextRow/>
-			<Textbox Field="couponcode" ColsToSpan="4"/>
+			<Textbox Field="couponcode" ColsToSpan="4" Disabled="True"/>
 			<ForceNextRow/>
         </LayoutTable>
         <LayoutTable ControlGroup="SordLine" Columns="{120, None}; {120, None}; {20, Empty}; {120, None}; {120, None}; {20, Empty}; {120, None}; {120, None}" ID="EditGroup2" Label="$sordline_editgroup">
@@ -210,7 +210,8 @@
             <CheckedCombo Field="sordstat" Width="120" Label="$sordstat_filter" ListID="eLog.Base.Sales.Sord.SordHeadStatList" ComboFlags="None"/>
             <CheckedCombo Field="sordlinestat" Width="120" Label="$sordlinestat_filter" ListID="eLog.Base.Sales.Sord.SordLineStatList" ComboFlags="None"/>
             <Checkbox Field="partialdelivery" ColsToSpan="3"/>
-            <ForceNextRow/>
+			<ForceNextRow/>
+			<Textbox Field="ref2" Width="120"/>
             <CheckedCombo Field="projid" ListID="eLog.Base.Project.ProjectList" ComboFlags="None" DependentField="cmpid" DependentCtrlID="q.cmpid" Width="120"/>
             <Combo Field="pendingst" Label="$filter_pendingst" Width="120" ComboFlags="AllowBlank" ListID="xml:eLog.Base.Sales.Sord_PendingSt"/>
             <Combo Field="addusrid" Width="120" ListID="eProjectWeb.Framework.UI.Maintenance.User.UserList" ComboFlags="None"/>
@@ -236,8 +237,8 @@
         <Column FieldName="whid" Width="50"/>
         <Column FieldName="curid" Width="50"/>
         <Column FieldName="netval" Width="100" Format="C2"/>
+		<Column FieldName="remnetval" Width="100" Format="C2"/>
         <Column FieldName="totval" Width="100" Format="C2"/>
-        <Column FieldName="remnetval" Width="100" Format="C2"/>
         <Column FieldName="remtotval" Width="100" Format="C2"/>
         <Column FieldName="note" Width="150"/>
         <Column FieldName="ref1" Width="100"/>
@@ -254,11 +255,11 @@
         <!--<Column FieldName="itemid_name3" Width="200" />-->
         <Column FieldName="itemid_name1" Width="200"/>
         <Column FieldName="reqdate" Width="80" Format="D"/>
+		<Column FieldName="confdeldate" Width="80"/>
         <Column FieldName="remqty" Width="90" Format="C2"/>
         <Column FieldName="remnetval" Width="90" Format="C2"/>
         <Column FieldName="selprc" Width="80"/>
         <Column FieldName="ordqty" Width="68"/>
-		<Column FieldName="confdeldate" Width="80"/>
         <Column FieldName="confqty" Width="80"/>
         <Column FieldName="movqty" Width="68"/>
         <Column FieldName="ordered" Width="85"/>
@@ -283,20 +284,19 @@
         <Column FieldName="sorddocid" Width="80"/>
         <Column FieldName="docnum" Width="90"/>
         <Column FieldName="linenum" Width="30"/>
-        <Column FieldName="sorddate" Width="68" Format="D"/>
         <Column FieldName="partncode" Width="80"/>
         <Column FieldName="partnname" Width="200"/>
         <Column FieldName="itemid_code" Width="100"/>
         <!--<Column FieldName="itemid_name3" Width="200" />-->
         <Column FieldName="itemid_name1" Width="200"/>
         <Column FieldName="reqdate" Width="80" Format="D"/>
+		<Column FieldName="confdeldate" Width="80" Format="D"/>
         <Column FieldName="remqty2" DisplayName="$remqty" Width="90" Format="C2"/>
         <Column FieldName="remnetval" Width="90" Format="C2"/>
         <Column FieldName="selprc" Width="80"/>
         <Column FieldName="ordqty" Width="68"/>
         <Column FieldName="movqty" Width="68"/>
 		<Column FieldName="confqty" Width="68"/>
-		<Column FieldName="confdeldate" Width="80"/>
         <Column FieldName="sl_resqty" Width="68"/>
         <Column FieldName="freeqty" Width="68"/>
         <Column FieldName="movableqty" Width="68"/>
@@ -312,6 +312,7 @@
         <Column FieldName="projcode" Width="60"/>
         <Column FieldName="projname" Width="150"/>
         <Column FieldName="addusrid" Width="100"/>
+		<Column FieldName="sorddate" Width="68" Format="D"/>
         <Column FieldName="adddate" Width="120" Format="DT"/>
     </Search>
    

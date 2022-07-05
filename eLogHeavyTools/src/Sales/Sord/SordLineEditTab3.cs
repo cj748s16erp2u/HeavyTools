@@ -36,7 +36,7 @@ namespace eLog.HeavyTools.Sales.Sord
 
             if (args.ActionID != ActionID.New && e != null)
             {
-                var olc = OlcSordLine.Load(e.Sordid);
+                var olc = OlcSordLine.Load(e.Sordlineid);
                 if (olc != null)
                 {
                     foreach (var c in this.OlcControls)

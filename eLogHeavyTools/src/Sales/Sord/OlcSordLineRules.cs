@@ -4,6 +4,7 @@
     {
         public OlcSordLineRules() : base(true, false)
         {
+            this.ERules[OlcSordLine.FieldSordlineid.Name].Mandatory = false;
         }
     }
 }
