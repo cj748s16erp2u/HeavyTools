@@ -3,6 +3,7 @@
   <Search Name="OlcItemColorSearchProvider">
     <Column FieldName="icid" PKFieldName="icid" Hidden="false" Width="100" />
     <Column FieldName="name" Width="130" />
+    <Column FieldName="oldcode" Width="80" />
 	<Column FieldName="delstat" Width="60" Align="Left" FieldFunction="listlookup" FieldFuncArg="eLog.Base.Setup.Parameters.DelstatTypeList,abbr" />
   </Search>
   <TabPage Name="OlcItemColorSearchTab">
@@ -18,7 +19,8 @@
       <Textbox Field="icid" />
       <ForceNextRow />
       <Textbox Field="name" />
-      <ForceNextRow />
+      <ForceNextRow />    
+	  <Intbox Field="oldcode" /> 
     </LayoutTable>
   </TabPage>
 </Schema>

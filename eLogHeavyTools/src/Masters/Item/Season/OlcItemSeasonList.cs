@@ -11,7 +11,14 @@ namespace eLog.HeavyTools.Masters.Item.Season
     {
         public static readonly string ID = typeof(OlcItemSeasonList).FullName;
 
-        protected static string m_queryString = @"select isid, name, delstat from olc_itemseason where delstat=0 order by isid desc";
+        protected static string m_queryString = @"select * from (
+	select distinct its.isid, name, its.delstat 
+	  from olc_itemseason its 
+	  join olc_itemmodelseason ims on ims.isid=its.isid
+	 where its.delstat=0
+	   --where
+) x order by substring(isid,2,2) desc , substring(isid,1,1) 
+";
 
         protected static ListColumn[] m_columns = new ListColumn[] {
             new ListColumn("isid", 0),
@@ -19,6 +26,7 @@ namespace eLog.HeavyTools.Masters.Item.Season
             new ListColumn("delstat", 0),
         };
 
+        
         public OlcItemSeasonList()
             : base(m_queryString, m_columns)
         {
@@ -26,6 +34,21 @@ namespace eLog.HeavyTools.Masters.Item.Season
             TextFieldName = "name";
             ShowCodeFieldName = "isid";
             SearchFieldNames = "isid,name";
+        }
+
+        protected override string GetQuerySql(Dictionary<string, object> args)
+        {
+            var sql = base.GetQuerySqlArgs(args, new QueryArg[0]);
+
+            if (args != null)
+            {
+                if (args.ContainsKey("imid"))
+                {
+                    sql = sql.Replace("--where", " and imid= " + args["imid"]);
+                }
+            }
+
+            return sql;
         }
     }
 }

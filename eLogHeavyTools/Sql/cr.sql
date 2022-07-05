@@ -93,13 +93,15 @@ go
 create table olc_itemmodel (
 	imid 	    		int identity(1, 1),
 	imgid 	    		int not null,
-	code				varchar(6) NOT NULL,
+	code				varchar(8) NOT NULL,
 	name				varchar(200) NOT NULL,
 	unitid				varchar(12) NOT NULL,
 	exclusivetype		int,
 	netweight			numeric(19, 6),
 	grossweight			numeric(19, 6),
 	volume				numeric(19, 6),
+	
+	isimported 			int,
 	
 	addusrid			varchar(12),
 	adddate				datetime,
@@ -116,7 +118,8 @@ go
 create table olc_itemcolor (
 	icid 	    		varchar(3),
 	name				varchar(200) NOT NULL,	
- 
+	oldcode				int null,
+	
 	addusrid			varchar(12),
 	adddate				datetime,
 	delstat				int not null,
@@ -131,7 +134,7 @@ go
 create table olc_itemseason (
 	isid 	    		varchar(12) NOT NULL,
 	name				varchar(200) NOT NULL,
-
+	oldcode 			varchar(12),
 	addusrid			varchar(12),
 	adddate				datetime,
 	delstat				int not null,
@@ -174,10 +177,11 @@ create table olc_item (
 	materialtype		int,
 	patterntype			int,
 	patterntype2		int,
-	
+	catalogpagenumber	int null, 
+	iscollectionarticlenumber int null,
+	note 				varchar(2000),
 	addusrid			varchar(12),
 	adddate				datetime,
-	delstat				int not null,
 	constraint pk_olc_item primary key (itemid),
 	constraint fk_olc_item_imsid foreign key (imsid) references olc_itemmodelseason(imsid),
 	constraint fk_olc_item_isrlid foreign key (isrlid) references olc_itemsizerangeline(isrlid),
@@ -189,7 +193,7 @@ go
 	Modell ártábla típus
 */
 create table olc_prctype (
-	tpid				int identity(1, 1), 
+	ptid				int identity(1, 1), 
 	name				varchar(100) not null,
 
 	isnet				int not null,
@@ -197,9 +201,11 @@ create table olc_prctype (
 	addusrid			varchar(12),
 	adddate				datetime,
 	delstat				int not null,
-	constraint pk_olc_prctypen primary key (tpid), 
+	constraint pk_olc_prctypen primary key (ptid), 
 	constraint fk_olc_prctype_addusrid foreign key (addusrid) references cfw_user(usrid)
 )
+
+
 
 
 /*
@@ -207,7 +213,10 @@ create table olc_prctype (
 */
 create table olc_prctable (
 	prcid				int identity(1, 1),
-	tpid 	    		int not null,
+	ptid 	    		int not null,
+
+	prctype             int not null,  /* 0 Eredeti ár, 1 Aktuális ár, 2 Akció alapja */
+	wid					varchar(12) null,
 
 	partnid				int null,
 	addrid				int null,
@@ -226,7 +235,7 @@ create table olc_prctable (
 	delstat				int not null,
 
 	constraint pk_olc_prctable primary key (prcid),
-	constraint fk_olc_prctable_tpid foreign key (tpid) references olc_prctype(tpid),
+	constraint fk_olc_prctable_tpid foreign key (ptid) references olc_prctype(ptid),
 	constraint fk_olc_prctable_partnid foreign key (partnid) references ols_partner(partnid),
 	constraint fk_olc_prctable_addrid foreign key (addrid) references ols_partnaddr(addrid),
 	constraint fk_olc_prctable_curid foreign key (curid) references ols_currency(curid), 
@@ -234,6 +243,7 @@ create table olc_prctable (
 	constraint fk_olc_prctable_isid foreign key (isid) references olc_itemseason(isid),
 	constraint fk_olc_prctable_icid foreign key (icid) references olc_itemcolor(icid),
 	constraint fk_olc_prctable_itemid foreign key (itemid) references ols_item(itemid), 
+	constraint fk_olc_prctable_wid foreign key (wid) references olc_webshop(wid), 
 	constraint fk_olc_prctable_addusrid foreign key (addusrid) references cfw_user(usrid)
 )
 go
@@ -363,3 +373,31 @@ create unique index uq_olc_whlocation_whloccode on olc_whlocation (whid, whzonei
 create index idx_olc_whlocation_loctype on olc_whlocation (whid, whzoneid, loctype)
 go
 
+/*
+	Webshop tábla
+*/
+create table olc_webshop (
+	wid					int identity(1, 1),
+	sname				varchar(12),
+	name				varchar(100),
+	
+	addusrid			varchar(12),
+	adddate				datetime,
+	delstat				int not null,
+
+	constraint pk_olc_webshop primary key (wid),
+	constraint fk_olc_webshop_addusrid foreign key (addusrid) references cfw_user(usrid)
+)
+go
+
+
+insert into olc_webshop values ('cz', '.cz webshop','dev',GETDATE(),0)
+insert into olc_webshop values ('sk', '.sk webshop','dev',GETDATE(),0)
+insert into olc_webshop values ('ro', '.ro webshop','dev',GETDATE(),0)
+insert into olc_webshop values ('com','.com webshop','dev',GETDATE(),0)
+insert into olc_webshop values ('hu','.hu webshop','dev',GETDATE(),0)
+
+
+ go
+ 
+ 

@@ -882,6 +882,30 @@ namespace eLog.HeavyTools.ImportBase
             {
                 value = this.DetermineColumnValueLeft(rowContext, rowContext.CurrentField.Left.Value, value);
             }
+            if (value != null && !string.IsNullOrEmpty(rowContext.CurrentField.SubString))
+            {
+                var pars = rowContext.CurrentField.SubString.Split(',');
+                if (pars.Length == 2)
+                {
+                    var startIndex = int.Parse(pars[0]);
+                    var length = int.Parse(pars[1]); 
+                    var str = ConvertUtils.ToString(value);
+                    var len = str.Length;
+                    if (len > startIndex + length)
+                    {
+                        value = str.Substring(startIndex, length);
+                    }
+                } else if (pars.Length == 1)
+                {
+                    var startIndex = int.Parse(pars[0]); 
+                    var str = ConvertUtils.ToString(value);
+                    var len = str.Length;
+                    if (len > startIndex)
+                    {
+                        value = str.Substring(startIndex);
+                    }
+                }
+            }
 
             if (rowContext.CurrentField.Type.HasValue)
             {
@@ -983,7 +1007,16 @@ namespace eLog.HeavyTools.ImportBase
 from [ols_typehead] [th] (nolock)
   join [ols_typeline] [tl] (nolock) on [tl].[typegrpid] = [th].[typegrpid]
 where [th].[typekey] = {Utils.SqlToString(lookup.TypeKey)}
-  and [tl].[{lookup.KeyField}] = {Utils.SqlToString(value)}";
+  and (";
+
+            var sep = "";
+            foreach (string kf in lookup.KeyField.Split(','))
+            {
+                sql += sep + $"[tl].[{kf}] = {Utils.SqlToString(value)}";
+                sep = " or ";
+            }
+
+            sql += ")";
 
             o = SqlDataAdapter.ExecuteSingleValue(DB.Main, sql);
 

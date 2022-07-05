@@ -11,7 +11,7 @@ namespace eLog.HeavyTools.Masters.Item.Season
     {
         internal static OlcItemSeasons LoadOrderBy(Key k)
         {
-            var sql = string.Format("select * from {0} (nolock) where {1} order by isid desc", Entity<OlcItemSeason>._TableName, k.ToSql());
+            var sql = string.Format("select top 20 * from {0} (nolock) where {1} order by substring(isid,2,2) desc , substring(isid,1,1)", Entity<OlcItemSeason>._TableName, k.ToSql());
 
             var lines = New();
             SqlDataAdapter.FillDataSet(Entity<OlcItemSeason>.Descriptor.DBConnID, lines, sql);

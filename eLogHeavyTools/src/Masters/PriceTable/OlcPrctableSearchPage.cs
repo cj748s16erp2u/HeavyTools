@@ -72,13 +72,24 @@ namespace eLog.HeavyTools.Masters.PriceTable
             }
 
             sql += " and ptid=" + pt.Ptid;
+            sql += " and prctype='" + pt.Prctype + "'";
             sql += " and curid='" + pt.Curid + "'";
+
+
+            if (string.IsNullOrEmpty(pt.Wid))
+            {
+                sql += " and wid is null";
+            }
+            else
+            {
+                sql += " and wid='" + pt.Wid + "'";
+            }
 
             AddIntNullFilter(ref sql, OlcPrctable.FieldPartnid, pt);
             AddIntNullFilter(ref sql, OlcPrctable.FieldAddrid, pt);
             AddIntNullFilter(ref sql, OlcPrctable.FieldImid, pt);
-            AddIntNullFilter(ref sql, OlcPrctable.FieldImid, pt);
-
+            AddIntNullFilter(ref sql, OlcPrctable.FieldImid, pt); 
+            AddIntNullFilter(ref sql, OlcPrctable.FieldItemid, pt);
 
 
             sql += string.Format("  and ( convert(datetime, '{0}')  <=  enddate and convert(datetime, '{1}') >= startdate )",

@@ -9,7 +9,7 @@ using eProjectWeb.Framework.BL;
 using eProjectWeb.Framework.Data;
 using eProjectWeb.Framework.Extensions;
 using eProjectWeb.Framework.Lang;
-using OfficeOpenXml;
+using Utils = eProjectWeb.Framework.Utils;
 using OfficeOpenXml.FormulaParsing.Excel.Functions.Text;
 
 namespace eLog.HeavyTools.Masters.Partner.Import

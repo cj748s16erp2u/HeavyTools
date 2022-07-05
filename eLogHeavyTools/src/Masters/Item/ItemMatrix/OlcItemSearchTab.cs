@@ -158,19 +158,30 @@ namespace eLog.HeavyTools.Masters.Item.ItemMatrix
 
         Textbox codetextbox = new Textbox("code") { Disabled = true };
         Textbox nametextbox = new Textbox("name") { Disabled = true };
-        Combo session = new Combo("isid", OlcItemSeasonList.ID);
+
+        Intbox imidintbox = new Intbox("imid") { Disabled = true };
+
+        Combo session = new Combo("isid", OlcItemSeasonList.ID) { DependentField = "imid", DependentCtrlID = "imid" };
       
         protected override void SetupHeader(LayoutTable layout)
         {
             layout.AddControl(codetextbox);
             layout.AddControl(nametextbox);
             layout.AddControl(session);
+            layout.AddControl(imidintbox);
 
         }
         protected override void SetupRootKey(OlcItemModel rootentity)
         {
             codetextbox.Value = rootentity.Code;
             nametextbox.Value = rootentity.Name;
+            imidintbox.Value = rootentity.Imid;
+            if (rootentity.Isimported == 1)
+            {
+                buildButton.Disabled = true;
+                saveChangeButton.Disabled = true;
+                noSaveButton.Disabled = true;
+            }
         }
 
         private const string sessionValue = "session.Value";
