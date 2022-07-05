@@ -1376,7 +1376,7 @@ where {key.ToSql("[t]")}";
             if (rowContext.CurrentField.Columns?.Any(c => c.Valid) == true)
             {
                 var bldr = new StringBuilder();
-                foreach (var c in rowContext.CurrentField.Columns.Where(c => c.Valid))
+                foreach (var c in rowContext.CurrentField.Columns.Where(c => c.Valid && c.ColumnIndex != null))
                 {
                     var val = ConvertUtils.ToString(this.DetermineColumnValue(rowContext, c.ColumnIndex.Value));
                     if (!string.IsNullOrWhiteSpace(val))

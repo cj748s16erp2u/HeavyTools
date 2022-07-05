@@ -1,0 +1,61 @@
+[
+  {
+    "Sheet": "Daily",
+    "HeaderRow": "1:8",
+    "ColumnNameRow": 8,
+    "Ignore": false,
+    "Tables": [
+      {
+
+        "Table": "cif_ebank_trans",
+        "Fields": [
+          {
+            "Field": "doccode",
+            "Const": ""
+          },
+          {
+            "Field": "docnum",
+            "Const": ""
+          },
+          {
+            "Field": "status",
+            "Const": 111
+          },
+          {
+            "Field": "trid",
+            "ColumnName": "Megrendelés száma"
+          },
+          {
+            "Field": "curcode",
+            "Const": "EUR"
+          },
+          {
+            "Field": "valuedoc",
+            "ColumnName": "Utánvét összeg"
+          },
+          {
+            "Field": "origcur",
+            "Const": "EUR"
+          },
+          {
+            "Field": "origvalue",
+            "ColumnName": "Utánvét összeg"
+             
+          },
+          {
+            "Field": "linedescr",
+            "ColumnName": "Levelezési cím"
+          },
+          {
+            "Field": "partnernamefrombank",
+            "ColumnName": "Levelezési cím"
+          },
+          {
+            "Field": "errorcode",
+            "ColumnName": "Kiszállítási dátum"
+          }
+        ]
+      }
+    ]
+  }
+]
