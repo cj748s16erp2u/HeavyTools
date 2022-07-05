@@ -123,4 +123,6 @@
   <!-- INTERSPORT banki kivonat import interface nev -->
   <add key="InterSportBankStatementImportInterfaceId" value="U4ERP_INTERSPORT" />
 
+  <!-- Vevoi rendelesen alapertelmezett jovahagyasi ertek -->
+  <add key="SordHeadFefaultApproval" value="10" />
 </configuration>

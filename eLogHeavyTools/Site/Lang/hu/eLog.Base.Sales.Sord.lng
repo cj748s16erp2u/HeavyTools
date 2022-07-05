@@ -1,0 +1,29 @@
+$webshop=Webes rendelés
+$loyaltycardno=Törzskártya
+
+$transfcond=Szállítási feltétel
+$transfcond_gls=GLS
+$transfcond_foxpost=FOXPOST
+$transfcond_store=Bolt
+$transfcond_address=Cím
+
+$deliverylocation=Csomagpont
+$customername=Szállítási név
+$customercountry=Szállítási ország
+$customerzipcode=Szállítási irányítószám
+$customercity=Szállítási település
+$customeraddress=Szállítási cím
+
+$couponcode=Kupon kód
+
+$regreprempid=Ter. képviselő
+$clerkempid=Ügyintéző
+$advval=Előleg összege
+
+$sordapprovalstat=Jóváhagyás
+
+$confqty=Visszaigazolt mennyiség
+$confdeldate=Visszaigazolt száll. hat. idő
+
+$sordapprovalstat_filter=Jóváhagyás státusz
+$confdeldatefrom=Visszaigazolt határidő
