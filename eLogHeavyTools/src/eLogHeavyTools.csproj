@@ -194,6 +194,7 @@
     <Compile Include="Masters\Item\Season\OlcItemSeasons.cs" />
     <Compile Include="Masters\Item\Season\OlcItemSeasonGenerated.cs" />
     <Compile Include="Masters\Item\Season\OlcItemSeasonSearchPage.cs" />
+    <Compile Include="Masters\Partner\EmployeeList3.cs" />
     <Compile Include="Masters\Partner\OlcEmployeeRules.cs" />
     <Compile Include="Masters\Partner\OlcPartnAddrRules.cs" />
     <Compile Include="Masters\PriceTable\OlcPrctable.cs" />
