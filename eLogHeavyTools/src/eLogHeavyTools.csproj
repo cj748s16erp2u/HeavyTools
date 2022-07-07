@@ -98,6 +98,8 @@
     <Reference Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Common\Transate\ITranslateController.cs" />
+    <Compile Include="Common\Transate\TranslateController.cs" />
     <Compile Include="BankTran\CifEbankTransBL3.cs" />
     <Compile Include="BankTran\CifEbankTransImportFieldList.cs" />
     <Compile Include="BankTran\EfxBankTranLineSearchTab3.cs" />
@@ -157,8 +159,8 @@
     <Compile Include="Masters\Item\Import\ItemRowContext.cs" />
     <Compile Include="Masters\Item\Import\OlcMultiplePrcTable.cs" />
     <Compile Include="Masters\Item\ItemBL3.cs" />
-    <Compile Include="Masters\Item\ItemCmps2.cs" />
-    <Compile Include="Masters\Item\ItemEditTab2.cs" />
+    <Compile Include="Masters\Item\ItemCmps3.cs" />
+    <Compile Include="Masters\Item\ItemEditTab3.cs" />
     <Compile Include="Masters\Item\ItemExts.cs" />
     <Compile Include="Masters\Item\ItemMatrix\Items.cs" />
     <Compile Include="Masters\Item\ColorTypeList.cs" />
@@ -187,9 +189,9 @@
     <Compile Include="Masters\Item\MainGroup\OlcItemSizeRangeSearchPage.cs" />
     <Compile Include="Masters\Item\MaterialTypeList.cs" />
     <Compile Include="Masters\Item\Model\ExclusiveTypeList.cs" />
-    <Compile Include="Masters\Item\Model\ItemSearchProvider3.cs" />
-    <Compile Include="Masters\Item\Model\ItemSearchTab3.cs" />
-    <Compile Include="Masters\Item\Model\ItemSearchTab3Info.cs" />
+    <Compile Include="Masters\Item\ItemSearchProvider3.cs" />
+    <Compile Include="Masters\Item\ItemSearchTab3.cs" />
+    <Compile Include="Masters\Item\ItemSearchTab3Info.cs" />
     <Compile Include="Masters\Item\Model\OlcItemModelAllList.cs" />
     <Compile Include="Masters\Item\Model\OlcItemModelList.cs" />
     <Compile Include="Masters\Item\Model\OlcItemModelSearchPage.cs" />

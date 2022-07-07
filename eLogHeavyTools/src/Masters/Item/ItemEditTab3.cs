@@ -14,12 +14,12 @@ using System.Web.UI;
 
 namespace eLog.HeavyTools.Masters.Item
 {
-    public class ItemEditTab2 : ItemEditTab
+    public class ItemEditTab3 : ItemEditTab
     {
         protected LayoutTable olcGroup;
 
         protected Combo imgid;
-        public ItemEditTab2()
+        public ItemEditTab3()
         {
         }
 

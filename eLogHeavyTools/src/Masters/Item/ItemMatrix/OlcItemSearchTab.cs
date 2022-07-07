@@ -39,17 +39,19 @@ namespace eLog.HeavyTools.Masters.Item.ItemMatrix
                     new MatrixField(OlcItemSizeRangeLine.FieldIsrlid, OlcItemSizeRangeLine.FieldSize),
                     ItemBL.ID
                     );
-            var c1 = new MatrixEditItem<Combo>(new Field("colortype1", FieldType.Integer), ColorSetup1) { Mandatory = true, ReadOnly = true };
+            var c1 = new MatrixEditItem<Combo>(new Field("colortype1", FieldType.Integer), ColorSetup1) { Mandatory = true};
             matrixTabPageData.EditItems.Add(c1);
             matrixTabPageData.EditItems.Add(new MatrixEditItem<Combo>(new Field("colortype2", FieldType.Integer), ColorSetup));
             matrixTabPageData.EditItems.Add(new MatrixEditItem<Combo>(new Field("colortype3", FieldType.Integer), ColorSetup));
 
             matrixTabPageData.EditItems.Add(new MatrixEditItem<Textbox>(new Field("colorname", FieldType.String), ColorTextSetup) { Mandatory = true, ReadOnly = true, WriteValueFromComboOnChange = c1 });
-            matrixTabPageData.EditItems.Add(new MatrixEditItem<Combo>(new Field("patterntype", FieldType.Integer), PatternSetup) { Mandatory = true, ReadOnly = true });
+            matrixTabPageData.EditItems.Add(new MatrixEditItem<Combo>(new Field("patterntype", FieldType.Integer), PatternSetup) { Mandatory = true});
             matrixTabPageData.EditItems.Add(new MatrixEditItem<Combo>(new Field("patterntype2", FieldType.Integer), PatternSetup));
              
             matrixTabPageData.EditItemsTop.Add(new MatrixEditItem<Combo>(new Field("materialtype", FieldType.Integer), MaterialSetup));
             matrixTabPageData.EditItemsTop.Add(new MatrixEditItem<Combo>(new Field("custtarid", FieldType.Integer), CusttarSetup));
+            matrixTabPageData.EditItemsTop.Add(new MatrixEditItem<Textbox>(new Field("webcategory", FieldType.String)));
+            matrixTabPageData.EditItemsTop.Add(new MatrixEditItem<Intbox>(new Field("catalogpagenumber", FieldType.String)));
 
 
             MatrixFirstCellWidth = 115;
@@ -112,9 +114,15 @@ namespace eLog.HeavyTools.Masters.Item.ItemMatrix
             }
             var img = OlcItemMainGroup.Load(im.Imgid);
 
-            return OlcItemSizeRangeLines.Load(new Key() {
+            var sizes= OlcItemSizeRangeLines.Load(new Key() {
                 { OlcItemSizeRangeLine.FieldDelstat.Name, 0 },
                 { OlcItemSizeRangeLine.FieldIsrhid.Name, img.Isrhid} });
+
+
+            sizes.Add(new OlcItemSizeRangeLine { Isrlid= int.MaxValue-1, Ordernum = int.MaxValue - 1, Size = "GY" });
+            sizes.Add(new OlcItemSizeRangeLine { Isrlid = int.MaxValue, Ordernum = int.MaxValue, Size = "GY2" });
+
+            return sizes;
         }
 
         private const string SesionImid = "SesionImid";
@@ -196,10 +204,16 @@ namespace eLog.HeavyTools.Masters.Item.ItemMatrix
 
             };
 
-            var sql = string.Format(@"select ci.* 
-                                      from olc_item ci
-                                      join olc_itemmodelseason ims on ims.imsid=ci.imsid 
-                                        where {0}", k.ToSql());
+            var sql = string.Format(@"select  ci.itemid,ci.imsid,
+case when isnull(iscollectionarticlenumber,0)=0 then isrlid else 
+ case when itemcode like '%.GY' then 2147483646 
+      when itemcode like '%.GY2' then 2147483647 else null end 
+ end isrlid,
+colortype1,colorname,colortype2,colortype3,materialtype,patterntype,patterntype2,catalogpagenumber,iscollectionarticlenumber,webcategory,ci.note,ci.addusrid,ci.adddate
+            from olc_item ci
+            join olc_itemmodelseason ims on ims.imsid=ci.imsid
+			join ols_item i on i.itemid=ci.itemid
+            where {0}", k.ToSql());
 
             var ics = OlcItems.New();
             SqlDataAdapter.FillDataSet(DB.Main, ics, sql);
@@ -239,9 +253,24 @@ namespace eLog.HeavyTools.Masters.Item.ItemMatrix
                 {
                     throw new MessageException("$missingcolortype1");
                 }
-                 
 
-                var srl = OlcItemSizeRangeLine.Load(olcitem.Isrlid);
+                string size;
+                if (olcitem.Isrlid.Value == int.MaxValue)
+                {
+                    size = "GY2";
+                    olcitem.Isrlid = null;
+                    olcitem.Iscollectionarticlenumber = 1;
+                }
+                else if (olcitem.Isrlid.Value == int.MaxValue - 1)
+                {
+                    size = "GY";
+                    olcitem.Isrlid = null;
+                    olcitem.Iscollectionarticlenumber = 1;
+                } else {
+                    var srl = OlcItemSizeRangeLine.Load(olcitem.Isrlid);
+                    size = srl.Size;
+                }
+
 
                 var p = SqlDataAdapter.ExecuteSingleValue(DB.Main, @"select name from ols_typeline where typegrpid=501 and value=" + olcitem.Patterntype).ToString();
                 var pN = ConvertUtils.ToInt32(SqlDataAdapter.ExecuteSingleValue(DB.Main, @"select VALUE from ols_typeline where typegrpid=501 and value=" + olcitem.Patterntype)).Value;
@@ -251,8 +280,8 @@ namespace eLog.HeavyTools.Masters.Item.ItemMatrix
                     p = "";
                 }
 
-                item.Name01 = string.Format("{0} {1} {2} {3}", m.Name, olcitem.Colorname, srl.Size, p);
-                item.Itemcode = string.Format("{0}{1}{2}.{3}", m.Code, ms.Isid, ms.Icid, srl.Size);
+                item.Name01 = string.Format("{0} {1} {2} {3}", m.Name, olcitem.Colorname, size, p);
+                item.Itemcode = string.Format("{0}{1}{2}.{3}", m.Code, ms.Isid, ms.Icid, size);
                 item.Itemgrpid = mf.Itemgrpid;
                 item.Unitid = m.Unitid;
                 item.Cmpcodes = "*";

@@ -208,7 +208,7 @@ namespace eLog.HeavyTools.Masters.Item.Import
                     prcs.Add(CreatePrc(ConvertUtils.ToDecimal(result.MultiplePrcTable.Entity["Ar3"]), 5, "EUR", PrcType.Actual));
                     prcs.Add(CreatePrc(ConvertUtils.ToDecimal(result.MultiplePrcTable.Entity["Ar4"]), 6, "EUR", PrcType.Actual, WebshopType.sk, 20, 2));
                     prcs.Add(CreatePrc(ConvertUtils.ToDecimal(result.MultiplePrcTable.Entity["Ar9"]), 6, "EUR", PrcType.Original, WebshopType.sk, 20, 2));
-                    prcs.Add(CreatePrc(ConvertUtils.ToDecimal(result.MultiplePrcTable.Entity["Ar5"]), 2, "HUF", PrcType.Actual));
+                    prcs.Add(CreatePrc(ConvertUtils.ToDecimal(result.MultiplePrcTable.Entity["Ar5"]), 2, "HUF", PrcType.Original));
                     prcs.Add(CreatePrc(ConvertUtils.ToDecimal(result.MultiplePrcTable.Entity["Ar7"]), 6, "EUR", PrcType.Actual, WebshopType.com, 27, 0));
                     prcs.Add(CreatePrc(ConvertUtils.ToDecimal(result.MultiplePrcTable.Entity["Ar10"]), 6, "EUR", PrcType.Original, WebshopType.com, 27, 0));
                     prcs.Add(CreatePrc(ConvertUtils.ToDecimal(result.MultiplePrcTable.Entity["Ar8"]), 5, "EUR", PrcType.Original));
@@ -234,6 +234,9 @@ namespace eLog.HeavyTools.Masters.Item.Import
 
                     prcs.Add(CreatePrc(ConvertUtils.ToDecimal(result.MultiplePrcTable.Entity["Ar4"]), 3, "EUR", PrcType.Actual));
                     prcs.Add(CreatePrc(ConvertUtils.ToDecimal(result.MultiplePrcTable.Entity["Ar9"]), 3, "EUR", PrcType.Original));
+
+
+                    prcs.Add(CreatePrc(ConvertUtils.ToDecimal(result.MultiplePrcTable.Entity["Ar0"]), 2, "HUF", PrcType.Actual));
 
 
                     foreach (OlcPrctable impPrc in prcs.AllRows)
@@ -413,7 +416,7 @@ namespace eLog.HeavyTools.Masters.Item.Import
                     }
                      
 
-                    var origItemCmps = origItem != null ? ItemCmps2.LoadAll(origItem.PK) : null;
+                    var origItemCmps = origItem != null ? ItemCmps3.LoadAll(origItem.PK) : null;
                     var itemCmps = ItemCmps.New();
                     foreach (var pc in result.ItemCmps)
                     {

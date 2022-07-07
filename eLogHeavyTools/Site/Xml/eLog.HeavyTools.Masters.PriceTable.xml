@@ -13,6 +13,7 @@
     <Column FieldName="curid" Width="60" />
 	
     <Column FieldName="code" Width="80" />
+    <Column FieldName="mname" Width="100" />
 
     <Column FieldName="isid" Width="100" Align="Left" FieldFunction="listlookup" FieldFuncArg="eLog.HeavyTools.Masters.Item.Season.OlcItemSeasonList" />
     <Column FieldName="icid" Width="100" Align="Left" FieldFunction="listlookup" FieldFuncArg="eLog.HeavyTools.Masters.Item.Color.OlcItemColorList" />
@@ -75,14 +76,14 @@
   <TabPage Name="OlcPrctableSearchTab2">
 	<Control ControlType="ItemSearchTab3Info" ID="ItemSearchTab3Info" />
     <SearchFilterBar ID="SrcBar">
-      <Combo Field="ptid" Width="100" ListID="eLog.HeavyTools.Setup.PriceTable.OlcPrcTypeList" width="100" />
+      <CheckedCombo Field="ptid" Width="100" ListID="eLog.HeavyTools.Setup.PriceTable.OlcPrcTypeList" width="100" />
       <Textbox Field="partnname" Width="150" />
       <Textbox Field="addrname" Width="150" />
       <DatePickerbox Field="date" Width="100" width="100" />
       <ForceNextRow />
-      <Combo Field="curid" Width="100" ListID="eLog.Base.Setup.Currency.CurrencyList" width="100" />
-      <Combo Field="isid" ListID="eLog.HeavyTools.Masters.Item.Season.OlcItemSeasonList" ComboFlags="None" />
-      <Combo Field="icid" ListID="eLog.HeavyTools.Masters.Item.Color.OlcItemColorList" ComboFlags="None" />
+      <CheckedCombo Field="curid" Width="100" ListID="eLog.Base.Setup.Currency.CurrencyList" width="100" />
+      <CheckedCombo Field="isid" ListID="eLog.HeavyTools.Masters.Item.Season.OlcItemSeasonList" ComboFlags="None" />
+      <CheckedCombo Field="icid" ListID="eLog.HeavyTools.Masters.Item.Color.OlcItemColorList" ComboFlags="None" />
       <ForceNextRow />
       <Textbox Field="itemcode" Width="150" />
       <Textbox Field="itemname" Width="150" />

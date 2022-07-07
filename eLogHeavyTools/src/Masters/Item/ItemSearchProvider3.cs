@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace eLog.HeavyTools.Masters.Item.Model
+namespace eLog.HeavyTools.Masters.Item
 {
     public class ItemSearchProvider3 : ItemSearchProvider
     {

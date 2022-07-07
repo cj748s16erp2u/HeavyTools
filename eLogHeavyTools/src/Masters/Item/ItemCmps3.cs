@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace eLog.HeavyTools.Masters.Item
 {
-    public class ItemCmps2 : ItemCmps
+    public class ItemCmps3 : ItemCmps
     {
         public static ItemCmps LoadAll(Key k)
         {
