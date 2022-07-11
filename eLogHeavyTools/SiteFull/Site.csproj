@@ -72,39 +72,51 @@
     </Reference>
     <Reference Include="CodaInt.Base, Version=7.0.8201.29971, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\..\Releases\CodaInt.Base\v7.0.0.0\Binaries\CodaInt.Base.dll</HintPath>
+      <SpecificVersion>False</SpecificVersion>
     </Reference>
     <Reference Include="CODALink, Version=7.0.8201.29967, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\..\Releases\CodaInt.Base\v7.0.0.0\Binaries\CODALink.dll</HintPath>
+      <SpecificVersion>False</SpecificVersion>
     </Reference>
     <Reference Include="eLog.Base, Version=7.2.8201.29968, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\..\Releases\eLog.Base\v7.2.0.0\Binaries\eLog.Base.dll</HintPath>
+      <SpecificVersion>False</SpecificVersion>
     </Reference>
     <Reference Include="eLog.Finance.Base, Version=7.0.8201.29971, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\..\Releases\eLog.Finance.Base\v7.0.0.0\Binaries\eLog.Finance.Base.dll</HintPath>
+      <SpecificVersion>False</SpecificVersion>
     </Reference>
     <Reference Include="eLog.Finance.Coda, Version=7.0.8201.29974, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\..\Releases\eLog.Finance.CODA\v7.0.0.0\Binaries\eLog.Finance.Coda.dll</HintPath>
+      <SpecificVersion>False</SpecificVersion>
     </Reference>
     <Reference Include="eProjectWeb.Framework, Version=7.2.8201.29966, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\..\Releases\eLog.Base\v7.2.0.0\Binaries\eProjectWeb.Framework.dll</HintPath>
+      <SpecificVersion>False</SpecificVersion>
     </Reference>
     <Reference Include="eProjectWeb.Framework.Package.Zip, Version=7.0.8201.29976, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\..\Releases\eLog.Base\v7.2.0.0\Binaries\eProjectWeb.Framework.Package.Zip.dll</HintPath>
+      <SpecificVersion>False</SpecificVersion>
     </Reference>
     <Reference Include="eProjectWeb.Framework.Reports.CR, Version=7.0.8201.29976, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\..\Releases\eLog.Base\v7.2.0.0\Binaries\eProjectWeb.Framework.Reports.CR.dll</HintPath>
+      <SpecificVersion>False</SpecificVersion>
     </Reference>
     <Reference Include="eProjectWeb.Framework.Reports.Csv, Version=7.0.8201.29976, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\..\Releases\eLog.Base\v7.2.0.0\Binaries\eProjectWeb.Framework.Reports.Csv.dll</HintPath>
+      <SpecificVersion>False</SpecificVersion>
     </Reference>
     <Reference Include="eProjectWeb.Framework.Reports.SSRS, Version=7.0.8201.29976, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\..\Releases\eLog.Base\v7.2.0.0\Binaries\eProjectWeb.Framework.Reports.SSRS.dll</HintPath>
+      <SpecificVersion>False</SpecificVersion>
     </Reference>
     <Reference Include="eProjectWeb.Framework.Reports.Xls, Version=7.0.8201.29976, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\..\Releases\eLog.Base\v7.2.0.0\Binaries\eProjectWeb.Framework.Reports.Xls.dll</HintPath>
+      <SpecificVersion>False</SpecificVersion>
     </Reference>
     <Reference Include="eProjectWeb.Framework.Reports.Xlsx, Version=7.0.8201.29976, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\..\Releases\eLog.Base\v7.2.0.0\Binaries\eProjectWeb.Framework.Reports.Xlsx.dll</HintPath>
+      <SpecificVersion>False</SpecificVersion>
     </Reference>
     <Reference Include="U4Ext.Bank.Base">
       <HintPath>..\..\..\Releases\Bank.Base\v7.2.0.0\Binaries\U4Ext.Bank.Base.dll</HintPath>

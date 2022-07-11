@@ -6,7 +6,7 @@ using eProjectWeb.Framework.Xml;
 
 namespace eLog.HeavyTools.Masters.Partner
 {
-    public class PartnerSearchProvider3 : PartnerSearchProvider2, IXmlObjectName
+    public class PartnerSearchProvider3 : PartnerSearchProvider2
     {
         #region IXmlObjectName
 
@@ -33,7 +33,7 @@ namespace eLog.HeavyTools.Masters.Partner
         {
             var query = base.CreateQueryString(args, fmtonly);
 
-            query = query.Replace("--morefields", " , olc.oldcode --morefields ");
+            query = query.Replace("--morefields", " , olc.oldcode, olc.loyaltycardno --morefields ");
 
             query = query.Replace("--morejoins", " left join olc_partner olc (nolock) on olc.partnid = a.partnid --morejoins ");
 
