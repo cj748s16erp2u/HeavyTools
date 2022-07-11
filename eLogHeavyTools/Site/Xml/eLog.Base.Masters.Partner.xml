@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Schema xmlns="http://tempuri.org/RenderableSchema.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://tempuri.org/RenderableSchema.xsd RenderableSchema.xsd">
+<Schema xmlns="http://tempuri.org/RenderableSchema.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://tempuri.org/RenderableSchema.xsd ../../../../Releases/eLog.Base/v7.2.0.0/Site/Xml/RenderableSchema.xsd">
 	<ControlType Name="PartnerInfoPart" Label="$group_partnerinfo">
 		<Textbox Field="partncode" Width="80" Disabled="True"/>
 		<Textbox Field="name" Width="300" Disabled="True"/>
@@ -8,9 +8,6 @@
 	<Search Name="PartnerSearchProvider">
 		<Column FieldName="partnid" Hidden="True" PKFieldName="partnid"/>
 		<Column FieldName="partncode" Width="70"/>
-		<Column FieldName="cmpcodes_" DisplayName="$cmpcodes" Width="60" />
-		<Column FieldName="grp" Width="50"/>
-		<Column FieldName="extcode" Width="70"/>
 		<Column FieldName="type" Width="60" FieldFunction="flaglookup" FieldFuncArg="eLog.Base.Masters.Partner.PartnerTypeList"/>
 		<!--<Column FieldName="grp" Width="100" />-->
 		<Column FieldName="name" Width="200"/>
@@ -24,6 +21,10 @@
 		<Column FieldName="vatnumeu" Width="100"/>
 		<Column FieldName="groupvatnum" Width="100"/>
 		<Column FieldName="bankaccno" Width="200"/>
+		<Column FieldName="cmpcodes_" DisplayName="$cmpcodes" Width="60" />
+		<Column FieldName="grp" Width="50"/>
+		<Column FieldName="extcode" Width="70"/>
+		<Column FieldName="loyaltycardno" Width="100" />
 		<!--<Column FieldName="webpage" Hidden="True" />-->
 		<Column FieldName="note" Hidden="True"/>
 		<Column FieldName="addusrid" Hidden="True"/>
@@ -59,6 +60,10 @@
 			<Textbox Field="regnum" />
 			<Textbox Field="extcode" />
 			<Textbox Field="grp" />
+			<Textbox Field="loyaltycardno" CustomData="olc" />
+			<Combo Field="regreprempid" ListID="eLog.Base.Masters.Partner.EmployeeList" CustomData="olc" />
+			<Numberbox Field="loyaltydiscpercnt" CustomData="olc" />
+			<Numberbox Field="loyaltyturnover" Disabled="true" CustomData="olc" />
 			<ForceNextRow />
 			<CompanyCodesControl Field="cmpcodes" ListID="eLog.Base.Setup.Company.CompanyCodeList#grantedonly#showall" ComboFlags="AutoSelectOne" ColsToSpan="-1" />
 			<Textbox Field="note" Rows="3" ColsToSpan="-1" />

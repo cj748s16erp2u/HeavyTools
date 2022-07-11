@@ -88,6 +88,60 @@ namespace eLog.HeavyTools.Masters.Partner
         /// <para>Field</para>
         /// ? - varchar
         /// </summary>
+        [Field("loyaltycardno")]
+        public static Field FieldLoyaltycardno { get; protected set; }
+        /// <summary>
+        /// ? - varchar
+        /// </summary>
+        public StringN Loyaltycardno
+        {
+            get { return new StringN(this[FieldLoyaltycardno]); }
+            set { this[FieldLoyaltycardno] = value; }
+        }
+
+        /// <summary>
+        /// <para>Field</para>
+        /// ? - numeric
+        /// </summary>
+        [Field("loyaltydiscpercnt")]
+        public static Field FieldLoyaltydiscpercnt { get; protected set; }
+        /// <summary>
+        /// ? - numeric
+        /// </summary>
+        public decimal? Loyaltydiscpercnt
+        {
+            get { return (decimal?)this[FieldLoyaltydiscpercnt]; }
+            set { this[FieldLoyaltydiscpercnt] = value; }
+        }
+
+        /// <summary>
+        /// <para>Field</para>
+        /// ? - numeric
+        /// </summary>
+        [Field("loyaltyturnover")]
+        public static Field FieldLoyaltyturnover { get; protected set; }
+        public decimal? Loyaltyturnover
+        {
+            get { return (decimal?)this[FieldLoyaltyturnover]; }
+            set { this[FieldLoyaltyturnover] = value; }
+        }
+
+        /// <summary>
+        /// <para>Field</para>
+        /// ? - int
+        /// </summary>
+        [Field("regreprempid")]
+        public static Field FieldRegreprempid { get; protected set; }
+        public int? Regreprempid
+        {
+            get { return (int?)this[FieldRegreprempid]; }
+            set { this[FieldRegreprempid] = value; }
+        }
+
+        /// <summary>
+        /// <para>Field</para>
+        /// ? - varchar
+        /// </summary>
         [Field("addusrid")]
         public static Field FieldAddusrid { get; protected set; }
         /// <summary>
