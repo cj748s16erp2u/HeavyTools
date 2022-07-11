@@ -12,6 +12,8 @@ namespace eLog.HeavyTools.Masters.Partner
         public OlcPartnerRules() : base(true, false)
         {
             this.ERules[OlcPartner.FieldPartnid.Name].Mandatory = false;
+            this.ERules[OlcPartner.FieldLoyaltydiscpercnt.Name].MinValue = 0;
+            this.ERules[OlcPartner.FieldLoyaltydiscpercnt.Name].MaxValue = 100;
         }
     }
 }

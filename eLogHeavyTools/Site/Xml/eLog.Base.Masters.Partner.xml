@@ -61,9 +61,9 @@
 			<Textbox Field="extcode" />
 			<Textbox Field="grp" />
 			<Textbox Field="loyaltycardno" CustomData="olc" />
+			<Combo Field="regreprempid" ListID="eLog.Base.Masters.Partner.EmployeeList" CustomData="olc" />
 			<Numberbox Field="loyaltydiscpercnt" CustomData="olc" />
 			<Numberbox Field="loyaltyturnover" Disabled="true" CustomData="olc" />
-			<Combo Field="regreprempid" ListID="eLog.Base.Masters.Partner.EmployeeList" CustomData="olc" />
 			<ForceNextRow />
 			<CompanyCodesControl Field="cmpcodes" ListID="eLog.Base.Setup.Company.CompanyCodeList#grantedonly#showall" ComboFlags="AutoSelectOne" ColsToSpan="-1" />
 			<Textbox Field="note" Rows="3" ColsToSpan="-1" />

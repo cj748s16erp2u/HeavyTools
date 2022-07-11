@@ -34,13 +34,13 @@ namespace eLog.HeavyTools.Masters.Partner
         public override string XmlObjectName => baseType.Name;
         #endregion
 
-        protected Control ctrlDebcredsumvalue;
+        protected Control ctrlLoyaltyTurnover;
 
         protected override void CreateBase()
         {
             base.CreateBase();
 
-            this.ctrlDebcredsumvalue = this.EditGroup1["debcredsumvalue"];
+            this.ctrlLoyaltyTurnover = this.EditGroup1["loyaltyturnover"];
         }
 
         protected override eLog.Base.Masters.Partner.Partner DefaultPageLoad(PageUpdateArgs args)
@@ -181,10 +181,10 @@ namespace eLog.HeavyTools.Masters.Partner
         {
             base.MakeControlsReadOnly(clearValue, args);
 
-            this.ctrlDebcredsumvalue.SetDisabled(true);
+            this.ctrlLoyaltyTurnover.SetDisabled(true);
             if (clearValue)
             {
-                this.ctrlDebcredsumvalue.SetValue(null, args: args);
+                this.ctrlLoyaltyTurnover.SetValue(null, args: args);
             }
         }
     }
