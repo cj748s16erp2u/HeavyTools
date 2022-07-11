@@ -6,6 +6,7 @@ using eLog.Base.Masters.Partner;
 using eProjectWeb.Framework;
 using eProjectWeb.Framework.BL;
 using eProjectWeb.Framework.Data;
+using eProjectWeb.Framework.Extensions;
 using eProjectWeb.Framework.UI.Controls;
 using eProjectWeb.Framework.UI.PageParts;
 
@@ -32,6 +33,15 @@ namespace eLog.HeavyTools.Masters.Partner
 
         public override string XmlObjectName => baseType.Name;
         #endregion
+
+        protected Control ctrlDebcredsumvalue;
+
+        protected override void CreateBase()
+        {
+            base.CreateBase();
+
+            this.ctrlDebcredsumvalue = this.EditGroup1["debcredsumvalue"];
+        }
 
         protected override eLog.Base.Masters.Partner.Partner DefaultPageLoad(PageUpdateArgs args)
         {
@@ -165,6 +175,17 @@ namespace eLog.HeavyTools.Masters.Partner
                 pc.Cmpid = cmpId;
             }
             return pc;
+        }
+
+        protected override void MakeControlsReadOnly(bool clearValue, PageUpdateArgs args)
+        {
+            base.MakeControlsReadOnly(clearValue, args);
+
+            this.ctrlDebcredsumvalue.SetDisabled(true);
+            if (clearValue)
+            {
+                this.ctrlDebcredsumvalue.SetValue(null, args: args);
+            }
         }
     }
 }

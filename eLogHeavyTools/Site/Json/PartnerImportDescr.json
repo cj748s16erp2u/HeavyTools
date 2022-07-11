@@ -328,20 +328,20 @@
             }
           }
         ],
-        "Conditionals": [
-          {
-            "Field": "add01",
-            "Type": "IsNotEmpty"
-          },
-          {
-            "Field": "add02",
-            "Type": "IsNotEmpty"
-          },
-          {
-            "Field": "postcode",
-            "Type": "IsNotEmpty"
-          }
-        ]
+        //"Conditionals": [
+        //  {
+        //    "Field": "add01",
+        //    "Type": "IsNotEmpty"
+        //  },
+        //  {
+        //    "Field": "add02",
+        //    "Type": "IsNotEmpty"
+        //  },
+        //  {
+        //    "Field": "postcode",
+        //    "Type": "IsNotEmpty"
+        //  }
+        //]
       },
       {
         "Table": "olc_partnaddr",
@@ -649,27 +649,22 @@
           },
           {
             "Field": "name",
-            "Type": "selflookup",
-            "Lookup": {
-              "Alias": "ols_partner",
-              "KeyField": "partnid",
-              "ValueField": "sname"
-            }
+            "ColumnName": "Nev"
           }
         ],
         "Conditionals": [
-          {
-            "Field": "add01",
-            "Type": "IsNotEmpty"
-          },
-          {
-            "Field": "add02",
-            "Type": "IsNotEmpty"
-          },
-          {
-            "Field": "postcode",
-            "Type": "IsNotEmpty"
-          },
+          //{
+          //  "Field": "add01",
+          //  "Type": "IsNotEmpty"
+          //},
+          //{
+          //  "Field": "add02",
+          //  "Type": "IsNotEmpty"
+          //},
+          //{
+          //  "Field": "postcode",
+          //  "Type": "IsNotEmpty"
+          //},
           {
             "ColumnName": "Ceglanc",
             "Type": "CheckCompanyHierarchyNot",
@@ -851,18 +846,18 @@
             "Field": "partnid",
             "Type": "IsNotEmpty"
           },
-          {
-            "Field": "add01",
-            "Type": "IsNotEmpty"
-          },
-          {
-            "Field": "add02",
-            "Type": "IsNotEmpty"
-          },
-          {
-            "Field": "postcode",
-            "Type": "IsNotEmpty"
-          }
+          //{
+          //  "Field": "add01",
+          //  "Type": "IsNotEmpty"
+          //},
+          //{
+          //  "Field": "add02",
+          //  "Type": "IsNotEmpty"
+          //},
+          //{
+          //  "Field": "postcode",
+          //  "Type": "IsNotEmpty"
+          //}
         ]
       },
       {
@@ -1044,14 +1039,14 @@
             "Field": "partnid",
             "Type": "IsNotEmpty"
           },
-          {
-            "Field": "firstname",
-            "Type": "IsNotEmpty"
-          },
-          {
-            "Field": "lastname",
-            "Type": "IsNotEmpty"
-          }
+          //{
+          //  "Field": "firstname",
+          //  "Type": "IsNotEmpty"
+          //},
+          //{
+          //  "Field": "lastname",
+          //  "Type": "IsNotEmpty"
+          //}
         ]
       },
       {

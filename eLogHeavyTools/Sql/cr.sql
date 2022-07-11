@@ -285,11 +285,16 @@ create table olc_partner (
     oldcode				varchar(10)             null, -- regi kod
 	wsemail				varchar(max)            null, -- Webshop email
 	invlngid			varchar(12)				null, -- Szamla nyelve
+	loyaltycardno       varchar(20)             null, -- torszkartya szama
+	loyaltydiscpercnt   numeric(9, 4)           null, -- torzsvevo kedvezmeny
+	debcredsumvalue     numeric(19, 6)          null, -- T/K. forgalom
+	regreprempid        int                     null, -- teruleti kepviselo
     addusrid            varchar(12)				not null,
     adddate             datetime                null,
     constraint pk_olc_partner primary key (partnid),
     constraint fk_olc_partner_partnid foreign key (partnid) references ols_partner (partnid),
-    constraint fk_olc_partner_addusrid foreign key (addusrid) references cfw_user (usrid)
+    constraint fk_olc_partner_addusrid foreign key (addusrid) references cfw_user (usrid),
+	constraint fk_olc_partner_regreprempid foreign key (regreprempid) references ols_employee (empid)
 )
 
 /*********************************/

@@ -8,6 +8,10 @@ $wsemail=Weshop email
 $secpaymid=Másodlagos fiz. mód
 $secpaycid=Másodlagos fiz. felt.
 $invlngid=Számla nyelve
+$loyaltycardno=Törzskártyaszám
+$loyaltydiscpercnt=Törzsvevő kedv.(%)
+$debcredsumvalue=T/K forgalom
+$regreprempid=Ter.képviselő
 
 $action_partnerimport=Partner betöltés
 $err_partnerimport_missingsettings=Hiányzó beállítás: {0}
