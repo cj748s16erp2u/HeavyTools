@@ -1,6 +1,6 @@
 [
   {
-    "Sheet": "Partnertörzs->Partner",
+    "Sheet": "Partnertörzs",
     "HeaderRow": "1:2",
     "ColumnNameRow": 1,
     "Ignore": false,
@@ -546,7 +546,7 @@
     ]
   },
   {
-    "Sheet": "Partnertörzs->Partner",
+    "Sheet": "Partnertörzs",
     "HeaderRow": "1:2",
     "ColumnNameRow": 1,
     "Ignore": false,
@@ -764,7 +764,7 @@
     ]
   },
   {
-    "Sheet": "Partner címek->Cím",
+    "Sheet": "Partner címek",
     "HeaderRow": "1:2",
     "ColumnNameRow": 1,
     "Ignore": false,
@@ -936,7 +936,7 @@
     ]
   },
   {
-    "Sheet": "Partner nevek->Alkalmazott",
+    "Sheet": "Partner nevek",
     "HeaderRow": "1:2",
     "ColumnNameRow": 1,
     "Ignore": false,
