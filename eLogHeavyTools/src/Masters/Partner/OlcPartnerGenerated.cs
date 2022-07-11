@@ -118,12 +118,12 @@ namespace eLog.HeavyTools.Masters.Partner
         /// <para>Field</para>
         /// ? - numeric
         /// </summary>
-        [Field("debcredsumvalue")]
-        public static Field FieldDebcredsumvalue { get; protected set; }
-        public decimal? Debcredsumvalue
+        [Field("loyaltyturnover")]
+        public static Field FieldLoyaltyturnover { get; protected set; }
+        public decimal? Loyaltyturnover
         {
-            get { return (decimal?)this[FieldDebcredsumvalue]; }
-            set { this[FieldDebcredsumvalue] = value; }
+            get { return (decimal?)this[FieldLoyaltyturnover]; }
+            set { this[FieldLoyaltyturnover] = value; }
         }
 
         /// <summary>

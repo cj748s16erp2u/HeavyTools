@@ -10,7 +10,7 @@ $secpaycid=Másodlagos fiz. felt.
 $invlngid=Számla nyelve
 $loyaltycardno=Törzskártyaszám
 $loyaltydiscpercnt=Törzsvevő kedv.(%)
-$debcredsumvalue=T/K forgalom
+$loyaltyturnover=Törzskártya forgalom
 $regreprempid=Ter.képviselő
 
 $action_partnerimport=Partner betöltés

@@ -287,7 +287,7 @@ create table olc_partner (
 	invlngid			varchar(12)				null, -- Szamla nyelve
 	loyaltycardno       varchar(20)             null, -- torszkartya szama
 	loyaltydiscpercnt   numeric(9, 4)           null, -- torzsvevo kedvezmeny
-	debcredsumvalue     numeric(19, 6)          null, -- T/K. forgalom
+	loyaltyturnover     numeric(19, 6)          null, -- torzskartya forgalom
 	regreprempid        int                     null, -- teruleti kepviselo
     addusrid            varchar(12)				not null,
     adddate             datetime                null,

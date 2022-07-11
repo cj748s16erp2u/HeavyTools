@@ -1,8 +1,8 @@
-﻿-- new fields: olc_partner.loyaltycardno,loyaltydiscpercnt,debcredsumvalue,regreprempid
+﻿-- new fields: olc_partner.loyaltycardno,loyaltydiscpercnt,loyaltyturnover,regreprempid
 /*
 exec sp_insertcolumn
   @tablename     = 'olc_partner',
-  @columndef     = 'loyaltycardno varchar(20) null, loyaltydiscpercnt numeric(9, 4) null, debcredsumvalue numeric(19, 6) null, regreprempid int null',
+  @columndef     = 'loyaltycardno varchar(20) null, loyaltydiscpercnt numeric(9, 4) null, loyaltyturnover numeric(19, 6) null, regreprempid int null',
   @refcolumnname = 'addusrid',
   @after         = 0,
   @customsql     = 'alter table olc_partner add constraint fk_olc_partner_regreprempid foreign key (regreprempid) references ols_employee (empid)',
@@ -26,8 +26,8 @@ go
 if not exists(select 0 from sys.columns where object_id = object_id('olc_partner') and name = 'loyaltydiscpercnt')
   alter table olc_partner add loyaltydiscpercnt numeric(9, 4) null
 go
-if not exists(select 0 from sys.columns where object_id = object_id('olc_partner') and name = 'debcredsumvalue')
-  alter table olc_partner add debcredsumvalue numeric(19, 6) null
+if not exists(select 0 from sys.columns where object_id = object_id('olc_partner') and name = 'loyaltyturnover')
+  alter table olc_partner add loyaltyturnover numeric(19, 6) null
 go
 if not exists(select 0 from sys.columns where object_id = object_id('olc_partner') and name = 'regreprempid')
   alter table olc_partner add regreprempid int null

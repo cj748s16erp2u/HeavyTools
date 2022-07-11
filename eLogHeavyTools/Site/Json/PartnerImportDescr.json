@@ -112,6 +112,18 @@
               "Alias": "PartnerInvLang",
               "ValueField": "u4lngid"
             }
+          },
+          {
+            "Field": "loyaltycardno",
+            "ColumnName": "Törzskartya_szama"
+          },
+          {
+            "Field": "loyaltyturnover",
+            "ColumnName": "Torzs_forgalom"
+          },
+          {
+            "Field": "loyaltydiscpercnt",
+            "ColumnName": "Torzs_kedvezm"
           }
         ]
       },
