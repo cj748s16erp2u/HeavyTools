@@ -125,4 +125,7 @@
 
   <!-- Vevoi rendelesen alapertelmezett jovahagyasi ertek -->
   <add key="SordHeadFefaultApproval" value="10" />
+  
+  <!-- Vevoi rendeles betoltes import file leiro helye -->
+  <add key="SordHeadImportDescrFileName" value="SordHeadImportDescr.json" />
 </configuration>

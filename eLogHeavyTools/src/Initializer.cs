@@ -204,6 +204,7 @@ namespace eLog.HeavyTools
             ObjectFactory.AddRemap(typeof(Base.Sales.Sord.SordHeadEditTab2), typeof(Sales.Sord.SordHeadEditTab3));
             ObjectFactory.AddRemap(typeof(Base.Sales.Sord.SordHeadBL), typeof(Sales.Sord.SordHeadBL3));
             ObjectFactory.AddRemap(typeof(Base.Sales.Sord.SordHeadSearchProvider), typeof(Sales.Sord.SordHeadSearchProvider3));
+            ObjectFactory.AddRemap(typeof(Base.Sales.Sord.SordHeadSearchTab), typeof(Sales.Sord.SordHeadSearchTab3));
 
             ObjectFactory.AddRemap(typeof(Base.Sales.Sord.SordLineAllEditTab2), typeof(Sales.Sord.SordLineAllEditTab3));
             ObjectFactory.AddRemap(typeof(Base.Sales.Sord.SordLineAllSearchProvider), typeof(Sales.Sord.SordLineAllSearchProvider3));
