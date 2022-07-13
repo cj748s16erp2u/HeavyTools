@@ -5,6 +5,7 @@ using System.Text;
 using eLog.Base.Masters.Item;
 using eLog.Base.Masters.Partner;
 using eLog.Base.Sales.Sord;
+using eLog.Base.Setup.ItemGroup;
 using eLog.HeavyTools.ImportBase;
 using eLog.HeavyTools.Masters.Partner.Import;
 using eProjectWeb.Framework;
@@ -30,6 +31,7 @@ namespace eLog.HeavyTools.Sales.Sord.Import
             //SordHeadRules.ValidateExtcodeUnique = false;
 
             this.sordHeadBL = SordHeadBL.New();
+            Dictionary<int, int> partnerSordHeadIds = new Dictionary<int, int>();
 
             var success = 0;
 
@@ -39,7 +41,7 @@ namespace eLog.HeavyTools.Sales.Sord.Import
                 var i = 0;
                 foreach (var r in results)
                 {
-                    var ret = this.SaveImport(r, ++i, count);
+                    var ret = this.SaveImport(r, partnerSordHeadIds, ++i, count);
                     if (ret)
                     {
                         success++;
@@ -128,7 +130,7 @@ namespace eLog.HeavyTools.Sales.Sord.Import
         }
 
 
-        private bool SaveImport(SordHeadImportResultSet result, int? pos = null, int? count = null)
+        private bool SaveImport(SordHeadImportResultSet result, Dictionary<int, int> partnerSordHeadIds, int? pos = null, int? count = null)
         {
             var partnCode = result.SordHead?.Entity["partnid"]
                             ?? result.SordHead?.Entity["partnid"];
@@ -151,7 +153,7 @@ namespace eLog.HeavyTools.Sales.Sord.Import
                 using (var db = DB.GetConn(DB.Main, Transaction.Use))
                 {
                     entityType = typeof(SordHead).Name;
-                    this.SaveSordHeadAndSordLine(result);
+                    this.SaveSordHeadAndSordLine(result, partnerSordHeadIds);
                     
                     db.Commit();
 
@@ -184,7 +186,7 @@ namespace eLog.HeavyTools.Sales.Sord.Import
             return false;
         }
 
-        private void SaveSordHeadAndSordLine(SordHeadImportResultSet result)
+        private void SaveSordHeadAndSordLine(SordHeadImportResultSet result, Dictionary<int, int> partnerSordHeadIds)
         {
             if (result.SordHead != null)
             {
@@ -219,6 +221,16 @@ namespace eLog.HeavyTools.Sales.Sord.Import
                 sordHead.Ref1 = result.SordHead.Entity[SordHead.FieldRef1.Name]?.ToString();
                 sordHead.Note = result.SordHead.Entity[SordHead.FieldNote.Name]?.ToString();
 
+                // ha ezt a fejet mar lementettuk, akkor azt hasznaljuk inkabb
+                if (sordHead.Partnid.HasValue)
+                {
+                    if (partnerSordHeadIds.ContainsKey(sordHead.Partnid.Value))
+                    {
+                        var sordId = partnerSordHeadIds[sordHead.Partnid.Value];
+                        sordHead = SordHead.Load(sordId);
+                    }
+                }
+
                 // sordline
                 sordLine.Reqdate = new DateTime(2022, 12, 01);
                 sordLine.Itemid = ConvertUtils.ToInt32(result.SordLine.Entity[SordLine.FieldItemid.Name]);
@@ -235,11 +247,26 @@ namespace eLog.HeavyTools.Sales.Sord.Import
 
                 sordLine.Ordqty = ConvertUtils.ToInt32(result.SordLine.Entity[SordLine.FieldOrdqty.Name]);
                 sordLine.Selprc = ConvertUtils.ToInt32(result.SordLine.Entity[SordLine.FieldSelprc.Name]);
-                sordLine.Taxid = result.SordLine.Entity[SordLine.FieldTaxid.Name]?.ToString();
+
+                var taxidSql = $@"SELECT tt.taxid FROM ols_taxtrans (nolock) tt
+                                JOIN ols_itemgroup (nolock) itmgrp on itmgrp.taxid = tt.taxid
+                                JOIN ols_item (nolock) itm on itm.itemgrpid = itmgrp.itemgrpid
+                                JOIN ols_sorddoc (nolock) sd on sd.bustypeid = tt.bustypeid
+                                WHERE itm.itemid = {Utils.SqlToString(sordLine.Itemid)} AND sd.sorddocid = '{Utils.SqlToString(sordHead.Sorddocid)}'";
+
+                sordLine.Taxid = SqlDataAdapter.ExecuteSingleValue(DB.Main, taxidSql).ToString();
 
                 map.Add(sordLine);
 
                 this.sordHeadBL.Save(map);
+
+                if (sordHead.Partnid.HasValue)
+                {
+                    if (!partnerSordHeadIds.ContainsKey(sordHead.Partnid.Value))
+                    {
+                        partnerSordHeadIds.Add(sordHead.Partnid.Value, sordHead.Sordid.Value);
+                    }
+                }
             }
         }
 

@@ -54,27 +54,20 @@
 					  }
         ]
       },
-	  
 	  {
-
         "Table": "ols_sordline",
         "Fields": [
 		  		  {
             "Field": "ordqty",
             "ColumnName": "Mennyiség"
           },
-		  
-		  		  		  {
+		  {
             "Field": "selprc",
             "Const": "0"
           },
 		  {
             "Field": "reqdate",
             "ColumnName": "Száll.hidő"
-          },
-		  {
-		  "Field": "taxid",
-            "Const": "A27"
           },
 		  {
             "Field": "itemid",
