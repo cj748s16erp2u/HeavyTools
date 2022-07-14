@@ -197,8 +197,6 @@ namespace eLog.HeavyTools.Sales.Sord.Import
                 var sordHead = SordHead.CreateNew();
                 var sordLine = SordLine.CreateNew();
 
-                map.Default = sordHead;
-
                 var addrKey = new Key
                 {
                     [Base.Masters.Partner.PartnAddr.FieldPartnid.Name] = ConvertUtils.ToInt32(result.SordHead.Entity[SordHead.FieldPartnid.Name]),
@@ -231,6 +229,8 @@ namespace eLog.HeavyTools.Sales.Sord.Import
                     }
                 }
 
+                map.Default = sordHead;
+
                 // sordline
                 sordLine.Reqdate = new DateTime(2022, 12, 01);
                 sordLine.Itemid = ConvertUtils.ToInt32(result.SordLine.Entity[SordLine.FieldItemid.Name]);
@@ -252,7 +252,7 @@ namespace eLog.HeavyTools.Sales.Sord.Import
                                 JOIN ols_itemgroup (nolock) itmgrp on itmgrp.taxid = tt.taxid
                                 JOIN ols_item (nolock) itm on itm.itemgrpid = itmgrp.itemgrpid
                                 JOIN ols_sorddoc (nolock) sd on sd.bustypeid = tt.bustypeid
-                                WHERE itm.itemid = {Utils.SqlToString(sordLine.Itemid)} AND sd.sorddocid = '{Utils.SqlToString(sordHead.Sorddocid)}'";
+                                WHERE itm.itemid = {Utils.SqlToString(sordLine.Itemid)} AND sd.sorddocid = {Utils.SqlToString(sordHead.Sorddocid)}";
 
                 sordLine.Taxid = SqlDataAdapter.ExecuteSingleValue(DB.Main, taxidSql).ToString();
 
