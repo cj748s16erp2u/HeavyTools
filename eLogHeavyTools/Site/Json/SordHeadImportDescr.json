@@ -1,0 +1,85 @@
+[
+  {
+    "Sheet": "Munka1",
+    "HeaderRow": "1:2",
+    "ColumnNameRow": 1,
+    "Ignore": false,
+    "Tables": [
+      {
+
+        "Table": "ols_sordhead",
+        "Fields": [
+		  {
+            "Field": "cmpid",
+            "Const": 3
+          },
+{
+            "Field": "sorddocid",
+            "Const": "ELOREND"
+          },
+		  		  
+				  
+		  {
+            "Field": "addrid",
+            "ColumnName": "Címkód"
+          },
+		  
+		  		  {
+            "Field": "curid",
+			"Const": "HUF"
+          },
+		  
+		  		  {
+            "Field": "paymid",
+            "ColumnName": "Fiz.mód"
+          },
+		  
+		  		  		  {
+            "Field": "ref1",
+            "ColumnName": "Vevői ref."
+          },
+		  
+		  		  		  {
+            "Field": "note",
+            "ColumnName": "Megjegyzés"
+          },
+		  	          {
+            "Field": "partnid",
+            "Type": "selflookup",
+			"ColumnName": "Partnerkód",
+            "Lookup": {
+              "Alias": "ols",
+              "ValueField": "partnid"
+            }
+					  }
+        ]
+      },
+	  {
+        "Table": "ols_sordline",
+        "Fields": [
+		  		  {
+            "Field": "ordqty",
+            "ColumnName": "Mennyiség"
+          },
+		  {
+            "Field": "selprc",
+            "Const": "0"
+          },
+		  {
+            "Field": "reqdate",
+            "ColumnName": "Száll.hidő"
+          },
+		  {
+            "Field": "itemid",
+            "Type": "selflookup",
+			"ColumnName": "Cikkszám",
+            "Lookup": {
+              "Alias": "ols",
+              "ValueField": "itemid"
+            }
+		}
+        ]
+      }
+    ]
+  }
+]
