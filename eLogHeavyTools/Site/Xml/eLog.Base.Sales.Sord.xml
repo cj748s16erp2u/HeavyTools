@@ -52,13 +52,15 @@
             <Combo Field="paymid" ListID="eLog.Base.Setup.PayMethod.PayMethodList" ComboFlags="None"/>
             <Combo Field="paycid" ListID="eLog.Base.Setup.PayMethod.PayCondList" ComboFlags="AllowBlank" DependentField="paymid" DependentCtrlID="SordHead.paymid"/>
             <ForceNextRow/>
-			<Combo Field="regreprempid" ListID="eLog.HeavyTools.Masters.Partner.EmployeeList3" ComboFlags="AllowBlank" DependentCtrlID="SordHead.partnid_partncode,#16" DependentField="partnid,emptype" CustomData="olc" />
-			<Combo Field="clerkempid" ListID="eLog.HeavyTools.Masters.Partner.EmployeeList3" ComboFlags="AllowBlank" DependentCtrlID="SordHead.partnid_partncode,#32" DependentField="partnid,emptype" CustomData="olc" />
+			<Combo Field="regreprempid" ListID="eLog.Base.Masters.Partner.EmployeeList" ComboFlags="AllowBlank" DependentCtrlID="SordHead.partnid_partncode,#16" DependentField="partnid,emptype" CustomData="olc" />
+			<Combo Field="clerkempid" ListID="eLog.Base.Masters.Partner.EmployeeList" ComboFlags="AllowBlank" DependentCtrlID="SordHead.partnid_partncode" DependentField="partnid" CustomData="olc" />
 			<ForceNextRow/>
-			<Numberbox Field="advval" ColsToSpan="4" CustomData="olc"/>
+			<Numberbox Field="advval" ColsToSpan="1" CustomData="olc"/>
 			<ForceNextRow/>
             <Textbox Field="note" Rows="2" ColsToSpan="4"/>
-			<GroupSeparator ID="webshop" />
+        </LayoutTable>
+		
+		<LayoutTable ControlGroup="WebShop" Columns="{120, None}; {120, None}; {20, Empty}; {120, None}; {120, None}; {20, Empty}; {120, None}; {120, None}" ID="WebShopEditGroup" Label="$webshop_editgroup" >
 			<Textbox Field="loyaltycardno" ColsToSpan="4" CustomData="olc" Disabled="True"/>
 			<ForceNextRow/>
 			<Combo Field="transfcond" ColsToSpan="1" CustomData="olc" ListID="xml:eLog.Base.Sales.Sord_transfcond" ComboFlags="None" Disabled="True"/>
@@ -77,8 +79,8 @@
 			<Textbox Field="customeraddress" ColsToSpan="4" Disabled="True"/>
 			<ForceNextRow/>
 			<Textbox Field="couponcode" ColsToSpan="4" Disabled="True"/>
-			<ForceNextRow/>
-        </LayoutTable>
+        </LayoutTable>		
+		
         <LayoutTable ControlGroup="SordLine" Columns="{120, None}; {120, None}; {20, Empty}; {120, None}; {120, None}; {20, Empty}; {120, None}; {120, None}" ID="EditGroup2" Label="$sordline_editgroup">
             <Selector Field="itemid" Label="$itemid_code" ValueField="itemid" TextField="itemcode" SelectionID="eLog.Base.Masters.Item.ItemSelectionProvider"/>
             <ForceNextRow/>

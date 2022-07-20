@@ -177,6 +177,7 @@ namespace eLog.HeavyTools
             ObjectFactory.AddRemap(typeof(Base.Masters.Partner.EmployeeBL), typeof(Masters.Partner.EmployeeBL3));
             ObjectFactory.AddRemap(typeof(Base.Masters.Partner.EmployeeEditTab), typeof(Masters.Partner.EmployeeEditTab3));
             ObjectFactory.AddRemap(typeof(Base.Masters.Partner.EmployeeSearchProvider), typeof(Masters.Partner.EmployeeSearchProvider3));
+            ObjectFactory.AddRemap(typeof(Base.Masters.Partner.EmployeeList), typeof(Masters.Partner.EmployeeList3));
 
             // PartnAddr
             ObjectFactory.AddRemap(typeof(Base.Masters.Partner.PartnAddrBL), typeof(Masters.Partner.PartnAddrBL3));

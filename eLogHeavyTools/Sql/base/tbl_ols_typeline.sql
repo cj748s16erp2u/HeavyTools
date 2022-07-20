@@ -49,9 +49,6 @@ values (11, 8, null, 'Beszerzés', 'BESZ', 'dev', getdate(), 0)
 insert into [ols_typeline] ([typegrpid], [value], [seqno], [name], [abbr], [addusrid], [adddate], [delstat])
 values (11, 16, null, 'Ter. képviselő', 'TER', 'dev', getdate(), 0)
 
-insert into [ols_typeline] ([typegrpid], [value], [seqno], [name], [abbr], [addusrid], [adddate], [delstat])
-values (11, 32, null, 'Ügyintéző', 'TER', 'dev', getdate(), 0)
-
 insert ols_typeline (typegrpid, value, seqno, name, abbr, addusrid, adddate, delstat)
 values (500, 1, 1, 'Kézi', 'K', 'dev', getdate(), 0)
 
