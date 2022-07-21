@@ -19,6 +19,8 @@ namespace eLog.HeavyTools.BankTran
 {
     public class CifEbankTransBL3 : U4Ext.Bank.Base.Transaction.CifEbankTransBL
     {
+        public const int CONST_InvalidImportBankType = 61; // 61: import not possible for larger type
+
         public static CifEbankTransBL3 New3()
         {
             return (CifEbankTransBL3)New();
@@ -866,8 +868,7 @@ namespace eLog.HeavyTools.BankTran
 
             var k = new Key(U4Ext.Bank.Base.Setup.Bank.EfxBank.FieldInterfaceid.Name, parentCifTrans.Interfaceid);
             U4Ext.Bank.Base.Setup.Bank.EfxBank b = U4Ext.Bank.Base.Setup.Bank.EfxBank.Load(k);
-            //U4Ext.Bank.Base.Setup.Bank.EfxBank.EfxBank_BankType
-            if (b.Banktype >= 60)
+            if (b.Banktype > CONST_InvalidImportBankType)
                 throw new MessageException("$import_exception_banktypeinvalid");
 
             using (var ns = new eProjectWeb.Framework.Lang.NS(typeof(CifEbankTransBL3).Namespace))
@@ -881,6 +882,8 @@ namespace eLog.HeavyTools.BankTran
                     Dictionary<CifEbankTrans, string> imported;
 
                     wrongLines = ProcessImportLines(fieldListId, importText, numberFormat, origCifTrans, ref list, out imported);
+
+                    BeforeSaveImportedLines(origCifTrans, ref list, imported);
 
                     generatedRecords = SaveImportedLines(list, imported, wrongLines);
 
@@ -919,6 +922,7 @@ namespace eLog.HeavyTools.BankTran
             importCifData.origCur = origCifTrans.Origcur;
             importCifData.origValue = origCifTrans.Origvalue;
             importCifData.valueAcc = origCifTrans.Valueacc;
+            importCifData.statementId = origCifTrans.Id;
 
             // process each line
             foreach (var il in impLines)
@@ -1411,10 +1415,49 @@ namespace eLog.HeavyTools.BankTran
             newCifTrans.Origcur = importCifData.origCur;
             newCifTrans.Origvalue = importCifData.origValue;
             newCifTrans.Valueacc = importCifData.valueAcc;
+            newCifTrans.Statement = importCifData.statementId;
+            newCifTrans.Openbalacc = null;
+            newCifTrans.Closebalacc = null;
+            newCifTrans.Extvalueacc = null;
             newCifTrans.Createdate = DateTime.Now;
             newCifTrans.State = DataRowState.Added;
 
             return string.Empty;
+        }
+
+        protected virtual void BeforeSaveImportedLines(CifEbankTrans origCifTrans, ref List<CifEbankTrans> list, Dictionary<CifEbankTrans, string> imported)
+        {
+            EfxBankTranHead tranHead = EfxBankTranHead.New();
+            var sql = eProjectWeb.Framework.Utils.SqlToStringFormat(
+@"select TOP 1 h.*
+from efx_banktranhead h (nolock)
+    left outer join efx_bank b(nolock) on b.bankid = h.bankid
+where b.banktype > {0} and h.ref1 = {1}", CONST_InvalidImportBankType, origCifTrans.Id);
+
+            try
+            {
+                SqlDataAdapter.FillSingleRow(U4Ext.Bank.Base.Module.eBankDBConnID, tranHead, sql);
+            }
+            catch (RecordNotFoundException)
+            {
+                tranHead = null;
+            }
+
+            if (tranHead != null)
+            {
+                var msg = eProjectWeb.Framework.Lang.Translator.Translate("$import_exception_translineinvalid", tranHead.Filename);
+                throw new MessageException(msg);
+            }
+            else
+            {
+                decimal? importedValue = list.Sum(l => ConvertUtils.ToDecimal(l.Origvalue)).GetValueOrDefault(0);
+                if (importedValue != origCifTrans.Origvalue)
+                {
+                    var msg = eProjectWeb.Framework.Lang.Translator.Translate("$import_exception_translinevalue", importedValue, origCifTrans.Origvalue);
+                    throw new MessageException(msg);
+                }                
+            }
+
         }
 
         private static List<Key> SaveImportedLines(List<CifEbankTrans> list, Dictionary<CifEbankTrans, string> imported, List<string> wrongLines)
@@ -1468,6 +1511,7 @@ namespace eLog.HeavyTools.BankTran
             public string origCur { get; set; }
             public decimal? origValue { get; set; }
             public decimal? valueAcc { get; set; }
+            public int? statementId { get; set; }
         }
 
     }
