@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Schema xmlns="http://tempuri.org/RenderableSchema.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://tempuri.org/RenderableSchema.xsd RenderableSchema.xsd">
+    <TabPage Name="PordHeadEditTabBase">
+        <LayoutTable ControlGroup="PordHead" Columns="{120, None}; {180, None}; {20, Empty}; {120, None}; {180, None}" ID="EditGroup1" Label="$pordhead_editgroup">
+            <Combo Field="cmpid" ListID="eLog.Base.Setup.Company.CompanyLoggedInList" ComboFlags="None" />
+            <Combo Field="porddocid" ListID="eLog.Base.Setup.PordDoc.PordDocList" ComboFlags="None" DependentField="cmpid" DependentCtrlID="PordHead.cmpid" />
+            <ForceNextRow />
+            <DatePickerbox Field="porddate" />
+            <Textbox Field="docnum" Disabled="True" />
+            <ForceNextRow />
+            <Combo Field="projid" ListID="eLog.Base.Project.ProjectList" ComboFlags="None" DependentField="cmpid" DependentCtrlID="PordHead.cmpid" ColsToSpan="4" />
+            <ForceNextRow />
+            <Selector Field="partnid" Label="$partnid_code" ValueField="partnid" TextField="partncode" SelectionID="eLog.Base.Masters.Partner.PartnerSelectionProvider" DependentField="cmpid" DependentCtrlID="PordHead.cmpid" />
+            <ForceNextRow />
+            <Selector Field="partnid" Label="$partnid_name" ValueField="partnid" TextField="name" SelectionID="eLog.Base.Masters.Partner.PartnerSelectionProvider" ColsToSpan="-1" />
+            <ForceNextRow />
+            <Combo Field="addrid" ListID="eLog.Base.Masters.Partner.PartnAddrList" ComboFlags="None AllowBlank AutoSelectFirst FindAnywhere" DependentField="partnid" DependentCtrlID="PordHead.partnid_partncode" ColsToSpan="-1" />
+            <ForceNextRow />
+            <Combo Field="curid" ListID="eLog.Base.Setup.Currency.CurrencyList" ComboFlags="None" />
+			<Combo Field="clerkempid" ListID="eLog.Base.Masters.Partner.EmployeeList" ComboFlags="AllowBlank" DependentCtrlID="PordHead.partnid_partncode,#16" DependentField="partnid,emptype" CustomData="olc" />
+			<ForceNextRow />
+			<Combo Field="paritytypeid" ListID="eProjectWeb.Framework.Data.TypeListProviderPublic#olc_pordhead.paritytype" CustomData="olc"/> <Textbox Field="locality" CustomData="olc"/>
+			<Numberbox Field="advance" DecDigits="2" ThousandSep="True" CustomData="olc"/>
+            <Textbox Field="ref1" />
+            <ForceNextRow />
+            <Textbox Field="note" Rows="2" ColsToSpan="-1" />
+        </LayoutTable>
+        <LayoutTable ControlGroup="PordLine" Columns="{120, None}; {120, None}; {20, Empty}; {100, None}; {120, None}" ID="EditGroup2" Label="$pordline_editgroup" DisableClientValidation="True">
+            <Selector Field="itemid" Label="$item_code" ValueField="itemid" TextField="itemcode" SelectionID="eLog.Base.Masters.Item.ItemSelectionProvider" />
+            <ForceNextRow/>
+            <Selector Field="itemid" Label="$item_name" ValueField="itemid" TextField="name01" SelectionID="eLog.Base.Masters.Item.ItemSelectionProvider" ColsToSpan="4" />
+            <ForceNextRow />
+            <DatePickerbox Field="reqdate"/>
+            <DatePickerbox Field="confreqdate"/>
+            <GroupSeparator ID="x" Label="_" />
+            <Combo Field="unitid" ListID="eLog.Base.Setup.Unit.UnitList" Disabled="True"/>
+            <ForceNextRow />         
+            <Numberbox Field="change" DecDigits="4" ThousandSep="True" />
+            <ForceNextRow />
+            <Numberbox Field="ordqty" DecDigits="2" ThousandSep="True"/>
+            <ForceNextRow />  
+            <Numberbox Field="confqty" DecDigits="2" ThousandSep="True"/>
+            <ForceNextRow />   
+            <Numberbox Field="movqty" Disabled="True" DecDigits="2" ThousandSep="True"/>
+            <ForceNextRow />    
+            <Numberbox Field="purchprc" DecDigits="2" ThousandSep="True"/>
+            <ForceNextRow />
+            <Textbox Field="ref2" ColsToSpan="-1" />
+			
+			<Combo Field="unitid2" ListID="eLog.Base.Setup.Unit.UnitList" Label="$unitid" Visible="False" />
+			<Numberbox Field="confqty2" DecDigits="2" ThousandSep="True" Visible="False"/>
+			<Numberbox Field="ordqty2" DecDigits="2" ThousandSep="True" Visible="False" />
+			<Numberbox Field="movqty2" Disabled="True" DecDigits="2" ThousandSep="True" Visible="False"/>
+			<Numberbox Field="purchprc2" DecDigits="2" ThousandSep="True" Visible="False" />
+        </LayoutTable>
+    </TabPage>
+</Schema>
