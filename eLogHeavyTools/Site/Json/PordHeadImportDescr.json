@@ -1,0 +1,105 @@
+[
+  {
+    "Sheet": "Munka1",
+    "HeaderRow": "1:2",
+    "ColumnNameRow": 1,
+    "Ignore": false,
+    "Tables": [
+      {
+
+        "Table": "ols_sordhead",
+        "Fields": [
+		  {
+            "Field": "cmpid",
+            "ColumnName" : "Vállalat"
+			"Lookup": {
+              "Alias": "ols",
+              "ValueField": "cmpcode"
+            }
+          },
+{
+            "Field": "porddocid",
+            "Const": "SRARU"
+          },
+		  		  
+				  
+		  {
+            "Field": "addrid",
+            "ColumnName": "Címkód"
+          },
+		  
+		  		  {
+            "Field": "curid",
+			"Const": "HUF"
+          },
+		  
+		  		  {
+            "Field": "paymid",
+            "ColumnName": "Fiz.mód"
+          },
+		  
+		  		  		  {
+            "Field": "ref1",
+            "ColumnName": "Vevői ref."
+          },
+		  
+		  		  		  {
+            "Field": "note",
+            "ColumnName": "Megj."
+          },
+		  	          {
+            "Field": "partnid",
+            "Type": "selflookup",
+			"ColumnName": "Partnerkód",
+            "Lookup": {
+              "Alias": "ols",
+              "ValueField": "partnid"
+            }
+					  }
+        ]
+      },
+	  {
+        "Table": "ols_sordline",
+        "Fields": [
+		  		  {
+            "Field": "ordqty",
+            "ColumnName": "Rendelt"
+          },
+		  {
+            "Field": "confqty",
+            "ColumnName": "Visszaigazolt"
+          },
+		  {
+            "Field": "reqdate",
+            "Const": "0"
+          },
+		  {
+            "Field": "reqdate",
+            "ColumnName": "Kért száll.dátuma"
+          },
+		  {
+            "Field": "confreqdate",
+            "ColumnName": "Vissza ig.dátuma"
+          },
+		  {
+            "Field": "note",
+            "ColumnName": "Megj2"
+          },
+		  {
+            "Field": "purchprc",
+            "ColumnName": "Besz.ár"
+          },
+		  {
+            "Field": "itemid",
+            "Type": "selflookup",
+			"ColumnName": "Cikkszám",
+            "Lookup": {
+              "Alias": "ols",
+              "ValueField": "itemid"
+            }
+		}
+        ]
+      }
+    ]
+  }
+]

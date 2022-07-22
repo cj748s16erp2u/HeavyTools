@@ -218,6 +218,7 @@ namespace eLog.HeavyTools
             // Pord
             ObjectFactory.AddRemap(typeof(Base.Purchase.Pord.PordHeadBL), typeof(Purchase.Pord.PordHeadBL3));
             ObjectFactory.AddRemap(typeof(Base.Purchase.Pord.PordHeadEditTab), typeof(Purchase.Pord.PordHeadEditTab3));
+            ObjectFactory.AddRemap(typeof(Base.Purchase.Pord.PordHeadSearchTab), typeof(Purchase.Pord.PordHeadSearchTab3));
         }
     }
 }
