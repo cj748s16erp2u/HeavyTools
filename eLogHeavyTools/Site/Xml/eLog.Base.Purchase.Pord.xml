@@ -33,25 +33,76 @@
             <DatePickerbox Field="reqdate"/>
             <DatePickerbox Field="confreqdate"/>
             <GroupSeparator ID="x" Label="_" />
-            <Combo Field="unitid" ListID="eLog.Base.Setup.Unit.UnitList" Disabled="True"/>
-            <ForceNextRow />         
+            <Combo Field="unitid2" ListID="eLog.Base.Setup.Unit.UnitList" Label="$unitid" />
+            <Combo Field="unitid" ListID="eLog.Base.Setup.Unit.UnitList" Disabled="True" Label=" " />
+            <ForceNextRow />
+            <Empty />
             <Numberbox Field="change" DecDigits="4" ThousandSep="True" />
             <ForceNextRow />
-            <Numberbox Field="ordqty" DecDigits="2" ThousandSep="True"/>
-            <ForceNextRow />  
-            <Numberbox Field="confqty" DecDigits="2" ThousandSep="True"/>
-            <ForceNextRow />   
-            <Numberbox Field="movqty" Disabled="True" DecDigits="2" ThousandSep="True"/>
-            <ForceNextRow />    
-            <Numberbox Field="purchprc" DecDigits="2" ThousandSep="True"/>
+            <Numberbox Field="ordqty2" DecDigits="2" ThousandSep="True" />
+            <Numberbox Field="ordqty" DecDigits="2" ThousandSep="True" Label=" " />
+            <ForceNextRow />
+            <Numberbox Field="confqty2" DecDigits="2" ThousandSep="True" />
+            <Numberbox Field="confqty" DecDigits="2" ThousandSep="True" Label=" " />
+            <ForceNextRow />
+            <Numberbox Field="movqty2" Disabled="True" DecDigits="2" ThousandSep="True" />
+            <Numberbox Field="movqty" Disabled="True" DecDigits="2" ThousandSep="True" Label=" " />
+            <ForceNextRow />
+            <Numberbox Field="purchprc2" DecDigits="2" ThousandSep="True" />
+            <Numberbox Field="purchprc" DecDigits="2" ThousandSep="True" Label=" " />
             <ForceNextRow />
             <Textbox Field="ref2" ColsToSpan="-1" />
-			
-			<Combo Field="unitid2" ListID="eLog.Base.Setup.Unit.UnitList" Label="$unitid" Visible="False" />
-			<Numberbox Field="confqty2" DecDigits="2" ThousandSep="True" Visible="False"/>
-			<Numberbox Field="ordqty2" DecDigits="2" ThousandSep="True" Visible="False" />
-			<Numberbox Field="movqty2" Disabled="True" DecDigits="2" ThousandSep="True" Visible="False"/>
-			<Numberbox Field="purchprc2" DecDigits="2" ThousandSep="True" Visible="False" />
         </LayoutTable>
     </TabPage>
+	
+	<Search Name="PordLineSearchProvider">
+        <Column FieldName="linenum" Width="30" />
+        <Column FieldName="pordlinestat" Width="35" FieldFunction="listlookup" FieldFuncArg="eLog.Base.Purchase.Pord.PordlineStatList,abbr" />
+        <Column FieldName="itemid_code" DisplayName="$item_code" Width="100" />
+        <Column FieldName="itemid_name1" DisplayName="$item_name" Width="200" />
+        <Column FieldName="reqdate" Width="80" Format="D" />
+        <Column FieldName="confreqdate" Width="80" Format="D" />
+        <Column FieldName="unitid" Width="50" />
+        <Column FieldName="purchprc" Width="80" Format="C" />
+        <Column FieldName="ordqty" Width="68" Format="C" />
+        <Column FieldName="confqty" Width="68" Format="C" />
+        <Column FieldName="movqty" Width="68" Format="C" />
+        <Column FieldName="occupied" Width="85" Format="C"/>
+        <Column FieldName="ref2" Width="100" />
+        <Column FieldName="parent" Width="100" DisplayName="$line_parent" />
+        <Column FieldName="pordlineid" PKFieldName="pordlineid" Width="60" />
+        <Column FieldName="addusrid" Width="100"/>
+        <Column FieldName="adddate" Width="120" Format="DT"/>
+        <Column FieldName="note" Width="200" />
+        <Column FieldName="purchval" Hidden="True" />
+        <Column FieldName="genperformqty" Format="C2" Width="100" />
+    </Search>
+
+    <Search Name="PordLineAllSearchProvider">
+        <Column FieldName="pordlineid" Hidden="true" PKFieldName="pordlineid" />
+        <Column FieldName="pordid" Hidden="true" PKFieldName="pordid" />
+        <Column FieldName="pordstat" Width="20" DisplayName="$pordstat_grid" FieldFunction="listlookup" FieldFuncArg="eLog.Base.Purchase.Pord.PordHeadStatList,abbr" />
+        <Column FieldName="pordlinestat" Width="35" DisplayName="$pordlinestat_grid" FieldFunction="listlookup" FieldFuncArg="eLog.Base.Purchase.Pord.PordlineStatList,abbr" Align="Left" />
+        <Column FieldName="porddocid" Width="80" />
+        <Column FieldName="docnum" Width="120" />
+        <Column FieldName="porddate" Width="68" Format="D" />
+        <Column FieldName="projcode" Width="60" />
+        <Column FieldName="projname" Width="150" />
+        <Column FieldName="partncode" Width="80" />
+        <Column FieldName="partnname" Width="200" />
+        <Column FieldName="itemid_code" DisplayName="$item_code" Width="100" />
+        <Column FieldName="itemid_name1" DisplayName="$item_name" Width="100" />
+        <Column FieldName="reqdate" Width="80" Format="D" />
+        <Column FieldName="confreqdate" Width="80" Format="D" />
+        <Column FieldName="unitid" Width="50" />
+        <Column FieldName="purchprc" Width="80" Format="C" />
+        <Column FieldName="ordqty" Width="68" Format="C" />
+        <Column FieldName="confqty" Width="68" Format="C" />
+        <Column FieldName="movqty" Width="68" Format="C" />
+        <Column FieldName="curid" Width="80" />
+        <Column FieldName="cmpid" Width="80" Align="Left" FieldFunction="listlookup" FieldFuncArg="eLog.Base.Setup.Company.CompanyLoggedInList" />
+        <Column FieldName="ref1" Width="100" />
+        <Column FieldName="ref2" Width="100" />
+        <Column FieldName="note" Width="150" />
+    </Search>
 </Schema>

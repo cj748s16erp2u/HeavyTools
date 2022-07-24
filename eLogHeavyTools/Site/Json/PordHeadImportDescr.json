@@ -1,20 +1,21 @@
 [
   {
     "Sheet": "Munka1",
-    "HeaderRow": "1:2",
-    "ColumnNameRow": 1,
+    "HeaderRow": "1:3",
+    "ColumnNameRow": 3,
     "Ignore": false,
     "Tables": [
       {
 
-        "Table": "ols_sordhead",
+        "Table": "ols_pordhead",
         "Fields": [
 		  {
             "Field": "cmpid",
-            "ColumnName" : "Vállalat"
+            "ColumnName" : "Vállalat",
+			"Type": "selflookup",
 			"Lookup": {
               "Alias": "ols",
-              "ValueField": "cmpcode"
+              "ValueField": "cmpid"
             }
           },
 {
@@ -59,7 +60,7 @@
         ]
       },
 	  {
-        "Table": "ols_sordline",
+        "Table": "ols_pordline",
         "Fields": [
 		  		  {
             "Field": "ordqty",
@@ -71,16 +72,12 @@
           },
 		  {
             "Field": "reqdate",
-            "Const": "0"
-          },
-		  {
-            "Field": "reqdate",
             "ColumnName": "Kért száll.dátuma"
           },
 		  {
             "Field": "confreqdate",
             "ColumnName": "Vissza ig.dátuma"
-          },
+		  },
 		  {
             "Field": "note",
             "ColumnName": "Megj2"
@@ -98,8 +95,8 @@
               "ValueField": "itemid"
             }
 		}
-        ]
-      }
+       ]	
+	  }		
     ]
-  }
+  }    
 ]

@@ -5,6 +5,7 @@ using System.Text;
 using eLog.Base.Masters.Item;
 using eLog.Base.Masters.Partner;
 using eLog.Base.Purchase.Pord;
+using eLog.Base.Setup.Company;
 using eLog.HeavyTools.ImportBase;
 using eLog.HeavyTools.Masters.Partner.Import;
 using eProjectWeb.Framework;
@@ -213,8 +214,13 @@ namespace eLog.HeavyTools.Purchase.Pord.Import
                     pordhead.Addrid = defAddr.Addrid;
                 }
 
-                pordhead.Curid = CustomSettings.GetString("PordHeadImportDefaultCurid");
-                //pordhead.Paymid = result.PordHead.Entity[PordHead.FieldPaymid.Name]?.ToString();
+                var curIdSql = $@"SELECT pcmp.curid FROM ols_partncmp pcmp
+                                    WHERE pcmp.partnid = {Utils.SqlToString(pordhead.Partnid)} 
+                                      and pcmp.cmpid = {Utils.SqlToString(pordhead.Cmpid)}";
+
+                var partnCmp = SqlDataAdapter.GetList<PartnCmp>(curIdSql).FirstOrDefault();
+
+                pordhead.Curid = partnCmp?.Curid;
                 pordhead.Ref1 = result.PordHead.Entity[PordHead.FieldRef1.Name]?.ToString();
                 pordhead.Note = result.PordHead.Entity[PordHead.FieldNote.Name]?.ToString();
 
@@ -223,8 +229,8 @@ namespace eLog.HeavyTools.Purchase.Pord.Import
                 {
                     if (partnerPordHeadIds.ContainsKey(pordhead.Partnid.Value))
                     {
-                        var sordId = partnerPordHeadIds[pordhead.Partnid.Value];
-                        pordhead = PordHead.Load(sordId);
+                        var partnId = partnerPordHeadIds[pordhead.Partnid.Value];
+                        pordhead = PordHead.Load(partnId);
                     }
                 }
 
@@ -235,9 +241,9 @@ namespace eLog.HeavyTools.Purchase.Pord.Import
                 pordline.Confreqdate = ConvertUtils.ToDateTime(result.PordLine.Entity[PordLine.FieldConfreqdate.Name]);
                 pordline.Itemid = ConvertUtils.ToInt32(result.PordLine.Entity[PordLine.FieldItemid.Name]);
 
-                pordline.Ref2 = result.PordLine.Entity[PordLine.FieldRef2.Name].ToString();
+                pordline.Ref2 = result.PordLine.Entity[PordLine.FieldRef2.Name]?.ToString();
 
-                pordline.Note = result.PordLine.Entity[PordLine.FieldNote.Name].ToString();
+                pordline.Note = result.PordLine.Entity[PordLine.FieldNote.Name]?.ToString();
 
                 if (!pordline.Itemid.HasValue)
                 {
@@ -249,17 +255,9 @@ namespace eLog.HeavyTools.Purchase.Pord.Import
                     throw new ValidateException(ve);
                 }
 
-                pordline.Ordqty = ConvertUtils.ToInt32(result.PordLine.Entity[PordLine.FieldOrdqty.Name]);
-                pordline.Purchprc  = ConvertUtils.ToInt32(result.PordLine.Entity[PordLine.FieldPurchprc.Name]);
-                pordline.Confqty = ConvertUtils.ToInt32(result.PordLine.Entity[PordLine.FieldConfqty.Name]);
-
-                //var taxidSql = $@"SELECT tt.taxid FROM ols_taxtrans (nolock) tt
-                //                JOIN ols_itemgroup (nolock) itmgrp on itmgrp.taxid = tt.taxid
-                //                JOIN ols_item (nolock) itm on itm.itemgrpid = itmgrp.itemgrpid
-                //                JOIN ols_sorddoc (nolock) sd on sd.bustypeid = tt.bustypeid
-                //                WHERE itm.itemid = {Utils.SqlToString(pordline.Itemid)} AND sd.sorddocid = {Utils.SqlToString(pordhead.Sorddocid)}";
-
-                //pordline.Taxid = SqlDataAdapter.ExecuteSingleValue(DB.Main, taxidSql).ToString();
+                pordline.Ordqty2 = ConvertUtils.ToInt32(result.PordLine.Entity[PordLine.FieldOrdqty.Name]);
+                pordline.Purchprc2  = ConvertUtils.ToInt32(result.PordLine.Entity[PordLine.FieldPurchprc.Name]) ?? 0;
+                pordline.Confqty2 = ConvertUtils.ToInt32(result.PordLine.Entity[PordLine.FieldConfqty.Name]);
 
                 map.Add(pordline);
 
@@ -337,7 +335,7 @@ namespace eLog.HeavyTools.Purchase.Pord.Import
 
             if (rowContext.CurrentField.Field.Equals(Partner.FieldPartnid.Name))
             {
-                var sql = $"SELECT * FROM ols_partner ols LEFT JOIN olc_partner olc on ols.partnid = olc.partnid WHERE ols.partncode = '{Utils.SqlToString(value)}' or olc.oldcode = '{Utils.SqlToString(value)}'";
+                var sql = $"SELECT * FROM ols_partner ols LEFT JOIN olc_partner olc on ols.partnid = olc.partnid WHERE ols.partncode = {Utils.SqlToString(value)} or olc.oldcode = {Utils.SqlToString(value)}";
                 var partners = SqlDataAdapter.GetList<Partner>(sql);
 
                 entity = partners.FirstOrDefault();
@@ -350,6 +348,14 @@ namespace eLog.HeavyTools.Purchase.Pord.Import
                 var items = SqlDataAdapter.GetList<Item>(sql);
 
                 entity = items.FirstOrDefault();
+            }
+
+            if (rowContext.CurrentField.Field.Equals(PordHead.FieldCmpid.Name))
+            {
+                var sql = $"SELECT * FROM ols_company WHERE abbr in ('HUPS',{Utils.SqlToString(value)})";
+                var c = SqlDataAdapter.GetList<Company>(sql);
+
+                entity = c.FirstOrDefault() ?? Company.Load(CustomSettings.GetString("PordHeadImportDefaultCmpCode"));
             }
 
             if (entity != null)

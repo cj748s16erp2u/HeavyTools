@@ -133,5 +133,5 @@
   <add key="SordheadImportDefaultCurid" value="HUF" />  
   
   <!-- Szallitoi rendeles betoltes import file leiro helye -->
-  <add key="PordHeadImportDescrFileName" value="SordHeadImportDescr.json" />
+  <add key="PordHeadImportDescrFileName" value="PordHeadImportDescr.json" />
 </configuration>
