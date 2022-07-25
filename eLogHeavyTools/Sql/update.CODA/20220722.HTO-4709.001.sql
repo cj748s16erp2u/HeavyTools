@@ -1,4 +1,4 @@
-﻿if object_id('cif_ebank_akcenta_header') is null
+if object_id('cif_ebank_akcenta_header') is null
 CREATE TABLE [cif_ebank_akcenta_header]
 (
 	[id] [int] IDENTITY(1,1) NOT NULL,
