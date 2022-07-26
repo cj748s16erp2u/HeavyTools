@@ -30,3 +30,6 @@ $missingcolortype1=Hiányzik a Szín 1.
 
 $modelMatrixResultTitle=Modell szezon-színállás eredmény
 $modelMatrixResult={0} db cikk változott, {1} db jött létre
+
+$catalogpagenumber=Katalógus
+$webcategory=Web kategória
