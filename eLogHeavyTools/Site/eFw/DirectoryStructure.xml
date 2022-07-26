@@ -16,7 +16,7 @@
             <Folder name="errors" parent="xml" value="Errors\"/>
             <Folder name="defaults" parent="xml" value="Defaults\"/>
             <Folder name="languages" parent="xml" value="Languages\"/>
-            <Folder name="publicarchive" parent="sourceroot" value="archive\"/>
+            <!--<Folder name="publicarchive" parent="sourceroot" value="archive\"/>-->
             <Folder name="export" parent="xml" value="Export\"/>
             <Folder name="transformations" parent="xml" value="Transformations\"/>
             <Folder name="webreport" parent="xml" value="WebReport\"/>

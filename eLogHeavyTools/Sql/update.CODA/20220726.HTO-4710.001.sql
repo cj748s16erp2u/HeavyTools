@@ -1,4 +1,4 @@
-﻿if object_id('cif_ebank_paypal_lines') is null
+if object_id('cif_ebank_paypal_lines') is null
 CREATE TABLE [cif_ebank_paypal_lines]
 (
 	[id] [int] IDENTITY(1,1) NOT NULL,
