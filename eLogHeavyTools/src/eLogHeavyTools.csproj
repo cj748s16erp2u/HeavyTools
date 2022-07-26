@@ -87,6 +87,10 @@
       <HintPath>..\..\..\Releases\eLog.Base\v7.2.0.0\Binaries\Newtonsoft.Json.dll</HintPath>
       <SpecificVersion>False</SpecificVersion>
     </Reference>
+    <Reference Include="U4Ext.Bank.Base, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\..\Releases\Bank.Base\v7.2.0.0\Binaries\U4Ext.Bank.Base.dll</HintPath>
+      <SpecificVersion>False</SpecificVersion>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Data.Linq" />
@@ -98,10 +102,6 @@
     <Reference Include="System.Web.Services" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Xml.Linq" />
-    <Reference Include="U4Ext.Bank.Base, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\..\Releases\Bank.Base\v7.2.0.0\Binaries\U4Ext.Bank.Base.dll</HintPath>
-      <SpecificVersion>False</SpecificVersion>
-    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BankTran\CifEbankTransBL3.cs" />
@@ -276,6 +276,7 @@
     <Compile Include="Sales\Sord\SordHeadEditTab3.cs" />
     <Compile Include="Sales\Sord\SordHeadSearchProvider3.cs" />
     <Compile Include="Sales\Sord\SordHeadSearchTab3.cs" />
+    <Compile Include="Sales\Sord\SordHeadWebShopEditCommon.cs" />
     <Compile Include="Sales\Sord\SordLineAllBL3.cs" />
     <Compile Include="Sales\Sord\SordLineAllEditTab3.cs" />
     <Compile Include="Sales\Sord\SordLineAllSearchProvider3.cs" />
