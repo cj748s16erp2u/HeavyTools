@@ -98,6 +98,13 @@ insert ols_typeline (typegrpid, value, seqno, name, abbr, str1, addusrid, adddat
 values (510, 5, 5, 'Avizó Intersport: referencia1, érték, kedvezmény', '5', 'ref1,origvalue,valueacc', 'dev', getdate(), 0)
 
 insert ols_typeline (typegrpid, value, seqno, name, abbr, addusrid, adddate, delstat)
+values (511, 10, 10, 'Ex works', 'EXW', 'dev', getdate(), 0)
+
+insert ols_typeline (typegrpid, value, seqno, name, abbr, addusrid, adddate, delstat)
+values (511, 20, 20, ' Free on board', 'FOB', 'dev', getdate(), 0)
+
+
+insert ols_typeline (typegrpid, value, seqno, name, abbr, addusrid, adddate, delstat)
 values (8001, 60, 60, 'K&H Bankkártya kivonat file', 'KHK', 'dev', getdate(), 0)
 
 insert ols_typeline (typegrpid, value, seqno, name, abbr, addusrid, adddate, delstat)

@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Schema xmlns="http://tempuri.org/RenderableSchema.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://tempuri.org/RenderableSchema.xsd RenderableSchema.xsd">
+    <TabPage Name="PordHeadEditTabBase">
+        <LayoutTable ControlGroup="PordHead" Columns="{120, None}; {180, None}; {20, Empty}; {120, None}; {180, None}" ID="EditGroup1" Label="$pordhead_editgroup">
+            <Combo Field="cmpid" ListID="eLog.Base.Setup.Company.CompanyLoggedInList" ComboFlags="None" />
+            <Combo Field="porddocid" ListID="eLog.Base.Setup.PordDoc.PordDocList" ComboFlags="None" DependentField="cmpid" DependentCtrlID="PordHead.cmpid" />
+            <ForceNextRow />
+            <DatePickerbox Field="porddate" />
+            <Textbox Field="docnum" Disabled="True" />
+            <ForceNextRow />
+            <Combo Field="projid" ListID="eLog.Base.Project.ProjectList" ComboFlags="None" DependentField="cmpid" DependentCtrlID="PordHead.cmpid" ColsToSpan="4" />
+            <ForceNextRow />
+            <Selector Field="partnid" Label="$partnid_code" ValueField="partnid" TextField="partncode" SelectionID="eLog.Base.Masters.Partner.PartnerSelectionProvider" DependentField="cmpid" DependentCtrlID="PordHead.cmpid" />
+            <ForceNextRow />
+            <Selector Field="partnid" Label="$partnid_name" ValueField="partnid" TextField="name" SelectionID="eLog.Base.Masters.Partner.PartnerSelectionProvider" ColsToSpan="-1" />
+            <ForceNextRow />
+            <Combo Field="addrid" ListID="eLog.Base.Masters.Partner.PartnAddrList" ComboFlags="None AllowBlank AutoSelectFirst FindAnywhere" DependentField="partnid" DependentCtrlID="PordHead.partnid_partncode" ColsToSpan="-1" />
+            <ForceNextRow />
+            <Combo Field="curid" ListID="eLog.Base.Setup.Currency.CurrencyList" ComboFlags="None" />
+			<Combo Field="clerkempid" ListID="eLog.Base.Masters.Partner.EmployeeList" ComboFlags="AllowBlank" DependentCtrlID="PordHead.partnid_partncode,#16" DependentField="partnid,emptype" CustomData="olc" />
+			<ForceNextRow />
+			<Combo Field="paritytypeid" ListID="eProjectWeb.Framework.Data.TypeListProviderPublic#olc_pordhead.paritytype" CustomData="olc"/> <Textbox Field="locality" CustomData="olc"/>
+			<Numberbox Field="advance" DecDigits="2" ThousandSep="True" CustomData="olc"/>
+            <Textbox Field="ref1" />
+            <ForceNextRow />
+            <Textbox Field="note" Rows="2" ColsToSpan="-1" />
+        </LayoutTable>
+        <LayoutTable ControlGroup="PordLine" Columns="{120, None}; {120, None}; {20, Empty}; {100, None}; {120, None}" ID="EditGroup2" Label="$pordline_editgroup" DisableClientValidation="True">
+            <Selector Field="itemid" Label="$item_code" ValueField="itemid" TextField="itemcode" SelectionID="eLog.Base.Masters.Item.ItemSelectionProvider" />
+            <ForceNextRow/>
+            <Selector Field="itemid" Label="$item_name" ValueField="itemid" TextField="name01" SelectionID="eLog.Base.Masters.Item.ItemSelectionProvider" ColsToSpan="4" />
+            <ForceNextRow />
+            <DatePickerbox Field="reqdate"/>
+            <DatePickerbox Field="confreqdate"/>
+            <GroupSeparator ID="x" Label="_" />
+            <Combo Field="unitid2" ListID="eLog.Base.Setup.Unit.UnitList" Label="$unitid" />
+            <Combo Field="unitid" ListID="eLog.Base.Setup.Unit.UnitList" Disabled="True" Label=" " />
+            <ForceNextRow />
+            <Empty />
+            <Numberbox Field="change" DecDigits="4" ThousandSep="True" />
+            <ForceNextRow />
+            <Numberbox Field="ordqty2" DecDigits="2" ThousandSep="True" />
+            <Numberbox Field="ordqty" DecDigits="2" ThousandSep="True" Label=" " />
+            <ForceNextRow />
+            <Numberbox Field="confqty2" DecDigits="2" ThousandSep="True" />
+            <Numberbox Field="confqty" DecDigits="2" ThousandSep="True" Label=" " />
+            <ForceNextRow />
+            <Numberbox Field="movqty2" Disabled="True" DecDigits="2" ThousandSep="True" />
+            <Numberbox Field="movqty" Disabled="True" DecDigits="2" ThousandSep="True" Label=" " />
+            <ForceNextRow />
+            <Numberbox Field="purchprc2" DecDigits="2" ThousandSep="True" />
+            <Numberbox Field="purchprc" DecDigits="2" ThousandSep="True" Label=" " />
+            <ForceNextRow />
+            <Textbox Field="ref2" ColsToSpan="-1" />
+        </LayoutTable>
+    </TabPage>
+	
+	<Search Name="PordLineSearchProvider">
+        <Column FieldName="linenum" Width="30" />
+        <Column FieldName="pordlinestat" Width="35" FieldFunction="listlookup" FieldFuncArg="eLog.Base.Purchase.Pord.PordlineStatList,abbr" />
+        <Column FieldName="itemid_code" DisplayName="$item_code" Width="100" />
+        <Column FieldName="itemid_name1" DisplayName="$item_name" Width="200" />
+        <Column FieldName="reqdate" Width="80" Format="D" />
+        <Column FieldName="confreqdate" Width="80" Format="D" />
+        <Column FieldName="unitid" Width="50" />
+        <Column FieldName="purchprc" Width="80" Format="C" />
+        <Column FieldName="ordqty" Width="68" Format="C" />
+        <Column FieldName="confqty" Width="68" Format="C" />
+        <Column FieldName="movqty" Width="68" Format="C" />
+        <Column FieldName="occupied" Width="85" Format="C"/>
+        <Column FieldName="ref2" Width="100" />
+        <Column FieldName="parent" Width="100" DisplayName="$line_parent" />
+        <Column FieldName="pordlineid" PKFieldName="pordlineid" Width="60" />
+        <Column FieldName="addusrid" Width="100"/>
+        <Column FieldName="adddate" Width="120" Format="DT"/>
+        <Column FieldName="note" Width="200" />
+        <Column FieldName="purchval" Hidden="True" />
+        <Column FieldName="genperformqty" Format="C2" Width="100" />
+    </Search>
+
+    <Search Name="PordLineAllSearchProvider">
+        <Column FieldName="pordlineid" Hidden="true" PKFieldName="pordlineid" />
+        <Column FieldName="pordid" Hidden="true" PKFieldName="pordid" />
+        <Column FieldName="pordstat" Width="20" DisplayName="$pordstat_grid" FieldFunction="listlookup" FieldFuncArg="eLog.Base.Purchase.Pord.PordHeadStatList,abbr" />
+        <Column FieldName="pordlinestat" Width="35" DisplayName="$pordlinestat_grid" FieldFunction="listlookup" FieldFuncArg="eLog.Base.Purchase.Pord.PordlineStatList,abbr" Align="Left" />
+        <Column FieldName="porddocid" Width="80" />
+        <Column FieldName="docnum" Width="120" />
+        <Column FieldName="porddate" Width="68" Format="D" />
+        <Column FieldName="projcode" Width="60" />
+        <Column FieldName="projname" Width="150" />
+        <Column FieldName="partncode" Width="80" />
+        <Column FieldName="partnname" Width="200" />
+        <Column FieldName="itemid_code" DisplayName="$item_code" Width="100" />
+        <Column FieldName="itemid_name1" DisplayName="$item_name" Width="100" />
+        <Column FieldName="reqdate" Width="80" Format="D" />
+        <Column FieldName="confreqdate" Width="80" Format="D" />
+        <Column FieldName="unitid" Width="50" />
+        <Column FieldName="purchprc" Width="80" Format="C" />
+        <Column FieldName="ordqty" Width="68" Format="C" />
+        <Column FieldName="confqty" Width="68" Format="C" />
+        <Column FieldName="movqty" Width="68" Format="C" />
+        <Column FieldName="curid" Width="80" />
+        <Column FieldName="cmpid" Width="80" Align="Left" FieldFunction="listlookup" FieldFuncArg="eLog.Base.Setup.Company.CompanyLoggedInList" />
+        <Column FieldName="ref1" Width="100" />
+        <Column FieldName="ref2" Width="100" />
+        <Column FieldName="note" Width="150" />
+    </Search>
+</Schema>

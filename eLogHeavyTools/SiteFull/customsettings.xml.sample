@@ -130,5 +130,8 @@
   <add key="SordHeadImportDescrFileName" value="SordHeadImportDescr.json" />
   
   <!-- Vevoi rendeles betoltes import file leiro helye -->
-  <add key="SordheadImportDefaultCurid" value="HUF" />
+  <add key="SordheadImportDefaultCurid" value="HUF" />  
+  
+  <!-- Szallitoi rendeles betoltes import file leiro helye -->
+  <add key="PordHeadImportDescrFileName" value="PordHeadImportDescr.json" />
 </configuration>

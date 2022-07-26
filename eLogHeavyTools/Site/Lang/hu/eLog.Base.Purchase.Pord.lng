@@ -1,0 +1,26 @@
+$paritytypeid=Paritás
+$advance=Előleg
+$clerkempid=Ügyintéző
+$locality=Helység
+$confqty=Visszaig. gyárt.
+
+$filename=Import fájl
+$logfilename=Log fájl
+$errfilename=Hibajegyzés
+$error=Hiba
+$errors=Hibák
+$exceptions=Krtikus
+$entity=Adat típus
+$import_title=Beolvasás
+$importresult_processedrows={0} sorból {1} beolvasása volt sikeres.
+$importresult_savedrows={0} beolvasott sorból {1} mentése volt sikeres.
+$importresult_ok={0} sor feldolgozása hiba nélkül befejeződött.
+$importresult_message={0}: {1}
+$import_columnname_not_unique=A következő oszlop nevek többször kerültek meghatározásra: {0}
+$import_invalidfieldvalue=A '{0}.{1}' mezőbe a '{2}' érték nem menthető\n{3}
+$import_invalidfield=A következő mező '{1}' nem található a '{0}' táblában
+$import_importresult=Beolvasás eredménye
+$action_pordheadimport=Import
+$import_importresult_ok=OK
+$pordheadimport=szallitoi_rendeles_import
+$error_import_item_not_found=Cikk nem található!
