@@ -61,6 +61,10 @@
       <HintPath>..\..\..\Releases\CodaInt.Base\v7.0.0.0\Binaries\CodaInt.Base.dll</HintPath>
       <SpecificVersion>False</SpecificVersion>
     </Reference>
+    <Reference Include="CODALink, Version=7.0.8201.29967, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\Releases\CodaInt.Base\v7.0.0.0\Binaries\CODALink.dll</HintPath>
+    </Reference>
     <Reference Include="eFwIntf.Interf">
       <HintPath>..\..\..\Releases\Bank.Base\v7.2.0.0\Binaries\eFwIntf.Interf.dll</HintPath>
     </Reference>
@@ -262,6 +266,8 @@
     <Compile Include="Purchase\Pord\PordHeadBL3.cs" />
     <Compile Include="Purchase\Pord\PordHeadEditTab3.cs" />
     <Compile Include="Purchase\Pord\PordHeadSearchTab3.cs" />
+    <Compile Include="Reports\Financials\BankCAvisoSaveToPdf.cs" />
+    <Compile Include="Reports\Financials\CompensationDraft.cs" />
     <Compile Include="Sales\Sord\Import\SordHeadImportResultSet.cs" />
     <Compile Include="Sales\Sord\Import\SordHeadImportResultSets.cs" />
     <Compile Include="Sales\Sord\Import\SordHeadImportService.cs" />
