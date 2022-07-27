@@ -1,32 +1,8 @@
-$webshop_editgroup=Webes rendelés
-$loyaltycardno=Törzskártya
-
-$transfcond=Szállítási feltétel
-$transfcond_gls=GLS
-$transfcond_foxpost=FOXPOST
-$transfcond_store=Bolt
-$transfcond_address=Cím
-
-$deliverylocation=Csomagpont
-$customername=Szállítási név
-$customercountry=Szállítási ország
-$customerzipcode=Szállítási irányítószám
-$customercity=Szállítási település
-$customeraddress=Szállítási cím
-
-$couponcode=Kupon kód
-
-$regreprempid=Ter. képviselő
+$paritytypeid=Paritás
+$advance=Előleg
 $clerkempid=Ügyintéző
-$advval=Előleg összege
-
-$sordapprovalstat=Jóváhagyás
-
-$confqty=Visszaigazolt mennyiség
-$confdeldate=Visszaigazolt száll. hat. idő
-
-$sordapprovalstat_filter=Jóváhagyás státusz
-$confdeldatefrom=Visszaigazolt határidő
+$locality=Helység
+$confqty=Visszaig. gyárt.
 
 $filename=Import fájl
 $logfilename=Log fájl
@@ -44,7 +20,7 @@ $import_columnname_not_unique=A következő oszlop nevek többször kerültek me
 $import_invalidfieldvalue=A '{0}.{1}' mezőbe a '{2}' érték nem menthető\n{3}
 $import_invalidfield=A következő mező '{1}' nem található a '{0}' táblában
 $import_importresult=Beolvasás eredménye
-$action_sordheadimport=Import
+$action_pordheadimport=Import
 $import_importresult_ok=OK
-$sordheadimport=vevoi_rendeles_import
+$pordheadimport=szallitoi_rendeles_import
 $error_import_item_not_found=Cikk nem található!

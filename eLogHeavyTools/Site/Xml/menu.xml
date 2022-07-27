@@ -419,6 +419,8 @@
         </Item>
         <Item ID="RPaymentReports" Name="$paymentreports">
             <Item ID="RBankPaymentFile" Name="$bankpaymentfile" PageID="CodaInt.Base.Reports.Financials.BankPaymentFile" />
+			<Item ID="RBankCAvisoSaveToPdf" Name="$bankcavisosavetopdf" PageID="eLog.HeavyTools.Reports.Financials.BankCAvisoSaveToPdf" />
+            <Item ID="RCompensationDraft" Name="$compensationdraft" PageID="eLog.HeavyTools.Reports.Financials.CompensationDraft" />
         </Item>
         <Item ID="RSynch" Name="$synch">
             <Item ID="RPtnrSynch" Name="$partnersynchronization" PageID="CodaInt.Base.PartnerSynchronization.PartnerSynchronizationPage"/>

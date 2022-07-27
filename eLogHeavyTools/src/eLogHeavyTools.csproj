@@ -61,6 +61,10 @@
       <HintPath>..\..\..\Releases\CodaInt.Base\v7.0.0.0\Binaries\CodaInt.Base.dll</HintPath>
       <SpecificVersion>False</SpecificVersion>
     </Reference>
+    <Reference Include="CODALink, Version=7.0.8201.29967, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\Releases\CodaInt.Base\v7.0.0.0\Binaries\CODALink.dll</HintPath>
+    </Reference>
     <Reference Include="eFwIntf.Interf">
       <HintPath>..\..\..\Releases\Bank.Base\v7.2.0.0\Binaries\eFwIntf.Interf.dll</HintPath>
     </Reference>
@@ -87,6 +91,10 @@
       <HintPath>..\..\..\Releases\eLog.Base\v7.2.0.0\Binaries\Newtonsoft.Json.dll</HintPath>
       <SpecificVersion>False</SpecificVersion>
     </Reference>
+    <Reference Include="U4Ext.Bank.Base, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\..\Releases\Bank.Base\v7.2.0.0\Binaries\U4Ext.Bank.Base.dll</HintPath>
+      <SpecificVersion>False</SpecificVersion>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Data.Linq" />
@@ -98,10 +106,6 @@
     <Reference Include="System.Web.Services" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Xml.Linq" />
-    <Reference Include="U4Ext.Bank.Base, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\..\Releases\Bank.Base\v7.2.0.0\Binaries\U4Ext.Bank.Base.dll</HintPath>
-      <SpecificVersion>False</SpecificVersion>
-    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BankTran\CifEbankTransBL3.cs" />
@@ -216,6 +220,7 @@
     <Compile Include="Masters\Item\Season\OlcItemSeasons.cs" />
     <Compile Include="Masters\Item\Season\OlcItemSeasonGenerated.cs" />
     <Compile Include="Masters\Item\Season\OlcItemSeasonSearchPage.cs" />
+    <Compile Include="Masters\Partner\EmployeeList3.cs" />
     <Compile Include="Masters\Partner\OlcEmployeeRules.cs" />
     <Compile Include="Masters\Partner\OlcPartnAddrRules.cs" />
     <Compile Include="Masters\PriceTable\OlcPrctable.cs" />
@@ -251,6 +256,18 @@
     <Compile Include="Masters\PriceTable\PrcType.cs" />
     <Compile Include="Module.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Purchase\Pord\Import\PordHeadImportResultSet.cs" />
+    <Compile Include="Purchase\Pord\Import\PordHeadImportResultSets.cs" />
+    <Compile Include="Purchase\Pord\Import\PordHeadImportService.cs" />
+    <Compile Include="Purchase\Pord\Import\PordHeadRowContext.cs" />
+    <Compile Include="Purchase\Pord\OlcPordHead.cs" />
+    <Compile Include="Purchase\Pord\OlcPordHeadGenerated.cs" />
+    <Compile Include="Purchase\Pord\OlcPordHeadRules.cs" />
+    <Compile Include="Purchase\Pord\PordHeadBL3.cs" />
+    <Compile Include="Purchase\Pord\PordHeadEditTab3.cs" />
+    <Compile Include="Purchase\Pord\PordHeadSearchTab3.cs" />
+    <Compile Include="Reports\Financials\BankCAvisoSaveToPdf.cs" />
+    <Compile Include="Reports\Financials\CompensationDraft.cs" />
     <Compile Include="Sales\Sord\Import\SordHeadImportResultSet.cs" />
     <Compile Include="Sales\Sord\Import\SordHeadImportResultSets.cs" />
     <Compile Include="Sales\Sord\Import\SordHeadImportService.cs" />
@@ -265,6 +282,7 @@
     <Compile Include="Sales\Sord\SordHeadEditTab3.cs" />
     <Compile Include="Sales\Sord\SordHeadSearchProvider3.cs" />
     <Compile Include="Sales\Sord\SordHeadSearchTab3.cs" />
+    <Compile Include="Sales\Sord\SordHeadWebShopEditCommon.cs" />
     <Compile Include="Sales\Sord\SordLineAllBL3.cs" />
     <Compile Include="Sales\Sord\SordLineAllEditTab3.cs" />
     <Compile Include="Sales\Sord\SordLineAllSearchProvider3.cs" />
