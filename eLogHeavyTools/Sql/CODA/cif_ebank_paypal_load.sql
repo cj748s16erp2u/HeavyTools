@@ -75,7 +75,7 @@ BEGIN
 		SET @cursor = CURSOR FAST_FORWARD FOR
 			SELECT DISTINCT(p_acnum)
 			FROM cif_ebank_paypal_lines WITH (NOLOCK)
-			WHERE interfaceid=@interfaceid AND username=@userid
+			WHERE interfaceid=@interfaceid AND username=@userid AND filname = @filename
 
 		OPEN @cursor
 		FETCH NEXT FROM @cursor INTO @acnum
