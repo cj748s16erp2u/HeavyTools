@@ -297,6 +297,7 @@
     <Compile Include="Setup\Warehouse\WarehouseSearchTab3.cs" />
     <Compile Include="Webshop\OlcWebshop.cs" />
     <Compile Include="Webshop\OlcWebshopGenerated.cs" />
+    <Compile Include="Webshop\WebshopList.cs" />
     <Compile Include="Webshop\WebshopType.cs" />
   </ItemGroup>
   <ItemGroup />

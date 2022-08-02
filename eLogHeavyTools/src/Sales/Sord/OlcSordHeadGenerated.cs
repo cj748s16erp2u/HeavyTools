@@ -116,21 +116,6 @@ namespace eLog.HeavyTools.Sales.Sord
 
         /// <summary>
         /// <para>Field</para>
-        /// ? - numeric
-        /// </summary>
-        [Field("advval")]
-        public static Field FieldAdvval { get; protected set; }
-        /// <summary>
-        /// ? - numeric
-        /// </summary>
-        public Decimal? Advval
-        {
-            get { return (Decimal?)this[FieldAdvval]; }
-            set { this[FieldAdvval] = value; }
-        }
-
-        /// <summary>
-        /// <para>Field</para>
         /// ? - int
         /// </summary>
         [Field("regreprempid")]
@@ -157,6 +142,21 @@ namespace eLog.HeavyTools.Sales.Sord
         {
             get { return (int?)this[FieldClerkempid]; }
             set { this[FieldClerkempid] = value; }
+        }
+
+        /// <summary>
+        /// <para>Field</para>
+        /// ? - varchar
+        /// </summary>
+        [Field("wid")]
+        public static Field FieldWid { get; protected set; }
+        /// <summary>
+        /// ? - varchar
+        /// </summary>
+        public StringN Wid
+        {
+            get { return new StringN(this[FieldWid]); }
+            set { this[FieldWid] = value; }
         }
 
         /// <summary>

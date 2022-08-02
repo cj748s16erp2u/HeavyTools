@@ -59,6 +59,9 @@
 			<ForceNextRow/>
             <Textbox Field="note" Rows="2" ColsToSpan="4"/>
 			<GroupSeparator ID="webshop" />
+			<ForceNextRow/>
+			<Combo Field="wid" ColsToSpan="1" ListID="eLog.HeavyTools.Webshop.WebshopList" ComboFlags="None" Disabled="True" ColsToSpan="4"/>
+			<ForceNextRow/>
 			<Textbox Field="loyaltycardno" ColsToSpan="4" CustomData="olc" Disabled="True"/>
 			<ForceNextRow/>
 			<Combo Field="transfcond" ColsToSpan="1" CustomData="olc" ListID="xml:eLog.Base.Sales.Sord_transfcond" ComboFlags="None" Disabled="True"/>
