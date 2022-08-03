@@ -89,6 +89,10 @@ CREATE TABLE [cif_ebank_akcenta_078]
 	[transaction_info1] [nvarchar](35) NULL,
 	[countpaccountnumber] [nvarchar](35) NULL,
 	[countpbank] [nvarchar](54) NULL,
+	[transaction_info_orig] [nvarchar](35) NULL,
+	[transaction_info_p1] [nvarchar](20) NULL,
+	[transaction_info_p2] [nvarchar](3) NULL,
+	[transaction_info_p3] [nvarchar](20) NULL,
 	CONSTRAINT [PK_cif_ebank_akcenta_078] PRIMARY KEY CLUSTERED 
 	(
 		[id] ASC
