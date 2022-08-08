@@ -177,6 +177,7 @@ namespace eLog.HeavyTools
             ObjectFactory.AddRemap(typeof(Base.Masters.Partner.EmployeeBL), typeof(Masters.Partner.EmployeeBL3));
             ObjectFactory.AddRemap(typeof(Base.Masters.Partner.EmployeeEditTab), typeof(Masters.Partner.EmployeeEditTab3));
             ObjectFactory.AddRemap(typeof(Base.Masters.Partner.EmployeeSearchProvider), typeof(Masters.Partner.EmployeeSearchProvider3));
+            ObjectFactory.AddRemap(typeof(Base.Masters.Partner.EmployeeList), typeof(Masters.Partner.EmployeeList3));
 
             // PartnAddr
             ObjectFactory.AddRemap(typeof(Base.Masters.Partner.PartnAddrBL), typeof(Masters.Partner.PartnAddrBL3));
@@ -205,7 +206,7 @@ namespace eLog.HeavyTools
             ObjectFactory.AddRemap(typeof(Base.Sales.Sord.SordHeadBL), typeof(Sales.Sord.SordHeadBL3));
             ObjectFactory.AddRemap(typeof(Base.Sales.Sord.SordHeadSearchProvider), typeof(Sales.Sord.SordHeadSearchProvider3));
             ObjectFactory.AddRemap(typeof(Base.Sales.Sord.SordHeadSearchTab), typeof(Sales.Sord.SordHeadSearchTab3));
-
+             
             ObjectFactory.AddRemap(typeof(Base.Sales.Sord.SordLineAllEditTab2), typeof(Sales.Sord.SordLineAllEditTab3));
             ObjectFactory.AddRemap(typeof(Base.Sales.Sord.SordLineAllSearchProvider), typeof(Sales.Sord.SordLineAllSearchProvider3));
             ObjectFactory.AddRemap(typeof(Base.Sales.Sord.SordLineAllBL), typeof(Sales.Sord.SordLineAllBL3));
@@ -213,6 +214,11 @@ namespace eLog.HeavyTools
             ObjectFactory.AddRemap(typeof(Base.Sales.Sord.SordLineEditTab), typeof(Sales.Sord.SordLineEditTab3));
             ObjectFactory.AddRemap(typeof(Base.Sales.Sord.SordLineEditTab), typeof(Sales.Sord.SordLineEditTab3));
             ObjectFactory.AddRemap(typeof(Base.Sales.Sord.SordLineSearchProvider), typeof(Sales.Sord.SordLineSearchProvider3));
+
+            // Pord
+            ObjectFactory.AddRemap(typeof(Base.Purchase.Pord.PordHeadBL), typeof(Purchase.Pord.PordHeadBL3));
+            ObjectFactory.AddRemap(typeof(Base.Purchase.Pord.PordHeadEditTab), typeof(Purchase.Pord.PordHeadEditTab3));
+            ObjectFactory.AddRemap(typeof(Base.Purchase.Pord.PordHeadSearchTab), typeof(Purchase.Pord.PordHeadSearchTab3));
         }
     }
 }

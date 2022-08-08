@@ -22,3 +22,7 @@ values (509, 'olc_partner.InvLangType', 'Partner tulajdonság: számla nyelve', 
 insert ols_typehead (typegrpid, typekey, descr, protect, multipl, addusrid, adddate, delstat)
 values (510, 'cif_ebank_trans.importfields', 'Import Fields', 1, 0, 'dev', getdate(), 0)
 go
+
+insert ols_typehead (typegrpid, typekey, descr, protect, multipl, addusrid, adddate, delstat)
+values (511, 'olc_pordhead.paritytype', 'Szállítói rendelés paritás', 1, 0, 'dev', getdate(), 0)
+go
