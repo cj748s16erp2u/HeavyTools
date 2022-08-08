@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using eLog.HeavyTools.Services.WhWebShop.DataAccess.Context;
+using Microsoft.EntityFrameworkCore.Infrastructure;
 
 namespace eLog.HeavyTools.Services.WhWebShop.DataAccess.Repositories.Interfaces;
 
@@ -46,7 +47,7 @@ public interface IUnitOfWork
     /// Saves all changes made in this context to the database.
     /// </summary>
     /// <returns>The number of state entities written to the database.</returns>
-    int SaveChanges();
+    int SaveChanges(); 
 
     /// <summary>
     /// Asynchronously saves all changes made in this context to the database.

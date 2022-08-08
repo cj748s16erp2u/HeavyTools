@@ -1,10 +1,9 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using eLog.HeavyTools.Services.WhWebShop.BusinessEntities.Model.Base;
 using Microsoft.EntityFrameworkCore;
-
+using eLog.HeavyTools.Services.WhWebShop.BusinessEntities.Model.Base;
 namespace eLog.HeavyTools.Services.WhWebShop.BusinessEntities.Model
 {
     [Table("cfw_usergroup")]
@@ -24,10 +23,10 @@ namespace eLog.HeavyTools.Services.WhWebShop.BusinessEntities.Model
         public string Cs { get; set; } = null!;
 
         [ForeignKey("Grpid")]
-        [InverseProperty("CfwUsergroups")]
+        [InverseProperty("CfwUsergroup")]
         public virtual CfwGroup Grp { get; set; } = null!;
         [ForeignKey("Usrid")]
-        [InverseProperty("CfwUsergroups")]
+        [InverseProperty("CfwUsergroup")]
         public virtual CfwUser Usr { get; set; } = null!;
     }
 }

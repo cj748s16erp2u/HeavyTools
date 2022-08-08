@@ -26,6 +26,8 @@ public interface IRepository<TEntity> where TEntity : class, IEntity
     /// </summary>
     IQueryable<TEntity> Entities { get; }
 
+    IQueryable<TEntity>? FromSql(string sql);
+
     /// <summary>
     ///     Finds an entity with the given primary key values. If an entity with the given primary key values
     ///     is being tracked by the context, then it is returned immediately without making a request to the
@@ -244,4 +246,6 @@ public interface IRepository<TEntity> where TEntity : class, IEntity
     /// <param name="sql">The interpolated string representing a SQL query with parameters.</param>
     /// <returns>An <see cref="IQueryable{T}" /> representing the interpolated string SQL query.</returns>
     IQueryable<TQuery> ExecuteSql<TQuery>(FormattableString sql) where TQuery : class;
+     
+    Task ExecuteStoredProcedure(string v, Dictionary<string, object> dictionary);
 }

@@ -1,10 +1,9 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using eLog.HeavyTools.Services.WhWebShop.BusinessEntities.Model.Base;
 using Microsoft.EntityFrameworkCore;
-
+using eLog.HeavyTools.Services.WhWebShop.BusinessEntities.Model.Base;
 namespace eLog.HeavyTools.Services.WhWebShop.BusinessEntities.Model
 {
     [Table("ols_sysval")]

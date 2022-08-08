@@ -1,10 +1,9 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using eLog.HeavyTools.Services.WhWebShop.BusinessEntities.Model.Base;
 using Microsoft.EntityFrameworkCore;
-
+using eLog.HeavyTools.Services.WhWebShop.BusinessEntities.Model.Base;
 namespace eLog.HeavyTools.Services.WhWebShop.BusinessEntities.Model
 {
     [Table("cfw_user")]
@@ -12,8 +11,15 @@ namespace eLog.HeavyTools.Services.WhWebShop.BusinessEntities.Model
     {
         public CfwUser()
         {
-            CfwUsergroups = new HashSet<CfwUsergroup>();
-            OlsCompanies = new HashSet<OlsCompany>();
+            CfwUsergroup = new HashSet<CfwUsergroup>();
+            OlcSordhead = new HashSet<OlcSordhead>();
+            OlcSordline = new HashSet<OlcSordline>();
+            OlsCompany = new HashSet<OlsCompany>();
+            OlsItem = new HashSet<OlsItem>();
+            OlsPartnaddr = new HashSet<OlsPartnaddr>();
+            OlsPartner = new HashSet<OlsPartner>();
+            OlsSordhead = new HashSet<OlsSordhead>();
+            OlsSordline = new HashSet<OlsSordline>();
         }
 
         [Key]
@@ -57,8 +63,22 @@ namespace eLog.HeavyTools.Services.WhWebShop.BusinessEntities.Model
         public string Cs { get; set; } = null!;
 
         [InverseProperty("Usr")]
-        public virtual ICollection<CfwUsergroup> CfwUsergroups { get; set; }
+        public virtual ICollection<CfwUsergroup> CfwUsergroup { get; set; }
         [InverseProperty("Addusr")]
-        public virtual ICollection<OlsCompany> OlsCompanies { get; set; }
+        public virtual ICollection<OlcSordhead> OlcSordhead { get; set; }
+        [InverseProperty("Addusr")]
+        public virtual ICollection<OlcSordline> OlcSordline { get; set; }
+        [InverseProperty("Addusr")]
+        public virtual ICollection<OlsCompany> OlsCompany { get; set; }
+        [InverseProperty("Addusr")]
+        public virtual ICollection<OlsItem> OlsItem { get; set; }
+        [InverseProperty("Addusr")]
+        public virtual ICollection<OlsPartnaddr> OlsPartnaddr { get; set; }
+        [InverseProperty("Addusr")]
+        public virtual ICollection<OlsPartner> OlsPartner { get; set; }
+        [InverseProperty("Addusr")]
+        public virtual ICollection<OlsSordhead> OlsSordhead { get; set; }
+        [InverseProperty("Addusr")]
+        public virtual ICollection<OlsSordline> OlsSordline { get; set; }
     }
 }

@@ -17,7 +17,7 @@ public class TestFixture : TestBedFixture
         services
             .AddDataAccess(configuration!)
             .AddBusinessLogic(configuration!);
-
+ 
         var descriptor = new ServiceDescriptor(
             typeof(BusinessLogic.Services.Interfaces.IEnvironmentService),
             typeof(EnvironmentService),

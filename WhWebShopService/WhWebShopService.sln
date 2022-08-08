@@ -15,7 +15,12 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WhWebShop.DataAccess", "WhW
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{E4EC6EE3-7065-45BF-A802-C7F4AF2C3619}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WhWebShop.Test", "WhWebShop.Test\WhWebShop.Test.csproj", "{DB0CEA1C-0B37-4F4A-9E83-A44AEB95F8C0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WhWebShop.Test", "WhWebShop.Test\WhWebShop.Test.csproj", "{DB0CEA1C-0B37-4F4A-9E83-A44AEB95F8C0}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{D0D69A9C-72BA-43A2-9AD1-97A2C7A53FD0}"
+	ProjectSection(SolutionItems) = preProject
+		.editorconfig = .editorconfig
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

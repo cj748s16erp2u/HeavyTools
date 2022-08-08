@@ -1282,3 +1282,1059 @@
 2022-08-01 13:47:42.1078 Info Validating config: Targets=5, ConfigItems=146, FilePath=D:\Projects\Calliditas\workspaces\eLogHeavyTools\WhWebShopService\WhWebShop.Service\bin\Debug\net6.0\NLog.config
 2022-08-01 13:47:42.1248 Info Configuration initialized.
 2022-08-01 13:47:42.1259 Info NLog, Version=4.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 4.7.14.740. Product version: 4.7.14+7b0baf946c6c5541cbd0dc523d2e9e7a582209ba. GlobalAssemblyCache: False
+2022-08-02 12:55:43.4272 Info Auto loading assembly file: C:\Munka\workspaces\eLogHeavyTools\WhWebShopService\WhWebShop.Service\bin\Debug\net6.0\NLog.Extensions.Logging.dll
+2022-08-02 12:55:43.4272 Info Loading assembly file: C:\Munka\workspaces\eLogHeavyTools\WhWebShopService\WhWebShop.Service\bin\Debug\net6.0\NLog.Extensions.Logging.dll
+2022-08-02 12:55:43.4272 Info NLog.Extensions.Logging, Version=1.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 1.7.4.1610. Product version: 1.7.4+e2bffa9e949fb4760d75aca224e78631c063f087. GlobalAssemblyCache: False
+2022-08-02 12:55:43.4272 Info Auto loading assembly file: C:\Munka\workspaces\eLogHeavyTools\WhWebShopService\WhWebShop.Service\bin\Debug\net6.0\NLog.Extensions.Logging.dll succeeded!
+2022-08-02 12:55:43.4272 Info Auto loading assembly file: C:\Munka\workspaces\eLogHeavyTools\WhWebShopService\WhWebShop.Service\bin\Debug\net6.0\NLog.Web.AspNetCore.dll
+2022-08-02 12:55:43.4272 Info Loading assembly file: C:\Munka\workspaces\eLogHeavyTools\WhWebShopService\WhWebShop.Service\bin\Debug\net6.0\NLog.Web.AspNetCore.dll
+2022-08-02 12:55:43.4272 Info NLog.Web.AspNetCore, Version=4.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 4.14.0.2042. Product version: 4.14.0+18bbcdbd5bd13b4565c32d72e09502b7ca6c71d4. GlobalAssemblyCache: False
+2022-08-02 12:55:43.4272 Info Auto loading assembly file: C:\Munka\workspaces\eLogHeavyTools\WhWebShopService\WhWebShop.Service\bin\Debug\net6.0\NLog.Web.AspNetCore.dll succeeded!
+2022-08-02 12:55:43.4272 Info Message Template Auto Format enabled
+2022-08-02 12:55:43.4370 Info Loading assembly: NLog.Web.AspNetCore
+2022-08-02 12:55:43.4370 Info Loading assembly: ERP4U.Log
+2022-08-02 12:55:43.4583 Info Adding target FileTarget(Name=allfile)
+2022-08-02 12:55:43.4583 Info Adding target FileTarget(Name=file-fatal)
+2022-08-02 12:55:43.4583 Info Adding target FileTarget(Name=file-warn)
+2022-08-02 12:55:43.4583 Info Adding target FileTarget(Name=file-trace)
+2022-08-02 12:55:43.4583 Info Adding target FileTarget(Name=allms)
+2022-08-02 12:55:43.4583 Warn Error has been raised. Exception: NLog.NLogConfigurationException: Failed to create target type: AuditLogFileTarget
+ ---> System.ArgumentException: Target cannot be found: 'AuditLogFileTarget'
+   at NLog.Config.Factory`2.CreateInstance(String itemName)
+   at NLog.Config.LoggingConfigurationParser.CreateTargetType(String targetTypeName)
+   --- End of inner exception stack trace ---
+2022-08-02 12:55:43.4583 Warn Error has been raised. Exception: NLog.NLogConfigurationException: Failed to create target type: ComLogFileTarget
+ ---> System.ArgumentException: Target cannot be found: 'ComLogFileTarget'
+   at NLog.Config.Factory`2.CreateInstance(String itemName)
+   at NLog.Config.LoggingConfigurationParser.CreateTargetType(String targetTypeName)
+   --- End of inner exception stack trace ---
+2022-08-02 12:55:43.4692 Warn Error has been raised. Exception: NLog.NLogConfigurationException: Target 'AuditFileLog' not found for logging rule: AuditLog.
+2022-08-02 12:55:43.4692 Warn Error has been raised. Exception: NLog.NLogConfigurationException: Target 'ComFileLog' not found for logging rule: ComLog.
+2022-08-02 12:55:43.4692 Info Validating config: Targets=5, ConfigItems=146, FilePath=C:\Munka\workspaces\eLogHeavyTools\WhWebShopService\WhWebShop.Service\bin\Debug\net6.0\NLog.config
+2022-08-02 12:55:43.4844 Info Configuration initialized.
+2022-08-02 12:55:43.4844 Info NLog, Version=4.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 4.7.14.740. Product version: 4.7.14+7b0baf946c6c5541cbd0dc523d2e9e7a582209ba. GlobalAssemblyCache: False
+2022-08-02 13:20:54.5910 Info Auto loading assembly file: C:\Munka\workspaces\eLogHeavyTools\WhWebShopService\WhWebShop.Service\bin\Debug\net6.0\NLog.Extensions.Logging.dll
+2022-08-02 13:20:54.5928 Info Loading assembly file: C:\Munka\workspaces\eLogHeavyTools\WhWebShopService\WhWebShop.Service\bin\Debug\net6.0\NLog.Extensions.Logging.dll
+2022-08-02 13:20:54.5928 Info NLog.Extensions.Logging, Version=1.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 1.7.4.1610. Product version: 1.7.4+e2bffa9e949fb4760d75aca224e78631c063f087. GlobalAssemblyCache: False
+2022-08-02 13:20:54.5928 Info Auto loading assembly file: C:\Munka\workspaces\eLogHeavyTools\WhWebShopService\WhWebShop.Service\bin\Debug\net6.0\NLog.Extensions.Logging.dll succeeded!
+2022-08-02 13:20:54.5928 Info Auto loading assembly file: C:\Munka\workspaces\eLogHeavyTools\WhWebShopService\WhWebShop.Service\bin\Debug\net6.0\NLog.Web.AspNetCore.dll
+2022-08-02 13:20:54.5928 Info Loading assembly file: C:\Munka\workspaces\eLogHeavyTools\WhWebShopService\WhWebShop.Service\bin\Debug\net6.0\NLog.Web.AspNetCore.dll
+2022-08-02 13:20:54.5928 Info NLog.Web.AspNetCore, Version=4.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 4.14.0.2042. Product version: 4.14.0+18bbcdbd5bd13b4565c32d72e09502b7ca6c71d4. GlobalAssemblyCache: False
+2022-08-02 13:20:54.5928 Info Auto loading assembly file: C:\Munka\workspaces\eLogHeavyTools\WhWebShopService\WhWebShop.Service\bin\Debug\net6.0\NLog.Web.AspNetCore.dll succeeded!
+2022-08-02 13:20:54.5928 Info Message Template Auto Format enabled
+2022-08-02 13:20:54.5928 Info Loading assembly: NLog.Web.AspNetCore
+2022-08-02 13:20:54.5928 Info Loading assembly: ERP4U.Log
+2022-08-02 13:20:54.6181 Info Adding target FileTarget(Name=allfile)
+2022-08-02 13:20:54.6181 Info Adding target FileTarget(Name=file-fatal)
+2022-08-02 13:20:54.6181 Info Adding target FileTarget(Name=file-warn)
+2022-08-02 13:20:54.6181 Info Adding target FileTarget(Name=file-trace)
+2022-08-02 13:20:54.6181 Info Adding target FileTarget(Name=allms)
+2022-08-02 13:20:54.6181 Warn Error has been raised. Exception: NLog.NLogConfigurationException: Failed to create target type: AuditLogFileTarget
+ ---> System.ArgumentException: Target cannot be found: 'AuditLogFileTarget'
+   at NLog.Config.Factory`2.CreateInstance(String itemName)
+   at NLog.Config.LoggingConfigurationParser.CreateTargetType(String targetTypeName)
+   --- End of inner exception stack trace ---
+2022-08-02 13:20:54.6239 Warn Error has been raised. Exception: NLog.NLogConfigurationException: Failed to create target type: ComLogFileTarget
+ ---> System.ArgumentException: Target cannot be found: 'ComLogFileTarget'
+   at NLog.Config.Factory`2.CreateInstance(String itemName)
+   at NLog.Config.LoggingConfigurationParser.CreateTargetType(String targetTypeName)
+   --- End of inner exception stack trace ---
+2022-08-02 13:20:54.6239 Warn Error has been raised. Exception: NLog.NLogConfigurationException: Target 'AuditFileLog' not found for logging rule: AuditLog.
+2022-08-02 13:20:54.6239 Warn Error has been raised. Exception: NLog.NLogConfigurationException: Target 'ComFileLog' not found for logging rule: ComLog.
+2022-08-02 13:20:54.6239 Info Validating config: Targets=5, ConfigItems=146, FilePath=C:\Munka\workspaces\eLogHeavyTools\WhWebShopService\WhWebShop.Service\bin\Debug\net6.0\NLog.config
+2022-08-02 13:20:54.6422 Info Configuration initialized.
+2022-08-02 13:20:54.6422 Info NLog, Version=4.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 4.7.14.740. Product version: 4.7.14+7b0baf946c6c5541cbd0dc523d2e9e7a582209ba. GlobalAssemblyCache: False
+2022-08-02 14:44:39.8259 Info Auto loading assembly file: C:\Munka\workspaces\eLogHeavyTools\WhWebShopService\WhWebShop.Service\bin\Debug\net6.0\NLog.Extensions.Logging.dll
+2022-08-02 14:44:39.8279 Info Loading assembly file: C:\Munka\workspaces\eLogHeavyTools\WhWebShopService\WhWebShop.Service\bin\Debug\net6.0\NLog.Extensions.Logging.dll
+2022-08-02 14:44:39.8279 Info NLog.Extensions.Logging, Version=1.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 1.7.4.1610. Product version: 1.7.4+e2bffa9e949fb4760d75aca224e78631c063f087. GlobalAssemblyCache: False
+2022-08-02 14:44:39.8279 Info Auto loading assembly file: C:\Munka\workspaces\eLogHeavyTools\WhWebShopService\WhWebShop.Service\bin\Debug\net6.0\NLog.Extensions.Logging.dll succeeded!
+2022-08-02 14:44:39.8279 Info Auto loading assembly file: C:\Munka\workspaces\eLogHeavyTools\WhWebShopService\WhWebShop.Service\bin\Debug\net6.0\NLog.Web.AspNetCore.dll
+2022-08-02 14:44:39.8279 Info Loading assembly file: C:\Munka\workspaces\eLogHeavyTools\WhWebShopService\WhWebShop.Service\bin\Debug\net6.0\NLog.Web.AspNetCore.dll
+2022-08-02 14:44:39.8279 Info NLog.Web.AspNetCore, Version=4.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 4.14.0.2042. Product version: 4.14.0+18bbcdbd5bd13b4565c32d72e09502b7ca6c71d4. GlobalAssemblyCache: False
+2022-08-02 14:44:39.8279 Info Auto loading assembly file: C:\Munka\workspaces\eLogHeavyTools\WhWebShopService\WhWebShop.Service\bin\Debug\net6.0\NLog.Web.AspNetCore.dll succeeded!
+2022-08-02 14:44:39.8279 Info Message Template Auto Format enabled
+2022-08-02 14:44:39.8279 Info Loading assembly: NLog.Web.AspNetCore
+2022-08-02 14:44:39.8279 Info Loading assembly: ERP4U.Log
+2022-08-02 14:44:39.8553 Info Adding target FileTarget(Name=allfile)
+2022-08-02 14:44:39.8553 Info Adding target FileTarget(Name=file-fatal)
+2022-08-02 14:44:39.8553 Info Adding target FileTarget(Name=file-warn)
+2022-08-02 14:44:39.8553 Info Adding target FileTarget(Name=file-trace)
+2022-08-02 14:44:39.8553 Info Adding target FileTarget(Name=allms)
+2022-08-02 14:44:39.8553 Warn Error has been raised. Exception: NLog.NLogConfigurationException: Failed to create target type: AuditLogFileTarget
+ ---> System.ArgumentException: Target cannot be found: 'AuditLogFileTarget'
+   at NLog.Config.Factory`2.CreateInstance(String itemName)
+   at NLog.Config.LoggingConfigurationParser.CreateTargetType(String targetTypeName)
+   --- End of inner exception stack trace ---
+2022-08-02 14:44:39.8620 Warn Error has been raised. Exception: NLog.NLogConfigurationException: Failed to create target type: ComLogFileTarget
+ ---> System.ArgumentException: Target cannot be found: 'ComLogFileTarget'
+   at NLog.Config.Factory`2.CreateInstance(String itemName)
+   at NLog.Config.LoggingConfigurationParser.CreateTargetType(String targetTypeName)
+   --- End of inner exception stack trace ---
+2022-08-02 14:44:39.8620 Warn Error has been raised. Exception: NLog.NLogConfigurationException: Target 'AuditFileLog' not found for logging rule: AuditLog.
+2022-08-02 14:44:39.8620 Warn Error has been raised. Exception: NLog.NLogConfigurationException: Target 'ComFileLog' not found for logging rule: ComLog.
+2022-08-02 14:44:39.8746 Info Validating config: Targets=5, ConfigItems=146, FilePath=C:\Munka\workspaces\eLogHeavyTools\WhWebShopService\WhWebShop.Service\bin\Debug\net6.0\NLog.config
+2022-08-02 14:44:39.8746 Info Configuration initialized.
+2022-08-02 14:44:39.8746 Info NLog, Version=4.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 4.7.14.740. Product version: 4.7.14+7b0baf946c6c5541cbd0dc523d2e9e7a582209ba. GlobalAssemblyCache: False
+2022-08-02 14:46:21.0155 Info Auto loading assembly file: C:\Munka\workspaces\eLogHeavyTools\WhWebShopService\WhWebShop.Service\bin\Debug\net6.0\NLog.Extensions.Logging.dll
+2022-08-02 14:46:21.0155 Info Loading assembly file: C:\Munka\workspaces\eLogHeavyTools\WhWebShopService\WhWebShop.Service\bin\Debug\net6.0\NLog.Extensions.Logging.dll
+2022-08-02 14:46:21.0155 Info NLog.Extensions.Logging, Version=1.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 1.7.4.1610. Product version: 1.7.4+e2bffa9e949fb4760d75aca224e78631c063f087. GlobalAssemblyCache: False
+2022-08-02 14:46:21.0155 Info Auto loading assembly file: C:\Munka\workspaces\eLogHeavyTools\WhWebShopService\WhWebShop.Service\bin\Debug\net6.0\NLog.Extensions.Logging.dll succeeded!
+2022-08-02 14:46:21.0155 Info Auto loading assembly file: C:\Munka\workspaces\eLogHeavyTools\WhWebShopService\WhWebShop.Service\bin\Debug\net6.0\NLog.Web.AspNetCore.dll
+2022-08-02 14:46:21.0155 Info Loading assembly file: C:\Munka\workspaces\eLogHeavyTools\WhWebShopService\WhWebShop.Service\bin\Debug\net6.0\NLog.Web.AspNetCore.dll
+2022-08-02 14:46:21.0155 Info NLog.Web.AspNetCore, Version=4.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 4.14.0.2042. Product version: 4.14.0+18bbcdbd5bd13b4565c32d72e09502b7ca6c71d4. GlobalAssemblyCache: False
+2022-08-02 14:46:21.0155 Info Auto loading assembly file: C:\Munka\workspaces\eLogHeavyTools\WhWebShopService\WhWebShop.Service\bin\Debug\net6.0\NLog.Web.AspNetCore.dll succeeded!
+2022-08-02 14:46:21.0155 Info Message Template Auto Format enabled
+2022-08-02 14:46:21.0155 Info Loading assembly: NLog.Web.AspNetCore
+2022-08-02 14:46:21.0155 Info Loading assembly: ERP4U.Log
+2022-08-02 14:46:21.0429 Info Adding target FileTarget(Name=allfile)
+2022-08-02 14:46:21.0429 Info Adding target FileTarget(Name=file-fatal)
+2022-08-02 14:46:21.0429 Info Adding target FileTarget(Name=file-warn)
+2022-08-02 14:46:21.0429 Info Adding target FileTarget(Name=file-trace)
+2022-08-02 14:46:21.0429 Info Adding target FileTarget(Name=allms)
+2022-08-02 14:46:21.0429 Warn Error has been raised. Exception: NLog.NLogConfigurationException: Failed to create target type: AuditLogFileTarget
+ ---> System.ArgumentException: Target cannot be found: 'AuditLogFileTarget'
+   at NLog.Config.Factory`2.CreateInstance(String itemName)
+   at NLog.Config.LoggingConfigurationParser.CreateTargetType(String targetTypeName)
+   --- End of inner exception stack trace ---
+2022-08-02 14:46:21.0492 Warn Error has been raised. Exception: NLog.NLogConfigurationException: Failed to create target type: ComLogFileTarget
+ ---> System.ArgumentException: Target cannot be found: 'ComLogFileTarget'
+   at NLog.Config.Factory`2.CreateInstance(String itemName)
+   at NLog.Config.LoggingConfigurationParser.CreateTargetType(String targetTypeName)
+   --- End of inner exception stack trace ---
+2022-08-02 14:46:21.0492 Warn Error has been raised. Exception: NLog.NLogConfigurationException: Target 'AuditFileLog' not found for logging rule: AuditLog.
+2022-08-02 14:46:21.0492 Warn Error has been raised. Exception: NLog.NLogConfigurationException: Target 'ComFileLog' not found for logging rule: ComLog.
+2022-08-02 14:46:21.0609 Info Validating config: Targets=5, ConfigItems=146, FilePath=C:\Munka\workspaces\eLogHeavyTools\WhWebShopService\WhWebShop.Service\bin\Debug\net6.0\NLog.config
+2022-08-02 14:46:21.0609 Info Configuration initialized.
+2022-08-02 14:46:21.0609 Info NLog, Version=4.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 4.7.14.740. Product version: 4.7.14+7b0baf946c6c5541cbd0dc523d2e9e7a582209ba. GlobalAssemblyCache: False
+2022-08-02 14:49:44.1338 Info Auto loading assembly file: C:\Munka\workspaces\eLogHeavyTools\WhWebShopService\WhWebShop.Service\bin\Debug\net6.0\NLog.Extensions.Logging.dll
+2022-08-02 14:49:44.1338 Info Loading assembly file: C:\Munka\workspaces\eLogHeavyTools\WhWebShopService\WhWebShop.Service\bin\Debug\net6.0\NLog.Extensions.Logging.dll
+2022-08-02 14:49:44.1338 Info NLog.Extensions.Logging, Version=1.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 1.7.4.1610. Product version: 1.7.4+e2bffa9e949fb4760d75aca224e78631c063f087. GlobalAssemblyCache: False
+2022-08-02 14:49:44.1338 Info Auto loading assembly file: C:\Munka\workspaces\eLogHeavyTools\WhWebShopService\WhWebShop.Service\bin\Debug\net6.0\NLog.Extensions.Logging.dll succeeded!
+2022-08-02 14:49:44.1338 Info Auto loading assembly file: C:\Munka\workspaces\eLogHeavyTools\WhWebShopService\WhWebShop.Service\bin\Debug\net6.0\NLog.Web.AspNetCore.dll
+2022-08-02 14:49:44.1338 Info Loading assembly file: C:\Munka\workspaces\eLogHeavyTools\WhWebShopService\WhWebShop.Service\bin\Debug\net6.0\NLog.Web.AspNetCore.dll
+2022-08-02 14:49:44.1392 Info NLog.Web.AspNetCore, Version=4.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 4.14.0.2042. Product version: 4.14.0+18bbcdbd5bd13b4565c32d72e09502b7ca6c71d4. GlobalAssemblyCache: False
+2022-08-02 14:49:44.1392 Info Auto loading assembly file: C:\Munka\workspaces\eLogHeavyTools\WhWebShopService\WhWebShop.Service\bin\Debug\net6.0\NLog.Web.AspNetCore.dll succeeded!
+2022-08-02 14:49:44.1392 Info Message Template Auto Format enabled
+2022-08-02 14:49:44.1392 Info Loading assembly: NLog.Web.AspNetCore
+2022-08-02 14:49:44.1392 Info Loading assembly: ERP4U.Log
+2022-08-02 14:49:44.1625 Info Adding target FileTarget(Name=allfile)
+2022-08-02 14:49:44.1625 Info Adding target FileTarget(Name=file-fatal)
+2022-08-02 14:49:44.1625 Info Adding target FileTarget(Name=file-warn)
+2022-08-02 14:49:44.1625 Info Adding target FileTarget(Name=file-trace)
+2022-08-02 14:49:44.1625 Info Adding target FileTarget(Name=allms)
+2022-08-02 14:49:44.1625 Warn Error has been raised. Exception: NLog.NLogConfigurationException: Failed to create target type: AuditLogFileTarget
+ ---> System.ArgumentException: Target cannot be found: 'AuditLogFileTarget'
+   at NLog.Config.Factory`2.CreateInstance(String itemName)
+   at NLog.Config.LoggingConfigurationParser.CreateTargetType(String targetTypeName)
+   --- End of inner exception stack trace ---
+2022-08-02 14:49:44.1625 Warn Error has been raised. Exception: NLog.NLogConfigurationException: Failed to create target type: ComLogFileTarget
+ ---> System.ArgumentException: Target cannot be found: 'ComLogFileTarget'
+   at NLog.Config.Factory`2.CreateInstance(String itemName)
+   at NLog.Config.LoggingConfigurationParser.CreateTargetType(String targetTypeName)
+   --- End of inner exception stack trace ---
+2022-08-02 14:49:44.1735 Warn Error has been raised. Exception: NLog.NLogConfigurationException: Target 'AuditFileLog' not found for logging rule: AuditLog.
+2022-08-02 14:49:44.1735 Warn Error has been raised. Exception: NLog.NLogConfigurationException: Target 'ComFileLog' not found for logging rule: ComLog.
+2022-08-02 14:49:44.1735 Info Validating config: Targets=5, ConfigItems=146, FilePath=C:\Munka\workspaces\eLogHeavyTools\WhWebShopService\WhWebShop.Service\bin\Debug\net6.0\NLog.config
+2022-08-02 14:49:44.1897 Info Configuration initialized.
+2022-08-02 14:49:44.1897 Info NLog, Version=4.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 4.7.14.740. Product version: 4.7.14+7b0baf946c6c5541cbd0dc523d2e9e7a582209ba. GlobalAssemblyCache: False
+2022-08-02 15:46:52.1772 Info Auto loading assembly file: C:\Munka\workspaces\eLogHeavyTools\WhWebShopService\WhWebShop.Service\bin\Debug\net6.0\NLog.Extensions.Logging.dll
+2022-08-02 15:46:52.1772 Info Loading assembly file: C:\Munka\workspaces\eLogHeavyTools\WhWebShopService\WhWebShop.Service\bin\Debug\net6.0\NLog.Extensions.Logging.dll
+2022-08-02 15:46:52.1772 Info NLog.Extensions.Logging, Version=1.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 1.7.4.1610. Product version: 1.7.4+e2bffa9e949fb4760d75aca224e78631c063f087. GlobalAssemblyCache: False
+2022-08-02 15:46:52.1857 Info Auto loading assembly file: C:\Munka\workspaces\eLogHeavyTools\WhWebShopService\WhWebShop.Service\bin\Debug\net6.0\NLog.Extensions.Logging.dll succeeded!
+2022-08-02 15:46:52.1857 Info Auto loading assembly file: C:\Munka\workspaces\eLogHeavyTools\WhWebShopService\WhWebShop.Service\bin\Debug\net6.0\NLog.Web.AspNetCore.dll
+2022-08-02 15:46:52.1857 Info Loading assembly file: C:\Munka\workspaces\eLogHeavyTools\WhWebShopService\WhWebShop.Service\bin\Debug\net6.0\NLog.Web.AspNetCore.dll
+2022-08-02 15:46:52.1857 Info NLog.Web.AspNetCore, Version=4.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 4.14.0.2042. Product version: 4.14.0+18bbcdbd5bd13b4565c32d72e09502b7ca6c71d4. GlobalAssemblyCache: False
+2022-08-02 15:46:52.1857 Info Auto loading assembly file: C:\Munka\workspaces\eLogHeavyTools\WhWebShopService\WhWebShop.Service\bin\Debug\net6.0\NLog.Web.AspNetCore.dll succeeded!
+2022-08-02 15:46:52.1857 Info Message Template Auto Format enabled
+2022-08-02 15:46:52.1857 Info Loading assembly: NLog.Web.AspNetCore
+2022-08-02 15:46:52.1857 Info Loading assembly: ERP4U.Log
+2022-08-02 15:46:52.2097 Info Adding target FileTarget(Name=allfile)
+2022-08-02 15:46:52.2097 Info Adding target FileTarget(Name=file-fatal)
+2022-08-02 15:46:52.2097 Info Adding target FileTarget(Name=file-warn)
+2022-08-02 15:46:52.2097 Info Adding target FileTarget(Name=file-trace)
+2022-08-02 15:46:52.2097 Info Adding target FileTarget(Name=allms)
+2022-08-02 15:46:52.2097 Warn Error has been raised. Exception: NLog.NLogConfigurationException: Failed to create target type: AuditLogFileTarget
+ ---> System.ArgumentException: Target cannot be found: 'AuditLogFileTarget'
+   at NLog.Config.Factory`2.CreateInstance(String itemName)
+   at NLog.Config.LoggingConfigurationParser.CreateTargetType(String targetTypeName)
+   --- End of inner exception stack trace ---
+2022-08-02 15:46:52.2097 Warn Error has been raised. Exception: NLog.NLogConfigurationException: Failed to create target type: ComLogFileTarget
+ ---> System.ArgumentException: Target cannot be found: 'ComLogFileTarget'
+   at NLog.Config.Factory`2.CreateInstance(String itemName)
+   at NLog.Config.LoggingConfigurationParser.CreateTargetType(String targetTypeName)
+   --- End of inner exception stack trace ---
+2022-08-02 15:46:52.2196 Warn Error has been raised. Exception: NLog.NLogConfigurationException: Target 'AuditFileLog' not found for logging rule: AuditLog.
+2022-08-02 15:46:52.2196 Warn Error has been raised. Exception: NLog.NLogConfigurationException: Target 'ComFileLog' not found for logging rule: ComLog.
+2022-08-02 15:46:52.2196 Info Validating config: Targets=5, ConfigItems=146, FilePath=C:\Munka\workspaces\eLogHeavyTools\WhWebShopService\WhWebShop.Service\bin\Debug\net6.0\NLog.config
+2022-08-02 15:46:52.2347 Info Configuration initialized.
+2022-08-02 15:46:52.2347 Info NLog, Version=4.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 4.7.14.740. Product version: 4.7.14+7b0baf946c6c5541cbd0dc523d2e9e7a582209ba. GlobalAssemblyCache: False
+2022-08-02 15:58:00.6524 Info Auto loading assembly file: C:\Munka\workspaces\eLogHeavyTools\WhWebShopService\WhWebShop.Service\bin\Debug\net6.0\NLog.Extensions.Logging.dll
+2022-08-02 15:58:00.6543 Info Loading assembly file: C:\Munka\workspaces\eLogHeavyTools\WhWebShopService\WhWebShop.Service\bin\Debug\net6.0\NLog.Extensions.Logging.dll
+2022-08-02 15:58:00.6543 Info NLog.Extensions.Logging, Version=1.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 1.7.4.1610. Product version: 1.7.4+e2bffa9e949fb4760d75aca224e78631c063f087. GlobalAssemblyCache: False
+2022-08-02 15:58:00.6543 Info Auto loading assembly file: C:\Munka\workspaces\eLogHeavyTools\WhWebShopService\WhWebShop.Service\bin\Debug\net6.0\NLog.Extensions.Logging.dll succeeded!
+2022-08-02 15:58:00.6543 Info Auto loading assembly file: C:\Munka\workspaces\eLogHeavyTools\WhWebShopService\WhWebShop.Service\bin\Debug\net6.0\NLog.Web.AspNetCore.dll
+2022-08-02 15:58:00.6543 Info Loading assembly file: C:\Munka\workspaces\eLogHeavyTools\WhWebShopService\WhWebShop.Service\bin\Debug\net6.0\NLog.Web.AspNetCore.dll
+2022-08-02 15:58:00.6543 Info NLog.Web.AspNetCore, Version=4.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 4.14.0.2042. Product version: 4.14.0+18bbcdbd5bd13b4565c32d72e09502b7ca6c71d4. GlobalAssemblyCache: False
+2022-08-02 15:58:00.6543 Info Auto loading assembly file: C:\Munka\workspaces\eLogHeavyTools\WhWebShopService\WhWebShop.Service\bin\Debug\net6.0\NLog.Web.AspNetCore.dll succeeded!
+2022-08-02 15:58:00.6543 Info Message Template Auto Format enabled
+2022-08-02 15:58:00.6543 Info Loading assembly: NLog.Web.AspNetCore
+2022-08-02 15:58:00.6543 Info Loading assembly: ERP4U.Log
+2022-08-02 15:58:00.6798 Info Adding target FileTarget(Name=allfile)
+2022-08-02 15:58:00.6798 Info Adding target FileTarget(Name=file-fatal)
+2022-08-02 15:58:00.6798 Info Adding target FileTarget(Name=file-warn)
+2022-08-02 15:58:00.6798 Info Adding target FileTarget(Name=file-trace)
+2022-08-02 15:58:00.6798 Info Adding target FileTarget(Name=allms)
+2022-08-02 15:58:00.6798 Warn Error has been raised. Exception: NLog.NLogConfigurationException: Failed to create target type: AuditLogFileTarget
+ ---> System.ArgumentException: Target cannot be found: 'AuditLogFileTarget'
+   at NLog.Config.Factory`2.CreateInstance(String itemName)
+   at NLog.Config.LoggingConfigurationParser.CreateTargetType(String targetTypeName)
+   --- End of inner exception stack trace ---
+2022-08-02 15:58:00.6855 Warn Error has been raised. Exception: NLog.NLogConfigurationException: Failed to create target type: ComLogFileTarget
+ ---> System.ArgumentException: Target cannot be found: 'ComLogFileTarget'
+   at NLog.Config.Factory`2.CreateInstance(String itemName)
+   at NLog.Config.LoggingConfigurationParser.CreateTargetType(String targetTypeName)
+   --- End of inner exception stack trace ---
+2022-08-02 15:58:00.6855 Warn Error has been raised. Exception: NLog.NLogConfigurationException: Target 'AuditFileLog' not found for logging rule: AuditLog.
+2022-08-02 15:58:00.6855 Warn Error has been raised. Exception: NLog.NLogConfigurationException: Target 'ComFileLog' not found for logging rule: ComLog.
+2022-08-02 15:58:00.6855 Info Validating config: Targets=5, ConfigItems=146, FilePath=C:\Munka\workspaces\eLogHeavyTools\WhWebShopService\WhWebShop.Service\bin\Debug\net6.0\NLog.config
+2022-08-02 15:58:00.7039 Info Configuration initialized.
+2022-08-02 15:58:00.7039 Info NLog, Version=4.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 4.7.14.740. Product version: 4.7.14+7b0baf946c6c5541cbd0dc523d2e9e7a582209ba. GlobalAssemblyCache: False
+2022-08-05 12:00:40.9017 Info Auto loading assembly file: C:\Munka\workspaces\eLogHeavyTools\WhWebShopService\WhWebShop.Service\bin\Debug\net6.0\NLog.Extensions.Logging.dll
+2022-08-05 12:00:40.9045 Info Loading assembly file: C:\Munka\workspaces\eLogHeavyTools\WhWebShopService\WhWebShop.Service\bin\Debug\net6.0\NLog.Extensions.Logging.dll
+2022-08-05 12:00:40.9045 Info NLog.Extensions.Logging, Version=1.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 1.7.4.1610. Product version: 1.7.4+e2bffa9e949fb4760d75aca224e78631c063f087. GlobalAssemblyCache: False
+2022-08-05 12:00:40.9045 Info Auto loading assembly file: C:\Munka\workspaces\eLogHeavyTools\WhWebShopService\WhWebShop.Service\bin\Debug\net6.0\NLog.Extensions.Logging.dll succeeded!
+2022-08-05 12:00:40.9045 Info Auto loading assembly file: C:\Munka\workspaces\eLogHeavyTools\WhWebShopService\WhWebShop.Service\bin\Debug\net6.0\NLog.Web.AspNetCore.dll
+2022-08-05 12:00:40.9045 Info Loading assembly file: C:\Munka\workspaces\eLogHeavyTools\WhWebShopService\WhWebShop.Service\bin\Debug\net6.0\NLog.Web.AspNetCore.dll
+2022-08-05 12:00:40.9991 Info NLog.Web.AspNetCore, Version=4.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 4.14.0.2042. Product version: 4.14.0+18bbcdbd5bd13b4565c32d72e09502b7ca6c71d4. GlobalAssemblyCache: False
+2022-08-05 12:00:40.9991 Info Auto loading assembly file: C:\Munka\workspaces\eLogHeavyTools\WhWebShopService\WhWebShop.Service\bin\Debug\net6.0\NLog.Web.AspNetCore.dll succeeded!
+2022-08-05 12:00:40.9991 Info Message Template Auto Format enabled
+2022-08-05 12:00:40.9991 Info Loading assembly: NLog.Web.AspNetCore
+2022-08-05 12:00:40.9991 Info Loading assembly: ERP4U.Log
+2022-08-05 12:00:41.0389 Info Adding target FileTarget(Name=allfile)
+2022-08-05 12:00:41.0389 Info Adding target FileTarget(Name=file-fatal)
+2022-08-05 12:00:41.0389 Info Adding target FileTarget(Name=file-warn)
+2022-08-05 12:00:41.0389 Info Adding target FileTarget(Name=file-trace)
+2022-08-05 12:00:41.0389 Info Adding target FileTarget(Name=allms)
+2022-08-05 12:00:41.0389 Warn Error has been raised. Exception: NLog.NLogConfigurationException: Failed to create target type: AuditLogFileTarget
+ ---> System.ArgumentException: Target cannot be found: 'AuditLogFileTarget'
+   at NLog.Config.Factory`2.CreateInstance(String itemName)
+   at NLog.Config.LoggingConfigurationParser.CreateTargetType(String targetTypeName)
+   --- End of inner exception stack trace ---
+2022-08-05 12:00:41.0545 Warn Error has been raised. Exception: NLog.NLogConfigurationException: Failed to create target type: ComLogFileTarget
+ ---> System.ArgumentException: Target cannot be found: 'ComLogFileTarget'
+   at NLog.Config.Factory`2.CreateInstance(String itemName)
+   at NLog.Config.LoggingConfigurationParser.CreateTargetType(String targetTypeName)
+   --- End of inner exception stack trace ---
+2022-08-05 12:00:41.0593 Warn Error has been raised. Exception: NLog.NLogConfigurationException: Target 'AuditFileLog' not found for logging rule: AuditLog.
+2022-08-05 12:00:41.0593 Warn Error has been raised. Exception: NLog.NLogConfigurationException: Target 'ComFileLog' not found for logging rule: ComLog.
+2022-08-05 12:00:41.0593 Info Validating config: Targets=5, ConfigItems=146, FilePath=C:\Munka\workspaces\eLogHeavyTools\WhWebShopService\WhWebShop.Service\bin\Debug\net6.0\NLog.config
+2022-08-05 12:00:41.0865 Info Configuration initialized.
+2022-08-05 12:00:41.0865 Info NLog, Version=4.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 4.7.14.740. Product version: 4.7.14+7b0baf946c6c5541cbd0dc523d2e9e7a582209ba. GlobalAssemblyCache: False
+2022-08-05 17:48:21.9186 Info Auto loading assembly file: C:\Munka\workspaces\eLogHeavyTools\WhWebShopService\WhWebShop.Service\bin\Debug\net6.0\NLog.Extensions.Logging.dll
+2022-08-05 17:48:21.9215 Info Loading assembly file: C:\Munka\workspaces\eLogHeavyTools\WhWebShopService\WhWebShop.Service\bin\Debug\net6.0\NLog.Extensions.Logging.dll
+2022-08-05 17:48:21.9215 Info NLog.Extensions.Logging, Version=1.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 1.7.4.1610. Product version: 1.7.4+e2bffa9e949fb4760d75aca224e78631c063f087. GlobalAssemblyCache: False
+2022-08-05 17:48:21.9215 Info Auto loading assembly file: C:\Munka\workspaces\eLogHeavyTools\WhWebShopService\WhWebShop.Service\bin\Debug\net6.0\NLog.Extensions.Logging.dll succeeded!
+2022-08-05 17:48:21.9215 Info Auto loading assembly file: C:\Munka\workspaces\eLogHeavyTools\WhWebShopService\WhWebShop.Service\bin\Debug\net6.0\NLog.Web.AspNetCore.dll
+2022-08-05 17:48:21.9215 Info Loading assembly file: C:\Munka\workspaces\eLogHeavyTools\WhWebShopService\WhWebShop.Service\bin\Debug\net6.0\NLog.Web.AspNetCore.dll
+2022-08-05 17:48:21.9363 Info NLog.Web.AspNetCore, Version=4.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 4.14.0.2042. Product version: 4.14.0+18bbcdbd5bd13b4565c32d72e09502b7ca6c71d4. GlobalAssemblyCache: False
+2022-08-05 17:48:21.9363 Info Auto loading assembly file: C:\Munka\workspaces\eLogHeavyTools\WhWebShopService\WhWebShop.Service\bin\Debug\net6.0\NLog.Web.AspNetCore.dll succeeded!
+2022-08-05 17:48:21.9363 Info Message Template Auto Format enabled
+2022-08-05 17:48:21.9363 Info Loading assembly: NLog.Web.AspNetCore
+2022-08-05 17:48:21.9363 Info Loading assembly: ERP4U.Log
+2022-08-05 17:48:21.9686 Info Adding target FileTarget(Name=allfile)
+2022-08-05 17:48:21.9686 Info Adding target FileTarget(Name=file-fatal)
+2022-08-05 17:48:21.9686 Info Adding target FileTarget(Name=file-warn)
+2022-08-05 17:48:21.9686 Info Adding target FileTarget(Name=file-trace)
+2022-08-05 17:48:21.9686 Info Adding target FileTarget(Name=allms)
+2022-08-05 17:48:21.9686 Warn Error has been raised. Exception: NLog.NLogConfigurationException: Failed to create target type: AuditLogFileTarget
+ ---> System.ArgumentException: Target cannot be found: 'AuditLogFileTarget'
+   at NLog.Config.Factory`2.CreateInstance(String itemName)
+   at NLog.Config.LoggingConfigurationParser.CreateTargetType(String targetTypeName)
+   --- End of inner exception stack trace ---
+2022-08-05 17:48:21.9844 Warn Error has been raised. Exception: NLog.NLogConfigurationException: Failed to create target type: ComLogFileTarget
+ ---> System.ArgumentException: Target cannot be found: 'ComLogFileTarget'
+   at NLog.Config.Factory`2.CreateInstance(String itemName)
+   at NLog.Config.LoggingConfigurationParser.CreateTargetType(String targetTypeName)
+   --- End of inner exception stack trace ---
+2022-08-05 17:48:21.9844 Warn Error has been raised. Exception: NLog.NLogConfigurationException: Target 'AuditFileLog' not found for logging rule: AuditLog.
+2022-08-05 17:48:21.9844 Warn Error has been raised. Exception: NLog.NLogConfigurationException: Target 'ComFileLog' not found for logging rule: ComLog.
+2022-08-05 17:48:22.0017 Info Validating config: Targets=5, ConfigItems=146, FilePath=C:\Munka\workspaces\eLogHeavyTools\WhWebShopService\WhWebShop.Service\bin\Debug\net6.0\NLog.config
+2022-08-05 17:48:22.0017 Info Configuration initialized.
+2022-08-05 17:48:22.0017 Info NLog, Version=4.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 4.7.14.740. Product version: 4.7.14+7b0baf946c6c5541cbd0dc523d2e9e7a582209ba. GlobalAssemblyCache: False
+2022-08-05 17:50:08.1755 Info Auto loading assembly file: C:\Munka\workspaces\eLogHeavyTools\WhWebShopService\WhWebShop.Service\bin\Debug\net6.0\NLog.Extensions.Logging.dll
+2022-08-05 17:50:08.1755 Info Loading assembly file: C:\Munka\workspaces\eLogHeavyTools\WhWebShopService\WhWebShop.Service\bin\Debug\net6.0\NLog.Extensions.Logging.dll
+2022-08-05 17:50:08.1867 Info NLog.Extensions.Logging, Version=1.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 1.7.4.1610. Product version: 1.7.4+e2bffa9e949fb4760d75aca224e78631c063f087. GlobalAssemblyCache: False
+2022-08-05 17:50:08.1867 Info Auto loading assembly file: C:\Munka\workspaces\eLogHeavyTools\WhWebShopService\WhWebShop.Service\bin\Debug\net6.0\NLog.Extensions.Logging.dll succeeded!
+2022-08-05 17:50:08.1867 Info Auto loading assembly file: C:\Munka\workspaces\eLogHeavyTools\WhWebShopService\WhWebShop.Service\bin\Debug\net6.0\NLog.Web.AspNetCore.dll
+2022-08-05 17:50:08.1867 Info Loading assembly file: C:\Munka\workspaces\eLogHeavyTools\WhWebShopService\WhWebShop.Service\bin\Debug\net6.0\NLog.Web.AspNetCore.dll
+2022-08-05 17:50:08.1867 Info NLog.Web.AspNetCore, Version=4.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 4.14.0.2042. Product version: 4.14.0+18bbcdbd5bd13b4565c32d72e09502b7ca6c71d4. GlobalAssemblyCache: False
+2022-08-05 17:50:08.1867 Info Auto loading assembly file: C:\Munka\workspaces\eLogHeavyTools\WhWebShopService\WhWebShop.Service\bin\Debug\net6.0\NLog.Web.AspNetCore.dll succeeded!
+2022-08-05 17:50:08.1867 Info Message Template Auto Format enabled
+2022-08-05 17:50:08.1867 Info Loading assembly: NLog.Web.AspNetCore
+2022-08-05 17:50:08.1867 Info Loading assembly: ERP4U.Log
+2022-08-05 17:50:08.2223 Info Adding target FileTarget(Name=allfile)
+2022-08-05 17:50:08.2223 Info Adding target FileTarget(Name=file-fatal)
+2022-08-05 17:50:08.2223 Info Adding target FileTarget(Name=file-warn)
+2022-08-05 17:50:08.2223 Info Adding target FileTarget(Name=file-trace)
+2022-08-05 17:50:08.2223 Info Adding target FileTarget(Name=allms)
+2022-08-05 17:50:08.2223 Warn Error has been raised. Exception: NLog.NLogConfigurationException: Failed to create target type: AuditLogFileTarget
+ ---> System.ArgumentException: Target cannot be found: 'AuditLogFileTarget'
+   at NLog.Config.Factory`2.CreateInstance(String itemName)
+   at NLog.Config.LoggingConfigurationParser.CreateTargetType(String targetTypeName)
+   --- End of inner exception stack trace ---
+2022-08-05 17:50:08.2364 Warn Error has been raised. Exception: NLog.NLogConfigurationException: Failed to create target type: ComLogFileTarget
+ ---> System.ArgumentException: Target cannot be found: 'ComLogFileTarget'
+   at NLog.Config.Factory`2.CreateInstance(String itemName)
+   at NLog.Config.LoggingConfigurationParser.CreateTargetType(String targetTypeName)
+   --- End of inner exception stack trace ---
+2022-08-05 17:50:08.2364 Warn Error has been raised. Exception: NLog.NLogConfigurationException: Target 'AuditFileLog' not found for logging rule: AuditLog.
+2022-08-05 17:50:08.2364 Warn Error has been raised. Exception: NLog.NLogConfigurationException: Target 'ComFileLog' not found for logging rule: ComLog.
+2022-08-05 17:50:08.2525 Info Validating config: Targets=5, ConfigItems=146, FilePath=C:\Munka\workspaces\eLogHeavyTools\WhWebShopService\WhWebShop.Service\bin\Debug\net6.0\NLog.config
+2022-08-05 17:50:08.2625 Info Configuration initialized.
+2022-08-05 17:50:08.2625 Info NLog, Version=4.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 4.7.14.740. Product version: 4.7.14+7b0baf946c6c5541cbd0dc523d2e9e7a582209ba. GlobalAssemblyCache: False
+2022-08-05 17:51:13.8707 Info Auto loading assembly file: C:\Munka\workspaces\eLogHeavyTools\WhWebShopService\WhWebShop.Service\bin\Debug\net6.0\NLog.Extensions.Logging.dll
+2022-08-05 17:51:13.8737 Info Loading assembly file: C:\Munka\workspaces\eLogHeavyTools\WhWebShopService\WhWebShop.Service\bin\Debug\net6.0\NLog.Extensions.Logging.dll
+2022-08-05 17:51:13.8737 Info NLog.Extensions.Logging, Version=1.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 1.7.4.1610. Product version: 1.7.4+e2bffa9e949fb4760d75aca224e78631c063f087. GlobalAssemblyCache: False
+2022-08-05 17:51:13.8737 Info Auto loading assembly file: C:\Munka\workspaces\eLogHeavyTools\WhWebShopService\WhWebShop.Service\bin\Debug\net6.0\NLog.Extensions.Logging.dll succeeded!
+2022-08-05 17:51:13.8737 Info Auto loading assembly file: C:\Munka\workspaces\eLogHeavyTools\WhWebShopService\WhWebShop.Service\bin\Debug\net6.0\NLog.Web.AspNetCore.dll
+2022-08-05 17:51:13.8737 Info Loading assembly file: C:\Munka\workspaces\eLogHeavyTools\WhWebShopService\WhWebShop.Service\bin\Debug\net6.0\NLog.Web.AspNetCore.dll
+2022-08-05 17:51:13.8737 Info NLog.Web.AspNetCore, Version=4.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 4.14.0.2042. Product version: 4.14.0+18bbcdbd5bd13b4565c32d72e09502b7ca6c71d4. GlobalAssemblyCache: False
+2022-08-05 17:51:13.8880 Info Auto loading assembly file: C:\Munka\workspaces\eLogHeavyTools\WhWebShopService\WhWebShop.Service\bin\Debug\net6.0\NLog.Web.AspNetCore.dll succeeded!
+2022-08-05 17:51:13.8880 Info Message Template Auto Format enabled
+2022-08-05 17:51:13.8880 Info Loading assembly: NLog.Web.AspNetCore
+2022-08-05 17:51:13.8880 Info Loading assembly: ERP4U.Log
+2022-08-05 17:51:13.9180 Info Adding target FileTarget(Name=allfile)
+2022-08-05 17:51:13.9180 Info Adding target FileTarget(Name=file-fatal)
+2022-08-05 17:51:13.9190 Info Adding target FileTarget(Name=file-warn)
+2022-08-05 17:51:13.9190 Info Adding target FileTarget(Name=file-trace)
+2022-08-05 17:51:13.9190 Info Adding target FileTarget(Name=allms)
+2022-08-05 17:51:13.9190 Warn Error has been raised. Exception: NLog.NLogConfigurationException: Failed to create target type: AuditLogFileTarget
+ ---> System.ArgumentException: Target cannot be found: 'AuditLogFileTarget'
+   at NLog.Config.Factory`2.CreateInstance(String itemName)
+   at NLog.Config.LoggingConfigurationParser.CreateTargetType(String targetTypeName)
+   --- End of inner exception stack trace ---
+2022-08-05 17:51:13.9190 Warn Error has been raised. Exception: NLog.NLogConfigurationException: Failed to create target type: ComLogFileTarget
+ ---> System.ArgumentException: Target cannot be found: 'ComLogFileTarget'
+   at NLog.Config.Factory`2.CreateInstance(String itemName)
+   at NLog.Config.LoggingConfigurationParser.CreateTargetType(String targetTypeName)
+   --- End of inner exception stack trace ---
+2022-08-05 17:51:13.9376 Warn Error has been raised. Exception: NLog.NLogConfigurationException: Target 'AuditFileLog' not found for logging rule: AuditLog.
+2022-08-05 17:51:13.9376 Warn Error has been raised. Exception: NLog.NLogConfigurationException: Target 'ComFileLog' not found for logging rule: ComLog.
+2022-08-05 17:51:13.9376 Info Validating config: Targets=5, ConfigItems=146, FilePath=C:\Munka\workspaces\eLogHeavyTools\WhWebShopService\WhWebShop.Service\bin\Debug\net6.0\NLog.config
+2022-08-05 17:51:13.9591 Info Configuration initialized.
+2022-08-05 17:51:13.9591 Info NLog, Version=4.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 4.7.14.740. Product version: 4.7.14+7b0baf946c6c5541cbd0dc523d2e9e7a582209ba. GlobalAssemblyCache: False
+2022-08-05 17:52:59.4165 Info Auto loading assembly file: C:\Munka\workspaces\eLogHeavyTools\WhWebShopService\WhWebShop.Service\bin\Debug\net6.0\NLog.Extensions.Logging.dll
+2022-08-05 17:52:59.4192 Info Loading assembly file: C:\Munka\workspaces\eLogHeavyTools\WhWebShopService\WhWebShop.Service\bin\Debug\net6.0\NLog.Extensions.Logging.dll
+2022-08-05 17:52:59.4192 Info NLog.Extensions.Logging, Version=1.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 1.7.4.1610. Product version: 1.7.4+e2bffa9e949fb4760d75aca224e78631c063f087. GlobalAssemblyCache: False
+2022-08-05 17:52:59.4192 Info Auto loading assembly file: C:\Munka\workspaces\eLogHeavyTools\WhWebShopService\WhWebShop.Service\bin\Debug\net6.0\NLog.Extensions.Logging.dll succeeded!
+2022-08-05 17:52:59.4192 Info Auto loading assembly file: C:\Munka\workspaces\eLogHeavyTools\WhWebShopService\WhWebShop.Service\bin\Debug\net6.0\NLog.Web.AspNetCore.dll
+2022-08-05 17:52:59.4192 Info Loading assembly file: C:\Munka\workspaces\eLogHeavyTools\WhWebShopService\WhWebShop.Service\bin\Debug\net6.0\NLog.Web.AspNetCore.dll
+2022-08-05 17:52:59.4192 Info NLog.Web.AspNetCore, Version=4.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 4.14.0.2042. Product version: 4.14.0+18bbcdbd5bd13b4565c32d72e09502b7ca6c71d4. GlobalAssemblyCache: False
+2022-08-05 17:52:59.4348 Info Auto loading assembly file: C:\Munka\workspaces\eLogHeavyTools\WhWebShopService\WhWebShop.Service\bin\Debug\net6.0\NLog.Web.AspNetCore.dll succeeded!
+2022-08-05 17:52:59.4348 Info Message Template Auto Format enabled
+2022-08-05 17:52:59.4348 Info Loading assembly: NLog.Web.AspNetCore
+2022-08-05 17:52:59.4348 Info Loading assembly: ERP4U.Log
+2022-08-05 17:52:59.4672 Info Adding target FileTarget(Name=allfile)
+2022-08-05 17:52:59.4672 Info Adding target FileTarget(Name=file-fatal)
+2022-08-05 17:52:59.4672 Info Adding target FileTarget(Name=file-warn)
+2022-08-05 17:52:59.4672 Info Adding target FileTarget(Name=file-trace)
+2022-08-05 17:52:59.4672 Info Adding target FileTarget(Name=allms)
+2022-08-05 17:52:59.4672 Warn Error has been raised. Exception: NLog.NLogConfigurationException: Failed to create target type: AuditLogFileTarget
+ ---> System.ArgumentException: Target cannot be found: 'AuditLogFileTarget'
+   at NLog.Config.Factory`2.CreateInstance(String itemName)
+   at NLog.Config.LoggingConfigurationParser.CreateTargetType(String targetTypeName)
+   --- End of inner exception stack trace ---
+2022-08-05 17:52:59.4840 Warn Error has been raised. Exception: NLog.NLogConfigurationException: Failed to create target type: ComLogFileTarget
+ ---> System.ArgumentException: Target cannot be found: 'ComLogFileTarget'
+   at NLog.Config.Factory`2.CreateInstance(String itemName)
+   at NLog.Config.LoggingConfigurationParser.CreateTargetType(String targetTypeName)
+   --- End of inner exception stack trace ---
+2022-08-05 17:52:59.4840 Warn Error has been raised. Exception: NLog.NLogConfigurationException: Target 'AuditFileLog' not found for logging rule: AuditLog.
+2022-08-05 17:52:59.4840 Warn Error has been raised. Exception: NLog.NLogConfigurationException: Target 'ComFileLog' not found for logging rule: ComLog.
+2022-08-05 17:52:59.5029 Info Validating config: Targets=5, ConfigItems=146, FilePath=C:\Munka\workspaces\eLogHeavyTools\WhWebShopService\WhWebShop.Service\bin\Debug\net6.0\NLog.config
+2022-08-05 17:52:59.5144 Info Configuration initialized.
+2022-08-05 17:52:59.5144 Info NLog, Version=4.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 4.7.14.740. Product version: 4.7.14+7b0baf946c6c5541cbd0dc523d2e9e7a582209ba. GlobalAssemblyCache: False
+2022-08-05 17:54:24.5678 Info Auto loading assembly file: C:\Munka\workspaces\eLogHeavyTools\WhWebShopService\WhWebShop.Service\bin\Debug\net6.0\NLog.Extensions.Logging.dll
+2022-08-05 17:54:24.5678 Info Loading assembly file: C:\Munka\workspaces\eLogHeavyTools\WhWebShopService\WhWebShop.Service\bin\Debug\net6.0\NLog.Extensions.Logging.dll
+2022-08-05 17:54:24.5783 Info NLog.Extensions.Logging, Version=1.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 1.7.4.1610. Product version: 1.7.4+e2bffa9e949fb4760d75aca224e78631c063f087. GlobalAssemblyCache: False
+2022-08-05 17:54:24.5783 Info Auto loading assembly file: C:\Munka\workspaces\eLogHeavyTools\WhWebShopService\WhWebShop.Service\bin\Debug\net6.0\NLog.Extensions.Logging.dll succeeded!
+2022-08-05 17:54:24.5783 Info Auto loading assembly file: C:\Munka\workspaces\eLogHeavyTools\WhWebShopService\WhWebShop.Service\bin\Debug\net6.0\NLog.Web.AspNetCore.dll
+2022-08-05 17:54:24.5783 Info Loading assembly file: C:\Munka\workspaces\eLogHeavyTools\WhWebShopService\WhWebShop.Service\bin\Debug\net6.0\NLog.Web.AspNetCore.dll
+2022-08-05 17:54:24.5783 Info NLog.Web.AspNetCore, Version=4.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 4.14.0.2042. Product version: 4.14.0+18bbcdbd5bd13b4565c32d72e09502b7ca6c71d4. GlobalAssemblyCache: False
+2022-08-05 17:54:24.5783 Info Auto loading assembly file: C:\Munka\workspaces\eLogHeavyTools\WhWebShopService\WhWebShop.Service\bin\Debug\net6.0\NLog.Web.AspNetCore.dll succeeded!
+2022-08-05 17:54:24.5783 Info Message Template Auto Format enabled
+2022-08-05 17:54:24.5783 Info Loading assembly: NLog.Web.AspNetCore
+2022-08-05 17:54:24.5783 Info Loading assembly: ERP4U.Log
+2022-08-05 17:54:24.6132 Info Adding target FileTarget(Name=allfile)
+2022-08-05 17:54:24.6132 Info Adding target FileTarget(Name=file-fatal)
+2022-08-05 17:54:24.6132 Info Adding target FileTarget(Name=file-warn)
+2022-08-05 17:54:24.6132 Info Adding target FileTarget(Name=file-trace)
+2022-08-05 17:54:24.6132 Info Adding target FileTarget(Name=allms)
+2022-08-05 17:54:24.6132 Warn Error has been raised. Exception: NLog.NLogConfigurationException: Failed to create target type: AuditLogFileTarget
+ ---> System.ArgumentException: Target cannot be found: 'AuditLogFileTarget'
+   at NLog.Config.Factory`2.CreateInstance(String itemName)
+   at NLog.Config.LoggingConfigurationParser.CreateTargetType(String targetTypeName)
+   --- End of inner exception stack trace ---
+2022-08-05 17:54:24.6269 Warn Error has been raised. Exception: NLog.NLogConfigurationException: Failed to create target type: ComLogFileTarget
+ ---> System.ArgumentException: Target cannot be found: 'ComLogFileTarget'
+   at NLog.Config.Factory`2.CreateInstance(String itemName)
+   at NLog.Config.LoggingConfigurationParser.CreateTargetType(String targetTypeName)
+   --- End of inner exception stack trace ---
+2022-08-05 17:54:24.6269 Warn Error has been raised. Exception: NLog.NLogConfigurationException: Target 'AuditFileLog' not found for logging rule: AuditLog.
+2022-08-05 17:54:24.6269 Warn Error has been raised. Exception: NLog.NLogConfigurationException: Target 'ComFileLog' not found for logging rule: ComLog.
+2022-08-05 17:54:24.6431 Info Validating config: Targets=5, ConfigItems=146, FilePath=C:\Munka\workspaces\eLogHeavyTools\WhWebShopService\WhWebShop.Service\bin\Debug\net6.0\NLog.config
+2022-08-05 17:54:24.6431 Info Configuration initialized.
+2022-08-05 17:54:24.6431 Info NLog, Version=4.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 4.7.14.740. Product version: 4.7.14+7b0baf946c6c5541cbd0dc523d2e9e7a582209ba. GlobalAssemblyCache: False
+2022-08-05 17:56:15.2294 Info Auto loading assembly file: C:\Munka\workspaces\eLogHeavyTools\WhWebShopService\WhWebShop.Service\bin\Debug\net6.0\NLog.Extensions.Logging.dll
+2022-08-05 17:56:15.2324 Info Loading assembly file: C:\Munka\workspaces\eLogHeavyTools\WhWebShopService\WhWebShop.Service\bin\Debug\net6.0\NLog.Extensions.Logging.dll
+2022-08-05 17:56:15.2324 Info NLog.Extensions.Logging, Version=1.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 1.7.4.1610. Product version: 1.7.4+e2bffa9e949fb4760d75aca224e78631c063f087. GlobalAssemblyCache: False
+2022-08-05 17:56:15.2324 Info Auto loading assembly file: C:\Munka\workspaces\eLogHeavyTools\WhWebShopService\WhWebShop.Service\bin\Debug\net6.0\NLog.Extensions.Logging.dll succeeded!
+2022-08-05 17:56:15.2324 Info Auto loading assembly file: C:\Munka\workspaces\eLogHeavyTools\WhWebShopService\WhWebShop.Service\bin\Debug\net6.0\NLog.Web.AspNetCore.dll
+2022-08-05 17:56:15.2324 Info Loading assembly file: C:\Munka\workspaces\eLogHeavyTools\WhWebShopService\WhWebShop.Service\bin\Debug\net6.0\NLog.Web.AspNetCore.dll
+2022-08-05 17:56:15.2324 Info NLog.Web.AspNetCore, Version=4.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 4.14.0.2042. Product version: 4.14.0+18bbcdbd5bd13b4565c32d72e09502b7ca6c71d4. GlobalAssemblyCache: False
+2022-08-05 17:56:15.2324 Info Auto loading assembly file: C:\Munka\workspaces\eLogHeavyTools\WhWebShopService\WhWebShop.Service\bin\Debug\net6.0\NLog.Web.AspNetCore.dll succeeded!
+2022-08-05 17:56:15.2324 Info Message Template Auto Format enabled
+2022-08-05 17:56:15.2490 Info Loading assembly: NLog.Web.AspNetCore
+2022-08-05 17:56:15.2490 Info Loading assembly: ERP4U.Log
+2022-08-05 17:56:15.2787 Info Adding target FileTarget(Name=allfile)
+2022-08-05 17:56:15.2795 Info Adding target FileTarget(Name=file-fatal)
+2022-08-05 17:56:15.2795 Info Adding target FileTarget(Name=file-warn)
+2022-08-05 17:56:15.2795 Info Adding target FileTarget(Name=file-trace)
+2022-08-05 17:56:15.2795 Info Adding target FileTarget(Name=allms)
+2022-08-05 17:56:15.2795 Warn Error has been raised. Exception: NLog.NLogConfigurationException: Failed to create target type: AuditLogFileTarget
+ ---> System.ArgumentException: Target cannot be found: 'AuditLogFileTarget'
+   at NLog.Config.Factory`2.CreateInstance(String itemName)
+   at NLog.Config.LoggingConfigurationParser.CreateTargetType(String targetTypeName)
+   --- End of inner exception stack trace ---
+2022-08-05 17:56:15.2939 Warn Error has been raised. Exception: NLog.NLogConfigurationException: Failed to create target type: ComLogFileTarget
+ ---> System.ArgumentException: Target cannot be found: 'ComLogFileTarget'
+   at NLog.Config.Factory`2.CreateInstance(String itemName)
+   at NLog.Config.LoggingConfigurationParser.CreateTargetType(String targetTypeName)
+   --- End of inner exception stack trace ---
+2022-08-05 17:56:15.2939 Warn Error has been raised. Exception: NLog.NLogConfigurationException: Target 'AuditFileLog' not found for logging rule: AuditLog.
+2022-08-05 17:56:15.2939 Warn Error has been raised. Exception: NLog.NLogConfigurationException: Target 'ComFileLog' not found for logging rule: ComLog.
+2022-08-05 17:56:15.3104 Info Validating config: Targets=5, ConfigItems=146, FilePath=C:\Munka\workspaces\eLogHeavyTools\WhWebShopService\WhWebShop.Service\bin\Debug\net6.0\NLog.config
+2022-08-05 17:56:15.3104 Info Configuration initialized.
+2022-08-05 17:56:15.3104 Info NLog, Version=4.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 4.7.14.740. Product version: 4.7.14+7b0baf946c6c5541cbd0dc523d2e9e7a582209ba. GlobalAssemblyCache: False
+2022-08-05 17:57:45.9407 Info Auto loading assembly file: C:\Munka\workspaces\eLogHeavyTools\WhWebShopService\WhWebShop.Service\bin\Debug\net6.0\NLog.Extensions.Logging.dll
+2022-08-05 17:57:45.9407 Info Loading assembly file: C:\Munka\workspaces\eLogHeavyTools\WhWebShopService\WhWebShop.Service\bin\Debug\net6.0\NLog.Extensions.Logging.dll
+2022-08-05 17:57:45.9549 Info NLog.Extensions.Logging, Version=1.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 1.7.4.1610. Product version: 1.7.4+e2bffa9e949fb4760d75aca224e78631c063f087. GlobalAssemblyCache: False
+2022-08-05 17:57:45.9549 Info Auto loading assembly file: C:\Munka\workspaces\eLogHeavyTools\WhWebShopService\WhWebShop.Service\bin\Debug\net6.0\NLog.Extensions.Logging.dll succeeded!
+2022-08-05 17:57:45.9549 Info Auto loading assembly file: C:\Munka\workspaces\eLogHeavyTools\WhWebShopService\WhWebShop.Service\bin\Debug\net6.0\NLog.Web.AspNetCore.dll
+2022-08-05 17:57:45.9549 Info Loading assembly file: C:\Munka\workspaces\eLogHeavyTools\WhWebShopService\WhWebShop.Service\bin\Debug\net6.0\NLog.Web.AspNetCore.dll
+2022-08-05 17:57:45.9549 Info NLog.Web.AspNetCore, Version=4.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 4.14.0.2042. Product version: 4.14.0+18bbcdbd5bd13b4565c32d72e09502b7ca6c71d4. GlobalAssemblyCache: False
+2022-08-05 17:57:45.9549 Info Auto loading assembly file: C:\Munka\workspaces\eLogHeavyTools\WhWebShopService\WhWebShop.Service\bin\Debug\net6.0\NLog.Web.AspNetCore.dll succeeded!
+2022-08-05 17:57:45.9549 Info Message Template Auto Format enabled
+2022-08-05 17:57:45.9664 Info Loading assembly: NLog.Web.AspNetCore
+2022-08-05 17:57:45.9664 Info Loading assembly: ERP4U.Log
+2022-08-05 17:57:45.9974 Info Adding target FileTarget(Name=allfile)
+2022-08-05 17:57:45.9974 Info Adding target FileTarget(Name=file-fatal)
+2022-08-05 17:57:45.9974 Info Adding target FileTarget(Name=file-warn)
+2022-08-05 17:57:45.9974 Info Adding target FileTarget(Name=file-trace)
+2022-08-05 17:57:45.9974 Info Adding target FileTarget(Name=allms)
+2022-08-05 17:57:45.9974 Warn Error has been raised. Exception: NLog.NLogConfigurationException: Failed to create target type: AuditLogFileTarget
+ ---> System.ArgumentException: Target cannot be found: 'AuditLogFileTarget'
+   at NLog.Config.Factory`2.CreateInstance(String itemName)
+   at NLog.Config.LoggingConfigurationParser.CreateTargetType(String targetTypeName)
+   --- End of inner exception stack trace ---
+2022-08-05 17:57:45.9974 Warn Error has been raised. Exception: NLog.NLogConfigurationException: Failed to create target type: ComLogFileTarget
+ ---> System.ArgumentException: Target cannot be found: 'ComLogFileTarget'
+   at NLog.Config.Factory`2.CreateInstance(String itemName)
+   at NLog.Config.LoggingConfigurationParser.CreateTargetType(String targetTypeName)
+   --- End of inner exception stack trace ---
+2022-08-05 17:57:46.0181 Warn Error has been raised. Exception: NLog.NLogConfigurationException: Target 'AuditFileLog' not found for logging rule: AuditLog.
+2022-08-05 17:57:46.0181 Warn Error has been raised. Exception: NLog.NLogConfigurationException: Target 'ComFileLog' not found for logging rule: ComLog.
+2022-08-05 17:57:46.0302 Info Validating config: Targets=5, ConfigItems=146, FilePath=C:\Munka\workspaces\eLogHeavyTools\WhWebShopService\WhWebShop.Service\bin\Debug\net6.0\NLog.config
+2022-08-05 17:57:46.0302 Info Configuration initialized.
+2022-08-05 17:57:46.0302 Info NLog, Version=4.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 4.7.14.740. Product version: 4.7.14+7b0baf946c6c5541cbd0dc523d2e9e7a582209ba. GlobalAssemblyCache: False
+2022-08-05 17:59:01.4677 Info Auto loading assembly file: C:\Munka\workspaces\eLogHeavyTools\WhWebShopService\WhWebShop.Service\bin\Debug\net6.0\NLog.Extensions.Logging.dll
+2022-08-05 17:59:01.4677 Info Loading assembly file: C:\Munka\workspaces\eLogHeavyTools\WhWebShopService\WhWebShop.Service\bin\Debug\net6.0\NLog.Extensions.Logging.dll
+2022-08-05 17:59:01.4677 Info NLog.Extensions.Logging, Version=1.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 1.7.4.1610. Product version: 1.7.4+e2bffa9e949fb4760d75aca224e78631c063f087. GlobalAssemblyCache: False
+2022-08-05 17:59:01.4677 Info Auto loading assembly file: C:\Munka\workspaces\eLogHeavyTools\WhWebShopService\WhWebShop.Service\bin\Debug\net6.0\NLog.Extensions.Logging.dll succeeded!
+2022-08-05 17:59:01.4677 Info Auto loading assembly file: C:\Munka\workspaces\eLogHeavyTools\WhWebShopService\WhWebShop.Service\bin\Debug\net6.0\NLog.Web.AspNetCore.dll
+2022-08-05 17:59:01.4677 Info Loading assembly file: C:\Munka\workspaces\eLogHeavyTools\WhWebShopService\WhWebShop.Service\bin\Debug\net6.0\NLog.Web.AspNetCore.dll
+2022-08-05 17:59:01.4831 Info NLog.Web.AspNetCore, Version=4.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 4.14.0.2042. Product version: 4.14.0+18bbcdbd5bd13b4565c32d72e09502b7ca6c71d4. GlobalAssemblyCache: False
+2022-08-05 17:59:01.4831 Info Auto loading assembly file: C:\Munka\workspaces\eLogHeavyTools\WhWebShopService\WhWebShop.Service\bin\Debug\net6.0\NLog.Web.AspNetCore.dll succeeded!
+2022-08-05 17:59:01.4831 Info Message Template Auto Format enabled
+2022-08-05 17:59:01.4831 Info Loading assembly: NLog.Web.AspNetCore
+2022-08-05 17:59:01.4831 Info Loading assembly: ERP4U.Log
+2022-08-05 17:59:01.5160 Info Adding target FileTarget(Name=allfile)
+2022-08-05 17:59:01.5160 Info Adding target FileTarget(Name=file-fatal)
+2022-08-05 17:59:01.5160 Info Adding target FileTarget(Name=file-warn)
+2022-08-05 17:59:01.5160 Info Adding target FileTarget(Name=file-trace)
+2022-08-05 17:59:01.5160 Info Adding target FileTarget(Name=allms)
+2022-08-05 17:59:01.5160 Warn Error has been raised. Exception: NLog.NLogConfigurationException: Failed to create target type: AuditLogFileTarget
+ ---> System.ArgumentException: Target cannot be found: 'AuditLogFileTarget'
+   at NLog.Config.Factory`2.CreateInstance(String itemName)
+   at NLog.Config.LoggingConfigurationParser.CreateTargetType(String targetTypeName)
+   --- End of inner exception stack trace ---
+2022-08-05 17:59:01.5314 Warn Error has been raised. Exception: NLog.NLogConfigurationException: Failed to create target type: ComLogFileTarget
+ ---> System.ArgumentException: Target cannot be found: 'ComLogFileTarget'
+   at NLog.Config.Factory`2.CreateInstance(String itemName)
+   at NLog.Config.LoggingConfigurationParser.CreateTargetType(String targetTypeName)
+   --- End of inner exception stack trace ---
+2022-08-05 17:59:01.5314 Warn Error has been raised. Exception: NLog.NLogConfigurationException: Target 'AuditFileLog' not found for logging rule: AuditLog.
+2022-08-05 17:59:01.5314 Warn Error has been raised. Exception: NLog.NLogConfigurationException: Target 'ComFileLog' not found for logging rule: ComLog.
+2022-08-05 17:59:01.5487 Info Validating config: Targets=5, ConfigItems=146, FilePath=C:\Munka\workspaces\eLogHeavyTools\WhWebShopService\WhWebShop.Service\bin\Debug\net6.0\NLog.config
+2022-08-05 17:59:01.5487 Info Configuration initialized.
+2022-08-05 17:59:01.5487 Info NLog, Version=4.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 4.7.14.740. Product version: 4.7.14+7b0baf946c6c5541cbd0dc523d2e9e7a582209ba. GlobalAssemblyCache: False
+2022-08-05 18:00:06.5804 Info Auto loading assembly file: C:\Munka\workspaces\eLogHeavyTools\WhWebShopService\WhWebShop.Service\bin\Debug\net6.0\NLog.Extensions.Logging.dll
+2022-08-05 18:00:06.5804 Info Loading assembly file: C:\Munka\workspaces\eLogHeavyTools\WhWebShopService\WhWebShop.Service\bin\Debug\net6.0\NLog.Extensions.Logging.dll
+2022-08-05 18:00:06.5913 Info NLog.Extensions.Logging, Version=1.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 1.7.4.1610. Product version: 1.7.4+e2bffa9e949fb4760d75aca224e78631c063f087. GlobalAssemblyCache: False
+2022-08-05 18:00:06.5913 Info Auto loading assembly file: C:\Munka\workspaces\eLogHeavyTools\WhWebShopService\WhWebShop.Service\bin\Debug\net6.0\NLog.Extensions.Logging.dll succeeded!
+2022-08-05 18:00:06.5913 Info Auto loading assembly file: C:\Munka\workspaces\eLogHeavyTools\WhWebShopService\WhWebShop.Service\bin\Debug\net6.0\NLog.Web.AspNetCore.dll
+2022-08-05 18:00:06.5913 Info Loading assembly file: C:\Munka\workspaces\eLogHeavyTools\WhWebShopService\WhWebShop.Service\bin\Debug\net6.0\NLog.Web.AspNetCore.dll
+2022-08-05 18:00:06.5913 Info NLog.Web.AspNetCore, Version=4.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 4.14.0.2042. Product version: 4.14.0+18bbcdbd5bd13b4565c32d72e09502b7ca6c71d4. GlobalAssemblyCache: False
+2022-08-05 18:00:06.5913 Info Auto loading assembly file: C:\Munka\workspaces\eLogHeavyTools\WhWebShopService\WhWebShop.Service\bin\Debug\net6.0\NLog.Web.AspNetCore.dll succeeded!
+2022-08-05 18:00:06.5913 Info Message Template Auto Format enabled
+2022-08-05 18:00:06.5913 Info Loading assembly: NLog.Web.AspNetCore
+2022-08-05 18:00:06.5913 Info Loading assembly: ERP4U.Log
+2022-08-05 18:00:06.6280 Info Adding target FileTarget(Name=allfile)
+2022-08-05 18:00:06.6280 Info Adding target FileTarget(Name=file-fatal)
+2022-08-05 18:00:06.6280 Info Adding target FileTarget(Name=file-warn)
+2022-08-05 18:00:06.6280 Info Adding target FileTarget(Name=file-trace)
+2022-08-05 18:00:06.6280 Info Adding target FileTarget(Name=allms)
+2022-08-05 18:00:06.6280 Warn Error has been raised. Exception: NLog.NLogConfigurationException: Failed to create target type: AuditLogFileTarget
+ ---> System.ArgumentException: Target cannot be found: 'AuditLogFileTarget'
+   at NLog.Config.Factory`2.CreateInstance(String itemName)
+   at NLog.Config.LoggingConfigurationParser.CreateTargetType(String targetTypeName)
+   --- End of inner exception stack trace ---
+2022-08-05 18:00:06.6428 Warn Error has been raised. Exception: NLog.NLogConfigurationException: Failed to create target type: ComLogFileTarget
+ ---> System.ArgumentException: Target cannot be found: 'ComLogFileTarget'
+   at NLog.Config.Factory`2.CreateInstance(String itemName)
+   at NLog.Config.LoggingConfigurationParser.CreateTargetType(String targetTypeName)
+   --- End of inner exception stack trace ---
+2022-08-05 18:00:06.6428 Warn Error has been raised. Exception: NLog.NLogConfigurationException: Target 'AuditFileLog' not found for logging rule: AuditLog.
+2022-08-05 18:00:06.6428 Warn Error has been raised. Exception: NLog.NLogConfigurationException: Target 'ComFileLog' not found for logging rule: ComLog.
+2022-08-05 18:00:06.6590 Info Validating config: Targets=5, ConfigItems=146, FilePath=C:\Munka\workspaces\eLogHeavyTools\WhWebShopService\WhWebShop.Service\bin\Debug\net6.0\NLog.config
+2022-08-05 18:00:06.6700 Info Configuration initialized.
+2022-08-05 18:00:06.6700 Info NLog, Version=4.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 4.7.14.740. Product version: 4.7.14+7b0baf946c6c5541cbd0dc523d2e9e7a582209ba. GlobalAssemblyCache: False
+2022-08-05 18:01:26.2680 Info Auto loading assembly file: C:\Munka\workspaces\eLogHeavyTools\WhWebShopService\WhWebShop.Service\bin\Debug\net6.0\NLog.Extensions.Logging.dll
+2022-08-05 18:01:26.2680 Info Loading assembly file: C:\Munka\workspaces\eLogHeavyTools\WhWebShopService\WhWebShop.Service\bin\Debug\net6.0\NLog.Extensions.Logging.dll
+2022-08-05 18:01:26.2795 Info NLog.Extensions.Logging, Version=1.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 1.7.4.1610. Product version: 1.7.4+e2bffa9e949fb4760d75aca224e78631c063f087. GlobalAssemblyCache: False
+2022-08-05 18:01:26.2795 Info Auto loading assembly file: C:\Munka\workspaces\eLogHeavyTools\WhWebShopService\WhWebShop.Service\bin\Debug\net6.0\NLog.Extensions.Logging.dll succeeded!
+2022-08-05 18:01:26.2795 Info Auto loading assembly file: C:\Munka\workspaces\eLogHeavyTools\WhWebShopService\WhWebShop.Service\bin\Debug\net6.0\NLog.Web.AspNetCore.dll
+2022-08-05 18:01:26.2795 Info Loading assembly file: C:\Munka\workspaces\eLogHeavyTools\WhWebShopService\WhWebShop.Service\bin\Debug\net6.0\NLog.Web.AspNetCore.dll
+2022-08-05 18:01:26.2795 Info NLog.Web.AspNetCore, Version=4.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 4.14.0.2042. Product version: 4.14.0+18bbcdbd5bd13b4565c32d72e09502b7ca6c71d4. GlobalAssemblyCache: False
+2022-08-05 18:01:26.2795 Info Auto loading assembly file: C:\Munka\workspaces\eLogHeavyTools\WhWebShopService\WhWebShop.Service\bin\Debug\net6.0\NLog.Web.AspNetCore.dll succeeded!
+2022-08-05 18:01:26.2795 Info Message Template Auto Format enabled
+2022-08-05 18:01:26.2795 Info Loading assembly: NLog.Web.AspNetCore
+2022-08-05 18:01:26.2795 Info Loading assembly: ERP4U.Log
+2022-08-05 18:01:26.3207 Info Adding target FileTarget(Name=allfile)
+2022-08-05 18:01:26.3207 Info Adding target FileTarget(Name=file-fatal)
+2022-08-05 18:01:26.3207 Info Adding target FileTarget(Name=file-warn)
+2022-08-05 18:01:26.3207 Info Adding target FileTarget(Name=file-trace)
+2022-08-05 18:01:26.3207 Info Adding target FileTarget(Name=allms)
+2022-08-05 18:01:26.3207 Warn Error has been raised. Exception: NLog.NLogConfigurationException: Failed to create target type: AuditLogFileTarget
+ ---> System.ArgumentException: Target cannot be found: 'AuditLogFileTarget'
+   at NLog.Config.Factory`2.CreateInstance(String itemName)
+   at NLog.Config.LoggingConfigurationParser.CreateTargetType(String targetTypeName)
+   --- End of inner exception stack trace ---
+2022-08-05 18:01:26.3387 Warn Error has been raised. Exception: NLog.NLogConfigurationException: Failed to create target type: ComLogFileTarget
+ ---> System.ArgumentException: Target cannot be found: 'ComLogFileTarget'
+   at NLog.Config.Factory`2.CreateInstance(String itemName)
+   at NLog.Config.LoggingConfigurationParser.CreateTargetType(String targetTypeName)
+   --- End of inner exception stack trace ---
+2022-08-05 18:01:26.3432 Warn Error has been raised. Exception: NLog.NLogConfigurationException: Target 'AuditFileLog' not found for logging rule: AuditLog.
+2022-08-05 18:01:26.3432 Warn Error has been raised. Exception: NLog.NLogConfigurationException: Target 'ComFileLog' not found for logging rule: ComLog.
+2022-08-05 18:01:26.3432 Info Validating config: Targets=5, ConfigItems=146, FilePath=C:\Munka\workspaces\eLogHeavyTools\WhWebShopService\WhWebShop.Service\bin\Debug\net6.0\NLog.config
+2022-08-05 18:01:26.3667 Info Configuration initialized.
+2022-08-05 18:01:26.3667 Info NLog, Version=4.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 4.7.14.740. Product version: 4.7.14+7b0baf946c6c5541cbd0dc523d2e9e7a582209ba. GlobalAssemblyCache: False
+2022-08-05 18:05:23.3467 Info Auto loading assembly file: C:\Munka\workspaces\eLogHeavyTools\WhWebShopService\WhWebShop.Service\bin\Debug\net6.0\NLog.Extensions.Logging.dll
+2022-08-05 18:05:23.3467 Info Loading assembly file: C:\Munka\workspaces\eLogHeavyTools\WhWebShopService\WhWebShop.Service\bin\Debug\net6.0\NLog.Extensions.Logging.dll
+2022-08-05 18:05:23.3584 Info NLog.Extensions.Logging, Version=1.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 1.7.4.1610. Product version: 1.7.4+e2bffa9e949fb4760d75aca224e78631c063f087. GlobalAssemblyCache: False
+2022-08-05 18:05:23.3584 Info Auto loading assembly file: C:\Munka\workspaces\eLogHeavyTools\WhWebShopService\WhWebShop.Service\bin\Debug\net6.0\NLog.Extensions.Logging.dll succeeded!
+2022-08-05 18:05:23.3584 Info Auto loading assembly file: C:\Munka\workspaces\eLogHeavyTools\WhWebShopService\WhWebShop.Service\bin\Debug\net6.0\NLog.Web.AspNetCore.dll
+2022-08-05 18:05:23.3584 Info Loading assembly file: C:\Munka\workspaces\eLogHeavyTools\WhWebShopService\WhWebShop.Service\bin\Debug\net6.0\NLog.Web.AspNetCore.dll
+2022-08-05 18:05:23.3584 Info NLog.Web.AspNetCore, Version=4.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 4.14.0.2042. Product version: 4.14.0+18bbcdbd5bd13b4565c32d72e09502b7ca6c71d4. GlobalAssemblyCache: False
+2022-08-05 18:05:23.3584 Info Auto loading assembly file: C:\Munka\workspaces\eLogHeavyTools\WhWebShopService\WhWebShop.Service\bin\Debug\net6.0\NLog.Web.AspNetCore.dll succeeded!
+2022-08-05 18:05:23.3584 Info Message Template Auto Format enabled
+2022-08-05 18:05:23.3584 Info Loading assembly: NLog.Web.AspNetCore
+2022-08-05 18:05:23.3584 Info Loading assembly: ERP4U.Log
+2022-08-05 18:05:23.3969 Info Adding target FileTarget(Name=allfile)
+2022-08-05 18:05:23.3969 Info Adding target FileTarget(Name=file-fatal)
+2022-08-05 18:05:23.3969 Info Adding target FileTarget(Name=file-warn)
+2022-08-05 18:05:23.3969 Info Adding target FileTarget(Name=file-trace)
+2022-08-05 18:05:23.3969 Info Adding target FileTarget(Name=allms)
+2022-08-05 18:05:23.3969 Warn Error has been raised. Exception: NLog.NLogConfigurationException: Failed to create target type: AuditLogFileTarget
+ ---> System.ArgumentException: Target cannot be found: 'AuditLogFileTarget'
+   at NLog.Config.Factory`2.CreateInstance(String itemName)
+   at NLog.Config.LoggingConfigurationParser.CreateTargetType(String targetTypeName)
+   --- End of inner exception stack trace ---
+2022-08-05 18:05:23.4141 Warn Error has been raised. Exception: NLog.NLogConfigurationException: Failed to create target type: ComLogFileTarget
+ ---> System.ArgumentException: Target cannot be found: 'ComLogFileTarget'
+   at NLog.Config.Factory`2.CreateInstance(String itemName)
+   at NLog.Config.LoggingConfigurationParser.CreateTargetType(String targetTypeName)
+   --- End of inner exception stack trace ---
+2022-08-05 18:05:23.4141 Warn Error has been raised. Exception: NLog.NLogConfigurationException: Target 'AuditFileLog' not found for logging rule: AuditLog.
+2022-08-05 18:05:23.4196 Warn Error has been raised. Exception: NLog.NLogConfigurationException: Target 'ComFileLog' not found for logging rule: ComLog.
+2022-08-05 18:05:23.4196 Info Validating config: Targets=5, ConfigItems=146, FilePath=C:\Munka\workspaces\eLogHeavyTools\WhWebShopService\WhWebShop.Service\bin\Debug\net6.0\NLog.config
+2022-08-05 18:05:23.4440 Info Configuration initialized.
+2022-08-05 18:05:23.4440 Info NLog, Version=4.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 4.7.14.740. Product version: 4.7.14+7b0baf946c6c5541cbd0dc523d2e9e7a582209ba. GlobalAssemblyCache: False
+2022-08-05 18:06:47.1795 Info Auto loading assembly file: C:\Munka\workspaces\eLogHeavyTools\WhWebShopService\WhWebShop.Service\bin\Debug\net6.0\NLog.Extensions.Logging.dll
+2022-08-05 18:06:47.1795 Info Loading assembly file: C:\Munka\workspaces\eLogHeavyTools\WhWebShopService\WhWebShop.Service\bin\Debug\net6.0\NLog.Extensions.Logging.dll
+2022-08-05 18:06:47.1932 Info NLog.Extensions.Logging, Version=1.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 1.7.4.1610. Product version: 1.7.4+e2bffa9e949fb4760d75aca224e78631c063f087. GlobalAssemblyCache: False
+2022-08-05 18:06:47.1932 Info Auto loading assembly file: C:\Munka\workspaces\eLogHeavyTools\WhWebShopService\WhWebShop.Service\bin\Debug\net6.0\NLog.Extensions.Logging.dll succeeded!
+2022-08-05 18:06:47.1932 Info Auto loading assembly file: C:\Munka\workspaces\eLogHeavyTools\WhWebShopService\WhWebShop.Service\bin\Debug\net6.0\NLog.Web.AspNetCore.dll
+2022-08-05 18:06:47.1932 Info Loading assembly file: C:\Munka\workspaces\eLogHeavyTools\WhWebShopService\WhWebShop.Service\bin\Debug\net6.0\NLog.Web.AspNetCore.dll
+2022-08-05 18:06:47.1932 Info NLog.Web.AspNetCore, Version=4.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 4.14.0.2042. Product version: 4.14.0+18bbcdbd5bd13b4565c32d72e09502b7ca6c71d4. GlobalAssemblyCache: False
+2022-08-05 18:06:47.1932 Info Auto loading assembly file: C:\Munka\workspaces\eLogHeavyTools\WhWebShopService\WhWebShop.Service\bin\Debug\net6.0\NLog.Web.AspNetCore.dll succeeded!
+2022-08-05 18:06:47.1932 Info Message Template Auto Format enabled
+2022-08-05 18:06:47.2029 Info Loading assembly: NLog.Web.AspNetCore
+2022-08-05 18:06:47.2029 Info Loading assembly: ERP4U.Log
+2022-08-05 18:06:47.2364 Info Adding target FileTarget(Name=allfile)
+2022-08-05 18:06:47.2364 Info Adding target FileTarget(Name=file-fatal)
+2022-08-05 18:06:47.2364 Info Adding target FileTarget(Name=file-warn)
+2022-08-05 18:06:47.2364 Info Adding target FileTarget(Name=file-trace)
+2022-08-05 18:06:47.2364 Info Adding target FileTarget(Name=allms)
+2022-08-05 18:06:47.2364 Warn Error has been raised. Exception: NLog.NLogConfigurationException: Failed to create target type: AuditLogFileTarget
+ ---> System.ArgumentException: Target cannot be found: 'AuditLogFileTarget'
+   at NLog.Config.Factory`2.CreateInstance(String itemName)
+   at NLog.Config.LoggingConfigurationParser.CreateTargetType(String targetTypeName)
+   --- End of inner exception stack trace ---
+2022-08-05 18:06:47.2533 Warn Error has been raised. Exception: NLog.NLogConfigurationException: Failed to create target type: ComLogFileTarget
+ ---> System.ArgumentException: Target cannot be found: 'ComLogFileTarget'
+   at NLog.Config.Factory`2.CreateInstance(String itemName)
+   at NLog.Config.LoggingConfigurationParser.CreateTargetType(String targetTypeName)
+   --- End of inner exception stack trace ---
+2022-08-05 18:06:47.2533 Warn Error has been raised. Exception: NLog.NLogConfigurationException: Target 'AuditFileLog' not found for logging rule: AuditLog.
+2022-08-05 18:06:47.2533 Warn Error has been raised. Exception: NLog.NLogConfigurationException: Target 'ComFileLog' not found for logging rule: ComLog.
+2022-08-05 18:06:47.2759 Info Validating config: Targets=5, ConfigItems=146, FilePath=C:\Munka\workspaces\eLogHeavyTools\WhWebShopService\WhWebShop.Service\bin\Debug\net6.0\NLog.config
+2022-08-05 18:06:47.2879 Info Configuration initialized.
+2022-08-05 18:06:47.2879 Info NLog, Version=4.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 4.7.14.740. Product version: 4.7.14+7b0baf946c6c5541cbd0dc523d2e9e7a582209ba. GlobalAssemblyCache: False
+2022-08-05 18:07:37.3262 Info Auto loading assembly file: C:\Munka\workspaces\eLogHeavyTools\WhWebShopService\WhWebShop.Service\bin\Debug\net6.0\NLog.Extensions.Logging.dll
+2022-08-05 18:07:37.3262 Info Loading assembly file: C:\Munka\workspaces\eLogHeavyTools\WhWebShopService\WhWebShop.Service\bin\Debug\net6.0\NLog.Extensions.Logging.dll
+2022-08-05 18:07:37.3262 Info NLog.Extensions.Logging, Version=1.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 1.7.4.1610. Product version: 1.7.4+e2bffa9e949fb4760d75aca224e78631c063f087. GlobalAssemblyCache: False
+2022-08-05 18:07:37.3262 Info Auto loading assembly file: C:\Munka\workspaces\eLogHeavyTools\WhWebShopService\WhWebShop.Service\bin\Debug\net6.0\NLog.Extensions.Logging.dll succeeded!
+2022-08-05 18:07:37.3262 Info Auto loading assembly file: C:\Munka\workspaces\eLogHeavyTools\WhWebShopService\WhWebShop.Service\bin\Debug\net6.0\NLog.Web.AspNetCore.dll
+2022-08-05 18:07:37.3262 Info Loading assembly file: C:\Munka\workspaces\eLogHeavyTools\WhWebShopService\WhWebShop.Service\bin\Debug\net6.0\NLog.Web.AspNetCore.dll
+2022-08-05 18:07:37.3433 Info NLog.Web.AspNetCore, Version=4.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 4.14.0.2042. Product version: 4.14.0+18bbcdbd5bd13b4565c32d72e09502b7ca6c71d4. GlobalAssemblyCache: False
+2022-08-05 18:07:37.3433 Info Auto loading assembly file: C:\Munka\workspaces\eLogHeavyTools\WhWebShopService\WhWebShop.Service\bin\Debug\net6.0\NLog.Web.AspNetCore.dll succeeded!
+2022-08-05 18:07:37.3433 Info Message Template Auto Format enabled
+2022-08-05 18:07:37.3433 Info Loading assembly: NLog.Web.AspNetCore
+2022-08-05 18:07:37.3433 Info Loading assembly: ERP4U.Log
+2022-08-05 18:07:37.3829 Info Adding target FileTarget(Name=allfile)
+2022-08-05 18:07:37.3829 Info Adding target FileTarget(Name=file-fatal)
+2022-08-05 18:07:37.3829 Info Adding target FileTarget(Name=file-warn)
+2022-08-05 18:07:37.3829 Info Adding target FileTarget(Name=file-trace)
+2022-08-05 18:07:37.3829 Info Adding target FileTarget(Name=allms)
+2022-08-05 18:07:37.3829 Warn Error has been raised. Exception: NLog.NLogConfigurationException: Failed to create target type: AuditLogFileTarget
+ ---> System.ArgumentException: Target cannot be found: 'AuditLogFileTarget'
+   at NLog.Config.Factory`2.CreateInstance(String itemName)
+   at NLog.Config.LoggingConfigurationParser.CreateTargetType(String targetTypeName)
+   --- End of inner exception stack trace ---
+2022-08-05 18:07:37.3988 Warn Error has been raised. Exception: NLog.NLogConfigurationException: Failed to create target type: ComLogFileTarget
+ ---> System.ArgumentException: Target cannot be found: 'ComLogFileTarget'
+   at NLog.Config.Factory`2.CreateInstance(String itemName)
+   at NLog.Config.LoggingConfigurationParser.CreateTargetType(String targetTypeName)
+   --- End of inner exception stack trace ---
+2022-08-05 18:07:37.3988 Warn Error has been raised. Exception: NLog.NLogConfigurationException: Target 'AuditFileLog' not found for logging rule: AuditLog.
+2022-08-05 18:07:37.4043 Warn Error has been raised. Exception: NLog.NLogConfigurationException: Target 'ComFileLog' not found for logging rule: ComLog.
+2022-08-05 18:07:37.4043 Info Validating config: Targets=5, ConfigItems=146, FilePath=C:\Munka\workspaces\eLogHeavyTools\WhWebShopService\WhWebShop.Service\bin\Debug\net6.0\NLog.config
+2022-08-05 18:07:37.4284 Info Configuration initialized.
+2022-08-05 18:07:37.4284 Info NLog, Version=4.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 4.7.14.740. Product version: 4.7.14+7b0baf946c6c5541cbd0dc523d2e9e7a582209ba. GlobalAssemblyCache: False
+2022-08-05 18:07:59.4226 Info Auto loading assembly file: C:\Munka\workspaces\eLogHeavyTools\WhWebShopService\WhWebShop.Service\bin\Debug\net6.0\NLog.Extensions.Logging.dll
+2022-08-05 18:07:59.4226 Info Loading assembly file: C:\Munka\workspaces\eLogHeavyTools\WhWebShopService\WhWebShop.Service\bin\Debug\net6.0\NLog.Extensions.Logging.dll
+2022-08-05 18:07:59.4226 Info NLog.Extensions.Logging, Version=1.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 1.7.4.1610. Product version: 1.7.4+e2bffa9e949fb4760d75aca224e78631c063f087. GlobalAssemblyCache: False
+2022-08-05 18:07:59.4226 Info Auto loading assembly file: C:\Munka\workspaces\eLogHeavyTools\WhWebShopService\WhWebShop.Service\bin\Debug\net6.0\NLog.Extensions.Logging.dll succeeded!
+2022-08-05 18:07:59.4226 Info Auto loading assembly file: C:\Munka\workspaces\eLogHeavyTools\WhWebShopService\WhWebShop.Service\bin\Debug\net6.0\NLog.Web.AspNetCore.dll
+2022-08-05 18:07:59.4226 Info Loading assembly file: C:\Munka\workspaces\eLogHeavyTools\WhWebShopService\WhWebShop.Service\bin\Debug\net6.0\NLog.Web.AspNetCore.dll
+2022-08-05 18:07:59.4375 Info NLog.Web.AspNetCore, Version=4.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 4.14.0.2042. Product version: 4.14.0+18bbcdbd5bd13b4565c32d72e09502b7ca6c71d4. GlobalAssemblyCache: False
+2022-08-05 18:07:59.4375 Info Auto loading assembly file: C:\Munka\workspaces\eLogHeavyTools\WhWebShopService\WhWebShop.Service\bin\Debug\net6.0\NLog.Web.AspNetCore.dll succeeded!
+2022-08-05 18:07:59.4375 Info Message Template Auto Format enabled
+2022-08-05 18:07:59.4375 Info Loading assembly: NLog.Web.AspNetCore
+2022-08-05 18:07:59.4375 Info Loading assembly: ERP4U.Log
+2022-08-05 18:07:59.4688 Info Adding target FileTarget(Name=allfile)
+2022-08-05 18:07:59.4688 Info Adding target FileTarget(Name=file-fatal)
+2022-08-05 18:07:59.4688 Info Adding target FileTarget(Name=file-warn)
+2022-08-05 18:07:59.4688 Info Adding target FileTarget(Name=file-trace)
+2022-08-05 18:07:59.4688 Info Adding target FileTarget(Name=allms)
+2022-08-05 18:07:59.4688 Warn Error has been raised. Exception: NLog.NLogConfigurationException: Failed to create target type: AuditLogFileTarget
+ ---> System.ArgumentException: Target cannot be found: 'AuditLogFileTarget'
+   at NLog.Config.Factory`2.CreateInstance(String itemName)
+   at NLog.Config.LoggingConfigurationParser.CreateTargetType(String targetTypeName)
+   --- End of inner exception stack trace ---
+2022-08-05 18:07:59.4828 Warn Error has been raised. Exception: NLog.NLogConfigurationException: Failed to create target type: ComLogFileTarget
+ ---> System.ArgumentException: Target cannot be found: 'ComLogFileTarget'
+   at NLog.Config.Factory`2.CreateInstance(String itemName)
+   at NLog.Config.LoggingConfigurationParser.CreateTargetType(String targetTypeName)
+   --- End of inner exception stack trace ---
+2022-08-05 18:07:59.4828 Warn Error has been raised. Exception: NLog.NLogConfigurationException: Target 'AuditFileLog' not found for logging rule: AuditLog.
+2022-08-05 18:07:59.4828 Warn Error has been raised. Exception: NLog.NLogConfigurationException: Target 'ComFileLog' not found for logging rule: ComLog.
+2022-08-05 18:07:59.4992 Info Validating config: Targets=5, ConfigItems=146, FilePath=C:\Munka\workspaces\eLogHeavyTools\WhWebShopService\WhWebShop.Service\bin\Debug\net6.0\NLog.config
+2022-08-05 18:07:59.4992 Info Configuration initialized.
+2022-08-05 18:07:59.4992 Info NLog, Version=4.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 4.7.14.740. Product version: 4.7.14+7b0baf946c6c5541cbd0dc523d2e9e7a582209ba. GlobalAssemblyCache: False
+2022-08-05 18:09:24.6603 Info Auto loading assembly file: C:\Munka\workspaces\eLogHeavyTools\WhWebShopService\WhWebShop.Service\bin\Debug\net6.0\NLog.Extensions.Logging.dll
+2022-08-05 18:09:24.6603 Info Loading assembly file: C:\Munka\workspaces\eLogHeavyTools\WhWebShopService\WhWebShop.Service\bin\Debug\net6.0\NLog.Extensions.Logging.dll
+2022-08-05 18:09:24.6710 Info NLog.Extensions.Logging, Version=1.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 1.7.4.1610. Product version: 1.7.4+e2bffa9e949fb4760d75aca224e78631c063f087. GlobalAssemblyCache: False
+2022-08-05 18:09:24.6710 Info Auto loading assembly file: C:\Munka\workspaces\eLogHeavyTools\WhWebShopService\WhWebShop.Service\bin\Debug\net6.0\NLog.Extensions.Logging.dll succeeded!
+2022-08-05 18:09:24.6710 Info Auto loading assembly file: C:\Munka\workspaces\eLogHeavyTools\WhWebShopService\WhWebShop.Service\bin\Debug\net6.0\NLog.Web.AspNetCore.dll
+2022-08-05 18:09:24.6710 Info Loading assembly file: C:\Munka\workspaces\eLogHeavyTools\WhWebShopService\WhWebShop.Service\bin\Debug\net6.0\NLog.Web.AspNetCore.dll
+2022-08-05 18:09:24.6710 Info NLog.Web.AspNetCore, Version=4.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 4.14.0.2042. Product version: 4.14.0+18bbcdbd5bd13b4565c32d72e09502b7ca6c71d4. GlobalAssemblyCache: False
+2022-08-05 18:09:24.6710 Info Auto loading assembly file: C:\Munka\workspaces\eLogHeavyTools\WhWebShopService\WhWebShop.Service\bin\Debug\net6.0\NLog.Web.AspNetCore.dll succeeded!
+2022-08-05 18:09:24.6710 Info Message Template Auto Format enabled
+2022-08-05 18:09:24.6710 Info Loading assembly: NLog.Web.AspNetCore
+2022-08-05 18:09:24.6710 Info Loading assembly: ERP4U.Log
+2022-08-05 18:09:24.7098 Info Adding target FileTarget(Name=allfile)
+2022-08-05 18:09:24.7098 Info Adding target FileTarget(Name=file-fatal)
+2022-08-05 18:09:24.7098 Info Adding target FileTarget(Name=file-warn)
+2022-08-05 18:09:24.7098 Info Adding target FileTarget(Name=file-trace)
+2022-08-05 18:09:24.7098 Info Adding target FileTarget(Name=allms)
+2022-08-05 18:09:24.7098 Warn Error has been raised. Exception: NLog.NLogConfigurationException: Failed to create target type: AuditLogFileTarget
+ ---> System.ArgumentException: Target cannot be found: 'AuditLogFileTarget'
+   at NLog.Config.Factory`2.CreateInstance(String itemName)
+   at NLog.Config.LoggingConfigurationParser.CreateTargetType(String targetTypeName)
+   --- End of inner exception stack trace ---
+2022-08-05 18:09:24.7251 Warn Error has been raised. Exception: NLog.NLogConfigurationException: Failed to create target type: ComLogFileTarget
+ ---> System.ArgumentException: Target cannot be found: 'ComLogFileTarget'
+   at NLog.Config.Factory`2.CreateInstance(String itemName)
+   at NLog.Config.LoggingConfigurationParser.CreateTargetType(String targetTypeName)
+   --- End of inner exception stack trace ---
+2022-08-05 18:09:24.7251 Warn Error has been raised. Exception: NLog.NLogConfigurationException: Target 'AuditFileLog' not found for logging rule: AuditLog.
+2022-08-05 18:09:24.7251 Warn Error has been raised. Exception: NLog.NLogConfigurationException: Target 'ComFileLog' not found for logging rule: ComLog.
+2022-08-05 18:09:24.7420 Info Validating config: Targets=5, ConfigItems=146, FilePath=C:\Munka\workspaces\eLogHeavyTools\WhWebShopService\WhWebShop.Service\bin\Debug\net6.0\NLog.config
+2022-08-05 18:09:24.7521 Info Configuration initialized.
+2022-08-05 18:09:24.7521 Info NLog, Version=4.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 4.7.14.740. Product version: 4.7.14+7b0baf946c6c5541cbd0dc523d2e9e7a582209ba. GlobalAssemblyCache: False
+2022-08-05 18:09:28.4217 Info AppDomain Shutting down. Logger closing...
+2022-08-05 18:09:28.4217 Info Logger has been shut down.
+2022-08-05 18:09:30.1282 Info Auto loading assembly file: C:\Munka\workspaces\eLogHeavyTools\WhWebShopService\WhWebShop.Service\bin\Debug\net6.0\NLog.Extensions.Logging.dll
+2022-08-05 18:09:30.1282 Info Loading assembly file: C:\Munka\workspaces\eLogHeavyTools\WhWebShopService\WhWebShop.Service\bin\Debug\net6.0\NLog.Extensions.Logging.dll
+2022-08-05 18:09:30.1387 Info NLog.Extensions.Logging, Version=1.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 1.7.4.1610. Product version: 1.7.4+e2bffa9e949fb4760d75aca224e78631c063f087. GlobalAssemblyCache: False
+2022-08-05 18:09:30.1387 Info Auto loading assembly file: C:\Munka\workspaces\eLogHeavyTools\WhWebShopService\WhWebShop.Service\bin\Debug\net6.0\NLog.Extensions.Logging.dll succeeded!
+2022-08-05 18:09:30.1387 Info Auto loading assembly file: C:\Munka\workspaces\eLogHeavyTools\WhWebShopService\WhWebShop.Service\bin\Debug\net6.0\NLog.Web.AspNetCore.dll
+2022-08-05 18:09:30.1387 Info Loading assembly file: C:\Munka\workspaces\eLogHeavyTools\WhWebShopService\WhWebShop.Service\bin\Debug\net6.0\NLog.Web.AspNetCore.dll
+2022-08-05 18:09:30.1387 Info NLog.Web.AspNetCore, Version=4.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 4.14.0.2042. Product version: 4.14.0+18bbcdbd5bd13b4565c32d72e09502b7ca6c71d4. GlobalAssemblyCache: False
+2022-08-05 18:09:30.1387 Info Auto loading assembly file: C:\Munka\workspaces\eLogHeavyTools\WhWebShopService\WhWebShop.Service\bin\Debug\net6.0\NLog.Web.AspNetCore.dll succeeded!
+2022-08-05 18:09:30.1387 Info Message Template Auto Format enabled
+2022-08-05 18:09:30.1387 Info Loading assembly: NLog.Web.AspNetCore
+2022-08-05 18:09:30.1387 Info Loading assembly: ERP4U.Log
+2022-08-05 18:09:30.1736 Info Adding target FileTarget(Name=allfile)
+2022-08-05 18:09:30.1736 Info Adding target FileTarget(Name=file-fatal)
+2022-08-05 18:09:30.1736 Info Adding target FileTarget(Name=file-warn)
+2022-08-05 18:09:30.1736 Info Adding target FileTarget(Name=file-trace)
+2022-08-05 18:09:30.1736 Info Adding target FileTarget(Name=allms)
+2022-08-05 18:09:30.1736 Warn Error has been raised. Exception: NLog.NLogConfigurationException: Failed to create target type: AuditLogFileTarget
+ ---> System.ArgumentException: Target cannot be found: 'AuditLogFileTarget'
+   at NLog.Config.Factory`2.CreateInstance(String itemName)
+   at NLog.Config.LoggingConfigurationParser.CreateTargetType(String targetTypeName)
+   --- End of inner exception stack trace ---
+2022-08-05 18:09:30.1879 Warn Error has been raised. Exception: NLog.NLogConfigurationException: Failed to create target type: ComLogFileTarget
+ ---> System.ArgumentException: Target cannot be found: 'ComLogFileTarget'
+   at NLog.Config.Factory`2.CreateInstance(String itemName)
+   at NLog.Config.LoggingConfigurationParser.CreateTargetType(String targetTypeName)
+   --- End of inner exception stack trace ---
+2022-08-05 18:09:30.1879 Warn Error has been raised. Exception: NLog.NLogConfigurationException: Target 'AuditFileLog' not found for logging rule: AuditLog.
+2022-08-05 18:09:30.1879 Warn Error has been raised. Exception: NLog.NLogConfigurationException: Target 'ComFileLog' not found for logging rule: ComLog.
+2022-08-05 18:09:30.2041 Info Validating config: Targets=5, ConfigItems=146, FilePath=C:\Munka\workspaces\eLogHeavyTools\WhWebShopService\WhWebShop.Service\bin\Debug\net6.0\NLog.config
+2022-08-05 18:09:30.2041 Info Configuration initialized.
+2022-08-05 18:09:30.2041 Info NLog, Version=4.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 4.7.14.740. Product version: 4.7.14+7b0baf946c6c5541cbd0dc523d2e9e7a582209ba. GlobalAssemblyCache: False
+2022-08-05 18:10:20.5910 Info Auto loading assembly file: C:\Munka\workspaces\eLogHeavyTools\WhWebShopService\WhWebShop.Service\bin\Debug\net6.0\NLog.Extensions.Logging.dll
+2022-08-05 18:10:20.5935 Info Loading assembly file: C:\Munka\workspaces\eLogHeavyTools\WhWebShopService\WhWebShop.Service\bin\Debug\net6.0\NLog.Extensions.Logging.dll
+2022-08-05 18:10:20.5935 Info NLog.Extensions.Logging, Version=1.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 1.7.4.1610. Product version: 1.7.4+e2bffa9e949fb4760d75aca224e78631c063f087. GlobalAssemblyCache: False
+2022-08-05 18:10:20.5935 Info Auto loading assembly file: C:\Munka\workspaces\eLogHeavyTools\WhWebShopService\WhWebShop.Service\bin\Debug\net6.0\NLog.Extensions.Logging.dll succeeded!
+2022-08-05 18:10:20.5935 Info Auto loading assembly file: C:\Munka\workspaces\eLogHeavyTools\WhWebShopService\WhWebShop.Service\bin\Debug\net6.0\NLog.Web.AspNetCore.dll
+2022-08-05 18:10:20.5935 Info Loading assembly file: C:\Munka\workspaces\eLogHeavyTools\WhWebShopService\WhWebShop.Service\bin\Debug\net6.0\NLog.Web.AspNetCore.dll
+2022-08-05 18:10:20.6062 Info NLog.Web.AspNetCore, Version=4.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 4.14.0.2042. Product version: 4.14.0+18bbcdbd5bd13b4565c32d72e09502b7ca6c71d4. GlobalAssemblyCache: False
+2022-08-05 18:10:20.6062 Info Auto loading assembly file: C:\Munka\workspaces\eLogHeavyTools\WhWebShopService\WhWebShop.Service\bin\Debug\net6.0\NLog.Web.AspNetCore.dll succeeded!
+2022-08-05 18:10:20.6062 Info Message Template Auto Format enabled
+2022-08-05 18:10:20.6062 Info Loading assembly: NLog.Web.AspNetCore
+2022-08-05 18:10:20.6062 Info Loading assembly: ERP4U.Log
+2022-08-05 18:10:20.6421 Info Adding target FileTarget(Name=allfile)
+2022-08-05 18:10:20.6421 Info Adding target FileTarget(Name=file-fatal)
+2022-08-05 18:10:20.6421 Info Adding target FileTarget(Name=file-warn)
+2022-08-05 18:10:20.6421 Info Adding target FileTarget(Name=file-trace)
+2022-08-05 18:10:20.6421 Info Adding target FileTarget(Name=allms)
+2022-08-05 18:10:20.6421 Warn Error has been raised. Exception: NLog.NLogConfigurationException: Failed to create target type: AuditLogFileTarget
+ ---> System.ArgumentException: Target cannot be found: 'AuditLogFileTarget'
+   at NLog.Config.Factory`2.CreateInstance(String itemName)
+   at NLog.Config.LoggingConfigurationParser.CreateTargetType(String targetTypeName)
+   --- End of inner exception stack trace ---
+2022-08-05 18:10:20.6586 Warn Error has been raised. Exception: NLog.NLogConfigurationException: Failed to create target type: ComLogFileTarget
+ ---> System.ArgumentException: Target cannot be found: 'ComLogFileTarget'
+   at NLog.Config.Factory`2.CreateInstance(String itemName)
+   at NLog.Config.LoggingConfigurationParser.CreateTargetType(String targetTypeName)
+   --- End of inner exception stack trace ---
+2022-08-05 18:10:20.6586 Warn Error has been raised. Exception: NLog.NLogConfigurationException: Target 'AuditFileLog' not found for logging rule: AuditLog.
+2022-08-05 18:10:20.6586 Warn Error has been raised. Exception: NLog.NLogConfigurationException: Target 'ComFileLog' not found for logging rule: ComLog.
+2022-08-05 18:10:20.6747 Info Validating config: Targets=5, ConfigItems=146, FilePath=C:\Munka\workspaces\eLogHeavyTools\WhWebShopService\WhWebShop.Service\bin\Debug\net6.0\NLog.config
+2022-08-05 18:10:20.6852 Info Configuration initialized.
+2022-08-05 18:10:20.6852 Info NLog, Version=4.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 4.7.14.740. Product version: 4.7.14+7b0baf946c6c5541cbd0dc523d2e9e7a582209ba. GlobalAssemblyCache: False
+2022-08-05 18:17:36.3855 Info Auto loading assembly file: C:\Munka\workspaces\eLogHeavyTools\WhWebShopService\WhWebShop.Service\bin\Debug\net6.0\NLog.Extensions.Logging.dll
+2022-08-05 18:17:36.3880 Info Loading assembly file: C:\Munka\workspaces\eLogHeavyTools\WhWebShopService\WhWebShop.Service\bin\Debug\net6.0\NLog.Extensions.Logging.dll
+2022-08-05 18:17:36.3880 Info NLog.Extensions.Logging, Version=1.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 1.7.4.1610. Product version: 1.7.4+e2bffa9e949fb4760d75aca224e78631c063f087. GlobalAssemblyCache: False
+2022-08-05 18:17:36.3880 Info Auto loading assembly file: C:\Munka\workspaces\eLogHeavyTools\WhWebShopService\WhWebShop.Service\bin\Debug\net6.0\NLog.Extensions.Logging.dll succeeded!
+2022-08-05 18:17:36.3880 Info Auto loading assembly file: C:\Munka\workspaces\eLogHeavyTools\WhWebShopService\WhWebShop.Service\bin\Debug\net6.0\NLog.Web.AspNetCore.dll
+2022-08-05 18:17:36.3880 Info Loading assembly file: C:\Munka\workspaces\eLogHeavyTools\WhWebShopService\WhWebShop.Service\bin\Debug\net6.0\NLog.Web.AspNetCore.dll
+2022-08-05 18:17:36.3880 Info NLog.Web.AspNetCore, Version=4.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 4.14.0.2042. Product version: 4.14.0+18bbcdbd5bd13b4565c32d72e09502b7ca6c71d4. GlobalAssemblyCache: False
+2022-08-05 18:17:36.3880 Info Auto loading assembly file: C:\Munka\workspaces\eLogHeavyTools\WhWebShopService\WhWebShop.Service\bin\Debug\net6.0\NLog.Web.AspNetCore.dll succeeded!
+2022-08-05 18:17:36.3880 Info Message Template Auto Format enabled
+2022-08-05 18:17:36.4049 Info Loading assembly: NLog.Web.AspNetCore
+2022-08-05 18:17:36.4049 Info Loading assembly: ERP4U.Log
+2022-08-05 18:17:36.4326 Info Adding target FileTarget(Name=allfile)
+2022-08-05 18:17:36.4326 Info Adding target FileTarget(Name=file-fatal)
+2022-08-05 18:17:36.4326 Info Adding target FileTarget(Name=file-warn)
+2022-08-05 18:17:36.4326 Info Adding target FileTarget(Name=file-trace)
+2022-08-05 18:17:36.4326 Info Adding target FileTarget(Name=allms)
+2022-08-05 18:17:36.4349 Warn Error has been raised. Exception: NLog.NLogConfigurationException: Failed to create target type: AuditLogFileTarget
+ ---> System.ArgumentException: Target cannot be found: 'AuditLogFileTarget'
+   at NLog.Config.Factory`2.CreateInstance(String itemName)
+   at NLog.Config.LoggingConfigurationParser.CreateTargetType(String targetTypeName)
+   --- End of inner exception stack trace ---
+2022-08-05 18:17:36.4349 Warn Error has been raised. Exception: NLog.NLogConfigurationException: Failed to create target type: ComLogFileTarget
+ ---> System.ArgumentException: Target cannot be found: 'ComLogFileTarget'
+   at NLog.Config.Factory`2.CreateInstance(String itemName)
+   at NLog.Config.LoggingConfigurationParser.CreateTargetType(String targetTypeName)
+   --- End of inner exception stack trace ---
+2022-08-05 18:17:36.4526 Warn Error has been raised. Exception: NLog.NLogConfigurationException: Target 'AuditFileLog' not found for logging rule: AuditLog.
+2022-08-05 18:17:36.4526 Warn Error has been raised. Exception: NLog.NLogConfigurationException: Target 'ComFileLog' not found for logging rule: ComLog.
+2022-08-05 18:17:36.4526 Info Validating config: Targets=5, ConfigItems=146, FilePath=C:\Munka\workspaces\eLogHeavyTools\WhWebShopService\WhWebShop.Service\bin\Debug\net6.0\NLog.config
+2022-08-05 18:17:36.4750 Info Configuration initialized.
+2022-08-05 18:17:36.4750 Info NLog, Version=4.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 4.7.14.740. Product version: 4.7.14+7b0baf946c6c5541cbd0dc523d2e9e7a582209ba. GlobalAssemblyCache: False
+2022-08-05 18:18:14.6720 Info Auto loading assembly file: C:\Munka\workspaces\eLogHeavyTools\WhWebShopService\WhWebShop.Service\bin\Debug\net6.0\NLog.Extensions.Logging.dll
+2022-08-05 18:18:14.6720 Info Loading assembly file: C:\Munka\workspaces\eLogHeavyTools\WhWebShopService\WhWebShop.Service\bin\Debug\net6.0\NLog.Extensions.Logging.dll
+2022-08-05 18:18:14.6866 Info NLog.Extensions.Logging, Version=1.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 1.7.4.1610. Product version: 1.7.4+e2bffa9e949fb4760d75aca224e78631c063f087. GlobalAssemblyCache: False
+2022-08-05 18:18:14.6866 Info Auto loading assembly file: C:\Munka\workspaces\eLogHeavyTools\WhWebShopService\WhWebShop.Service\bin\Debug\net6.0\NLog.Extensions.Logging.dll succeeded!
+2022-08-05 18:18:14.6866 Info Auto loading assembly file: C:\Munka\workspaces\eLogHeavyTools\WhWebShopService\WhWebShop.Service\bin\Debug\net6.0\NLog.Web.AspNetCore.dll
+2022-08-05 18:18:14.6866 Info Loading assembly file: C:\Munka\workspaces\eLogHeavyTools\WhWebShopService\WhWebShop.Service\bin\Debug\net6.0\NLog.Web.AspNetCore.dll
+2022-08-05 18:18:14.6866 Info NLog.Web.AspNetCore, Version=4.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 4.14.0.2042. Product version: 4.14.0+18bbcdbd5bd13b4565c32d72e09502b7ca6c71d4. GlobalAssemblyCache: False
+2022-08-05 18:18:14.6866 Info Auto loading assembly file: C:\Munka\workspaces\eLogHeavyTools\WhWebShopService\WhWebShop.Service\bin\Debug\net6.0\NLog.Web.AspNetCore.dll succeeded!
+2022-08-05 18:18:14.6866 Info Message Template Auto Format enabled
+2022-08-05 18:18:14.6866 Info Loading assembly: NLog.Web.AspNetCore
+2022-08-05 18:18:14.6866 Info Loading assembly: ERP4U.Log
+2022-08-05 18:18:14.7272 Info Adding target FileTarget(Name=allfile)
+2022-08-05 18:18:14.7272 Info Adding target FileTarget(Name=file-fatal)
+2022-08-05 18:18:14.7272 Info Adding target FileTarget(Name=file-warn)
+2022-08-05 18:18:14.7272 Info Adding target FileTarget(Name=file-trace)
+2022-08-05 18:18:14.7272 Info Adding target FileTarget(Name=allms)
+2022-08-05 18:18:14.7272 Warn Error has been raised. Exception: NLog.NLogConfigurationException: Failed to create target type: AuditLogFileTarget
+ ---> System.ArgumentException: Target cannot be found: 'AuditLogFileTarget'
+   at NLog.Config.Factory`2.CreateInstance(String itemName)
+   at NLog.Config.LoggingConfigurationParser.CreateTargetType(String targetTypeName)
+   --- End of inner exception stack trace ---
+2022-08-05 18:18:14.7434 Warn Error has been raised. Exception: NLog.NLogConfigurationException: Failed to create target type: ComLogFileTarget
+ ---> System.ArgumentException: Target cannot be found: 'ComLogFileTarget'
+   at NLog.Config.Factory`2.CreateInstance(String itemName)
+   at NLog.Config.LoggingConfigurationParser.CreateTargetType(String targetTypeName)
+   --- End of inner exception stack trace ---
+2022-08-05 18:18:14.7482 Warn Error has been raised. Exception: NLog.NLogConfigurationException: Target 'AuditFileLog' not found for logging rule: AuditLog.
+2022-08-05 18:18:14.7482 Warn Error has been raised. Exception: NLog.NLogConfigurationException: Target 'ComFileLog' not found for logging rule: ComLog.
+2022-08-05 18:18:14.7482 Info Validating config: Targets=5, ConfigItems=146, FilePath=C:\Munka\workspaces\eLogHeavyTools\WhWebShopService\WhWebShop.Service\bin\Debug\net6.0\NLog.config
+2022-08-05 18:18:14.7719 Info Configuration initialized.
+2022-08-05 18:18:14.7719 Info NLog, Version=4.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 4.7.14.740. Product version: 4.7.14+7b0baf946c6c5541cbd0dc523d2e9e7a582209ba. GlobalAssemblyCache: False
+2022-08-05 18:20:35.5384 Info Auto loading assembly file: C:\Munka\workspaces\eLogHeavyTools\WhWebShopService\WhWebShop.Service\bin\Debug\net6.0\NLog.Extensions.Logging.dll
+2022-08-05 18:20:35.5384 Info Loading assembly file: C:\Munka\workspaces\eLogHeavyTools\WhWebShopService\WhWebShop.Service\bin\Debug\net6.0\NLog.Extensions.Logging.dll
+2022-08-05 18:20:35.5514 Info NLog.Extensions.Logging, Version=1.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 1.7.4.1610. Product version: 1.7.4+e2bffa9e949fb4760d75aca224e78631c063f087. GlobalAssemblyCache: False
+2022-08-05 18:20:35.5514 Info Auto loading assembly file: C:\Munka\workspaces\eLogHeavyTools\WhWebShopService\WhWebShop.Service\bin\Debug\net6.0\NLog.Extensions.Logging.dll succeeded!
+2022-08-05 18:20:35.5514 Info Auto loading assembly file: C:\Munka\workspaces\eLogHeavyTools\WhWebShopService\WhWebShop.Service\bin\Debug\net6.0\NLog.Web.AspNetCore.dll
+2022-08-05 18:20:35.5514 Info Loading assembly file: C:\Munka\workspaces\eLogHeavyTools\WhWebShopService\WhWebShop.Service\bin\Debug\net6.0\NLog.Web.AspNetCore.dll
+2022-08-05 18:20:35.5514 Info NLog.Web.AspNetCore, Version=4.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 4.14.0.2042. Product version: 4.14.0+18bbcdbd5bd13b4565c32d72e09502b7ca6c71d4. GlobalAssemblyCache: False
+2022-08-05 18:20:35.5514 Info Auto loading assembly file: C:\Munka\workspaces\eLogHeavyTools\WhWebShopService\WhWebShop.Service\bin\Debug\net6.0\NLog.Web.AspNetCore.dll succeeded!
+2022-08-05 18:20:35.5514 Info Message Template Auto Format enabled
+2022-08-05 18:20:35.5610 Info Loading assembly: NLog.Web.AspNetCore
+2022-08-05 18:20:35.5610 Info Loading assembly: ERP4U.Log
+2022-08-05 18:20:35.5935 Info Adding target FileTarget(Name=allfile)
+2022-08-05 18:20:35.5935 Info Adding target FileTarget(Name=file-fatal)
+2022-08-05 18:20:35.5935 Info Adding target FileTarget(Name=file-warn)
+2022-08-05 18:20:35.5935 Info Adding target FileTarget(Name=file-trace)
+2022-08-05 18:20:35.5935 Info Adding target FileTarget(Name=allms)
+2022-08-05 18:20:35.5935 Warn Error has been raised. Exception: NLog.NLogConfigurationException: Failed to create target type: AuditLogFileTarget
+ ---> System.ArgumentException: Target cannot be found: 'AuditLogFileTarget'
+   at NLog.Config.Factory`2.CreateInstance(String itemName)
+   at NLog.Config.LoggingConfigurationParser.CreateTargetType(String targetTypeName)
+   --- End of inner exception stack trace ---
+2022-08-05 18:20:35.6131 Warn Error has been raised. Exception: NLog.NLogConfigurationException: Failed to create target type: ComLogFileTarget
+ ---> System.ArgumentException: Target cannot be found: 'ComLogFileTarget'
+   at NLog.Config.Factory`2.CreateInstance(String itemName)
+   at NLog.Config.LoggingConfigurationParser.CreateTargetType(String targetTypeName)
+   --- End of inner exception stack trace ---
+2022-08-05 18:20:35.6131 Warn Error has been raised. Exception: NLog.NLogConfigurationException: Target 'AuditFileLog' not found for logging rule: AuditLog.
+2022-08-05 18:20:35.6131 Warn Error has been raised. Exception: NLog.NLogConfigurationException: Target 'ComFileLog' not found for logging rule: ComLog.
+2022-08-05 18:20:35.6316 Info Validating config: Targets=5, ConfigItems=146, FilePath=C:\Munka\workspaces\eLogHeavyTools\WhWebShopService\WhWebShop.Service\bin\Debug\net6.0\NLog.config
+2022-08-05 18:20:35.6436 Info Configuration initialized.
+2022-08-05 18:20:35.6436 Info NLog, Version=4.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 4.7.14.740. Product version: 4.7.14+7b0baf946c6c5541cbd0dc523d2e9e7a582209ba. GlobalAssemblyCache: False
+2022-08-08 09:36:07.1070 Info Auto loading assembly file: C:\Munka\workspaces\eLogHeavyTools\WhWebShopService\WhWebShop.Service\bin\Debug\net6.0\NLog.Extensions.Logging.dll
+2022-08-08 09:36:07.1097 Info Loading assembly file: C:\Munka\workspaces\eLogHeavyTools\WhWebShopService\WhWebShop.Service\bin\Debug\net6.0\NLog.Extensions.Logging.dll
+2022-08-08 09:36:07.1097 Info NLog.Extensions.Logging, Version=1.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 1.7.4.1610. Product version: 1.7.4+e2bffa9e949fb4760d75aca224e78631c063f087. GlobalAssemblyCache: False
+2022-08-08 09:36:07.1097 Info Auto loading assembly file: C:\Munka\workspaces\eLogHeavyTools\WhWebShopService\WhWebShop.Service\bin\Debug\net6.0\NLog.Extensions.Logging.dll succeeded!
+2022-08-08 09:36:07.1097 Info Auto loading assembly file: C:\Munka\workspaces\eLogHeavyTools\WhWebShopService\WhWebShop.Service\bin\Debug\net6.0\NLog.Web.AspNetCore.dll
+2022-08-08 09:36:07.1097 Info Loading assembly file: C:\Munka\workspaces\eLogHeavyTools\WhWebShopService\WhWebShop.Service\bin\Debug\net6.0\NLog.Web.AspNetCore.dll
+2022-08-08 09:36:07.1263 Info NLog.Web.AspNetCore, Version=4.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 4.14.0.2042. Product version: 4.14.0+18bbcdbd5bd13b4565c32d72e09502b7ca6c71d4. GlobalAssemblyCache: False
+2022-08-08 09:36:07.1263 Info Auto loading assembly file: C:\Munka\workspaces\eLogHeavyTools\WhWebShopService\WhWebShop.Service\bin\Debug\net6.0\NLog.Web.AspNetCore.dll succeeded!
+2022-08-08 09:36:07.1263 Info Message Template Auto Format enabled
+2022-08-08 09:36:07.1263 Info Loading assembly: NLog.Web.AspNetCore
+2022-08-08 09:36:07.1263 Info Loading assembly: ERP4U.Log
+2022-08-08 09:36:07.1608 Info Adding target FileTarget(Name=allfile)
+2022-08-08 09:36:07.1608 Info Adding target FileTarget(Name=file-fatal)
+2022-08-08 09:36:07.1608 Info Adding target FileTarget(Name=file-warn)
+2022-08-08 09:36:07.1608 Info Adding target FileTarget(Name=file-trace)
+2022-08-08 09:36:07.1608 Info Adding target FileTarget(Name=allms)
+2022-08-08 09:36:07.1608 Warn Error has been raised. Exception: NLog.NLogConfigurationException: Failed to create target type: AuditLogFileTarget
+ ---> System.ArgumentException: Target cannot be found: 'AuditLogFileTarget'
+   at NLog.Config.Factory`2.CreateInstance(String itemName)
+   at NLog.Config.LoggingConfigurationParser.CreateTargetType(String targetTypeName)
+   --- End of inner exception stack trace ---
+2022-08-08 09:36:07.1781 Warn Error has been raised. Exception: NLog.NLogConfigurationException: Failed to create target type: ComLogFileTarget
+ ---> System.ArgumentException: Target cannot be found: 'ComLogFileTarget'
+   at NLog.Config.Factory`2.CreateInstance(String itemName)
+   at NLog.Config.LoggingConfigurationParser.CreateTargetType(String targetTypeName)
+   --- End of inner exception stack trace ---
+2022-08-08 09:36:07.1781 Warn Error has been raised. Exception: NLog.NLogConfigurationException: Target 'AuditFileLog' not found for logging rule: AuditLog.
+2022-08-08 09:36:07.1781 Warn Error has been raised. Exception: NLog.NLogConfigurationException: Target 'ComFileLog' not found for logging rule: ComLog.
+2022-08-08 09:36:07.1958 Info Validating config: Targets=5, ConfigItems=146, FilePath=C:\Munka\workspaces\eLogHeavyTools\WhWebShopService\WhWebShop.Service\bin\Debug\net6.0\NLog.config
+2022-08-08 09:36:07.2060 Info Configuration initialized.
+2022-08-08 09:36:07.2060 Info NLog, Version=4.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 4.7.14.740. Product version: 4.7.14+7b0baf946c6c5541cbd0dc523d2e9e7a582209ba. GlobalAssemblyCache: False
+2022-08-08 09:51:06.7804 Info Auto loading assembly file: C:\Munka\workspaces\eLogHeavyTools\WhWebShopService\WhWebShop.Service\bin\Debug\net6.0\NLog.Extensions.Logging.dll
+2022-08-08 09:51:06.7804 Info Loading assembly file: C:\Munka\workspaces\eLogHeavyTools\WhWebShopService\WhWebShop.Service\bin\Debug\net6.0\NLog.Extensions.Logging.dll
+2022-08-08 09:51:06.7804 Info NLog.Extensions.Logging, Version=1.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 1.7.4.1610. Product version: 1.7.4+e2bffa9e949fb4760d75aca224e78631c063f087. GlobalAssemblyCache: False
+2022-08-08 09:51:06.7804 Info Auto loading assembly file: C:\Munka\workspaces\eLogHeavyTools\WhWebShopService\WhWebShop.Service\bin\Debug\net6.0\NLog.Extensions.Logging.dll succeeded!
+2022-08-08 09:51:06.7804 Info Auto loading assembly file: C:\Munka\workspaces\eLogHeavyTools\WhWebShopService\WhWebShop.Service\bin\Debug\net6.0\NLog.Web.AspNetCore.dll
+2022-08-08 09:51:06.7804 Info Loading assembly file: C:\Munka\workspaces\eLogHeavyTools\WhWebShopService\WhWebShop.Service\bin\Debug\net6.0\NLog.Web.AspNetCore.dll
+2022-08-08 09:51:06.7804 Info NLog.Web.AspNetCore, Version=4.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 4.14.0.2042. Product version: 4.14.0+18bbcdbd5bd13b4565c32d72e09502b7ca6c71d4. GlobalAssemblyCache: False
+2022-08-08 09:51:06.7954 Info Auto loading assembly file: C:\Munka\workspaces\eLogHeavyTools\WhWebShopService\WhWebShop.Service\bin\Debug\net6.0\NLog.Web.AspNetCore.dll succeeded!
+2022-08-08 09:51:06.7954 Info Message Template Auto Format enabled
+2022-08-08 09:51:06.7954 Info Loading assembly: NLog.Web.AspNetCore
+2022-08-08 09:51:06.7954 Info Loading assembly: ERP4U.Log
+2022-08-08 09:51:06.8251 Info Adding target FileTarget(Name=allfile)
+2022-08-08 09:51:06.8251 Info Adding target FileTarget(Name=file-fatal)
+2022-08-08 09:51:06.8261 Info Adding target FileTarget(Name=file-warn)
+2022-08-08 09:51:06.8261 Info Adding target FileTarget(Name=file-trace)
+2022-08-08 09:51:06.8261 Info Adding target FileTarget(Name=allms)
+2022-08-08 09:51:06.8261 Warn Error has been raised. Exception: NLog.NLogConfigurationException: Failed to create target type: AuditLogFileTarget
+ ---> System.ArgumentException: Target cannot be found: 'AuditLogFileTarget'
+   at NLog.Config.Factory`2.CreateInstance(String itemName)
+   at NLog.Config.LoggingConfigurationParser.CreateTargetType(String targetTypeName)
+   --- End of inner exception stack trace ---
+2022-08-08 09:51:06.8261 Warn Error has been raised. Exception: NLog.NLogConfigurationException: Failed to create target type: ComLogFileTarget
+ ---> System.ArgumentException: Target cannot be found: 'ComLogFileTarget'
+   at NLog.Config.Factory`2.CreateInstance(String itemName)
+   at NLog.Config.LoggingConfigurationParser.CreateTargetType(String targetTypeName)
+   --- End of inner exception stack trace ---
+2022-08-08 09:51:06.8448 Warn Error has been raised. Exception: NLog.NLogConfigurationException: Target 'AuditFileLog' not found for logging rule: AuditLog.
+2022-08-08 09:51:06.8448 Warn Error has been raised. Exception: NLog.NLogConfigurationException: Target 'ComFileLog' not found for logging rule: ComLog.
+2022-08-08 09:51:06.8448 Info Validating config: Targets=5, ConfigItems=146, FilePath=C:\Munka\workspaces\eLogHeavyTools\WhWebShopService\WhWebShop.Service\bin\Debug\net6.0\NLog.config
+2022-08-08 09:51:06.8680 Info Configuration initialized.
+2022-08-08 09:51:06.8680 Info NLog, Version=4.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 4.7.14.740. Product version: 4.7.14+7b0baf946c6c5541cbd0dc523d2e9e7a582209ba. GlobalAssemblyCache: False
+2022-08-08 09:52:12.3489 Info Auto loading assembly file: C:\Munka\workspaces\eLogHeavyTools\WhWebShopService\WhWebShop.Service\bin\Debug\net6.0\NLog.Extensions.Logging.dll
+2022-08-08 09:52:12.3489 Info Loading assembly file: C:\Munka\workspaces\eLogHeavyTools\WhWebShopService\WhWebShop.Service\bin\Debug\net6.0\NLog.Extensions.Logging.dll
+2022-08-08 09:52:12.3618 Info NLog.Extensions.Logging, Version=1.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 1.7.4.1610. Product version: 1.7.4+e2bffa9e949fb4760d75aca224e78631c063f087. GlobalAssemblyCache: False
+2022-08-08 09:52:12.3618 Info Auto loading assembly file: C:\Munka\workspaces\eLogHeavyTools\WhWebShopService\WhWebShop.Service\bin\Debug\net6.0\NLog.Extensions.Logging.dll succeeded!
+2022-08-08 09:52:12.3618 Info Auto loading assembly file: C:\Munka\workspaces\eLogHeavyTools\WhWebShopService\WhWebShop.Service\bin\Debug\net6.0\NLog.Web.AspNetCore.dll
+2022-08-08 09:52:12.3618 Info Loading assembly file: C:\Munka\workspaces\eLogHeavyTools\WhWebShopService\WhWebShop.Service\bin\Debug\net6.0\NLog.Web.AspNetCore.dll
+2022-08-08 09:52:12.3618 Info NLog.Web.AspNetCore, Version=4.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 4.14.0.2042. Product version: 4.14.0+18bbcdbd5bd13b4565c32d72e09502b7ca6c71d4. GlobalAssemblyCache: False
+2022-08-08 09:52:12.3618 Info Auto loading assembly file: C:\Munka\workspaces\eLogHeavyTools\WhWebShopService\WhWebShop.Service\bin\Debug\net6.0\NLog.Web.AspNetCore.dll succeeded!
+2022-08-08 09:52:12.3618 Info Message Template Auto Format enabled
+2022-08-08 09:52:12.3618 Info Loading assembly: NLog.Web.AspNetCore
+2022-08-08 09:52:12.3618 Info Loading assembly: ERP4U.Log
+2022-08-08 09:52:12.3992 Info Adding target FileTarget(Name=allfile)
+2022-08-08 09:52:12.3992 Info Adding target FileTarget(Name=file-fatal)
+2022-08-08 09:52:12.3992 Info Adding target FileTarget(Name=file-warn)
+2022-08-08 09:52:12.3992 Info Adding target FileTarget(Name=file-trace)
+2022-08-08 09:52:12.3992 Info Adding target FileTarget(Name=allms)
+2022-08-08 09:52:12.3992 Warn Error has been raised. Exception: NLog.NLogConfigurationException: Failed to create target type: AuditLogFileTarget
+ ---> System.ArgumentException: Target cannot be found: 'AuditLogFileTarget'
+   at NLog.Config.Factory`2.CreateInstance(String itemName)
+   at NLog.Config.LoggingConfigurationParser.CreateTargetType(String targetTypeName)
+   --- End of inner exception stack trace ---
+2022-08-08 09:52:12.4151 Warn Error has been raised. Exception: NLog.NLogConfigurationException: Failed to create target type: ComLogFileTarget
+ ---> System.ArgumentException: Target cannot be found: 'ComLogFileTarget'
+   at NLog.Config.Factory`2.CreateInstance(String itemName)
+   at NLog.Config.LoggingConfigurationParser.CreateTargetType(String targetTypeName)
+   --- End of inner exception stack trace ---
+2022-08-08 09:52:12.4151 Warn Error has been raised. Exception: NLog.NLogConfigurationException: Target 'AuditFileLog' not found for logging rule: AuditLog.
+2022-08-08 09:52:12.4209 Warn Error has been raised. Exception: NLog.NLogConfigurationException: Target 'ComFileLog' not found for logging rule: ComLog.
+2022-08-08 09:52:12.4209 Info Validating config: Targets=5, ConfigItems=146, FilePath=C:\Munka\workspaces\eLogHeavyTools\WhWebShopService\WhWebShop.Service\bin\Debug\net6.0\NLog.config
+2022-08-08 09:52:12.4423 Info Configuration initialized.
+2022-08-08 09:52:12.4423 Info NLog, Version=4.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 4.7.14.740. Product version: 4.7.14+7b0baf946c6c5541cbd0dc523d2e9e7a582209ba. GlobalAssemblyCache: False
+2022-08-08 09:53:14.3448 Info Auto loading assembly file: C:\Munka\workspaces\eLogHeavyTools\WhWebShopService\WhWebShop.Service\bin\Debug\net6.0\NLog.Extensions.Logging.dll
+2022-08-08 09:53:14.3448 Info Loading assembly file: C:\Munka\workspaces\eLogHeavyTools\WhWebShopService\WhWebShop.Service\bin\Debug\net6.0\NLog.Extensions.Logging.dll
+2022-08-08 09:53:14.3448 Info NLog.Extensions.Logging, Version=1.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 1.7.4.1610. Product version: 1.7.4+e2bffa9e949fb4760d75aca224e78631c063f087. GlobalAssemblyCache: False
+2022-08-08 09:53:14.3448 Info Auto loading assembly file: C:\Munka\workspaces\eLogHeavyTools\WhWebShopService\WhWebShop.Service\bin\Debug\net6.0\NLog.Extensions.Logging.dll succeeded!
+2022-08-08 09:53:14.3448 Info Auto loading assembly file: C:\Munka\workspaces\eLogHeavyTools\WhWebShopService\WhWebShop.Service\bin\Debug\net6.0\NLog.Web.AspNetCore.dll
+2022-08-08 09:53:14.3448 Info Loading assembly file: C:\Munka\workspaces\eLogHeavyTools\WhWebShopService\WhWebShop.Service\bin\Debug\net6.0\NLog.Web.AspNetCore.dll
+2022-08-08 09:53:14.3596 Info NLog.Web.AspNetCore, Version=4.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 4.14.0.2042. Product version: 4.14.0+18bbcdbd5bd13b4565c32d72e09502b7ca6c71d4. GlobalAssemblyCache: False
+2022-08-08 09:53:14.3596 Info Auto loading assembly file: C:\Munka\workspaces\eLogHeavyTools\WhWebShopService\WhWebShop.Service\bin\Debug\net6.0\NLog.Web.AspNetCore.dll succeeded!
+2022-08-08 09:53:14.3596 Info Message Template Auto Format enabled
+2022-08-08 09:53:14.3596 Info Loading assembly: NLog.Web.AspNetCore
+2022-08-08 09:53:14.3596 Info Loading assembly: ERP4U.Log
+2022-08-08 09:53:14.3914 Info Adding target FileTarget(Name=allfile)
+2022-08-08 09:53:14.3914 Info Adding target FileTarget(Name=file-fatal)
+2022-08-08 09:53:14.3914 Info Adding target FileTarget(Name=file-warn)
+2022-08-08 09:53:14.3914 Info Adding target FileTarget(Name=file-trace)
+2022-08-08 09:53:14.3914 Info Adding target FileTarget(Name=allms)
+2022-08-08 09:53:14.3914 Warn Error has been raised. Exception: NLog.NLogConfigurationException: Failed to create target type: AuditLogFileTarget
+ ---> System.ArgumentException: Target cannot be found: 'AuditLogFileTarget'
+   at NLog.Config.Factory`2.CreateInstance(String itemName)
+   at NLog.Config.LoggingConfigurationParser.CreateTargetType(String targetTypeName)
+   --- End of inner exception stack trace ---
+2022-08-08 09:53:14.4064 Warn Error has been raised. Exception: NLog.NLogConfigurationException: Failed to create target type: ComLogFileTarget
+ ---> System.ArgumentException: Target cannot be found: 'ComLogFileTarget'
+   at NLog.Config.Factory`2.CreateInstance(String itemName)
+   at NLog.Config.LoggingConfigurationParser.CreateTargetType(String targetTypeName)
+   --- End of inner exception stack trace ---
+2022-08-08 09:53:14.4064 Warn Error has been raised. Exception: NLog.NLogConfigurationException: Target 'AuditFileLog' not found for logging rule: AuditLog.
+2022-08-08 09:53:14.4064 Warn Error has been raised. Exception: NLog.NLogConfigurationException: Target 'ComFileLog' not found for logging rule: ComLog.
+2022-08-08 09:53:14.4223 Info Validating config: Targets=5, ConfigItems=146, FilePath=C:\Munka\workspaces\eLogHeavyTools\WhWebShopService\WhWebShop.Service\bin\Debug\net6.0\NLog.config
+2022-08-08 09:53:14.4223 Info Configuration initialized.
+2022-08-08 09:53:14.4223 Info NLog, Version=4.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 4.7.14.740. Product version: 4.7.14+7b0baf946c6c5541cbd0dc523d2e9e7a582209ba. GlobalAssemblyCache: False
+2022-08-08 10:03:18.1301 Info Auto loading assembly file: C:\Munka\workspaces\eLogHeavyTools\WhWebShopService\WhWebShop.Service\bin\Debug\net6.0\NLog.Extensions.Logging.dll
+2022-08-08 10:03:18.1301 Info Loading assembly file: C:\Munka\workspaces\eLogHeavyTools\WhWebShopService\WhWebShop.Service\bin\Debug\net6.0\NLog.Extensions.Logging.dll
+2022-08-08 10:03:18.1406 Info NLog.Extensions.Logging, Version=1.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 1.7.4.1610. Product version: 1.7.4+e2bffa9e949fb4760d75aca224e78631c063f087. GlobalAssemblyCache: False
+2022-08-08 10:03:18.1406 Info Auto loading assembly file: C:\Munka\workspaces\eLogHeavyTools\WhWebShopService\WhWebShop.Service\bin\Debug\net6.0\NLog.Extensions.Logging.dll succeeded!
+2022-08-08 10:03:18.1406 Info Auto loading assembly file: C:\Munka\workspaces\eLogHeavyTools\WhWebShopService\WhWebShop.Service\bin\Debug\net6.0\NLog.Web.AspNetCore.dll
+2022-08-08 10:03:18.1406 Info Loading assembly file: C:\Munka\workspaces\eLogHeavyTools\WhWebShopService\WhWebShop.Service\bin\Debug\net6.0\NLog.Web.AspNetCore.dll
+2022-08-08 10:03:18.1406 Info NLog.Web.AspNetCore, Version=4.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 4.14.0.2042. Product version: 4.14.0+18bbcdbd5bd13b4565c32d72e09502b7ca6c71d4. GlobalAssemblyCache: False
+2022-08-08 10:03:18.1406 Info Auto loading assembly file: C:\Munka\workspaces\eLogHeavyTools\WhWebShopService\WhWebShop.Service\bin\Debug\net6.0\NLog.Web.AspNetCore.dll succeeded!
+2022-08-08 10:03:18.1406 Info Message Template Auto Format enabled
+2022-08-08 10:03:18.1406 Info Loading assembly: NLog.Web.AspNetCore
+2022-08-08 10:03:18.1406 Info Loading assembly: ERP4U.Log
+2022-08-08 10:03:18.1795 Info Adding target FileTarget(Name=allfile)
+2022-08-08 10:03:18.1795 Info Adding target FileTarget(Name=file-fatal)
+2022-08-08 10:03:18.1795 Info Adding target FileTarget(Name=file-warn)
+2022-08-08 10:03:18.1795 Info Adding target FileTarget(Name=file-trace)
+2022-08-08 10:03:18.1795 Info Adding target FileTarget(Name=allms)
+2022-08-08 10:03:18.1795 Warn Error has been raised. Exception: NLog.NLogConfigurationException: Failed to create target type: AuditLogFileTarget
+ ---> System.ArgumentException: Target cannot be found: 'AuditLogFileTarget'
+   at NLog.Config.Factory`2.CreateInstance(String itemName)
+   at NLog.Config.LoggingConfigurationParser.CreateTargetType(String targetTypeName)
+   --- End of inner exception stack trace ---
+2022-08-08 10:03:18.1951 Warn Error has been raised. Exception: NLog.NLogConfigurationException: Failed to create target type: ComLogFileTarget
+ ---> System.ArgumentException: Target cannot be found: 'ComLogFileTarget'
+   at NLog.Config.Factory`2.CreateInstance(String itemName)
+   at NLog.Config.LoggingConfigurationParser.CreateTargetType(String targetTypeName)
+   --- End of inner exception stack trace ---
+2022-08-08 10:03:18.1951 Warn Error has been raised. Exception: NLog.NLogConfigurationException: Target 'AuditFileLog' not found for logging rule: AuditLog.
+2022-08-08 10:03:18.1951 Warn Error has been raised. Exception: NLog.NLogConfigurationException: Target 'ComFileLog' not found for logging rule: ComLog.
+2022-08-08 10:03:18.2123 Info Validating config: Targets=5, ConfigItems=146, FilePath=C:\Munka\workspaces\eLogHeavyTools\WhWebShopService\WhWebShop.Service\bin\Debug\net6.0\NLog.config
+2022-08-08 10:03:18.2230 Info Configuration initialized.
+2022-08-08 10:03:18.2230 Info NLog, Version=4.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 4.7.14.740. Product version: 4.7.14+7b0baf946c6c5541cbd0dc523d2e9e7a582209ba. GlobalAssemblyCache: False
+2022-08-08 10:03:52.9845 Info Auto loading assembly file: C:\Munka\workspaces\eLogHeavyTools\WhWebShopService\WhWebShop.Service\bin\Debug\net6.0\NLog.Extensions.Logging.dll
+2022-08-08 10:03:52.9845 Info Loading assembly file: C:\Munka\workspaces\eLogHeavyTools\WhWebShopService\WhWebShop.Service\bin\Debug\net6.0\NLog.Extensions.Logging.dll
+2022-08-08 10:03:52.9845 Info NLog.Extensions.Logging, Version=1.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 1.7.4.1610. Product version: 1.7.4+e2bffa9e949fb4760d75aca224e78631c063f087. GlobalAssemblyCache: False
+2022-08-08 10:03:52.9845 Info Auto loading assembly file: C:\Munka\workspaces\eLogHeavyTools\WhWebShopService\WhWebShop.Service\bin\Debug\net6.0\NLog.Extensions.Logging.dll succeeded!
+2022-08-08 10:03:52.9845 Info Auto loading assembly file: C:\Munka\workspaces\eLogHeavyTools\WhWebShopService\WhWebShop.Service\bin\Debug\net6.0\NLog.Web.AspNetCore.dll
+2022-08-08 10:03:52.9845 Info Loading assembly file: C:\Munka\workspaces\eLogHeavyTools\WhWebShopService\WhWebShop.Service\bin\Debug\net6.0\NLog.Web.AspNetCore.dll
+2022-08-08 10:03:53.0010 Info NLog.Web.AspNetCore, Version=4.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 4.14.0.2042. Product version: 4.14.0+18bbcdbd5bd13b4565c32d72e09502b7ca6c71d4. GlobalAssemblyCache: False
+2022-08-08 10:03:53.0010 Info Auto loading assembly file: C:\Munka\workspaces\eLogHeavyTools\WhWebShopService\WhWebShop.Service\bin\Debug\net6.0\NLog.Web.AspNetCore.dll succeeded!
+2022-08-08 10:03:53.0010 Info Message Template Auto Format enabled
+2022-08-08 10:03:53.0010 Info Loading assembly: NLog.Web.AspNetCore
+2022-08-08 10:03:53.0010 Info Loading assembly: ERP4U.Log
+2022-08-08 10:03:53.0339 Info Adding target FileTarget(Name=allfile)
+2022-08-08 10:03:53.0339 Info Adding target FileTarget(Name=file-fatal)
+2022-08-08 10:03:53.0339 Info Adding target FileTarget(Name=file-warn)
+2022-08-08 10:03:53.0339 Info Adding target FileTarget(Name=file-trace)
+2022-08-08 10:03:53.0339 Info Adding target FileTarget(Name=allms)
+2022-08-08 10:03:53.0339 Warn Error has been raised. Exception: NLog.NLogConfigurationException: Failed to create target type: AuditLogFileTarget
+ ---> System.ArgumentException: Target cannot be found: 'AuditLogFileTarget'
+   at NLog.Config.Factory`2.CreateInstance(String itemName)
+   at NLog.Config.LoggingConfigurationParser.CreateTargetType(String targetTypeName)
+   --- End of inner exception stack trace ---
+2022-08-08 10:03:53.0482 Warn Error has been raised. Exception: NLog.NLogConfigurationException: Failed to create target type: ComLogFileTarget
+ ---> System.ArgumentException: Target cannot be found: 'ComLogFileTarget'
+   at NLog.Config.Factory`2.CreateInstance(String itemName)
+   at NLog.Config.LoggingConfigurationParser.CreateTargetType(String targetTypeName)
+   --- End of inner exception stack trace ---
+2022-08-08 10:03:53.0482 Warn Error has been raised. Exception: NLog.NLogConfigurationException: Target 'AuditFileLog' not found for logging rule: AuditLog.
+2022-08-08 10:03:53.0482 Warn Error has been raised. Exception: NLog.NLogConfigurationException: Target 'ComFileLog' not found for logging rule: ComLog.
+2022-08-08 10:03:53.0645 Info Validating config: Targets=5, ConfigItems=146, FilePath=C:\Munka\workspaces\eLogHeavyTools\WhWebShopService\WhWebShop.Service\bin\Debug\net6.0\NLog.config
+2022-08-08 10:03:53.0645 Info Configuration initialized.
+2022-08-08 10:03:53.0645 Info NLog, Version=4.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 4.7.14.740. Product version: 4.7.14+7b0baf946c6c5541cbd0dc523d2e9e7a582209ba. GlobalAssemblyCache: False

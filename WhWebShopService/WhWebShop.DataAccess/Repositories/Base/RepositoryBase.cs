@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using eLog.HeavyTools.Services.WhWebShop.BusinessEntities.Model.Interfaces;
 using eLog.HeavyTools.Services.WhWebShop.DataAccess.Context;
 using eLog.HeavyTools.Services.WhWebShop.DataAccess.Repositories.Interfaces;
+using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
 using Microsoft.EntityFrameworkCore.Metadata;
@@ -23,7 +25,7 @@ public class RepositoryBase<TEntity> : IRepository<TEntity> where TEntity : clas
     /// Get the database context
     /// </summary>
     private readonly WhWebShopDbContext dbContext;
-
+     
     /// <summary>
     /// Gets the database set
     /// </summary>
@@ -45,6 +47,8 @@ public class RepositoryBase<TEntity> : IRepository<TEntity> where TEntity : clas
         this.dbSet = this.dbContext.Set<TEntity>();
         this.Entities = this.dbSet.AsQueryable();
     }
+
+
 
     /// <summary>
     ///     Finds an entity with the given primary key values. If an entity with the given primary key values
@@ -350,4 +354,25 @@ public class RepositoryBase<TEntity> : IRepository<TEntity> where TEntity : clas
     public virtual IQueryable<TQuery> ExecuteSql<TQuery>(FormattableString sql)
         where TQuery : class
         => this.dbContext.Set<TQuery>().FromSqlInterpolated(sql);
+
+    public IQueryable<TEntity>? FromSql(string sql)
+    {
+        return this.dbSet.FromSqlRaw(sql, new object[0]);
+    }
+
+    public Task ExecuteStoredProcedure(string name, Dictionary<string, object> parms)
+    {
+        var spl = new List<SqlParameter>();
+        foreach (var parameter in parms)
+        {
+            spl.Add(new SqlParameter(parameter.Key, parameter.Value));
+        }
+        
+        var sql = name + " " + String.Join(", ", spl.Select(x =>
+         $"@{x.ParameterName} = @{x.ParameterName}" +
+         (x.Direction == ParameterDirection.Output ? " OUT" : "")
+         ));
+        return dbContext.Database.ExecuteSqlRawAsync(sql, spl.ToArray());
+
+    }
 }

@@ -1,16 +1,20 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using eLog.HeavyTools.Services.WhWebShop.BusinessEntities.Model.Base;
 using Microsoft.EntityFrameworkCore;
-
+using eLog.HeavyTools.Services.WhWebShop.BusinessEntities.Model.Base;
 namespace eLog.HeavyTools.Services.WhWebShop.BusinessEntities.Model
 {
     [Table("ols_company")]
     [Index("Cmpcode", Name = "idx_ols_company_cmpcode", IsUnique = true)]
-    public partial class OlsCompany : BusinessMasterEntity
+    public partial class OlsCompany : Entity
     {
+        public OlsCompany()
+        {
+            OlsSordhead = new HashSet<OlsSordhead>();
+        }
+
         [Key]
         [Column("cmpid")]
         public int Cmpid { get; set; }
@@ -82,9 +86,22 @@ namespace eLog.HeavyTools.Services.WhWebShop.BusinessEntities.Model
         public string? Grp { get; set; }
         [Column("xmldata", TypeName = "xml")]
         public string? Xmldata { get; set; }
+        [Column("addusrid")]
+        [StringLength(12)]
+        [Unicode(false)]
+        public string Addusrid { get; set; } = null!;
+        [Column("adddate", TypeName = "datetime")]
+        public DateTime Adddate { get; set; }
+        [Column("delstat")]
+        public int Delstat { get; set; }
 
         [ForeignKey("Addusrid")]
-        [InverseProperty("OlsCompanies")]
-        public override CfwUser Addusr { get; set; } = null!;
+        [InverseProperty("OlsCompany")]
+        public virtual CfwUser Addusr { get; set; } = null!;
+        [ForeignKey("Partnid")]
+        [InverseProperty("OlsCompany")]
+        public virtual OlsPartner Partn { get; set; } = null!;
+        [InverseProperty("Cmp")]
+        public virtual ICollection<OlsSordhead> OlsSordhead { get; set; }
     }
 }

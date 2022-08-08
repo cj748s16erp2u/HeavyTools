@@ -1,10 +1,9 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using eLog.HeavyTools.Services.WhWebShop.BusinessEntities.Model.Base;
 using Microsoft.EntityFrameworkCore;
-
+using eLog.HeavyTools.Services.WhWebShop.BusinessEntities.Model.Base;
 namespace eLog.HeavyTools.Services.WhWebShop.BusinessEntities.Model
 {
     [Table("cfw_group")]
@@ -12,7 +11,7 @@ namespace eLog.HeavyTools.Services.WhWebShop.BusinessEntities.Model
     {
         public CfwGroup()
         {
-            CfwUsergroups = new HashSet<CfwUsergroup>();
+            CfwUsergroup = new HashSet<CfwUsergroup>();
         }
 
         [Key]
@@ -38,6 +37,6 @@ namespace eLog.HeavyTools.Services.WhWebShop.BusinessEntities.Model
         public string Cs { get; set; } = null!;
 
         [InverseProperty("Grp")]
-        public virtual ICollection<CfwUsergroup> CfwUsergroups { get; set; }
+        public virtual ICollection<CfwUsergroup> CfwUsergroup { get; set; }
     }
 }

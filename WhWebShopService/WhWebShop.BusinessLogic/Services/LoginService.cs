@@ -35,8 +35,8 @@ internal class LoginService : ILoginService
         ValidateLoginParameters(userID, password);
 
         var user = await this.userRepository.Entities
-            .Include(e => e.CfwUsergroups)
-            .Select(u => new { u.Usrid, u.Options, u.Password, grpExists = u.CfwUsergroups.Any() })
+            .Include(e => e.CfwUsergroup)
+            .Select(u => new { u.Usrid, u.Options, u.Password, grpExists = u.CfwUsergroup.Any() })
             .FirstOrDefaultAsync(u => u.Usrid == userID!, cancellationToken);
         if (user is null)
         {
