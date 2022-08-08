@@ -61,8 +61,6 @@
         </LayoutTable>
 		
 		<LayoutTable ControlGroup="WebShop" Columns="{120, None}; {120, None}; {20, Empty}; {120, None}; {120, None}; {20, Empty}; {120, None}; {120, None}" ID="WebShopEditGroup" Label="$webshop_editgroup" >
-			<GroupSeparator ID="webshop" />
-			<ForceNextRow/>
 			<Combo Field="wid" ColsToSpan="1" ListID="eLog.HeavyTools.Webshop.WebshopList" ComboFlags="None" Disabled="True" ColsToSpan="4"/>
 			<ForceNextRow/>
 			<Textbox Field="loyaltycardno" ColsToSpan="4" CustomData="olc" Disabled="True"/>
@@ -83,7 +81,7 @@
 			<Textbox Field="customeraddress" ColsToSpan="4" Disabled="True"/>
 			<ForceNextRow/>
 			<Textbox Field="couponcode" ColsToSpan="4" Disabled="True"/>
-        </LayoutTable>
+        </LayoutTable>		
 		
         <LayoutTable ControlGroup="SordLine" Columns="{120, None}; {120, None}; {20, Empty}; {120, None}; {120, None}; {20, Empty}; {120, None}; {120, None}" ID="EditGroup2" Label="$sordline_editgroup">
             <Selector Field="itemid" Label="$itemid_code" ValueField="itemid" TextField="itemcode" SelectionID="eLog.Base.Masters.Item.ItemSelectionProvider"/>
