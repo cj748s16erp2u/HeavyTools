@@ -48,3 +48,5 @@ $action_sordheadimport=Import
 $import_importresult_ok=OK
 $sordheadimport=vevoi_rendeles_import
 $error_import_item_not_found=Cikk nem található!
+
+$wid=Webshop

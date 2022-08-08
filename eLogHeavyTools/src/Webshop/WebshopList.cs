@@ -17,9 +17,7 @@ namespace eLog.HeavyTools.Webshop
 
         public WebshopList()
             : base(m_queryString, AllColumns)
-        {
-            DBConnID = CodaInt.Base.Module.CodaDBConnID;
-
+        { 
             ValueFieldName = "wid";
             TextFieldName = "name";
             ShowCodeFieldName = "wid";

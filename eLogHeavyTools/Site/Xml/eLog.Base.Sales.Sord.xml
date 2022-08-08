@@ -61,7 +61,7 @@
         </LayoutTable>
 		
 		<LayoutTable ControlGroup="WebShop" Columns="{120, None}; {120, None}; {20, Empty}; {120, None}; {120, None}; {20, Empty}; {120, None}; {120, None}" ID="WebShopEditGroup" Label="$webshop_editgroup" >
-			<Combo Field="wid" ColsToSpan="1" ListID="eLog.HeavyTools.Webshop.WebshopList" ComboFlags="None" Disabled="True" ColsToSpan="4"/>
+			<Combo Field="wid" ListID="eLog.HeavyTools.Webshop.WebshopList" ComboFlags="None" Disabled="True" ColsToSpan="4"/>
 			<ForceNextRow/>
 			<Textbox Field="loyaltycardno" ColsToSpan="4" CustomData="olc" Disabled="True"/>
 			<ForceNextRow/>
