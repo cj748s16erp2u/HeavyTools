@@ -1028,7 +1028,7 @@ namespace eLog.HeavyTools.BankTran
             }
 
             importCifData.interfaceId = interfaceId;
-            importCifData.fileId = interfaceId + "_" + DateTime.Now.ToString();
+            importCifData.fileId = interfaceId + "_" + DateTime.Now.ToString("yyyyMMdd") + "_" + importCifData.statementId.ToString();
             importCifData.extRef1 = parts[0].ToString().Length > 32 ? parts[0].ToString().Substring(0, 32) : parts[0].ToString();
             importCifData.origValue = decOrigValue;
             importCifData.origCur = parts[2].ToString().Length > 3 ? parts[2].ToString().Substring(0, 3) : parts[2].ToString();
@@ -1113,7 +1113,7 @@ namespace eLog.HeavyTools.BankTran
             }
 
             importCifData.interfaceId = interfaceId;
-            importCifData.fileId = interfaceId + "_" + DateTime.Now.ToString();
+            importCifData.fileId = interfaceId + "_" + DateTime.Now.ToString("yyyyMMdd") + "_" + importCifData.statementId.ToString();
             importCifData.extRef1 = parts[0].ToString().Length > 32 ? parts[0].ToString().Substring(0, 32) : parts[0].ToString();
             importCifData.extRef2 = parts[1].ToString().Length > 32 ? parts[1].ToString().Substring(0, 32) : parts[1].ToString();
             importCifData.origValue = decOrigValue;
@@ -1193,7 +1193,7 @@ namespace eLog.HeavyTools.BankTran
             }
 
             importCifData.interfaceId = interfaceId;
-            importCifData.fileId = interfaceId + "_" + DateTime.Now.ToString();
+            importCifData.fileId = interfaceId + "_" + DateTime.Now.ToString("yyyyMMdd") + "_" + importCifData.statementId.ToString();
             importCifData.extRef1 = parts[0].ToString().Length > 32 ? parts[0].ToString().Substring(0, 32) : parts[0].ToString();
             importCifData.origValue = decOrigValue;
             importCifData.origCur = parts[2].ToString().Length > 3 ? parts[2].ToString().Substring(0, 3) : parts[2].ToString();
@@ -1292,7 +1292,7 @@ namespace eLog.HeavyTools.BankTran
             }
 
             importCifData.interfaceId = interfaceId;
-            importCifData.fileId = interfaceId + "_" + DateTime.Now.ToString();
+            importCifData.fileId = interfaceId + "_" + DateTime.Now.ToString("yyyyMMdd") + "_" + importCifData.statementId.ToString();
             importCifData.extRef1 = parts[0].ToString().Length > 32 ? parts[0].ToString().Substring(0, 32) : parts[0].ToString();
             importCifData.valueAcc = decValueAcc;
             importCifData.origValue = decOrigValue;
@@ -1386,7 +1386,7 @@ namespace eLog.HeavyTools.BankTran
             }
 
             importCifData.interfaceId = interfaceId;
-            importCifData.fileId = interfaceId + "_" + DateTime.Now.ToString();
+            importCifData.fileId = interfaceId + "_" + DateTime.Now.ToString("yyyyMMdd") + "_" + importCifData.statementId.ToString();
             importCifData.extRef1 = parts[0].ToString().Length > 32 ? parts[0].ToString().Substring(0, 32) : parts[0].ToString();
             importCifData.valueAcc = decValueAcc;
             importCifData.origValue = decOrigValue;
