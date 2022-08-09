@@ -15,7 +15,8 @@
       <Item Name="TaxCode" />
       <Item Name="AccountType">look_left</Item>
       <Item Name="DateAccountOpened" Macro="true" MacroTable="Company">CurrentTime</Item>
-      <Item Name="StartPeriod" Macro="true" MacroTable="Company">StartPeriod</Item>
+      <!--<Item Name="StartPeriod" Macro="true" MacroTable="Company">StartPeriod</Item>-->
+      <Item Name="StartPeriod" />
       <Item Name="EndPeriod" />
       <Item Name="CompulsoryDescr">false</Item>
       <Item Name="KeepTurnover">false</Item>
