@@ -1,0 +1,269 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Post>
+  <Partner UpdateSource="Destination">
+    <Group Name="Element" DefaultMacroTable="Partner">
+      <Item Name="TimeStamp" Macro="true" SkipAdd="true">TimeStamp</Item>
+      <Item Name="TaxesTimeStamp" Macro="true" SkipAdd="true">TaxesTimeStamp</Item>
+      <Item Name="CmpCode" Macro="true" MacroTable="Key">CmpCode</Item>
+      <Item Name="Code" Macro="true" MacroTable="Key">Code</Item>
+      <Item Name="Level" Macro="true" MacroTable="Key">Level</Item>
+      <Item Name="Name" Macro="true" UpdateSource="Source" MaxLength="36">Name</Item>
+      <Item Name="ShortName" Macro="true" UpdateSource="Source" MaxLength="20">ShortName</Item>
+      <Item Name="LongName" Macro="true" UpdateSource="Source">LongName</Item>
+      <Item Name="CurrencyCode" Macro="true" MacroTable="Company">HomeCurrencyCode</Item>
+      <Item Name="SubAnalyse">sometimes</Item>
+      <Item Name="TaxCode" />
+      <Item Name="AccountType">look_left</Item>
+      <Item Name="DateAccountOpened" Macro="true" MacroTable="Company">CurrentTime</Item>
+      <Item Name="StartPeriod" Macro="true" MacroTable="Company">StartPeriod</Item>
+      <Item Name="EndPeriod" />
+      <Item Name="CompulsoryDescr">false</Item>
+      <Item Name="KeepTurnover">false</Item>
+      <Item Name="AccountSummary" />
+      <Item Name="ElementStatus" />
+      <Item Name="ExternalValidation" />
+      <Item Name="MemoStatus" />
+      <Item Name="BalancingAccount" />
+      <Item Name="SubsElement" />
+      <Item Name="Matchable">true</Item>
+      <Item Name="Summary">acct_level</Item>
+      <Item Name="Split">none</Item>
+      <Item Name="Settlement" />
+      <Item Name="ForceDisperse">off</Item>
+      <Item Name="UserStatus" />
+      <Item Name="PayStatus">available</Item>
+      <Item Name="RecStatus">null</Item>
+      <Item Name="EnablePay">true</Item>
+      <Item Name="DefaultMedia" Macro="true" UpdateSource="Destination">DefaultMedia</Item>
+      <Item Name="PaperMedia" Macro="true" UpdateSource="Source">PaperMedia</Item>
+      <Item Name="ElecMedia" Macro="true" UpdateSource="Source">ElecMedia</Item>
+      <Item Name="PayNumber">0</Item>
+      <Item Name="CustomerSupplier">true</Item>
+      <Item Name="IsCustomer" Macro="true" MacroTable="Partner">IsCustomer</Item>
+      <Item Name="IsSupplier" Macro="true" MacroTable="Partner">IsSupplier</Item>
+      <Item Name="DiscountEnable">no</Item>
+      <Item Name="TaxMethod">net</Item>
+      <Item Name="Terms">01LL</Item>
+      <Item Name="TaxAdjustment">false</Item>
+      <Item Name="TaxRepESL" Macro="true">TaxRepESL</Item>
+      <Item Name="TaxRepIntra">false</Item>
+      <Item Name="VAT" Macro="true" UpdateSource="Source">VAT</Item>
+      <Item Name="Ten99">false</Item>
+      <Item Name="FederalTax" />
+      <Item Name="SocialSecurity" />
+      <Item Name="Ten99Code" />
+      <Item Name="SecondTIN">false</Item>
+      <Item Name="SIC" />
+      <Item Name="CreditManager" />
+      <Item Name="CreditRating" />
+      <Item Name="CreditReference" />
+      <Item Name="CreditAgency" />
+      <Item Name="PaymentIndex">0</Item>
+      <Item Name="ForceCreditLimit" Macro="true">ForceCreditLimit</Item>
+      <Item Name="IndirectCode" />
+      <Item Name="CreditLimit" Macro="true">CreditLimit</Item>
+      <Item Name="ArcRecon">no</Item>
+      <Item Name="ArcPaid">no</Item>
+      <Item Name="Shared">false</Item>
+      <Item Name="PostedTo">true</Item>
+      <Item Name="PromptForAsset">false</Item>
+      <Item Name="AssetCategory" />
+      <Item Name="ProcOrders" />
+      <Item Name="ProcRequisitions" />
+      <!--<Item Name="ReportingCode1" />-->
+      <!--<Item Name="ReportingCode2" />-->
+      <!--<Item Name="ReportingCode3" />-->
+      <Item Name="PunchoutCode" />
+      <Item Name="PunchoutMarketplace">false</Item>
+      <Item Name="PunchoutUrl" />
+      <Item Name="PunchoutDomain" />
+      <Item Name="PunchoutEncoding">51</Item>
+      <Item Name="PunchoutUser" />
+      <Item Name="PunchoutPassword" />
+      <Item Name="PunchoutItemDetailsCode" />
+      <Item Name="AutoReceipt">false</Item>
+      <Item Name="ProcStatus">false</Item>
+      <Item Name="ToleranceCode" />
+      <Item Name="ProcCalloffs" />
+      <Item Name="ProcGRNs" />
+      <Item Name="ProcReturns" />
+      <Group Name="Address" Container="Addresses" DefaultMacroTable="Address" RecordIdItem="Tag">
+        <Item Name="DefaultAddress" Macro="true" UpdateSource="Source">DefaultAddress</Item>
+        <Item Name="Tag" Macro="true" SkipEmpty="true">Tag</Item>
+        <Item Name="Name" Macro="true">Name</Item>
+        <Item Name="Address1" Macro="true" UpdateSource="Source">Address1</Item>
+        <Item Name="Address2" Macro="true" UpdateSource="Source">Address2</Item>
+        <Item Name="Address3" Macro="true">Address3</Item>
+        <Item Name="Address4" Macro="true">Address4</Item>
+        <Item Name="Address5" Macro="true">Address5</Item>
+        <Item Name="Address6" Macro="true" UpdateSource="Source">Address6</Item>
+        <Item Name="PostCode" Macro="true" UpdateSource="Source">PostCode</Item>
+        <Item Name="Tel" Macro="true" UpdateSource="Source">Tel</Item>
+        <Item Name="Fax" Macro="true" UpdateSource="Source">Fax</Item>
+        <Item Name="Country" Macro="true" UpdateSource="Source">CountryCODACode</Item>
+        <Item Name="Language" />
+        <Item Name="Category" Macro="true">Category</Item>
+        <Item Name="EMail" Macro="true">Email</Item>
+      </Group>
+      <Group Name="Bank" Container="Banks" DefaultMacroTable="Bank" RecordIdItem="Tag">
+        <Item Name="DefaultBank" Macro="true" UpdateSource="Source">DefaultBank</Item>
+        <Item Name="Tag" Macro="true" SkipEmpty="true">Tag</Item>
+        <Item Name="AccountNumber" Macro="true" UpdateSource="Source">AccountNumber</Item>
+        <Item Name="SortCode" Macro="true" UpdateSource="Source">SortCode</Item>
+        <Item Name="AccountName" Macro="true">AccountName</Item>
+        <Item Name="AccountRef" Macro="true">AccountRef</Item>
+        <Item Name="BankName" Macro="true" UpdateSource="Source">BankName</Item>
+        <Item Name="Address1" Macro="true">Address1</Item>
+        <Item Name="Address2" Macro="true">Address2</Item>
+        <Item Name="Address3" />
+        <Item Name="Address4" />
+        <Item Name="Address5" />
+        <Item Name="Address6" />
+        <Item Name="PostCode" Macro="true">PostCode</Item>
+        <Item Name="Country" Macro="true">CountryCODACode</Item>
+        <Item Name="SWIFT" Macro="true" UpdateSource="Source">Swift</Item>
+        <Item Name="IntBankName" />
+        <Item Name="IntAddress1" />
+        <Item Name="IntAddress2" />
+        <Item Name="IntAddress3" />
+        <Item Name="IntAddress4" />
+        <Item Name="IntAddress5" />
+        <Item Name="IntAddress6" />
+        <Item Name="IntPostCode" />
+        <Item Name="IntCountry" />
+        <Item Name="IBAN" Macro="true" UpdateSource="Source">Iban</Item>
+      </Group>
+      <Group Name="Comments">
+        <Item Name="Comment" Macro="true" MacroTable="Partner">Note</Item>
+      </Group>
+      <Group Name="Groups">
+        <!--<Item Name="GroupCode">VEVO</Item>-->
+        <!--<Item Name="GroupCode">SZALLITO</Item>-->
+      </Group>
+      <Group Name="Medias" />
+      <Group Name="LeftRules" />
+      <Group Name="RightRules" />
+      <Group Name="Mnemonics" />
+    </Group>
+  </Partner>
+  <Project UpdateSource="Destination">
+    <Group Name="Element" DefaultMacroTable="Project">
+      <!--<Item Name="TimeStamp" Macro="true" SkipAdd="true">TimeStamp</Item>-->
+      <!--<Item Name="TaxesTimeStamp" Macro="true" SkipAdd="true">TaxesTimeStamp</Item>-->
+      <Item Name="CmpCode" Macro="true" MacroTable="Key">CmpCode</Item>
+      <Item Name="Code" Macro="true" MacroTable="Key">Code</Item>
+      <Item Name="Level" Macro="true" MacroTable="Key">Level</Item>
+      <Item Name="Name" Macro="true">name</Item>
+      <Item Name="LongName" Macro="true">name</Item>
+      <Item Name="ShortName" Macro="true" MaxLength="20">sname-or-name</Item>
+      <Item Name="CurrencyCode">HUF</Item>
+      <Item Name="SubAnalyse">sometimes</Item>
+      <Item Name="TaxCode" />
+      <Item Name="AccountType">look_left</Item>
+      <Item Name="DateAccountOpened" Macro="true">adddate</Item>
+      <Item Name="StartPeriod" Macro="true" Format="yyyy'/0'MM">adddate</Item>
+      <Item Name="EndPeriod" />
+      <Item Name="CompulsoryDescr">false</Item>
+      <Item Name="KeepTurnover">false</Item>
+      <Item Name="AccountSummary" />
+      <Item Name="ElementStatus" />
+      <Item Name="ExternalValidation" />
+      <Item Name="MemoStatus" />
+      <Item Name="BalancingAccount" />
+      <Item Name="SubsElement" />
+      <Item Name="Matchable">false</Item>
+      <!--<Item Name="Summary">acct_level</Item>-->
+      <!--<Item Name="Split">none</Item>-->
+      <!--<Item Name="Settlement" />-->
+      <!--<Item Name="ForceDisperse">off</Item>-->
+      <Item Name="UserStatus" />
+      <Item Name="PayStatus">not_available</Item>
+      <Item Name="RecStatus">null</Item>
+      <!--<Item Name="EnablePay">true</Item>-->
+      <!--<Item Name="DefaultMedia" />-->
+      <!--<Item Name="PaperMedia">true</Item>-->
+      <!--<Item Name="ElecMedia">true</Item>-->
+      <Item Name="PayNumber">0</Item>
+      <Item Name="CustomerSupplier">false</Item>
+      <Item Name="IsCustomer">false</Item>
+      <Item Name="IsSupplier">false</Item>
+      <!--<Item Name="DiscountEnable">no</Item>-->
+      <!--<Item Name="TaxMethod">net</Item>-->
+      <Item Name="Terms">01LL</Item>
+      <!--<Item Name="TaxAdjustment">false</Item>-->
+      <Item Name="TaxRepESL">false</Item>
+      <Item Name="TaxRepIntra">false</Item>
+      <Item Name="VAT" />
+      <!--<Item Name="Ten99">false</Item>-->
+      <!--<Item Name="FederalTax" />-->
+      <!--<Item Name="SocialSecurity" />-->
+      <!--<Item Name="Ten99Code" />-->
+      <!--<Item Name="SecondTIN">false</Item>-->
+      <!--<Item Name="SIC" />-->
+      <!--<Item Name="CreditManager" />-->
+      <!--<Item Name="CreditRating" />-->
+      <!--<Item Name="CreditReference" />-->
+      <!--<Item Name="CreditAgency" />-->
+      <!--<Item Name="PaymentIndex">0</Item>-->
+      <!--<Item Name="ForceCreditLimit" />-->
+      <!--<Item Name="IndirectCode" />-->
+      <Item Name="CreditLimit">0</Item>
+      <Item Name="ArcRecon">no</Item>
+      <Item Name="ArcPaid">no</Item>
+      <Item Name="Shared">false</Item>
+      <Item Name="PostedTo">true</Item>
+      <Item Name="PromptForAsset">false</Item>
+      <Item Name="AssetCategory" />
+      <Item Name="ProcAllowPrinting">false</Item>
+      <Item Name="ProcTransmitPDF">false</Item>
+      <Item Name="ProcTransmitXML">false</Item>
+      <Item Name="ProcTransmitB2B">false</Item>
+      <Item Name="ProcOrders" />
+      <Item Name="ProcRequisitions" />
+      <Item Name="BillingAllowPrinting">false</Item>
+      <Item Name="BillingTransmitPDF">false</Item>
+      <Item Name="BillingTransmitXML">false</Item>
+      <Item Name="BillingSIProForma" />
+      <Item Name="BillingSIFinal" />
+      <Item Name="BillingCNProForma" />
+      <Item Name="BillingCNFinal" />
+      <Item Name="PunchoutCode" />
+      <Item Name="PunchoutMarketplace">false</Item>
+      <Item Name="PunchoutUrl" />
+      <Item Name="PunchoutDomain" />
+      <Item Name="PunchoutEncoding">51</Item>
+      <Item Name="PunchoutUser" />
+      <Item Name="PunchoutPassword" />
+      <Item Name="PunchoutItemDetailsCode" />
+      <Item Name="AutoReceipt">false</Item>
+      <Item Name="ProcStatus">false</Item>
+      <Item Name="ToleranceCode" />
+      <Item Name="ProcCalloffs" />
+      <Item Name="ProcGRNs" />
+      <Item Name="ProcReturns" />
+      <Item Name="BillingOutputDevice" />
+      <Item Name="Retail" />
+      <Item Name="Quantities" />
+      <Item Name="Discounts" />
+      <Item Name="Addresses" />
+      <Item Name="Banks" />
+      <Item Name="Comments" />
+      <Item Name="Groups" />
+      <Item Name="Medias" />
+      <Item Name="LeftRules" />
+      <Item Name="RightRules" />
+      <Item Name="Mnemonics" />
+    </Group>
+  </Project>
+  <GroupMaster UpdateSource="Destination">
+    <Group Name="GroupMaster" DefaultMacroTable="Group">
+      <Item Name="TimeStamp" Macro="true" SkipAdd="true">TimeStamp</Item>
+      <Item Name="CmpCode" Macro="true" MacroTable="Key">CmpCode</Item>
+      <Item Name="Code" Macro="true" MacroTable="Key">Code</Item>
+      <Item Name="Level" Macro="true" MacroTable="Key">Level</Item>
+      <Item Name="Name" Macro="true">name</Item>
+      <Item Name="ShortName" Macro="true" MaxLength="20">name</Item>
+      <Item Name="Shared">false</Item>
+    </Group>
+  </GroupMaster>
+</Post>
