@@ -208,6 +208,7 @@ BEGIN
 						[matched],
 						[createuser],
 						[createdate],
+						[extref1],
 						[openbalacc],
 						[closebalacc]
 					)
@@ -303,6 +304,7 @@ BEGIN
 						0, -- matched,
 						@userid,
 						CURRENT_TIMESTAMP,
+						l75.variablecode,
 						@opening, -- openbalacc
 						@closing -- closebalacc
 					FROM cif_ebank_akcenta_075 l75 (nolock)
