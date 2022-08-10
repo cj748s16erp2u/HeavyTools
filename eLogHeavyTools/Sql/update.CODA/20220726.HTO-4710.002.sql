@@ -22,21 +22,26 @@ BEGIN
 	DECLARE 
 		@CURSOR_UPDATE_VALUE cursor,
 		@pgross NVARCHAR(15),
+		@pfee NVARCHAR(15),
+		@pnet NVARCHAR(15),
 		@new_pgross NVARCHAR(15),
+		@new_pfee NVARCHAR(15),
+		@new_pnet NVARCHAR(15),
 		@position INT,
 		@recid INT
 
 		SET @CURSOR_UPDATE_VALUE = CURSOR FAST_FORWARD FOR
-			SELECT p_gross, id
+			SELECT p_gross, p_fee, p_net, id
 			FROM cif_ebank_paypal_lines WITH (NOLOCK)
 			WHERE interfaceid=@interfaceid AND username=@userid AND filname = @filename
 
 		OPEN @CURSOR_UPDATE_VALUE
-		FETCH NEXT FROM @CURSOR_UPDATE_VALUE INTO @pgross, @recid
+		FETCH NEXT FROM @CURSOR_UPDATE_VALUE INTO @pgross, @pfee, @pnet, @recid
 		WHILE @@FETCH_STATUS = 0 
 			BEGIN
 				SET @position = 1;
 				SET @new_pgross = '';
+
 				WHILE @position <= DATALENGTH(@pgross)  
 				   BEGIN
 					   IF ASCII(SUBSTRING(@pgross, @position, 1)) <> 194	-- NULL
@@ -48,10 +53,34 @@ BEGIN
 						SET @position = @position + 1  
 				   END;
 
+				SET @position = 1;
+				SET @new_pfee = '';
+
+				WHILE @position <= DATALENGTH(@pfee)  
+				   BEGIN
+					   IF ASCII(SUBSTRING(@pfee, @position, 1)) <> 194	-- NULL
+							BEGIN
+								SET @new_pfee += CHAR(ASCII(SUBSTRING(@pfee, @position, 1)))
+							END
+						SET @position = @position + 1  
+				   END;
+
+				SET @position = 1;
+				SET @new_pnet = '';
+
+				WHILE @position <= DATALENGTH(@pnet)  
+				   BEGIN
+					   IF ASCII(SUBSTRING(@pnet, @position, 1)) <> 194	-- NULL
+							BEGIN
+								SET @new_pnet += CHAR(ASCII(SUBSTRING(@pnet, @position, 1)))
+							END
+						SET @position = @position + 1  
+				   END;
+
 				   UPDATE cif_ebank_paypal_lines 
-				   SET p_gross = @new_pgross
+				   SET p_gross = @new_pgross, p_fee = @new_pfee, p_net = @new_pnet
 				   WHERE interfaceid=@interfaceid AND username=@userid AND filname = @filename AND id = @recid
-				FETCH NEXT FROM @CURSOR_UPDATE_VALUE INTO @pgross, @recid
+				FETCH NEXT FROM @CURSOR_UPDATE_VALUE INTO @pgross, @pfee, @pnet, @recid
 			END
 		CLOSE @CURSOR_UPDATE_VALUE
 		DEALLOCATE @CURSOR_UPDATE_VALUE
@@ -112,7 +141,9 @@ BEGIN
 					[postable],
 					[matched],
 					[createuser],
-					[createdate]
+					[createdate],
+					[extref1],
+					[valueacc]
 				)
 				SELECT 
 					@interfaceid,  -- interfaceid
@@ -127,7 +158,7 @@ BEGIN
 					1,  -- statement
 					p_description, -- trtypeid
 					p_transactionid, -- trid
-					CASE WHEN convert(decimal, p_gross / 100) > 0 THEN 161 ELSE 160 END, -- debcred
+					CASE WHEN convert(decimal(24,8), p_gross / 100) > 0 THEN 161 ELSE 160 END, -- debcred
 					(
 						SELECT MIN(10000*yr+period) / 10000
 						FROM oas_perlist WITH (NOLOCK)
@@ -148,17 +179,22 @@ BEGIN
 					convert(datetime, p_date, 102), -- due
 					convert(datetime, p_date, 102), -- val
 					p_currency, -- curcode
-					convert(decimal, p_gross) / 100, -- valuedoc fix 2 tizedes miatt
-					convert(decimal, p_gross) / ABS(convert(decimal, p_gross)), -- amountsign
+					convert(decimal(24,8), p_gross) / 100, -- valuedoc fix 2 tizedes miatt
+					convert(decimal(24,8), p_gross) / ABS(convert(decimal(24,8), p_gross)), -- amountsign
 					p_currency, -- origcur
-					convert(decimal, p_gross) / 100, -- origvalue
+					convert(decimal(24,8), p_gross) / 100, -- origvalue
 					p_name, -- partnernamefrombank
 					p_description, -- comment
 					p_fromemailaddr, -- partneraccnum
 					1, -- postable,
 					0, -- matched,
 					@userid,
-					CURRENT_TIMESTAMP
+					CURRENT_TIMESTAMP,
+					l.p_invoiceid,
+					CASE WHEN convert(decimal(24,8), p_gross / 100) > 0 
+						THEN convert(decimal(24,8), p_fee / 100) * -1 
+						ELSE convert(decimal(24,8), p_fee / 100) 
+					END -- valueacc
 				FROM cif_ebank_paypal_lines L WITH (NOLOCK)
 				WHERE 
 					interfaceid = @interfaceid 
