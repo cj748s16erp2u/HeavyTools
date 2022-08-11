@@ -407,7 +407,9 @@
 			<Item ID="AccRualHeadSearchPage" Name="$accrualheadsearchpage" PageID="CodaInt.Base.AccRual.AccRualHeadSearchPage" />
 			<Item ID="ElementReplaceSearchPage" Name="$elementreplacesearchpage" PageID="CodaInt.Base.ElementReplace.OfcElmReplHeadSearchPage" />
 			<Item ID="AutoMatching" Name="$automatching" PageID="CodaInt.Base.Matching.AutoMatching.AutoMatchingPage" />
-		</Item>
+      <Item ID="RFinRevalRuleHead" Name="$rfinrevalrulehead" PageID="CodaInt.Base.FinRevaluation.Rule.OfcFinRevalRuleHeadSearchPage" />
+      <Item ID="RFinRevalHead" Name="$rfinrevalhead" PageID="CodaInt.Base.FinRevaluation.OfcFinRevalHeadSearchPage" />
+    </Item>
 		<Item ID="RAssetExt" Name="$AssetExt">
 			<Item ID="AssetDisposal" Name="$assetdisposal" PageID="CodaInt.Base.Asset.AssetDisposal.AssetDisposalSearchPage" />
 			<Item ID="RDeprMaster" Name="$deprmaster" PageID="CodaInt.Base.DeprMaster.DeprMasterFileSearchPage"/>
