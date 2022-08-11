@@ -15,7 +15,7 @@ public class SordHeadOrderCSV
     public string? OrderDate { get; set; }
     
     [CSV(2)]
-    public string? OrderName { get; set; }
+    public string? SinvName { get; set; }
 
     [CSV(3)]
     public string? CountryName { get; set; }
@@ -67,21 +67,21 @@ public class SordHeadOrderCSV
     public string? PPPid { get; set; }
 
     [CSV(29)]
-    public string? ShippingPlace { get; set; }
+    public string? SinvPlace { get; set; }
     [CSV(30)]
-    public string? ShippingPlaceType { get; set; }
+    public string? SinvPlaceType { get; set; }
     [CSV(31)]
-    public string? ShippingHNum { get; set; }
+    public string? SinvHNum { get; set; }
     [CSV(32)]
-    public string? ShippingBuilding { get; set; }
+    public string? SinvBuilding { get; set; }
     [CSV(33)]
-    public string? ShippingStairs { get; set; }
+    public string? SinvStairs { get; set; }
     [CSV(34)]
-    public string? ShippingLevel{ get; set; }
+    public string? SinvLevel{ get; set; }
     [CSV(35)]
-    public string? ShippingDoor { get; set; }
+    public string? SinvDoor { get; set; }
     [CSV(36)]
-    public string? ShippingDistrict { get; set; }
+    public string? SinvDistrict { get; set; }
     [CSV(37)]
     public string? FoxPostId { get; set; }
     [CSV(38)]

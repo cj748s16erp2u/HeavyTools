@@ -1,5 +1,6 @@
 ﻿using eLog.HeavyTools.Services.WhWebShop.BusinessEntities.Dto;
 using eLog.HeavyTools.Services.WhWebShop.BusinessLogic.Services.Interfaces;
+using eLog.HeavyTools.Services.WhWebShop.Service.Helper;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -10,22 +11,22 @@ namespace eLog.HeavyTools.Services.WhWebShop.Service.Controllers.api;
 [Route("api/[controller]")]
 [ResponseCache(Location = ResponseCacheLocation.None, NoStore = true)]
 [Authorize]
-public class OrderController : Controller
+public class OrderController : BaseController
 {
     private readonly IOrderService service;
 
-    public OrderController(IOrderService service)
+    public OrderController(IApiLoggerService apiloggerservice, IOrderService service) :base(apiloggerservice)
     {
         this.service = service ?? throw new ArgumentNullException(nameof(service));
     }
 
 
-    [HttpPost("create")]
-    public async Task<IActionResult> CreateAsync([FromBody] OrderParamsDto parms)
+    [HttpPost("createold")]
+    public async Task<IActionResult> CreateOldAsync([FromBody] OrderParamsDto parms)
     {
         try
         {
-            var res = await this.service.CreateAsync(parms);
+            var res = await this.service.CreateOldAsync(parms, apilogger!);
             return this.Ok(res);
         }
         catch (Exception ex)
@@ -34,10 +35,18 @@ public class OrderController : Controller
             return this.BadRequest(ex.Message);
         }
     }
-
-    [HttpPost("calcprice")]
-    public Task<IActionResult> CalcPriceAsync([FromBody] OrderParamsDto parms)
-    {
-        throw new NotImplementedException();
+    [HttpPost("create")]
+    public async Task<IActionResult> CreateAsync([FromBody] Newtonsoft.Json.Linq.JObject value)
+    { 
+        try
+        {
+            var res = await this.service.CreateAsync(value, apilogger!);
+            return this.Ok(res);
+        }
+        catch (Exception ex)
+        {
+            await ERP4U.Log.LoggerManager.Instance.LogErrorAsync<OrderController>(ex);
+            return this.BadRequest(ex.Message);
+        }
     }
 }

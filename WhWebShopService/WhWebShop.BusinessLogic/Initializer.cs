@@ -29,6 +29,10 @@ public static class InitializerBL
             .GetSection(eLog.HeavyTools.Services.WhWebShop.BusinessLogic.Options.SordOptions.NAME)
             .Bind(options));
 
+        services.Configure<eLog.HeavyTools.Services.WhWebShop.BusinessLogic.Options.OSSOptions>(options => configuration
+        .GetSection(eLog.HeavyTools.Services.WhWebShop.BusinessLogic.Options.OSSOptions.NAME)
+        .Bind(options));
+
         RegisterImplementations(services);
 
         services.AddTransient(typeof(eLog.HeavyTools.Services.WhWebShop.BusinessLogic.Validators.Base.EntityValidator<>));

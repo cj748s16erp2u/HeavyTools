@@ -39,12 +39,12 @@ namespace eLog.HeavyTools.Services.WhWebShop.BusinessLogic.Helpers.CSVParser
 				throw new ArgumentException("Delimiter cannot be empty.");
 		}
 
-		char[] buffer = null;
+		char[] buffer = null!;
 		int bufferLength;
 		int bufferLoadThreshold;
 		int lineStartPos = 0;
 		int actualBufferLen = 0;
-		List<Field> fields = null;
+		List<Field> fields = null!;
 		int fieldsCount = 0;
 		int linesRead = 0;
 
@@ -160,7 +160,7 @@ namespace eLog.HeavyTools.Services.WhWebShop.BusinessLogic.Helpers.CSVParser
 					var f = fields[idx];
 					return fields[idx].GetValue(buffer);
 				}
-				return null;
+				return null!;
 			}
 		}
 
@@ -329,7 +329,7 @@ namespace eLog.HeavyTools.Services.WhWebShop.BusinessLogic.Helpers.CSVParser
 			}
 			internal bool Quoted;
 			internal int EscapedQuotesCount;
-			string cachedValue = null;
+			string cachedValue = null!;
 
 			internal Field()
 			{
@@ -341,7 +341,7 @@ namespace eLog.HeavyTools.Services.WhWebShop.BusinessLogic.Helpers.CSVParser
 				End = start - 1;
 				Quoted = false;
 				EscapedQuotesCount = 0;
-				cachedValue = null;
+				cachedValue = null!;
 				return this;
 			}
 

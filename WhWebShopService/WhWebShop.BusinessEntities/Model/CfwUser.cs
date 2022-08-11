@@ -14,12 +14,15 @@ namespace eLog.HeavyTools.Services.WhWebShop.BusinessEntities.Model
             CfwUsergroup = new HashSet<CfwUsergroup>();
             OlcSordhead = new HashSet<OlcSordhead>();
             OlcSordline = new HashSet<OlcSordline>();
+            OlcTaxtransext = new HashSet<OlcTaxtransext>();
             OlsCompany = new HashSet<OlsCompany>();
+            OlsCountry = new HashSet<OlsCountry>();
             OlsItem = new HashSet<OlsItem>();
             OlsPartnaddr = new HashSet<OlsPartnaddr>();
             OlsPartner = new HashSet<OlsPartner>();
             OlsSordhead = new HashSet<OlsSordhead>();
             OlsSordline = new HashSet<OlsSordline>();
+            OlsTaxtrans = new HashSet<OlsTaxtrans>();
         }
 
         [Key]
@@ -69,7 +72,11 @@ namespace eLog.HeavyTools.Services.WhWebShop.BusinessEntities.Model
         [InverseProperty("Addusr")]
         public virtual ICollection<OlcSordline> OlcSordline { get; set; }
         [InverseProperty("Addusr")]
+        public virtual ICollection<OlcTaxtransext> OlcTaxtransext { get; set; }
+        [InverseProperty("Addusr")]
         public virtual ICollection<OlsCompany> OlsCompany { get; set; }
+        [InverseProperty("Addusr")]
+        public virtual ICollection<OlsCountry> OlsCountry { get; set; }
         [InverseProperty("Addusr")]
         public virtual ICollection<OlsItem> OlsItem { get; set; }
         [InverseProperty("Addusr")]
@@ -80,5 +87,7 @@ namespace eLog.HeavyTools.Services.WhWebShop.BusinessEntities.Model
         public virtual ICollection<OlsSordhead> OlsSordhead { get; set; }
         [InverseProperty("Addusr")]
         public virtual ICollection<OlsSordline> OlsSordline { get; set; }
+        [InverseProperty("Addusr")]
+        public virtual ICollection<OlsTaxtrans> OlsTaxtrans { get; set; }
     }
 }

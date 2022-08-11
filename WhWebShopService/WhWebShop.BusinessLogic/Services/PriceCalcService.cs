@@ -8,9 +8,12 @@ using eLog.HeavyTools.Services.WhWebShop.BusinessEntities.Model;
 using eLog.HeavyTools.Services.WhWebShop.BusinessLogic.Helpers;
 using eLog.HeavyTools.Services.WhWebShop.BusinessLogic.Services.Base;
 using eLog.HeavyTools.Services.WhWebShop.BusinessLogic.Services.Interfaces;
+using eLog.HeavyTools.Services.WhWebShop.BusinessLogic.Services.PriceCalc;
 using eLog.HeavyTools.Services.WhWebShop.BusinessLogic.Validators.Interfaces;
 using eLog.HeavyTools.Services.WhWebShop.DataAccess.Repositories.Interfaces;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Newtonsoft.Json.Linq;
 
 namespace eLog.HeavyTools.Services.WhWebShop.BusinessLogic.Services;
 
@@ -66,6 +69,8 @@ internal class PriceCalcService : LogicServiceBase<OlcPriceCalcResult>, IPriceCa
         };
     }
 
+    public static string jsonRoot = "Cart";
+
     private void ValidateCalcParams(CalcParamsDto parms)
     {
         if (parms is null)
@@ -79,5 +84,11 @@ internal class PriceCalcService : LogicServiceBase<OlcPriceCalcResult>, IPriceCa
             throw new ArgumentOutOfRangeException("y less than x");
 #pragma warning restore S3928 // Parameter names used into ArgumentException constructors should match an existing one 
         }
+    }
+
+    public async Task<CalcJsonResultDto> CalcJsonAsync(Newtonsoft.Json.Linq.JObject parms, CancellationToken cancellationToken = default)
+    {
+        var calcitem = JsonParser.ParseObject<CalcJsonParamsDto>(parms);
+        return PriceCalcBL.DoCalc(calcitem);
     }
 }

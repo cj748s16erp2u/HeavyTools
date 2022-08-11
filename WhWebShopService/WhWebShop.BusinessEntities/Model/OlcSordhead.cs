@@ -34,6 +34,10 @@ namespace eLog.HeavyTools.Services.WhWebShop.BusinessEntities.Model
         [StringLength(12)]
         [Unicode(false)]
         public string? Wid { get; set; }
+        [Column("bustypeid")]
+        [StringLength(12)]
+        [Unicode(false)]
+        public string? Bustypeid { get; set; }
         [Column("addusrid")]
         [StringLength(12)]
         [Unicode(false)]

@@ -36,9 +36,12 @@ public partial class WhWebShopDbContext : DbContext
 	        public virtual DbSet<CfwGroup> CfwGroup { get; set; } = null!;
         public virtual DbSet<CfwUser> CfwUser { get; set; } = null!;
         public virtual DbSet<CfwUsergroup> CfwUsergroup { get; set; } = null!;
+        public virtual DbSet<OlcApilogger> OlcApilogger { get; set; } = null!;
         public virtual DbSet<OlcSordhead> OlcSordhead { get; set; } = null!;
         public virtual DbSet<OlcSordline> OlcSordline { get; set; } = null!;
+        public virtual DbSet<OlcTaxtransext> OlcTaxtransext { get; set; } = null!;
         public virtual DbSet<OlsCompany> OlsCompany { get; set; } = null!;
+        public virtual DbSet<OlsCountry> OlsCountry { get; set; } = null!;
         public virtual DbSet<OlsItem> OlsItem { get; set; } = null!;
         public virtual DbSet<OlsPartnaddr> OlsPartnaddr { get; set; } = null!;
         public virtual DbSet<OlsPartner> OlsPartner { get; set; } = null!;
@@ -46,6 +49,7 @@ public partial class WhWebShopDbContext : DbContext
         public virtual DbSet<OlsSordhead> OlsSordhead { get; set; } = null!;
         public virtual DbSet<OlsSordline> OlsSordline { get; set; } = null!;
         public virtual DbSet<OlsSysval> OlsSysval { get; set; } = null!;
+        public virtual DbSet<OlsTaxtrans> OlsTaxtrans { get; set; } = null!;
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -81,6 +85,12 @@ public partial class WhWebShopDbContext : DbContext
                     .HasForeignKey(d => d.Usrid)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("fk_cfw_usergroup_usrid");
+            });
+
+            modelBuilder.Entity<OlcApilogger>(entity =>
+            {
+                entity.HasKey(e => e.Apiid)
+                    .HasName("pk_olc_apilogger");
             });
 
             modelBuilder.Entity<OlcSordhead>(entity =>
@@ -123,6 +133,29 @@ public partial class WhWebShopDbContext : DbContext
                     .HasConstraintName("fk_olc_sordline_sordlineid");
             });
 
+            modelBuilder.Entity<OlcTaxtransext>(entity =>
+            {
+                entity.HasKey(e => e.Tteid)
+                    .HasName("pk_olc_taxtransext");
+
+                entity.HasOne(d => d.Addusr)
+                    .WithMany(p => p.OlcTaxtransext)
+                    .HasForeignKey(d => d.Addusrid)
+                    .HasConstraintName("fk_olc_taxtransext_addusrid");
+
+                entity.HasOne(d => d.Country)
+                    .WithMany(p => p.OlcTaxtransext)
+                    .HasForeignKey(d => d.Countryid)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("fk_olc_taxtransext_countryid");
+
+                entity.HasOne(d => d.Tt)
+                    .WithMany(p => p.OlcTaxtransext)
+                    .HasForeignKey(d => d.Ttid)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("fk_olc_taxtransext_ttid");
+            });
+
             modelBuilder.Entity<OlsCompany>(entity =>
             {
                 entity.HasKey(e => e.Cmpid)
@@ -136,11 +169,29 @@ public partial class WhWebShopDbContext : DbContext
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("fk_ols_company_addusrid");
 
+                entity.HasOne(d => d.Country)
+                    .WithMany(p => p.OlsCompany)
+                    .HasForeignKey(d => d.Countryid)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("fk_ols_company_countryid");
+
                 entity.HasOne(d => d.Partn)
                     .WithMany(p => p.OlsCompany)
                     .HasForeignKey(d => d.Partnid)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("fk_ols_company_partnid");
+            });
+
+            modelBuilder.Entity<OlsCountry>(entity =>
+            {
+                entity.HasKey(e => e.Countryid)
+                    .HasName("pk_ols_country");
+
+                entity.HasOne(d => d.Addusr)
+                    .WithMany(p => p.OlsCountry)
+                    .HasForeignKey(d => d.Addusrid)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("fk_ols_country_addusrid");
             });
 
             modelBuilder.Entity<OlsItem>(entity =>
@@ -174,6 +225,12 @@ public partial class WhWebShopDbContext : DbContext
                     .HasForeignKey(d => d.Addusrid)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("fk_ols_partnaddr_addusrid");
+
+                entity.HasOne(d => d.Country)
+                    .WithMany(p => p.OlsPartnaddr)
+                    .HasForeignKey(d => d.Countryid)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("fk_ols_partnaddr_countryid");
 
                 entity.HasOne(d => d.Partn)
                     .WithMany(p => p.OlsPartnaddr)
@@ -264,6 +321,18 @@ public partial class WhWebShopDbContext : DbContext
             {
                 entity.HasKey(e => e.Sysvalid)
                     .HasName("pk_ols_sysval");
+            });
+
+            modelBuilder.Entity<OlsTaxtrans>(entity =>
+            {
+                entity.HasKey(e => e.Ttid)
+                    .HasName("pk_ols_taxtrans");
+
+                entity.HasOne(d => d.Addusr)
+                    .WithMany(p => p.OlsTaxtrans)
+                    .HasForeignKey(d => d.Addusrid)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("fk_ols_taxtrans_addusrid");
             });
 
             modelBuilder.Entity<OlcPriceCalcResult>(entity => 

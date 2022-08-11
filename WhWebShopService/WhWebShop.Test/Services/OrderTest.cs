@@ -24,7 +24,7 @@ public class OrderTest : TestBase2<OlsSordhead, IOrderService>
     {
         var f = File.ReadAllText(@"c:\Munka\workspaces\eLogHeavyTools\eLogHeavyTools\order.txt");
 
-        var res = this.service.CreateAsync(new OrderParamsDto() { Content = f });
+        var res = this.service.CreateAsync(new Newtonsoft.Json.Linq.JObject(""), new OlcApilogger());
         Assert.True(res.Result.Success);
 
     }

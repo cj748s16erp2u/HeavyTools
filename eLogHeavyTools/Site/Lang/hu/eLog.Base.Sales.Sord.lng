@@ -6,13 +6,9 @@ $transfcond_gls=GLS
 $transfcond_foxpost=FOXPOST
 $transfcond_store=Bolt
 $transfcond_address=Cím
+$transfcond_ppp=PPP
 
 $deliverylocation=Csomagpont
-$customername=Szállítási név
-$customercountry=Szállítási ország
-$customerzipcode=Szállítási irányítószám
-$customercity=Szállítási település
-$customeraddress=Szállítási cím
 
 $couponcode=Kupon kód
 
@@ -50,3 +46,50 @@ $sordheadimport=vevoi_rendeles_import
 $error_import_item_not_found=Cikk nem található!
 
 $wid=Webshop
+
+$Sinv_Name=Számlázási név
+$Sinv_countryid=Számlázási ország
+$Sinv_postcode=Számlázási irsz.
+$Sinv_city=Számlázási város
+$Sinv_building=Számlázási épület
+$Sinv_district=Számlázási kerület
+$Sinv_door=Számlázási ajtó
+$Sinv_hnum=Számlázási házszám
+$Sinv_floor=Számlázási emelet
+$Sinv_place=Számlázási közterület
+$Sinv_placetype=Számlázási közt. neve
+$Sinv_stairway=Számlázási lépcsőház
+$Shipping_name=Szállítási név
+$Shipping_countryid=Szállítási ország
+$Shipping_postcode=Szállítási irsz.
+$Shipping_city=Szállítási város
+$Shipping_building=Szállítási épület
+$Shipping_district=Szállítási kerület
+$Shipping_door=Szállítási ajtó
+$Shipping_hnum=Szállítási házszám
+$Shipping_floor=Szállítási emelet
+$Shipping_place=Szállítási közterület
+$Shipping_placetype=Szállítási közt. neve
+$Shipping_stairway=Szállítási lépcsőház
+$Phone=Telefon
+$Email=Email
+$LoyaltyCardNo=Törzskártya
+$ShippinPrc=Szállítási költség
+$Paymenttransaciondata=Tranzakció adat
+$Netgopartnid=NetgoId
+$Pppid=PPP
+$Glsid=GLS
+$Foxpostid=Foxpost
+$CentralRetailType=Közp. v. bolti rendelés
+$Exchangepackagesnumber=Csere csomag
+$ShippingId=Száll. id.
+$PaymentId=Fizmód.
+$Coupons=Kuponok
+
+
+$sordlinewebshop_editgroup=Tétel webes rendelés
+$OrigSelVal=Eredeti ár
+$SelPrc=Egység ár
+$SelVal=Nettó érték
+$SetTotPrc=Bruttó egység ár
+$SelTotVal=Bruttó érték

@@ -5,15 +5,15 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace eLog.HeavyTools.Services.WhWebShop.BusinessEntities.Dto
-{
-    public class OrderParamsDto
-    {
-        public string Content { get; set; } = null!;
-    }
+namespace eLog.HeavyTools.Services.WhWebShop.BusinessEntities.Dto;
 
-    public class OrderResultDto : ResultDto
-    {
-        public int? Sordid { get; set; } = null!; 
-    }
+public class OrderParamsDto
+{
+    public string Content { get; set; } = null!;
+}
+
+public class OrderResultDto : ResultDto
+{
+    public int? Sordid { get; set; } = null!;
+    public CalcJsonResultDto Cart { get; set; } = null!;
 }

@@ -102,6 +102,9 @@ namespace eLog.HeavyTools.Services.WhWebShop.BusinessEntities.Model
         [ForeignKey("Addusrid")]
         [InverseProperty("OlsPartnaddr")]
         public virtual CfwUser Addusr { get; set; } = null!;
+        [ForeignKey("Countryid")]
+        [InverseProperty("OlsPartnaddr")]
+        public virtual OlsCountry Country { get; set; } = null!;
         [ForeignKey("Partnid")]
         [InverseProperty("OlsPartnaddr")]
         public virtual OlsPartner Partn { get; set; } = null!;

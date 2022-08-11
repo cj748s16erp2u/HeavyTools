@@ -39,8 +39,8 @@ public class LogicServiceBase<TEntity> : ILogicService<TEntity>
     };
 
     protected IValidator<TEntity> Validator { get; }
-    protected IRepository<TEntity> Repository { get; }
-    protected IUnitOfWork UnitOfWork { get; }
+    protected virtual IRepository<TEntity> Repository { get; }
+    protected virtual IUnitOfWork UnitOfWork { get; }
     protected IEnvironmentService EnvironmentService { get; }
 
     public LogicServiceBase(

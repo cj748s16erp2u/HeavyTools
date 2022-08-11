@@ -163,6 +163,21 @@ namespace eLog.HeavyTools.Sales.Sord
         /// <para>Field</para>
         /// ? - varchar
         /// </summary>
+        [Field("bustypeid")]
+        public static Field FieldBustypeid { get; protected set; }
+        /// <summary>
+        /// ? - varchar
+        /// </summary>
+        public StringN Bustypeid
+        {
+            get { return new StringN(this[FieldBustypeid]); }
+            set { this[FieldBustypeid] = value; }
+        }
+
+        /// <summary>
+        /// <para>Field</para>
+        /// ? - varchar
+        /// </summary>
         [Field("addusrid")]
         public static Field FieldAddusrid { get; protected set; }
         /// <summary>

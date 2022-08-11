@@ -20,12 +20,12 @@ public class PriceCalcController : Controller
 
 
     [HttpPost("calc")]
-    public async Task<IActionResult> CalcAsync([FromBody] CalcParamsDto parms)
+    public async Task<IActionResult> CalcAsync([FromBody] Newtonsoft.Json.Linq.JObject value)
     {
         try
         {
-            var res = await this.service.CalcAsync(parms);
-            return this.Ok(new { x = parms.X, y = parms.Y, result = res });
+            var res = await this.service.CalcJsonAsync(value);
+            return this.Ok(res);
         }
         catch (Exception ex)
         {

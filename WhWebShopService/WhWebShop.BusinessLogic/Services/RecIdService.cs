@@ -23,13 +23,9 @@ namespace eLog.HeavyTools.Services.WhWebShop.BusinessLogic.Services;
 public class RecIdService : LogicServiceBase<OlsRecid>, IRecIdService
 {
 
-    IRepository<OlsRecid> repository;
-    IUnitOfWork unitOfWork;
-
     public RecIdService(IValidator<OlsRecid> validator, IRepository<OlsRecid> repository, IUnitOfWork unitOfWork, IEnvironmentService environmentService) : base(validator, repository, unitOfWork, environmentService)
     {
-        this.repository = repository ?? throw new ArgumentNullException(nameof(repository));
-        this.unitOfWork = unitOfWork ?? throw new ArgumentNullException(nameof(unitOfWork));
+      
     }
 
     public async Task<OlsRecid?> GetCurrentAsync(string riid, CancellationToken cancellationtoken)
@@ -55,7 +51,7 @@ public class RecIdService : LogicServiceBase<OlsRecid>, IRecIdService
         await repository?.GetDatabase()?.ExecuteSqlRawAsync(sql, sqlParams)!;
         */
 
-        await repository.ExecuteStoredProcedure("sp_ols_getnewid", new Dictionary<string, object>
+        await Repository.ExecuteStoredProcedure("sp_ols_getnewid", new Dictionary<string, object>
         {
             {"id", riid },
             {"store",  int.Parse("1") },

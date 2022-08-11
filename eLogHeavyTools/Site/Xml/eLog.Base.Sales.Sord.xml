@@ -61,7 +61,7 @@
         </LayoutTable>
 		
 		<LayoutTable ControlGroup="WebShop" Columns="{120, None}; {120, None}; {20, Empty}; {120, None}; {120, None}; {20, Empty}; {120, None}; {120, None}" ID="WebShopEditGroup" Label="$webshop_editgroup" >
-			<Combo Field="wid" ListID="eLog.HeavyTools.Webshop.WebshopList" ComboFlags="None" Disabled="True" ColsToSpan="4"/>
+			<Combo Field="wid" ListID="eLog.HeavyTools.Webshop.WebshopList" ComboFlags="None" Disabled="True" CustomData="olc" ColsToSpan="4"/>
 			<ForceNextRow/>
 			<Textbox Field="loyaltycardno" ColsToSpan="4" CustomData="olc" Disabled="True"/>
 			<ForceNextRow/>
@@ -69,18 +69,82 @@
 			<ForceNextRow/>
 			<Textbox Field="deliverylocation" ColsToSpan="4" CustomData="olc" Disabled="True"/>
 			<ForceNextRow/>
-			<!-- szamlazasi adatok -->
-			<Textbox Field="customername" ColsToSpan="4" Disabled="True"/>
+			
+			 
+			
+			<!-- webes adatok -->
+			<Textbox Field="Sinv_Name" ColsToSpan="2" Disabled="True"/>
+			<Textbox Field="Shipping_name" ColsToSpan="2" Disabled="True"/>
 			<ForceNextRow/>
-			<Textbox Field="customercountry" ColsToSpan="4" Disabled="True"/>
+			<Textbox Field="Sinv_countryid" ColsToSpan="2" Disabled="True"/>
+			<Textbox Field="Shipping_countryid" ColsToSpan="2" Disabled="True"/>
 			<ForceNextRow/>
-			<Textbox Field="customerzipcode" ColsToSpan="4" Disabled="True"/>
+			<Textbox Field="Sinv_postcode" ColsToSpan="2" Disabled="True"/>
+			<Textbox Field="Shipping_postcode" ColsToSpan="2" Disabled="True"/>
 			<ForceNextRow/>
-			<Textbox Field="customercity" ColsToSpan="4" Disabled="True"/>
+			<Textbox Field="Sinv_city" ColsToSpan="2" Disabled="True"/>
+			<Textbox Field="Shipping_city" ColsToSpan="2" Disabled="True"/>
 			<ForceNextRow/>
-			<Textbox Field="customeraddress" ColsToSpan="4" Disabled="True"/>
+			<Textbox Field="Sinv_district" ColsToSpan="2" Disabled="True"/>
+			<Textbox Field="Shipping_district" ColsToSpan="2" Disabled="True"/>
 			<ForceNextRow/>
-			<Textbox Field="couponcode" ColsToSpan="4" Disabled="True"/>
+			<Textbox Field="Sinv_place" ColsToSpan="2" Disabled="True"/>
+			<Textbox Field="Shipping_place" ColsToSpan="2" Disabled="True"/>
+			<ForceNextRow/>
+			<Textbox Field="Sinv_placetype" ColsToSpan="2" Disabled="True"/>
+			<Textbox Field="Shipping_placetype" ColsToSpan="2" Disabled="True"/>
+			<ForceNextRow/>
+			<Textbox Field="Sinv_hnum" ColsToSpan="2" Disabled="True"/>
+			<Textbox Field="Shipping_hnum" ColsToSpan="2" Disabled="True"/>
+			<ForceNextRow/>
+			<Textbox Field="Sinv_building" ColsToSpan="2" Disabled="True"/>
+			<Textbox Field="Shipping_building" ColsToSpan="2" Disabled="True"/>
+			<ForceNextRow/>
+			<Textbox Field="Sinv_stairway" ColsToSpan="2" Disabled="True"/>
+			<Textbox Field="Shipping_stairway" ColsToSpan="2" Disabled="True"/>
+			<ForceNextRow/>
+			<Textbox Field="Sinv_floor" ColsToSpan="2" Disabled="True"/>
+			<Textbox Field="Shipping_floor" ColsToSpan="2" Disabled="True"/>
+			<ForceNextRow/>			
+			<Textbox Field="Sinv_door" ColsToSpan="2" Disabled="True"/>
+			<Textbox Field="Shipping_door" ColsToSpan="2" Disabled="True"/>
+			<ForceNextRow/>
+			
+			
+			
+			<Textbox Field="Phone" ColsToSpan="4" Disabled="True"/>
+			<ForceNextRow/>
+			<Textbox Field="Email" ColsToSpan="4" Disabled="True"/>
+			<ForceNextRow/>
+			<Textbox Field="LoyaltyCardNo" ColsToSpan="4" Disabled="True"/>
+			<ForceNextRow/>
+			<Textbox Field="ShippinPrc" ColsToSpan="4" Disabled="True"/>
+			<ForceNextRow/>
+			<Textbox Field="Paymenttransaciondata" ColsToSpan="4" Disabled="True"/>
+			<ForceNextRow/>
+			<Textbox Field="Netgopartnid" ColsToSpan="4" Disabled="True"/>
+			<ForceNextRow/>
+			<Textbox Field="Pppid" ColsToSpan="4" Disabled="True"/>
+			<ForceNextRow/>
+			<Textbox Field="Glsid" ColsToSpan="4" Disabled="True"/>
+			<ForceNextRow/>
+			<Textbox Field="Foxpostid" ColsToSpan="4" Disabled="True"/>
+			<ForceNextRow/>
+			<Textbox Field="CentralRetailType" ColsToSpan="4" Disabled="True"/>
+			<ForceNextRow/>
+			<Textbox Field="Exchangepackagesnumber" ColsToSpan="4" Disabled="True"/>
+			<ForceNextRow/>
+			<Textbox Field="ShippingId" ColsToSpan="4" Disabled="True"/>
+			<ForceNextRow/>
+			<Textbox Field="PaymentId" ColsToSpan="4" Disabled="True"/>
+			<ForceNextRow/>
+			<Textbox Field="Coupons" ColsToSpan="4" Disabled="True"/>
+			<ForceNextRow/>
+
+			
+			
+			
+			
         </LayoutTable>		
 		
         <LayoutTable ControlGroup="SordLine" Columns="{120, None}; {120, None}; {20, Empty}; {120, None}; {120, None}; {20, Empty}; {120, None}; {120, None}" ID="EditGroup2" Label="$sordline_editgroup">
@@ -110,6 +174,18 @@
             <Intbox Field="selprcprcid" Visible="false" />
             <Intbox Field="discpercntprcid" Visible="false" />
         </LayoutTable>
+		
+		<LayoutTable ControlGroup="SordLineWebShop" Columns="{120, None}; {120, None}; {20, Empty}; {120, None}; {120, None}; {20, Empty}; {120, None}; {120, None}" ID="SordlineWebShopEditGroup" Label="$sordlinewebshop_editgroup" >
+			<Textbox Field="OrigSelVal" ColsToSpan="2" Disabled="True"/>
+			<ForceNextRow/>			
+			<Textbox Field="SelPrc" ColsToSpan="2" Disabled="True"/>
+			<Textbox Field="SelVal" ColsToSpan="2" Disabled="True"/>
+			<ForceNextRow/>
+			<Textbox Field="SetTotPrc" ColsToSpan="2" Disabled="True"/>
+			<Textbox Field="SelTotVal" ColsToSpan="2" Disabled="True"/>
+		</LayoutTable>
+		
+			
         <LayoutTable ControlGroup="Reserve" Columns="{140, None}; {180, None}; {20, Empty}; {140, None}; {100, None}; {20, Empty}; {80, None}; {100, None}" ID="EditGroupReserve" Label="$reserve_editgroup">
             <Numberbox Field="resid" Disabled="True" DecDigits="0"/>
             <ForceNextRow/>
@@ -174,6 +250,17 @@
             <Intbox Field="selprcprcid" Visible="false" />
             <Intbox Field="discpercntprcid" Visible="false" />
         </LayoutTable>
+				
+		<LayoutTable ControlGroup="SordLineWebShop" Columns="{120, None}; {120, None}; {20, Empty}; {120, None}; {120, None}; {20, Empty}; {120, None}; {120, None}" ID="SordlineWebShopEditGroup" Label="$sordlinewebshop_editgroup" >
+			<Textbox Field="OrigSelVal" ColsToSpan="2" Disabled="True"/>
+			<ForceNextRow/>			
+			<Textbox Field="SelPrc" ColsToSpan="2" Disabled="True"/>
+			<Textbox Field="SelVal" ColsToSpan="2" Disabled="True"/>
+			<ForceNextRow/>
+			<Textbox Field="SetTotPrc" ColsToSpan="2" Disabled="True"/>
+			<Textbox Field="SelTotVal" ColsToSpan="2" Disabled="True"/>
+		</LayoutTable>
+		
         <LayoutTable ControlGroup="Reserve" Columns="{140, None}; {180, None}; {20, Empty}; {140, None}; {100, None}; {20, Empty}; {100, None}; {100, None}" ID="EditGroupReserve" Label="$reserve_editgroup">
             <Numberbox Field="resid" Disabled="True" DecDigits="0"/>
             <ForceNextRow/>
@@ -356,6 +443,7 @@
     <ComboItem Value="1" Caption="$transfcond_foxpost" />
     <ComboItem Value="2" Caption="$transfcond_store" />
     <ComboItem Value="3" Caption="$transfcond_address" />
+    <ComboItem Value="4" Caption="$transfcond_ppp" />
   </ComboItems>
 
 </Schema>

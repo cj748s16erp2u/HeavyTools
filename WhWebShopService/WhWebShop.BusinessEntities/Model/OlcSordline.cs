@@ -16,6 +16,8 @@ namespace eLog.HeavyTools.Services.WhWebShop.BusinessEntities.Model
         public decimal? Confqty { get; set; }
         [Column("confdeldate", TypeName = "datetime")]
         public DateTime? Confdeldate { get; set; }
+        [Column("data", TypeName = "xml")]
+        public string? Data { get; set; }
         [Column("addusrid")]
         [StringLength(12)]
         [Unicode(false)]
