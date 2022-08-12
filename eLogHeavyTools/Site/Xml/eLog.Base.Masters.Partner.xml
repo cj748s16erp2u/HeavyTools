@@ -123,6 +123,8 @@
 			<!--<Combo Field="codacode" ListID="CodaInt.Base.Masters.Partner.PartnerElementList" DependentCtrlID="xx.cmpid" DependentField="cmpid" ColsToSpan="4" />-->
 			<Textbox Field="cmpid" Visible="False" />
 			<ForceNextRow />
+      <Combo Field="valuecurid" ListID="eLog.Base.Setup.Currency.CurrencyList" ComboFlags="AllowBlank" />
+      <ForceNextRow />      
 			<Combo Field="posttype" ListID="eLog.Base.Masters.Partner.PartnCmpPostTypeList" ComboFlags="None" Mandatory="true" />
 			<!--CODA specifikus start-->
 			<Textbox Field="codacode" Disabled="True" />
