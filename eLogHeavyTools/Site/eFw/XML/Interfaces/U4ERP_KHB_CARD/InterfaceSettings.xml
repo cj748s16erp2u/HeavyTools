@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Interface>
+    <InterfaceParams>
+        <InterfaceOperation>BankHandling</InterfaceOperation>
+        <InterfaceSource>FileSystem</InterfaceSource>
+        <FolderStructure>InterfaceNameLast</FolderStructure>
+        <StoredProcedureName>cif_ebank_khb_card_load</StoredProcedureName>
+        <BankStoredProcedureName>cif_ebank_post</BankStoredProcedureName>
+        <UpdateFinalStatusStoredProcedureName>cif_ebank_post_status</UpdateFinalStatusStoredProcedureName>
+        <MatchStoredProcedureName>cif_ebank_match</MatchStoredProcedureName>
+        <UpdateUpdateStatusStoredProcedureName>cif_ebank_match_status</UpdateUpdateStatusStoredProcedureName>
+        <SplitBankAccounts>true</SplitBankAccounts>
+        <MaxRequestCount>20</MaxRequestCount>
+        <ParameterTables>
+            <ParameterTable name="cif_ebank_params">
+                <ColumnSettings>
+                    <ColumnSetting name="id" type="numeric" editable="false" visible="false" identity="true"/>
+                    <ColumnSetting name="interfaceid" type="string" editable="false" visible="false"/>
+                    <ColumnSetting name="username" type="string" editable="false" visible="false"/>
+                    <ColumnSetting name="inputdate" type="datetime" editable="false" visible="false"/>
+                    <ColumnSetting name="cmpcode" type="string" editable="false" visible="false"/>
+                    <ColumnSetting name="licencecode" type="string" editable="true" visible="true" required="true"/>
+                    <ColumnSetting name="bankaccountlevel" type="numeric" editable="true" visible="true" required="true"/>
+                    <ColumnSetting name="partnerlevel" type="numeric" editable="true" visible="true" required="true"/>
+                    <ColumnSetting name="partnerprefix" type="string" editable="true" visible="true" required="false"/>
+                    <ColumnSetting name="temppartner" type="string" editable="true" visible="true" required="true"/>
+                    <ColumnSetting name="tempgl" type="string" editable="true" visible="true" required="true"/>
+                    <ColumnSetting name="invref" type="numeric" editable="true" visible="true" required="true"/>
+                    <ColumnSetting name="comprefvalue" type="string" editable="true" visible="true" required="false"/>
+                    <ColumnSetting name="docmatch" type="string" editable="true" visible="true" required="true" webControlType="DropDownList" sqlFillCommand="select code as value, code + ' / ' + name as text from oas_mam where cmpcode='currentCompany' and deldate is null and currule=150" connectionStringId="CODA"/>
+                    <ColumnSetting name="elmatch" type="string" editable="true" visible="true" required="true" webControlType="DropDownList" sqlFillCommand="select code as value, code + ' / ' + name as text from oas_mam where cmpcode='currentCompany' and deldate is null and currule=149" connectionStringId="CODA"/>
+                    <ColumnSetting name="stdate" type="numeric" editable="true" visible="true" required="true" webControlType="CheckBox"/>
+                    <ColumnSetting name="ref1" type="string" editable="true" visible="true" required="false" webControlType="DropDownList" enumerator=";statement;ownacnum;partacnum;partname;valdate;docdate;comment;descr;descr2"/>
+                    <ColumnSetting name="ref2" type="string" editable="true" visible="true" required="false" webControlType="DropDownList" enumerator=";statement;ownacnum;partacnum;partname;valdate;docdate;comment;descr;descr2"/>
+                    <ColumnSetting name="ref3" type="string" editable="true" visible="true" required="false" webControlType="DropDownList" enumerator=";statement;ownacnum;partacnum;partname;valdate;docdate;comment;descr;descr2"/>
+                    <ColumnSetting name="ref4" type="string" editable="true" visible="true" required="false" webControlType="DropDownList" enumerator=";statement;ownacnum;partacnum;partname;valdate;docdate;comment;descr;descr2"/>
+                    <ColumnSetting name="comment" type="string" editable="true" visible="true" required="false" webControlType="DropDownList" enumerator=";statement;ownacnum;partacnum;partname;valdate;docdate;comment;descr;descr2"/>
+                    <ColumnSetting name="linedescr" type="string" editable="true" visible="true" required="false" webControlType="DropDownList" enumerator=";statement;ownacnum;partacnum;partname;valdate;docdate;comment;descr;descr2"/>
+                    <ColumnSetting name="enduser" type="string" editable="false" visible="false"/>
+                    <ColumnSetting name="enddate" type="datetime" editable="false" visible="false"/>
+                </ColumnSettings>
+            </ParameterTable>
+            <ParameterTable name="cif_ebank_acnum_list">
+                <ColumnSettings>
+                    <ColumnSetting name="id" type="numeric" editable="false" visible="false" identity="true"/>
+                    <ColumnSetting name="interfaceid" type="string" editable="false" visible="false"/>
+                    <ColumnSetting name="username" type="string" editable="false" visible="false"/>
+                    <ColumnSetting name="inputdate" type="datetime" editable="false" visible="false"/>
+                    <ColumnSetting name="cmpcode" type="string" editable="false" visible="false"/>
+                    <ColumnSetting name="sort" type="string" editable="true" visible="true" required="true"/>
+                    <ColumnSetting name="acnum" type="string" editable="true" visible="true" required="true"/>
+                    <ColumnSetting name="doccode" type="string" editable="true" visible="true" required="true" webControlType="DropDownList" sqlFillCommand="select code as value, code + ' / ' + name as text from oas_document where cmpcode='currentCompany' and deldate is null" connectionStringId="CODA"/>
+                    <ColumnSetting name="strictmode" type="numeric" editable="true" visible="true" required="true" webControlType="CheckBox"/>
+                    <ColumnSetting name="avgrate" type="numeric" editable="true" visible="true" required="true" webControlType="CheckBox"/>
+                    <ColumnSetting name="avgdualrate" type="numeric" editable="true" visible="true" required="true" webControlType="CheckBox"/>
+                    <ColumnSetting name="opencheck" type="numeric" editable="true" visible="true" required="true" webControlType="CheckBox"/>
+                    <ColumnSetting name="partmatch" type="numeric" editable="true" visible="true" required="true" webControlType="CheckBox"/>
+                    <ColumnSetting name="fullacmatch" type="numeric" editable="true" visible="true" required="true" webControlType="CheckBox"/>
+                    <ColumnSetting name="refinv" type="string" editable="true" visible="true"/>
+                    <ColumnSetting name="refbank" type="string" editable="true" visible="true"/>
+                    <ColumnSetting name="enduser" type="string" editable="false" visible="false"/>
+                    <ColumnSetting name="enddate" type="datetime" editable="false" visible="false"/>
+                </ColumnSettings>
+            </ParameterTable>
+            <ParameterTable name="cif_ebank_rules">
+                <ColumnSettings>
+                    <ColumnSetting name="id" type="numeric" editable="false" visible="false" identity="true"/>
+                    <ColumnSetting name="interfaceid" type="string" editable="false" visible="false"/>
+                    <ColumnSetting name="username" type="string" editable="false" visible="false"/>
+                    <ColumnSetting name="inputdate" type="datetime" editable="false" visible="false"/>
+                    <ColumnSetting name="cmpcode" type="string" editable="false" visible="false"/>
+                    <ColumnSetting name="sort" type="string" editable="true" visible="true" required="true"/>
+                    <ColumnSetting name="acnum" type="string" editable="true" visible="true" required="true"/>
+                    <ColumnSetting name="sortorderindex" type="numeric" editable="true" visible="true" required="true"/>
+                    <ColumnSetting name="partneracnum" type="string" editable="true" visible="true" required="false"/>
+                    <ColumnSetting name="curcode" type="string" editable="true" visible="true" required="false"/>
+                    <ColumnSetting name="amountsign" type="numeric" editable="true" visible="true" required="false" webControlType="DropDownList" enumerator=" ;-1;1"/>
+                    <ColumnSetting name="trtype" type="string" editable="true" visible="true" required="false"/>
+                    <ColumnSetting name="comment" type="string" editable="true" visible="true" required="false"/>
+                    <ColumnSetting name="el1" type="string" editable="true" visible="true" required="false"/>
+                    <!--webControlType="DropDownList" sqlFillCommand="select '' as value, '' as text union all select code as value, code + ' / ' + name as text from oas_element where cmpcode='currentCompany' and deldate is null and elmlevel=1" connectionStringId="CODA"-->
+                    <ColumnSetting name="el2" type="string" editable="true" visible="true" required="false"/>
+                    <!--webControlType="DropDownList" sqlFillCommand="select '' as value, '' as text union all select code as value, code + ' / ' + name as text from oas_element where cmpcode='currentCompany' and deldate is null and elmlevel=2" connectionStringId="CODA"-->
+                    <ColumnSetting name="el3" type="string" editable="true" visible="true" required="false"/>
+                    <!--webControlType="DropDownList" sqlFillCommand="select '' as value, '' as text union all select code as value, code + ' / ' + name as text from oas_element where cmpcode='currentCompany' and deldate is null and elmlevel=3" connectionStringId="CODA"-->
+                    <ColumnSetting name="el4" type="string" editable="true" visible="true" required="false"/>
+                    <!--webControlType="DropDownList" sqlFillCommand="select '' as value, '' as text union all select code as value, code + ' / ' + name as text from oas_element where cmpcode='currentCompany' and deldate is null and elmlevel=4" connectionStringId="CODA"-->
+                    <ColumnSetting name="el5" type="string" editable="true" visible="true" required="false"/>
+                    <!--webControlType="DropDownList" sqlFillCommand="select '' as value, '' as text union all select code as value, code + ' / ' + name as text from oas_element where cmpcode='currentCompany' and deldate is null and elmlevel=5" connectionStringId="CODA"-->
+                    <ColumnSetting name="el6" type="string" editable="true" visible="true" required="false"/>
+                    <!--webControlType="DropDownList" sqlFillCommand="select '' as value, '' as text union all select code as value, code + ' / ' + name as text from oas_element where cmpcode='currentCompany' and deldate is null and elmlevel=6" connectionStringId="CODA"-->
+                    <ColumnSetting name="el7" type="string" editable="true" visible="true" required="false"/>
+                    <!--webControlType="DropDownList" sqlFillCommand="select '' as value, '' as text union all select code as value, code + ' / ' + name as text from oas_element where cmpcode='currentCompany' and deldate is null and elmlevel=7" connectionStringId="CODA"-->
+                    <ColumnSetting name="el8" type="string" editable="true" visible="true" required="false"/>
+                    <!--webControlType="DropDownList" sqlFillCommand="select '' as value, '' as text union all select code as value, code + ' / ' + name as text from oas_element where cmpcode='currentCompany' and deldate is null and elmlevel=8" connectionStringId="CODA"-->
+                    <ColumnSetting name="descr" type="string" editable="true" visible="true" required="false"/>
+                    <ColumnSetting name="descr2" type="string" editable="true" visible="true" required="false"/>
+                    <ColumnSetting name="postable" type="numeric" editable="true" visible="true" required="true" webControlType="CheckBox" />
+                    <ColumnSetting name="destination" type="numeric" editable="true" visible="true" required="true" webControlType="DropDownList" enumerator="11;35"/>
+                    <ColumnSetting name="enduser" type="string" editable="false" visible="false"/>
+                    <ColumnSetting name="enddate" type="datetime" editable="false" visible="false"/>
+                </ColumnSettings>
+            </ParameterTable>
+            <ParameterTable name="cif_ebank_accode_list">
+                <ColumnSettings>
+                    <ColumnSetting name="id" type="numeric" editable="false" visible="false" identity="true"/>
+                    <ColumnSetting name="interfaceid" type="string" editable="false" visible="false"/>
+                    <ColumnSetting name="username" type="string" editable="false" visible="false"/>
+                    <ColumnSetting name="inputdate" type="datetime" editable="false" visible="false"/>
+                    <ColumnSetting name="cmpcode" type="string" editable="false" visible="false"/>
+                    <ColumnSetting name="trtype" type="string" editable="true" visible="true" required="true"/>
+                    <ColumnSetting name="accode" type="string" editable="true" visible="true" required="true"/>
+                    <ColumnSetting name="enduser" type="string" editable="false" visible="false"/>
+                    <ColumnSetting name="enddate" type="datetime" editable="false" visible="false"/>
+                </ColumnSettings>
+            </ParameterTable>
+            <ParameterTable name="cif_ebank_dual">
+            <ColumnSettings>
+              <ColumnSetting name="id" type="numeric" editable="false" visible="false" identity="true"/>
+              <ColumnSetting name="interfaceid" type="string" editable="false" visible="false"/>
+              <ColumnSetting name="username" type="string" editable="false" visible="false"/>
+              <ColumnSetting name="inputdate" type="datetime" editable="false" visible="false"/>
+              <ColumnSetting name="cmpcode" type="string" editable="false" visible="false"/>
+              <ColumnSetting name="curfrom" type="string" editable="true" visible="true" required="true" webControlType="DropDownList" sqlFillCommand="select distinct curcode as value, curcode as text from oas_curlist where cmpcode='currentCompany'" connectionStringId="CODA"/>
+              <ColumnSetting name="curto" type="string" editable="true" visible="true" required="true" webControlType="DropDownList" sqlFillCommand="select distinct curcode as value, curcode as text from oas_curlist where cmpcode='currentCompany'" connectionStringId="CODA"/>
+              <ColumnSetting name="enduser" type="string" editable="false" visible="false"/>
+              <ColumnSetting name="enddate" type="datetime" editable="false" visible="false"/>
+            </ColumnSettings>
+          </ParameterTable>
+            <ParameterTable name="cif_ebank_match_list">
+            <ColumnSettings>
+              <ColumnSetting name="id" type="numeric" editable="false" visible="false" identity="true"/>
+              <ColumnSetting name="interfaceid" type="string" editable="false" visible="false"/>
+              <ColumnSetting name="username" type="string" editable="false" visible="false"/>
+              <ColumnSetting name="inputdate" type="datetime" editable="false" visible="false"/>
+              <ColumnSetting name="cmpcode" type="string" editable="false" visible="false"/>
+              <ColumnSetting name="sort" type="string" editable="true" visible="true" required="true"/>
+              <ColumnSetting name="acnum" type="string" editable="true" visible="true" required="true"/>
+              <ColumnSetting name="doccode" type="string" editable="true" visible="true" required="true" webControlType="DropDownList" sqlFillCommand="select code as value, code + ' / ' + name as text from oas_document where cmpcode='currentCompany' and deldate is null" connectionStringId="CODA"/>
+              <ColumnSetting name="linetype" type="numeric" editable="true" visible="true" required="true" webControlType="DropDownList" enumerator="157;158"/>
+              <ColumnSetting name="include_range_start" type="string" editable="true" visible="true" required="false"/>
+              <ColumnSetting name="include_range_end" type="string" editable="true" visible="true" required="false"/>
+              <ColumnSetting name="exclude_range_start" type="string" editable="true" visible="true" required="false"/>
+              <ColumnSetting name="exclude_range_end" type="string" editable="true" visible="true" required="false"/>
+              <ColumnSetting name="debit" type="numeric" editable="true" visible="true" required="true" webControlType="CheckBox" />
+              <ColumnSetting name="credit" type="numeric" editable="true" visible="true" required="true" webControlType="CheckBox" />
+              <ColumnSetting name="reval_doccode" type="string" editable="true" visible="true" required="false" webControlType="DropDownList" sqlFillCommand="select '' as value, '' as text union all select code as value, code + ' / ' + name as text from oas_document where cmpcode='currentCompany' and deldate is null" connectionStringId="CODA"/>
+              <ColumnSetting name="reval_include_start" type="string" editable="true" visible="true" required="false"/>
+              <ColumnSetting name="reval_include_end" type="string" editable="true" visible="true" required="false"/>
+              <ColumnSetting name="reval_exclude_start" type="string" editable="true" visible="true" required="false"/>
+              <ColumnSetting name="reval_exclude_end" type="string" editable="true" visible="true" required="false"/>
+              <ColumnSetting name="enduser" type="string" editable="false" visible="false"/>
+              <ColumnSetting name="enddate" type="datetime" editable="false" visible="false"/>
+            </ColumnSettings>
+          </ParameterTable>
+            <ParameterTable name="cif_ebank_opening">
+            <ColumnSettings>
+              <ColumnSetting name="id" type="numeric" editable="false" visible="false" identity="true"/>
+              <ColumnSetting name="interfaceid" type="string" editable="false" visible="false"/>
+              <ColumnSetting name="username" type="string" editable="false" visible="false"/>
+              <ColumnSetting name="inputdate" type="datetime" editable="false" visible="false"/>
+              <ColumnSetting name="cmpcode" type="string" editable="false" visible="false"/>
+              <ColumnSetting name="sort" type="string" editable="true" visible="true" required="true"/>
+              <ColumnSetting name="acnum" type="string" editable="true" visible="true" required="true"/>
+              <ColumnSetting name="openacc" type="numeric" editable="true" visible="true" required="true"/>
+              <ColumnSetting name="openhome" type="numeric" editable="true" visible="true" required="true"/>
+              <ColumnSetting name="opendual" type="numeric" editable="true" visible="true" required="true"/>
+              <ColumnSetting name="enduser" type="string" editable="false" visible="false"/>
+              <ColumnSetting name="enddate" type="datetime" editable="false" visible="false"/>
+            </ColumnSettings>
+          </ParameterTable>
+        </ParameterTables>
+    </InterfaceParams>
+    <Files>
+        <File>
+            <FileParams>
+                <Type>fixlength</Type>
+                <Separator>;</Separator>
+                <TextMarker>'</TextMarker>
+                <TableName>dummy</TableName>
+                <HasHeadLine>false</HasHeadLine>
+                <Encoding>1252</Encoding>
+                <FileNamePrefix></FileNamePrefix>
+                <DriverFile>true</DriverFile>
+                <FilePartDefinitionPosition>0</FilePartDefinitionPosition>
+            </FileParams>
+            <FileParts>
+                <FilePart tablename="cif_ebank_khb_card_all">
+                    <Prefixes>
+                        <Prefix value=""/>
+                    </Prefixes>
+                    <ColumnParams>
+                        <Column name="line" type="string" length="500" insert="true" />
+                    </ColumnParams>
+                </FilePart>
+            </FileParts>
+        </File>
+    </Files>
+</Interface>

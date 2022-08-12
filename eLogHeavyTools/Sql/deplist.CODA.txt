@@ -3,3 +3,4 @@ CODA\cif_ebank_fio_load.sql
 CODA\cif_ebank_paypal_load.sql
 CODA\cif_ebank_akcenta_load.sql
 CODA\sp_cif_ebank_otp_card_load.sql
+CODA\sp_cif_ebank_khb_card_load.sql
