@@ -256,6 +256,9 @@
     <Compile Include="Masters\PriceTable\PrcType.cs" />
     <Compile Include="Module.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Purchase\PinvPackage\ApprovedPinvHeadPackageSearchPage.cs" />
+    <Compile Include="Purchase\PinvPackage\ApprovedPinvHeadPackageSearchProvider.cs" />
+    <Compile Include="Purchase\PinvPackage\ApprovedPinvHeadPackageSearchTab.cs" />
     <Compile Include="Purchase\Pord\Import\PordHeadImportResultSet.cs" />
     <Compile Include="Purchase\Pord\Import\PordHeadImportResultSets.cs" />
     <Compile Include="Purchase\Pord\Import\PordHeadImportService.cs" />
@@ -317,7 +320,9 @@
     <Compile Include="Webshop\OlcWebshopGenerated.cs" />
     <Compile Include="Webshop\WebshopType.cs" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Purchase\Pinv\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

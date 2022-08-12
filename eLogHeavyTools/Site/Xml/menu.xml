@@ -100,7 +100,6 @@
 			<Item ID="OlcPrctableSearchPage" Name="$olcprctablesearchpage" PageID="eLog.HeavyTools.Masters.PriceTable.OlcPrctableSearchPage"/>
 			
 			<Item ID="SContract" Name="$scontract" PageID="eLog.Base.Sales.SContract.SContractSearchPage"/>
-			<Item ID="SContract" Name="$scontract" PageID="eLog.Base.Sales.SContract.SContractSearchPage"/>
             <Item ID="Sord" Name="$sord" PageID="eLog.Base.Sales.Sord.SordHeadSearchPage"/>
             <Item ID="SordLineAll" Name="$sordlineall" PageID="eLog.Base.Sales.Sord.SordLineAllSearchPage"/>
             <Item ID="SordUqCard" Name="$sorduqcard" PageID="eLog.Base.Sales.Sord.SordUqCardSearchPage"/>
@@ -128,6 +127,7 @@
             <!--<Item ID="Pinv" Name="$pinv" PageID="eLog.Base.Purchase.Pinv.PinvHeadSearchPage"/>-->
             <Item ID="PinvCostLine" Name="$pinvcostline" PageID="eLog.Base.Purchase.Pinv.PinvCostLineSearchPage"/>
             <Item ID="PinvCostApproval" Name="$pinvcostapproval" PageID="eLog.Base.Purchase.Pinv.PinvCostApprovalSearchPage"/>
+            <Item ID="ApprovedPinvHeadPackage" Name="$approvedpinvheadpackage" PageID="eLog.HeavyTools.Purchase.PinvPackage.ApprovedPinvHeadPackageSearchPage"/>
         </Item>
         <Item ID="Warehouse" Name="$warehouse_root">
             <Item ID="Stock" Name="$stock" PageID="eLog.Base.Warehouse.Stock.StockSearchPage"/>

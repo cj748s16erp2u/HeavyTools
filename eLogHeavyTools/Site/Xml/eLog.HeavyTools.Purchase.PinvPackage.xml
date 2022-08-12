@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Schema xmlns="http://tempuri.org/RenderableSchema.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://tempuri.org/RenderableSchema.xsd RenderableSchema.xsd">
+  
+  <TabPage Name="ApprovedPinvHeadPackageSearchTab">
+    <SearchFilterBar ID="SrcBar">
+      <!--<CheckedCombo Field="cmpcode" ListID="CodaInt.Base.Setup.Company.CompanyList#sessioncmp" Width="180" ComboFlags="AutoSelectOne" />-->
+    </SearchFilterBar>
+    <Grid ID="searchResults" Label="$apprphpackage_search_results" />
+  </TabPage>
+  <Search Name="ApprovedPinvHeadPackageSearchProvider">
+    <Column FieldName="cmpcode" Width="80" />
+    <Column FieldName="packagecode" Width="250" PKFieldName="true" />
+    <Column FieldName="paydate" Width="120" Format="D" />
+    <Column FieldName="genhomenet" Width="120" Format="C"/>
+    <Column FieldName="homenet" Width="120" Format="C"/>    
+  </Search>
+</Schema>
