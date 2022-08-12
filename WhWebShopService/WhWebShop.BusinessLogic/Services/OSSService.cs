@@ -13,15 +13,15 @@ namespace eLog.HeavyTools.Services.WhWebShop.BusinessLogic.Services;
 [RegisterDI(Interface = typeof(IOSSService))]
 public class OSSService : LogicServiceBase<OlcTaxtransext>, IOSSService
 {
-    protected ICountryService countryService;
-    protected ITtaxtrans taxtrans;
+    protected IOlsCountryService countryService;
+    protected IOlsTaxtransService taxtransService;
     IOptions<Options.OSSOptions> ossoptions;
 
 
-    public OSSService(IValidator<OlcTaxtransext> validator, IRepository<OlcTaxtransext> repository, IUnitOfWork unitOfWork, IEnvironmentService environmentService, ICountryService countryService, ITtaxtrans taxtrans, IOptions<Options.OSSOptions> ossoptions) : base(validator, repository, unitOfWork, environmentService)
+    public OSSService(IValidator<OlcTaxtransext> validator, IRepository<OlcTaxtransext> repository, IUnitOfWork unitOfWork, IEnvironmentService environmentService, IOlsCountryService countryService, IOlsTaxtransService taxtransService, IOptions<Options.OSSOptions> ossoptions) : base(validator, repository, unitOfWork, environmentService)
     {
         this.countryService = countryService ?? throw new ArgumentNullException(nameof(countryService));
-        this.taxtrans = taxtrans ?? throw new ArgumentNullException(nameof(taxtrans));
+        this.taxtransService = taxtransService ?? throw new ArgumentNullException(nameof(taxtransService));
         this.ossoptions = ossoptions ?? throw new ArgumentNullException(nameof(ossoptions));
     }
 
@@ -61,7 +61,7 @@ public class OSSService : LogicServiceBase<OlcTaxtransext>, IOSSService
             {
                 throw new ArgumentOutOfRangeException(nameof(ossparam), ossparam.CoundtyId);
             }
-            var t = await taxtrans.GetAsync(p => p.Ttid == e.Ttid, cancellationtoken);
+            var t = await taxtransService.GetAsync(p => p.Ttid == e.Ttid, cancellationtoken);
             if (t == null)
             {
                 throw new ArgumentOutOfRangeException(nameof(e.Ttid));

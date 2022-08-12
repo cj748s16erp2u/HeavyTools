@@ -24,6 +24,10 @@ public class OrderJsonParamsDto
     public string Sinv_name { get; set; } = null!;
     [JsonField(false)]
     public string Note { get; set; } = null!;
+
+    [JsonField(true)]
+    public int? GiftCardLogId { get; set; } = null!;
+    
     [JsonField(true)]
     public string Sinv_countryid { get; set; } = null!;
     [JsonField(true)]

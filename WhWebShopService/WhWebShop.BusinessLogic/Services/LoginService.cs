@@ -17,12 +17,12 @@ namespace eLog.HeavyTools.Services.WhWebShop.BusinessLogic.Services;
 internal class LoginService : ILoginService
 {
     private readonly IRepository<CfwUser> userRepository;
-    private readonly ISysvalService sysvalService;
+    private readonly IOlsSysvalService sysvalService;
     private readonly IOptions<Options.CryptoOptions> cryptoOptions;
 
     public LoginService(
         IRepository<CfwUser> userRepository,
-        ISysvalService sysvalService,
+        IOlsSysvalService sysvalService,
         IOptions<Options.CryptoOptions> cryptoOptions)
     {
         this.userRepository = userRepository ?? throw new ArgumentNullException(nameof(userRepository));

@@ -140,7 +140,11 @@ public class JsonParser
     }
 
     internal static T ParseObject<T>(JObject parms)
-    { 
+    {
+        if (parms == null)
+        {
+            throw new Exception("Json parse error");
+        }
         foreach (var a in typeof(T).GetCustomAttributes(false))
         {
             var ja = a as JsonObjectAttributes;

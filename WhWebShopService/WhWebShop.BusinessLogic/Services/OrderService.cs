@@ -10,8 +10,7 @@ using eLog.HeavyTools.Services.WhWebShop.BusinessEntities.Model;
 using eLog.HeavyTools.Services.WhWebShop.BusinessLogic.Helpers;
 using eLog.HeavyTools.Services.WhWebShop.BusinessLogic.Helpers.CSVParser;
 using eLog.HeavyTools.Services.WhWebShop.BusinessLogic.Services.Base;
-using eLog.HeavyTools.Services.WhWebShop.BusinessLogic.Services.Interfaces;
-using eLog.HeavyTools.Services.WhWebShop.BusinessLogic.Services.PriceCalc;
+using eLog.HeavyTools.Services.WhWebShop.BusinessLogic.Services.Interfaces; 
 using eLog.HeavyTools.Services.WhWebShop.BusinessLogic.Services.Sord;
 using eLog.HeavyTools.Services.WhWebShop.BusinessLogic.Validators.Interfaces;
 using eLog.HeavyTools.Services.WhWebShop.DataAccess.Repositories.Interfaces;
@@ -26,20 +25,20 @@ namespace eLog.HeavyTools.Services.WhWebShop.BusinessLogic.Services;
 [RegisterDI(Interface = typeof(IOrderService))]
 public class OrderService : LogicServiceBase<OlsSordhead>, IOrderService
 {
-    private readonly ISordHeadService sordHeadService;
-    private readonly ISordLineService sordLineService;
-    private readonly IRecIdService recIdService;
+    private readonly IOlsSordheadService sordHeadService;
+    private readonly IOlsSordlineService sordLineService;
+    private readonly IOlsRecidService recIdService;
     private readonly IItemCache itemCache;
     private readonly IOptions<Options.SordOptions> sordoptions;
     private readonly IOSSService oSSService;
-    private readonly ICountryService countryService;
-    private readonly IOlcSordHeadService olcSordHeadService;
-    private readonly IOlcSordLineService olcSordLineService;
+    private readonly IOlsCountryService countryService;
+    private readonly IOlcSordheadService olcSordHeadService;
+    private readonly IOlcSordlineService olcSordLineService;
 
 
     //OrderServiceCSV orderServiceCSV;
 
-    public OrderService(IValidator<OlsSordhead> validator, IRepository<OlsSordhead> repository, IUnitOfWork unitOfWork, IEnvironmentService environmentService, ISordHeadService sordHeadService, ISordLineService sordLineService, IRecIdService recIdService, IItemCache itemCache, IOptions<Options.SordOptions> sordoptions, IOSSService oSSService, ICountryService countryService, IOlcSordHeadService olcSordHeadService, IOlcSordLineService olcSordLineService) : base(validator, repository, unitOfWork, environmentService)
+    public OrderService(IValidator<OlsSordhead> validator, IRepository<OlsSordhead> repository, IUnitOfWork unitOfWork, IEnvironmentService environmentService, IOlsSordheadService sordHeadService, IOlsSordlineService sordLineService, IOlsRecidService recIdService, IItemCache itemCache, IOptions<Options.SordOptions> sordoptions, IOSSService oSSService, IOlsCountryService countryService, IOlcSordheadService olcSordHeadService, IOlcSordlineService olcSordLineService) : base(validator, repository, unitOfWork, environmentService)
     {
         this.sordHeadService = sordHeadService ?? throw new ArgumentNullException(nameof(sordHeadService));
         this.sordLineService = sordLineService ?? throw new ArgumentNullException(nameof(sordLineService));
@@ -188,7 +187,8 @@ public class OrderService : LogicServiceBase<OlsSordhead>, IOrderService
         AddXElement(root, order, nameof(order.Exchangepackagesnumber));
         AddXElement(root, order, nameof(order.ShippingId));
         AddXElement(root, order, nameof(order.PaymentId));
-
+        AddXElement(root, order, nameof(order.GiftCardLogId));
+        
         if (order.Cart.Cupons.Length > 0)
         {
             root.Add(new XElement("Coupons", string.Join(",", order.Cart.Cupons.ToArray())));

@@ -12,7 +12,7 @@ using Xunit;
 
 namespace eLog.HeavyTools.Services.WhWebShop.Test.Services;
 
-public class RecidTest : TestBase2<OlsRecid, IRecIdService>
+public class RecidTest : TestBase2<OlsRecid, IOlsRecidService>
 {
     public RecidTest(ITestOutputHelper testOutputHelper, TestFixture fixture) : base(testOutputHelper, fixture)
     {

@@ -211,6 +211,11 @@ namespace eLog.HeavyTools.Sales.Sord
             get => this.XmlManipute.Get("Coupons");
             set => this.XmlManipute.Set("Coupons", value);
         }
+        public string GiftCardLogId
+        {
+            get => this.XmlManipute.Get("GiftCardLogId");
+            set => this.XmlManipute.Set("GiftCardLogId", value);
+        }
 
     }
 }

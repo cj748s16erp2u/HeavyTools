@@ -18,7 +18,7 @@ public class OSSController : BaseController
 {
     private readonly IOSSService service;
 
-    public OSSController(IApiLoggerService apiloggerservice, IOSSService service) : base (apiloggerservice)
+    public OSSController(IOlcApiloggerService apiloggerservice, IOSSService service) : base (apiloggerservice)
     {
         this.service = service ?? throw new ArgumentNullException(nameof(service));
     }
@@ -34,7 +34,7 @@ public class OSSController : BaseController
         }
         catch (Exception ex)
         {
-            await ERP4U.Log.LoggerManager.Instance.LogErrorAsync<OrderController>(ex);
+            await ERP4U.Log.LoggerManager.Instance.LogErrorAsync<OSSController>(ex);
             return this.BadRequest(ex.Message);
         }
     }

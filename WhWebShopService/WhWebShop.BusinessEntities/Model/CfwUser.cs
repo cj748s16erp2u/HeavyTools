@@ -12,6 +12,16 @@ namespace eLog.HeavyTools.Services.WhWebShop.BusinessEntities.Model
         public CfwUser()
         {
             CfwUsergroup = new HashSet<CfwUsergroup>();
+            OlcAction = new HashSet<OlcAction>();
+            OlcActioncountry = new HashSet<OlcActioncountry>();
+            OlcActioncouponnumber = new HashSet<OlcActioncouponnumber>();
+            OlcActionext = new HashSet<OlcActionext>();
+            OlcActionretail = new HashSet<OlcActionretail>();
+            OlcActionwebhop = new HashSet<OlcActionwebhop>();
+            OlcGiftcard = new HashSet<OlcGiftcard>();
+            OlcGiftcardlog = new HashSet<OlcGiftcardlog>();
+            OlcItem = new HashSet<OlcItem>();
+            OlcPrctable = new HashSet<OlcPrctable>();
             OlcSordhead = new HashSet<OlcSordhead>();
             OlcSordline = new HashSet<OlcSordline>();
             OlcTaxtransext = new HashSet<OlcTaxtransext>();
@@ -67,6 +77,26 @@ namespace eLog.HeavyTools.Services.WhWebShop.BusinessEntities.Model
 
         [InverseProperty("Usr")]
         public virtual ICollection<CfwUsergroup> CfwUsergroup { get; set; }
+        [InverseProperty("Addusr")]
+        public virtual ICollection<OlcAction> OlcAction { get; set; }
+        [InverseProperty("Addusr")]
+        public virtual ICollection<OlcActioncountry> OlcActioncountry { get; set; }
+        [InverseProperty("Addusr")]
+        public virtual ICollection<OlcActioncouponnumber> OlcActioncouponnumber { get; set; }
+        [InverseProperty("Addusr")]
+        public virtual ICollection<OlcActionext> OlcActionext { get; set; }
+        [InverseProperty("Addusr")]
+        public virtual ICollection<OlcActionretail> OlcActionretail { get; set; }
+        [InverseProperty("Addusr")]
+        public virtual ICollection<OlcActionwebhop> OlcActionwebhop { get; set; }
+        [InverseProperty("Addusr")]
+        public virtual ICollection<OlcGiftcard> OlcGiftcard { get; set; }
+        [InverseProperty("Addusr")]
+        public virtual ICollection<OlcGiftcardlog> OlcGiftcardlog { get; set; }
+        [InverseProperty("Addusr")]
+        public virtual ICollection<OlcItem> OlcItem { get; set; }
+        [InverseProperty("Addusr")]
+        public virtual ICollection<OlcPrctable> OlcPrctable { get; set; }
         [InverseProperty("Addusr")]
         public virtual ICollection<OlcSordhead> OlcSordhead { get; set; }
         [InverseProperty("Addusr")]

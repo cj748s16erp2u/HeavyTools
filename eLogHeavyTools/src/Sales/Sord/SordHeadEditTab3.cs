@@ -124,6 +124,7 @@ namespace eLog.HeavyTools.Sales.Sord
                     SetTextBoxValue("ShippingId", olc.ShippingId);
                     SetTextBoxValue("PaymentId", olc.PaymentId);
                     SetTextBoxValue("Coupons", olc.Coupons);
+                    SetTextBoxValue("GiftCardLogId", olc.GiftCardLogId);
 
                 }
 
@@ -208,6 +209,7 @@ namespace eLog.HeavyTools.Sales.Sord
             olc.ShippingId = (this.EditGroup1["ShippingId"] as Textbox).GetStringValue();
             olc.PaymentId = (this.EditGroup1["PaymentId"] as Textbox).GetStringValue();
             olc.Coupons = (this.EditGroup1["Coupons"] as Textbox).GetStringValue();
+            olc.GiftCardLogId = (this.EditGroup1["GiftCardLogId"] as Textbox).GetStringValue();
 
 
             var sordLine = map.Get<SordLine>();

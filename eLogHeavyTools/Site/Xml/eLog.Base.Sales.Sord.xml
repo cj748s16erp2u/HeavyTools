@@ -60,7 +60,7 @@
             <Textbox Field="note" Rows="2" ColsToSpan="4"/>
         </LayoutTable>
 		
-		<LayoutTable ControlGroup="WebShop" Columns="{120, None}; {120, None}; {20, Empty}; {120, None}; {120, None}; {20, Empty}; {120, None}; {120, None}" ID="WebShopEditGroup" Label="$webshop_editgroup" >
+		<LayoutTable ControlGroup="WebShop" Columns="{120, None}; {120, None}; {20, Empty}; {120, None}; {120, None}; {20, Empty}; {120, None}; {120, None}" ID="WebShopEditGroup" Label="$webshop_editgroup" Open="false">
 			<Combo Field="wid" ListID="eLog.HeavyTools.Webshop.WebshopList" ComboFlags="None" Disabled="True" CustomData="olc" ColsToSpan="4"/>
 			<ForceNextRow/>
 			<Textbox Field="loyaltycardno" ColsToSpan="4" CustomData="olc" Disabled="True"/>
@@ -140,11 +140,9 @@
 			<ForceNextRow/>
 			<Textbox Field="Coupons" ColsToSpan="4" Disabled="True"/>
 			<ForceNextRow/>
-
-			
-			
-			
-			
+			<Textbox Field="GiftCardLogId" ColsToSpan="4" Disabled="True"/>
+			<ForceNextRow/>
+ 
         </LayoutTable>		
 		
         <LayoutTable ControlGroup="SordLine" Columns="{120, None}; {120, None}; {20, Empty}; {120, None}; {120, None}; {20, Empty}; {120, None}; {120, None}" ID="EditGroup2" Label="$sordline_editgroup">
@@ -175,7 +173,7 @@
             <Intbox Field="discpercntprcid" Visible="false" />
         </LayoutTable>
 		
-		<LayoutTable ControlGroup="SordLineWebShop" Columns="{120, None}; {120, None}; {20, Empty}; {120, None}; {120, None}; {20, Empty}; {120, None}; {120, None}" ID="SordlineWebShopEditGroup" Label="$sordlinewebshop_editgroup" >
+		<LayoutTable ControlGroup="SordLineWebShop" Columns="{120, None}; {120, None}; {20, Empty}; {120, None}; {120, None}; {20, Empty}; {120, None}; {120, None}" ID="SordlineWebShopEditGroup" Label="$sordlinewebshop_editgroup" Open="false">
 			<Textbox Field="OrigSelVal" ColsToSpan="2" Disabled="True"/>
 			<ForceNextRow/>			
 			<Textbox Field="SelPrc" ColsToSpan="2" Disabled="True"/>
@@ -251,7 +249,7 @@
             <Intbox Field="discpercntprcid" Visible="false" />
         </LayoutTable>
 				
-		<LayoutTable ControlGroup="SordLineWebShop" Columns="{120, None}; {120, None}; {20, Empty}; {120, None}; {120, None}; {20, Empty}; {120, None}; {120, None}" ID="SordlineWebShopEditGroup" Label="$sordlinewebshop_editgroup" >
+		<LayoutTable ControlGroup="SordLineWebShop" Columns="{120, None}; {120, None}; {20, Empty}; {120, None}; {120, None}; {20, Empty}; {120, None}; {120, None}" ID="SordlineWebShopEditGroup" Label="$sordlinewebshop_editgroup" Open="false">
 			<Textbox Field="OrigSelVal" ColsToSpan="2" Disabled="True"/>
 			<ForceNextRow/>			
 			<Textbox Field="SelPrc" ColsToSpan="2" Disabled="True"/>

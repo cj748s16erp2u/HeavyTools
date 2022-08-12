@@ -36,7 +36,17 @@ public partial class WhWebShopDbContext : DbContext
 	        public virtual DbSet<CfwGroup> CfwGroup { get; set; } = null!;
         public virtual DbSet<CfwUser> CfwUser { get; set; } = null!;
         public virtual DbSet<CfwUsergroup> CfwUsergroup { get; set; } = null!;
+        public virtual DbSet<OlcAction> OlcAction { get; set; } = null!;
+        public virtual DbSet<OlcActioncountry> OlcActioncountry { get; set; } = null!;
+        public virtual DbSet<OlcActioncouponnumber> OlcActioncouponnumber { get; set; } = null!;
+        public virtual DbSet<OlcActionext> OlcActionext { get; set; } = null!;
+        public virtual DbSet<OlcActionretail> OlcActionretail { get; set; } = null!;
+        public virtual DbSet<OlcActionwebhop> OlcActionwebhop { get; set; } = null!;
         public virtual DbSet<OlcApilogger> OlcApilogger { get; set; } = null!;
+        public virtual DbSet<OlcGiftcard> OlcGiftcard { get; set; } = null!;
+        public virtual DbSet<OlcGiftcardlog> OlcGiftcardlog { get; set; } = null!;
+        public virtual DbSet<OlcItem> OlcItem { get; set; } = null!;
+        public virtual DbSet<OlcPrctable> OlcPrctable { get; set; } = null!;
         public virtual DbSet<OlcSordhead> OlcSordhead { get; set; } = null!;
         public virtual DbSet<OlcSordline> OlcSordline { get; set; } = null!;
         public virtual DbSet<OlcTaxtransext> OlcTaxtransext { get; set; } = null!;
@@ -87,10 +97,162 @@ public partial class WhWebShopDbContext : DbContext
                     .HasConstraintName("fk_cfw_usergroup_usrid");
             });
 
+            modelBuilder.Entity<OlcAction>(entity =>
+            {
+                entity.HasKey(e => e.Aid)
+                    .HasName("pk_olc_action");
+
+                entity.HasOne(d => d.Addusr)
+                    .WithMany(p => p.OlcAction)
+                    .HasForeignKey(d => d.Addusrid)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("fk_olc_action_addusrid");
+
+                entity.HasOne(d => d.Discounta)
+                    .WithMany(p => p.InverseDiscounta)
+                    .HasForeignKey(d => d.Discountaid)
+                    .HasConstraintName("fk_olc_action_discountaid");
+            });
+
+            modelBuilder.Entity<OlcActioncountry>(entity =>
+            {
+                entity.HasKey(e => e.Acid)
+                    .HasName("pk_olc_actioncountry");
+
+                entity.HasOne(d => d.Addusr)
+                    .WithMany(p => p.OlcActioncountry)
+                    .HasForeignKey(d => d.Addusrid)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("fk_olc_actioncountry_addusrid");
+
+                entity.HasOne(d => d.Country)
+                    .WithMany(p => p.OlcActioncountry)
+                    .HasForeignKey(d => d.Countryid)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("fk_olc_actioncountry_countryid");
+            });
+
+            modelBuilder.Entity<OlcActioncouponnumber>(entity =>
+            {
+                entity.HasKey(e => e.Acnid)
+                    .HasName("pk_olc_actioncouponnumber");
+
+                entity.HasOne(d => d.Addusr)
+                    .WithMany(p => p.OlcActioncouponnumber)
+                    .HasForeignKey(d => d.Addusrid)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("fk_olc_actioncouponnumber_addusrid");
+            });
+
+            modelBuilder.Entity<OlcActionext>(entity =>
+            {
+                entity.HasKey(e => e.Axid)
+                    .HasName("pk_olc_actionext");
+
+                entity.HasOne(d => d.Addusr)
+                    .WithMany(p => p.OlcActionext)
+                    .HasForeignKey(d => d.Addusrid)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("fk_olc_actionext_addusrid");
+            });
+
+            modelBuilder.Entity<OlcActionretail>(entity =>
+            {
+                entity.HasKey(e => e.Arid)
+                    .HasName("pk_olc_actionretail");
+
+                entity.HasOne(d => d.Addusr)
+                    .WithMany(p => p.OlcActionretail)
+                    .HasForeignKey(d => d.Addusrid)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("fk_olc_actionretail_addusrid");
+            });
+
+            modelBuilder.Entity<OlcActionwebhop>(entity =>
+            {
+                entity.HasKey(e => e.Awid)
+                    .HasName("pk_olc_actionwebhop");
+
+                entity.HasOne(d => d.Addusr)
+                    .WithMany(p => p.OlcActionwebhop)
+                    .HasForeignKey(d => d.Addusrid)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("fk_olc_actionwebhop_addusrid");
+            });
+
             modelBuilder.Entity<OlcApilogger>(entity =>
             {
                 entity.HasKey(e => e.Apiid)
                     .HasName("pk_olc_apilogger");
+            });
+
+            modelBuilder.Entity<OlcGiftcard>(entity =>
+            {
+                entity.HasKey(e => e.Gcid)
+                    .HasName("pk_olc_giftcard");
+
+                entity.HasOne(d => d.Addusr)
+                    .WithMany(p => p.OlcGiftcard)
+                    .HasForeignKey(d => d.Addusrid)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("fk_olc_giftcard_addusrid");
+            });
+
+            modelBuilder.Entity<OlcGiftcardlog>(entity =>
+            {
+                entity.HasKey(e => e.Gclid)
+                    .HasName("pk_olc_giftcardlog");
+
+                entity.HasOne(d => d.Addusr)
+                    .WithMany(p => p.OlcGiftcardlog)
+                    .HasForeignKey(d => d.Addusrid)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("fk_olc_giftcardlog_addusrid");
+
+                entity.HasOne(d => d.Gc)
+                    .WithMany(p => p.OlcGiftcardlog)
+                    .HasForeignKey(d => d.Gcid)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("fk_olc_giftcardlog_gcid");
+            });
+
+            modelBuilder.Entity<OlcItem>(entity =>
+            {
+                entity.HasKey(e => e.Itemid)
+                    .HasName("pk_olc_item");
+
+                entity.Property(e => e.Itemid).ValueGeneratedNever();
+
+                entity.HasOne(d => d.Addusr)
+                    .WithMany(p => p.OlcItem)
+                    .HasForeignKey(d => d.Addusrid)
+                    .HasConstraintName("fk_olc_item_addusrid");
+            });
+
+            modelBuilder.Entity<OlcPrctable>(entity =>
+            {
+                entity.HasKey(e => e.Prcid)
+                    .HasName("pk_olc_prctable");
+
+                entity.HasOne(d => d.Addr)
+                    .WithMany(p => p.OlcPrctable)
+                    .HasForeignKey(d => d.Addrid)
+                    .HasConstraintName("fk_olc_prctable_addrid");
+
+                entity.HasOne(d => d.Addusr)
+                    .WithMany(p => p.OlcPrctable)
+                    .HasForeignKey(d => d.Addusrid)
+                    .HasConstraintName("fk_olc_prctable_addusrid");
+
+                entity.HasOne(d => d.Item)
+                    .WithMany(p => p.OlcPrctable)
+                    .HasForeignKey(d => d.Itemid)
+                    .HasConstraintName("fk_olc_prctable_itemid");
+
+                entity.HasOne(d => d.Partn)
+                    .WithMany(p => p.OlcPrctable)
+                    .HasForeignKey(d => d.Partnid)
+                    .HasConstraintName("fk_olc_prctable_partnid");
             });
 
             modelBuilder.Entity<OlcSordhead>(entity =>

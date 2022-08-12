@@ -13,6 +13,10 @@ public class CalcJsonResultDto : ResultDto
 
     public CalcItemJsonResultDto[] Items { get; set; } = null!;
 
+    public bool FreeShipping { get; set; } = false;
+
+    public bool AllItemForfree { get; set; } = false;
+
 }
 public class CalcItemJsonResultDto
 {

@@ -93,3 +93,5 @@ $SelPrc=Egység ár
 $SelVal=Nettó érték
 $SetTotPrc=Bruttó egység ár
 $SelTotVal=Bruttó érték
+$GiftCardLogId=Ajándék kártya log
+

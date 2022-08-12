@@ -14,6 +14,7 @@ namespace eLog.HeavyTools.Services.WhWebShop.BusinessEntities.Model
         public OlsItem()
         {
             InverseRootitem = new HashSet<OlsItem>();
+            OlcPrctable = new HashSet<OlcPrctable>();
             OlsSordline = new HashSet<OlsSordline>();
         }
 
@@ -87,6 +88,8 @@ namespace eLog.HeavyTools.Services.WhWebShop.BusinessEntities.Model
         public virtual OlsItem? Rootitem { get; set; }
         [InverseProperty("Rootitem")]
         public virtual ICollection<OlsItem> InverseRootitem { get; set; }
+        [InverseProperty("Item")]
+        public virtual ICollection<OlcPrctable> OlcPrctable { get; set; }
         [InverseProperty("Item")]
         public virtual ICollection<OlsSordline> OlsSordline { get; set; }
     }

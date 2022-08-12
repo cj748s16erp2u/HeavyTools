@@ -8,6 +8,7 @@ using eLog.HeavyTools.Services.WhWebShop.BusinessEntities.Model;
 using eLog.HeavyTools.Services.WhWebShop.BusinessEntities.Model.Interfaces;
 using eLog.HeavyTools.Services.WhWebShop.BusinessLogic.Services.Interfaces;
 using eLog.HeavyTools.Services.WhWebShop.Test.Base;
+using eLog.HeavyTools.Services.WhWebShop.Test.CartJsonGenerator;
 using eLog.HeavyTools.Services.WhWebShop.Test.Fixtures;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
@@ -28,51 +29,51 @@ public class PriceCalcServiceTest : TestBase<OlcPriceCalcResult, IPriceCalcServi
     [InlineData(3, -6)]
     [InlineData(0, 6)]
     [InlineData(3, 1)]
-    public void Test01(int x, int y)
+    public void Test01Test(int x, int y)
     {
         var res = this.service.Calc(x, y);
         Assert.Equal(x * y * 5, res);
     }
 
-    [Theory]
-    [InlineData(3, 6)]
-    [InlineData(-3, 6)]
-    [InlineData(3, -6)]
-    [InlineData(0, 6)]
-    [InlineData(3, 1)]
-    public async Task Test02Async(int x, int y)
-    {
-        var res = await this.TestIntl02Async(this.service, x, y);
+    private static string JSON= @"
+{ 
+    ""Cart"": {
+        ""Wid"": ""hu"",
+		""LoyaltyCardNo"": ""ABC12345678"",
+        ""CountryId"": ""HU"",
+		""Cupons"": [
 
-        if (res is not null)
-        {
-            var entity = await this.dbContext.OlcPriceCalcResults.FirstOrDefaultAsync(r => r.Id == res.Id);
-            Assert.NotNull(entity);
-            Assert.Equal(res.Result, entity!.Value);
-        }
+            ""Cupon1"",
+			""Cupon2""],
+        ""Items"": [
+            {
+            ""ItemCode"": ""C6S22449NA.L"",
+				""Quantity"": 2
+            },{
+            ""ItemCode"": ""C6S22145ST.L"",
+				""Quantity"": 3
+            },{
+            ""ItemCode"": ""G3S20529RT.L"",
+				""Quantity"": 4
+            }]
+	}
+}
+ ";
+
+    [Fact]
+    public async void Test01()
+    {
+        var jo = Newtonsoft.Json.Linq.JObject.Parse(JSON);
+        var res = await this.service.CalcJsonAsync(jo);
+        Assert.True(res.Success);
     }
 
-    private async Task<CalcResultDto?> TestIntl02Async(IPriceCalcService service, int x, int y)
+    private async Task<CalcJsonResultDto?> TestIntl02Async(IPriceCalcService service, string json)
     {
-        var parms = new CalcParamsDto
-        {
-            X = x,
-            Y = y
-        };
-
-        if (x > y)
-        {
-            var ex = await Assert.ThrowsAnyAsync<Exception>(() => service.CalcAsync(parms));
-            Assert.Contains("Parameter 'y less than x'", ex.Message);
-            return null;
-        }
-        else
-        {
-            var res = await service.CalcAsync(parms);
-            Assert.NotNull(res);
-            Assert.NotNull(res.Id);
-            return res;
-        }
+        var jo = Newtonsoft.Json.Linq.JObject.Parse(json);
+        var res = await service.CalcJsonAsync(jo);
+        return res;
+ 
     }
 
     [Fact]
@@ -82,7 +83,7 @@ public class PriceCalcServiceTest : TestBase<OlcPriceCalcResult, IPriceCalcServi
 
         var list = new int[20].Select(i =>
         {
-            var scope = scopeFactory.CreateScope();
+            var scope = scopeFactory!.CreateScope();
             return new Worker<OlcPriceCalcResult, IPriceCalcService>
             {
                 Scope = scope,
@@ -121,15 +122,9 @@ public class PriceCalcServiceTest : TestBase<OlcPriceCalcResult, IPriceCalcServi
 
                 try
                 {
-                    var x = rnd.Next(255);
-                    var y = rnd.Next(255);
 
-                    if (x > y)
-                    {
-                        (x, y) = (y, x);
-                    }
-
-                    await this.TestIntl02Async(s.Service, x, y);
+                    var res = await this.TestIntl02Async(s.Service!, CartGenerator.GetRandomCart());
+                    Assert.True(res.Success);
                 }
                 finally
                 {

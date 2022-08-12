@@ -11,6 +11,9 @@ namespace eLog.HeavyTools.Services.WhWebShop.BusinessEntities.Dto
     public class CalcJsonParamsDto
     {
         [JsonField(true, false)]
+        public bool FirstPurchase { get; set; } = false;
+
+        [JsonField(true, false)]
         public string Wid { get; set; } = null!;
         
         [JsonField(true, false)]

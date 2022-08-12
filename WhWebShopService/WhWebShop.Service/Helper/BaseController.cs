@@ -10,11 +10,11 @@ namespace eLog.HeavyTools.Services.WhWebShop.Service.Helper
 {
     abstract public class BaseController : Controller
     {
-        private IApiLoggerService apiloggerservice;
+        private IOlcApiloggerService apiloggerservice;
 
         public OlcApilogger? apilogger;
 
-        public BaseController(IApiLoggerService apiloggerservice)
+        public BaseController(IOlcApiloggerService apiloggerservice)
         {
             this.apiloggerservice = apiloggerservice ?? throw new ArgumentNullException(nameof(apiloggerservice));
         }

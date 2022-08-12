@@ -11,6 +11,7 @@ namespace eLog.HeavyTools.Services.WhWebShop.BusinessEntities.Model
     {
         public OlsCountry()
         {
+            OlcActioncountry = new HashSet<OlcActioncountry>();
             OlcTaxtransext = new HashSet<OlcTaxtransext>();
             OlsCompany = new HashSet<OlsCompany>();
             OlsPartnaddr = new HashSet<OlsPartnaddr>();
@@ -51,6 +52,8 @@ namespace eLog.HeavyTools.Services.WhWebShop.BusinessEntities.Model
         [ForeignKey("Addusrid")]
         [InverseProperty("OlsCountry")]
         public virtual CfwUser Addusr { get; set; } = null!;
+        [InverseProperty("Country")]
+        public virtual ICollection<OlcActioncountry> OlcActioncountry { get; set; }
         [InverseProperty("Country")]
         public virtual ICollection<OlcTaxtransext> OlcTaxtransext { get; set; }
         [InverseProperty("Country")]

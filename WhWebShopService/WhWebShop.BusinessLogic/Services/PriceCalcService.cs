@@ -7,12 +7,12 @@ using eLog.HeavyTools.Services.WhWebShop.BusinessEntities.Dto;
 using eLog.HeavyTools.Services.WhWebShop.BusinessEntities.Model;
 using eLog.HeavyTools.Services.WhWebShop.BusinessLogic.Helpers;
 using eLog.HeavyTools.Services.WhWebShop.BusinessLogic.Services.Base;
-using eLog.HeavyTools.Services.WhWebShop.BusinessLogic.Services.Interfaces;
-using eLog.HeavyTools.Services.WhWebShop.BusinessLogic.Services.PriceCalc;
+using eLog.HeavyTools.Services.WhWebShop.BusinessLogic.Services.Interfaces; 
 using eLog.HeavyTools.Services.WhWebShop.BusinessLogic.Validators.Interfaces;
 using eLog.HeavyTools.Services.WhWebShop.DataAccess.Repositories.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
 namespace eLog.HeavyTools.Services.WhWebShop.BusinessLogic.Services;
@@ -21,15 +21,21 @@ namespace eLog.HeavyTools.Services.WhWebShop.BusinessLogic.Services;
 internal class PriceCalcService : LogicServiceBase<OlcPriceCalcResult>, IPriceCalcService
 {
     private readonly IRepository<CfwUser> userRepository;
+    private readonly IOlcApiloggerService olcApiloggerService;
+    private readonly IPriceCalcOriginalService priceCalcOriginalService;
 
     public PriceCalcService(
         IOlcPriceCalcResultValidator validator,
         IRepository<OlcPriceCalcResult> repository,
         IUnitOfWork unitOfWork,
         IEnvironmentService environmentService,
-        IRepository<CfwUser> userRepository) : base(validator, repository, unitOfWork, environmentService)
+        IRepository<CfwUser> userRepository,
+        IOlcApiloggerService olcApiloggerService,
+        IPriceCalcOriginalService priceCalcOriginalService) : base(validator, repository, unitOfWork, environmentService)
     {
         this.userRepository = userRepository ?? throw new ArgumentNullException(nameof(userRepository));
+        this.olcApiloggerService = olcApiloggerService ?? throw new ArgumentNullException(nameof(olcApiloggerService));
+        this.priceCalcOriginalService = priceCalcOriginalService ?? throw new ArgumentNullException(nameof(priceCalcOriginalService));
     }
 
     public int Calc(int? x, int? y)
@@ -89,6 +95,19 @@ internal class PriceCalcService : LogicServiceBase<OlcPriceCalcResult>, IPriceCa
     public async Task<CalcJsonResultDto> CalcJsonAsync(Newtonsoft.Json.Linq.JObject parms, CancellationToken cancellationToken = default)
     {
         var calcitem = JsonParser.ParseObject<CalcJsonParamsDto>(parms);
-        return PriceCalcBL.DoCalc(calcitem);
+        CalcJsonResultDto res = await priceCalcOriginalService.GetOriginalPrice(calcitem, cancellationToken);
+
+
+
+        var a = new OlcApilogger
+        {
+            Command = "PriceCalcService",
+            Request = parms.ToString(),
+            Response = JsonConvert.SerializeObject(res)
+        };
+
+        await olcApiloggerService.AddAsync(a);
+
+        return res;
     }
 }

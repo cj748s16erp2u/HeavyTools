@@ -15,7 +15,7 @@ public class OrderController : BaseController
 {
     private readonly IOrderService service;
 
-    public OrderController(IApiLoggerService apiloggerservice, IOrderService service) :base(apiloggerservice)
+    public OrderController(IOlcApiloggerService apiloggerservice, IOrderService service) :base(apiloggerservice)
     {
         this.service = service ?? throw new ArgumentNullException(nameof(service));
     }

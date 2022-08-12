@@ -12,6 +12,7 @@ namespace eLog.HeavyTools.Services.WhWebShop.BusinessEntities.Model
     {
         public OlsPartnaddr()
         {
+            OlcPrctable = new HashSet<OlcPrctable>();
             OlsSordhead = new HashSet<OlsSordhead>();
         }
 
@@ -108,6 +109,8 @@ namespace eLog.HeavyTools.Services.WhWebShop.BusinessEntities.Model
         [ForeignKey("Partnid")]
         [InverseProperty("OlsPartnaddr")]
         public virtual OlsPartner Partn { get; set; } = null!;
+        [InverseProperty("Addr")]
+        public virtual ICollection<OlcPrctable> OlcPrctable { get; set; }
         [InverseProperty("Addr")]
         public virtual ICollection<OlsSordhead> OlsSordhead { get; set; }
     }

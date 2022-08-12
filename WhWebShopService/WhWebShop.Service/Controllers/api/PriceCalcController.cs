@@ -29,7 +29,7 @@ public class PriceCalcController : Controller
         }
         catch (Exception ex)
         {
-            await ERP4U.Log.LoggerManager.Instance.LogErrorAsync<HomeController>(ex);
+            await ERP4U.Log.LoggerManager.Instance.LogErrorAsync<PriceCalcController>(ex);
             return this.BadRequest(ex.Message);
         }
     }
