@@ -10,7 +10,6 @@
             <Folder name="sources" parent="sourceroot" value="InterfaceFiles\"/>
             <Folder name="archive" parent="sourceroot" value="Archive\"/>
 
-
             <Folder name="log" parent="xml" value="Log\"/>
             <Folder name="temp" parent="xml" value="Temp\"/>
             <Folder name="errors" parent="xml" value="Errors\"/>
