@@ -214,8 +214,16 @@ namespace eLog.HeavyTools.Sales.Sord.Import
                     sordHead.Addrid = defAddr.Addrid;
                 }
 
+                // get the default payment details for the partner if it's not included in the excel
+                var paymid = result.SordHead.Entity[SordHead.FieldPaymid.Name]?.ToString();
+                if (string.IsNullOrWhiteSpace(paymid))
+                {
+                    paymid = SqlDataAdapter.ExecuteSingleValue(DB.Main, $"SELECT paymid FROM ols_partncmp WHERE partnid = {Utils.SqlToString(sordHead.Partnid)} AND cmpid = {Utils.SqlToString(sordHead.Cmpid)}")?.ToString();
+                    sordHead.Paycid = ConvertUtils.ToInt32(SqlDataAdapter.ExecuteSingleValue(DB.Main, $"SELECT paycid FROM ols_partncmp WHERE partnid = {Utils.SqlToString(sordHead.Partnid)} AND cmpid = {Utils.SqlToString(sordHead.Cmpid)}"));
+                }
+
                 sordHead.Curid = CustomSettings.GetString("SordheadImportDefaultCurid");
-                sordHead.Paymid = result.SordHead.Entity[SordHead.FieldPaymid.Name]?.ToString();
+                sordHead.Paymid = paymid;
                 sordHead.Ref1 = result.SordHead.Entity[SordHead.FieldRef1.Name]?.ToString();
                 sordHead.Note = result.SordHead.Entity[SordHead.FieldNote.Name]?.ToString();
 
