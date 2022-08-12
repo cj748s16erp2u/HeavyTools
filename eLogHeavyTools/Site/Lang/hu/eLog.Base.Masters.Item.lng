@@ -5,3 +5,5 @@ $nomodelselected=Nincs model kiválasztva
 $unitid3=Mértékegység DB /
 
 $unitid3b=Me. DB / 
+
+$missingcolortype1=A(z) "Színállás neve" mező kitöltése kötelező
