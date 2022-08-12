@@ -62,8 +62,8 @@
       <SpecificVersion>False</SpecificVersion>
     </Reference>
     <Reference Include="CODALink, Version=7.0.8201.29967, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\Releases\CodaInt.Base\v7.0.0.0\Binaries\CODALink.dll</HintPath>
+      <SpecificVersion>False</SpecificVersion>
     </Reference>
     <Reference Include="eFwIntf.Interf">
       <HintPath>..\..\..\Releases\Bank.Base\v7.2.0.0\Binaries\eFwIntf.Interf.dll</HintPath>
@@ -111,6 +111,7 @@
     <Compile Include="BankTran\CifEbankTransBL3.cs" />
     <Compile Include="BankTran\CifEbankTransImportFieldList.cs" />
     <Compile Include="BankTran\EfxBankTranLineSearchTab3.cs" />
+    <Compile Include="BankTran\EfxBankTranHeadBL3.cs" />
     <Compile Include="BankTran\Import\CifEbankTransImportService.cs" />
     <Compile Include="BankTran\Import\CifEbankTransImportResultSet.cs" />
     <Compile Include="BankTran\Import\CifEbankTransImportResultSets.cs" />
