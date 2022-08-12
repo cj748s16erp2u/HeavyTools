@@ -71,7 +71,7 @@ namespace eLog.HeavyTools.BankTran.Import
                 }
             }
 
-            return success;
+            //return success;
         }
 
         private bool SaveImport(CifEbankTransImportResultSet result, int? pos = null, int? count = null)
