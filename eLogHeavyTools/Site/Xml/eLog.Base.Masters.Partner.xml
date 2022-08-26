@@ -115,7 +115,7 @@
 			<ForceNextRow/>
 			<Numberbox Field="credlimit" DecDigits="0" ThousandSep="True" Mandatory="True" />
 			<Combo Field="prcgrpidprc" ListID="eLog.Base.Setup.PriceTable.PrcGroupList_Price_Partner" DependentField="cmpid" DependentCtrlID="xx.cmpid" />
-			<Combo Field="prcgrpiddiscnt" ListID="eLog.Base.Setup.PriceTable.PrcGroupList_Discount_Partner" CDependentField="cmpid" DependentCtrlID="xx.cmpid" />
+			<Combo Field="prcgrpiddiscnt" ListID="eLog.Base.Setup.PriceTable.PrcGroupList_Discount_Partner" DependentField="cmpid" DependentCtrlID="xx.cmpid" />
 			<Combo Field="selprcincdiscnttype" ListID="eLog.Base.Masters.Partner.PartnCmpSelprcIncDiscntType" ComboFlags="None" Mandatory="True" />
 			<CheckedCombo Field="pcstat" ListID="eLog.Base.Masters.Partner.PartnCmpPcStatTypeList" ComboFlags="FlagValues" />
 			<Combo Field="curid" ListID="eLog.Base.Setup.Currency.CurrencyList" ComboFlags="AllowBlank" />
@@ -123,8 +123,25 @@
 			<!--<Combo Field="codacode" ListID="CodaInt.Base.Masters.Partner.PartnerElementList" DependentCtrlID="xx.cmpid" DependentField="cmpid" ColsToSpan="4" />-->
 			<Textbox Field="cmpid" Visible="False" />
 			<ForceNextRow />
+      <Textbox Field="relatedaccno" />
+      <Combo Field="scontoinvoice" ListID="eProjectWeb.Framework.Data.TypeListProviderPublic#olc_partncmp.scontoinvoice" ComboFlags="AllowBlank" />
+      <ForceNextRow />
+      <Textbox Field="scontobelowaccno" />
+      <Textbox Field="scontoaboveaccno" />
+      <ForceNextRow />
+      <Selector Field="el2" ValueField="code" TextField="code" SelectionID="CodaInt.Base.Common.Element.ElementSelectionProvider" DependentCtrlID="xx.cmpid,#2" DependentField="cmpid,elmlevel" />
+      <Selector Field="el2" Label=" " ValueField="code" TextField="name" ColsToSpan="-1" />
+      <Selector Field="el3" ValueField="code" TextField="code" SelectionID="CodaInt.Base.Common.Element.ElementSelectionProvider" DependentCtrlID="xx.cmpid,#3" DependentField="cmpid,elmlevel" />
+      <Selector Field="el3" Label=" " ValueField="code" TextField="name" ColsToSpan="-1" />
+      <ForceNextRow />
+      <Textbox Field="transactionfeeaccno" />
+      <Checkbox Field="domesticvaluerate" />
+      <ForceNextRow />
+      <Combo Field="referencetype" ListID="eProjectWeb.Framework.Data.TypeListProviderPublic#olc_partncmp.referencetype" ComboFlags="AllowBlank" />
+      <Checkbox Field="discountaccounting" />
+      <ForceNextRow />
       <Combo Field="valuecurid" ListID="eLog.Base.Setup.Currency.CurrencyList" ComboFlags="AllowBlank" />
-      <ForceNextRow />      
+      <ForceNextRow />
 			<Combo Field="posttype" ListID="eLog.Base.Masters.Partner.PartnCmpPostTypeList" ComboFlags="None" Mandatory="true" />
 			<!--CODA specifikus start-->
 			<Textbox Field="codacode" Disabled="True" />

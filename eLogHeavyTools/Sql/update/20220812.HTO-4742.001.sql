@@ -1,11 +1,11 @@
--- new fields: olc_partncmp.relatedaccno, scontoinvoice, scontobelowaccno, scontoavoveaccno
+-- new fields: olc_partncmp.relatedaccno, scontoinvoice, scontobelowaccno, scontoaboveaccno
 -- new fields: el1, el2, el3, el4, el5, el6, el7, el8
--- new fields: transactonfeeaccno, domesticvaluerate, referencetype, discountaccounting, valuecurid
+-- new fields: transactionfeeaccno, domesticvaluerate, referencetype, discountaccounting, valuecurid
 
 /*
 exec sp_insertcolumn
   @tablename     = 'olc_partncmp',
-  @columndef     = 'relatedaccno varchar(50) null,scontoinvoice integer null,scontobelowaccno varchar(50) null,scontoavoveaccno varchar(50) null',
+  @columndef     = 'relatedaccno varchar(50) null,scontoinvoice integer null,scontobelowaccno varchar(50) null,scontoaboveaccno varchar(50) null',
   @refcolumnname = 'addusrid',
   @after         = 0,
   @customsql     = null,
@@ -25,7 +25,7 @@ exec sp_insertcolumn
 /*
 exec sp_insertcolumn
   @tablename     = 'olc_partncmp',
-  @columndef     = 'transactonfeeaccno varchar(50)  null,domesticvaluerate integer null,referencetype integer null,discountaccounting integer null,valuecurid varchar(12) null',
+  @columndef     = 'transactionfeeaccno varchar(50)  null,domesticvaluerate integer null,referencetype integer null,discountaccounting integer null,valuecurid varchar(12) null',
   @refcolumnname = 'addusrid',
   @after         = 0,
   @customsql     = null,
@@ -51,7 +51,7 @@ go
 if not exists(select 0 from sys.columns where object_id = object_id('olc_partncmp') and name = 'scontobelowaccno')
   alter table olc_partncmp add scontobelowaccno varchar(50) null
 go
-if not exists(select 0 from sys.columns where object_id = object_id('olc_partncmp') and name = 'scontoavoveaccno')
+if not exists(select 0 from sys.columns where object_id = object_id('olc_partncmp') and name = 'scontoaboveaccno')
   alter table olc_partncmp add scontoavoveaccno varchar(50) null
 go
 if not exists(select 0 from sys.columns where object_id = object_id('olc_partncmp') and name = 'el1')
@@ -78,8 +78,8 @@ go
 if not exists(select 0 from sys.columns where object_id = object_id('olc_partncmp') and name = 'el8')
   alter table olc_partncmp add el8 varchar(72) null
 go
-if not exists(select 0 from sys.columns where object_id = object_id('olc_partncmp') and name = 'transactonfeeaccno')
-  alter table olc_partncmp add transactonfeeaccno varchar(50)  null
+if not exists(select 0 from sys.columns where object_id = object_id('olc_partncmp') and name = 'transactionfeeaccno')
+  alter table olc_partncmp add transactionfeeaccno varchar(50)  null
 go
 if not exists(select 0 from sys.columns where object_id = object_id('olc_partncmp') and name = 'domesticvaluerate')
   alter table olc_partncmp add domesticvaluerate integer null

@@ -114,17 +114,27 @@ namespace eLog.HeavyTools.Masters.Partner
                 foreach (Control c in l.Controls)
                 {
                     string id = c.ID;
+                    bool find = false;
                     if (id.StartsWith(prefix))
                     {
                         string fieldName = id.Substring(prefix.Length);
 
-                        if (fieldName.Equals(OlcPartnCmp.FieldSecpaymid.Name))
+                        foreach (var olcField in OlcPartnCmp.GetSchema().Fields)
                         {
-                            Field field = OlcPartnCmp.GetSchema().Fields.Get(fieldName);
-                            if (field != null)
-                                c.Value = olcpc[field];
+                            if (find)
+                                continue;
+
+                            if (fieldName.Equals(olcField.Name))
+                            {
+                                Field field = OlcPartnCmp.GetSchema().Fields.Get(fieldName);
+                                if (field != null)
+                                {
+                                    c.Value = olcpc[field];
+                                    find = true;
+                                }
+                            }
                         }
-                        else
+                        if (!find)
                         {
                             Field field = PartnCmp.GetSchema().Fields.Get(fieldName);
                             if (field != null)

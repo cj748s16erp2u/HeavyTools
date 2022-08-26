@@ -72,6 +72,21 @@ namespace eLog.HeavyTools.Masters.Partner
 
         /// <summary>
         /// <para>Field</para>
+        /// ? - int
+        /// </summary>
+        [Field("secpaycid")]
+        public static Field FieldSecpaycid { get; protected set; }
+        /// <summary>
+        /// ? - int
+        /// </summary>
+        public int? Secpaycid
+        {
+            get { return (int?)this[FieldSecpaycid]; }
+            set { this[FieldSecpaycid] = value; }
+        }
+
+        /// <summary>
+        /// <para>Field</para>
         /// ? - varchar
         /// </summary>
         [Field("relatedaccno")]
@@ -119,15 +134,15 @@ namespace eLog.HeavyTools.Masters.Partner
         /// <para>Field</para>
         /// ? - varchar
         /// </summary>
-        [Field("scontoavoveaccno")]
-        public static Field FieldScontoavoveaccno { get; protected set; }
+        [Field("scontoaboveaccno")]
+        public static Field FieldScontoaboveaccno { get; protected set; }
         /// <summary>
         /// ? - varchar
         /// </summary>
-        public StringN Scontoavoveaccno
+        public StringN Scontoaboveaccno
         {
-            get { return new StringN(this[FieldScontoavoveaccno]); }
-            set { this[FieldScontoavoveaccno] = value; }
+            get { return new StringN(this[FieldScontoaboveaccno]); }
+            set { this[FieldScontoaboveaccno] = value; }
         }
 
         /// <summary>
@@ -254,15 +269,15 @@ namespace eLog.HeavyTools.Masters.Partner
         /// <para>Field</para>
         /// ? - varchar
         /// </summary>
-        [Field("transactonfeeaccno")]
-        public static Field FieldTransactonfeeaccno { get; protected set; }
+        [Field("transactionfeeaccno")]
+        public static Field FieldTransactionfeeaccno { get; protected set; }
         /// <summary>
         /// ? - varchar
         /// </summary>
-        public StringN Transactonfeeaccno
+        public StringN Transactionfeeaccno
         {
-            get { return new StringN(this[FieldTransactonfeeaccno]); }
-            set { this[FieldTransactonfeeaccno] = value; }
+            get { return new StringN(this[FieldTransactionfeeaccno]); }
+            set { this[FieldTransactionfeeaccno] = value; }
         }
 
         /// <summary>

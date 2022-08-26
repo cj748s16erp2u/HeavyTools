@@ -301,28 +301,29 @@ create table olc_partner (
 /* Partner-vállalat kiegészítés  */
 /*********************************/
 create table olc_partncmp (
-    partnid				int						not null,
-	cmpid				int						not null,
-    secpaymid			varchar(12)         null, -- Masodlagos fizetesi mod
-    relatedaccno                varchar(50)         null, /* kapcsolodo banki elszamolo (technikai utkozo) szamla szamlakodja */
-    scontoinvoice               integer             null, /* skonto csak a plusszos szamlak utan, 0: nem, 1: igen, 2: nincs skonto */
-    scontobelowaccno            varchar(50)         null, /* 3% alatti skonto szamlakodja */
-    scontoavoveaccno            varchar(50)         null, /* 3% feletti skonto szamlakodja */
-    el1                         varchar(72)         null,
-    el2                         varchar(72)         null, /* szallito elemkodja (el2) */
-    el3                         varchar(72)         null, /* ertekesitesi egyseg kodja (el3) */
-    el4                         varchar(72)         null,
-    el5                         varchar(72)         null,
-    el6                         varchar(72)         null,
-    el7                         varchar(72)         null,
-    el8                         varchar(72)         null,
-    transactonfeeaccno          varchar(50)         null, /* tranzakcios dij szamlakodja */
-    domesticvaluerate           integer             null, /* elem ertek es hazai ertek aranyositasa szukseges, 0: nem, 1: igen */
-    referencetype               integer             null, /* referencia tipusa, tobbfele */
-    discountaccounting          integer             null, /* kedvezmeny konyvelese, 0: nem, 1: igen */
-    valuecurid                  varchar(12)         null, /* ertek devizanem */
-    addusrid                    varchar(12)      not null,
-    adddate             datetime                null,
+    partnid                             int         not null,
+    cmpid                               int         not null,
+    secpaymid                   varchar(12)             null, -- Masodlagos fizetesi mod
+    secpaycid                           int             null,
+    relatedaccno                varchar(50)             null, /* kapcsolodo banki elszamolo (technikai utkozo) szamla szamlakodja */
+    scontoinvoice               integer                 null, /* skonto csak a plusszos szamlak utan, 0: nem, 1: igen, 2: nincs skonto */
+    scontobelowaccno            varchar(50)             null, /* 3% alatti skonto szamlakodja */
+    scontoaboveaccno            varchar(50)             null, /* 3% feletti skonto szamlakodja */
+    el1                         varchar(72)             null,
+    el2                         varchar(72)             null, /* szallito elemkodja (el2) */
+    el3                         varchar(72)             null, /* ertekesitesi egyseg kodja (el3) */
+    el4                         varchar(72)             null,
+    el5                         varchar(72)             null,
+    el6                         varchar(72)             null,
+    el7                         varchar(72)             null,
+    el8                         varchar(72)             null,
+    transactionfeeaccno         varchar(50)             null, /* tranzakcios dij szamlakodja */
+    domesticvaluerate           integer                 null, /* elem ertek es hazai ertek aranyositasa szukseges, 0: nem, 1: igen */
+    referencetype               integer                 null, /* referencia tipusa, tobbfele */
+    discountaccounting          integer                 null, /* kedvezmeny konyvelese, 0: nem, 1: igen */
+    valuecurid                  varchar(12)             null, /* ertek devizanem */
+    addusrid                    varchar(12)         not null,
+    adddate                     datetime                null,
     constraint pk_olc_partncmp primary key (partnid, cmpid), -- composite primary key
     constraint fk_olc_partncmp_partnid foreign key (partnid) references ols_partner (partnid),
     constraint fk_olc_partncmp_cmpid foreign key (cmpid) references ols_company (cmpid),
