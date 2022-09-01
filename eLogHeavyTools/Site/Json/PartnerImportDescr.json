@@ -247,6 +247,7 @@
       {
         "Alias": "PA1",
         "Table": "ols_partnaddr",
+        "Optional": true,
         "Fields": [
           {
             "Field": "addrid",
@@ -340,23 +341,24 @@
             }
           }
         ],
-        //"Conditionals": [
-        //  {
-        //    "Field": "add01",
-        //    "Type": "IsNotEmpty"
-        //  },
-        //  {
-        //    "Field": "add02",
-        //    "Type": "IsNotEmpty"
-        //  },
-        //  {
-        //    "Field": "postcode",
-        //    "Type": "IsNotEmpty"
-        //  }
-        //]
+        "Conditionals": [
+          {
+            "Field": "add01",
+            "Type": "IsNotEmpty"
+          },
+          {
+            "Field": "add02",
+            "Type": "IsNotEmpty"
+          },
+          {
+            "Field": "postcode",
+            "Type": "IsNotEmpty"
+          }
+        ]
       },
       {
         "Table": "olc_partnaddr",
+        "Optional": true,
         "Fields": [
           {
             "Field": "addrid",
@@ -383,6 +385,7 @@
       },
       {
         "Table": "ols_partnaddrcmp",
+        "Optional": true,
         "Fields": [
           {
             "Field": "addrid",
