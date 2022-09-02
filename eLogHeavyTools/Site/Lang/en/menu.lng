@@ -1,0 +1,5 @@
+﻿$customreports2=Custom Reports
+$statementofaccount2=Statement of Accounts (Heavy Tools)
+$reminderletter2=Remainder Letter (Heavy Tools)
+$reminderletterparams=Remainder Letter text body (Heavy Tools)
+$statementofaccountparams=Statement of Accounts text body (Heavy Tools)

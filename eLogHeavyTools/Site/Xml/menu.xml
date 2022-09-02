@@ -533,7 +533,10 @@
             </Item>
         </Item>
         <Item ID="CustomReports2" Name="$customreports2">
-            <Item ID="CR2" Name="." PageID=""/>
+            <Item ID="StatementOfAccount2" Name="$statementofaccount2" PageID="eLog.HeavyTools.Reports.Financials.StatementOfAccount2" />
+            <Item ID="ReminderLetterHT" Name="$reminderletter2" PageID="eLog.HeavyTools.Reports.Financials.ReminderLetter.ReminderLetter2" />
+            <Item ID="StatementOfAccountParams" Name="$statementofaccountparams" PageID="eLog.HeavyTools.Reports.Financials.StatementOfAccount.StatementOfAccountSearchPage" />
+            <Item ID="ReminderLetterParams" Name="$reminderletterparams" PageID="eLog.HeavyTools.Reports.Financials.ReminderLetter.ReminderLetterSearchPage" />
         </Item>
     </RootMenu>
 </MenuRoot>
