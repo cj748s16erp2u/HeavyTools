@@ -113,6 +113,28 @@ namespace eLog.HeavyTools.Masters.Partner
 
                 foreach (Control c in l.Controls)
                 {
+                    if (c is Selector)
+                    {
+                        if (!string.IsNullOrEmpty(((Selector)c).DependentCtrlID))
+                        {
+                            var oldDepCtrlId = ((Selector)c).DependentCtrlID;
+                            List<string> depCtrlIds = new List<string>();
+                            foreach (var i in oldDepCtrlId.Split(','))
+                            {
+                                if (i.StartsWith(CmpContainer.ControlGroup + "."))
+                                {
+                                    //depCtrlIds.Add("#" + cmpid.ToString());
+                                    depCtrlIds.Add(l.ControlGroup + "." + CmpGroupControlIdPrefix(cmpid) + i.Substring(CmpContainer.ControlGroup.Length + 1));
+                                }
+                                else
+                                    depCtrlIds.Add(i);
+                            }
+
+                            ((Selector)c).DependentCtrlID = depCtrlIds.Count > 1 ? string.Join(",", depCtrlIds) :
+                                depCtrlIds.Count == 1 ? depCtrlIds.First() : oldDepCtrlId;
+                        }
+                    }
+
                     string id = c.ID;
                     bool find = false;
                     if (id.StartsWith(prefix))

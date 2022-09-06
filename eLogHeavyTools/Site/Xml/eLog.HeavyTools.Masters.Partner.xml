@@ -1,0 +1,163 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema xmlns="http://tempuri.org/RenderableSchema.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://tempuri.org/RenderableSchema.xsd ../../../../Releases/eLog.Base/v7.2.0.0/Site/Xml/RenderableSchema.xsd">
+
+  <TabPage Name="OlcPartnCmpCustTab">
+    <Grid ID="searchResults" Label="$partncmpcust_search_results" MultiSelect="false" />
+  </TabPage>
+  
+  <Search Name="OlcPartnCmpCustSearchProvider">
+    <Column FieldName="partnid" Hidden="True" PKFieldName="partnid"/>
+    <!--<Column FieldName="cmpid" Hidden="True" PKFieldName="cmpid"/>-->
+    <Column FieldName="cmpid" Hidden="True"/>
+    <Column FieldName="c_abbr" Width="60" />
+    <Column FieldName="relatedaccno" />
+    <Column FieldName="scontoinvoice" FieldFunction="listlookup" FieldFuncArg="eProjectWeb.Framework.Data.TypeListProviderPublic#olc_partncmp.scontoinvoice" Align="Left" Width="100" />
+    <Column FieldName="scontobelowaccno" />
+    <Column FieldName="scontoaboveaccno" />
+    <Column FieldName="el2" />
+    <Column FieldName="transactionfeeaccno" />
+    <Column FieldName="domesticvaluerate" FieldFunction="bool1" />
+    <Column FieldName="referencetype" FieldFunction="listlookup" FieldFuncArg="eProjectWeb.Framework.Data.TypeListProviderPublic#olc_partncmp.referencetype" Align="Left" Width="100" />
+    <Column FieldName="discountaccounting" FieldFunction="bool1" />
+    <Column FieldName="valuecurid" Width="60" />    
+  </Search>
+
+  <TabPage Name="OlcPartnCmpCustEditTab">
+    <LayoutTable ControlGroup="PartnCmp" Columns="{120, None}; {160, None}; {5, Empty}; {120, None}; {180, None}" ID="EditGroup1" Label="$group_partncmp">
+      <Combo Field="cmpid" ListID="eLog.Base.Setup.Company.CompanyLoggedInList" Disabled="true" />
+      <Selector Field="partnid" Label="$partn_code" ValueField="partnid" TextField="partncode" SelectionID="eLog.Base.Masters.Partner.PartnerSelectionProvider" DependentCtrlID="cmpid" DependentField="cmpid" Disabled="true" />
+      <GroupSeparator ID="gs1" Label="$relaccno" />
+      <Textbox Field="relatedaccno" Disabled="true" ColsToSpan="3" />
+      <ForceNextRow />
+      <Selector Field="relaccno_el1" Label="$el1code" ValueField="code" TextField="code" SelectionID="CodaInt.Base.Common.Element.ElementSelectionProvider" DependentCtrlID="cmpid,el1level" DependentField="cmpid,elmlevel" />
+      <Selector Field="relaccno_el1" Label="$el1name" ValueField="code" TextField="name" ColsToSpan="-1" />
+      <ForceNextRow />
+      <Selector Field="relaccno_el2" Label="$el2code" ValueField="code" TextField="code" SelectionID="CodaInt.Base.Common.Element.ElementSelectionProvider" DependentCtrlID="cmpid,el2level" DependentField="cmpid,elmlevel" />
+      <Selector Field="relaccno_el2" Label="$el2name" ValueField="code" TextField="name" ColsToSpan="-1" />
+      <ForceNextRow />
+      <Selector Field="relaccno_el3" Label="$el3code" ValueField="code" TextField="code" SelectionID="CodaInt.Base.Common.Element.ElementSelectionProvider" DependentCtrlID="cmpid,el3level" DependentField="cmpid,elmlevel" />
+      <Selector Field="relaccno_el3" Label="$el3name" ValueField="code" TextField="name" ColsToSpan="-1" />
+      <ForceNextRow />
+      <Selector Field="relaccno_el4" Label="$el4code" ValueField="code" TextField="code" SelectionID="CodaInt.Base.Common.Element.ElementSelectionProvider" DependentCtrlID="cmpid,el4level" DependentField="cmpid,elmlevel" />
+      <Selector Field="relaccno_el4" Label="$el4name" ValueField="code" TextField="name" ColsToSpan="-1" />
+      <ForceNextRow />
+      <Selector Field="relaccno_el5" Label="$el5code" ValueField="code" TextField="code" SelectionID="CodaInt.Base.Common.Element.ElementSelectionProvider" DependentCtrlID="cmpid,el5level" DependentField="cmpid,elmlevel" />
+      <Selector Field="relaccno_el5" Label="$el5name" ValueField="code" TextField="name" ColsToSpan="-1" />
+      <ForceNextRow />
+      <Selector Field="relaccno_el6" Label="$el6code" ValueField="code" TextField="code" SelectionID="CodaInt.Base.Common.Element.ElementSelectionProvider" DependentCtrlID="cmpid,el6level" DependentField="cmpid,elmlevel" />
+      <Selector Field="relaccno_el6" Label="$el6name" ValueField="code" TextField="name" ColsToSpan="-1" />
+      <ForceNextRow />
+      <Selector Field="relaccno_el7" Label="$el7code" ValueField="code" TextField="code" SelectionID="CodaInt.Base.Common.Element.ElementSelectionProvider" DependentCtrlID="cmpid,el7level,el7prefix" DependentField="cmpid,elmlevel"/>
+      <Selector Field="relaccno_el7" Label="$el7name" ValueField="code" TextField="name" ColsToSpan="-1" />
+      <ForceNextRow />
+      <Selector Field="relaccno_el8" Label="$el8code" ValueField="code" TextField="code" SelectionID="CodaInt.Base.Common.Element.ElementSelectionProvider" DependentCtrlID="cmpid,el8level,el8prefix" DependentField="cmpid,elmlevel"/>
+      <Selector Field="relaccno_el8" Label="$el8name" ValueField="code" TextField="name" ColsToSpan="-1" />
+      <GroupSeparator ID="gs2" Label="$scaccno" />
+      <Combo Field="scontoinvoice" ListID="eProjectWeb.Framework.Data.TypeListProviderPublic#olc_partncmp.scontoinvoice" ComboFlags="AllowBlank" />
+      <ForceNextRow />
+      <Textbox Field="scontobelowaccno" Disabled="true" ColsToSpan="3" />
+      <ForceNextRow />
+      <Selector Field="scbaccno_el1" Label="$el1code" ValueField="code" TextField="code" SelectionID="CodaInt.Base.Common.Element.ElementSelectionProvider" DependentCtrlID="cmpid,el1level" DependentField="cmpid,elmlevel" />
+      <Selector Field="scbaccno_el1" Label="$el1name" ValueField="code" TextField="name" ColsToSpan="-1" />
+      <ForceNextRow />
+      <Selector Field="scbaccno_el2" Label="$el2code" ValueField="code" TextField="code" SelectionID="CodaInt.Base.Common.Element.ElementSelectionProvider" DependentCtrlID="cmpid,el2level" DependentField="cmpid,elmlevel" />
+      <Selector Field="scbaccno_el2" Label="$el2name" ValueField="code" TextField="name" ColsToSpan="-1" />
+      <ForceNextRow />
+      <Selector Field="scbaccno_el3" Label="$el3code" ValueField="code" TextField="code" SelectionID="CodaInt.Base.Common.Element.ElementSelectionProvider" DependentCtrlID="cmpid,el3level" DependentField="cmpid,elmlevel" />
+      <Selector Field="scbaccno_el3" Label="$el3name" ValueField="code" TextField="name" ColsToSpan="-1" />
+      <ForceNextRow />
+      <Selector Field="scbaccno_el4" Label="$el4code" ValueField="code" TextField="code" SelectionID="CodaInt.Base.Common.Element.ElementSelectionProvider" DependentCtrlID="cmpid,el4level" DependentField="cmpid,elmlevel" />
+      <Selector Field="scbaccno_el4" Label="$el4name" ValueField="code" TextField="name" ColsToSpan="-1" />
+      <ForceNextRow />
+      <Selector Field="scbaccno_el5" Label="$el5code" ValueField="code" TextField="code" SelectionID="CodaInt.Base.Common.Element.ElementSelectionProvider" DependentCtrlID="cmpid,el5level" DependentField="cmpid,elmlevel" />
+      <Selector Field="scbaccno_el5" Label="$el5name" ValueField="code" TextField="name" ColsToSpan="-1" />
+      <ForceNextRow />
+      <Selector Field="scbaccno_el6" Label="$el6code" ValueField="code" TextField="code" SelectionID="CodaInt.Base.Common.Element.ElementSelectionProvider" DependentCtrlID="cmpid,el6level" DependentField="cmpid,elmlevel" />
+      <Selector Field="scbaccno_el6" Label="$el6name" ValueField="code" TextField="name" ColsToSpan="-1" />
+      <ForceNextRow />
+      <Selector Field="scbaccno_el7" Label="$el7code" ValueField="code" TextField="code" SelectionID="CodaInt.Base.Common.Element.ElementSelectionProvider" DependentCtrlID="cmpid,el7level" DependentField="cmpid,elmlevel" />
+      <Selector Field="scbaccno_el7" Label="$el7name" ValueField="code" TextField="name" ColsToSpan="-1" />
+      <ForceNextRow />
+      <Selector Field="scbaccno_el8" Label="$el8code" ValueField="code" TextField="code" SelectionID="CodaInt.Base.Common.Element.ElementSelectionProvider" DependentCtrlID="cmpid,el8level" DependentField="cmpid,elmlevel" />
+      <Selector Field="scbaccno_el8" Label="$el8name" ValueField="code" TextField="name" ColsToSpan="-1" />
+      <ForceNextRow />
+      <Textbox Field="scontoaboveaccno" Disabled="true" ColsToSpan="3" />
+      <ForceNextRow />
+      <Selector Field="scaaccno_el1" Label="$el1code" ValueField="code" TextField="code" SelectionID="CodaInt.Base.Common.Element.ElementSelectionProvider" DependentCtrlID="cmpid,el1level" DependentField="cmpid,elmlevel" />
+      <Selector Field="scaaccno_el1" Label="$el1name" ValueField="code" TextField="name" ColsToSpan="-1" />
+      <ForceNextRow />
+      <Selector Field="scaaccno_el2" Label="$el2code" ValueField="code" TextField="code" SelectionID="CodaInt.Base.Common.Element.ElementSelectionProvider" DependentCtrlID="cmpid,el2level" DependentField="cmpid,elmlevel" />
+      <Selector Field="scaaccno_el2" Label="$el2name" ValueField="code" TextField="name" ColsToSpan="-1" />
+      <ForceNextRow />
+      <Selector Field="scaaccno_el3" Label="$el3code" ValueField="code" TextField="code" SelectionID="CodaInt.Base.Common.Element.ElementSelectionProvider" DependentCtrlID="cmpid,el3level" DependentField="cmpid,elmlevel" />
+      <Selector Field="scaaccno_el3" Label="$el3name" ValueField="code" TextField="name" ColsToSpan="-1" />
+      <ForceNextRow />
+      <Selector Field="scaaccno_el4" Label="$el4code" ValueField="code" TextField="code" SelectionID="CodaInt.Base.Common.Element.ElementSelectionProvider" DependentCtrlID="cmpid,el4level" DependentField="cmpid,elmlevel" />
+      <Selector Field="scaaccno_el4" Label="$el4name" ValueField="code" TextField="name" ColsToSpan="-1" />
+      <ForceNextRow />
+      <Selector Field="scaaccno_el5" Label="$el5code" ValueField="code" TextField="code" SelectionID="CodaInt.Base.Common.Element.ElementSelectionProvider" DependentCtrlID="cmpid,el5level" DependentField="cmpid,elmlevel" />
+      <Selector Field="scaaccno_el5" Label="$el5name" ValueField="code" TextField="name" ColsToSpan="-1" />
+      <ForceNextRow />
+      <Selector Field="scaaccno_el6" Label="$el6code" ValueField="code" TextField="code" SelectionID="CodaInt.Base.Common.Element.ElementSelectionProvider" DependentCtrlID="cmpid,el6level" DependentField="cmpid,elmlevel" />
+      <Selector Field="scaaccno_el6" Label="$el6name" ValueField="code" TextField="name" ColsToSpan="-1" />
+      <ForceNextRow />
+      <Selector Field="scaaccno_el7" Label="$el7code" ValueField="code" TextField="code" SelectionID="CodaInt.Base.Common.Element.ElementSelectionProvider" DependentCtrlID="cmpid,el7level" DependentField="cmpid,elmlevel" />
+      <Selector Field="scaaccno_el7" Label="$el7name" ValueField="code" TextField="name" ColsToSpan="-1" />
+      <ForceNextRow />
+      <Selector Field="scaaccno_el8" Label="$el8code" ValueField="code" TextField="code" SelectionID="CodaInt.Base.Common.Element.ElementSelectionProvider" DependentCtrlID="cmpid,el8level" DependentField="cmpid,elmlevel" />
+      <Selector Field="scaaccno_el8" Label="$el8name" ValueField="code" TextField="name" ColsToSpan="-1" />
+      <ForceNextRow />
+      <GroupSeparator ID="gs3" Label="$traccno" />
+      <Textbox Field="transactionfeeaccno" Disabled="true" ColsToSpan="3" />
+      <ForceNextRow />
+      <Selector Field="transaccno_el1" Label="$el1code" ValueField="code" TextField="code" SelectionID="CodaInt.Base.Common.Element.ElementSelectionProvider" DependentCtrlID="cmpid,el1level" DependentField="cmpid,elmlevel" />
+      <Selector Field="transaccno_el1" Label="$el1name" ValueField="code" TextField="name" ColsToSpan="-1" />
+      <ForceNextRow />
+      <Selector Field="transaccno_el2" Label="$el2code" ValueField="code" TextField="code" SelectionID="CodaInt.Base.Common.Element.ElementSelectionProvider" DependentCtrlID="cmpid,el2level" DependentField="cmpid,elmlevel" />
+      <Selector Field="transaccno_el2" Label="$el2name" ValueField="code" TextField="name" ColsToSpan="-1" />
+      <ForceNextRow />
+      <Selector Field="transaccno_el3" Label="$el3code" ValueField="code" TextField="code" SelectionID="CodaInt.Base.Common.Element.ElementSelectionProvider" DependentCtrlID="cmpid,el3level" DependentField="cmpid,elmlevel" />
+      <Selector Field="transaccno_el3" Label="$el3name" ValueField="code" TextField="name" ColsToSpan="-1" />
+      <ForceNextRow />
+      <Selector Field="transaccno_el4" Label="$el4code" ValueField="code" TextField="code" SelectionID="CodaInt.Base.Common.Element.ElementSelectionProvider" DependentCtrlID="cmpid,el4level" DependentField="cmpid,elmlevel" />
+      <Selector Field="transaccno_el4" Label="$el4name" ValueField="code" TextField="name" ColsToSpan="-1" />
+      <ForceNextRow />
+      <Selector Field="transaccno_el5" Label="$el5code" ValueField="code" TextField="code" SelectionID="CodaInt.Base.Common.Element.ElementSelectionProvider" DependentCtrlID="cmpid,el5level" DependentField="cmpid,elmlevel" />
+      <Selector Field="transaccno_el5" Label="$el5name" ValueField="code" TextField="name" ColsToSpan="-1" />
+      <ForceNextRow />
+      <Selector Field="transaccno_el6" Label="$el6code" ValueField="code" TextField="code" SelectionID="CodaInt.Base.Common.Element.ElementSelectionProvider" DependentCtrlID="cmpid,el6level" DependentField="cmpid,elmlevel" />
+      <Selector Field="transaccno_el6" Label="$el6name" ValueField="code" TextField="name" ColsToSpan="-1" />
+      <ForceNextRow />
+      <Selector Field="transaccno_el7" Label="$el7code" ValueField="code" TextField="code" SelectionID="CodaInt.Base.Common.Element.ElementSelectionProvider" DependentCtrlID="cmpid,el7level" DependentField="cmpid,elmlevel" />
+      <Selector Field="transaccno_el7" Label="$el7name" ValueField="code" TextField="name" ColsToSpan="-1" />
+      <ForceNextRow />
+      <Selector Field="transaccno_el8" Label="$el8code" ValueField="code" TextField="code" SelectionID="CodaInt.Base.Common.Element.ElementSelectionProvider" DependentCtrlID="cmpid,el8level" DependentField="cmpid,elmlevel" />
+      <Selector Field="transaccno_el8" Label="$el8name" ValueField="code" TextField="name" ColsToSpan="-1" />
+      <ForceNextRow />
+      <GroupSeparator ID="gs4" Label="$other" />
+      <Checkbox Field="domesticvaluerate" />
+      <ForceNextRow />
+      <Combo Field="referencetype" ListID="eProjectWeb.Framework.Data.TypeListProviderPublic#olc_partncmp.referencetype" ComboFlags="AllowBlank" />
+      <Checkbox Field="discountaccounting" />
+      <ForceNextRow />
+      <Combo Field="valuecurid" ListID="eLog.Base.Setup.Currency.CurrencyList" ComboFlags="AllowBlank" />
+      <Intbox Field="el1level" Visible="false" />
+      <Intbox Field="el2level" Visible="false" />
+      <Intbox Field="el3level" Visible="false" />
+      <Intbox Field="el4level" Visible="false" />
+      <Intbox Field="el5level" Visible="false" />
+      <Intbox Field="el6level" Visible="false" />
+      <Intbox Field="el7level" Visible="false" />
+      <Intbox Field="el8level" Visible="false" />
+      <Textbox Field="el1prefix" Visible="false" />
+      <Textbox Field="el2prefix" Visible="false" />
+      <Textbox Field="el3prefix" Visible="false" />
+      <Textbox Field="el4prefix" Visible="false" />
+      <Textbox Field="el5prefix" Visible="false" />
+      <Textbox Field="el6prefix" Visible="false" />
+      <Textbox Field="el7prefix" Visible="false" />
+      <Textbox Field="el8prefix" Visible="false" />
+    </LayoutTable>
+  </TabPage>
+
+</Schema>
