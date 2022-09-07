@@ -15,12 +15,13 @@ namespace eLog.HeavyTools.Purchase.PinvPackage
 
         protected static string m_queryString = @"
 select prl.cmpcode, prl.usrname, prl.prlcode, prl.pcmcode+'/'+prl.usrname+'/'+prl.prlcode as packagecode, 
-     prl.paydate, prl.genhomenet, prl.homenet
+     prl.paydate, prl.genhomenet, prl.homenet, prl.status
 from /*u4findb*/..oas_prllist prl (nolock)
 ";
 
         protected static QueryArg[] m_filters = new QueryArg[] {
             new QueryArg("cmpcode", "prl", FieldType.String, QueryFlags.MultipleAllowed),
+            new QueryArg("packagecode", FieldType.String),
         };
 
         protected ApprovedPinvHeadPackageSearchProvider() : base(m_queryString, m_filters, SearchProviderType.Default, 1000)
@@ -29,6 +30,8 @@ from /*u4findb*/..oas_prllist prl (nolock)
 
         static ApprovedPinvHeadPackageSearchProvider()
         {
+            SetCustomFunc(m_filters, "packagecode", a => { a.Sb.AppendFormat(@"(rtrim(ltrim(prl.pcmcode+'/'+prl.usrname+'/'+prl.prlcode)) like '%' + {0} + '%')",
+                eProjectWeb.Framework.Utils.SqlToString(a.ArgValue)); });
         }
 
         protected override string CreateQueryString(Dictionary<string, object> args, bool fmtonly)

@@ -259,6 +259,8 @@
     <Compile Include="Purchase\PinvPackage\ApprovedPinvHeadPackageSearchPage.cs" />
     <Compile Include="Purchase\PinvPackage\ApprovedPinvHeadPackageSearchProvider.cs" />
     <Compile Include="Purchase\PinvPackage\ApprovedPinvHeadPackageSearchTab.cs" />
+    <Compile Include="Purchase\PinvPackage\ApprovedPinvLinePackageSearchProvider.cs" />
+    <Compile Include="Purchase\PinvPackage\ApprovedPinvLinePackageSearchTab.cs" />
     <Compile Include="Purchase\Pord\Import\PordHeadImportResultSet.cs" />
     <Compile Include="Purchase\Pord\Import\PordHeadImportResultSets.cs" />
     <Compile Include="Purchase\Pord\Import\PordHeadImportService.cs" />
