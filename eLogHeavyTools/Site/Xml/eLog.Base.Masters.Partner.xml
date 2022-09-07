@@ -123,8 +123,8 @@
 			<!--<Combo Field="codacode" ListID="CodaInt.Base.Masters.Partner.PartnerElementList" DependentCtrlID="xx.cmpid" DependentField="cmpid" ColsToSpan="4" />-->
 			<Textbox Field="cmpid" Visible="False" />
 			<ForceNextRow />
-      <Selector Field="el3" ValueField="code" TextField="code" SelectionID="CodaInt.Base.Common.Element.ElementSelectionProvider" DependentCtrlID="xx.cmpid,#3" DependentField="cmpid,elmlevel" />
-      <Selector Field="el3" Label=" " ValueField="code" TextField="name" SelectionID="CodaInt.Base.Common.Element.ElementSelectionProvider" ColsToSpan="-1" />
+      <Selector Field="el3" Label ="$el3code" ValueField="code" TextField="code" SelectionID="CodaInt.Base.Common.Element.ElementSelectionProvider" DependentCtrlID="xx.cmpid,#3" DependentField="cmpid,elmlevel" />
+      <Selector Field="el3" Label="$el3name" ValueField="code" TextField="name" SelectionID="CodaInt.Base.Common.Element.ElementSelectionProvider" ColsToSpan="-1" />
       <ForceNextRow />
 			<Combo Field="posttype" ListID="eLog.Base.Masters.Partner.PartnCmpPostTypeList" ComboFlags="None" Mandatory="true" />
 			<!--CODA specifikus start-->

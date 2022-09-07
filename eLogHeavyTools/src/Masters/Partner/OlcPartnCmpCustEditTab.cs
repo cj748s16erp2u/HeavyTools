@@ -117,7 +117,7 @@ namespace eLog.HeavyTools.Masters.Partner
         public static OlcPartnCmpCustEditTab New(eProjectWeb.Framework.UI.Templates.DefaultPageSetup custom)
         {
             var t = ObjectFactory.New<OlcPartnCmpCustEditTab>();
-            t.Initialize("olcpartncmp", custom);
+            t.Initialize("PartnCmpCust", custom);
             return t;
         }
 
@@ -257,7 +257,7 @@ namespace eLog.HeavyTools.Masters.Partner
                     // RelatedAccno
                     SetupSelectors(args, olcPartnCmp.Relatedaccno.ToStr(), "relaccno", false);
                     // ScontoBelowAccno
-                    SetupSelectors(args, olcPartnCmp.Scontoaboveaccno.ToStr(), "scbaccno", false);
+                    SetupSelectors(args, olcPartnCmp.Scontobelowaccno.ToStr(), "scbaccno", false);
                     // ScontoAboveAccno
                     SetupSelectors(args, olcPartnCmp.Scontoaboveaccno.ToStr(), "scaaccno", false);
                     // TransactionFeeAccno

@@ -19,7 +19,7 @@ namespace eLog.HeavyTools.Masters.Partner
         public static OlcPartnCmpCustTab New(eProjectWeb.Framework.UI.Templates.DefaultPageSetup custom)
         {
             OlcPartnCmpCustTab t = (OlcPartnCmpCustTab)ObjectFactory.New(typeof(OlcPartnCmpCustTab));
-            t.Initialize("partncmpcust", custom, "$noroot_partner",
+            t.Initialize("PartnCmpCust", custom, "$noroot_partner",
                     eProjectWeb.Framework.UI.Templates.DefaultActions.Modify | eProjectWeb.Framework.UI.Templates.DefaultActions.View);
             return t;
         }

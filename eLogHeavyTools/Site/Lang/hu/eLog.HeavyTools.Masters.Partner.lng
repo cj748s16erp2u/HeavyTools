@@ -1,1 +1,30 @@
 ﻿@parent=eLog.Base.Masters.Partner
+
+$tabName_PartnCmpCust=Partner - vállalat
+
+$relatedaccno=Banki elszámoló szla.
+$skontoaacno=Skonto elszámoló szla.
+$scontoinvoice=Skonto 
+$scontobelowaccno=3% alatti skonto szla.
+$scontoaboveaccno=3% feletti skonto szla.
+$transactionfeeaccno=Tranzakciós díj szla.
+$domesticvaluerate=Elem/Hazai ért. arány.
+$referencetype=Referencia típusa
+$discountaccounting=Kedvezmény könyvelés
+$valuecurid=Érték devizanem
+$other=Egyéb mezők
+
+$el1code=Elem 1
+$el1name=Megnevezés
+$el2code=Elem 2
+$el2name=Megnevezés
+$el4code=Elem 4
+$el4name=Megnevezés
+$el5code=Elem 5
+$el5name=Megnevezés
+$el6code=Elem 6
+$el6name=Megnevezés
+$el7code=Elem 7
+$el7name=Megnevezés
+$el8code=Elem 8
+$el8name=Megnevezés
