@@ -22,6 +22,7 @@ from /*u4findb*/..oas_prllist prl (nolock)
         protected static QueryArg[] m_filters = new QueryArg[] {
             new QueryArg("cmpcode", "prl", FieldType.String, QueryFlags.MultipleAllowed),
             new QueryArg("packagecode", FieldType.String),
+            new QueryArg("status", "prl", FieldType.Integer, QueryFlags.MultipleAllowed),
         };
 
         protected ApprovedPinvHeadPackageSearchProvider() : base(m_queryString, m_filters, SearchProviderType.Default, 1000)
@@ -46,9 +47,7 @@ from /*u4findb*/..oas_prllist prl (nolock)
         protected virtual void ModifyQueryString(Dictionary<string, object> args, bool fmtonly, ref string query)
         {
             var dbLinkFin = DBConfig.GetDatabaseLink(eProjectWeb.Framework.Session.Catalog, CodaInt.Base.Module.CodaDBConnID);
-
-            var dbLinkFIN = DBConfig.GetDatabaseLink(Session.Catalog, CodaInt.Base.Module.CodaDBConnID);
-            query = query.Replace("/*u4findb*/", $"[{dbLinkFIN.Database}]");
+            query = query.Replace("/*u4findb*/", $"[{dbLinkFin.Database}]");
         }
 
         protected override void PreSearch(Dictionary<string, object> args)

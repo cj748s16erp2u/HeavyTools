@@ -1,0 +1,31 @@
+$pageName_ApprovedPinvHead=Szállítói jóváhagyás csomag
+$tabName_apprphpackage=Szállítói jóváhagyás csomag
+$tabName_apprplpackage=Tétel
+
+$cmpcode=Vállalat
+$packagecode=Csomagkód
+$status=Státusz
+$paydate=Fizetés dátuma
+$genhomenet=Eredeti hazai érték
+$homenet=Aktuális hazai érték
+
+$apprphpackage_group=Csomag adatok
+
+$doccode=Dok.kód
+$docnum=Dok.szám
+$net=Aktuális érték
+$descr=Sor leírás
+$extref1=Refrencia 1
+$pinvnum=Számlaszám
+$seqno=Sorrend
+$apprstat=Jóváhagyás státusz
+$apprdate=Döntés dátuma
+$apprusrid=Jóváhagyó
+$apprusrid_name=Név
+$costval=Jog. érték
+$curid=Pénznem
+$replausrid=Helyettesítő
+$replausrid_name=Név
+$costlinenote=Egyeztetés megjegyzés
+$apprnote=Jóváhagyás megjegyzés
+

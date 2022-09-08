@@ -5,19 +5,32 @@
     <SearchFilterBar ID="SrcBar">
       <CheckedCombo Field="cmpcode" ListID="CodaInt.Base.Setup.Company.CompanyList#sessioncmp" ComboFlags="AutoSelectOne" Width="100" />
       <Textbox Field="packagecode" Width="250" />
+      <CheckedCombo Field="status" Width="170" ListID="eLog.Base.Setup.Status.StatListProviderPublic#oas_prllist.status" ComboFlags="None" />
     </SearchFilterBar>
     <Grid ID="searchResults" Label="$apprphpackage_search_results" />
   </TabPage>
   <Search Name="ApprovedPinvHeadPackageSearchProvider">
     <Column FieldName="cmpcode" Width="80" />
     <Column FieldName="packagecode" Width="250" PKFieldName="true" />
-    <Column FieldName="status" Width="120" />
-    <Column FieldName="paydate" Width="120" Format="D" />
-    <Column FieldName="genhomenet" Width="120" Format="C"/>
-    <Column FieldName="homenet" Width="120" Format="C"/>
+    <Column FieldName="status" Width="150" FieldFunction="listlookup" FieldFuncArg="eLog.Base.Setup.Status.StatListProviderPublic#oas_prllist.status" Editable="false" />
+    <Column FieldName="paydate" Width="100" Format="D" />
+    <Column FieldName="genhomenet" Width="150" Format="C"/>
+    <Column FieldName="homenet" Width="150" Format="C"/>
   </Search>
 
+  <ControlType Name="ApprovedPinvHeadPackageInfoPart" Label="$apprphpackage_group">
+    <Combo Field="cmpcode" ListID="CodaInt.Base.Setup.Company.CompanyList#sessioncmp" Width="250" Disabled="true" />
+    <Textbox Field="packagecode" Width="250" Disabled="true" />
+    <Combo Field="status" ListID="eLog.Base.Setup.Status.StatListProviderPublic#oas_prllist.status" Width="150" Disabled="true" />
+  </ControlType>  
   <TabPage Name="ApprovedPinvLinePackageSearchTab">
+    <Control ControlType="ApprovedPinvHeadPackageInfoPart" ID="apprPinvHeadPackageInfoPart" />
+    <SearchFilterBar ID="SrcBar">
+      <Textbox Field="pinvnum" Width="150" />
+      <CheckedCombo Field="apprstat" Width="170" ListID="eLog.Base.Setup.Status.StatListProviderPublic#ols_pinvapproval.apprstat" ComboFlags="None" />
+      <CheckedCombo Field="usrid" Width="150" ListID="eProjectWeb.Framework.UI.Maintenance.User.UserList" ComboFlags="None" />
+      <Combo Field="padelstat" Label="$delstat" Width="100" ListID="eLog.Base.Setup.Parameters.DelstatTypeList" ComboFlags="AutoSelectFirst" />
+    </SearchFilterBar>
     <Grid ID="searchResults" Label="$apprplpackage_search_results" />
   </TabPage>
   <Search Name="ApprovedPinvLinePackageSearchProvider">
@@ -28,6 +41,18 @@
     <Column FieldName="descr" Width="250" />
     <Column FieldName="extref1" Width="180" />
     <Column FieldName="pinvnum" Width="180" />
+    <Column FieldName="seqno" Width="60" Editable="true" />
+    <Column FieldName="apprstat" Width="50" FieldFunction="listlookup" FieldFuncArg="eLog.Base.Setup.Status.StatListProviderPublic#ols_pinvapproval.apprstat,abbr" Editable="false" />
+    <Column FieldName="apprdate" Width="100" Format="DT" Editable="false" />
+    <Column FieldName="apprusrid" Width="80" Editable="true"/>
+    <Column FieldName="apprusrid_name" Width="200" Editable="false"/>
+    <Column FieldName="costval" Width="100" Format="C2" />
+    <Column FieldName="curid" Width="40" />
+    <Column FieldName="replausrid" Width="80" Editable="true"/>
+    <Column FieldName="replausrid_name" Width="200" Editable="false"/>
+    <Column FieldName="costlinenote" Width="200" Editable="false"/>
+    <Column FieldName="apprnote" Width="200" Editable="false"/>
+    <Column FieldName="padelstat" DisplayName="$delstat" Width="50" FieldFunction="listlookup" FieldFuncArg="eLog.Base.Setup.Parameters.DelstatTypeList,abbr" />
   </Search>
   
 </Schema>

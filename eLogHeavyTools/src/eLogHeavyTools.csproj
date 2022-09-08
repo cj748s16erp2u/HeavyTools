@@ -256,6 +256,8 @@
     <Compile Include="Masters\PriceTable\PrcType.cs" />
     <Compile Include="Module.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Purchase\PinvPackage\ApprovedPinvHeadPackageBL.cs" />
+    <Compile Include="Purchase\PinvPackage\ApprovedPinvHeadPackageInfoPart.cs" />
     <Compile Include="Purchase\PinvPackage\ApprovedPinvHeadPackageSearchPage.cs" />
     <Compile Include="Purchase\PinvPackage\ApprovedPinvHeadPackageSearchProvider.cs" />
     <Compile Include="Purchase\PinvPackage\ApprovedPinvHeadPackageSearchTab.cs" />
