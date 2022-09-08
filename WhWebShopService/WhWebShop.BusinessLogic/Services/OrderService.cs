@@ -34,11 +34,11 @@ public class OrderService : LogicServiceBase<OlsSordhead>, IOrderService
     private readonly IOlsCountryService countryService;
     private readonly IOlcSordheadService olcSordHeadService;
     private readonly IOlcSordlineService olcSordLineService;
+    private readonly IPriceCalcService priceCalcService;
+    private readonly IPriceCalcCuponUsageService priceCalcCuponUsageService;
 
-
-    //OrderServiceCSV orderServiceCSV;
-
-    public OrderService(IValidator<OlsSordhead> validator, IRepository<OlsSordhead> repository, IUnitOfWork unitOfWork, IEnvironmentService environmentService, IOlsSordheadService sordHeadService, IOlsSordlineService sordLineService, IOlsRecidService recIdService, IItemCache itemCache, IOptions<Options.SordOptions> sordoptions, IOSSService oSSService, IOlsCountryService countryService, IOlcSordheadService olcSordHeadService, IOlcSordlineService olcSordLineService) : base(validator, repository, unitOfWork, environmentService)
+ 
+    public OrderService(IValidator<OlsSordhead> validator, IRepository<OlsSordhead> repository, IUnitOfWork unitOfWork, IEnvironmentService environmentService, IOlsSordheadService sordHeadService, IOlsSordlineService sordLineService, IOlsRecidService recIdService, IItemCache itemCache, IOptions<Options.SordOptions> sordoptions, IOSSService oSSService, IOlsCountryService countryService, IOlcSordheadService olcSordHeadService, IOlcSordlineService olcSordLineService, IPriceCalcService priceCalcService, IPriceCalcCuponUsageService priceCalcCuponUsageService) : base(validator, repository, unitOfWork, environmentService)
     {
         this.sordHeadService = sordHeadService ?? throw new ArgumentNullException(nameof(sordHeadService));
         this.sordLineService = sordLineService ?? throw new ArgumentNullException(nameof(sordLineService));
@@ -49,21 +49,17 @@ public class OrderService : LogicServiceBase<OlsSordhead>, IOrderService
         this.countryService = countryService ?? throw new ArgumentNullException(nameof(countryService));
         this.olcSordHeadService = olcSordHeadService ?? throw new ArgumentNullException(nameof(olcSordHeadService));
         this.olcSordLineService = olcSordLineService ?? throw new ArgumentNullException(nameof(olcSordLineService));
+        this.priceCalcService = priceCalcService ?? throw new ArgumentNullException(nameof(priceCalcService));
+        this.priceCalcCuponUsageService = priceCalcCuponUsageService ?? throw new ArgumentNullException(nameof(priceCalcCuponUsageService));
 
         /*orderServiceCSV = new OrderServiceCSV(validator, repository, unitOfWork, environmentService, sordHeadService, sordLineService, recIdService, itemCache, sordoptions, oSSService, countryService, olcSordHeadService);*/
     }
-
-    public async Task<OrderResultDto> CreateOldAsync(OrderParamsDto parms, OlcApilogger apilogger, CancellationToken cancellationToken = default)
-    {
-        throw new NotImplementedException();
-        //return await orderServiceCSV.CreateOldAsync2Async(parms, apilogger, cancellationToken);
-    }
-  
       
     public async Task<OrderResultDto> CreateAsync(JObject value, OlcApilogger apilogger, CancellationToken cancellationToken = default)
     {
-        var order = JsonParser.ParseObject<OrderJsonParamsDto>(value); 
-        var cart = PriceCalcBL.DoCalc(order!.Cart);
+        var order = JsonParser.ParseObject<OrderJsonParamsDto>(value);
+       
+        await priceCalcCuponUsageService.UseCuponAsync(order.Cart.Cupons);
 
         var sh = new OlsSordhead();
 
@@ -72,18 +68,18 @@ public class OrderService : LogicServiceBase<OlsSordhead>, IOrderService
             var country = await GetCountry(order, cancellationToken);
             var oss = await GetOSS(country.Countryid, cancellationToken);
 
-            await FillHeadAsync(sh, order, cart, cancellationToken);
+            await FillHeadAsync(sh, order, cancellationToken);
             await sordHeadService.AddAsync(sh, cancellationToken);
 
             var csh = new OlcSordhead();
-            FillOlcHead(csh, sh, cart ,order, oss, apilogger);
+            FillOlcHead(csh, sh, order, oss, apilogger);
             await olcSordHeadService.AddAsync(csh, cancellationToken);
 
 
             var sl = new List<OlsSordline>();
             var csl = new List<OlcSordline>();
 
-            await FillLinesAsync(sl, csl, cart, sh.Sordid, oss, cancellationToken);
+            await FillLinesAsync(sl, csl, order, sh.Sordid, oss, cancellationToken);
 
             foreach (var line in sl)
             {
@@ -104,12 +100,11 @@ public class OrderService : LogicServiceBase<OlsSordhead>, IOrderService
         {
             Success = true,
             ErrorMessage = null,
-            Sordid = sh!.Sordid,
-            Cart= cart
+            Sordid = sh!.Sordid
         };
     }
 
-    private async Task FillHeadAsync(OlsSordhead sh, OrderJsonParamsDto order, CalcJsonResultDto cart, CancellationToken cancellationToken)
+    private async Task FillHeadAsync(OlsSordhead sh, OrderJsonParamsDto order, CancellationToken cancellationToken)
     {
         var sordid = await recIdService.GetNewIdAsync("SordHead.SordID", cancellationToken);
         if (sordid == null)
@@ -121,13 +116,13 @@ public class OrderService : LogicServiceBase<OlsSordhead>, IOrderService
         sh.Partnid = 1;
         sh.Docnum = order.OrderNumber;
         sh.Sorddate = order.OrderDate!.Value;
-        sh.Curid = cart.Curid;
+        sh.Curid = order.Cart.Curid;
         sh.Paymid = "KP";
         sh.Paycid = null;
         sh.Sordstat = 10;
         sh.Note = order.Note;
         sh.Langid = "hu-HU";
-        sh.Lastlinenum = cart.Items.Count();
+        sh.Lastlinenum = order.Cart.Items.Count();
 
         sh.Gen = this.sordoptions.Value.Gen!.Value;
         sh.Sorddocid = this.sordoptions.Value.SordDocId!;
@@ -146,7 +141,7 @@ public class OrderService : LogicServiceBase<OlsSordhead>, IOrderService
         }
     }
 
-    private void FillOlcHead(OlcSordhead csh, OlsSordhead sh, CalcJsonResultDto cart, OrderJsonParamsDto order, OSSResultDto oss, OlcApilogger apilogger)
+    private void FillOlcHead(OlcSordhead csh, OlsSordhead sh, OrderJsonParamsDto order, OSSResultDto oss, OlcApilogger apilogger)
     {
         var root = new XElement("sordhead");
 
@@ -178,6 +173,7 @@ public class OrderService : LogicServiceBase<OlsSordhead>, IOrderService
         AddXElement(root, order, nameof(order.Phone));
         AddXElement(root, order, nameof(order.Email));
         AddXElement(root, order, nameof(order.ShippinPrc));
+        AddXElement(root, order, nameof(order.PaymentFee));
         AddXElement(root, order, nameof(order.Paymenttransaciondata));
         AddXElement(root, order, nameof(order.Netgopartnid));
         AddXElement(root, order, nameof(order.Pppid));
@@ -246,11 +242,11 @@ public class OrderService : LogicServiceBase<OlsSordhead>, IOrderService
         }
     }
 
-    private async Task FillLinesAsync(List<OlsSordline> sl, List<OlcSordline> csl, CalcJsonResultDto cart, int sordid, OSSResultDto oss, CancellationToken cancellationToken)
+    private async Task FillLinesAsync(List<OlsSordline> sl, List<OlcSordline> csl, OrderJsonParamsDto order, int sordid, OSSResultDto oss, CancellationToken cancellationToken)
     {
         var num = 0;
 
-        foreach (var item in cart.Items)
+        foreach (var item in order.Cart.Items)
         {
             num++;
             var nsl = new OlsSordline();
@@ -273,9 +269,12 @@ public class OrderService : LogicServiceBase<OlsSordhead>, IOrderService
             
             nsl.Ordqty = Convert.ToDecimal(item!.Quantity!.Value);
             nsl.Movqty = 0;
+
+             
             nsl.Selprctype = 2; // bruttó
-            nsl.Selprc = item.SelPrc!.Value;
-            nsl.Seltotprc = item.SetTotPrc!.Value;
+            nsl.Selprc = item.SelPrc.GetValueOrDefault(0);
+            nsl.Seltotprc = item.GrossPrc.GetValueOrDefault(0);
+
 
             nsl.Selprcprcid = null;
             nsl.Discpercnt = 0;
@@ -294,11 +293,13 @@ public class OrderService : LogicServiceBase<OlsSordhead>, IOrderService
              
             var root = new XElement("sordline");
 
-            AddXElement(root, item, nameof(item.OrigSelVal));
+            AddXElement(root, item, nameof(item.OrignalSelPrc));
+            AddXElement(root, item, nameof(item.OrignalTotprc));
             AddXElement(root, item, nameof(item.SelPrc));
-            AddXElement(root, item, nameof(item.SetTotPrc));
-            AddXElement(root, item, nameof(item.SelVal));
-            AddXElement(root, item, nameof(item.SelTotVal));
+            AddXElement(root, item, nameof(item.GrossPrc));
+            AddXElement(root, item, nameof(item.NetVal));
+            AddXElement(root, item, nameof(item.TaxVal));
+            AddXElement(root, item, nameof(item.TotVal));
 
             var ncsl = new OlcSordline
             {

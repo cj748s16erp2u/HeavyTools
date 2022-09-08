@@ -22,10 +22,16 @@ namespace eLog.HeavyTools.Sales.Sord
             private set;
         }
 
-        public string OrigSelVal
+        public string OrignalSelPrc
         {
-            get => this.XmlManipute.Get("OrigSelVal");
-            set => this.XmlManipute.Set("OrigSelVal", value);
+            get => this.XmlManipute.Get("OrignalSelPrc");
+            set => this.XmlManipute.Set("OrignalSelPrc", value);
+        }
+
+        public string OrignalTotprc
+        {
+            get => this.XmlManipute.Get("OrignalTotprc");
+            set => this.XmlManipute.Set("OrignalTotprc", value);
         }
 
         public string SelPrc
@@ -34,22 +40,26 @@ namespace eLog.HeavyTools.Sales.Sord
             set => this.XmlManipute.Set("SelPrc", value);
         }
 
-        public string SetTotPrc
+        public string GrossPrc
         {
-            get => this.XmlManipute.Get("SetTotPrc");
-            set => this.XmlManipute.Set("SetTotPrc", value);
+            get => this.XmlManipute.Get("GrossPrc");
+            set => this.XmlManipute.Set("GrossPrc", value);
         }
 
-        public string SelVal
+        public string NetVal
         {
-            get => this.XmlManipute.Get("SelVal");
-            set => this.XmlManipute.Set("SelVal", value);
+            get => this.XmlManipute.Get("NetVal");
+            set => this.XmlManipute.Set("NetVal", value);
         }
-
-        public string SelTotVal
+        public string TaxVal
         {
-            get => this.XmlManipute.Get("SelTotVal");
-            set => this.XmlManipute.Set("SelTotVal", value);
+            get => this.XmlManipute.Get("TaxVal");
+            set => this.XmlManipute.Set("TaxVal", value);
+        }
+        public string TotVal
+        {
+            get => this.XmlManipute.Get("TotVal");
+            set => this.XmlManipute.Set("TotVal", value);
         }
     }
 }

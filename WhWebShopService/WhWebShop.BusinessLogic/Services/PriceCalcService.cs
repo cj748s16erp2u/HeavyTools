@@ -23,6 +23,10 @@ internal class PriceCalcService : LogicServiceBase<OlcPriceCalcResult>, IPriceCa
     private readonly IRepository<CfwUser> userRepository;
     private readonly IOlcApiloggerService olcApiloggerService;
     private readonly IPriceCalcOriginalService priceCalcOriginalService;
+    private readonly IPriceCalcActionService priceCalcActionService;
+    private readonly IPriceCalcGroupService priceCalcGroupService;
+    private readonly IPriceCalcValueCalculatorService pricseCalcValueCalculatorService;
+    private readonly IOlcActionCacheService olcActionCacheService;
 
     public PriceCalcService(
         IOlcPriceCalcResultValidator validator,
@@ -31,11 +35,19 @@ internal class PriceCalcService : LogicServiceBase<OlcPriceCalcResult>, IPriceCa
         IEnvironmentService environmentService,
         IRepository<CfwUser> userRepository,
         IOlcApiloggerService olcApiloggerService,
-        IPriceCalcOriginalService priceCalcOriginalService) : base(validator, repository, unitOfWork, environmentService)
+        IPriceCalcOriginalService priceCalcOriginalService,
+        IPriceCalcActionService priceCalcActionService,
+        IPriceCalcGroupService priceCalcGroupService,
+        IPriceCalcValueCalculatorService pricseCalcValueCalculatorService,
+        IOlcActionCacheService olcActionCacheService) : base(validator, repository, unitOfWork, environmentService)
     {
         this.userRepository = userRepository ?? throw new ArgumentNullException(nameof(userRepository));
         this.olcApiloggerService = olcApiloggerService ?? throw new ArgumentNullException(nameof(olcApiloggerService));
         this.priceCalcOriginalService = priceCalcOriginalService ?? throw new ArgumentNullException(nameof(priceCalcOriginalService));
+        this.priceCalcActionService = priceCalcActionService ?? throw new ArgumentNullException(nameof(priceCalcActionService));
+        this.priceCalcGroupService = priceCalcGroupService ?? throw new ArgumentNullException(nameof(priceCalcGroupService));
+        this.pricseCalcValueCalculatorService = pricseCalcValueCalculatorService ?? throw new ArgumentNullException(nameof(pricseCalcValueCalculatorService));
+        this.olcActionCacheService = olcActionCacheService ?? throw new ArgumentNullException(nameof(olcActionCacheService));
     }
 
     public int Calc(int? x, int? y)
@@ -75,8 +87,6 @@ internal class PriceCalcService : LogicServiceBase<OlcPriceCalcResult>, IPriceCa
         };
     }
 
-    public static string jsonRoot = "Cart";
-
     private void ValidateCalcParams(CalcParamsDto parms)
     {
         if (parms is null)
@@ -94,20 +104,59 @@ internal class PriceCalcService : LogicServiceBase<OlcPriceCalcResult>, IPriceCa
 
     public async Task<CalcJsonResultDto> CalcJsonAsync(Newtonsoft.Json.Linq.JObject parms, CancellationToken cancellationToken = default)
     {
-        var calcitem = JsonParser.ParseObject<CalcJsonParamsDto>(parms);
-        CalcJsonResultDto res = await priceCalcOriginalService.GetOriginalPrice(calcitem, cancellationToken);
+        var pcar = new PriceCalcActionResultDto();
+        var cart = JsonParser.ParseObject<CalcJsonParamsDto>(parms);
+        var res = await CalculatePrice(cart, pcar, cancellationToken);
+        
 
+        if (UnitTestDetector.IsRunningFromNUnit) {
+            Debug(pcar);
+            Debug(res);
+        }
 
+            /*
+            JsonSerializerSettings jsSettings = new JsonSerializerSettings();
+            jsSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
 
-        var a = new OlcApilogger
-        {
-            Command = "PriceCalcService",
-            Request = parms.ToString(),
-            Response = JsonConvert.SerializeObject(res)
-        };
+            var a = new OlcApilogger
+            {
+                Command = "PriceCalcService",
+                Request = parms.ToString(),
+                Response = JsonConvert.SerializeObject(res, Formatting.None, jsSettings)
+            };
 
-        await olcApiloggerService.AddAsync(a);
+            await olcApiloggerService.AddAsync(a);
+            var a2 = new OlcApilogger
+            {
+                Command = "PriceCalcServiceActionResult",
+                Request ="",
+                Response = JsonConvert.SerializeObject(pcar, Formatting.None, jsSettings)
+            };
+            await olcApiloggerService.AddAsync(a2);
+            */
+            return res;
+    }
 
+    public static void Debug(object res)
+    {
+        var jsSettings = new JsonSerializerSettings();
+        jsSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
+        System.Diagnostics.Debug.WriteLine(JsonConvert.SerializeObject(res, Formatting.Indented, jsSettings));
+    }
+
+    public async Task<CalcJsonResultDto> CalculatePrice(CalcJsonParamsDto cart, PriceCalcActionResultDto pricecalcactionresult, CancellationToken cancellationToken = default)
+    {
+        var res = await priceCalcOriginalService.GetOriginalPrice(cart, cancellationToken);
+        await priceCalcActionService.CalculateActionPriceAsync(cart, res, pricecalcactionresult, cancellationToken);
+        priceCalcGroupService.GroupCart(res);
+        await pricseCalcValueCalculatorService.CalculateCartAsync(res, cancellationToken);
         return res;
+    }
+
+    public async Task<bool> ResetJsonAsync(JObject parms)
+    {
+        var cartReset = JsonParser.ParseObject<CalcResetJsonParamsDto>(parms);
+
+        return await olcActionCacheService.Reset(cartReset.Aid, default);
     }
 }

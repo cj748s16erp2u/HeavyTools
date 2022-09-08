@@ -114,12 +114,12 @@ namespace eLog.HeavyTools.Sales.Sord
                     SetTextBoxValue("Email", olc.Email);
                     SetTextBoxValue("LoyaltyCardNo", olc.LoyaltyCardNo);
                     SetTextBoxValue("ShippinPrc", olc.ShippinPrc);
+                    SetTextBoxValue("PaymentFee", olc.PaymentFee);
                     SetTextBoxValue("Paymenttransaciondata", olc.Paymenttransaciondata);
                     SetTextBoxValue("Netgopartnid", olc.Netgopartnid);
                     SetTextBoxValue("Pppid", olc.Pppid);
                     SetTextBoxValue("Glsid", olc.Glsid);
                     SetTextBoxValue("Foxpostid", olc.Foxpostid);
-                    SetTextBoxValue("CentralRetailType", olc.CentralRetailType);
                     SetTextBoxValue("Exchangepackagesnumber", olc.Exchangepackagesnumber);
                     SetTextBoxValue("ShippingId", olc.ShippingId);
                     SetTextBoxValue("PaymentId", olc.PaymentId);
@@ -139,11 +139,13 @@ namespace eLog.HeavyTools.Sales.Sord
                         (this.m_defLine["confdeldate"] as DatePickerbox)?.SetValue(defOlcSordLine.Confdeldate);
                         (this.m_defLine["confqty"] as Numberbox)?.SetValue(defOlcSordLine.Confqty);
 
-                        SetTextBoxValue("SordlineWebShopEditGroup", "OrigSelVal", defOlcSordLine.OrigSelVal);
+                        SetTextBoxValue("SordlineWebShopEditGroup", "OrignalSelPrc", defOlcSordLine.OrignalSelPrc);
+                        SetTextBoxValue("SordlineWebShopEditGroup", "OrignalTotprc", defOlcSordLine.OrignalTotprc);
                         SetTextBoxValue("SordlineWebShopEditGroup", "SelPrc", defOlcSordLine.SelPrc);
-                        SetTextBoxValue("SordlineWebShopEditGroup", "SelVal", defOlcSordLine.SelVal);
-                        SetTextBoxValue("SordlineWebShopEditGroup", "SetTotPrc", defOlcSordLine.SetTotPrc);
-                        SetTextBoxValue("SordlineWebShopEditGroup", "SelTotVal", defOlcSordLine.SelTotVal);
+                        SetTextBoxValue("SordlineWebShopEditGroup", "GrossPrc", defOlcSordLine.GrossPrc);
+                        SetTextBoxValue("SordlineWebShopEditGroup", "NetVal", defOlcSordLine.NetVal);
+                        SetTextBoxValue("SordlineWebShopEditGroup", "TaxVal", defOlcSordLine.TaxVal);
+                        SetTextBoxValue("SordlineWebShopEditGroup", "TotVal", defOlcSordLine.TotVal);
 
                     }
                 }
@@ -198,13 +200,13 @@ namespace eLog.HeavyTools.Sales.Sord
             olc.Phone = (this.EditGroup1["Phone"] as Textbox).GetStringValue();
             olc.Email = (this.EditGroup1["Email"] as Textbox).GetStringValue();
             olc.LoyaltyCardNo = (this.EditGroup1["LoyaltyCardNo"] as Textbox).GetStringValue();
+            olc.PaymentFee = (this.EditGroup1["PaymentFee"] as Textbox).GetStringValue();
             olc.ShippinPrc = (this.EditGroup1["ShippinPrc"] as Textbox).GetStringValue();
             olc.Paymenttransaciondata = (this.EditGroup1["Paymenttransaciondata"] as Textbox).GetStringValue();
             olc.Netgopartnid = (this.EditGroup1["Netgopartnid"] as Textbox).GetStringValue();
             olc.Pppid = (this.EditGroup1["Pppid"] as Textbox).GetStringValue();
             olc.Glsid = (this.EditGroup1["Glsid"] as Textbox).GetStringValue();
             olc.Foxpostid = (this.EditGroup1["Foxpostid"] as Textbox).GetStringValue();
-            olc.CentralRetailType = (this.EditGroup1["CentralRetailType"] as Textbox).GetStringValue();
             olc.Exchangepackagesnumber = (this.EditGroup1["Exchangepackagesnumber"] as Textbox).GetStringValue();
             olc.ShippingId = (this.EditGroup1["ShippingId"] as Textbox).GetStringValue();
             olc.PaymentId = (this.EditGroup1["PaymentId"] as Textbox).GetStringValue();
@@ -231,11 +233,13 @@ namespace eLog.HeavyTools.Sales.Sord
                 olcSordLine.Confdeldate = (this.m_defLine["confdeldate"] as DatePickerbox)?.GetValue<DateTime>();
                 olcSordLine.Confqty = (this.m_defLine["confqty"] as Numberbox)?.GetValue<decimal>();
 
-                olcSordLine.OrigSelVal = GetTextBoxValue("SordlineWebShopEditGroup", "OrigSelVal");
+                olcSordLine.OrignalSelPrc = GetTextBoxValue("SordlineWebShopEditGroup", "OrignalSelPrc");
+                olcSordLine.OrignalTotprc = GetTextBoxValue("SordlineWebShopEditGroup", "OrignalTotprc");
                 olcSordLine.SelPrc = GetTextBoxValue("SordlineWebShopEditGroup", "SelPrc");
-                olcSordLine.SelVal = GetTextBoxValue("SordlineWebShopEditGroup", "SelVal");
-                olcSordLine.SetTotPrc = GetTextBoxValue("SordlineWebShopEditGroup", "SetTotPrc");
-                olcSordLine.SelTotVal = GetTextBoxValue("SordlineWebShopEditGroup", "SelTotVal");
+                olcSordLine.GrossPrc = GetTextBoxValue("SordlineWebShopEditGroup", "GrossPrc");
+                olcSordLine.NetVal = GetTextBoxValue("SordlineWebShopEditGroup", "NetVal");
+                olcSordLine.TaxVal = GetTextBoxValue("SordlineWebShopEditGroup", "TaxVal");
+                olcSordLine.TotVal = GetTextBoxValue("SordlineWebShopEditGroup", "TotVal");
 
                 map.Add(olcSordLine);
             }

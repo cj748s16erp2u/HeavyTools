@@ -41,6 +41,9 @@ namespace eLog.HeavyTools.Services.WhWebShop.BusinessEntities.Model
         [ForeignKey("Countryid")]
         [InverseProperty("OlcTaxtransext")]
         public virtual OlsCountry Country { get; set; } = null!;
+        [ForeignKey("Taxid")]
+        [InverseProperty("OlcTaxtransext")]
+        public virtual OlsTax Tax { get; set; } = null!;
         [ForeignKey("Ttid")]
         [InverseProperty("OlcTaxtransext")]
         public virtual OlsTaxtrans Tt { get; set; } = null!;

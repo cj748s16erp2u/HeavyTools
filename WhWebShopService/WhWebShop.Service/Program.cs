@@ -1,4 +1,6 @@
-﻿var options = new WebApplicationOptions
+﻿using eLog.HeavyTools.Services.WhWebShop.BusinessLogic.Services;
+
+var options = new WebApplicationOptions
 {
     ContentRootPath = AppContext.BaseDirectory,
     Args = args
@@ -55,6 +57,9 @@ builder.Services.AddCors(options =>
 #endif
         );
 });
+
+builder.Services.AddControllers().AddJsonOptions(options =>
+options.JsonSerializerOptions.PropertyNamingPolicy = null);
 
 builder.Services.AddControllers()
     .AddNewtonsoftJson(options =>

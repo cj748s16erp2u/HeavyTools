@@ -10,6 +10,7 @@ namespace eLog.HeavyTools.Sales.Action
     {
         public override void SetDefaultValues()
         {
+            Isdiscount = 0;
         }
     }
 }

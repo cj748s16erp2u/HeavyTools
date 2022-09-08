@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace eLog.HeavyTools.Services.WhWebShop.BusinessEntities.Dto;
 
-public class OSSParamsDto : ResultDto
+public class OSSParamsDto
 {
     public string? CoundtyId { get; set; } = null!;
 }

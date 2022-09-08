@@ -109,16 +109,14 @@
 			<Textbox Field="Sinv_door" ColsToSpan="2" Disabled="True"/>
 			<Textbox Field="Shipping_door" ColsToSpan="2" Disabled="True"/>
 			<ForceNextRow/>
-			
-			
-			
+			 
 			<Textbox Field="Phone" ColsToSpan="4" Disabled="True"/>
 			<ForceNextRow/>
 			<Textbox Field="Email" ColsToSpan="4" Disabled="True"/>
 			<ForceNextRow/>
-			<Textbox Field="LoyaltyCardNo" ColsToSpan="4" Disabled="True"/>
-			<ForceNextRow/>
 			<Textbox Field="ShippinPrc" ColsToSpan="4" Disabled="True"/>
+			<ForceNextRow/>
+			<Textbox Field="PaymentFee" ColsToSpan="4" Disabled="True"/>
 			<ForceNextRow/>
 			<Textbox Field="Paymenttransaciondata" ColsToSpan="4" Disabled="True"/>
 			<ForceNextRow/>
@@ -129,8 +127,6 @@
 			<Textbox Field="Glsid" ColsToSpan="4" Disabled="True"/>
 			<ForceNextRow/>
 			<Textbox Field="Foxpostid" ColsToSpan="4" Disabled="True"/>
-			<ForceNextRow/>
-			<Textbox Field="CentralRetailType" ColsToSpan="4" Disabled="True"/>
 			<ForceNextRow/>
 			<Textbox Field="Exchangepackagesnumber" ColsToSpan="4" Disabled="True"/>
 			<ForceNextRow/>
@@ -174,13 +170,15 @@
         </LayoutTable>
 		
 		<LayoutTable ControlGroup="SordLineWebShop" Columns="{120, None}; {120, None}; {20, Empty}; {120, None}; {120, None}; {20, Empty}; {120, None}; {120, None}" ID="SordlineWebShopEditGroup" Label="$sordlinewebshop_editgroup" Open="false">
-			<Textbox Field="OrigSelVal" ColsToSpan="2" Disabled="True"/>
+			<Textbox Field="OrignalSelPrc" Disabled="True"/>
+			<Textbox Field="OrignalTotprc"  Disabled="True"/>
 			<ForceNextRow/>			
-			<Textbox Field="SelPrc" ColsToSpan="2" Disabled="True"/>
-			<Textbox Field="SelVal" ColsToSpan="2" Disabled="True"/>
+			<Textbox Field="SelPrc" Disabled="True"/> 
+			<Textbox Field="GrossPrc" Disabled="True"/>
 			<ForceNextRow/>
-			<Textbox Field="SetTotPrc" ColsToSpan="2" Disabled="True"/>
-			<Textbox Field="SelTotVal" ColsToSpan="2" Disabled="True"/>
+			<Textbox Field="NetVal" Disabled="True"/>
+			<Textbox Field="TotVal" Disabled="True"/>
+			<Textbox Field="TaxVal" Disabled="True"/>
 		</LayoutTable>
 		
 			
@@ -250,13 +248,15 @@
         </LayoutTable>
 				
 		<LayoutTable ControlGroup="SordLineWebShop" Columns="{120, None}; {120, None}; {20, Empty}; {120, None}; {120, None}; {20, Empty}; {120, None}; {120, None}" ID="SordlineWebShopEditGroup" Label="$sordlinewebshop_editgroup" Open="false">
-			<Textbox Field="OrigSelVal" ColsToSpan="2" Disabled="True"/>
+			<Textbox Field="OrignalSelPrc" Disabled="True"/>
+			<Textbox Field="OrignalTotprc"  Disabled="True"/>
 			<ForceNextRow/>			
-			<Textbox Field="SelPrc" ColsToSpan="2" Disabled="True"/>
-			<Textbox Field="SelVal" ColsToSpan="2" Disabled="True"/>
+			<Textbox Field="SelPrc" Disabled="True"/> 
+			<Textbox Field="GrossPrc" Disabled="True"/>
 			<ForceNextRow/>
-			<Textbox Field="SetTotPrc" ColsToSpan="2" Disabled="True"/>
-			<Textbox Field="SelTotVal" ColsToSpan="2" Disabled="True"/>
+			<Textbox Field="NetVal" Disabled="True"/>
+			<Textbox Field="TotVal" Disabled="True"/>
+			<Textbox Field="TaxVal" Disabled="True"/>
 		</LayoutTable>
 		
         <LayoutTable ControlGroup="Reserve" Columns="{140, None}; {180, None}; {20, Empty}; {140, None}; {100, None}; {20, Empty}; {100, None}; {100, None}" ID="EditGroupReserve" Label="$reserve_editgroup">

@@ -1,17 +1,20 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using eLog.HeavyTools.Services.WhWebShop.BusinessEntities.Dto;
 using eLog.HeavyTools.Services.WhWebShop.BusinessEntities.Model;
-using eLog.HeavyTools.Services.WhWebShop.BusinessEntities.Model.Interfaces;
+using eLog.HeavyTools.Services.WhWebShop.BusinessEntities.Model.Interfaces; 
 using eLog.HeavyTools.Services.WhWebShop.BusinessLogic.Services.Interfaces;
 using eLog.HeavyTools.Services.WhWebShop.Test.Base;
 using eLog.HeavyTools.Services.WhWebShop.Test.CartJsonGenerator;
 using eLog.HeavyTools.Services.WhWebShop.Test.Fixtures;
+using eLog.HeavyTools.Services.WhWebShop.Test.Helpers;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
+using Newtonsoft.Json;
 using Xunit;
 using Xunit.Abstractions;
 
@@ -19,10 +22,14 @@ namespace eLog.HeavyTools.Services.WhWebShop.Test.Services;
 
 public class PriceCalcServiceTest : TestBase<OlcPriceCalcResult, IPriceCalcService>
 {
+
+    private IPriceCalcService? service;
     public PriceCalcServiceTest(ITestOutputHelper testOutputHelper, TestFixture fixture) : base(testOutputHelper, fixture)
     {
+        
     }
-
+     
+      
     [Theory]
     [InlineData(3, 6)]
     [InlineData(-3, 6)]
@@ -38,7 +45,9 @@ public class PriceCalcServiceTest : TestBase<OlcPriceCalcResult, IPriceCalcServi
     private static string JSON= @"
 { 
     ""Cart"": {
-        ""Wid"": ""hu"",
+        ""Wid"": ""com"",
+        ""Curid"": ""EUR"",
+        ""FirstPurchase"": ""false"",
 		""LoyaltyCardNo"": ""ABC12345678"",
         ""CountryId"": ""HU"",
 		""Cupons"": [
@@ -47,23 +56,56 @@ public class PriceCalcServiceTest : TestBase<OlcPriceCalcResult, IPriceCalcServi
 			""Cupon2""],
         ""Items"": [
             {
-            ""ItemCode"": ""C6S22449NA.L"",
-				""Quantity"": 2
+                ""CartId"": ""1"",
+                ""ItemCode"": ""A2W22282NA.L"",
+				""Quantity"": 4
             },{
-            ""ItemCode"": ""C6S22145ST.L"",
+                ""CartId"": ""2"",
+                ""ItemCode"": ""C6S22145ST.L"",
 				""Quantity"": 3
             },{
-            ""ItemCode"": ""G3S20529RT.L"",
+                ""CartId"": ""3"",
+                ""ItemCode"": ""G3S20529RT.L"",
 				""Quantity"": 4
             }]
 	}
 }
  ";
 
+    private static string JSON2 = @"
+{ 
+    ""Cart"": {
+        ""Wid"": ""com"",
+        ""Curid"": ""EUR"",
+        ""FirstPurchase"": ""false"",
+		""LoyaltyCardNo"": ""ABC12345678"",
+        ""CountryId"": ""HU"",
+		""Cupons"": [
+
+            ""Cupon1"",
+			""Cupon2""],
+        ""Items"": [
+            {
+                ""CartId"": ""1"",
+                ""ItemCode"": ""A2W22282NA.L"",
+				""Quantity"": 4
+            }]
+	}
+}
+ ";
+ 
     [Fact]
-    public async void Test01()
+    public async void Test01Fix()
     {
-        var jo = Newtonsoft.Json.Linq.JObject.Parse(JSON);
+        var jo = Newtonsoft.Json.Linq.JObject.Parse(JSON2);
+        var res = await this.service.CalcJsonAsync(jo);            
+        Assert.True(res.Success);
+    }
+ 
+    [Fact]
+    public async void Test01Random()
+    {
+        var jo = Newtonsoft.Json.Linq.JObject.Parse(CartGenerator.GetRandomCart());
         var res = await this.service.CalcJsonAsync(jo);
         Assert.True(res.Success);
     }

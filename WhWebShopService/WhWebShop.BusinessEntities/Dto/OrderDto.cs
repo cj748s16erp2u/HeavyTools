@@ -15,5 +15,4 @@ public class OrderParamsDto
 public class OrderResultDto : ResultDto
 {
     public int? Sordid { get; set; } = null!;
-    public CalcJsonResultDto Cart { get; set; } = null!;
 }

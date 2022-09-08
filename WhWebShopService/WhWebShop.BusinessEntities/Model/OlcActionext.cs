@@ -23,9 +23,13 @@ namespace eLog.HeavyTools.Services.WhWebShop.BusinessEntities.Model
         [Column("count")]
         public int Count { get; set; }
         [Column("discounttype")]
-        public int Discounttype { get; set; }
+        public int? Discounttype { get; set; }
         [Column("discountval", TypeName = "numeric(19, 6)")]
         public decimal? Discountval { get; set; }
+        [Column("discountcalculationtype")]
+        public int? Discountcalculationtype { get; set; }
+        [Column("isdiscount")]
+        public int Isdiscount { get; set; }
         [Column("addusrid")]
         [StringLength(12)]
         [Unicode(false)]

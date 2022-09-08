@@ -46,11 +46,13 @@ namespace eLog.HeavyTools.Sales.Sord
                         c.DataBind(olc, false);
                     }
 
-                    SetTextBoxValue("SordlineWebShopEditGroup", "OrigSelVal", olc.OrigSelVal);
+                    SetTextBoxValue("SordlineWebShopEditGroup", "OrignalSelPrc", olc.OrignalSelPrc);
+                    SetTextBoxValue("SordlineWebShopEditGroup", "OrignalTotprc", olc.OrignalTotprc);
                     SetTextBoxValue("SordlineWebShopEditGroup", "SelPrc", olc.SelPrc);
-                    SetTextBoxValue("SordlineWebShopEditGroup", "SelVal", olc.SelVal);
-                    SetTextBoxValue("SordlineWebShopEditGroup", "SetTotPrc", olc.SetTotPrc);
-                    SetTextBoxValue("SordlineWebShopEditGroup", "SelTotVal", olc.SelTotVal);
+                    SetTextBoxValue("SordlineWebShopEditGroup", "GrossPrc", olc.GrossPrc);
+                    SetTextBoxValue("SordlineWebShopEditGroup", "NetVal", olc.NetVal);
+                    SetTextBoxValue("SordlineWebShopEditGroup", "TaxVal", olc.TaxVal);
+                    SetTextBoxValue("SordlineWebShopEditGroup", "TotVal", olc.TotVal);
 
                 }
             }
@@ -73,11 +75,13 @@ namespace eLog.HeavyTools.Sales.Sord
                 c.DataBind(olc, true);
             }
 
-            olc.OrigSelVal = GetTextBoxValue("SordlineWebShopEditGroup", "OrigSelVal");
+            olc.OrignalSelPrc = GetTextBoxValue("SordlineWebShopEditGroup", "OrignalSelPrc");
+            olc.OrignalTotprc = GetTextBoxValue("SordlineWebShopEditGroup", "OrignalTotprc");
             olc.SelPrc = GetTextBoxValue("SordlineWebShopEditGroup", "SelPrc");
-            olc.SelVal = GetTextBoxValue("SordlineWebShopEditGroup", "SelVal");
-            olc.SetTotPrc = GetTextBoxValue("SordlineWebShopEditGroup", "SetTotPrc");
-            olc.SelTotVal = GetTextBoxValue("SordlineWebShopEditGroup", "SelTotVal");
+            olc.GrossPrc = GetTextBoxValue("SordlineWebShopEditGroup", "GrossPrc");
+            olc.NetVal = GetTextBoxValue("SordlineWebShopEditGroup", "NetVal");
+            olc.TaxVal = GetTextBoxValue("SordlineWebShopEditGroup", "TaxVal");
+            olc.TotVal = GetTextBoxValue("SordlineWebShopEditGroup", "TotVal");
 
             map.Add(olc);
 

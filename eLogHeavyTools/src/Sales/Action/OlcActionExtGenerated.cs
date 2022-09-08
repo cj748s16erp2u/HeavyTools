@@ -131,6 +131,36 @@ namespace eLog.HeavyTools.Sales.Action
 
         /// <summary>
         /// <para>Field</para>
+        /// ? - int
+        /// </summary>
+        [Field("discountcalculationtype")]
+        public static Field FieldDiscountcalculationtype { get; protected set; }
+        /// <summary>
+        /// ? - int
+        /// </summary>
+        public int? Discountcalculationtype
+        {
+            get { return (int?)this[FieldDiscountcalculationtype]; }
+            set { this[FieldDiscountcalculationtype] = value; }
+        }
+
+        /// <summary>
+        /// <para>Field</para>
+        /// ? - int
+        /// </summary>
+        [Field("isdiscount")]
+        public static Field FieldIsdiscount { get; protected set; }
+        /// <summary>
+        /// ? - int
+        /// </summary>
+        public int? Isdiscount
+        {
+            get { return (int?)this[FieldIsdiscount]; }
+            set { this[FieldIsdiscount] = value; }
+        }
+
+        /// <summary>
+        /// <para>Field</para>
         /// ? - varchar
         /// </summary>
         [Field("addusrid")]

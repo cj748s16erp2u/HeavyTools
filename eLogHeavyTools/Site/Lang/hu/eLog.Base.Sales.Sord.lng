@@ -95,3 +95,16 @@ $SetTotPrc=Bruttó egység ár
 $SelTotVal=Bruttó érték
 $GiftCardLogId=Ajándék kártya log
 
+
+
+$OrignalSelPrc=Eredeti n. egységár
+$OrignalTotprc=Eredeti br. egységár
+$GrossPrc=Bruttó egységár
+$NetVal=Nettó érték
+$TaxVal=Adó
+$TotVal=Bruttó érték
+
+$PaymentFee=Fizetési 
+
+
+

@@ -5,5 +5,5 @@ namespace eLog.HeavyTools.Services.WhWebShop.BusinessLogic.Services.Interfaces;
 
 public interface IPriceCalcActionService
 {
-    Task<CalcJsonResultDto> CalculateActionPrice(CalcJsonResultDto cart, CancellationToken cancellationToken = default);
+    Task CalculateActionPriceAsync(CalcJsonParamsDto cart, CalcJsonResultDto cartRes, PriceCalcActionResultDto pricecalcactionresult, CancellationToken cancellationToken);
 }

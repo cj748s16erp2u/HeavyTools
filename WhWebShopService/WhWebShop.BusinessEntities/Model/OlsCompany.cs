@@ -12,6 +12,7 @@ namespace eLog.HeavyTools.Services.WhWebShop.BusinessEntities.Model
     {
         public OlsCompany()
         {
+            OlsSinvhead = new HashSet<OlsSinvhead>();
             OlsSordhead = new HashSet<OlsSordhead>();
         }
 
@@ -101,9 +102,17 @@ namespace eLog.HeavyTools.Services.WhWebShop.BusinessEntities.Model
         [ForeignKey("Countryid")]
         [InverseProperty("OlsCompany")]
         public virtual OlsCountry Country { get; set; } = null!;
+        [ForeignKey("Dualcurid")]
+        [InverseProperty("OlsCompanyDualcur")]
+        public virtual OlsCurrency? Dualcur { get; set; }
+        [ForeignKey("Homecurid")]
+        [InverseProperty("OlsCompanyHomecur")]
+        public virtual OlsCurrency Homecur { get; set; } = null!;
         [ForeignKey("Partnid")]
         [InverseProperty("OlsCompany")]
         public virtual OlsPartner Partn { get; set; } = null!;
+        [InverseProperty("Cmp")]
+        public virtual ICollection<OlsSinvhead> OlsSinvhead { get; set; }
         [InverseProperty("Cmp")]
         public virtual ICollection<OlsSordhead> OlsSordhead { get; set; }
     }

@@ -99,6 +99,9 @@ namespace eLog.HeavyTools.Services.WhWebShop.BusinessEntities.Model
         [ForeignKey("Cmpid")]
         [InverseProperty("OlsSordhead")]
         public virtual OlsCompany Cmp { get; set; } = null!;
+        [ForeignKey("Curid")]
+        [InverseProperty("OlsSordhead")]
+        public virtual OlsCurrency Cur { get; set; } = null!;
         [ForeignKey("Partnid")]
         [InverseProperty("OlsSordhead")]
         public virtual OlsPartner Partn { get; set; } = null!;

@@ -21,17 +21,23 @@ namespace eLog.HeavyTools.Services.WhWebShop.BusinessEntities.Model
             OlcGiftcard = new HashSet<OlcGiftcard>();
             OlcGiftcardlog = new HashSet<OlcGiftcardlog>();
             OlcItem = new HashSet<OlcItem>();
+            OlcPartner = new HashSet<OlcPartner>();
             OlcPrctable = new HashSet<OlcPrctable>();
+            OlcPrctype = new HashSet<OlcPrctype>();
             OlcSordhead = new HashSet<OlcSordhead>();
             OlcSordline = new HashSet<OlcSordline>();
             OlcTaxtransext = new HashSet<OlcTaxtransext>();
             OlsCompany = new HashSet<OlsCompany>();
             OlsCountry = new HashSet<OlsCountry>();
+            OlsCurrency = new HashSet<OlsCurrency>();
             OlsItem = new HashSet<OlsItem>();
             OlsPartnaddr = new HashSet<OlsPartnaddr>();
             OlsPartner = new HashSet<OlsPartner>();
+            OlsSinvheadAddusr = new HashSet<OlsSinvhead>();
+            OlsSinvheadCloseusr = new HashSet<OlsSinvhead>();
             OlsSordhead = new HashSet<OlsSordhead>();
             OlsSordline = new HashSet<OlsSordline>();
+            OlsTax = new HashSet<OlsTax>();
             OlsTaxtrans = new HashSet<OlsTaxtrans>();
         }
 
@@ -96,7 +102,11 @@ namespace eLog.HeavyTools.Services.WhWebShop.BusinessEntities.Model
         [InverseProperty("Addusr")]
         public virtual ICollection<OlcItem> OlcItem { get; set; }
         [InverseProperty("Addusr")]
+        public virtual ICollection<OlcPartner> OlcPartner { get; set; }
+        [InverseProperty("Addusr")]
         public virtual ICollection<OlcPrctable> OlcPrctable { get; set; }
+        [InverseProperty("Addusr")]
+        public virtual ICollection<OlcPrctype> OlcPrctype { get; set; }
         [InverseProperty("Addusr")]
         public virtual ICollection<OlcSordhead> OlcSordhead { get; set; }
         [InverseProperty("Addusr")]
@@ -108,15 +118,23 @@ namespace eLog.HeavyTools.Services.WhWebShop.BusinessEntities.Model
         [InverseProperty("Addusr")]
         public virtual ICollection<OlsCountry> OlsCountry { get; set; }
         [InverseProperty("Addusr")]
+        public virtual ICollection<OlsCurrency> OlsCurrency { get; set; }
+        [InverseProperty("Addusr")]
         public virtual ICollection<OlsItem> OlsItem { get; set; }
         [InverseProperty("Addusr")]
         public virtual ICollection<OlsPartnaddr> OlsPartnaddr { get; set; }
         [InverseProperty("Addusr")]
         public virtual ICollection<OlsPartner> OlsPartner { get; set; }
         [InverseProperty("Addusr")]
+        public virtual ICollection<OlsSinvhead> OlsSinvheadAddusr { get; set; }
+        [InverseProperty("Closeusr")]
+        public virtual ICollection<OlsSinvhead> OlsSinvheadCloseusr { get; set; }
+        [InverseProperty("Addusr")]
         public virtual ICollection<OlsSordhead> OlsSordhead { get; set; }
         [InverseProperty("Addusr")]
         public virtual ICollection<OlsSordline> OlsSordline { get; set; }
+        [InverseProperty("Addusr")]
+        public virtual ICollection<OlsTax> OlsTax { get; set; }
         [InverseProperty("Addusr")]
         public virtual ICollection<OlsTaxtrans> OlsTaxtrans { get; set; }
     }

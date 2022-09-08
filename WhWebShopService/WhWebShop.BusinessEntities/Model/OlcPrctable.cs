@@ -61,11 +61,17 @@ namespace eLog.HeavyTools.Services.WhWebShop.BusinessEntities.Model
         [ForeignKey("Addusrid")]
         [InverseProperty("OlcPrctable")]
         public virtual CfwUser? Addusr { get; set; }
+        [ForeignKey("Curid")]
+        [InverseProperty("OlcPrctable")]
+        public virtual OlsCurrency? Cur { get; set; }
         [ForeignKey("Itemid")]
         [InverseProperty("OlcPrctable")]
         public virtual OlsItem? Item { get; set; }
         [ForeignKey("Partnid")]
         [InverseProperty("OlcPrctable")]
         public virtual OlsPartner? Partn { get; set; }
+        [ForeignKey("Ptid")]
+        [InverseProperty("OlcPrctable")]
+        public virtual OlcPrctype Pt { get; set; } = null!;
     }
 }

@@ -20,7 +20,7 @@ public class OrderController : BaseController
         this.service = service ?? throw new ArgumentNullException(nameof(service));
     }
 
-
+    /*
     [HttpPost("createold")]
     public async Task<IActionResult> CreateOldAsync([FromBody] OrderParamsDto parms)
     {
@@ -34,7 +34,8 @@ public class OrderController : BaseController
             await ERP4U.Log.LoggerManager.Instance.LogErrorAsync<OrderController>(ex);
             return this.BadRequest(ex.Message);
         }
-    }
+    }*/
+
     [HttpPost("create")]
     public async Task<IActionResult> CreateAsync([FromBody] Newtonsoft.Json.Linq.JObject value)
     { 

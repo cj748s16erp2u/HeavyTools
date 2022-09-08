@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
@@ -20,7 +21,7 @@ namespace eLog.HeavyTools.Services.WhWebShop.BusinessLogic.Services;
 [RegisterDI(Interface = typeof(IItemCache))]
 public class ItemCache : LogicServiceBase<OlsItem>, IItemCache
 {
-    public static Dictionary<string, int> cache = new Dictionary<string, int>();
+    public static ConcurrentDictionary<string, int> cache = new ConcurrentDictionary<string, int>();
     private IRepository<OlsItem> repository;
 
     public ItemCache(IValidator<OlsItem> validator, IRepository<OlsItem> repository, IUnitOfWork unitOfWork, IEnvironmentService environmentService) : base(validator, repository, unitOfWork, environmentService)
@@ -32,14 +33,15 @@ public class ItemCache : LogicServiceBase<OlsItem>, IItemCache
     {
         if (itemcode != null)
         {
-            if (cache.ContainsKey(itemcode))
+            int i;
+            if (cache.TryGetValue(itemcode, out i))
             {
-                return cache[itemcode];
+                return i;
             } 
             var item = await this.repository.Entities.FirstOrDefaultAsync(p => p.Itemcode == itemcode, cancellationToken);
             if (item is not null)
             {
-                cache.Add(itemcode, item.Itemid);
+                cache.TryAdd(itemcode, item.Itemid);
                 return item.Itemid;
             }
         }

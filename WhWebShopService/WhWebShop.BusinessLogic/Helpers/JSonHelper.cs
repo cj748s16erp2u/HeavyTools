@@ -27,52 +27,53 @@ public class JsonParser
         return o; 
     }*/
 
-    protected static object Parse(Type t, JObject order, string root, bool isRoot)
+    protected static object Parse(Type t, JObject order, string root, int deep =-1)
     {
+        deep++;
         var o = Activator.CreateInstance(t)!;
-        ParseInternal(t, o, order, root, isRoot);
+        ParseInternal(t, o, order, root, deep);
         return o;
     }
 
 
-    internal static void ParseInternal(Type tt, object o, JObject jo, string root, bool isRoot)
+    internal static void ParseInternal(Type tt, object o, JObject jo, string root, int deep)
     {
         var properties = tt.GetProperties();
 
         foreach (var item in properties)
         {
+            var vvt = "???";
             try
-            {
+            { 
                 foreach (var a in item.GetCustomAttributes(false))
                 {
                     var ja = a as JsonFieldAttribute;
                     if (ja != null)
                     {
                         var found = jo.ContainsKey(item.Name);
-
-                        if (isRoot)
+                         
+                        if (ja.IsMandotary(deep) && !found)
                         {
-                            if (ja.Mandotary && !found)
-                            {
-                                throw new Exception("Missing item(Mandotary)");
-                            }
-                        } else
-                        {
-
-                            if (ja.Mandotarysub && !found)
-                            {
-                                throw new Exception("Missing item(MandotarySub)");
-                            }
+                            throw new Exception($"Missing item(Mandotary) deep={deep}");
                         }
-
+                        
                         if (found)
-                        {
+                        { 
+                            var vv = jo[item.Name];
+                            if (vv != null)
+                            {
+                                vvt = vv.ToString();
+                            } 
                             Type t = item.PropertyType;
                             object v = null!;
 
                             if (t == typeof(string))
                             {
                                 v = jo[item.Name]!.Value<string>()!;
+                            }
+                            else if (t == typeof(bool))
+                            {
+                                v = jo[item.Name]!.Value<bool>()!;
                             }
                             else if (t == typeof(int))
                             {
@@ -107,16 +108,15 @@ public class JsonParser
 
                                 foreach (var ai in subitem)
                                 {
-                                    var oo = Parse(itemType, ai.ToObject<JObject>()!, root + "/" + item.Name, false);
-
-                                    m!.Invoke(item.GetValue(o, null), new[] { oo });
+                                    var oo = Parse(itemType, ai.ToObject<JObject>()!, root + "/" + item.Name, deep); 
+                                    m!.Invoke(item.GetValue(o, null), new[] { oo }); 
                                 }
                                 continue;
                             }
                             else if (t.BaseType == typeof(object))
                             {
                                 var subitem = jo[item.Name]!.ToObject<JObject>();
-                                v = Parse(t, subitem!, root + "/" + item.Name, false);
+                                v = Parse(t, subitem!, root + "/" + item.Name, deep);
                             }
                             else
                             {
@@ -133,7 +133,7 @@ public class JsonParser
             }
             catch (Exception e)
             {
-                throw new ArgumentException(root + "/" + item.Name + ": " + e.Message);
+                throw new ArgumentException(root + "/" + item.Name + ": '" + vvt + "', error: " + e.Message);
             }
 
         }
@@ -153,8 +153,11 @@ public class JsonParser
                 var jsonRoot = ja.ObjectName;
  
                 var order = parms[jsonRoot];
-
-                return (T)Parse(typeof(T), order!.ToObject<JObject>()!, jsonRoot, true);
+                if (order == null)
+                {
+                    throw new Exception("Missing root element");
+                }
+                return (T)Parse(typeof(T), order!.ToObject<JObject>()!, jsonRoot);
             }
             
         }

@@ -23,8 +23,8 @@ namespace eLog.HeavyTools.Sales.Sord
 
         public string Sinv_Name
         {
-            get => this.XmlManipute.Get("Sinv_Name");
-            set => this.XmlManipute.Set("Sinv_Name", value);
+            get => this.XmlManipute.Get("Sinv_name");
+            set => this.XmlManipute.Set("Sinv_name", value);
         }
         public string Sinv_countryid
         {
@@ -161,6 +161,11 @@ namespace eLog.HeavyTools.Sales.Sord
             get => this.XmlManipute.Get("ShippinPrc");
             set => this.XmlManipute.Set("ShippinPrc", value);
         }
+        public string PaymentFee
+        {
+            get => this.XmlManipute.Get("PaymentFee");
+            set => this.XmlManipute.Set("PaymentFee", value);
+        }
         public string Paymenttransaciondata
         {
             get => this.XmlManipute.Get("Paymenttransaciondata");
@@ -185,12 +190,7 @@ namespace eLog.HeavyTools.Sales.Sord
         {
             get => this.XmlManipute.Get("Foxpostid");
             set => this.XmlManipute.Set("Foxpostid", value);
-        }
-        public string CentralRetailType
-        {
-            get => this.XmlManipute.Get("CentralRetailType");
-            set => this.XmlManipute.Set("CentralRetailType", value);
-        }
+        } 
         public string Exchangepackagesnumber
         {
             get => this.XmlManipute.Get("Exchangepackagesnumber");

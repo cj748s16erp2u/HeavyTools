@@ -35,5 +35,6 @@ $noroot=Nincs modell kiválasztva
 $prctype=Ártípus 2.
 
 $prctype_original=Eredeti
-$prctype_actual=Aktuális
+$prctype_actual=Lista ár
 $prctype_basisofaction=Akció alapja
+$prctype_saleprice=Akciós ár

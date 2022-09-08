@@ -1,4 +1,5 @@
 ﻿using eLog.HeavyTools.Services.WhWebShop.BusinessEntities.Dto;
+using eLog.HeavyTools.Services.WhWebShop.BusinessEntities.Enums;
 using eLog.HeavyTools.Services.WhWebShop.BusinessEntities.Model;
 using eLog.HeavyTools.Services.WhWebShop.BusinessLogic.Helpers;
 using eLog.HeavyTools.Services.WhWebShop.BusinessLogic.Services.Base;
@@ -23,30 +24,78 @@ public class PriceCalcOriginalService : LogicServiceBase<OlcPrctable>, IPriceCal
   ) x 
  where GETDATE() between p.startdate and p.enddate
    and wid='{0}'
-   and i.itemcode='{2}'
+   and i.itemcode='{1}'
    and prctype=1
  order by ordernum";
 
-    public PriceCalcOriginalService(IValidator<OlcPrctable> validator, IRepository<OlcPrctable> repository, IUnitOfWork unitOfWork, IEnvironmentService environmentService) : base(validator, repository, unitOfWork, environmentService)
+    private IOlcPrctypeService olcPrctypeService;
+    private readonly IOlsCurrencyCacheService olsCurrencyCacheService;
+
+    public PriceCalcOriginalService(IValidator<OlcPrctable> validator,
+                                    IRepository<OlcPrctable> repository,
+                                    IUnitOfWork unitOfWork,
+                                    IEnvironmentService environmentService,
+                                    IOlcPrctypeService olcPrctypeService,
+                                    IOlsCurrencyCacheService olsCurrencyCacheService) : base(validator, repository, unitOfWork, environmentService)
     {
+        this.olcPrctypeService = olcPrctypeService ?? throw new ArgumentNullException(nameof(olcPrctypeService));
+        this.olsCurrencyCacheService = olsCurrencyCacheService ?? throw new ArgumentNullException(nameof(olsCurrencyCacheService));
     }
+
 
     public async Task<CalcJsonResultDto> GetOriginalPrice(CalcJsonParamsDto? cart, CancellationToken cancellationToken = default)
     {
+        if (cart == null)
+        {
+            throw new ArgumentNullException(nameof(cart));
+        }
+
+        if (cart.Curid == null)
+        {
+            throw new ArgumentNullException(nameof(cart.Curid));
+        }
+        if (string.IsNullOrEmpty(cart.CountryId))
+        {
+            throw new ArgumentNullException(nameof(cart.CountryId));
+        }
+
         var o = new CalcJsonResultDto
         {
-            Curid = "HUF"
+            Curid = cart.Curid,
+            Round = await olsCurrencyCacheService.GetRound(cart.Curid),
+            CountryId = cart.CountryId
         };
+
         var l = new List<CalcItemJsonResultDto>();
 
-        foreach (var cartitem in cart!.Items)
+        foreach (var cartitem in cart.Items)
         {
-            l.Add(new CalcItemJsonResultDto
+            var origprc = await GetCartFullPrice(cart, cartitem, cancellationToken);
+            if (origprc != null)
             {
-                ItemCode = cartitem.ItemCode,
-                Quantity = cartitem.Quantity,
-                OrigSelVal = await GetCartFullPrice(cart, cartitem, cancellationToken)
-            });
+                if (origprc.Curid != cart.Curid)
+                {
+                    throw new Exception($"Curid not equal {origprc.Curid} != {cart.Curid}");
+                }
+                for (int i = 0; i < cartitem.Quantity; i++)
+                {
+                    var ncijrd = new CalcItemJsonResultDto
+                    {
+                        ItemCode = cartitem.ItemCode,
+                        Quantity = 1,
+                        RawOrigSelPrc = origprc!.Prc,
+                        RawSelPrc = origprc!.Prc,
+                        RawSelVal = origprc!.Prc
+                    };
+
+                    if (i == 0)
+                    {
+                        ncijrd.CartId = cartitem.CartId;
+                    }
+
+                    l.Add(ncijrd);
+                }
+            }
         }
         o.Items = l.ToArray();
         o.Success = true;
@@ -54,14 +103,23 @@ public class PriceCalcOriginalService : LogicServiceBase<OlcPrctable>, IPriceCal
     }
      
 
-    private async Task<decimal?> GetCartFullPrice(CalcJsonParamsDto cart, CartItemJson cartitem, CancellationToken cancellationToken = default)
+    private async Task<PriceCalcOriginalResultDto?> GetCartFullPrice(CalcJsonParamsDto cart, CartItemJson cartitem, CancellationToken cancellationToken = default)
     {
         var p = await Repository.FromSql(String.Format(PrcSql, cart.Wid, cartitem.ItemCode))!.FirstOrDefaultAsync(cancellationToken);
 
         if (p == null)
         {
-            throw new ArgumentException("NO price" + cartitem.ItemCode);
+            return null;
         }
-        return p.Prc;
+
+        var pt = await olcPrctypeService.GetAsync(pp=> pp.Ptid == p.Ptid, cancellationToken);
+         
+        return new PriceCalcOriginalResultDto()
+        {
+            Prc = p.Prc,
+            Prctype = (PrcType)p.Prctype,
+            IsNet = pt!.Isnet == 1,
+            Curid = p.Curid
+        };
     }
 }

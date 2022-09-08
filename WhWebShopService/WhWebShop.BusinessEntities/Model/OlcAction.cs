@@ -19,10 +19,22 @@ namespace eLog.HeavyTools.Services.WhWebShop.BusinessEntities.Model
         public int Aid { get; set; }
         [Column("actiontype")]
         public int Actiontype { get; set; }
+        [Column("isactive")]
+        public int Isactive { get; set; }
+        [Column("isextcondition")]
+        public int Isextcondition { get; set; }
+        [Column("isextdiscount")]
+        public int? Isextdiscount { get; set; }
         [Column("name")]
         [StringLength(100)]
         [Unicode(false)]
         public string? Name { get; set; }
+        [Column("priority")]
+        public int? Priority { get; set; }
+        [Column("curid")]
+        [StringLength(12)]
+        [Unicode(false)]
+        public string? Curid { get; set; }
         [Column("singlecouponnumber")]
         [StringLength(100)]
         [Unicode(false)]
@@ -30,7 +42,7 @@ namespace eLog.HeavyTools.Services.WhWebShop.BusinessEntities.Model
         [Column("couponunlimiteduse")]
         public int? Couponunlimiteduse { get; set; }
         [Column("discounttype")]
-        public int Discounttype { get; set; }
+        public int? Discounttype { get; set; }
         [Column("discountval", TypeName = "numeric(19, 6)")]
         public decimal? Discountval { get; set; }
         [Column("discountforfree")]
@@ -38,11 +50,13 @@ namespace eLog.HeavyTools.Services.WhWebShop.BusinessEntities.Model
         [Column("discountfreetransportation")]
         public int? Discountfreetransportation { get; set; }
         [Column("discountcalculationtype")]
-        public int Discountcalculationtype { get; set; }
+        public int? Discountcalculationtype { get; set; }
         [Column("discountaid")]
         public int? Discountaid { get; set; }
         [Column("validdatefrom", TypeName = "datetime")]
         public DateTime? Validdatefrom { get; set; }
+        [Column("validforsaleproducts")]
+        public int? Validforsaleproducts { get; set; }
         [Column("validdateto", TypeName = "datetime")]
         public DateTime? Validdateto { get; set; }
         [Column("validtotvalfrom", TypeName = "numeric(19, 6)")]
@@ -51,9 +65,8 @@ namespace eLog.HeavyTools.Services.WhWebShop.BusinessEntities.Model
         public decimal? Validtotvalto { get; set; }
         [Column("purchasetype")]
         public int Purchasetype { get; set; }
-        [Column("filtercustomers")]
-        [Unicode(false)]
-        public string? Filtercustomers { get; set; }
+        [Column("filtercustomerstype")]
+        public int? Filtercustomerstype { get; set; }
         [Column("filteritems")]
         [Unicode(false)]
         public string? Filteritems { get; set; }
@@ -62,6 +75,11 @@ namespace eLog.HeavyTools.Services.WhWebShop.BusinessEntities.Model
         public string? Filteritemsblock { get; set; }
         [Column("count")]
         public int? Count { get; set; }
+        [Column("note")]
+        [Unicode(false)]
+        public string? Note { get; set; }
+        [Column("netgoid")]
+        public int? Netgoid { get; set; }
         [Column("addusrid")]
         [StringLength(12)]
         [Unicode(false)]
@@ -74,6 +92,9 @@ namespace eLog.HeavyTools.Services.WhWebShop.BusinessEntities.Model
         [ForeignKey("Addusrid")]
         [InverseProperty("OlcAction")]
         public virtual CfwUser Addusr { get; set; } = null!;
+        [ForeignKey("Curid")]
+        [InverseProperty("OlcAction")]
+        public virtual OlsCurrency? Cur { get; set; }
         [ForeignKey("Discountaid")]
         [InverseProperty("InverseDiscounta")]
         public virtual OlcAction? Discounta { get; set; }

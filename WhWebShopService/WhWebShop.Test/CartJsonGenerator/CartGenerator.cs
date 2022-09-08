@@ -18,13 +18,15 @@ namespace eLog.HeavyTools.Services.WhWebShop.Test.CartJsonGenerator
             var str = @"
 { 
     ""Cart"": {
-        ""Wid"": ""hu"",
+        ""Wid"": ""com"",
+        ""Curid"": ""EUR"",
+        ""FirstPurchase"": ""false"",
 		""LoyaltyCardNo"": ""ABC12345678"",
         ""CountryId"": ""HU"",
 		""Cupons"": [
-			""Cupon1"",
-			""Cupon2""],
+			""XXX""],
         ""Items"": [
+                
  ";
 
             for (int i = 0; i < itemnum; i++)
@@ -32,6 +34,7 @@ namespace eLog.HeavyTools.Services.WhWebShop.Test.CartJsonGenerator
                 int qty = rnd.Next(1, 3);
 
                 str += $@"{{
+				""CartId"": ""{i}"",
 				""ItemCode"": ""{ItemCodes.Itemcodes[i]}"",
 				""Quantity"": {qty}
 			}},";

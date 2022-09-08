@@ -49,6 +49,12 @@ namespace eLog.HeavyTools.Services.WhWebShop.BusinessEntities.Model
         [ForeignKey("Addusrid")]
         [InverseProperty("OlsTaxtrans")]
         public virtual CfwUser Addusr { get; set; } = null!;
+        [ForeignKey("Realtaxid")]
+        [InverseProperty("OlsTaxtransRealtax")]
+        public virtual OlsTax Realtax { get; set; } = null!;
+        [ForeignKey("Taxid")]
+        [InverseProperty("OlsTaxtransTax")]
+        public virtual OlsTax Tax { get; set; } = null!;
         [InverseProperty("Tt")]
         public virtual ICollection<OlcTaxtransext> OlcTaxtransext { get; set; }
     }

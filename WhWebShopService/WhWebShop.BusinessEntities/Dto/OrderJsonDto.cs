@@ -11,13 +11,13 @@ namespace eLog.HeavyTools.Services.WhWebShop.BusinessEntities.Dto;
 public class OrderJsonParamsDto
 {
 
-    [JsonField(true)]
+    [JsonField(false, true)]
     public string Wid { get; set; } = null!;
 
     [JsonField(true)]
     public string OrderNumber { get; set; } = null!;
 
-    [JsonField(true, RegexpType.Date)]
+    [JsonField(RegexpType.Date, true)]
     public DateTime? OrderDate { get; set; } = null!;
 
     [JsonField(true)]
@@ -95,11 +95,15 @@ public class OrderJsonParamsDto
     [JsonField(true)]
     public string Phone { get; set; } = null!;
 
-    [JsonField(true, RegexpType.Email)]
+    [JsonField(RegexpType.Email,true)]
     public string Email { get; set; } = null!;
 
     [JsonField(false)]
-    public decimal? ShippinPrc { get; set; } = null!;
+    public decimal? ShippinPrc { get; set; } = null!; 
+    
+    [JsonField(false)]
+    public decimal? PaymentFee { get; set; } = null!;
+
 
     [JsonField(false)]
     public string Paymenttransaciondata { get; set; } = null!;

@@ -41,7 +41,8 @@ public class OSSService : LogicServiceBase<OlcTaxtransext>, IOSSService
             return new OSSResultDto
             {
                 Bustypeid = ossoptions.Value.HuBustypeid,
-                Taxid = ossoptions.Value.HuTaxid
+                Taxid = ossoptions.Value.HuTaxid,
+                Success=true
             };
         }
 
@@ -69,14 +70,16 @@ public class OSSService : LogicServiceBase<OlcTaxtransext>, IOSSService
             return new OSSResultDto
             {
                 Bustypeid = t.Bustypeid,
-                Taxid = e.Taxid
+                Taxid = e.Taxid,
+                Success = true
             };
         } else {
-                return new OSSResultDto
-                {
-                    Bustypeid = ossoptions.Value.NoneEUBustypeid,
-                    Taxid = ossoptions.Value.HoneEUTaxid
-                };
+            return new OSSResultDto
+            {
+                Bustypeid = ossoptions.Value.NoneEUBustypeid,
+                Taxid = ossoptions.Value.HoneEUTaxid,
+                Success = true
+            };
         }
     }
 }

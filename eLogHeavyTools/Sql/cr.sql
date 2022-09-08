@@ -498,11 +498,16 @@ create table olc_action (
   aid						int identity    not null, -- Akció egyedi azonosító
   actiontype				int				not null, -- Akció típusa 0=kupon, 1=akció, 2=Törzskártya, 3=VIP kártya
   name						varchar(100)	null,	  -- Akció megnevezése
+  isactive 					int 			null,     -- Aktív?
+  isextcondition			int				not null, -- Összetett feltétel?
+  isextdiscount				int				not null, -- Összetett kedvezmény?
+  priority 					int 			null,     -- Akció prioritás
+  curid 					varchar(12)  	null,     -- Akció pénznem
   
   singlecouponnumber		varchar(100)	null,	  -- Kupon kód
   couponunlimiteduse		int				null,     -- Kupon használata korlátlan alkalommal
 
-  discounttype				int				not null, -- Kedvezmény típusa 0=összeg, 1=százalék, 2=kupon
+  discounttype				int				null, -- Kedvezmény típusa 0=összeg, 1=százalék, 2=kupon
   discountval				numeric(19,6)   null,     -- Kedvezmény értéke
   discountforfree			int				null,     -- Ingyenes fizetés
   discountfreetransportation int			null,     -- Ingyenes szállítás
@@ -512,15 +517,18 @@ create table olc_action (
   validdatefrom				datetime		null,	  -- Érvényesség kezdete
   validdateto				datetime		null,	  -- Érvényesség vége
   validtotvalfrom			numeric(19,6)	null,	  -- Minimum rendelési összeg, bruttó adott devizában
+  validforsaleproducts 		int 			null,     -- Akciós termékekre érvényes
   validtotvalto				numeric(19,6)	null,	  -- Maximum rendelési összeg, bruttó adott devizában
-
   purchasetype				int				not null, -- Vásárlás típusa 0=Bármely, 1=Csak az első vásárláshoz, 2=Csak a legolcsóbb termék megvásárlásához, több termék vásárlásakor
 
-  filtercustomers			varchar(max)    null,     -- Mely ügyfelekre vonatkozik
+  filtercustomerstype		int    			null,     -- Mely ügyfelekre vonatkozik 0=Minden ügyél, 1=Csak törzsvásárlókra, 2=Törzsvásárlókra NEM, 3=Viszonteladókra NEM
   filteritems				varchar(max)    null,     -- Mely cikkszámokra vonatkozik
   filteritemsblock			varchar(max)    null,     -- Mely cikkszámokra nem vonatkozik
   count						int				null,	  -- Hány terméknek kell a kosárban lennie
- 
+  note 						varchar(max)    NULL	  -- Megjegyzés
+  netgoid 					int 		    NULL	  -- NetGO id interface
+  blockmessage 				varchar(200) 	null      -- Blokkra nyomtatási üzenet
+  
   addusrid                  varchar(12)     not null, -- Rögzítő
   adddate                   datetime        not null, -- Rögzítés dátuma
   delstat                   int             not null, -- Rejtett
@@ -599,9 +607,11 @@ create table olc_actionext (
   filteritems				varchar(max)    not null, -- Mely cikkszámokra vonatkozik
   filteritemsblock			varchar(max)    null,     -- Mely cikkszámokra nem vonatkozik
   count						int				not null, -- Hány db termék
-  discounttype				int				not null, -- Kedvezmény típusa 0=összeg, 1=százalék
+  discounttype				int				null, -- Kedvezmény típusa 0=összeg, 1=százalék
   discountval				numeric(19,6)   null,     -- Kedvezmény értéke
-
+  discountcalculationtype 	int 			null,	  -- 0=Erre nem, 1=Erre igen
+  isdiscount 				int 			not null, -- Kedvezmény?
+  
   addusrid                  varchar(12)     not null, -- Rögzítő
   adddate                   datetime        not null, -- Rögzítés dátuma
   delstat                   int             not null, -- Rejtett

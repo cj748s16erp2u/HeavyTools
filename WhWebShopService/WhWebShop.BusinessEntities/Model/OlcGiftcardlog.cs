@@ -35,5 +35,8 @@ namespace eLog.HeavyTools.Services.WhWebShop.BusinessEntities.Model
         [ForeignKey("Gcid")]
         [InverseProperty("OlcGiftcardlog")]
         public virtual OlcGiftcard Gc { get; set; } = null!;
+        [ForeignKey("Sinvid")]
+        [InverseProperty("OlcGiftcardlog")]
+        public virtual OlsSinvhead? Sinv { get; set; }
     }
 }

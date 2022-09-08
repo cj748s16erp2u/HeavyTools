@@ -84,6 +84,9 @@ namespace eLog.HeavyTools.Services.WhWebShop.BusinessEntities.Model
         [ForeignKey("Sordid")]
         [InverseProperty("OlsSordline")]
         public virtual OlsSordhead Sord { get; set; } = null!;
+        [ForeignKey("Taxid")]
+        [InverseProperty("OlsSordline")]
+        public virtual OlsTax Tax { get; set; } = null!;
         [InverseProperty("Sordline")]
         public virtual OlcSordline OlcSordline { get; set; } = null!;
     }

@@ -96,9 +96,9 @@
             <Item ID="ProjWorkTime" Name="$projworktime" PageID="eLog.Base.Project.ProjWorkTimeSearchPage"/>
         </Item>
         <Item ID="Sales" Name="$sales">
-            
-			<Item ID="OlcPrctableSearchPage" Name="$olcprctablesearchpage" PageID="eLog.HeavyTools.Masters.PriceTable.OlcPrctableSearchPage"/>
-			
+			<Item ID="OlcPrctableSearchPage" Name="$olcprctablesearchpage" PageID="eLog.HeavyTools.Masters.PriceTable.OlcPrctableSearchPage"/> 
+			<Item ID="Action" Name="$action" PageID="eLog.HeavyTools.Sales.Action.ActionSearchPage"/>
+	   
 			<Item ID="SContract" Name="$scontract" PageID="eLog.Base.Sales.SContract.SContractSearchPage"/>
 			<Item ID="SContract" Name="$scontract" PageID="eLog.Base.Sales.SContract.SContractSearchPage"/>
             <Item ID="Sord" Name="$sord" PageID="eLog.Base.Sales.Sord.SordHeadSearchPage"/>
