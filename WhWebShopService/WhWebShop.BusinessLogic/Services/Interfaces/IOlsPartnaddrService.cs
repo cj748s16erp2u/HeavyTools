@@ -3,4 +3,5 @@ namespace eLog.HeavyTools.Services.WhWebShop.BusinessLogic.Services.Interfaces;
 
 public interface IOlsPartnaddrService : ILogicService<OlsPartnaddr>
 {
+
 }

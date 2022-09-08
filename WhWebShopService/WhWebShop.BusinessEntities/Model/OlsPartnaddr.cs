@@ -13,6 +13,8 @@ namespace eLog.HeavyTools.Services.WhWebShop.BusinessEntities.Model
         public OlsPartnaddr()
         {
             OlcPrctable = new HashSet<OlcPrctable>();
+            OlsSinvheadAddr = new HashSet<OlsSinvhead>();
+            OlsSinvheadDeladdr = new HashSet<OlsSinvhead>();
             OlsSordhead = new HashSet<OlsSordhead>();
         }
 
@@ -111,6 +113,10 @@ namespace eLog.HeavyTools.Services.WhWebShop.BusinessEntities.Model
         public virtual OlsPartner Partn { get; set; } = null!;
         [InverseProperty("Addr")]
         public virtual ICollection<OlcPrctable> OlcPrctable { get; set; }
+        [InverseProperty("Addr")]
+        public virtual ICollection<OlsSinvhead> OlsSinvheadAddr { get; set; }
+        [InverseProperty("Deladdr")]
+        public virtual ICollection<OlsSinvhead> OlsSinvheadDeladdr { get; set; }
         [InverseProperty("Addr")]
         public virtual ICollection<OlsSordhead> OlsSordhead { get; set; }
     }
