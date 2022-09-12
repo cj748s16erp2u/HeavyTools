@@ -52,7 +52,8 @@ internal class PriceCalcGroupService : IPriceCalcGroupService
     {
         if (i.ItemCode == ni.ItemCode &&
               i.RawOrigSelPrc == ni.RawOrigSelPrc &&
-              i.RawSelPrc == ni.RawSelPrc)
+              i.RawSelPrc == ni.RawSelPrc &&
+              i.CartId == ni.CartId)
         {
             return true;
         }

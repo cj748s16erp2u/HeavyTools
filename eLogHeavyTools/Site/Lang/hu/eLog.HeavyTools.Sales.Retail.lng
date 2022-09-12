@@ -1,0 +1,27 @@
+$pageName_RetailSales=Kosár
+$tabName_RetailSales=Kosár
+$action_AddItem=Cikk hozzáadása
+$action_Recalc=Újraszámol
+$action_Delete=Törlés
+
+$selPrc=Nettó egys.ár
+$grossPrc=Bruttó egys.ár
+$netVal=Nettó érték
+$taxVal=Áfa érték
+$totVal=Bruttó érték
+$orignalSelPrc=E. nettó egys.ár
+$orignalGrossPrc=E. bruttó egys.ár
+$orignalTotVal=E. bruttó érték
+
+
+
+$action_Cupon=Új kupon
+$action_LoyaltyCardNo=Törvásárló megadása
+
+$loyaltyCardNo=Törzs. szám
+$cupon=Kupon kód
+
+
+$pname=Tv. parnter név
+$partncode=Tv. partner kód
+

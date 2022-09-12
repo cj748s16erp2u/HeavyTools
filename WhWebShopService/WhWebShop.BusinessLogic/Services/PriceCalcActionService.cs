@@ -342,13 +342,20 @@ public class PriceCalcActionService : IPriceCalcActionService
                         Used = false
                     };
                 }
+            } else
+            {
+                return new CalculeteOut()
+                {
+                    WhyNotMessage = $"Nem törzsvásárló",
+                    Used = false
+                };
             }
         }
         
         var cartToUse = new List<CalcItemJsonResultDto>();
         var conditionCarts = new List<CalcItemJsonResultDto>();
 
-        //Össztett feltétel
+        //Összetett feltétel
         if (action.Isextcondition == 1)
         {
             foreach (var ae in action.OlcActionexts)

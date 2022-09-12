@@ -4,7 +4,7 @@ namespace eLog.HeavyTools.Services.WhWebShop.BusinessEntities.Dto;
 
 public class CalcJsonResultDto : ResultDto
 {
-    [Newtonsoft.Json.JsonIgnore]
+    [Newtonsoft.Json.JsonIgnore] 
     public string CountryId { get; set; } = null!;
 
     public string Curid { get; set; } = null!;
@@ -33,6 +33,7 @@ public class CalcJsonResultDto : ResultDto
 public class CalcItemJsonResultDto
 {
     public int? CartId { get; set; } = null!;
+    public int? Itemid { get; set; } = null!;
     public string ItemCode { get; set; } = null!;
     public int? Quantity { get; set; } = null!;
 

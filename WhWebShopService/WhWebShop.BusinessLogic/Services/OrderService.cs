@@ -261,9 +261,14 @@ public class OrderService : LogicServiceBase<OlsSordhead>, IOrderService
             nsl.Linenum = num;
             nsl.Def = 1;
 
-            var i = await this.itemCache.GetAsync(item.ItemCode, cancellationToken);
-
-            nsl.Itemid = i.Value;
+            if (!string.IsNullOrEmpty(item.ItemCode))
+            {
+                nsl.Itemid = (await this.itemCache.GetAsync(item.ItemCode, cancellationToken)).Value;
+            } else
+            {
+                nsl.Itemid = item.Itemid!.Value;
+            }
+            
             nsl.Reqdate = DateTime.Today;
             nsl.Ref2 = null;
             

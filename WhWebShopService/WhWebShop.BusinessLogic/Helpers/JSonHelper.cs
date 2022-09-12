@@ -51,10 +51,38 @@ public class JsonParser
                     if (ja != null)
                     {
                         var found = jo.ContainsKey(item.Name);
-                         
+
                         if (ja.IsMandotary(deep) && !found)
                         {
-                            throw new Exception($"Missing item(Mandotary) deep={deep}");
+                            var itemidFound = false;
+                            // Ha itemid és nincs itemcode, akkor nem állunk meg
+                            if (item.Name == "ItemCode")
+                            {
+                                foreach (var p2 in properties)
+                                {
+                                    if (p2.Name == "itemid")
+                                    {
+                                        var vvv = "";
+                                        if (jo.ContainsKey(item.Name))
+                                        {
+                                            var vv = jo[item.Name];
+                                            if (vv != null)
+                                            {
+                                                vvv = vv.ToString();
+                                            }
+                                        }
+                                        if (!string.IsNullOrEmpty(vvv))
+                                        {
+                                            itemidFound = true;
+                                        }
+
+                                    }
+                                }
+                            }
+                            if (!itemidFound)
+                            {
+                                throw new Exception($"Missing item(Mandotary) deep={deep}");
+                            }
                         }
                         
                         if (found)
