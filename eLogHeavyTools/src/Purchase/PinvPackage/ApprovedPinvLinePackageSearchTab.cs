@@ -20,5 +20,35 @@ namespace eLog.HeavyTools.Purchase.PinvPackage
             return t;
         }
 
+        protected override void CreateBase()
+        {
+            RefreshGridOnActivate = false;
+
+            base.CreateBase();
+
+            //SearchResults.MergePageData = "mypinvkey";
+
+            OnPageActivate += ApprovedPinvLinePackageSearchTab_OnPageActivate;
+        }
+
+        protected void ApprovedPinvLinePackageSearchTab_OnPageActivate(eProjectWeb.Framework.PageUpdateArgs args)
+        {
+            int? pinvId = 0;
+
+            if ((args.PageData?.ContainsKey(Consts.DetailEntityKey)).GetValueOrDefault())
+            {
+                var detailEntityKey = args.PageData[Consts.DetailEntityKey] as Dictionary<string, object>;
+
+                if (detailEntityKey.ContainsKey("pinvid"))
+                {
+                    pinvId = ConvertUtils.ToInt32(detailEntityKey["pinvid"]);
+                }
+            }
+
+            args.PageData["mypinvkey"] = new eProjectWeb.Framework.Data.Key("pinvid", pinvId);
+
+            if (!SearchResults.ForceRefresh)
+                SearchResults.ForceRefresh = true;
+        }
     }
 }

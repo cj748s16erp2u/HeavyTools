@@ -9,15 +9,15 @@ using eProjectWeb.Framework;
 
 namespace eLog.HeavyTools.Purchase.PinvPackage
 {
-    public class ApprovedPinvHeadPackageBL : DefaultBL2
+    public class ApprovedPackageBL : DefaultBL2
     {
-        public static readonly string ID = typeof(ApprovedPinvHeadPackageBL).FullName;
+        public static readonly string ID = typeof(ApprovedPackageBL).FullName;
 
-        public static ApprovedPinvHeadPackageBL New()
+        public static ApprovedPackageBL New()
         {
-            return (ApprovedPinvHeadPackageBL)ObjectFactory.New(typeof(ApprovedPinvHeadPackageBL));
+            return (ApprovedPackageBL)ObjectFactory.New(typeof(ApprovedPackageBL));
         }
-        protected ApprovedPinvHeadPackageBL() : base()
+        protected ApprovedPackageBL() : base()
         {
         }
 
@@ -34,7 +34,7 @@ select prl.cmpcode, prl.prlcode, prl.pcmcode+'/'+prl.usrname+'/'+prl.prlcode as 
 from oas_prllist prl (nolock)
 where prl.pcmcode+'/'+prl.usrname+'/'+prl.prlcode=" + Utils.SqlToString(k["packagecode"]);
 
-            DataRow row = new DataRow(SqlDataAdapter.GetSchema(CodaInt.Base.Module.CodaDBConnID, "ApprovedPinvHeadPackageInfoPart", sql));
+            DataRow row = new DataRow(SqlDataAdapter.GetSchema(CodaInt.Base.Module.CodaDBConnID, "ApprovedPackageInfoPart", sql));
             SqlDataAdapter.FillSingleRow(CodaInt.Base.Module.CodaDBConnID, row, sql);
             return row;
         }

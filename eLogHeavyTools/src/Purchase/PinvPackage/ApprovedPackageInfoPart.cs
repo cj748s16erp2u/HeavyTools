@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace eLog.HeavyTools.Purchase.PinvPackage
 {
-    public class ApprovedPinvHeadPackageInfoPart : eProjectWeb.Framework.UI.Templates.TabInfoPartTemplate1
+    public class ApprovedPackageInfoPart : eProjectWeb.Framework.UI.Templates.TabInfoPartTemplate1
     {
-        public ApprovedPinvHeadPackageInfoPart() : base("info", ApprovedPinvHeadPackageBL.ID + ".GetInfo")
+        public ApprovedPackageInfoPart() : base("info", ApprovedPackageBL.ID + ".GetInfo")
         {
         }
     }

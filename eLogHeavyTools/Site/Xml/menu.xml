@@ -127,7 +127,7 @@
             <!--<Item ID="Pinv" Name="$pinv" PageID="eLog.Base.Purchase.Pinv.PinvHeadSearchPage"/>-->
             <Item ID="PinvCostLine" Name="$pinvcostline" PageID="eLog.Base.Purchase.Pinv.PinvCostLineSearchPage"/>
             <Item ID="PinvCostApproval" Name="$pinvcostapproval" PageID="eLog.Base.Purchase.Pinv.PinvCostApprovalSearchPage"/>
-            <Item ID="ApprovedPinvHeadPackage" Name="$approvedpinvheadpackage" PageID="eLog.HeavyTools.Purchase.PinvPackage.ApprovedPinvHeadPackageSearchPage"/>
+            <Item ID="ApprovedPackage" Name="$approvedpackage" PageID="eLog.HeavyTools.Purchase.PinvPackage.ApprovedPackageSearchPage"/>
         </Item>
         <Item ID="Warehouse" Name="$warehouse_root">
             <Item ID="Stock" Name="$stock" PageID="eLog.Base.Warehouse.Stock.StockSearchPage"/>

@@ -8,15 +8,17 @@ using eProjectWeb.Framework.UI.Templates;
 
 namespace eLog.HeavyTools.Purchase.PinvPackage
 {
-    public class ApprovedPinvHeadPackageSearchPage : TabbedPageInfoProvider
+    public class ApprovedPackageSearchPage : TabbedPageInfoProvider
     {
-        public static readonly string ID = typeof(ApprovedPinvHeadPackageSearchPage).FullName;
+        public static readonly string ID = typeof(ApprovedPackageSearchPage).FullName;
 
+        public static DefaultPageSetup Package = new DefaultPageSetup("ApprovedPackage", null, ApprovedPackageSearchProvider.ID, null, null);
         public static DefaultPageSetup Head = new DefaultPageSetup("ApprovedPinvHead", null, ApprovedPinvHeadPackageSearchProvider.ID, null, null);
         public static DefaultPageSetup Line = new DefaultPageSetup("ApprovedPinvLines", null, ApprovedPinvLinePackageSearchProvider.ID, null, null);
 
-        public ApprovedPinvHeadPackageSearchPage() : base("ApprovedPinvHead")
+        public ApprovedPackageSearchPage() : base("ApprovedPackage")
         {
+            Tabs.AddTab(() => ApprovedPackageSearchTab.New(Package));
             Tabs.AddTab(() => ApprovedPinvHeadPackageSearchTab.New(Head));
             Tabs.AddTab(() => ApprovedPinvLinePackageSearchTab.New(Line));
         }
