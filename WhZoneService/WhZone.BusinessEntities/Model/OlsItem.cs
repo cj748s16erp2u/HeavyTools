@@ -9,7 +9,6 @@ namespace eLog.HeavyTools.Services.WhZone.BusinessEntities.Model
         {
             InverseRootitem = new HashSet<OlsItem>();
             OlcWhzstockmaps = new HashSet<OlcWhzstockmap>();
-            OlcWhzstocks = new HashSet<OlcWhzstock>();
             OlcWhztranlines = new HashSet<OlcWhztranline>();
             OlsPordlines = new HashSet<OlsPordline>();
             OlsSordlines = new HashSet<OlsSordline>();
@@ -38,7 +37,6 @@ namespace eLog.HeavyTools.Services.WhZone.BusinessEntities.Model
         public virtual OlsUnit Unit { get; set; } = null!;
         public virtual ICollection<OlsItem> InverseRootitem { get; set; }
         public virtual ICollection<OlcWhzstockmap> OlcWhzstockmaps { get; set; }
-        public virtual ICollection<OlcWhzstock> OlcWhzstocks { get; set; }
         public virtual ICollection<OlcWhztranline> OlcWhztranlines { get; set; }
         public virtual ICollection<OlsPordline> OlsPordlines { get; set; }
         public virtual ICollection<OlsSordline> OlsSordlines { get; set; }

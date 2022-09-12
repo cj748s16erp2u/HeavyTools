@@ -4,10 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using eLog.HeavyTools.Services.WhZone.BusinessEntities.Model;
-using FluentValidation;
 
-namespace eLog.HeavyTools.Services.WhZone.BusinessLogic.Validators.Interfaces;
+namespace eLog.HeavyTools.Services.WhZone.BusinessLogic.Services.Interfaces;
 
-public interface IOlcWhzstockValidator : IValidator<OlcWhzstock>
+public interface IWhZoneService : ILogicService<OlcWhzone>
 {
 }

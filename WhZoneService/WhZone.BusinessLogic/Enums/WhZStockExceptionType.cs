@@ -58,5 +58,9 @@ public enum WhZStockExceptionType
     /// <summary>
     /// Meglévő <see cref="OlcWhzstock"/> bejegyzés nem módosítható, mert már módosítva lett
     /// </summary>
-    AlreadyModified
+    AlreadyModified,
+    /// <summary>
+    /// Hiba történt az újonnan felvitt bejegyzés visszatöltése során
+    /// </summary>
+    InsertFailed,
 }

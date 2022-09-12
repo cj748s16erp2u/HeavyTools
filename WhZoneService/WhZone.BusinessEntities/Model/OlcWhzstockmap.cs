@@ -14,7 +14,7 @@ namespace eLog.HeavyTools.Services.WhZone.BusinessEntities.Model
         public int Itemid { get; set; }
         public string Whid { get; set; } = null!;
         public int? Whzoneid { get; set; }
-        public int Whlocid { get; set; }
+        public int? Whlocid { get; set; }
         public decimal Recqty { get; set; }
         public decimal Reqqty { get; set; }
         public decimal Actqty { get; set; }
@@ -23,7 +23,7 @@ namespace eLog.HeavyTools.Services.WhZone.BusinessEntities.Model
 
         public virtual OlsItem Item { get; set; } = null!;
         public virtual OlsWarehouse Wh { get; set; } = null!;
-        public virtual OlcWhlocation Whloc { get; set; } = null!;
+        public virtual OlcWhlocation? Whloc { get; set; }
         public virtual OlcWhzone? Whzone { get; set; }
 
         public IWhZStockMapKey CreateKey()
@@ -43,17 +43,5 @@ namespace eLog.HeavyTools.Services.WhZone.BusinessEntities.Model
         }
 
         bool IEquatable<IWhZStockMapKey>.Equals(IWhZStockMapKey? other) => Comparer.Equals(this, other);
-
-        IWhZStockKey IWhZStockKey.CreateKey()
-        {
-            return new WhZStockKey
-            {
-                Itemid = this.Itemid,
-                Whid = this.Whid,
-                Whzoneid = this.Whzoneid,
-            };
-        }
-
-        bool IEquatable<IWhZStockKey>.Equals(IWhZStockKey? other) => WhZStockKeyComparer.Instance.Equals(this, other);
     }
 }

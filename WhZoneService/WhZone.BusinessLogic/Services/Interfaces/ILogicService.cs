@@ -28,5 +28,5 @@ public interface ILogicService<TEntity>
     Task<TEntity?> AddAsync(TEntity entity, CancellationToken cancellationToken = default);
     Task<TEntity?> UpdateAsync(TEntity entity, CancellationToken cancellationToken = default);
     Task<TEntity?> DeleteAsync(TEntity entity, CancellationToken cancellationToken = default);
-    Task ValidateAndThrowAsync(TEntity entity, TEntity? originalEntity = null, params string[] ruleSets);
+    Task ValidateAndThrowAsync(TEntity entity, TEntity? originalEntity = null, string[]? ruleSets = null, CancellationToken cancellationToken = default);
 }

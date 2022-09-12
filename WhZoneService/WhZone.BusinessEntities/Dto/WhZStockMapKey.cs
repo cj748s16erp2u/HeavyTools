@@ -16,7 +16,7 @@ public class WhZStockMapKey : Base.EntityDto, IWhZStockMapKey
     public int Itemid { get; init; }
     public string Whid { get; init; } = null!;
     public int? Whzoneid { get; init; }
-    public int Whlocid { get; init; }
+    public int? Whlocid { get; init; }
 
     public IWhZStockMapKey CreateKey()
     {
@@ -35,16 +35,4 @@ public class WhZStockMapKey : Base.EntityDto, IWhZStockMapKey
     }
 
     bool IEquatable<IWhZStockMapKey>.Equals(IWhZStockMapKey? other) => Comparer.Equals(this, other);
-
-    IWhZStockKey IWhZStockKey.CreateKey()
-    {
-        return new WhZStockKey
-        {
-            Itemid = this.Itemid,
-            Whid = this.Whid,
-            Whzoneid = this.Whzoneid
-        };
-    }
-
-    bool IEquatable<IWhZStockKey>.Equals(IWhZStockKey? other) => WhZStockKeyComparer.Instance.Equals(this, other);
 }

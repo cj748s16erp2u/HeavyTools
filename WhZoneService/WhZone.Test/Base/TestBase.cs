@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using eLog.HeavyTools.Services.WhZone.BusinessEntities.Model;
 using eLog.HeavyTools.Services.WhZone.BusinessEntities.Model.Interfaces;
+using eLog.HeavyTools.Services.WhZone.BusinessLogic.Enums;
 using eLog.HeavyTools.Services.WhZone.BusinessLogic.Services.Interfaces;
 using eLog.HeavyTools.Services.WhZone.DataAccess.Context;
 using eLog.HeavyTools.Services.WhZone.Test.Fixtures;
@@ -31,17 +32,30 @@ public abstract class TestBase<TEntity, TService> : TestBed<TestFixture>
     {
         return await this.dbContext.OlsItems
             .OrderBy(i => i.Itemid)
-            .Select(i => i.Itemid)
+            .Select(i => (int?)i.Itemid)
             .FirstOrDefaultAsync(cancellationToken);
     }
 
-    protected async Task<string?> GetFirstWarehouseIdAsync(bool needWhZone = false, CancellationToken cancellationToken = default)
+    protected async Task<string?> GetFirstWarehouseIdAsync(bool withWhZone, bool withLoc, CancellationToken cancellationToken = default)
     {
         var query = this.dbContext.OlsWarehouses
             .AsQueryable();
-        if (needWhZone)
+        if (withWhZone)
         {
             query = query.Where(i => i.OlcWhzones.Any());
+        }
+        //else
+        //{
+        //    query = query.Where(i => i.OlcWhzones.Any() == false);
+        //}
+
+        if (withLoc)
+        {
+            query = query.Where(i => i.Loctype == (int)OlsWarehouse_LocType.Yes || i.Loctype == (int)OlsWarehouse_LocType.WhZone_Location);
+        }
+        else
+        {
+            query = query.Where(i => i.Loctype != (int)OlsWarehouse_LocType.Yes && i.Loctype != (int)OlsWarehouse_LocType.WhZone_Location);
         }
 
         return await query
@@ -50,7 +64,7 @@ public abstract class TestBase<TEntity, TService> : TestBed<TestFixture>
             .FirstOrDefaultAsync(cancellationToken);
     }
 
-    protected async Task<int?> GetFirstWhZoneIdAsync(string whid, bool needWhLocation = false, CancellationToken cancellationToken = default)
+    protected async Task<int?> GetFirstWhZoneIdAsync(string whid, bool needWhLocation, CancellationToken cancellationToken = default)
     {
         var query = this.dbContext.OlcWhzones
             .AsQueryable()
@@ -62,7 +76,7 @@ public abstract class TestBase<TEntity, TService> : TestBed<TestFixture>
 
         return await query
             .OrderBy(i => i.Whzoneid)
-            .Select(i => i.Whzoneid)
+            .Select(i => (int?)i.Whzoneid)
             .FirstOrDefaultAsync(cancellationToken);
     }
 
@@ -71,7 +85,7 @@ public abstract class TestBase<TEntity, TService> : TestBed<TestFixture>
         return await this.dbContext.OlcWhlocations
             .Where(i => i.Whid == whid)
             .Where(i => i.Whzoneid == whZoneId)
-            .Select(i => i.Whlocid)
+            .Select(i => (int?)i.Whlocid)
             .FirstOrDefaultAsync(cancellationToken);
     }
 
@@ -81,7 +95,7 @@ public abstract class TestBase<TEntity, TService> : TestBed<TestFixture>
         var skipCount = new Random().Next(itemCount - 1);
         return await this.dbContext.OlsItems
             .Skip(skipCount)
-            .Select(i => i.Itemid)
+            .Select(i => (int?)i.Itemid)
             .FirstOrDefaultAsync(cancellationToken);
     }
 
@@ -99,7 +113,7 @@ public abstract class TestBase<TEntity, TService> : TestBed<TestFixture>
         var skipCount = new Random().Next(zoneCount - 1);
         return await query
             .Skip(skipCount)
-            .Select(i => i.Whzoneid)
+            .Select(i => (int?)i.Whzoneid)
             .FirstOrDefaultAsync(cancellationToken);
     }
 
@@ -114,33 +128,7 @@ public abstract class TestBase<TEntity, TService> : TestBed<TestFixture>
         var skipCount = new Random().Next(locCount - 1);
         return await query
             .Skip(skipCount)
-            .Select(i => i.Whlocid)
-            .FirstOrDefaultAsync(cancellationToken);
-    }
-
-    protected async Task<OlcWhzstock?> GetRandomStockAsync(string whid, bool hasZone, bool hasResQty = false, CancellationToken cancellationToken = default)
-    {
-        var query = this.dbContext.OlcWhzstocks
-            .AsQueryable()
-            .Where(i => i.Whid == whid);
-        if (hasZone)
-        {
-            query = query.Where(i => i.Whzoneid != null);
-        }
-        else
-        {
-            query = query.Where(i => i.Whzoneid == null);
-        }
-
-        if (hasResQty)
-        {
-            query = query.Where(i => i.Resqty > 0M && i.Actqty > 0M);
-        }
-
-        var stockCount = await query.CountAsync(cancellationToken: cancellationToken);
-        var skipCount = new Random().Next(stockCount - 1);
-        return await query
-            .Skip(skipCount)
+            .Select(i => (int?)i.Whlocid)
             .FirstOrDefaultAsync(cancellationToken);
     }
 }

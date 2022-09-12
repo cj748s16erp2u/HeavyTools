@@ -8,10 +8,8 @@ using eLog.HeavyTools.Services.WhZone.BusinessEntities.Model;
 using eLog.HeavyTools.Services.WhZone.BusinessLogic.Containers.Interfaces;
 using eLog.HeavyTools.Services.WhZone.BusinessLogic.Enums;
 using eLog.HeavyTools.Services.WhZone.BusinessLogic.Services.Interfaces;
-using eLog.HeavyTools.Services.WhZone.DataAccess.Context;
 using eLog.HeavyTools.Services.WhZone.Test.Base;
 using eLog.HeavyTools.Services.WhZone.Test.Fixtures;
-using Microsoft.EntityFrameworkCore;
 using Xunit;
 
 namespace eLog.HeavyTools.Services.WhZone.Test.Services.Base;
@@ -26,32 +24,6 @@ public abstract class WhZStockMapServiceTestBase : TestBase<OlcWhzstockmap, IWhZ
     {
     }
 
-    //protected async Task<OlcWhzstock?> GetRandomStockAsync(string whid, bool hasZone, bool hasResQty = false, CancellationToken cancellationToken = default)
-    //{
-    //    var query = this.dbContext.OlcWhzstocks
-    //        .AsQueryable()
-    //        .Where(i => i.Whid == whid);
-    //    if (hasZone)
-    //    {
-    //        query = query.Where(i => i.Whzoneid != null);
-    //    }
-    //    else
-    //    {
-    //        query = query.Where(i => i.Whzoneid == null);
-    //    }
-
-    //    if (hasResQty)
-    //    {
-    //        query = query.Where(i => i.Resqty > 0M && i.Actqty > 0M);
-    //    }
-
-    //    var stockCount = query.Count();
-    //    var skipCount = new Random().Next(stockCount - 1);
-    //    return await query
-    //        .Skip(skipCount)
-    //        .FirstOrDefaultAsync(cancellationToken);
-    //}
-
     protected async Task StoreAsync(IWhZStockMapContext context, CancellationToken cancellationToken = default)
     {
         await this.service.StoreAsync(context, cancellationToken);
@@ -64,12 +36,6 @@ public abstract class WhZStockMapServiceTestBase : TestBase<OlcWhzstockmap, IWhZ
         Assert.Equal(WhZStockMovement.AddReceving, receivingData.Movement);
         Assert.Equal(request.Qty.GetValueOrDefault(), (receivingData?.Qty).GetValueOrDefault(), Precision);
 
-        //var stockData = receivingData!.StockData;
-        //Assert.NotNull(stockData);
-        //Assert.Equal(WhZStockMovement.AddReceving, stockData.Movement);
-        //Assert.Equal(request.Qty.GetValueOrDefault(), (stockData?.Qty).GetValueOrDefault(), Precision);
-        throw new NotImplementedException();
-
         return receivingData;
     }
 
@@ -79,12 +45,6 @@ public abstract class WhZStockMapServiceTestBase : TestBase<OlcWhzstockmap, IWhZ
         Assert.NotNull(reservedData);
         Assert.Equal(WhZStockMovement.AddReserved, reservedData.Movement);
         Assert.Equal(request.Qty.GetValueOrDefault(), (reservedData?.Qty).GetValueOrDefault(), Precision);
-
-        //var stockData = reservedData!.StockData;
-        //Assert.NotNull(stockData);
-        //Assert.Equal(WhZStockMovement.AddReserved, stockData.Movement);
-        //Assert.Equal(request.Qty.GetValueOrDefault(), (stockData?.Qty).GetValueOrDefault(), Precision);
-        throw new NotImplementedException();
 
         return reservedData;
     }
@@ -101,12 +61,6 @@ public abstract class WhZStockMapServiceTestBase : TestBase<OlcWhzstockmap, IWhZ
         Assert.Equal(WhZStockMovement.CommitReceving, commitData.Movement);
         Assert.Equal(request.Qty.GetValueOrDefault(), (commitData?.Qty).GetValueOrDefault(), Precision);
 
-        //var stockData = commitData!.StockData;
-        //Assert.NotNull(stockData);
-        //Assert.Equal(WhZStockMovement.CommitReceving, stockData.Movement);
-        //Assert.Equal(request.Qty.GetValueOrDefault(), (stockData?.Qty).GetValueOrDefault(), Precision);
-        throw new NotImplementedException();
-
         return commitData;
     }
 
@@ -116,12 +70,6 @@ public abstract class WhZStockMapServiceTestBase : TestBase<OlcWhzstockmap, IWhZ
         Assert.NotNull(commitData);
         Assert.Equal(WhZStockMovement.CommitReserved, commitData.Movement);
         Assert.Equal(request.Qty.GetValueOrDefault(), (commitData?.Qty).GetValueOrDefault(), Precision);
-
-        //var stockData = commitData!.StockData;
-        //Assert.NotNull(stockData);
-        //Assert.Equal(WhZStockMovement.CommitReserved, stockData.Movement);
-        //Assert.Equal(request.Qty.GetValueOrDefault(), (stockData?.Qty).GetValueOrDefault(), Precision);
-        throw new NotImplementedException();
 
         return commitData;
     }
@@ -133,12 +81,6 @@ public abstract class WhZStockMapServiceTestBase : TestBase<OlcWhzstockmap, IWhZ
         Assert.Equal(WhZStockMovement.RemoveReceiving, reservedData.Movement);
         Assert.Equal(request.Qty.GetValueOrDefault(), (reservedData?.Qty).GetValueOrDefault(), Precision);
 
-        //var stockData = reservedData!.StockData;
-        //Assert.NotNull(stockData);
-        //Assert.Equal(WhZStockMovement.RemoveReceiving, stockData.Movement);
-        //Assert.Equal(request.Qty.GetValueOrDefault(), (stockData?.Qty).GetValueOrDefault(), Precision);
-        throw new NotImplementedException();
-
         return reservedData;
     }
 
@@ -148,12 +90,6 @@ public abstract class WhZStockMapServiceTestBase : TestBase<OlcWhzstockmap, IWhZ
         Assert.NotNull(reservedData);
         Assert.Equal(WhZStockMovement.RemoveReserved, reservedData.Movement);
         Assert.Equal(request.Qty.GetValueOrDefault(), (reservedData?.Qty).GetValueOrDefault(), Precision);
-
-        //var stockData = reservedData!.StockData;
-        //Assert.NotNull(stockData);
-        //Assert.Equal(WhZStockMovement.RemoveReserved, stockData.Movement);
-        //Assert.Equal(request.Qty.GetValueOrDefault(), (stockData?.Qty).GetValueOrDefault(), Precision);
-        throw new NotImplementedException();
 
         return reservedData;
     }

@@ -99,13 +99,4 @@ public interface IWhZStockMapService : ILogicService<OlcWhzstockmap>
     /// <param name="context">Feldolgozási folyamat kontextus</param>
     /// <param name="cancellationToken">A <see cref="CancellationToken" /> to observe while waiting for the task to complete.</param>
     Task StoreAsync(IWhZStockMapContext context, CancellationToken cancellationToken = default);
-
-    /// <summary>
-    /// Egy [cikk, raktár, helykód] bejegyzéshez tartozó összes helykód készlet összegzése
-    /// </summary>
-    /// <param name="key">Betöltendő kulcs</param>
-    /// <param name="excludedLocId">Kizárt helykód (opcionális)</param>
-    /// <param name="cancellationToken">A <see cref="CancellationToken" /> to observe while waiting for the task to complete.</param>
-    /// <returns>(beérkező mennyiség, aktuális mennyiség, foglalt mennyiség, előjelzett mennyiség)</returns>
-    ValueTask<(decimal recQty, decimal actQty, decimal resQty, decimal provQty)> SumStockMapQtyAsync(IWhZStockKey key, int? excludedLocId = null, CancellationToken cancellationToken = default);
 }

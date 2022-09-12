@@ -11,7 +11,6 @@ namespace eLog.HeavyTools.Services.WhZone.BusinessEntities.Model
             OlcWhzlocs = new HashSet<OlcWhzloc>();
             OlcWhzones = new HashSet<OlcWhzone>();
             OlcWhzstockmaps = new HashSet<OlcWhzstockmap>();
-            OlcWhzstocks = new HashSet<OlcWhzstock>();
             OlsPordheads = new HashSet<OlsPordhead>();
             OlsSordheads = new HashSet<OlsSordhead>();
             OlsStheadFromwhs = new HashSet<OlsSthead>();
@@ -39,7 +38,6 @@ namespace eLog.HeavyTools.Services.WhZone.BusinessEntities.Model
         public virtual ICollection<OlcWhzloc> OlcWhzlocs { get; set; }
         public virtual ICollection<OlcWhzone> OlcWhzones { get; set; }
         public virtual ICollection<OlcWhzstockmap> OlcWhzstockmaps { get; set; }
-        public virtual ICollection<OlcWhzstock> OlcWhzstocks { get; set; }
         public virtual ICollection<OlsPordhead> OlsPordheads { get; set; }
         public virtual ICollection<OlsSordhead> OlsSordheads { get; set; }
         public virtual ICollection<OlsSthead> OlsStheadFromwhs { get; set; }

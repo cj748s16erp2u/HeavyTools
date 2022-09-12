@@ -70,6 +70,208 @@ namespace eLog.HeavyTools.Services.WhZone.BusinessLogic.Helpers
             return bldr.ToString();
         }
 
+        public static (string sql, IReadOnlyDictionary<string, object> parameters) ToSqlWhereParameter<T>([DisallowNull] T obj, [DisallowNull] Expression<Func<T, object>> expression, string? paramPrefix = null, string? tablePrefix = "")
+        {
+            var parameter = expression.Parameters[0];
+
+            var memberNames = VisitExpression(expression);
+            return ToSqlWhereParameter(obj, memberNames, paramPrefix, tablePrefix, parameter);
+        }
+
+        public static (string sql, IReadOnlyDictionary<string, object> parameters) ToSqlWhereParameter<T>([DisallowNull] T obj, string? paramPrefix = null, string? tablePrefix = "")
+        {
+            var type = typeof(T);
+            var parameter = Expression.Parameter(type, "t");
+
+            var memberNames = type.GetProperties().Select(p => p.Name).ToList();
+            return ToSqlWhereParameter(obj, memberNames, paramPrefix, tablePrefix, parameter);
+        }
+
+        private static (string sql, IReadOnlyDictionary<string, object> parameters) ToSqlWhereParameter<T>(T obj, IEnumerable<string> memberNames, string? paramPrefix, string? tablePrefix, ParameterExpression parameter)
+        {
+            var bldr = new StringBuilder();
+            var sep = string.Empty;
+            if (!string.IsNullOrWhiteSpace(paramPrefix))
+            {
+                paramPrefix = $"{paramPrefix}_";
+            }
+
+            if (tablePrefix == null)
+            {
+                tablePrefix = parameter.Name;
+            }
+
+            var i = 0;
+            var parameters = new Dictionary<string, object>();
+            foreach (var memberName in memberNames)
+            {
+                var name = memberName;
+                var expr = CreateExpression<T>(parameter, name);
+                if (expr is null)
+                {
+                    continue;
+                }
+
+                var value = GetValue(obj, expr);
+
+                name = $"[{name.ToLowerInvariant()}]";
+                if (!string.IsNullOrWhiteSpace(tablePrefix))
+                {
+                    name = $"[{tablePrefix}].{name}";
+                }
+
+                string sql;
+                if (value is null)
+                {
+                    sql = CreateSql(name, value!);
+                }
+                else
+                {
+                    var parameterName = $"@__{paramPrefix}{memberName}_{i++}";
+                    sql = CreateSqlParameter(name, parameterName, value);
+                    parameters.Add(parameterName, value);
+                }
+
+                if (!string.IsNullOrWhiteSpace(sql))
+                {
+                    bldr.Append(sep);
+                    bldr.Append(sql);
+                    sep = " and ";
+                }
+            }
+
+            return (bldr.ToString(), parameters);
+        }
+
+        public static (string fields, string values, IReadOnlyDictionary<string, object> parameters) ToSqlInsertParameter<T>([DisallowNull] T obj, [DisallowNull] Expression<Func<T, object>> expression, string? paramPrefix = null)
+        {
+            var parameter = expression.Parameters[0];
+
+            var memberNames = VisitExpression(expression);
+            return ToSqlInsertParameter(obj, memberNames, paramPrefix, parameter);
+        }
+
+        public static (string fields, string values, IReadOnlyDictionary<string, object> parameters) ToSqlInsertParameter<T>([DisallowNull] T obj, string? paramPrefix = null, string? prefix = null)
+        {
+            var type = typeof(T);
+            var parameter = Expression.Parameter(type, prefix ?? "t");
+
+            var memberNames = type.GetProperties().Select(p => p.Name).ToList();
+            return ToSqlInsertParameter(obj, memberNames, paramPrefix, parameter);
+        }
+
+        private static (string fields, string values, IReadOnlyDictionary<string, object> parameters) ToSqlInsertParameter<T>(T obj, IEnumerable<string> memberNames, string? paramPrefix, ParameterExpression parameter)
+        {
+            var fieldBldr = new StringBuilder();
+            var insertBldr = new StringBuilder();
+            var sep = string.Empty;
+            if (!string.IsNullOrWhiteSpace(paramPrefix))
+            {
+                paramPrefix = $"{paramPrefix}_";
+            }
+
+            var i = 0;
+            var parameters = new Dictionary<string, object>();
+            foreach (var memberName in memberNames)
+            {
+                var expr = CreateExpression<T>(parameter, memberName);
+                if (expr is null)
+                {
+                    continue;
+                }
+
+                var value = GetValue(obj, expr);
+
+                string sql;
+                if (value is null)
+                {
+                    sql = $"{value!}";
+                }
+                else
+                {
+                    var parameterName = $"@__{paramPrefix}{memberName}_{i++}";
+                    sql = parameterName;
+                    parameters.Add(parameterName, value);
+                }
+
+                if (!string.IsNullOrWhiteSpace(sql))
+                {
+                    fieldBldr.Append(sep);
+                    fieldBldr.Append($"[{memberName}]");
+
+                    insertBldr.Append(sep);
+                    insertBldr.Append(sql);
+                    sep = ", ";
+                }
+            }
+
+            return (fieldBldr.ToString(), insertBldr.ToString(), parameters);
+        }
+
+        public static (string sql, IReadOnlyDictionary<string, object> parameters) ToSqlUpdateParameter<T>([DisallowNull] T obj, [DisallowNull] Expression<Func<T, object>> expression, string? tablePrefix = null)
+        {
+            var parameter = expression.Parameters[0];
+
+            var memberNames = VisitExpression(expression);
+            return ToSqlUpdateParameter(obj, memberNames, tablePrefix, parameter);
+        }
+
+        public static (string sql, IReadOnlyDictionary<string, object> parameters) ToSqlUpdateParameter<T>([DisallowNull] T obj, string? tablePrefix = null)
+        {
+            var type = typeof(T);
+            var parameter = Expression.Parameter(type, "t");
+
+            var memberNames = type.GetProperties().Select(p => p.Name).ToList();
+            return ToSqlUpdateParameter(obj, memberNames, tablePrefix, parameter);
+        }
+
+        private static (string sql, IReadOnlyDictionary<string, object> parameters) ToSqlUpdateParameter<T>(T obj, IEnumerable<string> memberNames, string? paramPrefix, ParameterExpression parameter)
+        {
+            var bldr = new StringBuilder();
+            var sep = string.Empty;
+            if (!string.IsNullOrWhiteSpace(paramPrefix))
+            {
+                paramPrefix = $"{paramPrefix}_";
+            }
+
+            var i = 0;
+            var parameters = new Dictionary<string, object>();
+            foreach (var memberName in memberNames)
+            {
+                var name = memberName;
+                var expr = CreateExpression<T>(parameter, name);
+                if (expr is null)
+                {
+                    continue;
+                }
+
+                var value = GetValue(obj, expr);
+
+                name = $"  [{name.ToLowerInvariant()}]";
+
+                string sql;
+                if (value is null)
+                {
+                    sql = CreateSql(name, value!);
+                }
+                else
+                {
+                    var parameterName = $"@__{paramPrefix}{memberName}_{i++}";
+                    sql = CreateSqlParameter(name, parameterName, value);
+                    parameters.Add(parameterName, value);
+                }
+
+                if (!string.IsNullOrWhiteSpace(sql))
+                {
+                    bldr.Append(sep);
+                    bldr.Append(sql);
+                    sep = $",{Environment.NewLine}";
+                }
+            }
+
+            return (bldr.ToString(), parameters);
+        }
+
         private static Expression<Func<T, object>>? CreateExpression<T>(ParameterExpression parameter, string name)
         {
             var type = typeof(T);
@@ -89,6 +291,17 @@ namespace eLog.HeavyTools.Services.WhZone.BusinessLogic.Helpers
             var sValue = ConvertToString(value);
             var op = value is null ? "is" : "=";
             return $"{memberName} {op} {sValue}";
+        }
+
+        private static string CreateSqlParameter(string memberName, string parameterName, object value)
+        {
+            if (value is null)
+            {
+                var sValue = ConvertToString(value);
+                return $"{memberName} is {sValue}";
+            }
+
+            return $"{memberName} = {parameterName}";
         }
 
         private static string ConvertToString(object? value)

@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using eLog.HeavyTools.Services.WhZone.BusinessEntities.Model;
@@ -9,31 +11,31 @@ using eLog.HeavyTools.Services.WhZone.BusinessLogic.Containers;
 using eLog.HeavyTools.Services.WhZone.BusinessLogic.Services.Base;
 using eLog.HeavyTools.Services.WhZone.BusinessLogic.Services.Interfaces;
 using eLog.HeavyTools.Services.WhZone.DataAccess.Repositories.Interfaces;
-using FluentValidation;
 using eLog.HeavyTools.Services.WhZone.BusinessLogic.Validators.Interfaces;
 using eLog.HeavyTools.Services.WhZone.BusinessEntities.Interfaces;
-using System.Linq.Expressions;
 using eLog.HeavyTools.Services.WhZone.BusinessEntities.Dto;
 using eLog.HeavyTools.Services.WhZone.BusinessLogic.Enums;
-using Microsoft.EntityFrameworkCore;
 using eLog.HeavyTools.Services.WhZone.BusinessLogic.Helpers;
-using System.Runtime.CompilerServices;
+using FluentValidation;
 
 namespace eLog.HeavyTools.Services.WhZone.BusinessLogic.Services;
 
 [RegisterDI(Interface = typeof(IWhZStockMapService))]
 public class WhZStockMapService : LogicServiceBase<OlcWhzstockmap>, IWhZStockMapService
 {
-    private readonly IWhZStockService stockService;
+    private readonly IWarehouseService warehouseService;
+    private readonly IWhZoneService whZoneService;
 
     public WhZStockMapService(
         IOlcWhzstockmapValidator validator,
         IRepository<OlcWhzstockmap> repository,
-        IWhZStockService whZStockService,
         IUnitOfWork unitOfWork,
-        IEnvironmentService environmentService) : base(validator, repository, unitOfWork, environmentService)
+        IEnvironmentService environmentService,
+        IWarehouseService warehouseService,
+        IWhZoneService whZoneService) : base(validator, repository, unitOfWork, environmentService)
     {
-        this.stockService = whZStockService ?? throw new ArgumentNullException(nameof(whZStockService));
+        this.warehouseService = warehouseService ?? throw new ArgumentNullException(nameof(warehouseService));
+        this.whZoneService = whZoneService ?? throw new ArgumentNullException(nameof(whZoneService));
     }
 
     /// <summary>
@@ -42,12 +44,7 @@ public class WhZStockMapService : LogicServiceBase<OlcWhzstockmap>, IWhZStockMap
     /// <returns>A létrehozott kontextus</returns>
     public IWhZStockMapContext CreateContext()
     {
-        var stockContext = this.stockService.CreateContext();
-
-        return new WhZStockMapContext
-        {
-            StockContext = stockContext
-        };
+        return new WhZStockMapContext();
     }
 
     /// <summary>
@@ -74,18 +71,14 @@ public class WhZStockMapService : LogicServiceBase<OlcWhzstockmap>, IWhZStockMap
     /// <param name="cancellationToken">A <see cref="CancellationToken" /> to observe while waiting for the task to complete.</param>
     /// <returns>A feldolgozott kérés adattartalma</returns>
     /// <exception cref="OperationCanceledException">If the <see cref="CancellationToken" /> is canceled.</exception>
-    public async ValueTask<IWhZStockMapData> AddReceivingAsync(IWhZStockMapContext context, WhZStockMapDto request, CancellationToken cancellationToken = default)
+    public ValueTask<IWhZStockMapData> AddReceivingAsync(IWhZStockMapContext context, WhZStockMapDto request, CancellationToken cancellationToken = default)
     {
         this.ValidateAddParameters(context, request);
 
         var ctx = (WhZStockMapContext)context;
 
-        var stockRequest = this.CreateStockRequest(request);
-        var stockData = await this.stockService.AddReceivingAsync(ctx.StockContext, stockRequest, cancellationToken);
-
         var result = new WhZStockMapData
         {
-            //StockData = stockData,
             Key = request.CreateKey(),
             Movement = WhZStockMovement.AddReceving,
             Qty = request.Qty.GetValueOrDefault(),
@@ -93,7 +86,7 @@ public class WhZStockMapService : LogicServiceBase<OlcWhzstockmap>, IWhZStockMap
 
         ctx.AddMovement(result);
 
-        return result;
+        return ValueTask.FromResult<IWhZStockMapData>(result);
     }
 
     /// <summary>
@@ -111,7 +104,7 @@ public class WhZStockMapService : LogicServiceBase<OlcWhzstockmap>, IWhZStockMap
         var ctx = (WhZStockMapContext)context;
 
         var recQty = ctx.MovementList
-            .Where(i => WhZStockKey.Comparer.Equals(request, i.Key))
+            .Where(i => WhZStockMapKey.Comparer.Equals(request, i.Key))
             // a recQty-t akarjuk csokkenteni, igy a tobbi mennyiseg nem erdekes
             .Where(i => i.Movement == WhZStockMovement.AddReceving || i.Movement == WhZStockMovement.RemoveReceiving || i.Movement == WhZStockMovement.CommitReceving)
             .Select(i => i.Movement == WhZStockMovement.AddReceving ? i.Qty : -i.Qty)
@@ -128,12 +121,8 @@ public class WhZStockMapService : LogicServiceBase<OlcWhzstockmap>, IWhZStockMap
             this.ThrowException(WhZStockExceptionType.RemoveReceivingQty, "Not enough receiving quantity to fulfill the remove request", entity);
         }
 
-        var stockRequest = this.CreateStockRequest(request);
-        var stockData = await this.stockService.RemoveReceivingAsync(ctx.StockContext, stockRequest, cancellationToken);
-
         var result = new WhZStockMapData
         {
-            //StockData = stockData,
             Key = request.CreateKey(),
             Movement = WhZStockMovement.RemoveReceiving,
             Qty = request.Qty.GetValueOrDefault()
@@ -174,12 +163,8 @@ public class WhZStockMapService : LogicServiceBase<OlcWhzstockmap>, IWhZStockMap
             this.ThrowException(WhZStockExceptionType.CommitReceivingQty, "Not enough receiving quantity to fulfill the commit request", entity);
         }
 
-        var stockRequest = this.CreateStockRequest(request);
-        var stockData = await this.stockService.CommitReceivingAsync(ctx.StockContext, stockRequest, cancellationToken);
-
         var result = new WhZStockMapData
         {
-            //StockData = stockData,
             Key = request.CreateKey(),
             Movement = WhZStockMovement.CommitReceving,
             Qty = request.Qty.GetValueOrDefault()
@@ -220,12 +205,8 @@ public class WhZStockMapService : LogicServiceBase<OlcWhzstockmap>, IWhZStockMap
             this.ThrowException(WhZStockExceptionType.AddReservedQty, "Not enough stock to fulfill the reserve request", entity);
         }
 
-        var stockRequest = this.CreateStockRequest(request);
-        var stockData = await this.stockService.AddReservedAsync(ctx.StockContext, stockRequest, cancellationToken);
-
         var result = new WhZStockMapData
         {
-            //StockData = stockData,
             Key = request.CreateKey(),
             Movement = WhZStockMovement.AddReserved,
             Qty = request.Qty.GetValueOrDefault()
@@ -266,12 +247,8 @@ public class WhZStockMapService : LogicServiceBase<OlcWhzstockmap>, IWhZStockMap
             this.ThrowException(WhZStockExceptionType.RemoveReservedQty, "Not enough reserved quantity to fulfill the remove request", entity);
         }
 
-        var stockRequest = this.CreateStockRequest(request);
-        var stockData = await this.stockService.RemoveReservedAsync(ctx.StockContext, stockRequest, cancellationToken);
-
         var result = new WhZStockMapData
         {
-            //StockData = stockData,
             Key = request.CreateKey(),
             Movement = WhZStockMovement.RemoveReserved,
             Qty = request.Qty.GetValueOrDefault()
@@ -312,12 +289,8 @@ public class WhZStockMapService : LogicServiceBase<OlcWhzstockmap>, IWhZStockMap
             this.ThrowException(WhZStockExceptionType.CommitReservedQty, "Not enough reserved quantity to fulfill the commit request", entity);
         }
 
-        var stockRequest = this.CreateStockRequest(request);
-        var stockData = await this.stockService.CommitReservedAsync(ctx.StockContext, stockRequest, cancellationToken);
-
         var result = new WhZStockMapData
         {
-            //StockData = stockData,
             Key = request.CreateKey(),
             Movement = WhZStockMovement.CommitReserved,
             Qty = request.Qty.GetValueOrDefault()
@@ -342,9 +315,6 @@ public class WhZStockMapService : LogicServiceBase<OlcWhzstockmap>, IWhZStockMap
             this.ThrowException(WhZStockExceptionType.DeleteNotEnoughQty, "Unable to remove this request, cause the further requests uses its quantity");
         }
 
-        //this.stockService.Delete(ctx.StockContext, request.StockData);
-        throw new NotImplementedException();
-
         if (!ctx.TryRemoveMovement(request))
         {
             this.ThrowException(WhZStockExceptionType.DeleteNotEnoughQty, "Unable to remove this request, cause the further requests uses its quantity");
@@ -367,8 +337,6 @@ public class WhZStockMapService : LogicServiceBase<OlcWhzstockmap>, IWhZStockMap
 
         try
         {
-            await this.stockService.StoreAsync(ctx.StockContext, cancellationToken);
-
             foreach (var movements in ctx.MovementList.GroupBy(m => m.Key, WhZStockMapKey.Comparer))
             {
                 await this.StoreAsync(movements.Key, movements, cancellationToken);
@@ -380,7 +348,7 @@ public class WhZStockMapService : LogicServiceBase<OlcWhzstockmap>, IWhZStockMap
         }
         catch (Exception ex)
         {
-            await ERP4U.Log.LoggerManager.Instance.LogErrorAsync<WhZStockService>(ex);
+            await ERP4U.Log.LoggerManager.Instance.LogErrorAsync<WhZStockMapService>(ex);
             throw;
         }
         finally
@@ -390,31 +358,6 @@ public class WhZStockMapService : LogicServiceBase<OlcWhzstockmap>, IWhZStockMap
                 tran.Rollback();
             }
         }
-    }
-
-    /// <summary>
-    /// Egy [cikk, raktár, helykód] bejegyzéshez tartozó összes helykód készlet összegzése
-    /// </summary>
-    /// <param name="key">Betöltendő kulcs</param>
-    /// <param name="excludedLocId">Kizárt helykód (opcionális)</param>
-    /// <param name="cancellationToken">A <see cref="CancellationToken" /> to observe while waiting for the task to complete.</param>
-    /// <returns>(beérkező mennyiség, aktuális mennyiség, foglalt mennyiség, előjelzett mennyiség)</returns>
-    public async ValueTask<(decimal recQty, decimal actQty, decimal resQty, decimal provQty)> SumStockMapQtyAsync(IWhZStockKey key, int? excludedLocId = null, CancellationToken cancellationToken = default)
-    {
-        this.ValidateKeyParameters(key, nameof(key));
-
-        var query = this.Query(Find(key));
-        if (excludedLocId is not null)
-        {
-            query = query.Where(i => i.Whlocid != excludedLocId);
-        }
-
-        var result = await query
-            .GroupBy(i => new { i.Itemid, i.Whid, i.Whzoneid })
-            .Select(i => new { recQty = i.Sum(e => e.Recqty), actQty = i.Sum(e => e.Actqty), resQty = i.Sum(e => e.Resqty), provQty = i.Sum(e => e.Provqty) })
-            .SingleOrDefaultAsync(cancellationToken);
-
-        return (result?.recQty ?? 0, result?.actQty ?? 0, result?.resQty ?? 0, result?.provQty ?? 0);
     }
 
     /// <summary>
@@ -495,7 +438,7 @@ public class WhZStockMapService : LogicServiceBase<OlcWhzstockmap>, IWhZStockMap
 
                 needTryAgain = false;
             }
-            catch (WhZStockServiceException ex)
+            catch (WhZStockMapServiceException ex)
             {
                 needTryAgain = false;
                 if (ex.Type == WhZStockExceptionType.AlreadyExists || ex.Type == WhZStockExceptionType.AlreadyModified)
@@ -530,7 +473,13 @@ public class WhZStockMapService : LogicServiceBase<OlcWhzstockmap>, IWhZStockMap
             this.ThrowException(WhZStockExceptionType.AlreadyExists, $"Adding the current stock map was failed, cause it is already exists [Itemid: {entityToSave.Itemid}, Whid: {entityToSave.Whid}, Whzoneid: {entityToSave.Whzoneid}, Whlocid: {entityToSave.Whlocid}]");
         }
 
-        var primaryKey = this.Repository.GetPrimaryKey(entity);
+        entity = (await this.GetAsync(entityToSave, cancellationToken))!;
+        if (entity is null)
+        {
+            this.ThrowException(WhZStockExceptionType.InsertFailed, $"Adding the current stock map was failed [Itemid: {entityToSave.Itemid}, Whid: {entityToSave.Whid}, Whzoneid: {entityToSave.Whzoneid}, Whlocid: {entityToSave.Whlocid}]");
+        }
+
+        var primaryKey = this.Repository.GetPrimaryKey(entity!);
 
         return await this.GetByIdAsync(primaryKey!.Values.ToArray(), cancellationToken);
     }
@@ -588,18 +537,37 @@ public class WhZStockMapService : LogicServiceBase<OlcWhzstockmap>, IWhZStockMap
             throw new ArgumentNullException(nameof(entityToSave));
         }
 
-        var sql = new StringBuilder($"if (select count(0) from {this.Repository.GetTableName()} [t] (nolock) where {Utils.ToSql(entityToSave, t => new { t.Itemid, t.Whid, t.Whzoneid, t.Whlocid })}) = 0{Environment.NewLine}");
-        sql.AppendLine($"  insert into {this.Repository.GetTableName()} ([{nameof(OlcWhzstockmap.Itemid)}], [{nameof(OlcWhzstockmap.Whid)}], [{nameof(OlcWhzstockmap.Whzoneid)}], [{nameof(OlcWhzstockmap.Whlocid)}], [{nameof(OlcWhzstockmap.Recqty)}], [{nameof(OlcWhzstockmap.Actqty)}], [{nameof(OlcWhzstockmap.Resqty)}])");
-        sql.Append($"  values (");
-        sql.Append($"{Utils.ToSqlValue(entityToSave.Itemid)}, ");
-        sql.Append($"{Utils.ToSqlValue(entityToSave.Whid)}, ");
-        sql.Append($"{Utils.ToSqlValue(entityToSave.Whzoneid)}, ");
-        sql.Append($"{Utils.ToSqlValue(entityToSave.Whlocid)}, ");
-        sql.Append($"{Utils.ToSqlValue(entityToSave.Recqty)}, ");
-        sql.Append($"{Utils.ToSqlValue(entityToSave.Actqty)}, ");
-        sql.Append($"{Utils.ToSqlValue(entityToSave.Resqty)})");
+        //var sql = new StringBuilder($"if (select count(0) from {this.Repository.GetTableName()} [t] (nolock) where {Utils.ToSql(entityToSave, t => new { t.Itemid, t.Whid, t.Whzoneid, t.Whlocid })}) = 0{Environment.NewLine}");
+        //sql.AppendLine($"  insert into {this.Repository.GetTableName()} ([{nameof(OlcWhzstockmap.Itemid)}], [{nameof(OlcWhzstockmap.Whid)}], [{nameof(OlcWhzstockmap.Whzoneid)}], [{nameof(OlcWhzstockmap.Whlocid)}], [{nameof(OlcWhzstockmap.Recqty)}], [{nameof(OlcWhzstockmap.Reqqty)}], [{nameof(OlcWhzstockmap.Actqty)}], [{nameof(OlcWhzstockmap.Resqty)}])");
+        //sql.Append($"  values (");
+        //sql.Append($"{Utils.ToSqlValue(entityToSave.Itemid)}, ");
+        //sql.Append($"{Utils.ToSqlValue(entityToSave.Whid)}, ");
+        //sql.Append($"{Utils.ToSqlValue(entityToSave.Whzoneid)}, ");
+        //sql.Append($"{Utils.ToSqlValue(entityToSave.Whlocid)}, ");
+        //sql.Append($"{Utils.ToSqlValue(entityToSave.Recqty)}, ");
+        //sql.Append($"{Utils.ToSqlValue(entityToSave.Reqqty)}, ");
+        //sql.Append($"{Utils.ToSqlValue(entityToSave.Actqty)}, ");
+        //sql.Append($"{Utils.ToSqlValue(entityToSave.Resqty)})");
 
-        return FormattableStringFactory.Create(sql.ToString());
+        var (whereSql, whereParameters) = Utils.ToSqlWhereParameter(entityToSave, t => new { t.Itemid, t.Whid, t.Whzoneid, t.Whlocid }, "key");
+        var (fieldsSql, valuesSql, insertParameters) = Utils.ToSqlInsertParameter(entityToSave, t => new { t.Itemid, t.Whid, t.Whzoneid, t.Whlocid, t.Recqty, t.Reqqty, t.Actqty, t.Resqty });
+
+        var sqlBldr = new StringBuilder($"if (select count(0) from {this.Repository.GetTableName()} [t] (nolock) where {whereSql}) = 0{Environment.NewLine}");
+        sqlBldr.AppendLine($"  insert into {this.Repository.GetTableName()} ({fieldsSql})");
+        sqlBldr.Append($"  values ({valuesSql})");
+        var sql = sqlBldr.ToString();
+
+        var i = 0;
+        var list = new List<object>();
+        foreach (var p in whereParameters.Concat(insertParameters))
+        {
+            list.Add(new Microsoft.Data.SqlClient.SqlParameter(p.Key, p.Value));
+
+            //sql = sql.Replace(p.Key, $"{{{i++}}}");
+            //list.Add(p.Value!);
+        }
+
+        return FormattableStringFactory.Create(sql, list.ToArray());
     }
 
     /// <summary>
@@ -619,24 +587,27 @@ public class WhZStockMapService : LogicServiceBase<OlcWhzstockmap>, IWhZStockMap
             throw new ArgumentNullException(nameof(knownEntity));
         }
 
-        var sql = new StringBuilder($"update {this.Repository.GetTableName()} set{Environment.NewLine}");
-        sql.AppendLine($"  {Utils.ToSql(entityToSave, t => t.Recqty)},");
-        sql.AppendLine($"  {Utils.ToSql(entityToSave, t => t.Actqty)},");
-        sql.AppendLine($"  {Utils.ToSql(entityToSave, t => t.Resqty)}");
-        sql.AppendLine($"where {Utils.ToSql(entityToSave, t => new { t.Itemid, t.Whid, t.Whzoneid, t.Whlocid })}");
-        sql.AppendLine($"  and {Utils.ToSql(knownEntity, t => new { t.Recqty, t.Actqty, t.Resqty })}");
+        var (whereSql, whereParameters) = Utils.ToSqlWhereParameter(entityToSave, t => new { t.Itemid, t.Whid, t.Whzoneid, t.Whlocid }, "key");
+        var (knownSql, knownParameters) = Utils.ToSqlWhereParameter(knownEntity, t => new { t.Recqty, t.Reqqty, t.Actqty, t.Resqty }, "known");
+        var (updateSql, updateParameters) = Utils.ToSqlUpdateParameter(entityToSave, t => new { t.Recqty, t.Reqqty, t.Actqty, t.Resqty });
 
-        return FormattableStringFactory.Create(sql.ToString());
-    }
+        var sqlBldr = new StringBuilder($"update {this.Repository.GetTableName()} set{Environment.NewLine}");
+        sqlBldr.AppendLine(updateSql);
+        sqlBldr.AppendLine($"where {whereSql}");
+        sqlBldr.AppendLine($"  and {knownSql}");
+        var sql = sqlBldr.ToString();
 
-    /// <summary>
-    /// Készlet bejegyzést kereső kifejezés létrehozása (<see cref="Expression{Func{OlcWhzstock, bool}}"/> predicate)
-    /// </summary>
-    /// <param name="key">A keresett bejegyzés kulcsa</param>
-    /// <returns>A kereső kifejezés (<see cref="Expression{Func{OlcWhzstock, bool}}"/> predicate)</returns>
-    private static Expression<Func<OlcWhzstockmap, bool>> Find(IWhZStockKey key)
-    {
-        return entity => entity.Itemid == key.Itemid && entity.Whid == key.Whid && entity.Whzoneid == key.Whzoneid;
+        var i = 0;
+        var list = new List<object>();
+        foreach (var p in whereParameters.Concat(knownParameters).Concat(updateParameters))
+        {
+            list.Add(new Microsoft.Data.SqlClient.SqlParameter(p.Key, p.Value));
+
+            //sql = sql.Replace(p.Key, $"{{{i++}}}");
+            //list.Add(p.Value);
+        }
+
+        return FormattableStringFactory.Create(sql, list.ToArray());
     }
 
     /// <summary>
@@ -646,23 +617,12 @@ public class WhZStockMapService : LogicServiceBase<OlcWhzstockmap>, IWhZStockMap
     /// <returns>A kereső kifejezés (<see cref="Expression{Func{OlcWhzstock, bool}}"/> predicate)</returns>
     private static Expression<Func<OlcWhzstockmap, bool>> Find(IWhZStockMapKey key)
     {
-        return entity => entity.Itemid == key.Itemid && entity.Whid == key.Whid && entity.Whzoneid == key.Whzoneid && entity.Whlocid == key.Whlocid;
-    }
-
-    /// <summary>
-    /// A helykódos készlet mozgás kérésből készlet mozgás kérés létrehozása
-    /// </summary>
-    /// <param name="request">Helykódos készlet mozgás kérés</param>
-    /// <returns>A létrehozott készlet mozgás kérés</returns>
-    private WhZStockDto CreateStockRequest(WhZStockMapDto request)
-    {
-        return new WhZStockDto
+        if (key is null)
         {
-            Itemid = request.Itemid,
-            Whid = request.Whid,
-            Whzoneid = request.Whzoneid,
-            Qty = request.Qty
-        };
+            throw new ArgumentNullException(nameof(key));
+        }
+
+        return entity => entity.Itemid == key.Itemid && entity.Whid == key.Whid && entity.Whzoneid == key.Whzoneid && entity.Whlocid == key.Whlocid;
     }
 
     /// <summary>
@@ -709,7 +669,7 @@ public class WhZStockMapService : LogicServiceBase<OlcWhzstockmap>, IWhZStockMap
     /// </summary>
     /// <param name="key">A validálandó kulcs</param>
     /// <param name="name">A hibaüzenetben megjelenítendő paraméter neve</param>
-    private void ValidateKeyParameters(IWhZStockKey key, string name)
+    private void ValidateKeyParameters(IWhZStockMapKey key, string name)
     {
         if (key is null)
         {
@@ -831,5 +791,33 @@ public class WhZStockMapService : LogicServiceBase<OlcWhzstockmap>, IWhZStockMap
     private void ThrowException(WhZStockExceptionType type, string message, OlcWhzstockmap? entity = null, string? fieldName = null)
     {
         throw new WhZStockMapServiceException(type, message, entity, fieldName);
+    }
+
+    /// <summary>
+    /// Validálásnál használt adattároló feltöltése
+    /// új adat: raktár, zóna
+    /// </summary>
+    /// <param name="entity"></param>
+    /// <param name="originalEntity"></param>
+    /// <param name="ruleSets"></param>
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    protected override async ValueTask<ValidationContext<OlcWhzstockmap>> CreateValidationContextAsync(OlcWhzstockmap entity, OlcWhzstockmap? originalEntity, string[] ruleSets, CancellationToken cancellationToken = default)
+    {
+        var context = await base.CreateValidationContextAsync(entity, originalEntity, ruleSets);
+
+        if (!string.IsNullOrWhiteSpace(entity.Whid))
+        {
+            var warehouse = await this.warehouseService.GetByIdAsync(new object[] { entity.Whid }, cancellationToken);
+            if (warehouse is not null)
+            {
+                if (!context.TryAddEntity(warehouse))
+                {
+                    this.ThrowException("Unable to add warehouse to the validation context", entity);
+                }
+            }
+        }
+
+        return context;
     }
 }

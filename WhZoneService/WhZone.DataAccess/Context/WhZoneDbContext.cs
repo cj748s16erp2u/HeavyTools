@@ -40,7 +40,6 @@ namespace eLog.HeavyTools.Services.WhZone.DataAccess.Context
         public virtual DbSet<OlcWhlocation> OlcWhlocations { get; set; } = null!;
         public virtual DbSet<OlcWhzloc> OlcWhzlocs { get; set; } = null!;
         public virtual DbSet<OlcWhzone> OlcWhzones { get; set; } = null!;
-        public virtual DbSet<OlcWhzstock> OlcWhzstocks { get; set; } = null!;
         public virtual DbSet<OlcWhzstockmap> OlcWhzstockmaps { get; set; } = null!;
         public virtual DbSet<OlcWhztranhead> OlcWhztranheads { get; set; } = null!;
         public virtual DbSet<OlcWhztranline> OlcWhztranlines { get; set; } = null!;
@@ -474,62 +473,6 @@ namespace eLog.HeavyTools.Services.WhZone.DataAccess.Context
                     .HasForeignKey(d => d.Whid)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("fk_olc_whzone_whid");
-            });
-
-            modelBuilder.Entity<OlcWhzstock>(entity =>
-            {
-                entity.HasKey(e => e.Whzstockid)
-                    .HasName("pk_olc_whzstock");
-
-                entity.ToTable("olc_whzstock");
-
-                entity.HasIndex(e => new { e.Itemid, e.Whid, e.Whzoneid }, "uq_olc_whzstock")
-                    .IsUnique();
-
-                entity.Property(e => e.Whzstockid).HasColumnName("whzstockid");
-
-                entity.Property(e => e.Actqty)
-                    .HasColumnType("numeric(19, 6)")
-                    .HasColumnName("actqty");
-
-                entity.Property(e => e.Itemid).HasColumnName("itemid");
-
-                entity.Property(e => e.Provqty)
-                    .HasColumnType("numeric(21, 6)")
-                    .HasColumnName("provqty")
-                    .HasComputedColumnSql("(([actqty]+[recqty])-[resqty])", true);
-
-                entity.Property(e => e.Recqty)
-                    .HasColumnType("numeric(19, 6)")
-                    .HasColumnName("recqty");
-
-                entity.Property(e => e.Resqty)
-                    .HasColumnType("numeric(19, 6)")
-                    .HasColumnName("resqty");
-
-                entity.Property(e => e.Whid)
-                    .HasMaxLength(12)
-                    .IsUnicode(false)
-                    .HasColumnName("whid");
-
-                entity.Property(e => e.Whzoneid).HasColumnName("whzoneid");
-
-                entity.HasOne(d => d.Item)
-                    .WithMany(p => p.OlcWhzstocks)
-                    .HasForeignKey(d => d.Itemid)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("fk_olc_whzstock_itemid");
-
-                entity.HasOne(d => d.Wh)
-                    .WithMany(p => p.OlcWhzstocks)
-                    .HasForeignKey(d => d.Whid)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("fk_olc_whzstock_whid");
-
-                entity.HasOne(d => d.Whzone)
-                    .WithMany(p => p.OlcWhzstocks)
-                    .HasForeignKey(d => d.Whzoneid)
-                    .HasConstraintName("fk_olc_whzstock_whzoneid");
             });
 
             modelBuilder.Entity<OlcWhzstockmap>(entity =>

@@ -219,7 +219,7 @@ public class LogicServiceBase<TEntity> : ILogicService<TEntity>
         return this.DeleteIntlAsync(entity, cancellationToken);
     }
 
-    public virtual async Task ValidateAndThrowAsync(TEntity entity, TEntity? originalEntity = null, params string[] ruleSets)
+    public virtual async Task ValidateAndThrowAsync(TEntity entity, TEntity? originalEntity = null, string[]? ruleSets = null, CancellationToken cancellationToken = default)
     {
         if (this.Validator is not null)
         {
@@ -232,9 +232,9 @@ public class LogicServiceBase<TEntity> : ILogicService<TEntity>
                 ruleSets = DefaultRuleSets.Concat(ruleSets).Distinct().ToArray();
             }
 
-            var context = this.CreateValidationContext(entity, originalEntity, ruleSets);
+            var context = await this.CreateValidationContextAsync(entity, originalEntity, ruleSets, cancellationToken);
 
-            var validationResult = await this.Validator.ValidateAsync(context);
+            var validationResult = await this.Validator.ValidateAsync(context, cancellationToken);
             if (!validationResult.IsValid)
             {
                 this.ThrowException(validationResult.Errors, entity, originalEntity);
@@ -311,7 +311,7 @@ public class LogicServiceBase<TEntity> : ILogicService<TEntity>
         }
     }
 
-    protected virtual ValidationContext<TEntity> CreateValidationContext(TEntity entity, TEntity? originalEntity, string[] ruleSets)
+    protected virtual ValueTask<ValidationContext<TEntity>> CreateValidationContextAsync(TEntity entity, TEntity? originalEntity, string[] ruleSets, CancellationToken cancellationToken = default)
     {
         var context = new ValidationContext<TEntity>(entity, new FluentValidation.Internal.PropertyChain(), new FluentValidation.Internal.RulesetValidatorSelector(ruleSets));
         if (originalEntity != null)
@@ -319,6 +319,6 @@ public class LogicServiceBase<TEntity> : ILogicService<TEntity>
             context.RootContextData[Validators.Base.EntityValidator<TEntity>.OriginalEntityKey] = originalEntity;
         }
 
-        return context;
+        return ValueTask.FromResult(context);
     }
 }

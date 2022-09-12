@@ -16,8 +16,6 @@ public class WhZStockMapContext : IWhZStockMapContext
     {
     }
 
-    public IWhZStockContext StockContext { get; init; } = null!;
-
     public IEnumerable<IWhZStockMapData> MovementList => this.movementList;
 
     public IWhZStockMapData AddMovement(IWhZStockMapData movementData)

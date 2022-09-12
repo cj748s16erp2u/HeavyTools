@@ -23,7 +23,30 @@ public static class PrimaryKeyValidatorExtensions
         return ruleBuilder.SetValidator(new PrimaryKeySameValidator<TEntity>(dbContext));
     }
 
-    public static T? GetEntity<TEntity, T>(this ValidationContext<TEntity> context, string key)
+    public static bool TryAddEntity<TEntity, T>(this ValidationContext<TEntity> context, T entity)
+        where TEntity : class, IEntity
+        where T : class, IEntity
+    {
+        var key = typeof(T).Name;
+        return TryAddEntity(context, entity, key);
+    }
+
+    public static bool TryAddEntity<TEntity, T>(this ValidationContext<TEntity> context, T entity, string key)
+        where TEntity : class, IEntity
+        where T : class, IEntity
+    {
+        return context.RootContextData.TryAdd(key, entity);
+    }
+
+    public static T? TryGetEntity<TEntity, T>(this ValidationContext<TEntity> context)
+        where TEntity : class, IEntity
+        where T : class, IEntity
+    {
+        var key = typeof(T).Name;
+        return TryGetEntity<TEntity, T>(context, key);
+    }
+
+    public static T? TryGetEntity<TEntity, T>(this ValidationContext<TEntity> context, string key)
         where TEntity : class, IEntity
         where T : class, IEntity
     {
@@ -31,12 +54,13 @@ public static class PrimaryKeyValidatorExtensions
         {
             return t;
         }
+
         return null;
     }
 
     public static TEntity? GetOriginalEntity<TEntity>(this ValidationContext<TEntity> context)
         where TEntity : class, IEntity
     {
-        return GetEntity<TEntity, TEntity>(context, EntityValidator<TEntity>.OriginalEntityKey);
+        return TryGetEntity<TEntity, TEntity>(context, EntityValidator<TEntity>.OriginalEntityKey);
     }
 }
