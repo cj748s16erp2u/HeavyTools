@@ -25,7 +25,7 @@ public class PriceCalcOriginalService : LogicServiceBase<OlcPrctable>, IPriceCal
  where GETDATE() between p.startdate and p.enddate
    and wid='{0}'
    and i.itemcode='{1}'
-   and prctype=1
+   and prctype in (1,4)
  order by ordernum";
 
     private IOlcPrctypeService olcPrctypeService;
@@ -95,7 +95,10 @@ public class PriceCalcOriginalService : LogicServiceBase<OlcPrctable>, IPriceCal
                         RawSelPrc = origprc!.Prc,
                         RawSelVal = origprc!.Prc
                     };
-
+                    if (origprc.Prctype.HasValue && origprc.Prctype.Value == PrcType.SalePrice)
+                    {
+                        ncijrd.CartActionType = CartActionType.PrcTable;
+                    }
                     if (i == 0)
                     {
                         ncijrd.CartId = cartitem.CartId;
