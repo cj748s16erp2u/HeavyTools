@@ -27,6 +27,7 @@ internal class PriceCalcService : LogicServiceBase<OlcPriceCalcResult>, IPriceCa
     private readonly IPriceCalcGroupService priceCalcGroupService;
     private readonly IPriceCalcValueCalculatorService pricseCalcValueCalculatorService;
     private readonly IOlcActionCacheService olcActionCacheService;
+    private readonly IOlcCartCacheService olcCartCacheService;
 
     public PriceCalcService(
         IOlcPriceCalcResultValidator validator,
@@ -39,7 +40,8 @@ internal class PriceCalcService : LogicServiceBase<OlcPriceCalcResult>, IPriceCa
         IPriceCalcActionService priceCalcActionService,
         IPriceCalcGroupService priceCalcGroupService,
         IPriceCalcValueCalculatorService pricseCalcValueCalculatorService,
-        IOlcActionCacheService olcActionCacheService) : base(validator, repository, unitOfWork, environmentService)
+        IOlcActionCacheService olcActionCacheService, 
+        IOlcCartCacheService olcCartCacheService) : base(validator, repository, unitOfWork, environmentService)
     {
         this.userRepository = userRepository ?? throw new ArgumentNullException(nameof(userRepository));
         this.olcApiloggerService = olcApiloggerService ?? throw new ArgumentNullException(nameof(olcApiloggerService));
@@ -48,6 +50,7 @@ internal class PriceCalcService : LogicServiceBase<OlcPriceCalcResult>, IPriceCa
         this.priceCalcGroupService = priceCalcGroupService ?? throw new ArgumentNullException(nameof(priceCalcGroupService));
         this.pricseCalcValueCalculatorService = pricseCalcValueCalculatorService ?? throw new ArgumentNullException(nameof(pricseCalcValueCalculatorService));
         this.olcActionCacheService = olcActionCacheService ?? throw new ArgumentNullException(nameof(olcActionCacheService));
+        this.olcCartCacheService = olcCartCacheService ?? throw new ArgumentNullException(nameof(olcCartCacheService));
     }
 
     public int Calc(int? x, int? y)
@@ -145,12 +148,18 @@ internal class PriceCalcService : LogicServiceBase<OlcPriceCalcResult>, IPriceCa
     }
 
     public async Task<CalcJsonResultDto> CalculatePrice(CalcJsonParamsDto cart, PriceCalcActionResultDto pricecalcactionresult, CancellationToken cancellationToken = default)
-    {
-        var res = await priceCalcOriginalService.GetOriginalPrice(cart, cancellationToken);
-        await priceCalcActionService.CalculateActionPriceAsync(cart, res, pricecalcactionresult, cancellationToken);
-        priceCalcGroupService.GroupCart(res);
-        await pricseCalcValueCalculatorService.CalculateCartAsync(res, cancellationToken);
-        return res;
+    { 
+        if (olcCartCacheService.TryGet(cart, out var cjrd))
+        {
+            return cjrd;
+        } else {
+            var res = await priceCalcOriginalService.GetOriginalPrice(cart, cancellationToken);
+            await priceCalcActionService.CalculateActionPriceAsync(cart, res, pricecalcactionresult, cancellationToken);
+            priceCalcGroupService.GroupCart(res);
+            await pricseCalcValueCalculatorService.CalculateCartAsync(res, cancellationToken);
+            olcCartCacheService.Add(cart, res);
+            return res;
+        }
     }
 
     public async Task<bool> ResetJsonAsync(JObject parms, CancellationToken cancellationToken = default)
@@ -158,5 +167,10 @@ internal class PriceCalcService : LogicServiceBase<OlcPriceCalcResult>, IPriceCa
         var cartReset = JsonParser.ParseObject<CalcResetJsonParamsDto>(parms);
 
         return await olcActionCacheService.Reset(cartReset.Aid, cancellationToken);
+    }
+
+    public void ResetCartCacheAsync(JObject value)
+    {
+        olcCartCacheService.Reset();
     }
 }

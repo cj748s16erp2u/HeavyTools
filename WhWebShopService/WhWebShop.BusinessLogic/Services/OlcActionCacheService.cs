@@ -21,14 +21,21 @@ public class OlcActionCacheService : IOlcActionCacheService
     private readonly IOlcActioncouponnumberService olcActioncouponnumberService;
     private readonly IOlcActionwebhopService olcActionwebhopService;
     private readonly IOlcActionretailService olcActionretailService;
+    private readonly IOlcCartCacheService olcCartCacheService;
 
-    public OlcActionCacheService(IOlcActionextService olcActionextService, IOlcActionService olcActionService, IOlcActioncouponnumberService olcActioncouponnumberService, IOlcActionwebhopService olcActionwebhopService, IOlcActionretailService olcActionretailService)
+    public OlcActionCacheService(IOlcActionextService olcActionextService, 
+        IOlcActionService olcActionService, 
+        IOlcActioncouponnumberService olcActioncouponnumberService, 
+        IOlcActionwebhopService olcActionwebhopService, 
+        IOlcActionretailService olcActionretailService,
+        IOlcCartCacheService olcCartCacheService)
     {
         this.olcActionextService = olcActionextService ?? throw new ArgumentNullException(nameof(olcActionextService));
         this.olcActionService = olcActionService ?? throw new ArgumentNullException(nameof(olcActionService));
         this.olcActioncouponnumberService = olcActioncouponnumberService ?? throw new ArgumentNullException(nameof(olcActioncouponnumberService));
         this.olcActionwebhopService = olcActionwebhopService ?? throw new ArgumentNullException(nameof(olcActionwebhopService));
         this.olcActionretailService = olcActionretailService ?? throw new ArgumentNullException(nameof(olcActionretailService));
+        this.olcCartCacheService = olcCartCacheService ?? throw new ArgumentNullException(nameof(olcCartCacheService));
     }
      
 
@@ -79,7 +86,7 @@ public class OlcActionCacheService : IOlcActionCacheService
          
         ActionDataGroupDto o;
         actions.TryRemove(ca.Aid, out o!);
- 
+
         await AddItems(p => p.Validdatefrom <= DateTime.Today
               && p.Validdateto > DateTime.Today
               && p.Isactive == 1 && p.Delstat == 0 && p.Aid == ca.Aid); 
@@ -92,6 +99,11 @@ public class OlcActionCacheService : IOlcActionCacheService
 
         var ids = (from a in aids
                    select a.Aid).ToList();
+
+        foreach (var aid in ids)
+        {
+            olcCartCacheService.RemoveCartByAction(aid);
+        }
 
         var es =
            await olcActionextService.QueryAsync(p => ids.Contains(p.Aid) && p.Delstat == 0, cancellationToken);

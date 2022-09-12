@@ -50,6 +50,22 @@ public class PriceCalcController : Controller
             return this.BadRequest(ex.Message);
         }
     }
+
+
+    [HttpPost("cartcachereset")]
+    public async Task<IActionResult> ResetCartCacheAsync([FromBody] Newtonsoft.Json.Linq.JObject value)
+    {
+        try
+        {
+            this.service.ResetCartCacheAsync(value);
+            return this.Ok(true);
+        }
+        catch (Exception ex)
+        {
+            await ERP4U.Log.LoggerManager.Instance.LogErrorAsync<PriceCalcController>(ex);
+            return this.BadRequest(ex.Message);
+        }
+    }
     /*
     public override JsonResult Json(object? data, object? serializerSettings)
     {

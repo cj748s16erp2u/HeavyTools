@@ -13,4 +13,5 @@ public interface IPriceCalcService : ILogicService<OlcPriceCalcResult>
      
     Task<CalcJsonResultDto> CalculatePrice(CalcJsonParamsDto cart, PriceCalcActionResultDto priceCalcAction ,CancellationToken cancellationToken = default);
     Task<bool> ResetJsonAsync(JObject value, CancellationToken cancellationToken = default);
+    void ResetCartCacheAsync(JObject value);
 }

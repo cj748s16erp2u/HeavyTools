@@ -106,5 +106,10 @@ namespace eLog.HeavyTools.InterfaceCaller
             return httpRequestMessage;
         }
 
+        internal void ClearCartCache()
+        {
+            var json = @"{}";
+            CallInterface("PriceCalc/cartcachereset", json);
+        }
     }
 }

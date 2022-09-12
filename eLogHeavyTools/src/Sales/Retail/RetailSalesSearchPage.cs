@@ -1,5 +1,6 @@
 ﻿using eLog.Base.Common;
 using eLog.Base.Masters.Item;
+using eLog.HeavyTools.InterfaceCaller;
 using eLog.HeavyTools.Sales.Retail.Cart;
 using eProjectWeb.Framework;
 using eProjectWeb.Framework.BL;
@@ -159,6 +160,16 @@ namespace eLog.HeavyTools.Sales.Retail
             dbLoyaltyCardNo.OnButton1Clicked += this.DbLoyaltyCardNo_OnButton1Clicked;
 
 
+            var clearCartCache = new Button("clearCartCache");
+            AddCmd(clearCartCache);
+            clearCartCache.SetOnClick(OnCartCache);
+
+        }
+
+        private void OnCartCache(PageUpdateArgs args)
+        {
+            new InterfaceCallerBL().ClearCartCache();
+            new CartBL().Recalc();
         }
 
         private void DbLoyaltyCardNo_OnButton1Clicked(PageUpdateArgs args)

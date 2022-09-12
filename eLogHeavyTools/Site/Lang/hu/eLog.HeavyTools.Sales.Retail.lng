@@ -25,3 +25,6 @@ $cupon=Kupon kód
 $pname=Tv. parnter név
 $partncode=Tv. partner kód
 
+
+$action_clearCartCache=Kosár cache ürítés
+
