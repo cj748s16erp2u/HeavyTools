@@ -536,4 +536,10 @@
             <Item ID="CR2" Name="." PageID=""/>
         </Item>
     </RootMenu>
+	
+	
+    <RootMenu ID="Retail" Name="$retail" CreateIfNotExists="true">
+		<Item ID="RetailSalesSearchPage" Name="$retailsalessearchpage" PageID="eLog.HeavyTools.Sales.Retail.RetailSalesSearchPage"/> 
+   </RootMenu>
+	
 </MenuRoot>

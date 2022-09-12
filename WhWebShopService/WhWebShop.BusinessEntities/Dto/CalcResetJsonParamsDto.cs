@@ -7,8 +7,7 @@ using System.Threading.Tasks;
 
 namespace eLog.HeavyTools.Services.WhWebShop.BusinessEntities.Dto;
 
-[JsonObjectAttributes("Reset")]
- 
+[JsonObjectAttributes("Reset")] 
 public class CalcResetJsonParamsDto
 {
     [JsonField(false)]

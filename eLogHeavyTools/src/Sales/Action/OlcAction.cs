@@ -1,4 +1,5 @@
-﻿using System;
+﻿using eLog.HeavyTools.InterfaceCaller;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,6 +21,11 @@ namespace eLog.HeavyTools.Sales.Action
             Isextdiscount = 0;
             Filtercustomerstype = (int)eLog.HeavyTools.Sales.Action.FilterCustomersType.All;
         }
-         
+
+        public override void PostSave()
+        {
+            base.PostSave();
+            new InterfaceCallerBL().ResetAction(Aid);
+        }
     }
 }

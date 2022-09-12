@@ -30,16 +30,19 @@ public class PriceCalcOriginalService : LogicServiceBase<OlcPrctable>, IPriceCal
 
     private IOlcPrctypeService olcPrctypeService;
     private readonly IOlsCurrencyCacheService olsCurrencyCacheService;
+    private readonly IItemCache itemCache;
 
     public PriceCalcOriginalService(IValidator<OlcPrctable> validator,
                                     IRepository<OlcPrctable> repository,
                                     IUnitOfWork unitOfWork,
                                     IEnvironmentService environmentService,
                                     IOlcPrctypeService olcPrctypeService,
-                                    IOlsCurrencyCacheService olsCurrencyCacheService) : base(validator, repository, unitOfWork, environmentService)
+                                    IOlsCurrencyCacheService olsCurrencyCacheService, 
+                                    IItemCache itemCache) : base(validator, repository, unitOfWork, environmentService)
     {
         this.olcPrctypeService = olcPrctypeService ?? throw new ArgumentNullException(nameof(olcPrctypeService));
         this.olsCurrencyCacheService = olsCurrencyCacheService ?? throw new ArgumentNullException(nameof(olsCurrencyCacheService));
+        this.itemCache = itemCache ?? throw new ArgumentNullException(nameof(itemCache));
     }
 
 
@@ -70,6 +73,10 @@ public class PriceCalcOriginalService : LogicServiceBase<OlcPrctable>, IPriceCal
 
         foreach (var cartitem in cart.Items)
         {
+            if (cartitem.Itemid.HasValue)
+            {
+                cartitem.ItemCode = (await this.itemCache.GetAsync(cartitem.Itemid, cancellationToken))!;
+            }
             var origprc = await GetCartFullPrice(cart, cartitem, cancellationToken);
             if (origprc != null)
             {
@@ -82,6 +89,7 @@ public class PriceCalcOriginalService : LogicServiceBase<OlcPrctable>, IPriceCal
                     var ncijrd = new CalcItemJsonResultDto
                     {
                         ItemCode = cartitem.ItemCode,
+                        Itemid = cartitem.Itemid,
                         Quantity = 1,
                         RawOrigSelPrc = origprc!.Prc,
                         RawSelPrc = origprc!.Prc,
@@ -105,13 +113,19 @@ public class PriceCalcOriginalService : LogicServiceBase<OlcPrctable>, IPriceCal
 
     private async Task<PriceCalcOriginalResultDto?> GetCartFullPrice(CalcJsonParamsDto cart, CartItemJson cartitem, CancellationToken cancellationToken = default)
     {
-        var p = await Repository.FromSql(String.Format(PrcSql, cart.Wid, cartitem.ItemCode))!.FirstOrDefaultAsync(cancellationToken);
+        OlcPrctable? p = null;
+        if (!string.IsNullOrEmpty(cartitem.ItemCode))
+        {
+            p = await Repository.FromSql(String.Format(PrcSql, cart.Wid, cartitem.ItemCode))!.FirstOrDefaultAsync(cancellationToken);
+        } else
+        {
+            p = await Repository.FromSql(String.Format(PrcSql, cart.Wid, cartitem.Itemid))!.FirstOrDefaultAsync(cancellationToken);
+        }
 
         if (p == null)
         {
             return null;
         }
-
         var pt = await olcPrctypeService.GetAsync(pp=> pp.Ptid == p.Ptid, cancellationToken);
          
         return new PriceCalcOriginalResultDto()

@@ -51,51 +51,54 @@ namespace eLog.HeavyTools.Services.WhWebShop.BusinessEntities.Dto
     [JsonObjectAttributes("Items")]
     public class CartItemJson
     {
-        [JsonField(null, true, true)]
+        [JsonField(null!, true, true)]
         public int? CartId { get; set; } = null!;
 
-        [JsonField(null, true, true)]
+        [JsonField(null!, null!, null!)]
+        public int? Itemid { get; set; } = null!;
+
+        [JsonField(null!, true, true)]
         public string ItemCode { get; set; } = null!;
 
-        [JsonField(null, true, true)]
+        [JsonField(null!, true, true)]
         public int? Quantity { get; set; } = null!;
 
-        [JsonField(null, false, true)]
+        [JsonField(null!, false, true)]
         public decimal? OrignalSelPrc { get; set; } = null!;
 
-        [JsonField(null, false, true)]
+        [JsonField(null!, false, true)]
         public decimal? OrignalTotprc { get; set; } = null!;
 
         /// <summary>
         /// Nettó egységár
         /// </summary>
-        [JsonField(null, false, true)]
+        [JsonField(null!, false, true)]
         public decimal? SelPrc { get; set; } = null!;
 
         /// <summary>
         /// Bruttó egységár
         /// </summary>
-        [JsonField(null, false, true)]
+        [JsonField(null!, false, true)]
         public decimal? GrossPrc { get; set; } = null!;
 
 
         /// <summary>
         /// Nettó érték  (Nettó egységár * Mennyiség)
         /// </summary>
-        [JsonField(null, false, true)]
+        [JsonField(null!, false, true)]
         public decimal? NetVal { get; set; } = null!;
 
         /// <summary>
         /// Áfa érték
         /// </summary>
-        [JsonField(null, false, true)]
+        [JsonField(null!, false, true)]
         public decimal? TaxVal { get; set; } = null!;
 
 
         /// <summary>
         /// Bruttó érték
         /// </summary>
-        [JsonField(null, false, true)]
+        [JsonField(null!, false, true)]
         public decimal? TotVal { get; set; } = null!;
 
     }

@@ -336,10 +336,6 @@ namespace eLog.HeavyTools.Sales.Action
 
             foreach (var c in cs)
             {
-                if (c.Field == "filteritems")
-                {
-
-                }
                 var visible = false;
 
                 var en = c.CustomData.Split(',');

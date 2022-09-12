@@ -12,5 +12,5 @@ public interface IPriceCalcService : ILogicService<OlcPriceCalcResult>
     Task<CalcJsonResultDto> CalcJsonAsync(Newtonsoft.Json.Linq.JObject parms, CancellationToken cancellationToken = default);
      
     Task<CalcJsonResultDto> CalculatePrice(CalcJsonParamsDto cart, PriceCalcActionResultDto priceCalcAction ,CancellationToken cancellationToken = default);
-    Task<bool> ResetJsonAsync(JObject value);
+    Task<bool> ResetJsonAsync(JObject value, CancellationToken cancellationToken = default);
 }

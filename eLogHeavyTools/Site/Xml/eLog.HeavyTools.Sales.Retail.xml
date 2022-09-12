@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Schema xmlns="http://tempuri.org/RenderableSchema.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://tempuri.org/RenderableSchema.xsd RenderableSchema.xsd">
+  <Search Name="RetailSalesSearchProvider">
+    <Column FieldName="cartid" PKFieldName="cartid" Hidden="true" Width="100" />
+    <Column FieldName="itemcode" Width="130" />
+    <Column FieldName="name01" Width="200" />
+
+	<Column FieldName="loyaltyCardNo" Width="100" DecDigits="2" />
+	<Column FieldName="cupon" Width="100" DecDigits="2" />
+	
+	
+	<Column FieldName="orignalGrossPrc" Width="100" DecDigits="2" /> 
+	<Column FieldName="grossPrc" Width="100" DecDigits="2" />
+	<!--Column FieldName="totVal" Width="100" DecDigits="2" /-->
+ 
+	<!--Column FieldName="netVal" Width="100" DecDigits="2" /-->
+	<Column FieldName="orignalSelPrc" Width="100" DecDigits="2" />
+	<Column FieldName="selPrc" Width="100" DecDigits="2" />
+	<Column FieldName="taxVal" Width="100" DecDigits="2" />
+	<!--Column FieldName="orignalTotVal" Width="20	0" DecDigits="2" /-->
+ 
+    <Column FieldName="name" Width="200" />
+    <Column FieldName="partncode" Width="100" />
+    <Column FieldName="pname" Width="200" />
+  </Search>
+  <TabPage Name="RetailSalesSearchTab">
+    <SearchFilterBar ID="SrcBar">
+		<Selector Field="itemid" Label="$item_code" ValueField="itemid" TextField="itemcode" SelectionID="eLog.Base.Masters.Item.ItemSelectionProvider" ColsToSpan="2" />
+        <Selector Field="itemid" Label="$item_name" ValueField="itemid" TextField="name01" SelectionID="eLog.Base.Masters.Item.ItemSelectionProvider" ColsToSpan="4" />
+           
+    </SearchFilterBar>
+    <Grid ID="searchResults" Label="$search_results" ColsToSpan="-1" MultiSelect="True"/>
+  </TabPage>
+</Schema>
