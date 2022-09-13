@@ -148,8 +148,10 @@ internal class PriceCalcService : LogicServiceBase<OlcPriceCalcResult>, IPriceCa
     }
 
     public async Task<CalcJsonResultDto> CalculatePrice(CalcJsonParamsDto cart, PriceCalcActionResultDto pricecalcactionresult, CancellationToken cancellationToken = default)
-    { 
-        if (olcCartCacheService.TryGet(cart, out var cjrd))
+    {
+        var hash = olcCartCacheService.GenerateHash(cart);
+
+        if (olcCartCacheService.TryGet(hash, out var cjrd))
         {
             return cjrd;
         } else {
@@ -157,7 +159,7 @@ internal class PriceCalcService : LogicServiceBase<OlcPriceCalcResult>, IPriceCa
             await priceCalcActionService.CalculateActionPriceAsync(cart, res, pricecalcactionresult, cancellationToken);
             priceCalcGroupService.GroupCart(res);
             await pricseCalcValueCalculatorService.CalculateCartAsync(res, cancellationToken);
-            //olcCartCacheService.Add(cart, res);
+            olcCartCacheService.Add(hash, res);
             return res;
         }
     }

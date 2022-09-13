@@ -11,20 +11,14 @@ public class JsonFieldAttribute : Attribute
     List<bool> MandotaryDeep = new List<bool>(); 
     public RegexpType? RegexpType = null;
     public string Condition = null!;
-    /// <summary>
-    /// A bejövő adat változhat, ezért vissza kell állítani a kosár cache-hez, pl: itemdid esetén töltődik a itemcode
-    /// </summary>
-    public bool DeleteAnotherfield = false;
-
     public JsonFieldAttribute(params MandotaryType[] mandotary)
     {
         AddRange2(mandotary);
     }
-    public JsonFieldAttribute(string condition, bool deleteanotherfield ,params MandotaryType[] mandotary)
+    public JsonFieldAttribute(string condition, params MandotaryType[] mandotary)
     {
         Condition = condition;
         AddRange2(mandotary);
-        DeleteAnotherfield = deleteanotherfield;
     }
 
 

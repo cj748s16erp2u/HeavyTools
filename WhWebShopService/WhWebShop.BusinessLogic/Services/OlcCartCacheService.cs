@@ -8,6 +8,8 @@ using System.Security.Cryptography;
 using eLog.HeavyTools.Services.WhWebShop.BusinessEntities.Other;
 using eLog.HeavyTools.Services.WhWebShop.BusinessEntities.Dto.Attributes;
 using System.Reflection;
+using System.Text;
+using System.Runtime.Serialization.Formatters.Binary; 
 
 namespace eLog.HeavyTools.Services.WhWebShop.BusinessLogic.Services;
 
@@ -25,9 +27,8 @@ public class OlcCartCacheService : IOlcCartCacheService
     /// </summary>
     public static ConcurrentDictionary<int, string> aidHashs = new ConcurrentDictionary<int, string>();
      
-    void IOlcCartCacheService.Add(CalcJsonParamsDto cart, CalcJsonResultDto res)
+    void IOlcCartCacheService.Add(string hash, CalcJsonResultDto res)
     {
-        var hash = GenerateHashKey(cart);
         carthashs.TryAdd(hash, new CartCacheItem() { CalcJsonResultDto = res });
         foreach (var item in res.Items)
         {
@@ -37,63 +38,11 @@ public class OlcCartCacheService : IOlcCartCacheService
             }
         }
     }
-    public static string GenerateHashKey(ICloneable oObjectOriginal)
+
+    public static byte[] ObjectToByteArray(object obj)
     {
-        var oObject = oObjectOriginal.Clone() as CalcJsonParamsDto;
-
-        if (oObject == null)
-        {
-            return string.Empty;
-        }
-
-        foreach (var item in oObject.Items)
-        {
-            foreach (PropertyInfo p in item.GetType().GetProperties())
-            {
-                object[] attrs = p.GetCustomAttributes(true);
-
-                foreach (var attr in attrs)
-                {
-                    var co = attr as JsonFieldAttribute;
-                    if (co != null)
-                    {
-                        if (co.DeleteAnotherfield)
-                        {
-                            var v = p.GetValue(item);
-                            if (v != null)
-                            {
-                                SetValueToNull<CartItemJson>(item, co.Condition);
-                            }
-                        }
-                    }
-                }
-            } 
-        }
-
-        var serializer = new DataContractSerializer(typeof(CalcJsonParamsDto));
-        using (var memoryStream = new MemoryStream())
-        {
-            XmlWriter writer = XmlDictionaryWriter.CreateBinaryWriter(memoryStream);
-            serializer.WriteObject(memoryStream, oObject);
-            byte[] serializedData = memoryStream.ToArray();
-
-            var SHA = new SHA512CryptoServiceProvider();
-            byte[] hash = SHA.ComputeHash(serializedData);
-
-            var h = Convert.ToBase64String(hash);
-            return h;
-        }
-    }
-
-    private static void SetValueToNull<T>(object oObject, string field)
-    {
-        foreach (var p in typeof(T).GetFields())
-        {
-            if (p.Name == field)
-            {
-                p.SetValue(oObject, null);
-            }
-        }
+        var json = System.Text.Json.JsonSerializer.Serialize(obj);
+        return Encoding.UTF8.GetBytes(json);
     }
 
     void IOlcCartCacheService.RemoveCartByAction(int aid)
@@ -105,9 +54,8 @@ public class OlcCartCacheService : IOlcCartCacheService
         aidHashs.TryRemove(aid, out var h);
     }
 
-    bool IOlcCartCacheService.TryGet(CalcJsonParamsDto cart, out CalcJsonResultDto outcjrd)
+    bool IOlcCartCacheService.TryGet(string hash, out CalcJsonResultDto outcjrd)
     {
-        var hash = GenerateHashKey(cart);
         if (carthashs.TryGetValue(hash, out var cjrd))
         {
             if (cjrd != null)
@@ -131,5 +79,21 @@ public class OlcCartCacheService : IOlcCartCacheService
         carthashs = new ConcurrentDictionary<string, CartCacheItem>();
         aidHashs = new ConcurrentDictionary<int, string>();
 
+    }
+
+    public string GenerateHash(CalcJsonParamsDto cart)
+    {
+        byte[] serializedData = ObjectToByteArray(cart);
+         
+        var h = ComputeSHA256Hash(serializedData);
+        return h;
+    }
+
+    public static string ComputeSHA256Hash(byte[] bytes)
+    {
+        using (var sha256 = new SHA256Managed())
+        {
+            return BitConverter.ToString(sha256.ComputeHash(bytes)).Replace("-", "");
+        }
     }
 }

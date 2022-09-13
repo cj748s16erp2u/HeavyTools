@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 namespace eLog.HeavyTools.Services.WhWebShop.BusinessEntities.Dto
 { 
     [JsonObjectAttributes("Cart")]
-    public class CalcJsonParamsDto : ICloneable
+    public class CalcJsonParamsDto
     {
         [JsonField(MandotaryType.Yes, MandotaryType.No)]
         public bool FirstPurchase { get; private set; } = false;
@@ -17,13 +17,13 @@ namespace eLog.HeavyTools.Services.WhWebShop.BusinessEntities.Dto
         /// <summary>
         /// B2B partner
         /// </summary>
-        [JsonField("Wid", false, MandotaryType.Yes, MandotaryType.No)]
+        [JsonField("Wid", MandotaryType.Yes, MandotaryType.No)]
         public string B2B { get; private set; } = null!;
 
         /// <summary>
         /// Webhop ár
         /// </summary>
-        [JsonField("B2B", false, MandotaryType.Yes, MandotaryType.No)]
+        [JsonField("B2B", MandotaryType.Yes, MandotaryType.No)]
         public string Wid { get; private set; } = null!;
 
         /// <summary>
@@ -52,11 +52,6 @@ namespace eLog.HeavyTools.Services.WhWebShop.BusinessEntities.Dto
 
         [JsonField(MandotaryType.No, MandotaryType.No)]
         public int? AddrId { get; private set; } = null!;
-
-        public object Clone()
-        {
-            return MemberwiseClone();
-        }
     }
 
     [JsonObjectAttributes("Items")]
@@ -65,10 +60,10 @@ namespace eLog.HeavyTools.Services.WhWebShop.BusinessEntities.Dto
         [JsonField(MandotaryType.Pointless, MandotaryType.Yes, MandotaryType.Yes)]
         public int? CartId { get; private set; } = null!;
 
-        [JsonField("ItemCode", false, MandotaryType.Pointless, MandotaryType.Yes, MandotaryType.Yes)]
+        [JsonField("ItemCode", MandotaryType.Pointless, MandotaryType.Yes, MandotaryType.Yes)]
         public int? Itemid { get; private set; } = null!;
 
-        [JsonField("Itemid", true, MandotaryType.Pointless, MandotaryType.Yes, MandotaryType.Yes)]
+        [JsonField("Itemid", MandotaryType.Pointless, MandotaryType.Yes, MandotaryType.Yes)]
         public string ItemCode { get; set; } = null!;
 
         [JsonField(MandotaryType.Pointless, MandotaryType.Yes, MandotaryType.Yes)]
