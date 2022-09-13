@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace eLog.HeavyTools.Services.WhWebShop.BusinessEntities.Dto.Attributes;
 
+
+
+[AttributeUsage(AttributeTargets.Class, AllowMultiple = false)]
 public class JsonObjectAttributes : Attribute
 {
     public JsonObjectAttributes(string objectname)

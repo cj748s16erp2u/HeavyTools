@@ -10,6 +10,6 @@ namespace eLog.HeavyTools.Services.WhWebShop.BusinessEntities.Dto;
 [JsonObjectAttributes("Reset")] 
 public class CalcResetJsonParamsDto
 {
-    [JsonField(false)]
+    [JsonField(MandotaryType.No)]
     public int? Aid { get; set; } = null!;
 }

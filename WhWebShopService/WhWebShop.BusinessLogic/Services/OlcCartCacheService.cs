@@ -6,6 +6,8 @@ using System.Runtime.Serialization;
 using System.Xml; 
 using System.Security.Cryptography;
 using eLog.HeavyTools.Services.WhWebShop.BusinessEntities.Other;
+using eLog.HeavyTools.Services.WhWebShop.BusinessEntities.Dto.Attributes;
+using System.Reflection;
 
 namespace eLog.HeavyTools.Services.WhWebShop.BusinessLogic.Services;
 
@@ -46,10 +48,26 @@ public class OlcCartCacheService : IOlcCartCacheService
 
         foreach (var item in oObject.Items)
         {
-            if (item.Itemid.HasValue)
+            foreach (PropertyInfo p in item.GetType().GetProperties())
             {
-                item.ItemCode = null!;
-            }
+                object[] attrs = p.GetCustomAttributes(true);
+
+                foreach (var attr in attrs)
+                {
+                    var co = attr as JsonFieldAttribute;
+                    if (co != null)
+                    {
+                        if (co.DeleteAnotherfield)
+                        {
+                            var v = p.GetValue(item);
+                            if (v != null)
+                            {
+                                SetValueToNull<CartItemJson>(item, co.Condition);
+                            }
+                        }
+                    }
+                }
+            } 
         }
 
         var serializer = new DataContractSerializer(typeof(CalcJsonParamsDto));
@@ -64,6 +82,17 @@ public class OlcCartCacheService : IOlcCartCacheService
 
             var h = Convert.ToBase64String(hash);
             return h;
+        }
+    }
+
+    private static void SetValueToNull<T>(object oObject, string field)
+    {
+        foreach (var p in typeof(T).GetFields())
+        {
+            if (p.Name == field)
+            {
+                p.SetValue(oObject, null);
+            }
         }
     }
 

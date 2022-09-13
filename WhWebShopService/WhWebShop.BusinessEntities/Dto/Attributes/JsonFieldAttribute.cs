@@ -10,21 +10,31 @@ public class JsonFieldAttribute : Attribute
 {
     List<bool> MandotaryDeep = new List<bool>(); 
     public RegexpType? RegexpType = null;
+    public string Condition = null!;
+    /// <summary>
+    /// A bejövő adat változhat, ezért vissza kell állítani a kosár cache-hez, pl: itemdid esetén töltődik a itemcode
+    /// </summary>
+    public bool DeleteAnotherfield = false;
 
-
-    public JsonFieldAttribute(params object[] mandotary)
+    public JsonFieldAttribute(params MandotaryType[] mandotary)
     {
         AddRange2(mandotary);
     }
+    public JsonFieldAttribute(string condition, bool deleteanotherfield ,params MandotaryType[] mandotary)
+    {
+        Condition = condition;
+        AddRange2(mandotary);
+        DeleteAnotherfield = deleteanotherfield;
+    }
 
-    private void AddRange2(object[] mandotary)
+
+    private void AddRange2(MandotaryType[] mandotary)
     {
         foreach (var item in mandotary)
         {
-            var b = item as bool?;
-            if (b.HasValue)
+            if (item==MandotaryType.Yes)
             {
-                MandotaryDeep.Add(b.Value);
+                MandotaryDeep.Add(true);
             }
             else
             {
@@ -33,7 +43,7 @@ public class JsonFieldAttribute : Attribute
         }
     }
 
-    public JsonFieldAttribute(RegexpType regexptype, params object[] mandotary)
+    public JsonFieldAttribute(RegexpType regexptype, params MandotaryType[] mandotary)
     {
         AddRange2(mandotary);
         this.RegexpType = regexptype;
@@ -56,4 +66,11 @@ public enum RegexpType
 {
     Date,
     Email
+}
+
+public enum MandotaryType
+{ 
+    No=0,
+    Yes=1,
+    Pointless=2
 }

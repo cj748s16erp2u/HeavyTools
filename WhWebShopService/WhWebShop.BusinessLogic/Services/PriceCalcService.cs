@@ -157,7 +157,7 @@ internal class PriceCalcService : LogicServiceBase<OlcPriceCalcResult>, IPriceCa
             await priceCalcActionService.CalculateActionPriceAsync(cart, res, pricecalcactionresult, cancellationToken);
             priceCalcGroupService.GroupCart(res);
             await pricseCalcValueCalculatorService.CalculateCartAsync(res, cancellationToken);
-            olcCartCacheService.Add(cart, res);
+            //olcCartCacheService.Add(cart, res);
             return res;
         }
     }

@@ -39,12 +39,13 @@ public class JsonParser
     internal static void ParseInternal(Type tt, object o, JObject jo, string root, int deep)
     {
         var properties = tt.GetProperties();
-
+        
+        // Adatok betöltése
         foreach (var item in properties)
         {
             var vvt = "???";
             try
-            { 
+            {                 
                 foreach (var a in item.GetCustomAttributes(false))
                 {
                     var ja = a as JsonFieldAttribute;
@@ -52,39 +53,6 @@ public class JsonParser
                     {
                         var found = jo.ContainsKey(item.Name);
 
-                        if (ja.IsMandotary(deep) && !found)
-                        {
-                            var itemidFound = false;
-                            // Ha itemid és nincs itemcode, akkor nem állunk meg
-                            if (item.Name == "ItemCode")
-                            {
-                                foreach (var p2 in properties)
-                                {
-                                    if (p2.Name == "itemid")
-                                    {
-                                        var vvv = "";
-                                        if (jo.ContainsKey(item.Name))
-                                        {
-                                            var vv = jo[item.Name];
-                                            if (vv != null)
-                                            {
-                                                vvv = vv.ToString();
-                                            }
-                                        }
-                                        if (!string.IsNullOrEmpty(vvv))
-                                        {
-                                            itemidFound = true;
-                                        }
-
-                                    }
-                                }
-                            }
-                            if (!itemidFound)
-                            {
-                                throw new Exception($"Missing item(Mandotary) deep={deep}");
-                            }
-                        }
-                        
                         if (found)
                         { 
                             var vv = jo[item.Name];
@@ -163,8 +131,54 @@ public class JsonParser
             {
                 throw new ArgumentException(root + "/" + item.Name + ": '" + vvt + "', error: " + e.Message);
             }
-
         }
+
+
+        // Kötelező mezők ellenőrzése
+        foreach (var item in properties)
+        {
+            foreach (var a in item.GetCustomAttributes(false))
+            {
+                var ja = a as JsonFieldAttribute;
+                if (ja != null)
+                {
+                    var found = jo.ContainsKey(item.Name);
+
+                    if (ja.IsMandotary(deep) && !found)
+                    {
+                        var conditionFound = false;
+
+                        var value = item.GetValue(o);
+                        if (value != null)
+                        {
+                            conditionFound = true;
+                        }
+
+                        if (!string.IsNullOrEmpty(ja.Condition))
+                        {
+                            foreach (var item2 in properties)
+                            {
+                                if (item2.Name == ja.Condition)
+                                {
+                                    var value2 = item2.GetValue(o);
+                                    if (value2 != null)
+                                    {
+                                        conditionFound = true;
+                                        break;
+                                    }
+                                }
+                            }
+                        }
+
+                        if (!conditionFound)
+                        {
+                            throw new Exception($"Missing item(Mandotary) deep={deep}");
+                        }
+                    } 
+                }
+            }
+        }
+
     }
 
     internal static T ParseObject<T>(JObject parms)
