@@ -1,4 +1,5 @@
 ﻿using eLog.HeavyTools.Services.WhWebShop.BusinessEntities.Dto.Attributes;
+using eLog.HeavyTools.Services.WhWebShop.BusinessEntities.Enums;
 using eLog.HeavyTools.Services.WhWebShop.BusinessEntities.Model;
 using System;
 using System.Collections.Generic;
@@ -7,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace eLog.HeavyTools.Services.WhWebShop.BusinessEntities.Dto
-{ 
+{
     [JsonObjectAttributes("Cart")]
     public class CalcJsonParamsDto
     {
@@ -48,10 +49,21 @@ namespace eLog.HeavyTools.Services.WhWebShop.BusinessEntities.Dto
         public string? Whid { get; private set; } = null!;
 
         [JsonField(MandotaryType.No, MandotaryType.No)]
-        public int? Partnid { get; private set; } = null!;
+        public int? Partnid { get; set; } = null!;
 
         [JsonField(MandotaryType.No, MandotaryType.No)]
         public int? AddrId { get; private set; } = null!;
+
+        [JsonField(MandotaryType.No, MandotaryType.No)]
+        public int? PtidPrcType { get; private set; } = null!;
+
+        public PtidPrcType PtidPrcTypeEnum { get; set; } = Enums.PtidPrcType.NotSet;
+
+        [JsonField(MandotaryType.No, MandotaryType.No)]
+        public int[] PrcType { get; private set; } = null!;
+
+        public PrcType[] PrcTypeEnum { get; set; } = null!;
+        
     }
 
     [JsonObjectAttributes("Items")]

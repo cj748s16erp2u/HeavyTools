@@ -1,25 +1,20 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace eLog.HeavyTools.Services.WhWebShop.BusinessEntities.Enums;
-
+﻿namespace eLog.HeavyTools.Services.WhWebShop.BusinessEntities.Enums;
+ 
 public enum PrcType
 {
+  
     /// <summary>
     /// Eredeti
     /// </summary>
-    Original=1,
+    Original =0,
     /// <summary>
     /// Aktuális
     /// </summary>
-    Actual=2,
+    Actual=1,
     /// <summary>
     /// Akció alapja
     /// </summary>
-    BasisOfAction=3,
+    BasisOfAction=2,
     /// <summary>
     /// Akciós ár
     /// </summary>

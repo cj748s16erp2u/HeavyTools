@@ -23,14 +23,14 @@ public class PriceCalcOriginalService : LogicServiceBase<OlcPrctable>, IPriceCal
 	select dbo.fn_olc_prctable_order(p.partnid, p.addrid, p.isid, p.icid, p.itemid, p.prctype) ordernum
   ) x 
  where GETDATE() between p.startdate and p.enddate
-   and wid='{0}'
-   and i.itemcode='{1}'
-   and prctype in (1,4)
+   and i.itemcode='{0}'
+   {1}
  order by ordernum";
 
     private IOlcPrctypeService olcPrctypeService;
     private readonly IOlsCurrencyCacheService olsCurrencyCacheService;
     private readonly IItemCache itemCache;
+    private readonly IOlsPartnerService olsPartnerService;
 
     public PriceCalcOriginalService(IValidator<OlcPrctable> validator,
                                     IRepository<OlcPrctable> repository,
@@ -38,11 +38,13 @@ public class PriceCalcOriginalService : LogicServiceBase<OlcPrctable>, IPriceCal
                                     IEnvironmentService environmentService,
                                     IOlcPrctypeService olcPrctypeService,
                                     IOlsCurrencyCacheService olsCurrencyCacheService, 
-                                    IItemCache itemCache) : base(validator, repository, unitOfWork, environmentService)
+                                    IItemCache itemCache,
+                                    IOlsPartnerService olsPartnerService) : base(validator, repository, unitOfWork, environmentService)
     {
         this.olcPrctypeService = olcPrctypeService ?? throw new ArgumentNullException(nameof(olcPrctypeService));
         this.olsCurrencyCacheService = olsCurrencyCacheService ?? throw new ArgumentNullException(nameof(olsCurrencyCacheService));
         this.itemCache = itemCache ?? throw new ArgumentNullException(nameof(itemCache));
+        this.olsPartnerService = olsPartnerService ?? throw new ArgumentNullException(nameof(olsPartnerService));
     }
 
 
@@ -60,6 +62,44 @@ public class PriceCalcOriginalService : LogicServiceBase<OlcPrctable>, IPriceCal
         if (string.IsNullOrEmpty(cart.CountryId))
         {
             throw new ArgumentNullException(nameof(cart.CountryId));
+        }
+        if (!string.IsNullOrEmpty(cart.B2B))
+        {
+            var ps = await olsPartnerService.QueryAsync(p => p.Partncode == cart.B2B);
+            if (ps != null)
+            {
+                var p = ps.FirstOrDefault();
+                if (p != null)
+                {
+                    cart.Partnid = p.Partnid;
+                }
+            }
+            cart.PtidPrcTypeEnum = PtidPrcType.Wholesale;
+            cart.PrcTypeEnum = new[] { PrcType.Actual };
+        }
+
+        if (cart.PtidPrcTypeEnum == PtidPrcType.NotSet)
+        {
+            if (!string.IsNullOrEmpty(cart.Wid))
+            {
+                cart.PtidPrcTypeEnum = PtidPrcType.Webshop;
+            }
+        }
+
+
+        if (cart.PtidPrcTypeEnum == PtidPrcType.NotSet)
+        {
+            throw new Exception("PtidPrcType not set!");
+        }
+
+        if (cart.PtidPrcTypeEnum== PtidPrcType.Webshop || cart.PtidPrcTypeEnum == PtidPrcType.Retail)
+        {
+            cart.PrcTypeEnum = new[] { PrcType.Actual, PrcType.SalePrice };
+        }
+
+        if (cart.PrcTypeEnum == null)
+        {
+            throw new Exception("PrcType not set!");
         }
 
         var o = new CalcJsonResultDto
@@ -115,15 +155,38 @@ public class PriceCalcOriginalService : LogicServiceBase<OlcPrctable>, IPriceCal
      
 
     private async Task<PriceCalcOriginalResultDto?> GetCartFullPrice(CalcJsonParamsDto cart, CartItemJson cartitem, CancellationToken cancellationToken = default)
-    {
-        OlcPrctable? p = null;
-        if (!string.IsNullOrEmpty(cartitem.ItemCode))
+    { 
+        var where = " and ptid = " + (int)cart.PtidPrcTypeEnum +
+                    " and prctype in ( " + ToIntArray(cart.PrcTypeEnum) + ")";
+
+
+
+        if (!string.IsNullOrEmpty(cart.Whid))
         {
-            p = await Repository.FromSql(String.Format(PrcSql, cart.Wid, cartitem.ItemCode))!.FirstOrDefaultAsync(cancellationToken);
-        } else
-        {
-            p = await Repository.FromSql(String.Format(PrcSql, cart.Wid, cartitem.Itemid))!.FirstOrDefaultAsync(cancellationToken);
+            where += $" and wid = '{cart.Wid}'";
         }
+
+        if (!string.IsNullOrEmpty(cart.Curid))
+        {
+            where += $" and curid = '{cart.Curid}'";
+        }
+
+
+        if (cart.Partnid.HasValue)
+        {
+            where += $" and (partnid is null or partnid= '{cart.Partnid}')";
+        }
+
+        if (cart.AddrId.HasValue)
+        {
+            where += $" and (addrid is null or addrid= '{cart.AddrId}')";
+        } 
+
+        var sql = string.Format(PrcSql, cartitem.ItemCode, where);
+
+         
+        var p = await Repository.FromSql(sql)!.FirstOrDefaultAsync(cancellationToken);
+         
 
         if (p == null)
         {
@@ -138,5 +201,17 @@ public class PriceCalcOriginalService : LogicServiceBase<OlcPrctable>, IPriceCal
             IsNet = pt!.Isnet == 1,
             Curid = p.Curid
         };
+    }
+
+    private string ToIntArray(PrcType[] prcTypeEnums)
+    {
+        var sep = "";
+        var str = "";
+        foreach (var item in prcTypeEnums)
+        {
+            str+=sep+ ((int)item).ToString();
+            sep = ",";
+        }
+        return str;
     }
 }
