@@ -272,8 +272,6 @@ public class PriceCalcActionService : IPriceCalcActionService
                     }
                     break;
                 case FilterCustomersType.NotForResale:
-
-
                     if (!string.IsNullOrEmpty(cart.B2B))
                     {
                         return new CalculeteOut()
@@ -281,7 +279,8 @@ public class PriceCalcActionService : IPriceCalcActionService
                             WhyNotMessage = "Viszonteladókra nem érvényes",
                             Used = false
                         };
-                    } 
+                    }
+                    break;
                 default:
                     return new CalculeteOut()
                     {
