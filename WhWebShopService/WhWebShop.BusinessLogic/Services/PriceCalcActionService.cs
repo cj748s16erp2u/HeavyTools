@@ -272,12 +272,16 @@ public class PriceCalcActionService : IPriceCalcActionService
                     }
                     break;
                 case FilterCustomersType.NotForResale:
-                    return new CalculeteOut()
+
+
+                    if (!string.IsNullOrEmpty(cart.B2B))
                     {
-                        //TODO: b2b értékesítés-e
-                        WhyNotMessage = "NotImplementedException:Filtercustomers: NotForResale",
-                        Used = false
-                    };
+                        return new CalculeteOut()
+                        {
+                            WhyNotMessage = "Viszonteladókra nem érvényes",
+                            Used = false
+                        };
+                    } 
                 default:
                     return new CalculeteOut()
                     {

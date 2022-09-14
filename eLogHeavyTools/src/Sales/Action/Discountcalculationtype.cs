@@ -37,7 +37,7 @@ namespace eLog.HeavyTools.Sales.Action
         }
         protected override IEnumerable<string> GetSkippedValues(Dictionary<string, object> args)
         {
-            return new[] { "ExtDiscountOnly", "Extcondition", "OneProduct" };
+            return new[] { "ExtDiscountOnly", "ExtConditionOnly", "OneProduct" };
         }
     }
     class ExtDiscountcalculationtypeList : EnumListProvider<Discountcalculationtype>

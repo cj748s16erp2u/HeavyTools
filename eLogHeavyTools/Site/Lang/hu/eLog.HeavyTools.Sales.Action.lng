@@ -94,4 +94,4 @@ $tabName_ActionExt=Akció kiegészítés
 $cannot_use=Nem menthető a fej beállítások miatt
 
 $discountcalculationtype_extdiscountonly=Csak kedvezmény sor
-$discountcalculationtype_extcondition=Csak feltétel sor
+$discountcalculationtype_extconditiononly=Csak feltétel sor
