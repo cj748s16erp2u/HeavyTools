@@ -26,14 +26,15 @@ namespace eLog.HeavyTools.Purchase.PinvPackage
 
             base.CreateBase();
 
-            //SearchResults.MergePageData = "mypinvkey";
+            SearchResults.MergePageData = "mykey";
 
             OnPageActivate += ApprovedPinvLinePackageSearchTab_OnPageActivate;
         }
 
         protected void ApprovedPinvLinePackageSearchTab_OnPageActivate(eProjectWeb.Framework.PageUpdateArgs args)
         {
-            int? pinvId = 0;
+            int? pinvId = null;
+            string packageCode = "";
 
             if ((args.PageData?.ContainsKey(Consts.DetailEntityKey)).GetValueOrDefault())
             {
@@ -42,12 +43,31 @@ namespace eLog.HeavyTools.Purchase.PinvPackage
                 if (detailEntityKey.ContainsKey("pinvid"))
                 {
                     pinvId = ConvertUtils.ToInt32(detailEntityKey["pinvid"]);
+                    if (!pinvId.HasValue)
+                        pinvId = 0;
+                }
+            }
+            if ((args.PageData?.ContainsKey(Consts.RootEntityKey)).GetValueOrDefault())
+            {
+                var rootEntityKey = args.PageData[Consts.RootEntityKey] as Dictionary<string, object>;
+                if (rootEntityKey.ContainsKey("packagecode"))
+                {
+                    packageCode = ConvertUtils.ToString(rootEntityKey["packagecode"]);
                 }
             }
 
-            args.PageData["mypinvkey"] = new eProjectWeb.Framework.Data.Key("pinvid", pinvId);
+            Key k = new Key();
+            if (pinvId.HasValue)
+            {
+                k.Add("selectedpinvid", pinvId);
+            }
+            if (!string.IsNullOrEmpty(packageCode))
+            {
+                k.Add("selectedpackagecode", packageCode);
+            }
 
-            if (!SearchResults.ForceRefresh)
+            args.PageData["mykey"] = k;
+            if (k.Count() > 0)
                 SearchResults.ForceRefresh = true;
         }
     }

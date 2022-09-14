@@ -56,16 +56,20 @@
     <Column FieldName="pinvnum" Width="180" />
     <Column FieldName="seqno" Width="60" Editable="true" />
     <Column FieldName="apprstat" Width="50" FieldFunction="listlookup" FieldFuncArg="eLog.Base.Setup.Status.StatListProviderPublic#ols_pinvapproval.apprstat,abbr" Editable="false" />
-    <Column FieldName="apprdate" Width="100" Format="DT" Editable="false" />
-    <Column FieldName="apprusrid" Width="80" Editable="true"/>
+    <Column FieldName="apprdate" Width="120" Format="DT" Editable="false" />
+    <Column FieldName="apprusrid" Width="100" Editable="true"/>
     <Column FieldName="apprusrid_name" Width="200" Editable="false"/>
-    <Column FieldName="costval" Width="100" Format="C2" />
+    <Column FieldName="costval" Width="120" Format="C2" />
     <Column FieldName="curid" Width="40" />
-    <Column FieldName="replausrid" Width="80" Editable="true"/>
+    <Column FieldName="replausrid" Width="100" Editable="true"/>
     <Column FieldName="replausrid_name" Width="200" Editable="false"/>
     <Column FieldName="costlinenote" Width="200" Editable="false"/>
     <Column FieldName="apprnote" Width="200" Editable="false"/>
     <Column FieldName="padelstat" DisplayName="$delstat" Width="50" FieldFunction="listlookup" FieldFuncArg="eLog.Base.Setup.Parameters.DelstatTypeList,abbr" />
   </Search>
 
+  <TabPage Name="ApprovedPackageAttachmentSearchTab">
+    <Grid ID="searchResults" Label="$apprattachment_search_results" />
+  </TabPage>
+  
 </Schema>

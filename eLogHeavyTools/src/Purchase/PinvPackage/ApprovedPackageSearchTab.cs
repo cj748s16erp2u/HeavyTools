@@ -27,14 +27,19 @@ namespace eLog.HeavyTools.Purchase.PinvPackage
 
             base.CreateBase();
 
-            SearchResults.MergePageData = "pinvid";
-
             OnPageActivate += ApprovedPackageSearchTab_OnPageActivate;
         }
 
         protected void ApprovedPackageSearchTab_OnPageActivate(eProjectWeb.Framework.PageUpdateArgs args)
         {
-            args.PageData["pinvid"] = new Key("pinvid", 0);
+            if ((args.PageData?.ContainsKey(Consts.DetailEntityKey)).GetValueOrDefault())
+            {
+                var detailEntityKey = args.PageData[Consts.DetailEntityKey] as Dictionary<string, object>;
+                if (detailEntityKey.ContainsKey("pinvid"))
+                    detailEntityKey.Remove("pinvid");
+                if (detailEntityKey.ContainsKey("packagecode"))
+                    detailEntityKey.Remove("packagecode");
+            }
         }
 
     }

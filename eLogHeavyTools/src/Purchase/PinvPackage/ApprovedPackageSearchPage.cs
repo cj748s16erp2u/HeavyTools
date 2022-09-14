@@ -14,13 +14,15 @@ namespace eLog.HeavyTools.Purchase.PinvPackage
 
         public static DefaultPageSetup Package = new DefaultPageSetup("ApprovedPackage", null, ApprovedPackageSearchProvider.ID, null, null);
         public static DefaultPageSetup Head = new DefaultPageSetup("ApprovedPinvHead", null, ApprovedPinvHeadPackageSearchProvider.ID, null, null);
-        public static DefaultPageSetup Line = new DefaultPageSetup("ApprovedPinvLines", null, ApprovedPinvLinePackageSearchProvider.ID, null, null);
+        public static DefaultPageSetup Line = new DefaultPageSetup("ApprovedPinvLine", null, ApprovedPinvLinePackageSearchProvider.ID, null, null);
+        public static DefaultPageSetup Attachment = new DefaultPageSetup("ApprovedAttachment", null, null, null, null);
 
         public ApprovedPackageSearchPage() : base("ApprovedPackage")
         {
             Tabs.AddTab(() => ApprovedPackageSearchTab.New(Package));
             Tabs.AddTab(() => ApprovedPinvHeadPackageSearchTab.New(Head));
             Tabs.AddTab(() => ApprovedPinvLinePackageSearchTab.New(Line));
+            Tabs.AddTab(() => ApprovedPackageAttachmentSearchTab.New(Attachment));
         }
 
     }

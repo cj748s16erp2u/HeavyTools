@@ -1,6 +1,8 @@
-$pageName_ApprovedPinvHead=Szállítói jóváhagyás csomag
-$tabName_apprphpackage=Szállítói jóváhagyás csomag
-$tabName_apprplpackage=Tétel
+$pageName_ApprovedPackage=Szállítói jóváhagyás csomag
+$tabName_apprpackage=Szállítói jóváhagyás csomag
+$tabName_apprphpackage=Szállítói számla
+$tabName_apprplpackage=Jóváhagyás tétel
+$tabName_apprattachment=Csatolt dokumentumok
 
 $cmpcode=Vállalat
 $packagecode=Csomagkód
@@ -28,4 +30,3 @@ $replausrid=Helyettesítő
 $replausrid_name=Név
 $costlinenote=Egyeztetés megjegyzés
 $apprnote=Jóváhagyás megjegyzés
-
