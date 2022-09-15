@@ -71,6 +71,21 @@ namespace eLog.HeavyTools.Sales.Sord
 
         /// <summary>
         /// <para>Field</para>
+        /// ? - xml
+        /// </summary>
+        [Field("data")]
+        public static Field FieldData { get; protected set; }
+        /// <summary>
+        /// ? - xml
+        /// </summary>
+        public StringN Data
+        {
+            get { return new StringN(this[FieldData]); }
+            set { this[FieldData] = value; }
+        }
+
+        /// <summary>
+        /// <para>Field</para>
         /// ? - varchar
         /// </summary>
         [Field("addusrid")]
