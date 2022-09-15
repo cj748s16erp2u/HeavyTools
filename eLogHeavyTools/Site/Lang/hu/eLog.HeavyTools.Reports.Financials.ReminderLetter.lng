@@ -1,0 +1,62 @@
+﻿$pageName_ReminderLetter=Felszólító levél szövegtörzs (Heavy Tools)
+$tabName_ReminderLetter=Felszólító levél szövegtörzs (Heavy Tools)
+
+$pageName_ReminderLetter2=Felszólító levél (Heavy Tools)
+$tabName_ReminderLetter2=Felszólító levél (Heavy Tools)
+
+$group_search=Lista paraméterek
+
+$company=Vállalat
+$gllevel=Főkönyv elemszint
+$prlcode=Listakód
+$remdate=Felszólítás dátuma
+$duedate_param=Fizetési határidő
+$partnerfrom=Partnertől
+$partnerto=Partnerig
+$reportformat=Lista formátum
+$lngid=Nyelv
+$rptfile_normal=Normál
+$rptfile_cheque=Csekk
+$partnerdescr=Megnevezés
+$parameter_required=paraméter kitöltése kötelező
+
+$rem_invalid=ÉRVÉNYTELEN
+$magyarpostacheck_message=Számlaszám: {0}
+$logo_left_file=_logoleft.png
+$rem_tel=Tel.: +36 1 999 0664
+$rem_fax=Fax: +36 1 332 1150
+$rem_web=www.kemenysepro.hu
+$rem_addr=Székhelycím/lakcím:
+
+; ReminderLetter
+$seqno=Sorszám
+$company=Vállalat
+$ledger=Főkönyv
+$severity=Levél súlyossága
+$lettertype=Levél típusa
+$template=Szövegtörzs
+
+; ReminderLetterText
+$tabName_ReminderLetterText=Szövegtörzs
+$xcvextcode=Kód
+$xcvnote=Szöveg
+
+; params tabs
+$info_ledger_legend=A főkönyvnek megadható a ~: mint tagadas, illetve a *: mint wildcard karakter
+$info_note_legend=Szövegben használható elemek\n<date>: Fizetési felszólítása dátuma\n<table>: ahova a táblázat kerül\n<payerid>: befizetőazonosító\n<b>Félköver szöveg</b>
+
+; hibak
+$err_reminderlettertext_isused=A levél szövegezés nem törölhető, mert használatban van!
+
+; combo items
+$reminderletterseverity_1=Fizetési emlékeztető
+$reminderletterseverity_2=Fizetési felszólító
+$reminderletterlettertype_1=Behajtási költségátalány
+$reminderletterlettertype_2=Felszólító díj
+$reminderletterlettertype_3=Egyik sem
+
+$reminderlettersgenerating=Felszólító levelek létrehozása
+$reminderlettersgenerating_getlist=Adatok leválogatása
+$reminderlettersgenerating_generate=Felszólító levél létrehozása I. ({0}/{1})
+$reminderlettersgenerating_gen2=Felszólító levél létrehozása II. - számla ({0}/{1})
+$reminderlettersgenerating_mergefiles=Létrehozott PDF-ek összeállítása

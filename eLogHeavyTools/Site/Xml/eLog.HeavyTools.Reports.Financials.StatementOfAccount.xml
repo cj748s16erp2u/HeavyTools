@@ -1,0 +1,44 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema xmlns="http://tempuri.org/RenderableSchema.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://tempuri.org/RenderableSchema.xsd ../../../Base/Site/Xml/RenderableSchema.xsd">
+    <!-- Paramter tab -->
+    <TabPage Name="StatementOfAccountSearchTab">
+        <SearchFilterBar ID="SrcBar"></SearchFilterBar>
+        <Grid ID="searchResults" />
+    </TabPage>
+    
+    <Search Name="StatementOfAccountSearchProvider">
+        <Column FieldName="Xcvid" PKFieldName="true" Hidden="true" />
+        <Column FieldName="Seqno" PKFieldName="true" Width="50" DisplayName="$seqno" />
+        <Column FieldName="Company" Width="80" DisplayName="$company" />
+        <Column FieldName="Template" Width="180" DisplayName="$template" />
+    </Search>
+
+    <TabPage Name="StatementOfAccountEditTab">
+        <LayoutTable ControlGroup="StatementOfAccount" Columns="{120, None}; {180, None}; {20, Empty}; {120, None}; {180, None}" ID="EditGroup1">
+            <Intbox Field="seqno" ThousandSep="false" DecDigits="0" Disabled="true" />
+            <ForceNextRow />
+            <Combo Field="company" Label="$company" ListID="CodaInt.Base.Setup.Company.CompanyList#sessioncmp" ComboFlags="AutoSelectOne" ColsToSpan="-1" />
+            <ForceNextRow />
+            <Combo Field="template" ListID="eLog.HeavyTools.Reports.Financials.StatementOfAccount.StatementOfAccountTextList" />
+        </LayoutTable>
+    </TabPage>
+    
+    <!-- Paramter Text tab -->
+    <TabPage Name="StatementOfAccountTextSearchTab">
+        <SearchFilterBar ID="SrcBar"></SearchFilterBar>
+        <Grid ID="searchResults" />
+    </TabPage>
+
+    <Search Name="StatementOfAccountTextSearchProvider">
+        <Column FieldName="xcvid" PKFieldName="true" Hidden="true" />
+        <Column FieldName="xcvextcode" Width="200" />
+    </Search>
+
+    <TabPage Name="StatementOfAccountTextEditTab">
+        <LayoutTable ControlGroup="StatementOfAccountText" Columns="{120, None}; {280, None}; {380, None};" ID="EditGroup1">
+            <Textbox Field="xcvextcode" />
+            <Textbox Field="note_legend" ColsToSpan="-1" Label="-" Disabled="true" Rows="5" />
+            <Textbox Field="note" Rows="15" ColsToSpan="-1" Label="$xcvnote" />
+        </LayoutTable>
+    </TabPage>
+</Schema>
