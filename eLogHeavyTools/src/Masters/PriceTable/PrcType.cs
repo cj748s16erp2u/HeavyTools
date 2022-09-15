@@ -10,10 +10,12 @@ namespace eLog.HeavyTools.Masters.PriceTable
 {
     public enum PrcType
     {
-        Original = 0, // Eredeti
-        Actual = 1,  // Aktuális
+        Original = 0, 		// Eredeti
+        Actual = 1,  		// Aktuális
         BasisOfAction = 2,  // Akció alapja
+		SalePrice=4			// Akciós ár
     }
+	
     public class PrcTypeList : EnumListProvider<PrcType>
     {
         public static readonly string ID = typeof(PrcTypeList).FullName;

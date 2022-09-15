@@ -96,9 +96,8 @@
             <Item ID="ProjWorkTime" Name="$projworktime" PageID="eLog.Base.Project.ProjWorkTimeSearchPage"/>
         </Item>
         <Item ID="Sales" Name="$sales">
-            
 			<Item ID="OlcPrctableSearchPage" Name="$olcprctablesearchpage" PageID="eLog.HeavyTools.Masters.PriceTable.OlcPrctableSearchPage"/>
-			
+			<Item ID="Action" Name="$action" PageID="eLog.HeavyTools.Sales.Action.ActionSearchPage"/>			
 			<Item ID="SContract" Name="$scontract" PageID="eLog.Base.Sales.SContract.SContractSearchPage"/>
 			<Item ID="SContract" Name="$scontract" PageID="eLog.Base.Sales.SContract.SContractSearchPage"/>
             <Item ID="Sord" Name="$sord" PageID="eLog.Base.Sales.Sord.SordHeadSearchPage"/>
@@ -533,7 +532,16 @@
             </Item>
         </Item>
         <Item ID="CustomReports2" Name="$customreports2">
-            <Item ID="CR2" Name="." PageID=""/>
+            <Item ID="StatementOfAccount2" Name="$statementofaccount2" PageID="eLog.HeavyTools.Reports.Financials.StatementOfAccount2" />
+            <Item ID="ReminderLetterHT" Name="$reminderletter2" PageID="eLog.HeavyTools.Reports.Financials.ReminderLetter.ReminderLetter2" />
+            <Item ID="StatementOfAccountParams" Name="$statementofaccountparams" PageID="eLog.HeavyTools.Reports.Financials.StatementOfAccount.StatementOfAccountSearchPage" />
+            <Item ID="ReminderLetterParams" Name="$reminderletterparams" PageID="eLog.HeavyTools.Reports.Financials.ReminderLetter.ReminderLetterSearchPage" />
         </Item>
     </RootMenu>
+	
+	
+    <RootMenu ID="Retail" Name="$retail" CreateIfNotExists="true">
+		<Item ID="RetailSalesSearchPage" Name="$retailsalessearchpage" PageID="eLog.HeavyTools.Sales.Retail.RetailSalesSearchPage"/> 
+    </RootMenu>
+	
 </MenuRoot>

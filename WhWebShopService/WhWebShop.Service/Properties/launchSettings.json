@@ -1,0 +1,11 @@
+{
+  "profiles": {
+    "WhWebShop.Service": {
+      "commandName": "Project",
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      },
+      "applicationUrl": "https://localhost:59787;http://localhost:59788"
+    }
+  }
+}

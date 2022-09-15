@@ -1,0 +1,19 @@
+﻿$pageName_StatementOfAccount=Egyenlegközlő levél szövegtörzs (Heavy Tools)
+$tabName_StatementOfAccount=Egyenlegközlő levél szövegtörzs (Heavy Tools)
+$group_search=Lista paraméterek
+
+; StatementOfAccount
+$seqno=Sorszám
+$company=Vállalat
+$template=Szövegtörzs
+
+; StatementOfAccountText
+$tabName_StatementOfAccountText=Szövegtörzs
+$xcvextcode=Kód
+$xcvnote=Szöveg
+
+; params tabs
+$info_note_legend=Szövegben használható elemek\n<date>: Egyenlegközlő dátuma
+
+; hibak
+$err_statementofaccounttext_isused=A levél szövegezés nem törölhető, mert használatban van!

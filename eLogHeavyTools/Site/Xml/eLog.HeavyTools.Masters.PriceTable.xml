@@ -57,6 +57,8 @@
       <Numberbox Field="prc" DecDigits="2" ThousandSep="True" />
     </LayoutTable>
     <LayoutTable ControlGroup="OlcPrctable3" Columns="{135, None}; {180, None}; {20, Empty}; {90, None}; {180, None};" ID="EditGroup3">
+      <Combo Field="wid" ListID="eLog.HeavyTools.Webshop.WebshopList" ComboFlags="None" ColsToSpan="4"/>		
+	  <ForceNextRow />
       <Combo Field="isid" ListID="eLog.HeavyTools.Masters.Item.Season.OlcItemSeasonList" ComboFlags="None" />
       <ForceNextRow />
       <Combo Field="icid" ListID="eLog.HeavyTools.Masters.Item.Color.OlcItemColorList" ComboFlags="None" />

@@ -17,3 +17,15 @@ $olcprctablesearchpage=Ártábla (Modell)
 
 $partnerimport3=Partner Excel beolvasás
 $excelitemimport=Cikktörzs Excel beolvasás
+
+$customreports2=Egyedi riportok
+$statementofaccount2=Egyenlegközlő levél (Heavy Tools)
+$reminderletter2=Felszólító levél (Heavy Tools)
+$reminderletterparams=Felszólító levél szövegtörzs (Heavy Tools)
+$statementofaccountparams=Egyenlegközlő levél szövegtörzs (Heavy Tools)
+
+
+$action=Akciók
+
+$retail=Kisker
+$retailsalessearchpage=Eladás

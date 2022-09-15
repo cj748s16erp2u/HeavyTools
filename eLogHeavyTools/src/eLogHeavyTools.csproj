@@ -91,6 +91,7 @@
       <HintPath>..\..\..\Releases\eLog.Base\v7.2.0.0\Binaries\Newtonsoft.Json.dll</HintPath>
       <SpecificVersion>False</SpecificVersion>
     </Reference>
+    <Reference Include="System.Net.Http" />
     <Reference Include="U4Ext.Bank.Base, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\..\Releases\Bank.Base\v7.2.0.0\Binaries\U4Ext.Bank.Base.dll</HintPath>
       <SpecificVersion>False</SpecificVersion>
@@ -117,6 +118,16 @@
     <Compile Include="BankTran\Import\CifEbankTransImportResultSet.cs" />
     <Compile Include="BankTran\Import\CifEbankTransImportResultSets.cs" />
     <Compile Include="BankTran\Import\CifEbankTransRowContext.cs" />
+    <Compile Include="Common\CommonUtils.cs" />
+    <Compile Include="Common\MagyarPostaCheckQRCode.cs" />
+    <Compile Include="Common\xcval\OfcXcval.cs" />
+    <Compile Include="Common\xcval\OfcXcvalBL.cs" />
+    <Compile Include="Common\xcval\OfcXcvalGenerated.cs" />
+    <Compile Include="Common\xcval\OfcXcvalRules.cs" />
+    <Compile Include="Common\ActionRulesMandotary.cs" />
+    <Compile Include="Common\Json\JsonFieldAttribute.cs" />
+    <Compile Include="Common\Json\JsonObjectAttributes.cs" />
+    <Compile Include="Common\Json\JsonParser.cs" />
     <Compile Include="ImportBase\DictionaryProxy.cs" />
     <Compile Include="ImportBase\FieldValue.cs" />
     <Compile Include="ImportBase\IImportExcelColumn.cs" />
@@ -152,6 +163,12 @@
     <Compile Include="Common\Matrix\MatrixTabPageData.cs" />
     <Compile Include="Common\Matrix\MatrixTabPage2.cs" />
     <Compile Include="Initializer.cs" />
+    <Compile Include="InterfaceCaller\ActionResetDto.cs" />
+    <Compile Include="InterfaceCaller\CalcJsonParamsDto.cs" />
+    <Compile Include="InterfaceCaller\CalcJsonResultDto.cs" />
+    <Compile Include="InterfaceCaller\CalcResetJsonParamsDto.cs" />
+    <Compile Include="InterfaceCaller\InterfaceCallerBL.cs" />
+    <Compile Include="InterfaceCaller\ResultDto.cs" />
     <Compile Include="Masters\Import\Partner\PartnerImportPage.cs" />
     <Compile Include="Masters\Import\Partner\PartnerImportTab.cs" />
     <Compile Include="Masters\Item\Color\OlcItemColor.cs" />
@@ -258,6 +275,34 @@
     <Compile Include="Masters\PriceTable\PrcType.cs" />
     <Compile Include="Module.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Sales\Action\ActionExtSearchTab.cs" />
+    <Compile Include="Sales\Action\ActionSearchPage.cs" />
+    <Compile Include="Sales\Action\ActionType.cs" />
+    <Compile Include="Sales\Action\ActionLists.cs" />
+    <Compile Include="Sales\Action\CuponSelectionProvider.cs" />
+    <Compile Include="Sales\Action\Discountcalculationtype.cs" />
+    <Compile Include="Sales\Action\Discounttype.cs" />
+    <Compile Include="Sales\Action\FilterCustomersType.cs" />
+    <Compile Include="Sales\Action\OlcAction.cs" />
+    <Compile Include="Sales\Action\OlcActioncountries.cs" />
+    <Compile Include="Sales\Action\OlcActioncountry.cs" />
+    <Compile Include="Sales\Action\OlcActioncountryGenerated.cs" />
+    <Compile Include="Sales\Action\OlcActionCouponNumber.cs" />
+    <Compile Include="Sales\Action\OlcActionCouponNumberGenerated.cs" />
+    <Compile Include="Sales\Action\OlcActionExt.cs" />
+    <Compile Include="Sales\Action\OlcActionExtGenerated.cs" />
+    <Compile Include="Sales\Action\OlcActionGenerated.cs" />
+    <Compile Include="Sales\Action\OlcActionRetail.cs" />
+    <Compile Include="Sales\Action\OlcActionRetailGenerated.cs" />
+    <Compile Include="Sales\Action\OlcActionRetails.cs" />
+    <Compile Include="Sales\Action\OlcActionWebhop.cs" />
+    <Compile Include="Sales\Action\OlcActionWebhopGenerated.cs" />
+    <Compile Include="Sales\Action\OlcActionWebhops.cs" />
+    <Compile Include="Sales\Action\Purchasetype.cs" />
+    <Compile Include="Sales\GiftCard\OlcGiftCard.cs" />
+    <Compile Include="Sales\GiftCard\OlcGiftCardGenerated.cs" />
+    <Compile Include="Sales\GiftCard\OlcGiftCardLog.cs" />
+    <Compile Include="Sales\GiftCard\OlcGiftCardLogGenerated.cs" />
     <Compile Include="Purchase\Pord\Import\PordHeadImportResultSet.cs" />
     <Compile Include="Purchase\Pord\Import\PordHeadImportResultSets.cs" />
     <Compile Include="Purchase\Pord\Import\PordHeadImportService.cs" />
@@ -270,6 +315,50 @@
     <Compile Include="Purchase\Pord\PordHeadSearchTab3.cs" />
     <Compile Include="Reports\Financials\BankCAvisoSaveToPdf.cs" />
     <Compile Include="Reports\Financials\CompensationDraft.cs" />
+    <Compile Include="Reports\Financials\ReminderLetter\ReminderLetter2.cs" />
+    <Compile Include="Reports\Financials\ReminderLetter\ReminderLetterBL.cs" />
+    <Compile Include="Reports\Financials\ReminderLetter\ReminderLetterEditPage.cs" />
+    <Compile Include="Reports\Financials\ReminderLetter\ReminderLetterEditTab.cs" />
+    <Compile Include="Reports\Financials\ReminderLetter\ReminderLetterItem.cs" />
+    <Compile Include="Reports\Financials\ReminderLetter\ReminderLetterParamsTab2.cs" />
+    <Compile Include="Reports\Financials\ReminderLetter\ReminderLetterPrintCallback.cs" />
+    <Compile Include="Reports\Financials\ReminderLetter\ReminderLetterRules.cs" />
+    <Compile Include="Reports\Financials\ReminderLetter\ReminderLetterSearchPage.cs" />
+    <Compile Include="Reports\Financials\ReminderLetter\ReminderLetterSearchProvider.cs" />
+    <Compile Include="Reports\Financials\ReminderLetter\ReminderLetterSearchTab.cs" />
+    <Compile Include="Reports\Financials\ReminderLetter\ReminderLetterText.cs" />
+    <Compile Include="Reports\Financials\ReminderLetter\ReminderLetterTextBL.cs" />
+    <Compile Include="Reports\Financials\ReminderLetter\ReminderLetterTextEditPage.cs" />
+    <Compile Include="Reports\Financials\ReminderLetter\ReminderLetterTextEditTab.cs" />
+    <Compile Include="Reports\Financials\ReminderLetter\ReminderLetterTextList.cs" />
+    <Compile Include="Reports\Financials\ReminderLetter\ReminderLetterTextRules.cs" />
+    <Compile Include="Reports\Financials\ReminderLetter\ReminderLetterTextSearchProvider.cs" />
+    <Compile Include="Reports\Financials\ReminderLetter\ReminderLetterTextSearchTab.cs" />
+    <Compile Include="Reports\Financials\StatementOfAccount2.cs" />
+    <Compile Include="Reports\Financials\StatementOfAccount\StatementOfAccountBL.cs" />
+    <Compile Include="Reports\Financials\StatementOfAccount\StatementOfAccountEditPage.cs" />
+    <Compile Include="Reports\Financials\StatementOfAccount\StatementOfAccountEditTab.cs" />
+    <Compile Include="Reports\Financials\StatementOfAccount\StatementOfAccountItem.cs" />
+    <Compile Include="Reports\Financials\StatementOfAccount\StatementOfAccountRules.cs" />
+    <Compile Include="Reports\Financials\StatementOfAccount\StatementOfAccountSearchPage.cs" />
+    <Compile Include="Reports\Financials\StatementOfAccount\StatementOfAccountSearchProvider.cs" />
+    <Compile Include="Reports\Financials\StatementOfAccount\StatementOfAccountSearchTab.cs" />
+    <Compile Include="Reports\Financials\StatementOfAccount\StatementOfAccountText.cs" />
+    <Compile Include="Reports\Financials\StatementOfAccount\StatementOfAccountTextBL.cs" />
+    <Compile Include="Reports\Financials\StatementOfAccount\StatementOfAccountTextEditPage.cs" />
+    <Compile Include="Reports\Financials\StatementOfAccount\StatementOfAccountTextEditTab.cs" />
+    <Compile Include="Reports\Financials\StatementOfAccount\StatementOfAccountTextList.cs" />
+    <Compile Include="Reports\Financials\StatementOfAccount\StatementOfAccountTextRules.cs" />
+    <Compile Include="Reports\Financials\StatementOfAccount\StatementOfAccountTextSearchProvider.cs" />
+    <Compile Include="Reports\Financials\StatementOfAccount\StatementOfAccountTextSearchTab.cs" />
+    <Compile Include="Sales\Sinv\SinvHeadBL3.cs" />
+    <Compile Include="Sales\Sinv\SinvPrintBL3.cs" />
+    <Compile Include="Sales\Sinv\SinvPrintCallback3.cs" />
+    <Compile Include="Sales\Retail\Cart\CartBL.cs" />
+    <Compile Include="Sales\Retail\Cart\OlcCart.cs" />
+    <Compile Include="Sales\Retail\Cart\OlcCartGenerated.cs" />
+    <Compile Include="Sales\Retail\Cart\OlcCarts.cs" />
+    <Compile Include="Sales\Retail\RetailSalesSearchPage.cs" />
     <Compile Include="Sales\Sord\Import\SordHeadImportResultSet.cs" />
     <Compile Include="Sales\Sord\Import\SordHeadImportResultSets.cs" />
     <Compile Include="Sales\Sord\Import\SordHeadImportService.cs" />
@@ -317,9 +406,12 @@
     <Compile Include="Setup\Warehouse\WarehouseSearchTab3.cs" />
     <Compile Include="Webshop\OlcWebshop.cs" />
     <Compile Include="Webshop\OlcWebshopGenerated.cs" />
+    <Compile Include="Webshop\WebshopList.cs" />
     <Compile Include="Webshop\WebshopType.cs" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
