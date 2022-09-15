@@ -30,3 +30,13 @@ $replausrid=Helyettesítő
 $replausrid_name=Név
 $costlinenote=Egyeztetés megjegyzés
 $apprnote=Jóváhagyás megjegyzés
+
+$apprattachment_search_results=Csatolt dokumentumok
+$filename=File név
+$mimetype=File tipus
+$adoctype=Dok.típus
+$def=Alap.
+$adddate=Dátum
+$action_upload=Feltöltés
+$action_preview=Előnézet
+$action_download=Letöltés

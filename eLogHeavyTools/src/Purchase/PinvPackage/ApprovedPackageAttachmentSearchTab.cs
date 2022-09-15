@@ -30,6 +30,8 @@ namespace eLog.HeavyTools.Purchase.PinvPackage
 
             base.CreateBase();
 
+            SearchResults.MergePageData = "myattachkey";
+
             OnPageActivate += ApprovedPackageAttachmentSearchTab_OnPageActivate;
 
             var btnViewAttachment = new Button("preview", 1000);
@@ -43,7 +45,42 @@ namespace eLog.HeavyTools.Purchase.PinvPackage
 
         protected void ApprovedPackageAttachmentSearchTab_OnPageActivate(eProjectWeb.Framework.PageUpdateArgs args)
         {
-            SearchResults.ForceRefresh = true;
+            int? pinvId = null;
+            string packageCode = "";
+
+            if ((args.PageData?.ContainsKey(Consts.DetailEntityKey)).GetValueOrDefault())
+            {
+                var detailEntityKey = args.PageData[Consts.DetailEntityKey] as Dictionary<string, object>;
+
+                if (detailEntityKey.ContainsKey("pinvid"))
+                {
+                    pinvId = ConvertUtils.ToInt32(detailEntityKey["pinvid"]);
+                    if (!pinvId.HasValue)
+                        pinvId = 0;
+                }
+            }
+            if ((args.PageData?.ContainsKey(Consts.RootEntityKey)).GetValueOrDefault())
+            {
+                var rootEntityKey = args.PageData[Consts.RootEntityKey] as Dictionary<string, object>;
+                if (rootEntityKey.ContainsKey("packagecode"))
+                {
+                    packageCode = ConvertUtils.ToString(rootEntityKey["packagecode"]);
+                }
+            }
+
+            Key k = new Key();
+            if (pinvId.HasValue)
+            {
+                k.Add("selectedpinvid", pinvId);
+            }
+            if (!string.IsNullOrEmpty(packageCode))
+            {
+                k.Add("selectedpackagecode", packageCode);
+            }
+
+            args.PageData["myattachkey"] = k;
+            if (k.Count() > 0)
+                SearchResults.ForceRefresh = true;
         }
 
         protected void btnDownloadAttachment_OnClick(PageUpdateArgs args)

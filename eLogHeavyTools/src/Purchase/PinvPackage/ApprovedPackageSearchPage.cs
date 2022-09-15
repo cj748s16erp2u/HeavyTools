@@ -15,7 +15,7 @@ namespace eLog.HeavyTools.Purchase.PinvPackage
         public static DefaultPageSetup Package = new DefaultPageSetup("ApprovedPackage", null, ApprovedPackageSearchProvider.ID, null, null);
         public static DefaultPageSetup Head = new DefaultPageSetup("ApprovedPinvHead", null, ApprovedPinvHeadPackageSearchProvider.ID, null, null);
         public static DefaultPageSetup Line = new DefaultPageSetup("ApprovedPinvLine", null, ApprovedPinvLinePackageSearchProvider.ID, null, null);
-        public static DefaultPageSetup Attachment = new DefaultPageSetup("ApprovedAttachment", null, null, null, null);
+        public static DefaultPageSetup Attachment = new DefaultPageSetup("ApprovedAttachment", null, ApprovedPackageAttachmentSearchProvider.ID, null, null);
 
         public ApprovedPackageSearchPage() : base("ApprovedPackage")
         {

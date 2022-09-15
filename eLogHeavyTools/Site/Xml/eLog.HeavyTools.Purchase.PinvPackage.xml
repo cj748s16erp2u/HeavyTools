@@ -71,5 +71,16 @@
   <TabPage Name="ApprovedPackageAttachmentSearchTab">
     <Grid ID="searchResults" Label="$apprattachment_search_results" />
   </TabPage>
+  <Search Name="ApprovedPackageAttachmentSearchProvider">
+    <Column FieldName="attid" Hidden="True" Align="Right" PKFieldName="attid" />
+    <Column FieldName="filename" Width="200" />
+    <Column FieldName="mimetype" Width="200" />
+    <Column FieldName="adoctype" Width="120" Editable="true" Align="Left" FieldFunction="listlookup" FieldFuncArg="eProjectWeb.Framework.Data.TypeListProviderPublic#ols_attachment.adoctype" />
+    <Column FieldName="note" Width="200" Editable="true" />
+    <Column FieldName="def" Width="50" FieldFunction="bool1" Editable="true" />
+    <Column FieldName="addusrid" Width="100" />
+    <Column FieldName="adddate" Width="100" />
+    <Column FieldName="delstat" Width="50" FieldFunction="listlookup" FieldFuncArg="eLog.Base.Setup.Parameters.DelstatTypeList,abbr" />
+  </Search>
   
 </Schema>
