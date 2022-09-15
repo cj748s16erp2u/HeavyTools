@@ -15,12 +15,12 @@ namespace eLog.HeavyTools.Purchase.PinvPackage
         protected static string m_queryString = @"
 select 
 oa.*,
-pinvdoc.pinvnum as attdocnum
+pinvdoc.pinvnum as attdocnum, pinvdoc.pinvid, pl.pcmcode+'/'+pl.usrname+'/'+pl.prlcode as packagecode
 from ols_attachment oa (nolock)
   outer apply (select ph.pinvid, ph.pinvnum, ph.ref1 from ols_pinvhead ph (nolock)
                where ph.pinvid = substring(oa.refid, CHARINDEX(':', oa.refid) + 1, LEN(oa.refid) - CHARINDEX(':', oa.refid) - 1 )) pinvdoc
      left outer join ofc_dochead dh (nolock) on dh.pinvid = pinvdoc.pinvid
-     left outer join /*u4findb*/..oas_prldetail pl on pl.cmpcode = dh.cmpcode and pl.doccode = dh.doccode and pl.docnum = dh.docnum
+     left outer join /*u4findb*/..oas_prldetail pl (nolock) on pl.cmpcode = dh.cmpcode and pl.doccode = dh.doccode and pl.docnum = dh.docnum
 ";
 
         protected static QueryArg[] m_filters = new QueryArg[]
@@ -50,10 +50,8 @@ from ols_attachment oa (nolock)
 
         protected virtual void ModifyQueryString(Dictionary<string, object> args, bool fmtonly, ref string query)
         {
-            var dbLinkFin = DBConfig.GetDatabaseLink(eProjectWeb.Framework.Session.Catalog, CodaInt.Base.Module.CodaDBConnID);
-
-            var dbLinkFIN = DBConfig.GetDatabaseLink(Session.Catalog, CodaInt.Base.Module.CodaDBConnID);
-            query = query.Replace("/*u4findb*/", $"[{dbLinkFIN.Database}]");
+            var dbLinkFin = DBConfig.GetDatabaseLink(Session.Catalog, CodaInt.Base.Module.CodaDBConnID);
+            query = query.Replace("/*u4findb*/", $"[{dbLinkFin.Database}]");
         }
 
         private static void CustomFilter(StringBuilder sb, QueryArg arg, string quotedFieldName, object argValue)

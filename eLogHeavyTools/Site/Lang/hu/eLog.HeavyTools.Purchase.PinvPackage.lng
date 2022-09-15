@@ -11,7 +11,7 @@ $paydate=Fizetés dátuma
 $genhomenet=Eredeti hazai érték
 $homenet=Aktuális hazai érték
 
-$apprphpackage_group=Csomag adatok
+$apprpackage_group=Csomag adatok
 
 $doccode=Dok.kód
 $docnum=Dok.szám

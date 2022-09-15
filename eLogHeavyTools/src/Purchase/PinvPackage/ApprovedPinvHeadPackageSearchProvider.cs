@@ -14,7 +14,7 @@ namespace eLog.HeavyTools.Purchase.PinvPackage
         public static readonly string ID = typeof(ApprovedPinvHeadPackageSearchProvider).FullName;
 
         protected static string m_query = @"
-select pl.cmpcode, pl.pcmcode+'/'+pl.usrname+'/'+pl.prlcode as packagecode,pl.doccode, pl.docnum, pl.net, pl.descr, pl.extref1, 
+select pl.cmpcode, pl.pcmcode+'/'+pl.usrname+'/'+pl.prlcode as packagecode, pl.doccode, pl.docnum, pl.net, pl.descr, pl.extref1, 
        ph.pinvnum, 
        dh.pinvid
 from /*u4findb*/..oas_prldetail pl (nolock)
@@ -50,10 +50,8 @@ from /*u4findb*/..oas_prldetail pl (nolock)
 
         protected virtual void ModifyQueryString(Dictionary<string, object> args, bool fmtonly, ref string query)
         {
-            var dbLinkFin = DBConfig.GetDatabaseLink(eProjectWeb.Framework.Session.Catalog, CodaInt.Base.Module.CodaDBConnID);
-
-            var dbLinkFIN = DBConfig.GetDatabaseLink(Session.Catalog, CodaInt.Base.Module.CodaDBConnID);
-            query = query.Replace("/*u4findb*/", $"[{dbLinkFIN.Database}]");
+            var dbLinkFin = DBConfig.GetDatabaseLink(Session.Catalog, CodaInt.Base.Module.CodaDBConnID);
+            query = query.Replace("/*u4findb*/", $"[{dbLinkFin.Database}]");
         }
 
     }

@@ -260,6 +260,7 @@
     <Compile Include="Purchase\PinvPackage\ApprovedPackageAttachmentSearchTab.cs" />
     <Compile Include="Purchase\PinvPackage\ApprovedPackageBL.cs" />
     <Compile Include="Purchase\PinvPackage\ApprovedPackageInfoPart.cs" />
+    <Compile Include="Purchase\PinvPackage\ApprovedPackageInfoPart2.cs" />
     <Compile Include="Purchase\PinvPackage\ApprovedPackageSearchPage.cs" />
     <Compile Include="Purchase\PinvPackage\ApprovedPackageSearchProvider.cs" />
     <Compile Include="Purchase\PinvPackage\ApprovedPackageSearchTab.cs" />

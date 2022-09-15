@@ -22,7 +22,13 @@
     <Combo Field="cmpcode" ListID="CodaInt.Base.Setup.Company.CompanyList#sessioncmp" Width="250" Disabled="true" />
     <Textbox Field="packagecode" Width="250" Disabled="true" />
     <Combo Field="status" ListID="eLog.Base.Setup.Status.StatListProviderPublic#oas_prllist.status" Width="150" Disabled="true" />
-  </ControlType>  
+  </ControlType>
+  <ControlType Name="ApprovedPackageInfoPart2" Label="$apprpackage_group">
+    <Combo Field="cmpcode" ListID="CodaInt.Base.Setup.Company.CompanyList#sessioncmp" Width="250" Disabled="true" />
+    <Textbox Field="packagecode" Width="250" Disabled="true" />
+    <Combo Field="status" ListID="eLog.Base.Setup.Status.StatListProviderPublic#oas_prllist.status" Width="150" Disabled="true" />
+    <Textbox Field="pinvnum" Width="180" Disabled="true" />
+  </ControlType>
   <TabPage Name="ApprovedPinvHeadPackageSearchTab">
     <Control ControlType="ApprovedPackageInfoPart" ID="apprPinvHeadPackageInfoPart" />
     <SearchFilterBar ID="SrcBar">
@@ -42,7 +48,7 @@
   </Search>
 
   <TabPage Name="ApprovedPinvLinePackageSearchTab">
-    <Control ControlType="ApprovedPackageInfoPart" ID="apprPinvHeadPackageInfoPart" />
+    <Control ControlType="ApprovedPackageInfoPart2" ID="apprPinvHeadPackageInfoPart" />
     <SearchFilterBar ID="SrcBar">
       <CheckedCombo Field="apprstat" Width="170" ListID="eLog.Base.Setup.Status.StatListProviderPublic#ols_pinvapproval.apprstat" ComboFlags="None" />
       <CheckedCombo Field="usrid" Width="150" ListID="eProjectWeb.Framework.UI.Maintenance.User.UserList" ComboFlags="None" />
@@ -66,13 +72,15 @@
     <Column FieldName="costlinenote" Width="200" Editable="false"/>
     <Column FieldName="apprnote" Width="200" Editable="false"/>
     <Column FieldName="padelstat" DisplayName="$delstat" Width="50" FieldFunction="listlookup" FieldFuncArg="eLog.Base.Setup.Parameters.DelstatTypeList,abbr" />
+    <Column FieldName="packagecode" Width="250" Hidden="true" PKFieldName="true" />    
   </Search>
 
   <TabPage Name="ApprovedPackageAttachmentSearchTab">
+    <Control ControlType="ApprovedPackageInfoPart2" ID="apprPinvHeadPackageInfoPart" />
     <Grid ID="searchResults" Label="$apprattachment_search_results" />
   </TabPage>
   <Search Name="ApprovedPackageAttachmentSearchProvider">
-    <Column FieldName="attid" Hidden="True" Align="Right" PKFieldName="attid" />
+    <Column FieldName="attid" Hidden="true" Align="Right" PKFieldName="attid" />
     <Column FieldName="filename" Width="200" />
     <Column FieldName="mimetype" Width="200" />
     <Column FieldName="adoctype" Width="120" Editable="true" Align="Left" FieldFunction="listlookup" FieldFuncArg="eProjectWeb.Framework.Data.TypeListProviderPublic#ols_attachment.adoctype" />
@@ -81,6 +89,8 @@
     <Column FieldName="addusrid" Width="100" />
     <Column FieldName="adddate" Width="100" />
     <Column FieldName="delstat" Width="50" FieldFunction="listlookup" FieldFuncArg="eLog.Base.Setup.Parameters.DelstatTypeList,abbr" />
+    <Column FieldName="pinvid" Width="100" Hidden="true" PKFieldName="pinvid" />
+    <Column FieldName="packagecode" Width="250" Hidden="true" PKFieldName="true" />
   </Search>
   
 </Schema>
