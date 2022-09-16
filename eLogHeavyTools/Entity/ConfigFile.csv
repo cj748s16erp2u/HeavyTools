@@ -20,3 +20,4 @@ olc_webshop,eLog.HeavyTools.Webshop,OlcWebshop
 
 olc_sordhead,eLog.HeavyTools.Sales.Sord,OlcSordHead
 olc_sordline,eLog.HeavyTools.Sales.Sord,OlcSordLine
+imp_colorexception,eLog.HeavyTools.Masters.Item.Import,ImpColorException

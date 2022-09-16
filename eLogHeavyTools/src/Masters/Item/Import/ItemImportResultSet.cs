@@ -14,7 +14,8 @@ namespace eLog.HeavyTools.Masters.Item.Import
         public TableEntry ItemSeason { get; set; }
         public TableEntry ItemSup { get; set; }
         public TableEntry MultiplePrcTable { get; set; }
-
         public TableEntry ItemMainGroup { get; set; }
+        public TableEntry TypeHeadColor { get; set; }
+        public TableEntry ImpColorException { get; set; }
     }
 }

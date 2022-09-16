@@ -149,6 +149,10 @@
     <Compile Include="Masters\Item\Color\OlcItemColorList.cs" />
     <Compile Include="Masters\Item\Color\OlcItemColors.cs" />
     <Compile Include="Masters\Item\Color\OlcItemColorSearchPage.cs" />
+    <Compile Include="Masters\Item\Import\ColorException.cs" />
+    <Compile Include="Masters\Item\Import\ImpColorException.cs" />
+    <Compile Include="Masters\Item\Import\ImpColorExceptionGenerated.cs" />
+    <Compile Include="Masters\Item\Import\ImpColorExceptions.cs" />
     <Compile Include="Masters\Item\Import\ImportConditionalConverter.cs" />
     <Compile Include="Masters\Item\Import\ItemImportConditional.cs" />
     <Compile Include="Masters\Item\Import\ItemImportMessageException.cs" />
@@ -266,6 +270,7 @@
     <Compile Include="Setup\PriceTable\OlcPrcTypeGenerated.cs" />
     <Compile Include="Setup\PriceTable\OlcPrcTypeList.cs" />
     <Compile Include="Setup\PriceTable\OlcPrcTypeSearchPage.cs" />
+    <Compile Include="Setup\Type\TypeLineBL3.cs" />
     <Compile Include="Setup\Warehouse\OlcWhLocation.cs" />
     <Compile Include="Setup\Warehouse\OlcWhLocationBL.cs" />
     <Compile Include="Setup\Warehouse\OlcWhLocationEditPage.cs" />

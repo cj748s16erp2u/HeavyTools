@@ -3,6 +3,7 @@ using eLog.HeavyTools.ImportBase;
 using eLog.HeavyTools.ImportBase.ImportResult;
 using eLog.HeavyTools.Masters.Partner;
 using eProjectWeb.Framework;
+using eProjectWeb.Framework.Data;
 using eProjectWeb.Framework.Extensions;
 using System;
 using System.Collections.Generic;
@@ -48,6 +49,9 @@ namespace eLog.HeavyTools.Masters.Item
         /// <param name="uploadInfo">Feltöltött fájlok tárolója</param>
         public ImportResult ItemImport(eProjectWeb.Framework.UI.Controls.UploadData uploadInfo)
         {
+            SqlDataAdapter.ExecuteNonQuery(DB.Main, "delete imp_colorexception");
+
+
             utils = new ImportBase.ImportUtils();
 
             string error = null;
@@ -147,7 +151,7 @@ namespace eLog.HeavyTools.Masters.Item
             var sFileName = Path.Combine(Globals.ReportsTempFolder, storedFileName);
             var realFileName = Path.Combine(Globals.ReportsTempFolder, fileName);
 
-            try { File.Move(sFileName, realFileName); }
+            try {  File.Move(sFileName, realFileName); }
             catch { realFileName = sFileName; }
 
             var executeId = Guid.NewGuid();

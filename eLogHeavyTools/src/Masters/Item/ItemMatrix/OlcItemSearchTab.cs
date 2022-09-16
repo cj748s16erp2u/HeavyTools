@@ -254,6 +254,8 @@ colortype1,colorname,colortype2,colortype3,materialtype,patterntype,patterntype2
                     throw new MessageException("$missingcolortype1");
                 }
 
+                olcitem.Iscollectionarticlenumber = 0;
+
                 string size;
                 if (olcitem.Isrlid.Value == int.MaxValue)
                 {
