@@ -81,6 +81,7 @@
   </TabPage>
   <Search Name="ApprovedPackageAttachmentSearchProvider">
     <Column FieldName="attid" Hidden="true" Align="Right" PKFieldName="attid" />
+    <Column FieldName="attdocnum" DisplayName="$pinvnum" Width="180" />
     <Column FieldName="filename" Width="200" />
     <Column FieldName="mimetype" Width="200" />
     <Column FieldName="adoctype" Width="120" Editable="true" Align="Left" FieldFunction="listlookup" FieldFuncArg="eProjectWeb.Framework.Data.TypeListProviderPublic#ols_attachment.adoctype" />
