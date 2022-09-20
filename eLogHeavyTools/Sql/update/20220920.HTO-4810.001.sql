@@ -1,9 +1,4 @@
-﻿update [sv] set [valuestr] = 'P{0:000000}'
-from [ols_sysval] [sv] (nolock)
-where [sv].[sysvalid] = 'partner:DefPartnCode'
-go
-
--- Szallitoi szamla - dokumentum csatolas
+-- Szallitoi szamla - Dokumentum csatoltas
 update t
 set valuevar = t2.value + (case when t2.value <> '' then ',' else '' end) + 'pinv'
 from ols_sysval t

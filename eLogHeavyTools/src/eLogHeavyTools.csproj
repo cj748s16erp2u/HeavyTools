@@ -275,6 +275,7 @@
     <Compile Include="Masters\PriceTable\PrcType.cs" />
     <Compile Include="Module.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Purchase\Pinv\PinvHeadSearchProvider3.cs" />
     <Compile Include="Sales\Action\ActionExtSearchTab.cs" />
     <Compile Include="Sales\Action\ActionSearchPage.cs" />
     <Compile Include="Sales\Action\ActionType.cs" />
@@ -409,9 +410,7 @@
     <Compile Include="Webshop\WebshopList.cs" />
     <Compile Include="Webshop\WebshopType.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <None Include="packages.config" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

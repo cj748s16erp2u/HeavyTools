@@ -99,7 +99,6 @@
 			<Item ID="OlcPrctableSearchPage" Name="$olcprctablesearchpage" PageID="eLog.HeavyTools.Masters.PriceTable.OlcPrctableSearchPage"/>
 			<Item ID="Action" Name="$action" PageID="eLog.HeavyTools.Sales.Action.ActionSearchPage"/>			
 			<Item ID="SContract" Name="$scontract" PageID="eLog.Base.Sales.SContract.SContractSearchPage"/>
-			<Item ID="SContract" Name="$scontract" PageID="eLog.Base.Sales.SContract.SContractSearchPage"/>
             <Item ID="Sord" Name="$sord" PageID="eLog.Base.Sales.Sord.SordHeadSearchPage"/>
             <Item ID="SordLineAll" Name="$sordlineall" PageID="eLog.Base.Sales.Sord.SordLineAllSearchPage"/>
             <Item ID="SordUqCard" Name="$sorduqcard" PageID="eLog.Base.Sales.Sord.SordUqCardSearchPage"/>

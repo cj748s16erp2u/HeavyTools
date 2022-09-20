@@ -1,0 +1,33 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Schema xmlns="http://tempuri.org/RenderableSchema.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://tempuri.org/RenderableSchema.xsd ../../../../eLog/Base/Site/Xml/RenderableSchema.xsd">
+    <Search Name="PinvHeadSearchProvider2">
+        <Column FieldName="pinvstat" Align="Left" Width="40" FieldFunction="listlookup" FieldFuncArg="eLog.Base.Purchase.Pinv.PinvHeadPinvStatList,abbr" />
+        <Column FieldName="approvalstat" Width="35" FieldFunction="listlookup" FieldFuncArg="eLog.Base.Setup.Status.StatListProviderPublic#ols_pinvhead.approvalstat,abbr" />
+        <Column FieldName="docstat" Align="Left" FieldFunction="listlookup" FieldFuncArg="CodaInt.Base.Bookkeeping.Common.CodaBookStatList,abbr" Width="30" />
+        <Column FieldName="attacheddoc" Width="20" FieldFunction="bool1" />      
+        <Column FieldName="doclinecount" Width="30" />
+        <Column FieldName="corrtype" Align="Left" Width="40" FieldFunction="listlookup" FieldFuncArg="eProjectWeb.Framework.Data.TypeListProviderPublic#ols_pinvhead.corrtype,abbr" />
+        <Column FieldName="pinvdocid" Width="100" />
+        <Column FieldName="pinvnum" Width="100" />
+        <Column FieldName="partncode" Width="80" />
+        <Column FieldName="partnname" Width="180" />
+        <Column FieldName="docdate" Width="80" Format="D" />
+        <Column FieldName="taxdate" Width="80" Format="D" />
+        <Column FieldName="pinvdate" Width="80" Format="D" />
+        <Column FieldName="duedate" Width="80" Format="D" />
+        <Column FieldName="netval" Width="80" />
+        <Column FieldName="taxval" Width="80" />
+        <Column FieldName="totval" Width="80" />
+        <Column FieldName="curid" Width="60" />
+        <Column FieldName="note" Width="150" />
+        <Column FieldName="paymid" Width="60" />
+        <Column FieldName="pinvid" PKFieldName="pinvid" Width="50" />
+        <Column FieldName="bustypeid" Width="60" Align="Left" FieldFunction="listlookup" FieldFuncArg="eLog.Base.Setup.BusType.BusTypeList" />
+        <Column FieldName="ref1" Width="100" />
+        <Column FieldName="ref2" Width="100" />
+        <Column FieldName="addusrid" Width="100" />
+        <Column FieldName="adddate" Width="120" Format="DT" />
+        <Column FieldName="cmpid" Align="Left" Width="60" FieldFunction="listlookup" FieldFuncArg="eLog.Base.Setup.Company.CompanyGrantedList" />
+        <Column FieldName="docnum" Width="100" />
+    </Search>
+</Schema>
