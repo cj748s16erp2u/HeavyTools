@@ -270,6 +270,7 @@ create table olc_partnaddr (
     oldcode				varchar(10)             null, -- regi kod
 	glnnum				varchar(15)             null, -- GLN szam
 	buildingname		varchar(50)             null, -- Epulet neve
+    el3                 varchar(72)             null, /* partner cimhez rendelt ertekesitesi egyseg kodja (el3) */
     addusrid            varchar(12)				not null,
     adddate             datetime                null,
     constraint pk_olc_partnaddr primary key (addrid),

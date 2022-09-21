@@ -88,6 +88,21 @@ namespace eLog.HeavyTools.Masters.Partner
         /// <para>Field</para>
         /// ? - varchar
         /// </summary>
+        [Field("el3")]
+        public static Field FieldEl3 { get; protected set; }
+        /// <summary>
+        /// ? - varchar
+        /// </summary>
+        public StringN El3
+        {
+            get { return new StringN(this[FieldEl3]); }
+            set { this[FieldEl3] = value; }
+        }
+
+        /// <summary>
+        /// <para>Field</para>
+        /// ? - varchar
+        /// </summary>
         [Field("addusrid")]
         public static Field FieldAddusrid { get; protected set; }
         /// <summary>
