@@ -300,6 +300,7 @@
     <Compile Include="Setup\Warehouse\OlcWhLocationEditPage.cs" />
     <Compile Include="Setup\Warehouse\OlcWhLocationEditTab.cs" />
     <Compile Include="Setup\Warehouse\OlcWhLocationGenerated.cs" />
+    <Compile Include="Setup\Warehouse\OlcWhLocationList.cs" />
     <Compile Include="Setup\Warehouse\OlcWhLocationRules.cs" />
     <Compile Include="Setup\Warehouse\OlcWhLocationSearchProvider.cs" />
     <Compile Include="Setup\Warehouse\OlcWhLocationSearchTab.cs" />
@@ -315,11 +316,21 @@
     <Compile Include="Setup\Warehouse\OlcWhZoneSearchTab.cs" />
     <Compile Include="Setup\Warehouse\WarehouseSearchPage3.cs" />
     <Compile Include="Setup\Warehouse\WarehouseSearchTab3.cs" />
+    <Compile Include="Warehouse\WhLocPrio\OlcWhLocPrio.cs" />
+    <Compile Include="Warehouse\WhLocPrio\OlcWhLocPrioBL.cs" />
+    <Compile Include="Warehouse\WhLocPrio\WhLocPrioAllSearchProvider.cs" />
+    <Compile Include="Warehouse\WhLocPrio\WhLocPrioAllSearchTab.cs" />
+    <Compile Include="Warehouse\WhLocPrio\WhLocPrioEditPage.cs" />
+    <Compile Include="Warehouse\WhLocPrio\OlcWhLocPrioGenerated.cs" />
+    <Compile Include="Warehouse\WhLocPrio\OlcWhLocPrioRules.cs" />
+    <Compile Include="Warehouse\WhLocPrio\WhLocPrioEditTab.cs" />
+    <Compile Include="Warehouse\WhLocPrio\WhLocPrioSearchPage.cs" />
+    <Compile Include="Warehouse\WhLocPrio\WhLocPrioSearchProvider.cs" />
+    <Compile Include="Warehouse\WhLocPrio\WhLocPrioSearchTab.cs" />
     <Compile Include="Webshop\OlcWebshop.cs" />
     <Compile Include="Webshop\OlcWebshopGenerated.cs" />
     <Compile Include="Webshop\WebshopType.cs" />
   </ItemGroup>
-  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

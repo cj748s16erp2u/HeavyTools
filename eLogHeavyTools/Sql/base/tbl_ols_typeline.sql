@@ -125,3 +125,10 @@ values (8001, 65, 65, 'Hervis avizó file', 'HER', 'dev', getdate(), 0)
 insert ols_typeline (typegrpid, value, seqno, name, abbr, addusrid, adddate, delstat)
 values (8001, 66, 66, 'Intersport avizó file', 'INT', 'dev', getdate(), 0)
 go
+
+insert into ols_typeline (typegrpid, value, name, abbr, addusrid, adddate, delstat)
+values (514, 1, 'Elsődleges helykód', 'E', 'dev', getdate(), 0)
+
+insert into ols_typeline (typegrpid, value, name, abbr, addusrid, adddate, delstat)
+values (514, 2, 'Másodlagos helykód', 'M', 'dev', getdate(), 0)
+go

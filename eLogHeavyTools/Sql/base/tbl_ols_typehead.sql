@@ -26,3 +26,7 @@ go
 insert ols_typehead (typegrpid, typekey, descr, protect, multipl, addusrid, adddate, delstat)
 values (511, 'olc_pordhead.paritytype', 'Szállítói rendelés paritás', 1, 0, 'dev', getdate(), 0)
 go
+
+insert into ols_typehead (typegrpid, typekey, descr, protect, multipl, addusrid, adddate, delstat)
+values (514, 'olc_whlocprio.priotype', 'Elsődleges vagy másodlagos helykód', 1, 1, 'dev', getdate(), 0)
+go
