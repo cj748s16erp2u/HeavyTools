@@ -25,7 +25,8 @@ from ols_partncmp pc (nolock)
         protected static QueryArg[] m_filters = new QueryArg[]
             {
                 new QueryArg("partnid", "opc", FieldType.Integer, QueryFlags.Equals),
-                new QueryArg("cmpid", "opc", FieldType.Integer, QueryFlags.Equals),
+                new QueryArg("cmpid", "c", FieldType.Integer, QueryFlags.Equals | QueryFlags.MultipleAllowed),
+                new QueryArg("cmpcode", "c", FieldType.String, QueryFlags.MultipleAllowed),
             };
 
         static OlcPartnCmpCustSearchProvider()
@@ -34,6 +35,7 @@ from ols_partncmp pc (nolock)
 
         protected OlcPartnCmpCustSearchProvider() : base(m_query, m_filters, SearchProviderType.Default, 1000)
         {
+            SetCustomFunc("cmpcode", eLog.Base.Common.CommonUtils.CmpCodesCustomFilter);
         }
 
         protected override string CreateQueryString(Dictionary<string, object> args, bool fmtonly)
@@ -48,6 +50,13 @@ from ols_partncmp pc (nolock)
 
         protected virtual void ModifyQueryString(Dictionary<string, object> args, bool fmtonly, ref string sql)
         {
+        }
+
+        protected override void PreSearch(Dictionary<string, object> args)
+        {
+            base.PreSearch(args);
+
+            eLog.Base.Common.CommonUtils.AddSessionCompaniesFilter(args, "cmpid");
         }
 
     }

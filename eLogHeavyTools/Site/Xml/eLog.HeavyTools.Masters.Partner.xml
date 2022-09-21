@@ -2,6 +2,10 @@
 <Schema xmlns="http://tempuri.org/RenderableSchema.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://tempuri.org/RenderableSchema.xsd ../../../../Releases/eLog.Base/v7.2.0.0/Site/Xml/RenderableSchema.xsd">
 
   <TabPage Name="OlcPartnCmpCustTab">
+    <SearchFilterBar ID="SrcBar">
+      <CheckedCombo Field="cmpcode" ListID="eLog.Base.Setup.Company.CompanyCodeList#loggedinonly" ComboFlags="AllowBlank" Width="150" Visible="false" />
+      <CheckedCombo Field="cmpid" Width="100" ListID="eLog.Base.Setup.Company.CompanyGrantedList" ComboFlags="AllowBlank" Visible="false" />
+    </SearchFilterBar>
     <Grid ID="searchResults" Label="$partncmpcust_search_results" MultiSelect="false" />
   </TabPage>
   
