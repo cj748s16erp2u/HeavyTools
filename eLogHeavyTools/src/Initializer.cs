@@ -194,8 +194,8 @@ namespace eLog.HeavyTools
             ObjectFactory.AddRemap(typeof(Base.Setup.Warehouse.WarehouseSearchTab), typeof(Setup.Warehouse.WarehouseSearchTab3));
 
             // Item
-            ObjectFactory.AddRemap(typeof(Base.Masters.Item.ItemEditTab), typeof(Masters.Item.ItemEditTab2));
-            ObjectFactory.AddRemap(typeof(Base.Masters.Item.ItemBL), typeof(Masters.Item.ItemBL3));
+            ObjectFactory.AddRemap(typeof(eLog.Base.Masters.Item.ItemEditTab), typeof(eLog.HeavyTools.Masters.Item.ItemEditTab3));
+            ObjectFactory.AddRemap(typeof(eLog.Base.Masters.Item.ItemBL), typeof(eLog.HeavyTools.Masters.Item.ItemBL3));  
 
             // Bank
             ObjectFactory.AddRemap(typeof(U4Ext.Bank.Base.Transaction.EfxBankTranLineSearchTab), typeof(BankTran.EfxBankTranLineSearchTab3));
@@ -208,7 +208,7 @@ namespace eLog.HeavyTools
             ObjectFactory.AddRemap(typeof(Base.Sales.Sord.SordHeadBL), typeof(Sales.Sord.SordHeadBL3));
             ObjectFactory.AddRemap(typeof(Base.Sales.Sord.SordHeadSearchProvider), typeof(Sales.Sord.SordHeadSearchProvider3));
             ObjectFactory.AddRemap(typeof(Base.Sales.Sord.SordHeadSearchTab), typeof(Sales.Sord.SordHeadSearchTab3));
-             
+
             ObjectFactory.AddRemap(typeof(Base.Sales.Sord.SordLineAllEditTab2), typeof(Sales.Sord.SordLineAllEditTab3));
             ObjectFactory.AddRemap(typeof(Base.Sales.Sord.SordLineAllSearchProvider), typeof(Sales.Sord.SordLineAllSearchProvider3));
             ObjectFactory.AddRemap(typeof(Base.Sales.Sord.SordLineAllBL), typeof(Sales.Sord.SordLineAllBL3));

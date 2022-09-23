@@ -87,6 +87,85 @@
 	],
     "Dictionaries": [
     ]
+  },{
+	"Sheet": "Színkódok",
+    "HeaderRow": "1:1",
+    "ColumnNameRow": 1,
+    "Tables": [
+      {
+        "Table": "ols_typeline",
+        "Fields": 
+		[
+          {
+            "Field": "str1",
+            "ColumnName": "SZÍNKÓD",
+            "Required": true
+          },{
+            "Field": "name",
+            "ColumnName": "SZÍN",
+            "Required": true
+          },{
+            "Field": "abbr",
+            "ColumnName": "Szín1",
+            "Required": true
+          },{
+            "Field": "value",
+            "ColumnName": "CODA ID",
+            "Required": true
+          },{
+            "Field": "typegrpid",
+            "Const": 507
+          },{
+            "Field": "delstat",
+            "Const": 0
+          }
+        ]
+      }
+	],
+    "Dictionaries": [
+    ]
+  },{
+	"Sheet": "Színállások",
+    "HeaderRow": "1:1",
+    "ColumnNameRow": 1,
+    "Tables": [
+      {
+        "Table": "imp_colorexception",
+        "Fields": 
+		[
+          {
+            "Field": "modelnumber",
+            "ColumnName": "modellszám",
+          },{
+            "Field": "colourcode",
+            "ColumnName": "SZÍNKÓD",
+          },{
+            "Field": "colorbalance",
+            "ColumnName": "színállás",
+          },{
+            "Field": "color1",
+            "ColumnName": "szín 1",
+          },{
+            "Field": "color2",
+            "ColumnName": "szín 2",
+          },{
+            "Field": "color3",
+            "ColumnName": "szín 3",
+          },{
+            "Field": "sample1",
+            "ColumnName": "minta 1",
+          },{
+            "Field": "sample2",
+            "ColumnName": "minta 2",
+          },{
+            "Field": "season",
+            "ColumnName": "szezon",
+          },		  
+        ]
+      }
+	],
+    "Dictionaries": [
+    ]
   },
   {
     "Sheet": "Cikktörzs",
@@ -352,7 +431,8 @@
 			{"Field": "Ar15", "ColumnName": "Ar15"},
 			{"Field": "Ar16", "ColumnName": "Ar16"},
 			{"Field": "Ar17", "ColumnName": "Ar17"},
-			{"Field": "Ar18", "ColumnName": "Ar18"}
+			{"Field": "Ar18", "ColumnName": "Ar18"},
+			{"Field": "Ar0", "ColumnName": "Ar0"}
         ]
       }
 	],

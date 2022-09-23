@@ -128,6 +128,8 @@
     <Compile Include="Common\Json\JsonFieldAttribute.cs" />
     <Compile Include="Common\Json\JsonObjectAttributes.cs" />
     <Compile Include="Common\Json\JsonParser.cs" />
+    <Compile Include="Common\Transate\ITranslateController.cs" />
+    <Compile Include="Common\Transate\TranslateController.cs" />
     <Compile Include="ImportBase\DictionaryProxy.cs" />
     <Compile Include="ImportBase\FieldValue.cs" />
     <Compile Include="ImportBase\IImportExcelColumn.cs" />
@@ -176,6 +178,10 @@
     <Compile Include="Masters\Item\Color\OlcItemColorList.cs" />
     <Compile Include="Masters\Item\Color\OlcItemColors.cs" />
     <Compile Include="Masters\Item\Color\OlcItemColorSearchPage.cs" />
+    <Compile Include="Masters\Item\Import\ColorException.cs" />
+    <Compile Include="Masters\Item\Import\ImpColorException.cs" />
+    <Compile Include="Masters\Item\Import\ImpColorExceptionGenerated.cs" />
+    <Compile Include="Masters\Item\Import\ImpColorExceptions.cs" />
     <Compile Include="Masters\Item\Import\ImportConditionalConverter.cs" />
     <Compile Include="Masters\Item\Import\ItemImportConditional.cs" />
     <Compile Include="Masters\Item\Import\ItemImportMessageException.cs" />
@@ -186,8 +192,8 @@
     <Compile Include="Masters\Item\Import\ItemRowContext.cs" />
     <Compile Include="Masters\Item\Import\OlcMultiplePrcTable.cs" />
     <Compile Include="Masters\Item\ItemBL3.cs" />
-    <Compile Include="Masters\Item\ItemCmps2.cs" />
-    <Compile Include="Masters\Item\ItemEditTab2.cs" />
+    <Compile Include="Masters\Item\ItemCmps3.cs" />
+    <Compile Include="Masters\Item\ItemEditTab3.cs" />
     <Compile Include="Masters\Item\ItemExts.cs" />
     <Compile Include="Masters\Item\ItemMatrix\Items.cs" />
     <Compile Include="Masters\Item\ColorTypeList.cs" />
@@ -216,9 +222,9 @@
     <Compile Include="Masters\Item\MainGroup\OlcItemSizeRangeSearchPage.cs" />
     <Compile Include="Masters\Item\MaterialTypeList.cs" />
     <Compile Include="Masters\Item\Model\ExclusiveTypeList.cs" />
-    <Compile Include="Masters\Item\Model\ItemSearchProvider3.cs" />
-    <Compile Include="Masters\Item\Model\ItemSearchTab3.cs" />
-    <Compile Include="Masters\Item\Model\ItemSearchTab3Info.cs" />
+    <Compile Include="Masters\Item\ItemSearchProvider3.cs" />
+    <Compile Include="Masters\Item\ItemSearchTab3.cs" />
+    <Compile Include="Masters\Item\ItemSearchTab3Info.cs" />
     <Compile Include="Masters\Item\Model\OlcItemModelAllList.cs" />
     <Compile Include="Masters\Item\Model\OlcItemModelList.cs" />
     <Compile Include="Masters\Item\Model\OlcItemModelSearchPage.cs" />
@@ -384,6 +390,7 @@
     <Compile Include="Setup\PriceTable\OlcPrcTypeGenerated.cs" />
     <Compile Include="Setup\PriceTable\OlcPrcTypeList.cs" />
     <Compile Include="Setup\PriceTable\OlcPrcTypeSearchPage.cs" />
+    <Compile Include="Setup\Type\TypeLineBL3.cs" />
     <Compile Include="Setup\Warehouse\OlcWhLocation.cs" />
     <Compile Include="Setup\Warehouse\OlcWhLocationBL.cs" />
     <Compile Include="Setup\Warehouse\OlcWhLocationEditPage.cs" />

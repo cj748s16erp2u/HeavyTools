@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using eLog.Base.Masters.Item;
 using eLog.Base.Setup.CustTariff;
+using eLog.Base.Setup.Type;
 using eLog.Base.Setup.Unit;
 using eLog.HeavyTools.ImportBase;
 using eLog.HeavyTools.ImportBase.Xlsx;
@@ -12,6 +13,7 @@ using eLog.HeavyTools.Masters.Item.Model;
 using eLog.HeavyTools.Masters.Item.Season;
 using eLog.HeavyTools.Masters.Partner;
 using eLog.HeavyTools.Masters.PriceTable;
+using eLog.HeavyTools.Setup.Type;
 using eLog.HeavyTools.Webshop;
 using eProjectWeb.Framework;
 using eProjectWeb.Framework.BL;
@@ -29,6 +31,7 @@ namespace eLog.HeavyTools.Masters.Item.Import
         public static string ItemImportRuning = "ItemImportRuning";
         private ItemBL ItemBL;
         private ItemExtBL ItemExtBL;
+        private ColorException ColorException;
 
         public ItemImportService() : base()
         {
@@ -43,6 +46,8 @@ namespace eLog.HeavyTools.Masters.Item.Import
         {
             this.ItemBL = ItemBL.New();
             this.ItemExtBL = Base.Masters.Item.ItemExtBL.New();
+
+            ColorException = new ColorException();
 
             var success = 0;
 
@@ -208,7 +213,7 @@ namespace eLog.HeavyTools.Masters.Item.Import
                     prcs.Add(CreatePrc(ConvertUtils.ToDecimal(result.MultiplePrcTable.Entity["Ar3"]), 5, "EUR", PrcType.Actual));
                     prcs.Add(CreatePrc(ConvertUtils.ToDecimal(result.MultiplePrcTable.Entity["Ar4"]), 6, "EUR", PrcType.Actual, WebshopType.sk, 20, 2));
                     prcs.Add(CreatePrc(ConvertUtils.ToDecimal(result.MultiplePrcTable.Entity["Ar9"]), 6, "EUR", PrcType.Original, WebshopType.sk, 20, 2));
-                    prcs.Add(CreatePrc(ConvertUtils.ToDecimal(result.MultiplePrcTable.Entity["Ar5"]), 2, "HUF", PrcType.Actual));
+                    prcs.Add(CreatePrc(ConvertUtils.ToDecimal(result.MultiplePrcTable.Entity["Ar5"]), 2, "HUF", PrcType.Original));
                     prcs.Add(CreatePrc(ConvertUtils.ToDecimal(result.MultiplePrcTable.Entity["Ar7"]), 6, "EUR", PrcType.Actual, WebshopType.com, 27, 0));
                     prcs.Add(CreatePrc(ConvertUtils.ToDecimal(result.MultiplePrcTable.Entity["Ar10"]), 6, "EUR", PrcType.Original, WebshopType.com, 27, 0));
                     prcs.Add(CreatePrc(ConvertUtils.ToDecimal(result.MultiplePrcTable.Entity["Ar8"]), 5, "EUR", PrcType.Original));
@@ -236,17 +241,20 @@ namespace eLog.HeavyTools.Masters.Item.Import
                     prcs.Add(CreatePrc(ConvertUtils.ToDecimal(result.MultiplePrcTable.Entity["Ar9"]), 3, "EUR", PrcType.Original));
 
 
+                    prcs.Add(CreatePrc(ConvertUtils.ToDecimal(result.MultiplePrcTable.Entity["Ar0"]), 2, "HUF", PrcType.Actual));
+
+
                     foreach (OlcPrctable impPrc in prcs.AllRows)
                     {
                         var pk = new Key()
-                    {
-                        { OlcPrctable.FieldPrc.Name, impPrc.Prc },
-                        { OlcPrctable.FieldPtid.Name, impPrc.Ptid },
-                        { OlcPrctable.FieldCurid.Name, impPrc.Curid },
-                        { OlcPrctable.FieldStartdate.Name, impPrc.Startdate },
-                        { OlcPrctable.FieldEnddate.Name, impPrc.Enddate },
-                        { OlcPrctable.FieldImid.Name, its.Imid }
-                    };
+                            {
+                                { OlcPrctable.FieldPrc.Name, impPrc.Prc },
+                                { OlcPrctable.FieldPtid.Name, impPrc.Ptid },
+                                { OlcPrctable.FieldCurid.Name, impPrc.Curid },
+                                { OlcPrctable.FieldStartdate.Name, impPrc.Startdate },
+                                { OlcPrctable.FieldEnddate.Name, impPrc.Enddate },
+                                { OlcPrctable.FieldImid.Name, its.Imid }
+                            };
 
                         if (ConvertUtils.ToInt32(itc.Iscollectionarticlenumber) == 0)
                         {
@@ -398,22 +406,7 @@ namespace eLog.HeavyTools.Masters.Item.Import
                         map.Add(result.OlcItem.Entity);
                     }
                      
-                    try
-                    { 
-                        var colorname = ConvertUtils.ToString(result.Item.Entity[BItem.FieldName01]).Split(' ')[1];
-                        var colortype = (int)SqlDataAdapter.ExecuteSingleValue(DB.Main,
-                            string.Format(@"select value from ols_typeline where typegrpid=507 and name={0}", Utils.SqlToString(colorname)));
-                         
-                        result.OlcItem.Entity[OlcItem.FieldColorname.Name] = colorname;
-                        result.OlcItem.Entity[OlcItem.FieldColortype1.Name] = colortype;
-                    }
-                    catch (Exception)
-                    {
-                        throw new ItemImportMessageException("$colornamecannotfound".eLogTransl(ConvertUtils.ToString(result.Item.Entity[BItem.FieldName01])));
-                    }
-                     
-
-                    var origItemCmps = origItem != null ? ItemCmps2.LoadAll(origItem.PK) : null;
+                    var origItemCmps = origItem != null ? ItemCmps3.LoadAll(origItem.PK) : null;
                     var itemCmps = ItemCmps.New();
                     foreach (var pc in result.ItemCmps)
                     {
@@ -443,7 +436,35 @@ namespace eLog.HeavyTools.Masters.Item.Import
                         catch (Exception)
                         { 
                         }
-                        
+
+
+
+
+                        ImpColorException ice; 
+                        var IsColorException = ColorException.IsColorException(isidCode, imidCode, out ice);
+                        if (IsColorException)
+                        {
+                            result.OlcItem.Entity[OlcItem.FieldColortype1.Name] = ice.ColorValue1;
+                            result.OlcItem.Entity[OlcItem.FieldColortype2.Name] = ice.ColorValue2;
+                            result.OlcItem.Entity[OlcItem.FieldColortype3.Name] = ice.ColorValue3;
+                            result.OlcItem.Entity[OlcItem.FieldPatterntype.Name] = ice.SampleValue1;
+                            result.OlcItem.Entity[OlcItem.FieldPatterntype2.Name] = ice.SampleValue2;
+                        } else 
+                        {
+                            try
+                            {
+                                var colorname = ConvertUtils.ToString(result.Item.Entity[BItem.FieldName01]).Split(' ')[1];
+                                var colortype = (int)SqlDataAdapter.ExecuteSingleValue(DB.Main,
+                                    string.Format(@"select value from ols_typeline where typegrpid=507 and name={0}", Utils.SqlToString(colorname)));
+
+                                result.OlcItem.Entity[OlcItem.FieldColorname.Name] = colorname;
+                                result.OlcItem.Entity[OlcItem.FieldColortype1.Name] = colortype;
+                            }
+                            catch (Exception)
+                            {
+                                throw new ItemImportMessageException("$colornamecannotfound".eLogTransl(ConvertUtils.ToString(result.Item.Entity[BItem.FieldName01])));
+                            }
+                        }
 
                         var img = OlcItemMainGroup.Load(new Key() { { OlcItemMainGroup.FieldOldcode.Name, imgOldCode } });
                         if (img == null)
@@ -704,9 +725,147 @@ order by c.icid", Utils.SqlToString(imid.Imid), Utils.SqlToString(isid.Isid))));
                     return true;
                 }
 
+                if (result.TypeHeadColor != null)
+                {
+
+                    //var tbl = TypeLineBL3.New();
+                    //var map = tbl.CreateBLObjects();
+
+                    var ck = new Key
+                    {
+                        { TypeLine.FieldName.Name, ConvertUtils.ToString(result.TypeHeadColor.Entity[TypeLine.FieldName]) },
+                        { TypeLine.FieldValue.Name, ConvertUtils.ToString(result.TypeHeadColor.Entity[TypeLine.FieldValue]) },
+                    };
+
+                    var origItem = TypeLine.Load(ck);
+                    //map.Default = result.TypeHeadColor.Entity;
+                    if (origItem != null)
+                    {
+                        this.logger.Log(" [modify] ");
+                        origItem.MergeTo(result.TypeHeadColor.Entity);
+
+                        result.TypeHeadColor.Entity.State = DataRowState.Modified;
+                        //map.SysParams.ActionID = ActionID.Modify;
+                    }
+                    try
+                    {
+                        Session.Current[ItemImportService.ItemImportRuning] = true;
+                        //tbl.Save(map);
+                        result.TypeHeadColor.Entity.Save();
+                        Session.Current[ItemImportService.ItemImportRuning] = false;
+                    }
+                    catch (Exception e)
+                    {
+                        throw new ItemImportMessageException("$colorsaveerror".eLogTransl(e.Message));
+                    }
+
+                    return true;
+                }
+
+                if (result.ImpColorException != null)
+                {
+                    var ck = new Key
+                    {
+                        { ImpColorException.FieldModelnumber.Name,
+                            ConvertUtils.ToString(result.ImpColorException.Entity[ImpColorException.FieldModelnumber]) },
+                        { ImpColorException.FieldColorbalance.Name, 
+                            ConvertUtils.ToString(result.ImpColorException.Entity[ImpColorException.FieldColorbalance]) },
+                        { ImpColorException.FieldSeason.Name, 
+                            ConvertUtils.ToString(result.ImpColorException.Entity[ImpColorException.FieldSeason]) },
+                    };
+
+                    var origItem = ImpColorException.Load(ck);
+                    if (origItem != null)
+                    {
+                        this.logger.Log(" [modify] ");
+                        origItem.MergeTo(result.ImpColorException.Entity);
+                        result.ImpColorException.Entity.State = DataRowState.Modified;
+                    }
+                    try
+                    {
+                        Session.Current[ItemImportService.ItemImportRuning] = true;
+
+                        var mn = ConvertUtils.ToString(result.ImpColorException.Entity[ImpColorException.FieldModelnumber]);
+
+                        if (mn != null)
+                        {
+                            mn = mn.Replace("-", "");
+                        }
+
+                        result.ImpColorException.Entity[ImpColorException.FieldModelnumber] = mn;
+                        
+                         result.ImpColorException.Entity.Save();
+
+                        var ice = ConvertUtils.ToInt32(result.ImpColorException.Entity[ImpColorException.FieldIce]);
+
+                        var ok = true;
+                        var found = false;
+                        var errorfield = "";
+
+                        foreach (var row in SqlDataAdapter.Query(String.Format(@"
+select color1, color2, color3, sample1, sample2, 
+	tl1.value c1, tl2.value c2, tl3.value c3, tl4.value s1, tl5.value s2
+  from imp_colorexception e
+  left join ols_typeline tl1 on tl1.typegrpid=507 and tl1.name=e.color1
+  left join ols_typeline tl2 on tl2.typegrpid=507 and tl2.name=e.color2
+  left join ols_typeline tl3 on tl3.typegrpid=507 and tl3.name=e.color3
+  left join ols_typeline tl4 on tl4.typegrpid=501 and tl4.str1=e.sample1
+  left join ols_typeline tl5 on tl5.typegrpid=501 and tl5.str1=e.sample2
+  where e.ice={0}
+", ice)).AllRows)
+                        {
+                            found = true;
+                             
+                            var color1 = ConvertUtils.ToString(row["color1"]);
+                            var color2 = ConvertUtils.ToString(row["color2"]);
+                            var color3 = ConvertUtils.ToString(row["color3"]);
+                            var sample1 = ConvertUtils.ToString(row["sample1"]);
+                            var sample2 = ConvertUtils.ToString(row["sample2"]);
+                            var c1 = ConvertUtils.ToInt32(row["c1"]);
+                            var c2 = ConvertUtils.ToInt32(row["c2"]);
+                            var c3 = ConvertUtils.ToInt32(row["c3"]);
+                            var s1 = ConvertUtils.ToInt32(row["s1"]);
+                            var s2 = ConvertUtils.ToInt32(row["s2"]);
+
+                            CheckValue(color1, c1, ref ok, ref errorfield, "Szín 1");
+                            CheckValue(color2, c2, ref ok, ref errorfield, "Szín 2");
+                            CheckValue(color3, c3, ref ok, ref errorfield, "Szín 3");
+                            CheckValue(sample1, s1, ref ok, ref errorfield, "Minta 1");
+                            CheckValue(sample2, s2, ref ok, ref errorfield, "Minta 2");
+
+                        }
+                        if (!found || !ok)
+                        {
+                            throw new ItemImportMessageException(Translator.Translate("$impcolorexceptionmissingtypeline", errorfield));
+                        }
+
+
+                        Session.Current[ItemImportService.ItemImportRuning] = false;
+                    }
+                    catch (Exception e)
+                    {
+                        throw new ItemImportMessageException("$impcolorexceptionsaveerror".eLogTransl(e.Message));
+                    }
+
+                    return true;
+                }
+
                 return null;
             }
         }
+
+        private void CheckValue(string str, int? typelinevalie, ref bool ok, ref string errorfield, string name)
+        {
+            if (!string.IsNullOrEmpty(str))
+            {
+                if (!typelinevalie.HasValue)
+                {
+                    ok = false;
+                    errorfield = name;
+                }
+            }
+        }
+
         private OlcPrctable CreatePrc(decimal? prc, int ptid, string curid, PrcType prcType)
         {
             return CreatePrc(prc, ptid, curid, prcType, null, null, null);
@@ -752,6 +911,8 @@ order by c.icid", Utils.SqlToString(imid.Imid), Utils.SqlToString(isid.Isid))));
                 PrcTable = rowContext.PrcTable,
                 MultiplePrcTable = rowContext.MultiplePrcTable,
                 ItemMainGroup = rowContext.ItemMainGroup,
+                TypeHeadColor= rowContext.TypeHeadColor,
+                ImpColorException = rowContext.ImpColorException,
                 LogText = rowContext.LogText,
                 Row = rowContext.Row,
                 LogCol = rowContext.LogCol,
@@ -863,7 +1024,7 @@ order by c.icid", Utils.SqlToString(imid.Imid), Utils.SqlToString(isid.Isid))));
                         Alias = alias,
                         Table = rowContext.CurrentTable,
                         Schema = OlcMultiplePrcTable.GetSchema(),
-                        Entity = new OlcMultiplePrcTable()
+                        Entity = OlcMultiplePrcTable.CreateNew()
                     };
                     rowContext.CurrentEntry = entry;
                     rowContext.MultiplePrcTable = entry;
@@ -878,6 +1039,28 @@ order by c.icid", Utils.SqlToString(imid.Imid), Utils.SqlToString(isid.Isid))));
                     };
                     rowContext.CurrentEntry = entry;
                     rowContext.ItemMainGroup = entry;
+                    break;
+                case "ols_typeline":
+                    entry = new TableEntry
+                    {
+                        Alias = alias,
+                        Table = rowContext.CurrentTable,
+                        Schema = TypeLine.GetSchema(),
+                        Entity = TypeLine.CreateNew()
+                    };
+                    rowContext.CurrentEntry = entry;
+                    rowContext.TypeHeadColor = entry;
+                    break;
+                case "imp_colorexception":
+                    entry = new TableEntry
+                    {
+                        Alias = alias,
+                        Table = rowContext.CurrentTable,
+                        Schema = ImpColorException.GetSchema(),
+                        Entity = ImpColorException.CreateNew()
+                    };
+                    rowContext.CurrentEntry = entry;
+                    rowContext.ImpColorException = entry;
                     break;
                 default:
                     throw new ArgumentOutOfRangeException(nameof(rowContext.CurrentTable.Table), rowContext.CurrentTable.Table, nameof(this.CreateEntity));
@@ -898,7 +1081,9 @@ order by c.icid", Utils.SqlToString(imid.Imid), Utils.SqlToString(isid.Isid))));
                 case "ols_itemsup": rowContext.ItemSup = null; break;
                 case "olc_multipleprctable": rowContext.MultiplePrcTable = null; break;
                 case "olc_itemmaingroup": rowContext.ItemMainGroup = null; break;
-
+                case "imp_colorexception": rowContext.ImpColorException = null; break;
+                case "ols_typeline": rowContext.TypeHeadColor = null; break;
+                     
                 default:
                     throw new ArgumentOutOfRangeException(nameof(rowContext.CurrentTable.Table), rowContext.CurrentTable.Table, nameof(this.RemoveEntity));
             }

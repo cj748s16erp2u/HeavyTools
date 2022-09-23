@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Schema xmlns="http://tempuri.org/RenderableSchema.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://tempuri.org/RenderableSchema.xsd RenderableSchema.xsd">
-  <TabPage Name="ItemEditTab2">
+  <TabPage Name="ItemEditTab3">
     <LayoutTable ControlGroup="Item" Columns="{130, None}; {180, None}; {20, Empty}; {130, None}; {180, None};" ID="EditGroup1" Label="$group_item">
       <!--<GroupSeparator Label="$group_item" ColsToSpan="-1"/>-->
       <Textbox Field="itemcode" />
@@ -67,4 +67,46 @@
       <Textbox Field="cmpid" Visible="False" />
     </LayoutContainer>
   </TabPage>
+  
+  <Search Name="ItemSearchProvider3">
+    <Column FieldName="itemid" Hidden="True" Align="Right" PKFieldName="itemid" />
+    <Column FieldName="itemcode" Width="140" />
+    <Column FieldName="name01" Width="200" />
+    <Column FieldName="custtarid" Width="80" Align="Left" />
+    <Column FieldName="itemgrpid" Width="80" />
+    <Column FieldName="unitid" Width="40" Align="Left" DisplayName="$unitidshort" />
+    <Column FieldName="releasedate" Width="80" Format="D" />
+    <Column FieldName="barcode" Width="100" />
+    <Column FieldName="cmpcodes_" DisplayName="$cmpcodes" Width="80" />
+    <Column FieldName="note2" Width="150" />
+    <Column FieldName="taxid" Width="100" />
+    <Column FieldName="delstat" Width="50" FieldFunction="listlookup" FieldFuncArg="eLog.Base.Setup.Parameters.DelstatTypeList,abbr" />
+  </Search>
+  
+  <ControlType Name="ItemSearchTab3Info" Label="$group_modelinfo"> 
+	<Combo Field="imid" Width="300"  ListID="eLog.HeavyTools.Masters.Item.Model.OlcItemModelAllList" ComboFlags="None" Disabled="true"/>
+ </ControlType>
+  
+  <TabPage Name="ItemSearchTab3">
+	<Control ControlType="ItemSearchTab3Info" ID="ItemSearchTab3Info" />
+	<SearchFilterBar ID="SrcBar">
+		<Textbox Field="itemcode" Width="100" />
+		<Textbox Field="name01" Width="205" ColsToSpan="3" />
+		<CheckedCombo Field="itemgrpid" ListID="eLog.Base.Setup.ItemGroup.ItemGroupList" ComboFlags="None" Width="100" />
+		<ForceNextRow/>
+		<Textbox Field="rootitemcode" Width="100" />
+		<DatePickerbox Field="reldatefrom" Width="100" />
+		<DatePickerbox Field="reldateto" Width="100"/>
+		<Combo Field="delstat" ListID="eLog.Base.Setup.Parameters.DelstatTypeList" ComboFlags="AllowBlank AutoSelectFirst" Width="100" />
+		<ForceNextRow/>
+		<Textbox Field="barcode" Width="100" />
+		<Textbox Field="ext" Width="100" />
+		<Empty />
+		<CheckedCombo Field="cmpcodes" ListID="eLog.Base.Setup.Company.CompanyCodeList#loggedinonly" ComboFlags="AllowBlank" Width="100" />
+		<ForceNextRow/>
+		 
+    </SearchFilterBar>
+    <Grid StatusBar="True" FilterBar="True" ID="searchResults" Label="$search_results_items" MultiSelect="True" />
+  </TabPage>
+  
 </Schema>

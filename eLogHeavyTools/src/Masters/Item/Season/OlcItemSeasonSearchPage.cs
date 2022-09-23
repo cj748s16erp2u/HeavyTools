@@ -2,6 +2,7 @@
 using eProjectWeb.Framework;
 using eProjectWeb.Framework.BL;
 using eProjectWeb.Framework.Data;
+using eProjectWeb.Framework.UI.Controls;
 using eProjectWeb.Framework.UI.Templates;
 
 
@@ -54,6 +55,19 @@ namespace eLog.HeavyTools.Masters.Item.Season
             var t = (OlcItemSeasonEditTab)ObjectFactory.New(typeof(OlcItemSeasonEditTab));
             t.Initialize("OlcItemSeason", setup);
             return t;
+        }
+        protected override void CreateBase()
+        {
+            base.CreateBase();
+            OnPageLoad += this.OlcItemSeasonEditTab_OnPageLoad;
+        }
+
+        private void OlcItemSeasonEditTab_OnPageLoad(PageUpdateArgs args)
+        {
+            if (args.ActionID != ActionID.New)
+            {
+                FindRenderable<Textbox>("isid").Disabled = true;
+            }
         }
     }
 

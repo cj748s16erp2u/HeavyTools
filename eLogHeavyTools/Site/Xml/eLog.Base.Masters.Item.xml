@@ -1,0 +1,37 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema xmlns="http://tempuri.org/RenderableSchema.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://tempuri.org/RenderableSchema.xsd RenderableSchema.xsd">
+    <TabPage Name="ItemSupEditTab">
+        <Control ID="itemInfoPart" ControlType="ItemInfoPart" />
+        <LayoutTable ControlGroup="ItemSup" Columns="{150, None}; {180, None}; {20, Empty}; {120, None}; {180, None}" ID="EditGroup1">
+            <Combo Field="cmpid" ListID="eLog.Base.Setup.Company.CompanyGrantedList" ComboFlags="None" />
+            <Checkbox Field="def" />
+            <ForceNextRow />
+            <Selector Field="suppartnid" Label="$suppartncode" ValueField="partnid" TextField="partncode" SelectionID="eLog.Base.Masters.Partner.PartnerSelectionProvider" DependentCtrlID="ItemSup.cmpid" DependentField="cmpid" />
+            <ForceNextRow />
+            <Selector Field="suppartnid" Label="$suppartnname" ValueField="partnid" TextField="name" SelectionID="eLog.Base.Masters.Partner.PartnerSelectionProvider" ColsToSpan="-1" />
+            <ForceNextRow />
+            <Numberbox Field="ordminqty" DecDigits="2" ThousandSep="True" />
+            <Numberbox Field="ordmaxqty" DecDigits="2" ThousandSep="True" />
+            <ForceNextRow />
+            <Numberbox Field="ordunitqty" DecDigits="2" ThousandSep="True" />
+            <Combo Field="unitid" ListID="eLog.Base.Setup.Unit.UnitList" ComboFlags="AutoSelectFirst"  Label="$unitid3" />
+            <ForceNextRow />
+            <Intbox Field="leadtime" ThousandSep="True" />
+        </LayoutTable>
+    </TabPage>
+	
+	    <Search Name="ItemSupSearchProvider">
+        <Column FieldName="itemid" Hidden="True" PKFieldName="itemid" />
+        <Column FieldName="cmpid" Width="60" PKFieldName="cmpid" FieldFunction="listlookup" FieldFuncArg="eLog.Base.Setup.Company.CompanyLoggedInList" />
+        <Column FieldName="def" Width="20" FieldFunction="bool1" />
+        <Column FieldName="suppartnid" Hidden="True" PKFieldName="suppartnid" />
+        <Column FieldName="suppartncode" Width="100" />
+        <Column FieldName="suppartnname" Width="150" />
+        <Column FieldName="ordminqty" Format="C" Width="100" />
+        <Column FieldName="ordunitqty" Format="C" Width="100" />
+        <Column FieldName="unitid" Width="60" DisplayName="$unitid3b" />
+        <Column FieldName="ordmaxqty" Format="C" Width="100" />
+        <Column FieldName="leadtime" Width="100" />
+    </Search>
+	
+</Schema>

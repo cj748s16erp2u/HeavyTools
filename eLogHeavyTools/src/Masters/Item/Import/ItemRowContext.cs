@@ -15,6 +15,8 @@ namespace eLog.HeavyTools.Masters.Item.Import
         public TableEntry ItemSup { get; internal set; }
         public TableEntry MultiplePrcTable { get; internal set; }
         public TableEntry ItemMainGroup { get; internal set; }
+        public TableEntry TypeHeadColor { get; internal set; }
+        public TableEntry ImpColorException { get; internal set; }
 
         public override void Dispose()
         {
@@ -32,6 +34,8 @@ namespace eLog.HeavyTools.Masters.Item.Import
             this.ItemSup = null;
             this.MultiplePrcTable = null;
             this.ItemMainGroup = null;
+            this.TypeHeadColor = null;
+            this.ImpColorException = null;
         }
     }
 }
