@@ -4,7 +4,7 @@ $tabName_PartnCmpCust=Partner - vállalat
 
 $relatedaccno=Banki elszámoló szla.
 $skontoaacno=Skonto elszámoló szla.
-$scontoinvoice=Skonto 
+$scontoinvoice=Skonto
 $scontobelowaccno=3% alatti skonto szla.
 $scontoaboveaccno=3% feletti skonto szla.
 $transactionfeeaccno=Tranzakciós díj szla.
