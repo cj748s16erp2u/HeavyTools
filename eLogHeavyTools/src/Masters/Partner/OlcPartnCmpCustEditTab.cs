@@ -16,6 +16,11 @@ namespace eLog.HeavyTools.Masters.Partner
 {
     public class OlcPartnCmpCustEditTab : eProjectWeb.Framework.UI.Templates.EditTabTemplate1<OlcPartnCmp, OlcPartnCmpRules, OlcPartnCmpCustBL>
     {
+        protected LayoutTable EditGroup2;
+        protected LayoutTable EditGroup3;
+        protected LayoutTable EditGroup4;
+        protected LayoutTable EditGroup5;
+
         #region RelatedAccno
         protected Control ctrlRelAccnoEl1Code;
         protected Control ctrlRelAccnoEl1Name;
@@ -114,6 +119,16 @@ namespace eLog.HeavyTools.Masters.Partner
         protected Control ctrlEl8Prefix;
         #endregion
 
+        protected Control ctrlcmpid_grp2;
+        protected Control ctrlcmpid_grp3;
+        protected Control ctrlcmpid_grp4;
+        protected Control ctrlcmpid_grp5;
+
+        protected Control ctrlRelatedaccno;
+        protected Control ctrlScontobelowaccno;
+        protected Control ctrlScontoaboveaccno;
+        protected Control ctrlTransactionfeeaccno;
+
         public static OlcPartnCmpCustEditTab New(eProjectWeb.Framework.UI.Templates.DefaultPageSetup custom)
         {
             var t = ObjectFactory.New<OlcPartnCmpCustEditTab>();
@@ -130,79 +145,104 @@ namespace eLog.HeavyTools.Masters.Partner
             base.CreateBase();
 
             #region RelatedAccno
-            ctrlRelAccnoEl1Code = EditGroup1["relaccno_el1_code"];
-            ctrlRelAccnoEl1Name = EditGroup1["relaccno_el1_name"];
-            ctrlRelAccnoEl2Code = EditGroup1["relaccno_el2_code"];
-            ctrlRelAccnoEl2Name = EditGroup1["relaccno_el2_name"];
-            ctrlRelAccnoEl3Code = EditGroup1["relaccno_el3_code"];
-            ctrlRelAccnoEl3Name = EditGroup1["relaccno_el3_name"];
-            ctrlRelAccnoEl4Code = EditGroup1["relaccno_el4_code"];
-            ctrlRelAccnoEl4Name = EditGroup1["relaccno_el4_name"];
-            ctrlRelAccnoEl5Code = EditGroup1["relaccno_el5_code"];
-            ctrlRelAccnoEl5Name = EditGroup1["relaccno_el5_name"];
-            ctrlRelAccnoEl6Code = EditGroup1["relaccno_el6_code"];
-            ctrlRelAccnoEl6Name = EditGroup1["relaccno_el6_name"];
-            ctrlRelAccnoEl7Code = EditGroup1["relaccno_el7_code"];
-            ctrlRelAccnoEl7Name = EditGroup1["relaccno_el7_name"];
-            ctrlRelAccnoEl8Code = EditGroup1["relaccno_el8_code"];
-            ctrlRelAccnoEl8Name = EditGroup1["relaccno_el8_name"];
+            EditGroup2 = this["EditGroup2"] as LayoutTable;
+            if (EditGroup2 != null)
+            {
+                ctrlRelatedaccno= EditGroup2["relatedaccno"];
+                ctrlcmpid_grp2 = EditGroup2["cmpid_grp2"];
+                ctrlRelAccnoEl1Code = EditGroup2["relaccno_el1_code"];
+                ctrlRelAccnoEl1Name = EditGroup2["relaccno_el1_name"];
+                ctrlRelAccnoEl2Code = EditGroup2["relaccno_el2_code"];
+                ctrlRelAccnoEl2Name = EditGroup2["relaccno_el2_name"];
+                ctrlRelAccnoEl3Code = EditGroup2["relaccno_el3_code"];
+                ctrlRelAccnoEl3Name = EditGroup2["relaccno_el3_name"];
+                ctrlRelAccnoEl4Code = EditGroup2["relaccno_el4_code"];
+                ctrlRelAccnoEl4Name = EditGroup2["relaccno_el4_name"];
+                ctrlRelAccnoEl5Code = EditGroup2["relaccno_el5_code"];
+                ctrlRelAccnoEl5Name = EditGroup2["relaccno_el5_name"];
+                ctrlRelAccnoEl6Code = EditGroup2["relaccno_el6_code"];
+                ctrlRelAccnoEl6Name = EditGroup2["relaccno_el6_name"];
+                ctrlRelAccnoEl7Code = EditGroup2["relaccno_el7_code"];
+                ctrlRelAccnoEl7Name = EditGroup2["relaccno_el7_name"];
+                ctrlRelAccnoEl8Code = EditGroup2["relaccno_el8_code"];
+                ctrlRelAccnoEl8Name = EditGroup2["relaccno_el8_name"];
+
+            }
             #endregion
 
             #region ScontoBelowAccno
-            ctrlScontBelowAccnoEl1Code = EditGroup1["scbaccno_el1_code"];
-            ctrlScontBelowAccnoEl1Name = EditGroup1["scbaccno_el1_name"];
-            ctrlScontBelowAccnoEl2Code = EditGroup1["scbaccno_el2_code"];
-            ctrlScontBelowAccnoEl2Name = EditGroup1["scbaccno_el2_name"];
-            ctrlScontBelowAccnoEl3Code = EditGroup1["scbaccno_el3_code"];
-            ctrlScontBelowAccnoEl3Name = EditGroup1["scbaccno_el3_name"];
-            ctrlScontBelowAccnoEl4Code = EditGroup1["scbaccno_el4_code"];
-            ctrlScontBelowAccnoEl4Name = EditGroup1["scbaccno_el4_name"];
-            ctrlScontBelowAccnoEl5Code = EditGroup1["scbaccno_el5_code"];
-            ctrlScontBelowAccnoEl5Name = EditGroup1["scbaccno_el5_name"];
-            ctrlScontBelowAccnoEl6Code = EditGroup1["scbaccno_el6_code"];
-            ctrlScontBelowAccnoEl6Name = EditGroup1["scbaccno_el6_name"];
-            ctrlScontBelowAccnoEl7Code = EditGroup1["scbaccno_el7_code"];
-            ctrlScontBelowAccnoEl7Name = EditGroup1["scbaccno_el7_name"];
-            ctrlScontBelowAccnoEl8Code = EditGroup1["scbaccno_el8_code"];
-            ctrlScontBelowAccnoEl8Name = EditGroup1["scbaccno_el8_name"];
+            EditGroup3 = this["EditGroup3"] as LayoutTable;
+            if (EditGroup3 != null)
+            {
+                ctrlScontobelowaccno = EditGroup3["scontobelowaccno"];
+                ctrlcmpid_grp3 = EditGroup3["cmpid_grp3"];
+                ctrlScontBelowAccnoEl1Code = EditGroup3["scbaccno_el1_code"];
+                ctrlScontBelowAccnoEl1Name = EditGroup3["scbaccno_el1_name"];
+                ctrlScontBelowAccnoEl2Code = EditGroup3["scbaccno_el2_code"];
+                ctrlScontBelowAccnoEl2Name = EditGroup3["scbaccno_el2_name"];
+                ctrlScontBelowAccnoEl3Code = EditGroup3["scbaccno_el3_code"];
+                ctrlScontBelowAccnoEl3Name = EditGroup3["scbaccno_el3_name"];
+                ctrlScontBelowAccnoEl4Code = EditGroup3["scbaccno_el4_code"];
+                ctrlScontBelowAccnoEl4Name = EditGroup3["scbaccno_el4_name"];
+                ctrlScontBelowAccnoEl5Code = EditGroup3["scbaccno_el5_code"];
+                ctrlScontBelowAccnoEl5Name = EditGroup3["scbaccno_el5_name"];
+                ctrlScontBelowAccnoEl6Code = EditGroup3["scbaccno_el6_code"];
+                ctrlScontBelowAccnoEl6Name = EditGroup3["scbaccno_el6_name"];
+                ctrlScontBelowAccnoEl7Code = EditGroup3["scbaccno_el7_code"];
+                ctrlScontBelowAccnoEl7Name = EditGroup3["scbaccno_el7_name"];
+                ctrlScontBelowAccnoEl8Code = EditGroup3["scbaccno_el8_code"];
+                ctrlScontBelowAccnoEl8Name = EditGroup3["scbaccno_el8_name"];
+            }
             #endregion
 
             #region ScontoAboveAccno
-            ctrlScontAboveAccnoEl1Code = EditGroup1["scaaccno_el1_code"];
-            ctrlScontAboveAccnoEl1Name = EditGroup1["scaaccno_el1_name"];
-            ctrlScontAboveAccnoEl2Code = EditGroup1["scaaccno_el2_code"];
-            ctrlScontAboveAccnoEl2Name = EditGroup1["scaaccno_el2_name"];
-            ctrlScontAboveAccnoEl3Code = EditGroup1["scaaccno_el3_code"];
-            ctrlScontAboveAccnoEl3Name = EditGroup1["scaaccno_el3_name"];
-            ctrlScontAboveAccnoEl4Code = EditGroup1["scaaccno_el4_code"];
-            ctrlScontAboveAccnoEl4Name = EditGroup1["scaaccno_el4_name"];
-            ctrlScontAboveAccnoEl5Code = EditGroup1["scaaccno_el5_code"];
-            ctrlScontAboveAccnoEl5Name = EditGroup1["scaaccno_el5_name"];
-            ctrlScontAboveAccnoEl6Code = EditGroup1["scaaccno_el6_code"];
-            ctrlScontAboveAccnoEl6Name = EditGroup1["scaaccno_el6_name"];
-            ctrlScontAboveAccnoEl7Code = EditGroup1["scaaccno_el7_code"];
-            ctrlScontAboveAccnoEl7Name = EditGroup1["scaaccno_el7_name"];
-            ctrlScontAboveAccnoEl8Code = EditGroup1["scaaccno_el8_code"];
-            ctrlScontAboveAccnoEl8Name = EditGroup1["scaaccno_el8_name"];
+            EditGroup4 = this["EditGroup4"] as LayoutTable;
+            if (EditGroup4 != null)
+            {
+                ctrlScontoaboveaccno = EditGroup4["scontoaboveaccno"];
+                ctrlcmpid_grp4 = EditGroup4["cmpid_grp4"];
+                ctrlScontAboveAccnoEl1Code = EditGroup4["scaaccno_el1_code"];
+                ctrlScontAboveAccnoEl1Name = EditGroup4["scaaccno_el1_name"];
+                ctrlScontAboveAccnoEl2Code = EditGroup4["scaaccno_el2_code"];
+                ctrlScontAboveAccnoEl2Name = EditGroup4["scaaccno_el2_name"];
+                ctrlScontAboveAccnoEl3Code = EditGroup4["scaaccno_el3_code"];
+                ctrlScontAboveAccnoEl3Name = EditGroup4["scaaccno_el3_name"];
+                ctrlScontAboveAccnoEl4Code = EditGroup4["scaaccno_el4_code"];
+                ctrlScontAboveAccnoEl4Name = EditGroup4["scaaccno_el4_name"];
+                ctrlScontAboveAccnoEl5Code = EditGroup4["scaaccno_el5_code"];
+                ctrlScontAboveAccnoEl5Name = EditGroup4["scaaccno_el5_name"];
+                ctrlScontAboveAccnoEl6Code = EditGroup4["scaaccno_el6_code"];
+                ctrlScontAboveAccnoEl6Name = EditGroup4["scaaccno_el6_name"];
+                ctrlScontAboveAccnoEl7Code = EditGroup4["scaaccno_el7_code"];
+                ctrlScontAboveAccnoEl7Name = EditGroup4["scaaccno_el7_name"];
+                ctrlScontAboveAccnoEl8Code = EditGroup4["scaaccno_el8_code"];
+                ctrlScontAboveAccnoEl8Name = EditGroup4["scaaccno_el8_name"];
+            }
             #endregion
 
             #region TransactionFeeAccno
-            ctrlTransFeeAccnoEl1Code = EditGroup1["transaccno_el1_code"];
-            ctrlTransFeeAccnoEl1Name = EditGroup1["transaccno_el1_name"];
-            ctrlTransFeeAccnoEl2Code = EditGroup1["transaccno_el2_code"];
-            ctrlTransFeeAccnoEl2Name = EditGroup1["transaccno_el2_name"];
-            ctrlTransFeeAccnoEl3Code = EditGroup1["transaccno_el3_code"];
-            ctrlTransFeeAccnoEl3Name = EditGroup1["transaccno_el3_name"];
-            ctrlTransFeeAccnoEl4Code = EditGroup1["transaccno_el4_code"];
-            ctrlTransFeeAccnoEl4Name = EditGroup1["transaccno_el4_name"];
-            ctrlTransFeeAccnoEl5Code = EditGroup1["transaccno_el5_code"];
-            ctrlTransFeeAccnoEl5Name = EditGroup1["transaccno_el5_name"];
-            ctrlTransFeeAccnoEl6Code = EditGroup1["transaccno_el6_code"];
-            ctrlTransFeeAccnoEl6Name = EditGroup1["transaccno_el6_name"];
-            ctrlTransFeeAccnoEl7Code = EditGroup1["transaccno_el7_code"];
-            ctrlTransFeeAccnoEl7Name = EditGroup1["transaccno_el7_name"];
-            ctrlTransFeeAccnoEl8Code = EditGroup1["transaccno_el8_code"];
-            ctrlTransFeeAccnoEl8Name = EditGroup1["transaccno_el8_name"];
+            EditGroup5 = this["EditGroup5"] as LayoutTable;
+            if (EditGroup5 != null)
+            {
+                ctrlTransactionfeeaccno = EditGroup5["transactionfeeaccno"];
+                ctrlcmpid_grp5 = EditGroup5["cmpid_grp5"];
+                ctrlTransFeeAccnoEl1Code = EditGroup5["transaccno_el1_code"];
+                ctrlTransFeeAccnoEl1Name = EditGroup5["transaccno_el1_name"];
+                ctrlTransFeeAccnoEl2Code = EditGroup5["transaccno_el2_code"];
+                ctrlTransFeeAccnoEl2Name = EditGroup5["transaccno_el2_name"];
+                ctrlTransFeeAccnoEl3Code = EditGroup5["transaccno_el3_code"];
+                ctrlTransFeeAccnoEl3Name = EditGroup5["transaccno_el3_name"];
+                ctrlTransFeeAccnoEl4Code = EditGroup5["transaccno_el4_code"];
+                ctrlTransFeeAccnoEl4Name = EditGroup5["transaccno_el4_name"];
+                ctrlTransFeeAccnoEl5Code = EditGroup5["transaccno_el5_code"];
+                ctrlTransFeeAccnoEl5Name = EditGroup5["transaccno_el5_name"];
+                ctrlTransFeeAccnoEl6Code = EditGroup5["transaccno_el6_code"];
+                ctrlTransFeeAccnoEl6Name = EditGroup5["transaccno_el6_name"];
+                ctrlTransFeeAccnoEl7Code = EditGroup5["transaccno_el7_code"];
+                ctrlTransFeeAccnoEl7Name = EditGroup5["transaccno_el7_name"];
+                ctrlTransFeeAccnoEl8Code = EditGroup5["transaccno_el8_code"];
+                ctrlTransFeeAccnoEl8Name = EditGroup5["transaccno_el8_name"];
+            }
             #endregion
 
             #region ElmLevel
@@ -226,6 +266,7 @@ namespace eLog.HeavyTools.Masters.Partner
             ctrlEl7Prefix = EditGroup1["el7prefix"];
             ctrlEl8Prefix = EditGroup1["el8prefix"];
             #endregion
+
         }
 
         protected override OlcPartnCmp DefaultPageLoad(PageUpdateArgs args)
@@ -254,14 +295,23 @@ namespace eLog.HeavyTools.Masters.Partner
                 var olcPartnCmp = OlcPartnCmp.Load(e.PK);
                 if (olcPartnCmp != null)
                 {
+                    ctrlcmpid_grp2.SetValue(olcPartnCmp.Cmpid);
+                    ctrlcmpid_grp3.SetValue(olcPartnCmp.Cmpid);
+                    ctrlcmpid_grp4.SetValue(olcPartnCmp.Cmpid);
+                    ctrlcmpid_grp5.SetValue(olcPartnCmp.Cmpid);
+
                     // RelatedAccno
-                    SetupSelectors(args, olcPartnCmp.Relatedaccno.ToStr(), "relaccno", false);
+                    ctrlRelatedaccno.SetValue(olcPartnCmp.Relatedaccno.ToStr());
+                    SetupSelectors(args, EditGroup2, olcPartnCmp.Relatedaccno.ToStr(), "relaccno", false);
                     // ScontoBelowAccno
-                    SetupSelectors(args, olcPartnCmp.Scontobelowaccno.ToStr(), "scbaccno", false);
+                    ctrlScontobelowaccno.SetValue(olcPartnCmp.Scontobelowaccno.ToStr());
+                    SetupSelectors(args, EditGroup3, olcPartnCmp.Scontobelowaccno.ToStr(), "scbaccno", false);
                     // ScontoAboveAccno
-                    SetupSelectors(args, olcPartnCmp.Scontoaboveaccno.ToStr(), "scaaccno", false);
+                    ctrlScontoaboveaccno.SetValue(olcPartnCmp.Scontoaboveaccno.ToStr());
+                    SetupSelectors(args, EditGroup4, olcPartnCmp.Scontoaboveaccno.ToStr(), "scaaccno", false);
                     // TransactionFeeAccno
-                    SetupSelectors(args, olcPartnCmp.Transactionfeeaccno.ToStr(), "transaccno", false);
+                    ctrlTransactionfeeaccno.SetValue(olcPartnCmp.Transactionfeeaccno.ToStr());
+                    SetupSelectors(args, EditGroup5, olcPartnCmp.Transactionfeeaccno.ToStr(), "transaccno", false);
                 }
             }
 
@@ -272,14 +322,14 @@ namespace eLog.HeavyTools.Masters.Partner
         {
             var map = base.SaveControlsToBLObjectMap(args, pc);
 
-            var relAcccode = GetAcccode("relaccno");
-            pc.Relatedaccno = relAcccode.ToString();
-            var scontBelowAcccode = GetAcccode("scbaccno");
-            pc.Scontobelowaccno = scontBelowAcccode.ToString();
-            var scontAboveAcccode = GetAcccode("scaaccno");
-            pc.Scontoaboveaccno = scontAboveAcccode.ToString();
-            var transAcccode = GetAcccode("transaccno");
-            pc.Transactionfeeaccno = transAcccode.ToString();
+            var relAcccode = GetAcccode(EditGroup2, "relaccno");
+            pc.Relatedaccno = string.IsNullOrEmpty(relAcccode.Replace(".","")) ? "" : relAcccode.ToString();
+            var scontBelowAcccode = GetAcccode(EditGroup3, "scbaccno");
+            pc.Scontobelowaccno = string.IsNullOrEmpty(scontBelowAcccode.Replace(".", "")) ? "" : scontBelowAcccode.ToString();
+            var scontAboveAcccode = GetAcccode(EditGroup4, "scaaccno");
+            pc.Scontoaboveaccno = string.IsNullOrEmpty(scontAboveAcccode.Replace(".", "")) ? "" : scontAboveAcccode.ToString();
+            var transAcccode = GetAcccode(EditGroup5, "transaccno");
+            pc.Transactionfeeaccno = string.IsNullOrEmpty(transAcccode.Replace(".", "")) ? "" : transAcccode.ToString();
 
             return map;
         }
@@ -293,18 +343,18 @@ namespace eLog.HeavyTools.Masters.Partner
             }
         }
 
-        private void SetupSelectors(PageUpdateArgs args, string def, string ctrlDef, bool setVisibility)
+        private void SetupSelectors(PageUpdateArgs args, LayoutTable l, string def, string ctrlDef, bool setVisibility)
         {
             if (!string.IsNullOrEmpty(def))
             {
                 var maskParts = def.Split('.');
 
-                if (EditGroup1 != null)
+                if (l != null)
                 {
                     for (int level = 1; level <= 8; level++)
                     {
-                        var ctrlCode = EditGroup1[ctrlDef.ToString() + "_el" + level.ToString() + "_code"];
-                        var ctrlName = EditGroup1[ctrlDef.ToString() + "_el" + level.ToString() + "_name"];
+                        var ctrlCode = l[ctrlDef.ToString() + "_el" + level.ToString() + "_code"];
+                        var ctrlName = l[ctrlDef.ToString() + "_el" + level.ToString() + "_name"];
                         var ctrlPrefix = EditGroup1["el" + level.ToString() + "prefix"];
 
                         if (ctrlCode != null && ctrlName != null && ctrlPrefix != null)
@@ -347,16 +397,16 @@ namespace eLog.HeavyTools.Masters.Partner
             return ret;
         }
 
-        protected virtual string GetAcccode(string ctrlDef)
+        protected virtual string GetAcccode(LayoutTable l, string ctrlDef)
         {
             var sep = "";
             var acccode = "";
 
-            if (EditGroup1 != null)
+            if (l != null)
             {
                 for (int level = 1; level <= 8; level++)
                 {
-                    var ctrl = EditGroup1[ctrlDef.ToString() + "_el" + level.ToString() + "_code"];
+                    var ctrl = l[ctrlDef.ToString() + "_el" + level.ToString() + "_code"];
                     if (ctrl != null)
                     {
                         acccode += GetAcccodeParts(ctrl, ref sep);
