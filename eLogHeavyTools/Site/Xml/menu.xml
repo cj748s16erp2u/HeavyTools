@@ -142,7 +142,7 @@
             <Item ID="StockReplace" Name="$stockreplace" PageID="eLog.Base.Warehouse.StockReplace.StockReplaceSearchPage"/>
             <Item ID="Pack" Name="$pack" PageID="eLog.Base.Warehouse.Pack.PackPage"/>
             <Item ID="TranspHead" Name="$transphead" PageID="eLog.Base.Warehouse.Transport.TranspHeadSearchPage" Group="WhTransport"/>
-			<Item ID="WhLocPrio" Name="$whlocprio" PageID="eLog.HeavyTools.Warehouse.WhLocPrio.WhLocPrioSearchPage"/>
+			<Item ID="OlcWhLocPrio" Name="$olcwhlocprio" PageID="eLog.HeavyTools.Warehouse.WhLocPrio.OlcWhLocPrioSearchPage"/>
 		</Item>
         <Item ID="Service" Name="$service_root">
             <Item ID="SvcWorksheet" Name="$svcworksheet" PageID="eLog.Base.ServiceSvc.ServiceWorksheet.SvcWorksheetHeadSearchPage"/>

@@ -9,11 +9,11 @@ using System.Threading.Tasks;
 
 namespace eLog.HeavyTools.Warehouse.WhLocPrio
 {
-    public class WhLocPrioSearchTab:SearchTabTemplate1
+    public class OlcWhLocPrioSearchTab : SearchTabTemplate1
     {
-        public static WhLocPrioSearchTab New(DefaultPageSetup setup)
+        public static OlcWhLocPrioSearchTab New(DefaultPageSetup setup)
         {
-            var t = ObjectFactory.New<WhLocPrioSearchTab>();
+            var t = ObjectFactory.New<OlcWhLocPrioSearchTab>();
             t.Initialize(nameof(OlcWhLocPrio), setup, DefaultActions.NewModify);
             return t;
         }

@@ -4,7 +4,7 @@ $pageName_OlcWhLocPrio=Elsődleges helykód
 
 ;Aktív helykódok fül
 
-$WhLocPrioSearchTab=Aktív helykódok
+$OlcWhLocPrioSearchTab=Aktív helykódok
 
 $itemname01=Cikk megnevezése
 $whzoneid=Zóna
@@ -17,8 +17,9 @@ $whloccode=Helykód kódja
 $date=Érvényesség
 $startdate=Érvényesség kezdete
 $enddate=Érvényesség vége
+$whlpid=Id
 
-$WhLocPrioEditTab=Aktív helykódok
+$OlcWhLocPrioEditTab=Aktív helykódok
 
 $itemid_code=Cikk kódja
 $itemid_name1=Cikk megnevezése
@@ -26,7 +27,7 @@ $refillimit=Utántöltési küszöb
 
 ;Összes helykód fül
 
-$WhLocPrioAllSearchTab=Összes helykód
+$OlcWhLocPrioAllSearchTab=Összes helykód
 
 ;Hibák
 

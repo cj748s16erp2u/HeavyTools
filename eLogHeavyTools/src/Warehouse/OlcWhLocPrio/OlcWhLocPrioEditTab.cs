@@ -9,11 +9,11 @@ using System.Threading.Tasks;
 
 namespace eLog.HeavyTools.Warehouse.WhLocPrio
 {
-    public class WhLocPrioEditTab:EditTabTemplate1<OlcWhLocPrio,OlcWhLocPrioRules,OlcWhLocPrioBL>
+    public class OlcWhLocPrioEditTab : EditTabTemplate1<OlcWhLocPrio, OlcWhLocPrioRules, OlcWhLocPrioBL>
     {
-        public static WhLocPrioEditTab New(DefaultPageSetup setup)
+        public static OlcWhLocPrioEditTab New(DefaultPageSetup setup)
         {
-            var t = ObjectFactory.New<WhLocPrioEditTab>();
+            var t = ObjectFactory.New<OlcWhLocPrioEditTab>();
             t.Initialize(nameof(OlcWhLocPrio), setup);
             return t;
         }
@@ -25,7 +25,7 @@ namespace eLog.HeavyTools.Warehouse.WhLocPrio
 
         protected override OlcWhLocPrio DefaultPageLoad(PageUpdateArgs args)
         {
-            var e =  base.DefaultPageLoad(args);
+            var e = base.DefaultPageLoad(args);
             return e;
         }
 

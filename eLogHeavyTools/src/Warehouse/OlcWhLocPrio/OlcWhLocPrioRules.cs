@@ -71,7 +71,7 @@ namespace eLog.HeavyTools.Warehouse.WhLocPrio
                 var loc = GetOlcWhLocation(ctx);
                 if (loc.Loctype != (int)OlcWhLocation_LocType.Normal)
                 {
-                    ctx.AddErrorField(OlcWhLocPrio.FieldWhlocid.Name,"$err_olcwhlocprio_whlocid", olcWhLocPrio.Whid.Value);
+                    ctx.AddErrorField(OlcWhLocPrio.FieldWhlocid.Name, "$err_olcwhlocprio_whlocid", olcWhLocPrio.Whid.Value);
                 }
             }
         }
@@ -97,19 +97,19 @@ namespace eLog.HeavyTools.Warehouse.WhLocPrio
         private void CheckItemActivePeriodRule(RuleValidateContext ctx, OlcWhLocPrio olcWhLocPrio)
         {
             var bl = OlcWhLocPrioBL.New();
-            
-            var checkResult = bl.CheckItemActivePeriod(olcWhLocPrio.Itemid,olcWhLocPrio.Startdate, olcWhLocPrio.Enddate, olcWhLocPrio.Whpriotype, olcWhLocPrio.Whlpid);
+
+            var checkResult = bl.CheckItemActivePeriod(olcWhLocPrio.Itemid, olcWhLocPrio.Startdate, olcWhLocPrio.Enddate, olcWhLocPrio.Whpriotype, olcWhLocPrio.Whlpid);
             if (checkResult)
             {
                 var item = Base.Masters.Item.Item.Load(olcWhLocPrio.Itemid);
-                ctx.AddErrorField(OlcWhLocPrio.FieldItemid.Name, "$err_olcwhlocprio_itemid", item?.Itemcode,olcWhLocPrio.Startdate, olcWhLocPrio.Enddate);
+                ctx.AddErrorField(OlcWhLocPrio.FieldItemid.Name, "$err_olcwhlocprio_itemid", item?.Itemcode, olcWhLocPrio.Startdate, olcWhLocPrio.Enddate);
             }
         }
 
         private void CheckItemIsMultiRule(RuleValidateContext ctx, OlcWhLocPrio olcWhLocPrio)
         {
             var bl = OlcWhLocPrioBL.New();
-            var checkResult = bl.CheckItemIsMulti(olcWhLocPrio.Whlocid,olcWhLocPrio.Itemid,olcWhLocPrio.Startdate,olcWhLocPrio.Enddate,olcWhLocPrio.Whlpid);
+            var checkResult = bl.CheckItemIsMulti(olcWhLocPrio.Whlocid, olcWhLocPrio.Itemid, olcWhLocPrio.Startdate, olcWhLocPrio.Enddate, olcWhLocPrio.Whlpid);
             if (checkResult)
             {
                 var loc = GetOlcWhLocation(ctx);

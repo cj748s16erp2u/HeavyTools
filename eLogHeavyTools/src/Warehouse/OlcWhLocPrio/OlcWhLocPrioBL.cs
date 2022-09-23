@@ -10,12 +10,12 @@ using System.Threading.Tasks;
 
 namespace eLog.HeavyTools.Warehouse.WhLocPrio
 {
-    public class OlcWhLocPrioBL:DefaultBL1<OlcWhLocPrio,OlcWhLocPrioRules>
+    public class OlcWhLocPrioBL : DefaultBL1<OlcWhLocPrio, OlcWhLocPrioRules>
     {
         public static readonly string ID = typeof(OlcWhLocPrioBL).FullName;
 
-        public static T New<T>() where T: OlcWhLocPrioBL
-        { 
+        public static T New<T>() where T : OlcWhLocPrioBL
+        {
             return ObjectFactory.New<T>();
         }
 
@@ -24,7 +24,7 @@ namespace eLog.HeavyTools.Warehouse.WhLocPrio
             return New<OlcWhLocPrioBL>();
         }
 
-        protected OlcWhLocPrioBL():base(DefaultBLFunctions.Basic)
+        protected OlcWhLocPrioBL() : base(DefaultBLFunctions.Basic)
         {
 
         }
@@ -58,7 +58,7 @@ where [p].[enddate] >= {Utils.SqlToString(startdate)}
                 sql += $" and p.whlpid<>{Utils.SqlToString(whlpid)}";
             }
             var obj = SqlDataAdapter.ExecuteSingleValue(DB.Main, sql);
-            return ConvertUtils.ToInt32(obj).GetValueOrDefault()!=0;
+            return ConvertUtils.ToInt32(obj).GetValueOrDefault() != 0;
         }
 
 
