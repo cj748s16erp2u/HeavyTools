@@ -48,5 +48,51 @@
 		<Column FieldName="barcode" Width="120"/>
 	</Search>
 	
-	
+	<TabPage Name="RetailSinvTab">
+
+		<LayoutTable ControlGroup="Defaddr" Columns="{120, None}; {250, None}; {20, Empty}; {120, None}; {180, None}" ID="EditGroup0" Label="$group_data">
+			<Intbox Field="itemcount" disabled="true"/>
+			<Numberbox Field="price" disabled="true" Format="C0"/>
+		</LayoutTable>
+
+		<SearchFilterBar ID="SrcBar">
+			<Selector Field="partnid" Label="$partn_code" ValueField="partnid" TextField="partncode" SelectionID="eLog.Base.Masters.Partner.PartnerSelectionProvider" Width="190"/>
+			<Selector Field="partnid" Label="$partn_name" ValueField="partnid" TextField="name" SelectionID="eLog.Base.Masters.Partner.PartnerSelectionProvider" ColsToSpan="-1" Width="240"/>
+			<ForceNextRow/>
+			<Combo Field="addrid" ListID="eLog.Base.Masters.Partner.PartnAddrList" ComboFlags="None AllowBlank FindAnywhere AutoSelectFirst" DependentCtrlID="q.partnid_partncode" DependentField="partnid" ColsToSpan="-1"/>
+		</SearchFilterBar>
+		<LayoutTable ControlGroup="Defaddr4" Columns="{160, None}; {180, None}; {20, Empty}; {120, None}; {180, None}" ID="EditGroup4" Label="$sinvtype">
+			<Combo Field="ptvattypid" ListID="eLog.Base.Setup.PartnVatType.PartnVatTypList#vistype=2" ComboFlags="AllowBlank" ColsToSpan="-1" />
+		</LayoutTable>
+   
+		<LayoutTable ControlGroup="Defaddr2" Columns="{120, None}; {180, None}; {20, Empty}; {120, None}; {180, None}" ID="EditGroup2" Label="$sinvdata">
+			<Textbox Field="partnname"/>
+			<ForceNextRow/>
+			<Textbox Field="buyvatnum"/>
+			<ForceNextRow/>
+			<Textbox Field="buyvatnumeu"/>
+			<ForceNextRow/>
+			<Textbox Field="buygroupvatnum"/>
+			<ForceNextRow/>
+			<Combo Field="countryid" ListID="eLog.Base.Setup.Country.CountryList" ComboFlags="None" DisplayRows="3"/>
+			<Combo Field="regid" ListID="eLog.Base.Setup.Country.RegionList" ComboFlags="None" DependentField="countryid" DependentCtrlID="PartnAddr.countryid"/>
+			<Selector Field="postcode" Label="$postcode" MasterKey="postcode" DoNotPropagateNullValue="True" ValueField="postcode" TextField="postcode" SelectionID="eLog.Base.Setup.Country.PostcodeSelectionProvider" DependentField="countryid" DependentCtrlID="countryid"/>
+			<Selector Field="add01" Label="$city" MasterKey="postcode" DoNotPropagateNullValue="True" ValueField="city" TextField="city" SelectionID="eLog.Base.Setup.Country.PostcodeSelectionProvider" DependentField="countryid" DependentCtrlID="countryid"/>
+			<Textbox Field="add02" ColsToSpan="-1" Disabled="true"/>
+			<Textbox Field="district"/>
+			<ForceNextRow/>
+			<Textbox Field="place" ColsToSpan="3"/>
+			<ForceNextRow/>
+			<Textbox Field="placetype"/>
+			<ForceNextRow/>
+			<Textbox Field="hnum"/>
+			<ForceNextRow/>
+			<Textbox Field="building"/>
+			<Textbox Field="stairway"/>
+			<Textbox Field="floor"/>
+			<Textbox Field="door"/>
+
+		</LayoutTable>
+
+	</TabPage>
 </Schema>
