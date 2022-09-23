@@ -1,6 +1,7 @@
 ﻿using eLog.HeavyTools.InterfaceCaller;
 using eProjectWeb.Framework;
 using eProjectWeb.Framework.Data;
+using eProjectWeb.Framework.UI.Controls;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,10 +14,20 @@ namespace eLog.HeavyTools.Sales.Retail.Cart
     internal class CartBL
     {
         private CartData CartData = null;
+        private readonly Numberbox originalValue;
+        private readonly Numberbox discValue;
+        private readonly Numberbox totValue;
+        private readonly Numberbox payValue;
+        private readonly Numberbox missingValue;
 
-        public CartBL()
+        public CartBL(Numberbox originalValue, Numberbox discValue, Numberbox totValue, Numberbox payValue, Numberbox missingValue)
         {
             LoadFromDB();
+            this.originalValue = originalValue;
+            this.discValue = discValue;
+            this.totValue = totValue;
+            this.payValue = payValue;
+            this.missingValue = missingValue;
         }
 
         private void LoadFromDB()
@@ -73,7 +84,7 @@ namespace eLog.HeavyTools.Sales.Retail.Cart
         }
 
         internal void Recalc()
-        { 
+        {
             var d = new InterfaceCallerBL().CartCalucate(CartData);
             foreach (var item in d.Items2)
             {
@@ -105,7 +116,22 @@ namespace eLog.HeavyTools.Sales.Retail.Cart
                     }
                 }
             }
+            FillTotal();
+        }
 
+        public void FillTotal()
+        {
+            var ct = GetCartTotal();
+            originalValue.Value = ct.GetOriginalValue();
+            discValue.Value = ct.GetDiscValue();
+            totValue.Value = ct.GetTotValue();
+            payValue.Value = ct.GetPayValue();
+            missingValue.Value = ct.GetMissingValue();
+        }
+
+        public CartTotal GetCartTotal()
+        {
+            return new CartTotal(Session.Current.UserID, CartData.Curid);
         }
 
         internal void AddCupon(string cupon)

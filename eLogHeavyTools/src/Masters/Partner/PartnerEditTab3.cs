@@ -113,18 +113,52 @@ namespace eLog.HeavyTools.Masters.Partner
 
                 foreach (Control c in l.Controls)
                 {
+                    // selectorban is le kell cserelni a xx.cmpid-t a combo mintajara
+                    if (c is Selector)
+                    {
+                        if (!string.IsNullOrEmpty(((Selector)c).DependentCtrlID))
+                        {
+                            var oldDepCtrlId = ((Selector)c).DependentCtrlID;
+                            List<string> depCtrlIds = new List<string>();
+                            foreach (var i in oldDepCtrlId.Split(','))
+                            {
+                                if (i.StartsWith(CmpContainer.ControlGroup + "."))
+                                {
+                                    //depCtrlIds.Add("#" + cmpid.ToString());
+                                    depCtrlIds.Add(l.ControlGroup + "." + CmpGroupControlIdPrefix(cmpid) + i.Substring(CmpContainer.ControlGroup.Length + 1));
+                                }
+                                else
+                                    depCtrlIds.Add(i);
+                            }
+
+                            ((Selector)c).DependentCtrlID = depCtrlIds.Count > 1 ? string.Join(",", depCtrlIds) :
+                                depCtrlIds.Count == 1 ? depCtrlIds.First() : oldDepCtrlId;
+                        }
+                    }
+
                     string id = c.ID;
+                    bool find = false;
                     if (id.StartsWith(prefix))
                     {
                         string fieldName = id.Substring(prefix.Length);
+                        if (fieldName == "el3_code") fieldName = "el3";
 
-                        if (fieldName.Equals(OlcPartnCmp.FieldSecpaymid.Name))
+                        foreach (var olcField in OlcPartnCmp.GetSchema().Fields)
                         {
-                            Field field = OlcPartnCmp.GetSchema().Fields.Get(fieldName);
-                            if (field != null)
-                                c.Value = olcpc[field];
+                            if (find)
+                                continue;
+
+                            if (fieldName.Equals(olcField.Name))
+                            {
+                                Field field = OlcPartnCmp.GetSchema().Fields.Get(fieldName);
+                                if (field != null)
+                                {
+                                    c.Value = olcpc[field];
+                                    find = true;
+                                }
+                            }
                         }
-                        else
+                        if (!find)
                         {
                             Field field = PartnCmp.GetSchema().Fields.Get(fieldName);
                             if (field != null)
@@ -156,6 +190,7 @@ namespace eLog.HeavyTools.Masters.Partner
                     if (id.StartsWith(prefix))
                     {
                         string fieldName = id.Substring(prefix.Length);
+                        if (fieldName == "el3_code") fieldName = "el3";
                         Field field = OlcPartnCmp.GetSchema().Fields.Get(fieldName);
                         if (field != null)
                             pc[field] = c.Value;
@@ -187,5 +222,42 @@ namespace eLog.HeavyTools.Masters.Partner
                 this.ctrlLoyaltyTurnover.SetValue(null, args: args);
             }
         }
+        
+        protected override void CreateControls(PageUpdateArgs updateArgs)
+        {
+            // vallalatonkenti el3 selector miatt, a code-name par megtalalja egymast
+
+            base.CreateControls(updateArgs);
+
+            foreach (LayoutTable cmpGroup in CmpGroups)
+            {
+                int cmpid = GetCmpIdByCmpLayoutPanel(cmpGroup);
+                if (cmpid < 1)
+                    continue;
+
+                foreach (Control c in cmpGroup.Controls.Cast<eProjectWeb.Framework.UI.Controls.Control>().ToList())
+                {
+                    if (!(c is eProjectWeb.Framework.UI.Controls.Selector))
+                        continue;
+
+                    var origSelector = (eProjectWeb.Framework.UI.Controls.Selector)c;
+                    var newSelector = new eProjectWeb.Framework.UI.Controls.Selector()
+                    {
+                        Field = origSelector.Field.Split('_')[0] + '_' + origSelector.Field.Split('_')[1] + '_' +
+                            origSelector.Field.Split('_')[2],
+                        ValueField = origSelector.ValueField,
+                        TextField = origSelector.TextField,
+                        SelectionID = origSelector.SelectionID,
+                        DependentCtrlID = origSelector.DependentCtrlID,
+                        DependentField = origSelector.DependentField,
+                        LabelId = origSelector.LabelId,
+
+                    };
+                    cmpGroup.AddControl(newSelector);
+                    cmpGroup.RemoveControl(origSelector);
+                }
+            }
+        }
+
     }
 }

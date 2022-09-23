@@ -200,7 +200,7 @@ namespace eLog.HeavyTools.Masters.PriceTable
 
         public static string DefaultOrderByStr = null;
 
-        protected static string m_queryString = @"select pt.*, p.name as pname , a.name aname, i.itemcode, i.name01, im.code
+        protected static string m_queryString = @"select pt.*, p.name as pname , a.name aname, i.itemcode, i.name01, im.code, im.name mname
   from olc_Prctable pt
   left join ols_partner p on p.partnid=pt.partnid
   left join ols_partnaddr a on a.addrid= pt.addrid
@@ -213,12 +213,12 @@ namespace eLog.HeavyTools.Masters.PriceTable
 
             new QueryArg("partnname", "name","p", FieldType.String, QueryFlags.Like),
             new QueryArg("addrname", "name","a", FieldType.String, QueryFlags.Like),
-            new QueryArg("curid", FieldType.String, QueryFlags.Equals),
-            new QueryArg("date", FieldType.DateTime), 
+            new QueryArg("curid", FieldType.String, QueryFlags.Equals| QueryFlags.MultipleAllowed),
+            new QueryArg("date", FieldType.DateTime),
             new QueryArg("imid","pt", FieldType.Integer, QueryFlags.Equals),
-            new QueryArg("isid", FieldType.String, QueryFlags.Equals),
-            new QueryArg("ptid", FieldType.Integer, QueryFlags.Equals),
-            new QueryArg("icid", FieldType.String, QueryFlags.Equals),
+            new QueryArg("isid", FieldType.String, QueryFlags.Equals| QueryFlags.MultipleAllowed),
+            new QueryArg("ptid", FieldType.Integer, QueryFlags.Equals| QueryFlags.MultipleAllowed),
+            new QueryArg("icid", FieldType.String, QueryFlags.Equals| QueryFlags.MultipleAllowed),
             new QueryArg("itemcode", FieldType.String, QueryFlags.Like),
             new QueryArg("itemname", "name01", "i", FieldType.String, QueryFlags.Like),
             new QueryArg("delstat", "pt", FieldType.Integer, QueryFlags.Equals),

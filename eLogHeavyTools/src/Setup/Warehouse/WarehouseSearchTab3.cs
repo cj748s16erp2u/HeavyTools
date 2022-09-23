@@ -11,7 +11,7 @@ namespace eLog.HeavyTools.Setup.Warehouse
     {
         #region IXmlObjectName
 
-        protected static Type baseType = typeof(WarehouseSearchTab);
+        protected static System.Type baseType = typeof(WarehouseSearchTab);
 
         public override string GetNamespaceName()
         {

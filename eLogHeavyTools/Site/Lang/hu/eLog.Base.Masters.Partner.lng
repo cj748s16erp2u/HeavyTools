@@ -12,6 +12,8 @@ $loyaltycardno=Törzskártyaszám
 $loyaltydiscpercnt=Törzsvevő kedv.(%)
 $loyaltyturnover=Törzskártya forgalom
 $regreprempid=Ter.képviselő
+$el3code=Elem 3
+$el3name=Megnevezés
 
 $action_partnerimport=Partner betöltés
 $err_partnerimport_missingsettings=Hiányzó beállítás: {0}

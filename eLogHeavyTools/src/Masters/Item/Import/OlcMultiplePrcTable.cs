@@ -56,6 +56,8 @@ namespace eLog.HeavyTools.Masters.Item.Import
         [Field("Ar18", DataType = FieldType.Decimal)]
         public static Field FieldAr18 { get; protected set; }
 
+        [Field("Ar0", DataType = FieldType.Decimal)]
+        public static Field FieldAr0 { get; protected set; }
 
 
         public decimal? Ar1 { get { return eProjectWeb.Framework.ConvertUtils.ToDecimal(this[FieldAr1]); } set { this[FieldAr1] = value; } }
@@ -76,6 +78,21 @@ namespace eLog.HeavyTools.Masters.Item.Import
         public decimal? Ar16 { get { return eProjectWeb.Framework.ConvertUtils.ToDecimal(this[FieldAr16]); } set { this[FieldAr16] = value; } }
         public decimal? Ar17 { get { return eProjectWeb.Framework.ConvertUtils.ToDecimal(this[FieldAr17]); } set { this[FieldAr17] = value; } }
         public decimal? Ar18 { get { return eProjectWeb.Framework.ConvertUtils.ToDecimal(this[FieldAr18]); } set { this[FieldAr18] = value; } }
+        public decimal? Ar0 { get { return eProjectWeb.Framework.ConvertUtils.ToDecimal(this[FieldAr0]); } set { this[FieldAr18] = value; } }
+        internal static Entity CreateNew2()
+        {
+            throw new NotImplementedException();
+        }
+
+        public static OlcMultiplePrcTable CreateNew()
+        {
+            OlcMultiplePrcTable val = New();
+            val.DefaultVersion = DataRowVersion.Original;
+            val.SetDefaultValues();
+            val.DefaultVersion = DataRowVersion.Current;
+            val.State = DataRowState.Added;
+            return val;
+        }
 
     }
 }
