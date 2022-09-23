@@ -24,4 +24,4 @@ olc_sordline,eLog.HeavyTools.Sales.Sord,OlcSordLine
 olc_pordhead,eLog.HeavyTools.Purchase.Pord,OlcPordHead
 
 olc_cart,eLog.HeavyTools.Sales.Retail.Cart,OlcCart
-
+olc_cartpay,eLog.HeavyTools.Sales.Retail.Cart,OlcCartPay

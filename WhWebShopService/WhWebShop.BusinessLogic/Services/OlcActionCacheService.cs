@@ -99,11 +99,14 @@ public class OlcActionCacheService : IOlcActionCacheService
 
         var ids = (from a in aids
                    select a.Aid).ToList();
-
+        /*
         foreach (var aid in ids)
         {
             olcCartCacheService.RemoveCartByAction(aid);
         }
+        Mindet törölni kell mert lehet olyan, hogy most nem érinti egy akció a kosarat, de kéne
+        */ 
+        olcCartCacheService.Reset();
 
         var es =
            await olcActionextService.QueryAsync(p => ids.Contains(p.Aid) && p.Delstat == 0, cancellationToken);
