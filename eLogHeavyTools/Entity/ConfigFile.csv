@@ -26,3 +26,5 @@ olc_pordhead,eLog.HeavyTools.Purchase.Pord,OlcPordHead
 olc_cart,eLog.HeavyTools.Sales.Retail.Cart,OlcCart
 
 imp_colorexception,eLog.HeavyTools.Masters.Item.Import,ImpColorException
+
+olc_cartpay,eLog.HeavyTools.Sales.Retail.Cart,OlcCartPay

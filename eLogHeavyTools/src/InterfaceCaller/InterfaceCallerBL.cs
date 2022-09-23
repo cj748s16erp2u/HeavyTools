@@ -111,5 +111,12 @@ namespace eLog.HeavyTools.InterfaceCaller
             var json = @"{}";
             CallInterface("PriceCalc/cartcachereset", json);
         }
+
+        internal void ReloadActions()
+        {
+            var json = @"{""Reset"": {""Aid"": null}}";
+
+            CallInterface("PriceCalc/reset", json);
+        }
     }
 }

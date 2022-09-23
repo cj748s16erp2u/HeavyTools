@@ -169,6 +169,7 @@ internal class PriceCalcService : LogicServiceBase<OlcPriceCalcResult>, IPriceCa
         var cartReset = JsonParser.ParseObject<CalcResetJsonParamsDto>(parms);
 
         return await olcActionCacheService.Reset(cartReset.Aid, cancellationToken);
+
     }
 
     public void ResetCartCacheAsync(JObject value)

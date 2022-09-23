@@ -357,6 +357,11 @@
     <Compile Include="Reports\Financials\StatementOfAccount\StatementOfAccountTextRules.cs" />
     <Compile Include="Reports\Financials\StatementOfAccount\StatementOfAccountTextSearchProvider.cs" />
     <Compile Include="Reports\Financials\StatementOfAccount\StatementOfAccountTextSearchTab.cs" />
+    <Compile Include="Sales\Retail\Cart\BarcodeSelectionProvider.cs" />
+    <Compile Include="Sales\Retail\Cart\BarcodeSelectPage.cs" />
+    <Compile Include="Sales\Retail\Cart\CartTotal.cs" />
+    <Compile Include="Sales\Retail\Cart\OlcCartPay.cs" />
+    <Compile Include="Sales\Retail\Cart\OlcCartPayGenerated.cs" />
     <Compile Include="Sales\Sinv\SinvHeadBL3.cs" />
     <Compile Include="Sales\Sinv\SinvPrintBL3.cs" />
     <Compile Include="Sales\Sinv\SinvPrintCallback3.cs" />
