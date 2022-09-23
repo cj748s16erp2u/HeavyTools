@@ -67,70 +67,70 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="BitFactory.Logging, Version=1.4.1.0, Culture=neutral, PublicKeyToken=de68848483a294a9, processorArchitecture=MSIL">
-      <HintPath>..\..\..\Releases\eLog.Base\v7.2.0.0\Binaries\BitFactory.Logging.dll</HintPath>
+      <HintPath>..\..\..\Releases\eLog.Base\v7.3.0.0\Binaries\BitFactory.Logging.dll</HintPath>
       <SpecificVersion>False</SpecificVersion>
     </Reference>
     <Reference Include="CodaInt.Base, Version=7.0.8201.29971, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\..\Releases\CodaInt.Base\v7.0.0.0\Binaries\CodaInt.Base.dll</HintPath>
+      <HintPath>..\..\..\Releases\CodaInt.Base\v7.3.0.0\Binaries\CodaInt.Base.dll</HintPath>
       <SpecificVersion>False</SpecificVersion>
     </Reference>
     <Reference Include="CODALink, Version=7.0.8201.29967, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\..\Releases\CodaInt.Base\v7.0.0.0\Binaries\CODALink.dll</HintPath>
+      <HintPath>..\..\..\Releases\CodaInt.Base\v7.3.0.0\Binaries\CODALink.dll</HintPath>
       <SpecificVersion>False</SpecificVersion>
     </Reference>
     <Reference Include="eLog.Base, Version=7.2.8201.29968, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\..\Releases\eLog.Base\v7.2.0.0\Binaries\eLog.Base.dll</HintPath>
+      <HintPath>..\..\..\Releases\eLog.Base\v7.3.0.0\Binaries\eLog.Base.dll</HintPath>
       <SpecificVersion>False</SpecificVersion>
     </Reference>
     <Reference Include="eLog.Finance.Base, Version=7.0.8201.29971, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\..\Releases\eLog.Finance.Base\v7.0.0.0\Binaries\eLog.Finance.Base.dll</HintPath>
+      <HintPath>..\..\..\Releases\eLog.Finance.Base\v7.3.0.0\Binaries\eLog.Finance.Base.dll</HintPath>
       <SpecificVersion>False</SpecificVersion>
     </Reference>
     <Reference Include="eLog.Finance.Coda, Version=7.0.8201.29974, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\..\Releases\eLog.Finance.CODA\v7.0.0.0\Binaries\eLog.Finance.Coda.dll</HintPath>
+      <HintPath>..\..\..\Releases\eLog.Finance.CODA\v7.3.0.0\Binaries\eLog.Finance.Coda.dll</HintPath>
       <SpecificVersion>False</SpecificVersion>
     </Reference>
     <Reference Include="eProjectWeb.Framework, Version=7.2.8201.29966, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\..\Releases\eLog.Base\v7.2.0.0\Binaries\eProjectWeb.Framework.dll</HintPath>
+      <HintPath>..\..\..\Releases\eLog.Base\v7.3.0.0\Binaries\eProjectWeb.Framework.dll</HintPath>
       <SpecificVersion>False</SpecificVersion>
     </Reference>
     <Reference Include="eProjectWeb.Framework.Package.Zip, Version=7.0.8201.29976, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\..\Releases\eLog.Base\v7.2.0.0\Binaries\eProjectWeb.Framework.Package.Zip.dll</HintPath>
+      <HintPath>..\..\..\Releases\eLog.Base\v7.3.0.0\Binaries\eProjectWeb.Framework.Package.Zip.dll</HintPath>
       <SpecificVersion>False</SpecificVersion>
     </Reference>
     <Reference Include="eProjectWeb.Framework.Reports.CR, Version=7.0.8201.29976, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\..\Releases\eLog.Base\v7.2.0.0\Binaries\eProjectWeb.Framework.Reports.CR.dll</HintPath>
+      <HintPath>..\..\..\Releases\eLog.Base\v7.3.0.0\Binaries\eProjectWeb.Framework.Reports.CR.dll</HintPath>
       <SpecificVersion>False</SpecificVersion>
     </Reference>
     <Reference Include="eProjectWeb.Framework.Reports.Csv, Version=7.0.8201.29976, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\..\Releases\eLog.Base\v7.2.0.0\Binaries\eProjectWeb.Framework.Reports.Csv.dll</HintPath>
+      <HintPath>..\..\..\Releases\eLog.Base\v7.3.0.0\Binaries\eProjectWeb.Framework.Reports.Csv.dll</HintPath>
       <SpecificVersion>False</SpecificVersion>
     </Reference>
     <Reference Include="eProjectWeb.Framework.Reports.SSRS, Version=7.0.8201.29976, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\..\Releases\eLog.Base\v7.2.0.0\Binaries\eProjectWeb.Framework.Reports.SSRS.dll</HintPath>
+      <HintPath>..\..\..\Releases\eLog.Base\v7.3.0.0\Binaries\eProjectWeb.Framework.Reports.SSRS.dll</HintPath>
       <SpecificVersion>False</SpecificVersion>
     </Reference>
     <Reference Include="eProjectWeb.Framework.Reports.Xls, Version=7.0.8201.29976, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\..\Releases\eLog.Base\v7.2.0.0\Binaries\eProjectWeb.Framework.Reports.Xls.dll</HintPath>
+      <HintPath>..\..\..\Releases\eLog.Base\v7.3.0.0\Binaries\eProjectWeb.Framework.Reports.Xls.dll</HintPath>
       <SpecificVersion>False</SpecificVersion>
     </Reference>
     <Reference Include="eProjectWeb.Framework.Reports.Xlsx, Version=7.0.8201.29976, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\..\Releases\eLog.Base\v7.2.0.0\Binaries\eProjectWeb.Framework.Reports.Xlsx.dll</HintPath>
+      <HintPath>..\..\..\Releases\eLog.Base\v7.3.0.0\Binaries\eProjectWeb.Framework.Reports.Xlsx.dll</HintPath>
       <SpecificVersion>False</SpecificVersion>
     </Reference>
     <Reference Include="U4Ext.Bank.Base">
-      <HintPath>..\..\..\Releases\Bank.Base\v7.2.0.0\Binaries\U4Ext.Bank.Base.dll</HintPath>
+      <HintPath>..\..\..\Releases\Bank.Base\v7.3.0.0\Binaries\U4Ext.Bank.Base.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.ReportViewer.WebForms, Version=12.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
-      <HintPath>..\..\..\Releases\eLog.Base\v7.2.0.0\Binaries\Microsoft.ReportViewer.WebForms.dll</HintPath>
+      <HintPath>..\..\..\Releases\eLog.Base\v7.3.0.0\Binaries\Microsoft.ReportViewer.WebForms.dll</HintPath>
       <SpecificVersion>False</SpecificVersion>
     </Reference>
     <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\..\..\Releases\eLog.Base\v7.2.0.0\Binaries\Newtonsoft.Json.dll</HintPath>
+      <HintPath>..\..\..\Releases\eLog.Base\v7.3.0.0\Binaries\Newtonsoft.Json.dll</HintPath>
       <SpecificVersion>False</SpecificVersion>
     </Reference>
     <Reference Include="org.in2bits.MyXls, Version=0.6.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\..\Releases\eLog.Base\v7.2.0.0\Binaries\org.in2bits.MyXls.dll</HintPath>
+      <HintPath>..\..\..\Releases\eLog.Base\v7.3.0.0\Binaries\org.in2bits.MyXls.dll</HintPath>
       <SpecificVersion>False</SpecificVersion>
     </Reference>
     <Reference Include="System" />
@@ -148,235 +148,235 @@
     <Reference Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="..\..\..\Releases\eLog.Base\v7.2.0.0\SiteFull\fonts\fontawesome-webfont.svg">
+    <Content Include="..\..\..\Releases\eLog.Base\v7.3.0.0\SiteFull\fonts\fontawesome-webfont.svg">
       <Link>fonts\fontawesome-webfont.svg</Link>
     </Content>
-    <Content Include="..\..\..\Releases\eLog.Base\v7.2.0.0\SiteFull\Scripts.dev\010_utils.js">
+    <Content Include="..\..\..\Releases\eLog.Base\v7.3.0.0\SiteFull\Scripts.dev\010_utils.js">
       <Link>scripts.dev\010_utils.js</Link>
     </Content>
-    <Content Include="..\..\..\Releases\eLog.Base\v7.2.0.0\SiteFull\Scripts.dev\020_connection.js">
+    <Content Include="..\..\..\Releases\eLog.Base\v7.3.0.0\SiteFull\Scripts.dev\020_connection.js">
       <Link>scripts.dev\020_connection.js</Link>
     </Content>
-    <Content Include="..\..\..\Releases\eLog.Base\v7.2.0.0\SiteFull\Scripts.dev\030_listCache.js">
+    <Content Include="..\..\..\Releases\eLog.Base\v7.3.0.0\SiteFull\Scripts.dev\030_listCache.js">
       <Link>scripts.dev\030_listCache.js</Link>
     </Content>
-    <Content Include="..\..\..\Releases\eLog.Base\v7.2.0.0\SiteFull\Scripts.dev\040_validator.js">
+    <Content Include="..\..\..\Releases\eLog.Base\v7.3.0.0\SiteFull\Scripts.dev\040_validator.js">
       <Link>scripts.dev\040_validator.js</Link>
     </Content>
-    <Content Include="..\..\..\Releases\eLog.Base\v7.2.0.0\SiteFull\Scripts.dev\050_dialogBox.js">
+    <Content Include="..\..\..\Releases\eLog.Base\v7.3.0.0\SiteFull\Scripts.dev\050_dialogBox.js">
       <Link>scripts.dev\050_dialogBox.js</Link>
     </Content>
-    <Content Include="..\..\..\Releases\eLog.Base\v7.2.0.0\SiteFull\Scripts.dev\100_layout.js">
+    <Content Include="..\..\..\Releases\eLog.Base\v7.3.0.0\SiteFull\Scripts.dev\100_layout.js">
       <Link>scripts.dev\100_layout.js</Link>
     </Content>
-    <Content Include="..\..\..\Releases\eLog.Base\v7.2.0.0\SiteFull\Scripts.dev\105_layoutCtrlSetup.js">
+    <Content Include="..\..\..\Releases\eLog.Base\v7.3.0.0\SiteFull\Scripts.dev\105_layoutCtrlSetup.js">
       <Link>scripts.dev\105_layoutCtrlSetup.js</Link>
     </Content>
-    <Content Include="..\..\..\Releases\eLog.Base\v7.2.0.0\SiteFull\Scripts.dev\110_textbox.js">
+    <Content Include="..\..\..\Releases\eLog.Base\v7.3.0.0\SiteFull\Scripts.dev\110_textbox.js">
       <Link>scripts.dev\110_textbox.js</Link>
     </Content>
-    <Content Include="..\..\..\Releases\eLog.Base\v7.2.0.0\SiteFull\Scripts.dev\111_filteredtextbox.js">
+    <Content Include="..\..\..\Releases\eLog.Base\v7.3.0.0\SiteFull\Scripts.dev\111_filteredtextbox.js">
       <Link>scripts.dev\111_filteredtextbox.js</Link>
     </Content>
-    <Content Include="..\..\..\Releases\eLog.Base\v7.2.0.0\SiteFull\Scripts.dev\120_numberbox.js">
+    <Content Include="..\..\..\Releases\eLog.Base\v7.3.0.0\SiteFull\Scripts.dev\120_numberbox.js">
       <Link>scripts.dev\120_numberbox.js</Link>
     </Content>
-    <Content Include="..\..\..\Releases\eLog.Base\v7.2.0.0\SiteFull\Scripts.dev\139_calendar.js">
+    <Content Include="..\..\..\Releases\eLog.Base\v7.3.0.0\SiteFull\Scripts.dev\139_calendar.js">
       <Link>scripts.dev\139_calendar.js</Link>
     </Content>
-    <Content Include="..\..\..\Releases\eLog.Base\v7.2.0.0\SiteFull\Scripts.dev\140_datebox.js">
+    <Content Include="..\..\..\Releases\eLog.Base\v7.3.0.0\SiteFull\Scripts.dev\140_datebox.js">
       <Link>scripts.dev\140_datebox.js</Link>
     </Content>
-    <Content Include="..\..\..\Releases\eLog.Base\v7.2.0.0\SiteFull\Scripts.dev\150_checkbox.js">
+    <Content Include="..\..\..\Releases\eLog.Base\v7.3.0.0\SiteFull\Scripts.dev\150_checkbox.js">
       <Link>scripts.dev\150_checkbox.js</Link>
     </Content>
-    <Content Include="..\..\..\Releases\eLog.Base\v7.2.0.0\SiteFull\Scripts.dev\160_empty.js">
+    <Content Include="..\..\..\Releases\eLog.Base\v7.3.0.0\SiteFull\Scripts.dev\160_empty.js">
       <Link>scripts.dev\160_empty.js</Link>
     </Content>
-    <Content Include="..\..\..\Releases\eLog.Base\v7.2.0.0\SiteFull\Scripts.dev\170_flagselector.js">
+    <Content Include="..\..\..\Releases\eLog.Base\v7.3.0.0\SiteFull\Scripts.dev\170_flagselector.js">
       <Link>scripts.dev\170_flagselector.js</Link>
     </Content>
-    <Content Include="..\..\..\Releases\eLog.Base\v7.2.0.0\SiteFull\Scripts.dev\180_selector.js">
+    <Content Include="..\..\..\Releases\eLog.Base\v7.3.0.0\SiteFull\Scripts.dev\180_selector.js">
       <Link>scripts.dev\180_selector.js</Link>
     </Content>
-    <Content Include="..\..\..\Releases\eLog.Base\v7.2.0.0\SiteFull\Scripts.dev\190_groupseparator.js">
+    <Content Include="..\..\..\Releases\eLog.Base\v7.3.0.0\SiteFull\Scripts.dev\190_groupseparator.js">
       <Link>scripts.dev\190_groupseparator.js</Link>
     </Content>
-    <Content Include="..\..\..\Releases\eLog.Base\v7.2.0.0\SiteFull\Scripts.dev\200_table.js">
+    <Content Include="..\..\..\Releases\eLog.Base\v7.3.0.0\SiteFull\Scripts.dev\200_table.js">
       <Link>scripts.dev\200_table.js</Link>
     </Content>
-    <Content Include="..\..\..\Releases\eLog.Base\v7.2.0.0\SiteFull\Scripts.dev\349_gridRow.js">
+    <Content Include="..\..\..\Releases\eLog.Base\v7.3.0.0\SiteFull\Scripts.dev\349_gridRow.js">
       <Link>scripts.dev\349_gridRow.js</Link>
     </Content>
-    <Content Include="..\..\..\Releases\eLog.Base\v7.2.0.0\SiteFull\Scripts.dev\350_grid.js">
+    <Content Include="..\..\..\Releases\eLog.Base\v7.3.0.0\SiteFull\Scripts.dev\350_grid.js">
       <Link>scripts.dev\350_grid.js</Link>
     </Content>
-    <Content Include="..\..\..\Releases\eLog.Base\v7.2.0.0\SiteFull\Scripts.dev\355_stateGrid.js">
+    <Content Include="..\..\..\Releases\eLog.Base\v7.3.0.0\SiteFull\Scripts.dev\355_stateGrid.js">
       <Link>scripts.dev\355_stateGrid.js</Link>
     </Content>
-    <Content Include="..\..\..\Releases\eLog.Base\v7.2.0.0\SiteFull\Scripts.dev\356_customGrid.js">
+    <Content Include="..\..\..\Releases\eLog.Base\v7.3.0.0\SiteFull\Scripts.dev\356_customGrid.js">
       <Link>scripts.dev\356_customGrid.js</Link>
     </Content>
-    <Content Include="..\..\..\Releases\eLog.Base\v7.2.0.0\SiteFull\Scripts.dev\360_combo.js">
+    <Content Include="..\..\..\Releases\eLog.Base\v7.3.0.0\SiteFull\Scripts.dev\360_combo.js">
       <Link>scripts.dev\360_combo.js</Link>
     </Content>
-    <Content Include="..\..\..\Releases\eLog.Base\v7.2.0.0\SiteFull\Scripts.dev\361_childcombo.js">
+    <Content Include="..\..\..\Releases\eLog.Base\v7.3.0.0\SiteFull\Scripts.dev\361_childcombo.js">
       <Link>scripts.dev\361_childcombo.js</Link>
     </Content>
-    <Content Include="..\..\..\Releases\eLog.Base\v7.2.0.0\SiteFull\Scripts.dev\365_datespecial.js">
+    <Content Include="..\..\..\Releases\eLog.Base\v7.3.0.0\SiteFull\Scripts.dev\365_datespecial.js">
       <Link>scripts.dev\365_datespecial.js</Link>
     </Content>
-    <Content Include="..\..\..\Releases\eLog.Base\v7.2.0.0\SiteFull\Scripts.dev\366_HTMLEditor.js">
+    <Content Include="..\..\..\Releases\eLog.Base\v7.3.0.0\SiteFull\Scripts.dev\366_HTMLEditor.js">
       <Link>scripts.dev\366_HTMLEditor.js</Link>
     </Content>
-    <Content Include="..\..\..\Releases\eLog.Base\v7.2.0.0\SiteFull\Scripts.dev\367_CustomControl.js">
+    <Content Include="..\..\..\Releases\eLog.Base\v7.3.0.0\SiteFull\Scripts.dev\367_CustomControl.js">
       <Link>scripts.dev\367_CustomControl.js</Link>
     </Content>
-    <Content Include="..\..\..\Releases\eLog.Base\v7.2.0.0\SiteFull\Scripts.dev\369_uploader.js">
+    <Content Include="..\..\..\Releases\eLog.Base\v7.3.0.0\SiteFull\Scripts.dev\369_uploader.js">
       <Link>scripts.dev\369_uploader.js</Link>
     </Content>
-    <Content Include="..\..\..\Releases\eLog.Base\v7.2.0.0\SiteFull\Scripts.dev\370_button.js">
+    <Content Include="..\..\..\Releases\eLog.Base\v7.3.0.0\SiteFull\Scripts.dev\370_button.js">
       <Link>scripts.dev\370_button.js</Link>
     </Content>
-    <Content Include="..\..\..\Releases\eLog.Base\v7.2.0.0\SiteFull\Scripts.dev\380_cmdBar.js">
+    <Content Include="..\..\..\Releases\eLog.Base\v7.3.0.0\SiteFull\Scripts.dev\380_cmdBar.js">
       <Link>scripts.dev\380_cmdBar.js</Link>
     </Content>
-    <Content Include="..\..\..\Releases\eLog.Base\v7.2.0.0\SiteFull\Scripts.dev\390_controlMaster.js">
+    <Content Include="..\..\..\Releases\eLog.Base\v7.3.0.0\SiteFull\Scripts.dev\390_controlMaster.js">
       <Link>scripts.dev\390_controlMaster.js</Link>
     </Content>
-    <Content Include="..\..\..\Releases\eLog.Base\v7.2.0.0\SiteFull\Scripts.dev\400_tabBar.js">
+    <Content Include="..\..\..\Releases\eLog.Base\v7.3.0.0\SiteFull\Scripts.dev\400_tabBar.js">
       <Link>scripts.dev\400_tabBar.js</Link>
     </Content>
-    <Content Include="..\..\..\Releases\eLog.Base\v7.2.0.0\SiteFull\Scripts.dev\470_tab.js">
+    <Content Include="..\..\..\Releases\eLog.Base\v7.3.0.0\SiteFull\Scripts.dev\470_tab.js">
       <Link>scripts.dev\470_tab.js</Link>
     </Content>
-    <Content Include="..\..\..\Releases\eLog.Base\v7.2.0.0\SiteFull\Scripts.dev\480_page.js">
+    <Content Include="..\..\..\Releases\eLog.Base\v7.3.0.0\SiteFull\Scripts.dev\480_page.js">
       <Link>scripts.dev\480_page.js</Link>
     </Content>
-    <Content Include="..\..\..\Releases\eLog.Base\v7.2.0.0\SiteFull\Scripts.dev\490_pageMaster.js">
+    <Content Include="..\..\..\Releases\eLog.Base\v7.3.0.0\SiteFull\Scripts.dev\490_pageMaster.js">
       <Link>scripts.dev\490_pageMaster.js</Link>
     </Content>
-    <Content Include="..\..\..\Releases\eLog.Base\v7.2.0.0\SiteFull\Scripts.dev\700_treeMenu.js">
+    <Content Include="..\..\..\Releases\eLog.Base\v7.3.0.0\SiteFull\Scripts.dev\700_treeMenu.js">
       <Link>scripts.dev\700_treeMenu.js</Link>
     </Content>
-    <Content Include="..\..\..\Releases\eLog.Base\v7.2.0.0\SiteFull\Scripts.dev\710_CODAMenu.js">
+    <Content Include="..\..\..\Releases\eLog.Base\v7.3.0.0\SiteFull\Scripts.dev\710_CODAMenu.js">
       <Link>scripts.dev\710_CODAMenu.js</Link>
     </Content>
-    <Content Include="..\..\..\Releases\eLog.Base\v7.2.0.0\SiteFull\Scripts.dev\790_login.js">
+    <Content Include="..\..\..\Releases\eLog.Base\v7.3.0.0\SiteFull\Scripts.dev\790_login.js">
       <Link>scripts.dev\790_login.js</Link>
     </Content>
-    <Content Include="..\..\..\Releases\eLog.Base\v7.2.0.0\SiteFull\Scripts.dev\800_app.js">
+    <Content Include="..\..\..\Releases\eLog.Base\v7.3.0.0\SiteFull\Scripts.dev\800_app.js">
       <Link>scripts.dev\800_app.js</Link>
     </Content>
-    <Content Include="..\..\..\Releases\eLog.Base\v7.2.0.0\SiteFull\Scripts.dev\A01_CODALogin.js">
+    <Content Include="..\..\..\Releases\eLog.Base\v7.3.0.0\SiteFull\Scripts.dev\A01_CODALogin.js">
       <Link>scripts.dev\A01_CODALogin.js</Link>
     </Content>
-    <Content Include="..\..\..\Releases\eLog.Base\v7.2.0.0\SiteFull\Scripts.dev\A02_IFrame.js">
+    <Content Include="..\..\..\Releases\eLog.Base\v7.3.0.0\SiteFull\Scripts.dev\A02_IFrame.js">
       <Link>scripts.dev\A02_IFrame.js</Link>
     </Content>
-    <Content Include="..\..\..\Releases\eLog.Base\v7.2.0.0\SiteFull\Scripts\cal.js">
+    <Content Include="..\..\..\Releases\eLog.Base\v7.3.0.0\SiteFull\Scripts\cal.js">
       <Link>scripts\cal.js</Link>
     </Content>
-    <Content Include="..\..\..\Releases\eLog.Base\v7.2.0.0\SiteFull\Scripts\cal.min.js">
+    <Content Include="..\..\..\Releases\eLog.Base\v7.3.0.0\SiteFull\Scripts\cal.min.js">
       <Link>scripts\cal.min.js</Link>
     </Content>
-    <Content Include="..\..\..\Releases\eLog.Base\v7.2.0.0\SiteFull\Scripts\crypto\Barrett.js">
+    <Content Include="..\..\..\Releases\eLog.Base\v7.3.0.0\SiteFull\Scripts\crypto\Barrett.js">
       <Link>scripts\crypto\Barrett.js</Link>
     </Content>
-    <Content Include="..\..\..\Releases\eLog.Base\v7.2.0.0\SiteFull\Scripts\crypto\base64.js">
+    <Content Include="..\..\..\Releases\eLog.Base\v7.3.0.0\SiteFull\Scripts\crypto\base64.js">
       <Link>scripts\crypto\base64.js</Link>
     </Content>
-    <Content Include="..\..\..\Releases\eLog.Base\v7.2.0.0\SiteFull\Scripts\crypto\BigInt.js">
+    <Content Include="..\..\..\Releases\eLog.Base\v7.3.0.0\SiteFull\Scripts\crypto\BigInt.js">
       <Link>scripts\crypto\BigInt.js</Link>
     </Content>
-    <Content Include="..\..\..\Releases\eLog.Base\v7.2.0.0\SiteFull\Scripts\crypto\md5.js">
+    <Content Include="..\..\..\Releases\eLog.Base\v7.3.0.0\SiteFull\Scripts\crypto\md5.js">
       <Link>scripts\crypto\md5.js</Link>
     </Content>
-    <Content Include="..\..\..\Releases\eLog.Base\v7.2.0.0\SiteFull\Scripts\crypto\RSA.js">
+    <Content Include="..\..\..\Releases\eLog.Base\v7.3.0.0\SiteFull\Scripts\crypto\RSA.js">
       <Link>scripts\crypto\RSA.js</Link>
     </Content>
-    <Content Include="..\..\..\Releases\eLog.Base\v7.2.0.0\SiteFull\Scripts\vendor\attrchange.js">
+    <Content Include="..\..\..\Releases\eLog.Base\v7.3.0.0\SiteFull\Scripts\vendor\attrchange.js">
       <Link>scripts\vendor\attrchange.js</Link>
     </Content>
-    <Content Include="..\..\..\Releases\eLog.Base\v7.2.0.0\SiteFull\Scripts\vendor\attrchange_ext.js">
+    <Content Include="..\..\..\Releases\eLog.Base\v7.3.0.0\SiteFull\Scripts\vendor\attrchange_ext.js">
       <Link>scripts\vendor\attrchange_ext.js</Link>
     </Content>
-    <Content Include="..\..\..\Releases\eLog.Base\v7.2.0.0\SiteFull\Scripts\vendor\jquery-3.1.0.min.js">
+    <Content Include="..\..\..\Releases\eLog.Base\v7.3.0.0\SiteFull\Scripts\vendor\jquery-3.1.0.min.js">
       <Link>scripts\vendor\jquery-3.1.0.min.js</Link>
     </Content>
-    <Content Include="..\..\..\Releases\eLog.Base\v7.2.0.0\SiteFull\Scripts\vendor\jquery-ui.1.12.0.min.js">
+    <Content Include="..\..\..\Releases\eLog.Base\v7.3.0.0\SiteFull\Scripts\vendor\jquery-ui.1.12.0.min.js">
       <Link>scripts\vendor\jquery-ui.1.12.0.min.js</Link>
     </Content>
-    <Content Include="..\..\..\Releases\eLog.Base\v7.2.0.0\SiteFull\Scripts\vendor\jquery.cookie.js">
+    <Content Include="..\..\..\Releases\eLog.Base\v7.3.0.0\SiteFull\Scripts\vendor\jquery.cookie.js">
       <Link>scripts\vendor\jquery.cookie.js</Link>
     </Content>
-    <Content Include="..\..\..\Releases\eLog.Base\v7.2.0.0\SiteFull\Scripts\vendor\jquery.storageapi.min.js">
+    <Content Include="..\..\..\Releases\eLog.Base\v7.3.0.0\SiteFull\Scripts\vendor\jquery.storageapi.min.js">
       <Link>scripts\vendor\jquery.storageapi.min.js</Link>
     </Content>
-    <Content Include="..\..\..\Releases\eLog.Base\v7.2.0.0\SiteFull\Scripts\vendor\modernizr-3.3.1.min.js">
+    <Content Include="..\..\..\Releases\eLog.Base\v7.3.0.0\SiteFull\Scripts\vendor\modernizr-3.3.1.min.js">
       <Link>scripts\vendor\modernizr-3.3.1.min.js</Link>
     </Content>
-    <Content Include="..\..\..\Releases\eLog.Base\v7.2.0.0\SiteFull\Scripts\vendor\respond.js">
+    <Content Include="..\..\..\Releases\eLog.Base\v7.3.0.0\SiteFull\Scripts\vendor\respond.js">
       <Link>scripts\vendor\respond.js</Link>
     </Content>
-    <Content Include="..\..\..\Releases\eLog.Base\v7.2.0.0\SiteFull\Scripts\vendor\SummerNote\bootstrap-3.3.5.min.js">
+    <Content Include="..\..\..\Releases\eLog.Base\v7.3.0.0\SiteFull\Scripts\vendor\SummerNote\bootstrap-3.3.5.min.js">
       <Link>scripts\vendor\SummerNote\bootstrap-3.3.5.min.js</Link>
     </Content>
-    <Content Include="..\..\..\Releases\eLog.Base\v7.2.0.0\SiteFull\Scripts\vendor\SummerNote\lang\summernote-cs-CZ.min.js">
+    <Content Include="..\..\..\Releases\eLog.Base\v7.3.0.0\SiteFull\Scripts\vendor\SummerNote\lang\summernote-cs-CZ.min.js">
       <Link>scripts\vendor\SummerNote\lang\summernote-cs-CZ.min.js</Link>
     </Content>
-    <Content Include="..\..\..\Releases\eLog.Base\v7.2.0.0\SiteFull\Scripts\vendor\SummerNote\lang\summernote-de-DE.min.js">
+    <Content Include="..\..\..\Releases\eLog.Base\v7.3.0.0\SiteFull\Scripts\vendor\SummerNote\lang\summernote-de-DE.min.js">
       <Link>scripts\vendor\SummerNote\lang\summernote-de-DE.min.js</Link>
     </Content>
-    <Content Include="..\..\..\Releases\eLog.Base\v7.2.0.0\SiteFull\Scripts\vendor\SummerNote\lang\summernote-fr-FR.min.js">
+    <Content Include="..\..\..\Releases\eLog.Base\v7.3.0.0\SiteFull\Scripts\vendor\SummerNote\lang\summernote-fr-FR.min.js">
       <Link>scripts\vendor\SummerNote\lang\summernote-fr-FR.min.js</Link>
     </Content>
-    <Content Include="..\..\..\Releases\eLog.Base\v7.2.0.0\SiteFull\Scripts\vendor\SummerNote\lang\summernote-hu-HU.min.js">
+    <Content Include="..\..\..\Releases\eLog.Base\v7.3.0.0\SiteFull\Scripts\vendor\SummerNote\lang\summernote-hu-HU.min.js">
       <Link>scripts\vendor\SummerNote\lang\summernote-hu-HU.min.js</Link>
     </Content>
-    <Content Include="..\..\..\Releases\eLog.Base\v7.2.0.0\SiteFull\Scripts\vendor\SummerNote\lang\summernote-pl-PL.min.js">
+    <Content Include="..\..\..\Releases\eLog.Base\v7.3.0.0\SiteFull\Scripts\vendor\SummerNote\lang\summernote-pl-PL.min.js">
       <Link>scripts\vendor\SummerNote\lang\summernote-pl-PL.min.js</Link>
     </Content>
-    <Content Include="..\..\..\Releases\eLog.Base\v7.2.0.0\SiteFull\Scripts\vendor\SummerNote\lang\summernote-ro-RO.min.js">
+    <Content Include="..\..\..\Releases\eLog.Base\v7.3.0.0\SiteFull\Scripts\vendor\SummerNote\lang\summernote-ro-RO.min.js">
       <Link>scripts\vendor\SummerNote\lang\summernote-ro-RO.min.js</Link>
     </Content>
-    <Content Include="..\..\..\Releases\eLog.Base\v7.2.0.0\SiteFull\Scripts\vendor\SummerNote\lang\summernote-ru-RU.min.js">
+    <Content Include="..\..\..\Releases\eLog.Base\v7.3.0.0\SiteFull\Scripts\vendor\SummerNote\lang\summernote-ru-RU.min.js">
       <Link>scripts\vendor\SummerNote\lang\summernote-ru-RU.min.js</Link>
     </Content>
-    <Content Include="..\..\..\Releases\eLog.Base\v7.2.0.0\SiteFull\Scripts\vendor\SummerNote\lang\summernote-sk-SK.min.js">
+    <Content Include="..\..\..\Releases\eLog.Base\v7.3.0.0\SiteFull\Scripts\vendor\SummerNote\lang\summernote-sk-SK.min.js">
       <Link>scripts\vendor\SummerNote\lang\summernote-sk-SK.min.js</Link>
     </Content>
-    <Content Include="..\..\..\Releases\eLog.Base\v7.2.0.0\SiteFull\Scripts\vendor\SummerNote\lang\summernote-uk-UA.min.js">
+    <Content Include="..\..\..\Releases\eLog.Base\v7.3.0.0\SiteFull\Scripts\vendor\SummerNote\lang\summernote-uk-UA.min.js">
       <Link>scripts\vendor\SummerNote\lang\summernote-uk-UA.min.js</Link>
     </Content>
-    <Content Include="..\..\..\Releases\eLog.Base\v7.2.0.0\SiteFull\Scripts\vendor\SummerNote\summernote-0.8.1.js">
+    <Content Include="..\..\..\Releases\eLog.Base\v7.3.0.0\SiteFull\Scripts\vendor\SummerNote\summernote-0.8.1.js">
       <Link>scripts\vendor\SummerNote\summernote-0.8.1.js</Link>
     </Content>
-    <Content Include="..\..\..\Releases\eLog.Base\v7.2.0.0\SiteFull\Scripts\vendor\SummerNote\summernote-0.8.1.min.js">
+    <Content Include="..\..\..\Releases\eLog.Base\v7.3.0.0\SiteFull\Scripts\vendor\SummerNote\summernote-0.8.1.min.js">
       <Link>scripts\vendor\SummerNote\summernote-0.8.1.min.js</Link>
     </Content>
-    <Content Include="..\..\..\Releases\eLog.Base\v7.2.0.0\SiteFull\Scripts\vendor\validator\date.js">
+    <Content Include="..\..\..\Releases\eLog.Base\v7.3.0.0\SiteFull\Scripts\vendor\validator\date.js">
       <Link>scripts\vendor\validator\date.js</Link>
     </Content>
-    <Content Include="..\..\..\Releases\eLog.Base\v7.2.0.0\SiteFull\Scripts\vendor\validator\file.js">
+    <Content Include="..\..\..\Releases\eLog.Base\v7.3.0.0\SiteFull\Scripts\vendor\validator\file.js">
       <Link>scripts\vendor\validator\file.js</Link>
     </Content>
-    <Content Include="..\..\..\Releases\eLog.Base\v7.2.0.0\SiteFull\Scripts\vendor\validator\html5.js">
+    <Content Include="..\..\..\Releases\eLog.Base\v7.3.0.0\SiteFull\Scripts\vendor\validator\html5.js">
       <Link>scripts\vendor\validator\html5.js</Link>
     </Content>
-    <Content Include="..\..\..\Releases\eLog.Base\v7.2.0.0\SiteFull\Scripts\vendor\validator\jquery.form-validator.min.js">
+    <Content Include="..\..\..\Releases\eLog.Base\v7.3.0.0\SiteFull\Scripts\vendor\validator\jquery.form-validator.min.js">
       <Link>scripts\vendor\validator\jquery.form-validator.min.js</Link>
     </Content>
-    <Content Include="..\..\..\Releases\eLog.Base\v7.2.0.0\SiteFull\Scripts\vendor\validator\security.js">
+    <Content Include="..\..\..\Releases\eLog.Base\v7.3.0.0\SiteFull\Scripts\vendor\validator\security.js">
       <Link>scripts\vendor\validator\security.js</Link>
     </Content>
-    <Content Include="..\..\..\Releases\eLog.Base\v7.2.0.0\SiteFull\Scripts\vendor\validator\uk.js">
+    <Content Include="..\..\..\Releases\eLog.Base\v7.3.0.0\SiteFull\Scripts\vendor\validator\uk.js">
       <Link>scripts\vendor\validator\uk.js</Link>
     </Content>
-    <Content Include="..\..\..\Releases\eLog.Base\v7.2.0.0\SiteFull\Styles\vendor\bootstrap-3.3.5.min.css">
+    <Content Include="..\..\..\Releases\eLog.Base\v7.3.0.0\SiteFull\Styles\vendor\bootstrap-3.3.5.min.css">
       <Link>styles\vendor\bootstrap-3.3.5.min.css</Link>
     </Content>
-    <Content Include="..\..\..\Releases\eLog.Base\v7.2.0.0\SiteFull\Styles\vendor\summernote-0.8.1.min.css">
+    <Content Include="..\..\..\Releases\eLog.Base\v7.3.0.0\SiteFull\Styles\vendor\summernote-0.8.1.min.css">
       <Link>styles\vendor\summernote-0.8.1.min.css</Link>
     </Content>
     <Content Include="HTMLEditor.aspx" />
@@ -385,81 +385,81 @@
     <Content Include="WSInterface\CODAQueryWS.asmx" />
     <Content Include="WSInterface\CODATranWS.asmx" />
     <Content Include="WSInterface\SinvWS.asmx" />
-    <None Include="..\..\..\Releases\eLog.Base\v7.2.0.0\SiteFull\Scripts.dev\_references.js">
+    <None Include="..\..\..\Releases\eLog.Base\v7.3.0.0\SiteFull\Scripts.dev\_references.js">
       <Link>scripts.dev\_references.js</Link>
     </None>
-    <Content Include="..\..\..\Releases\eLog.Base\v7.2.0.0\SiteFull\Styles\ball-atom.css">
+    <Content Include="..\..\..\Releases\eLog.Base\v7.3.0.0\SiteFull\Styles\ball-atom.css">
       <Link>styles\ball-atom.css</Link>
     </Content>
-    <Content Include="..\..\..\Releases\eLog.Base\v7.2.0.0\SiteFull\Styles\ball-atom.min.css">
+    <Content Include="..\..\..\Releases\eLog.Base\v7.3.0.0\SiteFull\Styles\ball-atom.min.css">
       <Link>styles\ball-atom.min.css</Link>
     </Content>
-    <Content Include="..\..\..\Releases\eLog.Base\v7.2.0.0\SiteFull\Styles\ball-spin-clockwise.css">
+    <Content Include="..\..\..\Releases\eLog.Base\v7.3.0.0\SiteFull\Styles\ball-spin-clockwise.css">
       <Link>styles\ball-spin-clockwise.css</Link>
     </Content>
-    <Content Include="..\..\..\Releases\eLog.Base\v7.2.0.0\SiteFull\Styles\ball-spin-clockwise.min.css">
+    <Content Include="..\..\..\Releases\eLog.Base\v7.3.0.0\SiteFull\Styles\ball-spin-clockwise.min.css">
       <Link>styles\ball-spin-clockwise.min.css</Link>
     </Content>
-    <Content Include="..\..\..\Releases\eLog.Base\v7.2.0.0\SiteFull\images\btnNavFirst0.gif">
+    <Content Include="..\..\..\Releases\eLog.Base\v7.3.0.0\SiteFull\images\btnNavFirst0.gif">
       <Link>images\btnNavFirst0.gif</Link>
     </Content>
-    <Content Include="..\..\..\Releases\eLog.Base\v7.2.0.0\SiteFull\images\btnNavLast0.gif">
+    <Content Include="..\..\..\Releases\eLog.Base\v7.3.0.0\SiteFull\images\btnNavLast0.gif">
       <Link>images\btnNavLast0.gif</Link>
     </Content>
-    <Content Include="..\..\..\Releases\eLog.Base\v7.2.0.0\SiteFull\images\btnNavNext0.gif">
+    <Content Include="..\..\..\Releases\eLog.Base\v7.3.0.0\SiteFull\images\btnNavNext0.gif">
       <Link>images\btnNavNext0.gif</Link>
     </Content>
-    <Content Include="..\..\..\Releases\eLog.Base\v7.2.0.0\SiteFull\images\btnNavPrev0.gif">
+    <Content Include="..\..\..\Releases\eLog.Base\v7.3.0.0\SiteFull\images\btnNavPrev0.gif">
       <Link>images\btnNavPrev0.gif</Link>
     </Content>
-    <Content Include="..\..\..\Releases\eLog.Base\v7.2.0.0\SiteFull\Styles\CODAstyle.css">
+    <Content Include="..\..\..\Releases\eLog.Base\v7.3.0.0\SiteFull\Styles\CODAstyle.css">
       <Link>styles\CODAstyle.css</Link>
     </Content>
-    <Content Include="..\..\..\Releases\eLog.Base\v7.2.0.0\SiteFull\Styles\CODAstyle.min.css">
+    <Content Include="..\..\..\Releases\eLog.Base\v7.3.0.0\SiteFull\Styles\CODAstyle.min.css">
       <Link>styles\CODAstyle.min.css</Link>
       <DependentUpon>CODAstyle.css</DependentUpon>
     </Content>
-    <Content Include="..\..\..\Releases\eLog.Base\v7.2.0.0\SiteFull\Styles\Colorizer.css">
+    <Content Include="..\..\..\Releases\eLog.Base\v7.3.0.0\SiteFull\Styles\Colorizer.css">
       <Link>styles\Colorizer.css</Link>
     </Content>
-    <Content Include="..\..\..\Releases\eLog.Base\v7.2.0.0\SiteFull\images\icoSortAscTable.gif">
+    <Content Include="..\..\..\Releases\eLog.Base\v7.3.0.0\SiteFull\images\icoSortAscTable.gif">
       <Link>images\icoSortAscTable.gif</Link>
     </Content>
-    <Content Include="..\..\..\Releases\eLog.Base\v7.2.0.0\SiteFull\images\icoSortDescTable.gif">
+    <Content Include="..\..\..\Releases\eLog.Base\v7.3.0.0\SiteFull\images\icoSortDescTable.gif">
       <Link>images\icoSortDescTable.gif</Link>
     </Content>
-    <Content Include="..\..\..\Releases\eLog.Base\v7.2.0.0\SiteFull\images\icoSortNoneTable.gif">
+    <Content Include="..\..\..\Releases\eLog.Base\v7.3.0.0\SiteFull\images\icoSortNoneTable.gif">
       <Link>images\icoSortNoneTable.gif</Link>
     </Content>
-    <Content Include="..\..\..\Releases\eLog.Base\v7.2.0.0\SiteFull\images\logo_login_unit4coda.png">
+    <Content Include="..\..\..\Releases\eLog.Base\v7.3.0.0\SiteFull\images\logo_login_unit4coda.png">
       <Link>images\logo_login_unit4coda.png</Link>
     </Content>
-    <Content Include="..\..\..\Releases\eLog.Base\v7.2.0.0\SiteFull\images\logo_unit4codafinancials.png">
+    <Content Include="..\..\..\Releases\eLog.Base\v7.3.0.0\SiteFull\images\logo_unit4codafinancials.png">
       <Link>images\logo_unit4codafinancials.png</Link>
     </Content>
-    <Content Include="..\..\..\Releases\eLog.Base\v7.2.0.0\SiteFull\images\sprite-activity-20.png">
+    <Content Include="..\..\..\Releases\eLog.Base\v7.3.0.0\SiteFull\images\sprite-activity-20.png">
       <Link>images\sprite-activity-20.png</Link>
     </Content>
-    <Content Include="..\..\..\Releases\eLog.Base\v7.2.0.0\SiteFull\images\sprite-common-16.png">
+    <Content Include="..\..\..\Releases\eLog.Base\v7.3.0.0\SiteFull\images\sprite-common-16.png">
       <Link>images\sprite-common-16.png</Link>
     </Content>
-    <Content Include="..\..\..\Releases\eLog.Base\v7.2.0.0\SiteFull\images\sprite-menu-16.png">
+    <Content Include="..\..\..\Releases\eLog.Base\v7.3.0.0\SiteFull\images\sprite-menu-16.png">
       <Link>images\sprite-menu-16.png</Link>
     </Content>
-    <Content Include="..\..\..\Releases\eLog.Base\v7.2.0.0\SiteFull\Styles\style.css">
+    <Content Include="..\..\..\Releases\eLog.Base\v7.3.0.0\SiteFull\Styles\style.css">
       <Link>styles\style.css</Link>
     </Content>
-    <Content Include="..\..\..\Releases\eLog.Base\v7.2.0.0\SiteFull\Styles\style.min.css">
+    <Content Include="..\..\..\Releases\eLog.Base\v7.3.0.0\SiteFull\Styles\style.min.css">
       <Link>styles\style.min.css</Link>
       <DependentUpon>style.css</DependentUpon>
     </Content>
-    <Content Include="..\..\..\Releases\eLog.Base\v7.2.0.0\SiteFull\Styles\theme-default.css">
+    <Content Include="..\..\..\Releases\eLog.Base\v7.3.0.0\SiteFull\Styles\theme-default.css">
       <Link>styles\theme-default.css</Link>
     </Content>
-    <Content Include="..\..\..\Releases\eLog.Base\v7.2.0.0\SiteFull\Styles\theme-default.min.css">
+    <Content Include="..\..\..\Releases\eLog.Base\v7.3.0.0\SiteFull\Styles\theme-default.min.css">
       <Link>styles\theme-default.min.css</Link>
     </Content>
-    <Content Include="..\..\..\Releases\eLog.Base\v7.2.0.0\SiteFull\images\ui-icons_888888_256x240.png">
+    <Content Include="..\..\..\Releases\eLog.Base\v7.3.0.0\SiteFull\images\ui-icons_888888_256x240.png">
       <Link>images\ui-icons_888888_256x240.png</Link>
     </Content>
     <Content Include="About.css" />
@@ -468,41 +468,41 @@
     <Content Include="DefaultValues.config">
       <SubType>Designer</SubType>
     </Content>
-    <Content Include="..\..\..\Releases\eLog.Base\v7.2.0.0\SiteFull\fonts\fontawesome-webfont.eot">
+    <Content Include="..\..\..\Releases\eLog.Base\v7.3.0.0\SiteFull\fonts\fontawesome-webfont.eot">
       <Link>fonts\fontawesome-webfont.eot</Link>
     </Content>
-    <Content Include="..\..\..\Releases\eLog.Base\v7.2.0.0\SiteFull\fonts\fontawesome-webfont.ttf">
+    <Content Include="..\..\..\Releases\eLog.Base\v7.3.0.0\SiteFull\fonts\fontawesome-webfont.ttf">
       <Link>fonts\fontawesome-webfont.ttf</Link>
     </Content>
-    <Content Include="..\..\..\Releases\eLog.Base\v7.2.0.0\SiteFull\fonts\fontawesome-webfont.woff">
+    <Content Include="..\..\..\Releases\eLog.Base\v7.3.0.0\SiteFull\fonts\fontawesome-webfont.woff">
       <Link>fonts\fontawesome-webfont.woff</Link>
     </Content>
-    <Content Include="..\..\..\Releases\eLog.Base\v7.2.0.0\SiteFull\fonts\fontawesome-webfont.woff2">
+    <Content Include="..\..\..\Releases\eLog.Base\v7.3.0.0\SiteFull\fonts\fontawesome-webfont.woff2">
       <Link>fonts\fontawesome-webfont.woff2</Link>
     </Content>
-    <Content Include="..\..\..\Releases\eLog.Base\v7.2.0.0\SiteFull\fonts\FontAwesome.otf">
+    <Content Include="..\..\..\Releases\eLog.Base\v7.3.0.0\SiteFull\fonts\FontAwesome.otf">
       <Link>fonts\FontAwesome.otf</Link>
     </Content>
-    <None Include="..\..\..\Releases\eLog.Base\v7.2.0.0\SiteFull\Styles.dev\style.less">
+    <None Include="..\..\..\Releases\eLog.Base\v7.3.0.0\SiteFull\Styles.dev\style.less">
       <Link>styles.dev\style.less</Link>
     </None>
-    <None Include="..\..\..\Releases\eLog.Base\v7.2.0.0\SiteFull\Styles.dev\CODAstyle.less">
+    <None Include="..\..\..\Releases\eLog.Base\v7.3.0.0\SiteFull\Styles.dev\CODAstyle.less">
       <Link>styles.dev\CODAstyle.less</Link>
     </None>
-    <Content Include="..\..\..\Releases\eLog.Base\v7.2.0.0\SiteFull\Styles\vendor\font\summernote.eot">
+    <Content Include="..\..\..\Releases\eLog.Base\v7.3.0.0\SiteFull\Styles\vendor\font\summernote.eot">
       <Link>styles\vendor\font\summernote.eot</Link>
     </Content>
-    <Content Include="..\..\..\Releases\eLog.Base\v7.2.0.0\SiteFull\Styles\vendor\font\summernote.ttf">
+    <Content Include="..\..\..\Releases\eLog.Base\v7.3.0.0\SiteFull\Styles\vendor\font\summernote.ttf">
       <Link>styles\vendor\font\summernote.ttf</Link>
     </Content>
-    <Content Include="..\..\..\Releases\eLog.Base\v7.2.0.0\SiteFull\Styles\vendor\font\summernote.woff">
+    <Content Include="..\..\..\Releases\eLog.Base\v7.3.0.0\SiteFull\Styles\vendor\font\summernote.woff">
       <Link>styles\vendor\font\summernote.woff</Link>
     </Content>
-    <Content Include="..\..\..\Releases\eLog.Base\v7.2.0.0\SiteFull\Styles\style.min.css.gz">
+    <Content Include="..\..\..\Releases\eLog.Base\v7.3.0.0\SiteFull\Styles\style.min.css.gz">
       <Link>styles\style.min.css.gz</Link>
       <DependentUpon>style.min.css</DependentUpon>
     </Content>
-    <Content Include="..\..\..\Releases\eLog.Base\v7.2.0.0\SiteFull\Styles\CODAstyle.min.css.gz">
+    <Content Include="..\..\..\Releases\eLog.Base\v7.3.0.0\SiteFull\Styles\CODAstyle.min.css.gz">
       <Link>styles\CODAstyle.min.css.gz</Link>
       <DependentUpon>CODAstyle.min.css</DependentUpon>
     </Content>
@@ -580,7 +580,7 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="..\..\..\Releases\eLog.Base\v7.2.0.0\SiteFull\favicon.ico">
+    <Content Include="..\..\..\Releases\eLog.Base\v7.3.0.0\SiteFull\favicon.ico">
       <Link>favicon.ico</Link>
     </Content>
     <Content Include="Global.asax" />

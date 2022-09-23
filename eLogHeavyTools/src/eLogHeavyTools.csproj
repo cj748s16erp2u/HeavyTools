@@ -58,42 +58,42 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="CodaInt.Base, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\..\Releases\CodaInt.Base\v7.0.0.0\Binaries\CodaInt.Base.dll</HintPath>
+      <HintPath>..\..\..\Releases\CodaInt.Base\v7.3.0.0\Binaries\CodaInt.Base.dll</HintPath>
       <SpecificVersion>False</SpecificVersion>
     </Reference>
     <Reference Include="CODALink, Version=7.0.8201.29967, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\..\Releases\CodaInt.Base\v7.0.0.0\Binaries\CODALink.dll</HintPath>
+      <HintPath>..\..\..\Releases\CodaInt.Base\v7.3.0.0\Binaries\CODALink.dll</HintPath>
       <SpecificVersion>False</SpecificVersion>
     </Reference>
     <Reference Include="eFwIntf.Interf">
-      <HintPath>..\..\..\Releases\Bank.Base\v7.2.0.0\Binaries\eFwIntf.Interf.dll</HintPath>
+      <HintPath>..\..\..\Releases\Bank.Base\v7.3.0.0\Binaries\eFwIntf.Interf.dll</HintPath>
     </Reference>
     <Reference Include="eLog.Base, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\..\Releases\eLog.Base\v7.2.0.0\Binaries\eLog.Base.dll</HintPath>
+      <HintPath>..\..\..\Releases\eLog.Base\v7.3.0.0\Binaries\eLog.Base.dll</HintPath>
       <SpecificVersion>False</SpecificVersion>
     </Reference>
     <Reference Include="eLog.Finance.Base, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\..\Releases\eLog.Finance.Base\v7.0.0.0\Binaries\eLog.Finance.Base.dll</HintPath>
+      <HintPath>..\..\..\Releases\eLog.Finance.Base\v7.3.0.0\Binaries\eLog.Finance.Base.dll</HintPath>
       <SpecificVersion>False</SpecificVersion>
     </Reference>
     <Reference Include="eLog.Finance.Coda, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\..\Releases\eLog.Finance.CODA\v7.0.0.0\Binaries\eLog.Finance.Coda.dll</HintPath>
+      <HintPath>..\..\..\Releases\eLog.Finance.CODA\v7.3.0.0\Binaries\eLog.Finance.Coda.dll</HintPath>
       <SpecificVersion>False</SpecificVersion>
     </Reference>
     <Reference Include="EPPlus, Version=4.5.3.1, Culture=neutral, PublicKeyToken=ea159fdaa78159a1, processorArchitecture=MSIL">
-      <HintPath>..\..\..\Releases\eLog.Base\v7.2.0.0\Binaries\EPPlus.dll</HintPath>
+      <HintPath>..\..\..\Releases\eLog.Base\v7.3.0.0\Binaries\EPPlus.dll</HintPath>
     </Reference>
     <Reference Include="eProjectWeb.Framework, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\..\Releases\eLog.Base\v7.2.0.0\Binaries\eProjectWeb.Framework.dll</HintPath>
+      <HintPath>..\..\..\Releases\eLog.Base\v7.3.0.0\Binaries\eProjectWeb.Framework.dll</HintPath>
       <SpecificVersion>False</SpecificVersion>
     </Reference>
     <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\..\..\Releases\eLog.Base\v7.2.0.0\Binaries\Newtonsoft.Json.dll</HintPath>
+      <HintPath>..\..\..\Releases\eLog.Base\v7.3.0.0\Binaries\Newtonsoft.Json.dll</HintPath>
       <SpecificVersion>False</SpecificVersion>
     </Reference>
     <Reference Include="System.Net.Http" />
     <Reference Include="U4Ext.Bank.Base, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\..\Releases\Bank.Base\v7.2.0.0\Binaries\U4Ext.Bank.Base.dll</HintPath>
+      <HintPath>..\..\..\Releases\Bank.Base\v7.3.0.0\Binaries\U4Ext.Bank.Base.dll</HintPath>
       <SpecificVersion>False</SpecificVersion>
     </Reference>
     <Reference Include="System" />
