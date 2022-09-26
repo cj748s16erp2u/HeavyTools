@@ -8,6 +8,7 @@ using eLog.Base.Setup.Type;
 using eLog.Base.Setup.Unit;
 using eLog.HeavyTools.ImportBase;
 using eLog.HeavyTools.ImportBase.Xlsx;
+using eLog.HeavyTools.Masters.Item.Assortment;
 using eLog.HeavyTools.Masters.Item.MainGroup;
 using eLog.HeavyTools.Masters.Item.Model;
 using eLog.HeavyTools.Masters.Item.Season;
@@ -762,6 +763,47 @@ order by c.icid", Utils.SqlToString(imid.Imid), Utils.SqlToString(isid.Isid))));
                     return true;
                 }
 
+                if (result.ItemAssortment != null)
+                {
+
+                    var tbl = OlcItemAssortmentBL.New();
+                    var map = tbl.CreateBLObjects();
+
+                    var ck = new Key
+                    {
+                        { OlcItemAssortment.FieldAssortmentitemid.Name,
+                            ConvertUtils.ToInt32(
+                                result.ItemAssortment.Entity[OlcItemAssortment.FieldAssortmentitemid]) },
+                        { OlcItemAssortment.FieldItemid.Name,
+                            ConvertUtils.ToInt32(
+                                result.ItemAssortment.Entity[OlcItemAssortment.FieldItemid]) },
+                    };
+
+                    var origItem = OlcItemAssortment.Load(ck);
+                    map.Default = result.ItemAssortment.Entity;
+                    
+                    if (origItem != null)
+                    {
+                        this.logger.Log(" [modify] ");
+                        origItem.MergeTo(result.ItemAssortment.Entity);
+
+                        result.ItemAssortment.Entity.State = DataRowState.Modified;
+                        map.SysParams.ActionID = ActionID.Modify;
+                    }
+                    try
+                    {
+                        Session.Current[ItemImportService.ItemImportRuning] = true;
+                        tbl.Save(map);
+                        Session.Current[ItemImportService.ItemImportRuning] = false;
+                    }
+                    catch (Exception e)
+                    {
+                        throw new ItemImportMessageException("$itemassortmenterror".eLogTransl(e.Message));
+                    }
+
+                    return true;
+                }
+
                 if (result.ImpColorException != null)
                 {
                     var ck = new Key
@@ -913,6 +955,7 @@ select color1, color2, color3, sample1, sample2,
                 ItemMainGroup = rowContext.ItemMainGroup,
                 TypeHeadColor= rowContext.TypeHeadColor,
                 ImpColorException = rowContext.ImpColorException,
+                ItemAssortment= rowContext.ItemAssortment,
                 LogText = rowContext.LogText,
                 Row = rowContext.Row,
                 LogCol = rowContext.LogCol,
@@ -1061,6 +1104,17 @@ select color1, color2, color3, sample1, sample2,
                     };
                     rowContext.CurrentEntry = entry;
                     rowContext.ImpColorException = entry;
+                    break;  
+                case "olc_itemassortment":
+                    entry = new TableEntry
+                    {
+                        Alias = alias,
+                        Table = rowContext.CurrentTable,
+                        Schema = OlcItemAssortment.GetSchema(),
+                        Entity = OlcItemAssortment.CreateNew()
+                    };
+                    rowContext.CurrentEntry = entry;
+                    rowContext.ItemAssortment = entry;
                     break;
                 default:
                     throw new ArgumentOutOfRangeException(nameof(rowContext.CurrentTable.Table), rowContext.CurrentTable.Table, nameof(this.CreateEntity));
@@ -1083,7 +1137,8 @@ select color1, color2, color3, sample1, sample2,
                 case "olc_itemmaingroup": rowContext.ItemMainGroup = null; break;
                 case "imp_colorexception": rowContext.ImpColorException = null; break;
                 case "ols_typeline": rowContext.TypeHeadColor = null; break;
-                     
+                case "olc_itemassortment": rowContext.ItemAssortment = null; break;
+
                 default:
                     throw new ArgumentOutOfRangeException(nameof(rowContext.CurrentTable.Table), rowContext.CurrentTable.Table, nameof(this.RemoveEntity));
             }

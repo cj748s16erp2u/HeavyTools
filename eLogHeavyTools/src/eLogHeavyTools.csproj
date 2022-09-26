@@ -173,6 +173,9 @@
     <Compile Include="InterfaceCaller\ResultDto.cs" />
     <Compile Include="Masters\Import\Partner\PartnerImportPage.cs" />
     <Compile Include="Masters\Import\Partner\PartnerImportTab.cs" />
+    <Compile Include="Masters\Item\Assortment\OlcItemAssortment.cs" />
+    <Compile Include="Masters\Item\Assortment\OlcItemAssortmentBL.cs" />
+    <Compile Include="Masters\Item\Assortment\OlcItemAssortmentGenerated.cs" />
     <Compile Include="Masters\Item\Color\OlcItemColor.cs" />
     <Compile Include="Masters\Item\Color\OlcItemColorGenerated.cs" />
     <Compile Include="Masters\Item\Color\OlcItemColorList.cs" />
