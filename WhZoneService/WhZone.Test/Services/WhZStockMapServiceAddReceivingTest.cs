@@ -142,7 +142,7 @@ public class WhZStockMapServiceAddReceivingTest : Base.WhZStockMapServiceTestBas
     private async Task AddReceivingNullFailedTest01Async(string whId, int? whZoneId, int? whLocId)
     {
         var ex = await Assert.ThrowsAsync<WhZStockMapServiceException>(() => this.AddReceivingTest01Async(whId, whZoneId, whLocId, null));
-        Assert.Equal(WhZStockExceptionType.InvalidRequestQty, ex.Type);
+        Assert.Equal(WhZStockExceptionType.Stock_InvalidRequestQty, ex.Type);
         Assert.Equal("The add qty is not set", ex.Message);
     }
 
@@ -189,7 +189,7 @@ public class WhZStockMapServiceAddReceivingTest : Base.WhZStockMapServiceTestBas
     private async Task AddReceivingFailedTest01Async(string whId, int? whZoneId, int? whLocId, decimal? qty)
     {
         var ex = await Assert.ThrowsAsync<WhZStockMapServiceException>(() => this.AddReceivingTest01Async(whId, whZoneId, whLocId, qty));
-        Assert.Equal(WhZStockExceptionType.InvalidRequestQty, ex.Type);
+        Assert.Equal(WhZStockExceptionType.Stock_InvalidRequestQty, ex.Type);
         Assert.Equal("The add qty cannot be less or equal to 0", ex.Message);
     }
 
@@ -657,7 +657,7 @@ public class WhZStockMapServiceAddReceivingTest : Base.WhZStockMapServiceTestBas
             var data = await this.AddReceivingAsync(context, request, ct);
             await this.AddReservedAsync(context, request, ct);
             var ex = Assert.Throws<WhZStockMapServiceException>(() => this.Delete(context, data!));
-            Assert.Equal(WhZStockExceptionType.DeleteNotEnoughQty, ex.Type);
+            Assert.Equal(WhZStockExceptionType.Stock_DeleteNotEnoughQty, ex.Type);
             Assert.Equal("Unable to remove this request, cause the further requests uses its quantity", ex.Message);
             Assert.Contains(context.MovementList, l => l == data);
         }
@@ -732,7 +732,7 @@ public class WhZStockMapServiceAddReceivingTest : Base.WhZStockMapServiceTestBas
             using var context = this.service.CreateContext();
 
             var ex = await Assert.ThrowsAsync<WhZStockMapServiceException>(() => this.RemoveReceivingAsync(context, request, ct));
-            Assert.Equal(WhZStockExceptionType.InvalidRequestQty, ex.Type);
+            Assert.Equal(WhZStockExceptionType.Stock_InvalidRequestQty, ex.Type);
             Assert.Equal("The remove qty cannot be less or equal to 0", ex.Message);
         }
         finally
@@ -1111,7 +1111,7 @@ public class WhZStockMapServiceAddReceivingTest : Base.WhZStockMapServiceTestBas
             };
 
             var ex = await Assert.ThrowsAsync<WhZStockMapServiceException>(() => this.RemoveReceivingAsync(context, removeRequest, ct));
-            Assert.Equal(WhZStockExceptionType.RemoveReceivingQty, ex.Type);
+            Assert.Equal(WhZStockExceptionType.Stock_RemoveReceivingQty, ex.Type);
             Assert.Equal("Not enough receiving quantity to fulfill the remove request", ex.Message);
         }
         finally
@@ -1489,7 +1489,7 @@ public class WhZStockMapServiceAddReceivingTest : Base.WhZStockMapServiceTestBas
             };
 
             var ex = await Assert.ThrowsAsync<WhZStockMapServiceException>(() => this.CommitReceivingAsync(context, commitRequest, ct));
-            Assert.Equal(WhZStockExceptionType.CommitReceivingQty, ex.Type);
+            Assert.Equal(WhZStockExceptionType.Stock_CommitReceivingQty, ex.Type);
             Assert.Equal("Not enough receiving quantity to fulfill the commit request", ex.Message);
         }
         finally
