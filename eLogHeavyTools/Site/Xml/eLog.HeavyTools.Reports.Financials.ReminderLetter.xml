@@ -1,0 +1,134 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema xmlns="http://tempuri.org/RenderableSchema.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://tempuri.org/RenderableSchema.xsd ../../../Base/Site/Xml/RenderableSchema.xsd">
+    <!-- Paramter tab -->
+    <TabPage Name="ReminderLetterSearchTab">
+        <SearchFilterBar ID="SrcBar"></SearchFilterBar>
+        <Grid ID="searchResults" />
+    </TabPage>
+    
+    <Search Name="ReminderLetterSearchProvider">
+        <Column FieldName="Xcvid" PKFieldName="true" Hidden="true" />
+        <Column FieldName="Seqno" PKFieldName="true" Width="50" DisplayName="$seqno" />
+        <Column FieldName="Company" Width="80" DisplayName="$company" />
+        <Column FieldName="Ledger" Width="80" DisplayName="$ledger" />
+        <Column FieldName="Severity" Width="120" Align="Left" FieldFunction="listlookup" FieldFuncArg="xml:eLog.HeavyTools.Reports.Financials.ReminderLetter_ReminderLetterSeverity" DisplayName="$severity" />
+        <Column FieldName="Lettertype" Width="120" Align="Left" FieldFunction="listlookup" FieldFuncArg="xml:eLog.HeavyTools.Reports.Financials.ReminderLetter_ReminderLetterLettertype" DisplayName="$lettertype" />
+        <Column FieldName="Template" Width="180" DisplayName="$template" />
+    </Search>
+
+    <TabPage Name="ReminderLetterEditTab">
+        <LayoutTable ControlGroup="ReminderLetter" Columns="{120, None}; {180, None}; {20, Empty}; {120, None}; {180, None}" ID="EditGroup1">
+            <Intbox Field="seqno" ThousandSep="false" DecDigits="0" Disabled="true" />
+            <ForceNextRow />
+            <Combo Field="company" Label="$company" ListID="CodaInt.Base.Setup.Company.CompanyList#sessioncmp" ComboFlags="AutoSelectOne" ColsToSpan="-1" />
+            <Textbox Field="ledger_legend" ColsToSpan="-1" Label="-" Disabled="true" />
+            <Textbox Field="ledger" />
+            <ForceNextRow />
+            <Combo Field="severity" ListID="xml:eLog.HeavyTools.Reports.Financials.ReminderLetter_ReminderLetterSeverity" />
+            <Combo Field="lettertype" ListID="xml:eLog.HeavyTools.Reports.Financials.ReminderLetter_ReminderLetterLettertype" />
+            <ForceNextRow />
+            <Combo Field="template" ListID="eLog.HeavyTools.Reports.Financials.ReminderLetter.ReminderLetterTextList" />
+        </LayoutTable>
+    </TabPage>
+    
+    <ComboItems Name="ReminderLetterSeverity">
+        <ComboItem Value="1" Caption="$reminderletterseverity_1" />
+        <ComboItem Value="2" Caption="$reminderletterseverity_2" />
+    </ComboItems>
+    
+    <ComboItems Name="ReminderLetterLettertype">
+        <ComboItem Value="1" Caption="$reminderletterlettertype_1" />
+        <ComboItem Value="2" Caption="$reminderletterlettertype_2" />
+        <ComboItem Value="3" Caption="$reminderletterlettertype_3" />
+    </ComboItems>
+    
+    <!-- Paramter Text tab -->
+    <TabPage Name="ReminderLetterTextSearchTab">
+        <SearchFilterBar ID="SrcBar"></SearchFilterBar>
+        <Grid ID="searchResults" />
+    </TabPage>
+
+    <Search Name="ReminderLetterTextSearchProvider">
+        <Column FieldName="xcvid" PKFieldName="true" Hidden="true" />
+        <Column FieldName="xcvextcode" Width="200" />
+    </Search>
+
+    <TabPage Name="ReminderLetterTextEditTab">
+        <LayoutTable ControlGroup="ReminderLetterText" Columns="{120, None}; {280, None}; {380, None};" ID="EditGroup1">
+            <Textbox Field="xcvextcode" />
+            <Textbox Field="note_legend" ColsToSpan="-1" Label="-" Disabled="true" Rows="5" />
+            <Textbox Field="note" Rows="15" ColsToSpan="-1" Label="$xcvnote" />
+        </LayoutTable>
+    </TabPage>
+    
+    <!-- Riport futtatas -->
+    <TabPage Name="ReminderLetterParamsTab2">
+        <Report>
+            <File Name="doc_reminder_letter_hto" Proc="sp_doc_reminder_letter_hto" Action="0" />
+            <File Name="doc_reminder_cheque_letter_hto" Proc="sp_doc_reminder_letter_hto" Action="1" />
+        </Report>
+        <LayoutTable ControlGroup="ReminderLetter" Columns="{120, None}; {160, None}; {20, Empty}; {120, None}; {160, None}; {20, Empty}; {120, None}; {120, None};"  ID="EditGroup1" Label="$group_search">
+            <Combo Field="cmpcode" Label="$company" ListID="CodaInt.Base.Setup.Company.CompanyList#sessioncmp" ComboFlags="AutoSelectOne" ColsToSpan="-1" Mandatory="True" />
+            <ForceNextRow />
+            <Intbox Field="gllevel" Visible="False" />
+            <Intbox Field="pelementlevel" Visible="false" Mandatory="True" />
+            <Textbox Field="pcodelike" Visible="false" />
+            <Intbox Field="cmpid" Visible="false"/>
+            <ForceNextRow />
+            <Combo Field="prlcode" Label="$prlcode" ListID="CodaInt.Base.Common.OfcPrestoredQueryList#psqid=prlcode" ComboFlags="FindAnywhere" DependentCtrlID="ReminderLetter.cmpcode" DependentField="cmpcode" ColsToSpan="-1" Mandatory="True" ForceReloadList="True" />
+            <ForceNextRow />
+            <DatePickerbox Field="remdate2" Label="$remdate" Mandatory="True" />
+            <Textbox Field="remdate" Visible="False"/>
+            <DatePickerbox Field="duedate_param2" Label="$duedate_param" Mandatory="True" />
+            <Textbox Field="duedate_param" Visible="False"/>
+            <ForceNextRow />
+            <!--<Selector Field="partner_from" Label="$partnerfrom" ValueField="code" TextField="code" SelectionID="CodaInt.Base.Common.Element.ElementSelectionProvider" DependentField="cmpid,elmlevel,prefix" DependentCtrlID="ReminderLetter.cmpid,ReminderLetter.pelementlevel,ReminderLetter.pcodelike" DependentAllowNullField="prefix"/>
+            <Selector Field="partner_from" Label="$partnerdescr" ValueField="code" TextField="name" SelectionID="CodaInt.Base.Common.Element.ElementSelectionProvider" ColsToSpan="-1"/>
+            <ForceNextRow/>
+            <Selector Field="partner_to" Label="$partnerto" ValueField="code" TextField="code" SelectionID="CodaInt.Base.Common.Element.ElementSelectionProvider" DependentField="cmpid,elmlevel,prefix" DependentCtrlID="ReminderLetter.cmpid,ReminderLetter.pelementlevel,ReminderLetter.pcodelike" DependentAllowNullField="prefix"/>
+            <Selector Field="partner_to" Label="$partnerdescr" ValueField="code" TextField="name" SelectionID="CodaInt.Base.Common.Element.ElementSelectionProvider" ColsToSpan="-1"/>-->
+            <Combo Field="partner_from" Label="$partnerfrom" ListID="CodaInt.Base.Common.OfcPrestoredQueryList#psqid=partner_reminder" ComboFlags="FindAnywhere" DependentCtrlID="ReminderLetter.cmpcode,ReminderLetter.pelementlevel,ReminderLetter.pcodelike,ReminderLetter.prlcode" DependentField="cmpcode,pelementlevel,pcodelike,prlcode" ColsToSpan="3" Mandatory="false" />
+            <ForceNextRow />
+            <Combo Field="partner_to" Label="$partnerto" ListID="CodaInt.Base.Common.OfcPrestoredQueryList#psqid=partner_reminder" ComboFlags="FindAnywhere" DependentCtrlID="ReminderLetter.cmpcode,ReminderLetter.pelementlevel,ReminderLetter.pcodelike,ReminderLetter.prlcode" DependentField="cmpcode,pelementlevel,pcodelike,prlcode" ColsToSpan="3" Mandatory="false" />
+            <ForceNextRow />
+            <Combo Field="action" Label="$reportformat" ListID="xml:eLog.HeavyTools.Reports.Financials.ReminderLetter_rptfile" ComboFlags="FindAnywhere" Mandatory="True" />
+            <ForceNextRow/>
+            <GroupSeparator ID="gs2" Label="_" />
+            <Combo Field="lngid" ListID="eProjectWeb.Framework.UI.Maintenance.Language.LanguageList" ComboFlags="FindAnywhere" Mandatory="true" />
+        </LayoutTable>
+    </TabPage>
+
+    <ComboItems Name="rptfile">
+        <ComboItem Caption="$rptfile_normal" Value="0" />
+        <ComboItem Caption="$rptfile_cheque" Value="1" />
+    </ComboItems>
+
+    <ReportLabels Name="doc_reminder_letter_hto">
+        <Label Name="$title_" />
+        <Label Name="$logo_file" />
+        <Label Name="$logo_left_file" />
+        <Label Name="$logo_right_file" />
+        <Label Name="$rem_tel" />
+        <Label Name="$rem_fax" />
+        <Label Name="$rem_web" />
+    </ReportLabels>
+
+    <ReportLabels Name="doc_reminder_cheque_letter_hto">
+        <Label Name="$title_" />
+        <Label Name="$rem_invalid"/>
+        <Label Name="$logo_file" />
+        <Label Name="$logo_left_file" />
+        <Label Name="$logo_right_file" />
+        <Label Name="$rem_tel" />
+        <Label Name="$rem_fax" />
+        <Label Name="$rem_web" />
+		<Label Name="$rem_addr" />
+    </ReportLabels>
+
+    <ProcParams Name="ProcParams">
+        <Proc Name="sp_rep2_reminder_letter_HeavyTools">
+            <Param Name="lntry" Value="0"/>
+            <Param Name="lninit" Value="0"/>
+        </Proc>
+    </ProcParams>
+</Schema>

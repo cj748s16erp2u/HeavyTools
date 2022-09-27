@@ -1,0 +1,97 @@
+$pageName_Action=Akciók
+$tabName_Action=Akciók
+
+
+$actiontype=Akció típusa
+$name=Megnevezés
+$priority=Akció prioritás
+$curid=Pénznem
+$singlecouponnumber=Kuponszám
+$couponunlimiteduse=Korlátlan használat
+$discounttype=Kedvezmény típusa
+$discountval=Kedvezmény értéke
+$discountforfree=Ingyenes fizetés
+$discountfreetransportation=Ingyenes szállítás
+$discountcalculationtype=Kedvezmény számítás 
+$discountaid=Kupon kedvezmény 
+$validdatefrom=Érvényesség kezdete
+$validdateto=Érvényesség vége
+$validtotvalfrom=Minimum rendelési összeg
+$validtotvalto=Maximum rendelési összeg
+$purchasetype=Vásárlás típusa
+$filtercustomerstype=Mely ügyfelekre vonatkozik
+$filteritems=Cikkszám szűrés
+$filteritemsblock=Kizárt cikkszámok
+$count=Min. termékek száma
+
+
+$actiontype_cupon=Kupon
+$actiontype_action=Akció
+$actiontype_loyaltycardno=Törzsvásárló
+$actiontype_vip=VIP kártya
+
+$discounttype_val=Érték
+$discounttype_percent=Százalék
+$discounttype_cupon=Kupon
+
+$discountcalculationtype_division=Osztás
+$discountcalculationtype_oneproduct=Egy termék
+
+$purchasetype_all=Összes
+$purchasetype_first=Első
+$purchasetype_cheapest=A lagolcsóbb értékű a kosárban
+
+
+
+$discounttype2=Kedv. típ.
+$discountval2=Kedv. ért.
+$validdatefrom2=Érv. kezdete
+$validdateto2=Érv. vége
+
+$validforsaleproducts=Akciós termékekre érvényes
+
+$common=Általános beállítások
+$base=Alap beállítások
+$other=Egyéb beállítások
+
+
+$filtercustomerstype_all=Minden ügyfelekre
+$filtercustomerstype_onlyloyalty=Csak törzsvásárlókra vonatkozik
+$filtercustomerstype_notforloyalty=Törzsvásárlókra NEM vonatkozik
+$filtercustomerstype_notforresale=Viszonteladókra NEM vonatkozik
+
+$isactive=Aktív?
+
+
+$missingitemcode=Nem létező cikkszám: {0}
+
+
+$country=Ország
+$retail=Kisker
+$webshop=Webshop
+
+$isextcondition=Öszetett feltétel
+$isextdiscount=Öszetett kedvezmény
+
+$netgoid=NetGo Az.
+
+
+$noActionselected=Nincs fej kiválasztva
+
+
+$cupon_not_single_discount=Kupon kedvezmény esetén más kedvezmény nem adható!
+$discount_missing=Nincs kedvezmény megadva
+
+$multiple_discount=Túl sok kedvezmény
+
+
+$isdiscount=Kedvezmény?
+
+$count2=Mennyiség
+
+$tabName_ActionExt=Akció kiegészítés
+
+$cannot_use=Nem menthető a fej beállítások miatt
+
+$discountcalculationtype_extdiscountonly=Csak kedvezmény sor
+$discountcalculationtype_extconditiononly=Csak feltétel sor

@@ -1,10 +1,12 @@
 ﻿using eLog.Base.Common;
+using eLog.HeavyTools.Common.Transate;
 using eLog.HeavyTools.Masters.Item.Import;
 using eProjectWeb.Framework;
 using eProjectWeb.Framework.BL;
 using eProjectWeb.Framework.Data;
 using eProjectWeb.Framework.UI.Controls;
 using eProjectWeb.Framework.UI.Templates;
+using System.Collections.Generic;
 
 namespace eLog.HeavyTools.Masters.Item.MainGroup
 {
@@ -56,14 +58,28 @@ namespace eLog.HeavyTools.Masters.Item.MainGroup
             t.Initialize("OlcItemMainGroup", setup);
             return t;
         }
+
         protected override OlcItemMainGroup DefaultPageLoad_LoadEntity(PageUpdateArgs args)
         {
             var e= base.DefaultPageLoad_LoadEntity(args);
-
             FindRenderable<Combo>("imgt1id").Disabled = true;
-
             return e;
         }
+          
+        protected override OlcItemMainGroup DefaultPageLoad(PageUpdateArgs args)
+        {
+            OlcItemMainGroup e = base.DefaultPageLoad(args);
+            TranslateController.DefaultPageLoad(this,e);
+            return e;
+        }
+
+        protected override BLObjectMap SaveControlsToBLObjectMap(PageUpdateArgs args, OlcItemMainGroup e)
+        {
+            var map = base.SaveControlsToBLObjectMap(args, e);
+            TranslateController.SaveControlsToBLObjectMap(this, e);
+            return map;
+        }
+
     }
 
     internal class OlcItemMainGroupSearchProvider : DefaultSearchProvider
@@ -72,14 +88,17 @@ namespace eLog.HeavyTools.Masters.Item.MainGroup
 
         public static string DefaultOrderByStr = null;
 
-        protected static string m_queryString = @"select img.*,  isrh.name isrhname, imgt2.groupname groupname2
+        protected static string m_queryString = @"select img.*, isrh.name isrhname, imgt2.groupname groupname2, imgt1.groupname groupname1 --%%ITranslateFields%%
   from olc_itemmaingroup img
   left join olc_itemsizerangehead isrh on isrh.isrhid=img.isrhid
-  left join olc_itemmaingrouptype2 imgt2 on imgt2.imgt2id=img.imgt2id";
+  left join olc_itemmaingrouptype1 imgt1 on imgt1.imgt1id=img.imgt1id
+  left join olc_itemmaingrouptype2 imgt2 on imgt2.imgt2id=img.imgt2id
+  --%%ITranslateJoins%%
+";
 
         protected static QueryArg[] m_argsTemplate = new QueryArg[]
         {
-            new QueryArg("imgid", "img", FieldType.String, QueryFlags.Like),
+            new QueryArg("imgid", "img", FieldType.Integer, QueryFlags.Equals),
             new QueryArg("code", "img", FieldType.String, QueryFlags.Like),
             new QueryArg("name", "img", FieldType.String, QueryFlags.Like),
             new QueryArg("delstat","img", FieldType.Integer, QueryFlags.Equals),
@@ -88,6 +107,12 @@ namespace eLog.HeavyTools.Masters.Item.MainGroup
         protected OlcItemMainGroupSearchProvider()
             : base(m_queryString, m_argsTemplate, SearchProviderType.Default)
         {
+        }
+
+        protected override string CreateQueryString(Dictionary<string, object> args, bool fmtonly)
+        {
+            var sql= base.CreateQueryString(args, fmtonly);
+            return TranslateController.UpdateQueryString(sql, OlcItemMainGroup.CreateNew(), "--%%ITranslateFields%%", "--%%ITranslateJoins%%");
         }
     }
 

@@ -21,8 +21,16 @@ values (509, 'olc_partner.InvLangType', 'Partner tulajdonság: számla nyelve', 
 
 insert ols_typehead (typegrpid, typekey, descr, protect, multipl, addusrid, adddate, delstat)
 values (510, 'cif_ebank_trans.importfields', 'Import Fields', 1, 0, 'dev', getdate(), 0)
-go
 
 insert ols_typehead (typegrpid, typekey, descr, protect, multipl, addusrid, adddate, delstat)
 values (511, 'olc_pordhead.paritytype', 'Szállítói rendelés paritás', 1, 0, 'dev', getdate(), 0)
-go
+
+insert into ols_typehead (typegrpid, typekey, descr, protect, multipl, addusrid, adddate, delstat)
+values (512, 'olc_partncmp.scontoinvoice', 'Skontó plusszos számlák után', 1, 0, 'dev', getdate(), 0)
+
+insert into ols_typehead (typegrpid, typekey, descr, protect, multipl, addusrid, adddate, delstat)
+values (513, 'olc_partncmp.referencetype', 'Referencia típusa', 1, 0, 'dev', getdate(), 0)
+
+
+insert into ols_typehead (typegrpid, typekey, descr, protect, multipl, addusrid, adddate, delstat)
+values (514, 'olc_whlocprio.priotype', 'Elsődleges vagy másodlagos helykód', 1, 1, 'dev', getdate(), 0)

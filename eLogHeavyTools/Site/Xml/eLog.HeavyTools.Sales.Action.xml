@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Schema xmlns="http://tempuri.org/RenderableSchema.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://tempuri.org/RenderableSchema.xsd RenderableSchema.xsd">
+	<Search Name="ActionSearchProvider">
+		<Column FieldName="aid" PKFieldName="aid" Hidden="true" Width="100"/>
+		<Column FieldName="actiontype" Width="80" FieldFunction="listlookup" FieldFuncArg="eLog.HeavyTools.Sales.Action.ActionTypeList"/>
+		<Column FieldName="name" Width="130"/>
+		<Column FieldName="priority" Width="80"/>
+		<Column FieldName="curid" Width="80"/>
+		<Column FieldName="discounttype" DisplayName="$discounttype2" Width="80" FieldFunction="listlookup" FieldFuncArg="eLog.HeavyTools.Sales.Action.DiscounttypeList"/>
+		<Column FieldName="discountval" DisplayName="$discountval2" Width="80"/>
+		<Column FieldName="validdatefrom" DisplayName="$validdatefrom2" Width="80" Format="D"/>
+		<Column FieldName="validdateto" Width="80" DisplayName="$validdateto2" Format="D"/>
+		
+		
+		<Column FieldName="delstat" Width="60" Align="Left" FieldFunction="listlookup" FieldFuncArg="eLog.Base.Setup.Parameters.DelstatTypeList,abbr"/>
+	</Search>
+	<TabPage Name="ActionSearchTab">
+		<SearchFilterBar ID="SrcBar">
+			<Textbox Field="name" Width="150"/>
+			
+			<Combo Field="actiontype" Width="100" ListID="eLog.HeavyTools.Sales.Action.ActionTypeList"/>
+			
+			<Combo Field="delstat" Width="100" ListID="eLog.Base.Setup.Parameters.DelstatTypeList" ComboFlags="AllowBlank AutoSelectFirst"/>
+		</SearchFilterBar>
+		<Grid ID="searchResults" Label="$search_results" ColsToSpan="-1"/>
+	</TabPage>
+	<TabPage Name="ActionEditTab">
+		<LayoutTable ControlGroup="Action" Columns="{175, None}; {180, None}; {20, Empty}; {90, None}; {180, None};" ID="EditGroup1">
+ 			
+			<Combo Field="actiontype" ListID="eLog.HeavyTools.Sales.Action.ActionTypeList" /> 
+			<ForceNextRow/>
+			<Intbox Field="netgoid" Disabled="true" CustomData="Cupon"/>
+			<ForceNextRow/> 
+			<Combo Field="isactive" ListID="eLog.Base.Setup.Parameters.YesNoTypeList" />
+		    <ForceNextRow/>
+			<Combo Field="isextcondition" ListID="eLog.Base.Setup.Parameters.YesNoTypeList" CustomData="Cupon,Action"/>
+			<ForceNextRow/>
+			<Combo Field="isextdiscount" ListID="eLog.Base.Setup.Parameters.YesNoTypeList" CustomData="Cupon,Action"/>
+			<Combo Field="isextdiscount" ListID="eLog.Base.Setup.Parameters.YesNoTypeList" CustomData="Cupon,Action"/>
+		    <ForceNextRow/>
+			
+			<GroupSeparator ID="x1" Label="$common" />
+			<Intbox Field="priority" />
+			<ForceNextRow/>
+			<Combo Field="curid" ListID="eLog.Base.Setup.Currency.CurrencyList" ComboFlags="AllowBlank" />
+			<ForceNextRow/>
+			<CheckedCombo Field="country" ListID="eLog.HeavyTools.Sales.Action.ActionCountryList" ComboFlags="AllowBlank" ColsToSpan="-1" />
+			<ForceNextRow/>
+			<CheckedCombo Field="retail" ListID="eLog.HeavyTools.Sales.Action.ActionRetailList" ComboFlags="AllowBlank" ColsToSpan="-1"/>
+			<ForceNextRow/>
+			<CheckedCombo Field="webshop" ListID="eLog.HeavyTools.Webshop.WebshopList" ComboFlags="AllowBlank" ColsToSpan="-1"/>
+			<GroupSeparator ID="x2" Label="$base" />
+			<Textbox Field="singlecouponnumber" CustomData="Cupon,VIP"/>
+			<ForceNextRow/>			
+			<Textbox Field="name" />
+			<ForceNextRow/>
+			<Combo Field="discounttype" ListID="eLog.HeavyTools.Sales.Action.DiscounttypeList" ColsToSpan="-1" />
+			<ForceNextRow/>
+			<Numberbox Field="discountval" DecDigits="2" ThousandSep="True"/>
+			<ForceNextRow/>
+			<Combo Field="couponunlimiteduse" ListID="eLog.Base.Setup.Parameters.YesNoTypeList" CustomData="Cupon" ColsToSpan="-1"/>
+			<ForceNextRow/>
+			<DatePickerbox Field="validdatefrom"/>
+			<ForceNextRow/>
+			<DatePickerbox Field="validdateto"/>
+			<ForceNextRow/>
+			<Combo Field="validforsaleproducts" ListID="eLog.Base.Setup.Parameters.YesNoTypeList" ComboFlags="None" CustomData="Cupon,Action"/>
+			<ForceNextRow/>	
+			<Combo Field="filtercustomerstype" ListID="eLog.HeavyTools.Sales.Action.FilterCustomersTypeList" ComboFlags="None" ColsToSpan="-1" CustomData="Cupon,Action"/>
+			<ForceNextRow/>
+			<Textbox Field="filteritems" Rows="6" ColsToSpan="-1" CustomData="Cupon,Action"/>
+			<ForceNextRow/>
+			<Textbox Field="filteritemsblock" Rows="6" ColsToSpan="-1" CustomData="Cupon,Action"/>
+			<ForceNextRow/>
+			<Numberbox Field="validtotvalfrom" DecDigits="2" ThousandSep="True" CustomData="Cupon,Action,Loyaltycardno"/>
+			<ForceNextRow/>
+			<Numberbox Field="validtotvalto" DecDigits="2" ThousandSep="True" CustomData="Cupon,Action"/>
+			<ForceNextRow/>
+			<Combo Field="purchasetype" ListID="eLog.HeavyTools.Sales.Action.PurchasetypeList" ComboFlags="None" ColsToSpan="-1" CustomData="Cupon,Action"/>
+			<ForceNextRow/>
+			<Combo Field="discountforfree" ListID="eLog.Base.Setup.Parameters.YesNoTypeList" ComboFlags="None" CustomData="Cupon,Action"/>
+			<ForceNextRow/>
+			<Combo Field="discountfreetransportation" ListID="eLog.Base.Setup.Parameters.YesNoTypeList" ComboFlags="None" CustomData="Cupon,Action"/>
+			<ForceNextRow/>
+			<Textbox Field="note" Rows="2" ColsToSpan="-1" CustomData="Cupon,Action"/>
+			
+		    <GroupSeparator ID="x3" Label="$other" />
+			<Combo Field="discountcalculationtype" ListID="eLog.HeavyTools.Sales.Action.DiscountcalculationtypeList" ComboFlags="None" ColsToSpan="-1" CustomData="Cupon,Action"/>
+			<ForceNextRow/>
+			<Selector Field="discountaid" Label="$discountaid" ValueField="aid" TextField="name" SelectionID="eLog.HeavyTools.Sales.Action.CuponSelectionProvider" CustomData="Cupon,Action"/>
+			<ForceNextRow/>
+			<Intbox Field="count" CustomData="Cupon,Action"/> 
+		</LayoutTable>
+	</TabPage>
+	
+	
+	
+	<Search Name="ActionExtSearchProvider">
+		<Column FieldName="axid" PKFieldName="axid" Hidden="true" Width="100"/> 
+		<Column FieldName="isdiscount" Width="80" FieldFunction="listlookup" FieldFuncArg="eLog.Base.Setup.Parameters.YesNoTypeList"/>
+		<Column FieldName="discounttype" Width="80" FieldFunction="listlookup" FieldFuncArg="eLog.HeavyTools.Sales.Action.DiscounttypeList"/>
+		<Column FieldName="discountval" Width="130"/> 
+		<Column FieldName="count" Width="130"/> 
+		<Column FieldName="discountcalculationtype" Width="80" FieldFunction="listlookup" FieldFuncArg="eLog.HeavyTools.Sales.Action.ExtDiscountcalculationtypeList"/>
+		<Column FieldName="filteritems" Width="200"/>
+		<Column FieldName="delstat" Width="60" Align="Left" FieldFunction="listlookup" FieldFuncArg="eLog.Base.Setup.Parameters.DelstatTypeList,abbr"/>
+	</Search>
+	
+	
+	<TabPage Name="ActionExtSearchTab">
+		<SearchFilterBar ID="SrcBar">
+			<Combo Field="delstat" Width="100" ListID="eLog.Base.Setup.Parameters.DelstatTypeList" ComboFlags="AllowBlank AutoSelectFirst"/>
+		</SearchFilterBar>
+		<Grid ID="searchResults" Label="$search_results" ColsToSpan="-1"/>
+	</TabPage>
+	
+	
+	
+	<TabPage Name="ActionExtEditTab">
+		<LayoutTable ControlGroup="Action" Columns="{175, None}; {180, None}; {20, Empty}; {90, None}; {180, None};" ID="EditGroup1">
+			<Combo Field="isdiscount" ListID="eLog.Base.Setup.Parameters.YesNoTypeList" />
+			<ForceNextRow/>
+			<Intbox Field="count" Label="$count2"  />
+			<ForceNextRow/>	
+			<Combo Field="discounttype" ListID="eLog.HeavyTools.Sales.Action.ExtDiscounttypeList" ColsToSpan="-1" />
+			<ForceNextRow/>
+			<Numberbox Field="discountval" DecDigits="2" ThousandSep="True"/>
+			<ForceNextRow/>
+			<Combo Field="discountcalculationtype" ListID="eLog.HeavyTools.Sales.Action.ExtDiscountcalculationtypeList" ComboFlags="None" ColsToSpan="-1" CustomData="Cupon,Action"/>
+			<ForceNextRow/>
+			<Textbox Field="filteritems" Rows="6" ColsToSpan="-1" CustomData="Cupon,Action"/>
+			<ForceNextRow/>
+			<Textbox Field="filteritemsblock" Rows="6" ColsToSpan="-1" CustomData="Cupon,Action"/>		
+		
+		</LayoutTable>
+	</TabPage>	
+	
+</Schema>

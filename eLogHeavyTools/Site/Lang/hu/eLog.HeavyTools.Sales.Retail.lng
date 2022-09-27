@@ -1,0 +1,66 @@
+$pageName_RetailSales=Kosár
+$tabName_RetailSales=Kosár
+$action_AddItem=Cikk hozzáadása
+$action_Recalc=Újraszámol
+$action_Delete=Cikk törlés
+
+$selPrc=Nettó egys.ár
+$grossPrc=Bruttó egys.ár
+$netVal=Nettó érték
+$taxVal=Áfa érték
+$totVal=Bruttó érték
+$orignalSelPrc=E. nettó egys.ár
+$orignalGrossPrc=E. bruttó egys.ár
+$orignalTotVal=E. bruttó érték
+
+
+
+$action_Cupon=Kupon hozzáadása
+$action_LoyaltyCardNo=Törvásárló megadása
+
+$loyaltyCardNo=Törzs. szám
+$cupon=Kupon kód
+
+
+$pname=Tv. parnter név
+$partncode=Tv. partner kód
+
+
+$action_clearCartCache=Kosár cache ürítés
+
+
+$finpaymid=Fiz.mód
+$payvalue=Összeg
+
+$paysearch_results=Fizetés
+$payval=Fizetendő
+
+$paysearch_results2=Fizetés összesítő
+$originalValue=Eredeti ár
+$discValue=Kedvezmény
+$totValue=Összesen
+$payValue=Fizetendő
+$missingValue=Maradvány
+
+$action_add=Új...
+$action_Item=Új cikk hozzáadása
+
+
+$action_admin=Fejlesztői
+
+$action_reloadActions=Akciók újra töltése
+
+$invalidPayvalue=Hibás fizetési összeg
+$invalidFinpaymid=Hibás fizetési mód
+$action_PayCard=Bankkártyás fizetési
+
+$action_PayCash=Készpénzes fizetési
+$action_PayCustom=Egyedi fizetési
+$paycustom=Egyedi fizetési
+
+$action_PayDelete=Fizetés törlése
+$action_DeleteAll=Kosár ürítés
+$action_PayDeleteAll=Összes fizetés törlése
+
+
+$action_refresh2=F10 | Frissít

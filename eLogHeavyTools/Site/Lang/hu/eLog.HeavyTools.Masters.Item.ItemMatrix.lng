@@ -15,7 +15,7 @@ $itemgrouptitle=Összes adatok
 $colortype1=Szín 1.
 $colortype2=Szín 2.
 $colortype3=Szín 3.
-$colorname=Szín név
+$colorname=Színállás neve
 $materialtype=Anyagösszetétel
 $patterntype=Mintázat 1.
 $patterntype2=Mintázat 2.
@@ -30,3 +30,6 @@ $missingcolortype1=Hiányzik a Szín 1.
 
 $modelMatrixResultTitle=Modell szezon-színállás eredmény
 $modelMatrixResult={0} db cikk változott, {1} db jött létre
+
+$catalogpagenumber=Katalógus
+$webcategory=Web kategória

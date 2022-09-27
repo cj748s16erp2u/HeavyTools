@@ -13,15 +13,18 @@ namespace eLog.HeavyTools.Masters.Item
             : base(true)
         {
             ERules[OlcItem.FieldItemid.Name].Mandatory = false;  // PK, FK
-            ERules[OlcItem.FieldColortype1.Name].Mandatory = true;
+            ERules[OlcItem.FieldColortype1.Name].Mandatory = false;
             AddCustomRule(Colortype1Mandatory);
         }
 
         private void Colortype1Mandatory(RuleValidateContext ctx, OlcItem value)
         {
-            if (!value.Colortype1.HasValue)
+            if (value.Colortype1.HasValue)
             {
-                ctx.AddErrorField(OlcItem.FieldColortype1, "$missingcolortype1");
+                if (string.IsNullOrEmpty(value.Colorname))
+                {
+                    ctx.AddErrorField(OlcItem.FieldColortype1, "$missingcolortype1");
+                }
             }
         }
     }

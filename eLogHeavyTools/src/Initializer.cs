@@ -188,14 +188,15 @@ namespace eLog.HeavyTools
             ObjectFactory.AddRemap(typeof(Base.Masters.Partner.PartnerBL), typeof(Masters.Partner.PartnerBL3));
             ObjectFactory.AddRemap(typeof(Base.Masters.Partner.PartnerEditTab), typeof(Masters.Partner.PartnerEditTab3));
             ObjectFactory.AddRemap(typeof(Base.Masters.Partner.PartnerSearchProvider), typeof(Masters.Partner.PartnerSearchProvider3));
+            ObjectFactory.AddRemap(typeof(Base.Masters.Partner.PartnerSearchPage), typeof(Masters.Partner.PartnerSearchPage3));
 
             // Warehouse
             ObjectFactory.AddRemap(typeof(Base.Setup.Warehouse.WarehouseSearchPage), typeof(Setup.Warehouse.WarehouseSearchPage3));
             ObjectFactory.AddRemap(typeof(Base.Setup.Warehouse.WarehouseSearchTab), typeof(Setup.Warehouse.WarehouseSearchTab3));
 
             // Item
-            ObjectFactory.AddRemap(typeof(Base.Masters.Item.ItemEditTab), typeof(Masters.Item.ItemEditTab2));
-            ObjectFactory.AddRemap(typeof(Base.Masters.Item.ItemBL), typeof(Masters.Item.ItemBL3));
+            ObjectFactory.AddRemap(typeof(eLog.Base.Masters.Item.ItemEditTab), typeof(eLog.HeavyTools.Masters.Item.ItemEditTab3));
+            ObjectFactory.AddRemap(typeof(eLog.Base.Masters.Item.ItemBL), typeof(eLog.HeavyTools.Masters.Item.ItemBL3));  
 
             // Bank
             ObjectFactory.AddRemap(typeof(U4Ext.Bank.Base.Transaction.EfxBankTranLineSearchTab), typeof(BankTran.EfxBankTranLineSearchTab3));
@@ -221,6 +222,10 @@ namespace eLog.HeavyTools
             ObjectFactory.AddRemap(typeof(Base.Purchase.Pord.PordHeadBL), typeof(Purchase.Pord.PordHeadBL3));
             ObjectFactory.AddRemap(typeof(Base.Purchase.Pord.PordHeadEditTab), typeof(Purchase.Pord.PordHeadEditTab3));
             ObjectFactory.AddRemap(typeof(Base.Purchase.Pord.PordHeadSearchTab), typeof(Purchase.Pord.PordHeadSearchTab3));
+
+            // Pinv
+            //ObjectFactory.AddRemap(typeof(Base.Purchase.Pinv.PinvHeadSearchPage), typeof(Purchase.Pinv.PinvHeadSearchPage3));
+            ObjectFactory.AddRemap(typeof(Base.Purchase.Pinv.PinvHeadSearchProvider), typeof(Purchase.Pinv.PinvHeadSearchProvider3));
         }
     }
 }

@@ -10,7 +10,7 @@ namespace eLog.HeavyTools.Setup.Warehouse
 {
     public class WarehouseSearchPage3 : Base.Setup.Warehouse.WarehouseSearchPage
     {
-        protected static readonly Type baseType = typeof(Base.Setup.Warehouse.WarehouseSearchPage);
+        protected static readonly System.Type baseType = typeof(Base.Setup.Warehouse.WarehouseSearchPage);
 
         protected override string GetNamespaceName()
         {

@@ -301,11 +301,29 @@ create table olc_partner (
 /* Partner-vállalat kiegészítés  */
 /*********************************/
 create table olc_partncmp (
-    partnid				int						not null,
-	cmpid				int						not null,
-    secpaymid			varchar(12)             null, -- Masodlagos fizetesi mod
-    addusrid            varchar(12)				not null,
-    adddate             datetime                null,
+    partnid                             int         not null,
+    cmpid                               int         not null,
+    secpaymid                   varchar(12)             null, -- Masodlagos fizetesi mod
+    secpaycid                           int             null,
+    relatedaccno                varchar(50)             null, /* kapcsolodo banki elszamolo (technikai utkozo) szamla szamlakodja */
+    scontoinvoice               integer                 null, /* skonto csak a plusszos szamlak utan, 0: nem, 1: igen, 2: nincs skonto */
+    scontobelowaccno            varchar(50)             null, /* 3% alatti skonto szamlakodja */
+    scontoaboveaccno            varchar(50)             null, /* 3% feletti skonto szamlakodja */
+    el1                         varchar(72)             null,
+    el2                         varchar(72)             null, /* szallito elemkodja (el2) */
+    el3                         varchar(72)             null, /* ertekesitesi egyseg kodja (el3) */
+    el4                         varchar(72)             null,
+    el5                         varchar(72)             null,
+    el6                         varchar(72)             null,
+    el7                         varchar(72)             null,
+    el8                         varchar(72)             null,
+    transactionfeeaccno         varchar(50)             null, /* tranzakcios dij szamlakodja */
+    domesticvaluerate           integer                 null, /* elem ertek es hazai ertek aranyositasa szukseges, 0: nem, 1: igen */
+    referencetype               integer                 null, /* referencia tipusa, tobbfele */
+    discountaccounting          integer                 null, /* kedvezmeny konyvelese, 0: nem, 1: igen */
+    valuecurid                  varchar(12)             null, /* ertek devizanem */
+    addusrid                    varchar(12)         not null,
+    adddate                     datetime                null,
     constraint pk_olc_partncmp primary key (partnid, cmpid), -- composite primary key
     constraint fk_olc_partncmp_partnid foreign key (partnid) references ols_partner (partnid),
 	constraint fk_olc_partncmp_cmpid foreign key (cmpid) references ols_company (cmpid),
@@ -418,6 +436,8 @@ create table [olc_sordhead] (
   [data]                      [xml]                 null, -- számlázási adatok (customer prefix: név, cím, szállítási cím, telefon, email; coupon prefix lista: kuponkód, ...)
   [regreprempid]    		  [int]                 null, -- területi képviselő 
   [clerkempid]                [int]                 null, -- ügyintéző
+  [wid]						  [varchar](12)         null, -- melyik webáruházból jött egy rendelés
+  [bustypeid]				  [varchar](12)         null, -- melyik webáruházból jött egy rendelés
   [addusrid]                  [varchar](12)     not null,
   [adddate]                   [datetime]        not null,
   constraint [pk_olc_sordhead] primary key ([sordid])
@@ -425,7 +445,8 @@ create table [olc_sordhead] (
 
 alter table [olc_sordhead] add constraint [fk_olc_sordhead_sordid] foreign key ([sordid]) references [ols_sordhead] ([sordid])
 alter table [olc_sordhead] add constraint [fk_olc_sordhead_addusrid] foreign key ([addusrid]) references [cfw_user] ([usrid])
-go
+alter table [olc_sordhead] add constraint [fk_olc_sordhead_wid] foreign key ([wid]) references [olc_webshop] ([wid])
+alter table [olc_sordhead] add constraint [fk_olc_sordhead_bustypeid] foreign key ([bustypeid]) references [ols_bustype] ([bustypeid])
 
 /***************************************/
 /* Vevői rendelés tétel kiegészítés    */
@@ -443,6 +464,223 @@ alter table [olc_sordline] add constraint [fk_olc_sordline_sordlineid] foreign k
 alter table [olc_sordline] add constraint [fk_olc_sordline_addusrid] foreign key ([addusrid]) references [cfw_user] ([usrid])
 go
 
+/* Ajándék kártya       */
+
+create table olc_giftcard (
+  gcid						int identity    not null, -- Ajándék kártya egyedi azonosító
+  barcode					varchar(40)		null,	  -- Ajándék kártya vonalkód
+  pincode					varchar(4)		null,	  -- Ajándék kártya pin kód
+  prc						numeric(19,6)   not null, -- Ajándék kártya érték
+  addusrid                  varchar(12)     not null, -- Rögzítő
+  adddate                   datetime        not null, -- Rögzítés dátuma
+  delstat                   int             not null, -- Rejtett
+  constraint pk_olc_giftcard primary key (gcid)
+)
+ 
+alter table olc_giftcard add constraint fk_olc_giftcard_addusrid foreign key (addusrid) references cfw_user (usrid)
+
+create table olc_giftcardlog (
+  gclid						int identity    not null, -- Ajándék kártya log egyedi azonosító
+  gcid						int             not null, -- Ajándék kártya egyedi azonosító
+  sinvlineid				int			    null,     -- Ajándék kártya feltöltés
+  sinvid					int			    null,     -- Ajándék kártya levásárlás
+  val						numeric(19,6)   not null, -- Ajándék kártya érték változás
+  addusrid                  varchar(12)     not null, -- Rögzítő
+  adddate                   datetime        not null, -- Rögzítés dátuma
+  delstat                   int             not null, -- Rejtett
+  constraint pk_olc_giftcardlog primary key (gclid)
+)
+
+alter table olc_giftcardlog add constraint fk_olc_giftcardlog_gcid foreign key (gcid) references olc_giftcard (gcid)
+alter table olc_giftcardlog add constraint fk_olc_giftcardlog_sinvlineid foreign key (sinvlineid) references ols_sinvline (sinvlineid)
+alter table olc_giftcardlog add constraint fk_olc_giftcardlog_sinvidid foreign key (sinvid) references ols_sinvhead (sinvid)
+alter table olc_giftcardlog add constraint fk_olc_giftcardlog_addusrid foreign key (addusrid) references cfw_user (usrid)
+
+
+go
+
+/*
+drop table olc_actionext
+drop table olc_actioncouponnumber
+drop table olc_actioncountry
+drop table olc_actionwebhop
+drop table olc_action
+drop table olc_actionretail
+*/
+
+
+
+/* Akciók és kuponok */
+
+create table olc_action (
+  aid						int identity    not null, -- Akció egyedi azonosító
+  actiontype				int				not null, -- Akció típusa 0=kupon, 1=akció, 2=Törzskártya, 3=VIP kártya
+  name						varchar(100)	null,	  -- Akció megnevezése
+  isactive 					int 			null,     -- Aktív?
+  isextcondition			int				not null, -- Összetett feltétel?
+  isextdiscount				int				not null, -- Összetett kedvezmény?
+  priority 					int 			null,     -- Akció prioritás
+  curid 					varchar(12)  	null,     -- Akció pénznem
+  
+  singlecouponnumber		varchar(100)	null,	  -- Kupon kód
+  couponunlimiteduse		int				null,     -- Kupon használata korlátlan alkalommal
+
+  discounttype				int				null, -- Kedvezmény típusa 0=összeg, 1=százalék, 2=kupon
+  discountval				numeric(19,6)   null,     -- Kedvezmény értéke
+  discountforfree			int				null,     -- Ingyenes fizetés
+  discountfreetransportation int			null,     -- Ingyenes szállítás
+  discountcalculationtype	int				not null, -- Kedvezmény számítás 0=Szétosztás, 1=egy termék
+  discountaid				int				null,	  -- Kupon kedvezmény 
+
+  validdatefrom				datetime		null,	  -- Érvényesség kezdete
+  validdateto				datetime		null,	  -- Érvényesség vége
+  validtotvalfrom			numeric(19,6)	null,	  -- Minimum rendelési összeg, bruttó adott devizában
+  validforsaleproducts 		int 			null,     -- Akciós termékekre érvényes
+  validtotvalto				numeric(19,6)	null,	  -- Maximum rendelési összeg, bruttó adott devizában
+  purchasetype				int				not null, -- Vásárlás típusa 0=Bármely, 1=Csak az első vásárláshoz, 2=Csak a legolcsóbb termék megvásárlásához, több termék vásárlásakor
+
+  filtercustomerstype		int    			null,     -- Mely ügyfelekre vonatkozik 0=Minden ügyél, 1=Csak törzsvásárlókra, 2=Törzsvásárlókra NEM, 3=Viszonteladókra NEM
+  filteritems				varchar(max)    null,     -- Mely cikkszámokra vonatkozik
+  filteritemsblock			varchar(max)    null,     -- Mely cikkszámokra nem vonatkozik
+  count						int				null,	  -- Hány terméknek kell a kosárban lennie
+  note 						varchar(max)    NULL	  -- Megjegyzés
+  netgoid 					int 		    NULL	  -- NetGO id interface
+  blockmessage 				varchar(200) 	null      -- Blokkra nyomtatási üzenet
+  
+  addusrid                  varchar(12)     not null, -- Rögzítő
+  adddate                   datetime        not null, -- Rögzítés dátuma
+  delstat                   int             not null, -- Rejtett
+  constraint pk_olc_action primary key (aid)
+)
+ 
+
+
+alter table olc_action add constraint fk_olc_action_addusrid foreign key (addusrid) references cfw_user (usrid)
+alter table olc_action add constraint fk_olc_action_discountaid foreign key (discountaid) references olc_action (aid)
+
+go
+ 
+/* Akciók és kuponok melyik webshop-ban érvényesek */
+
+create table olc_actionwebhop (
+  awid						int identity    not null, -- Akció webshop egyedi azonosító
+  aid						int				not null, -- Akció egyedi azonosító
+  wid						varchar(12) 	not null, -- Webáruház egyedi azonosító
+
+  addusrid                  varchar(12)     not null, -- Rögzítő
+  adddate                   datetime        not null, -- Rögzítés dátuma
+  delstat                   int             not null, -- Rejtett
+  constraint pk_olc_actionwebhop primary key (awid)
+)
+
+alter table olc_actionwebhop add constraint fk_olc_actionwebhop_addusrid foreign key (addusrid) references cfw_user (usrid)
+alter table olc_actionwebhop add constraint fk_olc_actionwebhop_wid foreign key (wid) references olc_webshop (wid)
+
+go
+
+/* Akciók és kuponok melyik országban érvényesek */
+
+create table olc_actioncountry (
+  acid						int identity    not null, -- Akció ország egyedi azonosító
+  aid						int				not null, -- Akció egyedi azonosító
+  countryid					varchar(12)		not null, -- Ország egyedi azonosító
+
+  addusrid                  varchar(12)     not null, -- Rögzítő
+  adddate                   datetime        not null, -- Rögzítés dátuma
+  delstat                   int             not null, -- Rejtett
+  constraint pk_olc_actioncountry primary key (acid)
+)
+
+alter table olc_actioncountry add constraint fk_olc_actioncountry_addusrid foreign key (addusrid) references cfw_user (usrid)
+alter table olc_actioncountry add constraint fk_olc_actioncountry_countryid foreign key (countryid) references ols_country (countryid)
+
+go
+ 
+/* Akció egyedi kuponkód */
+
+create table olc_actioncouponnumber (
+  acnid						int identity    not null, -- Egyedi kuponkód azonosító
+  aid						int				not null, -- Akció egyedi azonosító
+  couponnumber				varchar(100)	not null, -- Egyedi kupon kód
+  used						int				not null, -- Felhasznált-e
+
+  addusrid                  varchar(12)     not null, -- Rögzítő
+  adddate                   datetime        not null, -- Rögzítés dátuma
+  delstat                   int             not null, -- Rejtett
+  constraint pk_olc_actioncouponnumber primary key (acnid)
+)
+
+alter table olc_actioncouponnumber add constraint fk_olc_actioncouponnumber_addusrid foreign key (addusrid) references cfw_user (usrid)
+ 
+go
+
+
+
+/* Akciók kiegészítés */
+
+create table olc_actionext (
+  axid						int identity    not null, -- Akció kiegészítés egyedi azonosító
+  aid						int				not null, -- Akció egyedi azonosító
+
+  filteritems				varchar(max)    not null, -- Mely cikkszámokra vonatkozik
+  filteritemsblock			varchar(max)    null,     -- Mely cikkszámokra nem vonatkozik
+  count						int				not null, -- Hány db termék
+  discounttype				int				null, -- Kedvezmény típusa 0=összeg, 1=százalék
+  discountval				numeric(19,6)   null,     -- Kedvezmény értéke
+  discountcalculationtype 	int 			null,	  -- 0=Erre nem, 1=Erre igen
+  isdiscount 				int 			not null, -- Kedvezmény?
+  
+  addusrid                  varchar(12)     not null, -- Rögzítő
+  adddate                   datetime        not null, -- Rögzítés dátuma
+  delstat                   int             not null, -- Rejtett
+  constraint pk_olc_actionext primary key (axid)
+)
+
+alter table olc_actionext add constraint fk_olc_actionext_addusrid foreign key (addusrid) references cfw_user (usrid) 
+
+go
+
+
+
+
+/* Akciók és kuponok melyik boltban érvényesek */
+
+create table olc_actionretail (
+  arid						int identity    not null, -- Akció bolt egyedi azonosító
+  aid						int				not null, -- Akció egyedi azonosító
+  whid						varchar(12)     not null, -- Bolt egyedi azonosító 
+
+  addusrid                  varchar(12)     not null, -- Rögzítő
+  adddate                   datetime        not null, -- Rögzítés dátuma
+  delstat                   int             not null, -- Rejtett
+  constraint pk_olc_actionretail primary key (arid)
+)
+
+alter table olc_actionretail add constraint fk_olc_actionretail_addusrid foreign key (addusrid) references cfw_user (usrid)
+alter table olc_actionretail add constraint fk_olc_actionretail_whid foreign key (whid) references ols_warehouse (whid)
+
+go
+create table olc_taxtransext (  
+	tteid 	    		int identity(1, 1),
+	ttid	int not null,
+
+	countryid			varchar(12) not null,
+	taxid				varchar(12) not null, 
+	ttefrom				datetime not null,
+	tteto				datetime not null,
+	
+	addusrid			varchar(12),
+	adddate				datetime,
+	delstat				int not null,
+
+	constraint pk_olc_taxtransext primary key (tteid),
+	constraint fk_olc_taxtransext_addusrid foreign key (addusrid) references cfw_user(usrid),
+	constraint fk_olc_taxtransext_ttid foreign key (ttid) references ols_taxtrans(ttid),
+	constraint fk_olc_taxtransext_countryid foreign key (countryid) references ols_country(countryid),
+	constraint fk_olc_taxtransext_taxid foreign key (taxid) references ols_tax(taxid),
+)
+
+go
 /***************************************/
 /* Szállítói rendelés kiegészítés          */
 /***************************************/
@@ -459,4 +697,63 @@ create table [olc_pordhead] (
 
 alter table [olc_pordhead] add constraint [fk_olc_pordhead_pordid] foreign key ([pordid]) references [ols_pordhead] ([pordid])
 alter table [olc_pordhead] add constraint [fk_olc_pordhead_addusrid] foreign key ([addusrid]) references [cfw_user] ([usrid])
+go
+
+
+create table olc_cart (
+	cartid                  	int identity    not null,
+	itemid                  	int not null,
+	
+	orignalSelPrc numeric(19,6) null,
+	orignalGrossPrc numeric(19,6) null,
+	orignalTotVal numeric(19,6) null,
+	selPrc numeric(19,6) null,
+	grossPrc numeric(19,6) null,
+	netVal numeric(19,6) null,
+	taxVal numeric(19,6) null,
+	totVal numeric(19,6) null,
+	aid	int null,
+  
+	addusrid                  varchar(12)     not null,
+	adddate                   datetime        not null,
+	delstat                   int             not null,
+	constraint pk_olc_cart primary key (cartid)
+)
+
+alter table olc_cart add constraint fk_olc_cart_addusrid foreign key (addusrid) references cfw_user (usrid)
+alter table olc_cart add constraint fk_olc_cart_aid foreign key (aid) references olc_action (aid)
+alter table olc_cart add constraint fk_olc_cart_itemid foreign key (itemid) references ols_item (itemid)
+
+
+
+
+/***************************************/
+/* Elsődleges helykód				   */
+/***************************************/
+
+create table olc_whlocprio (
+  whlpid                    int identity    not null, -- kulcs
+  itemid                    int             not null, -- cikk hivatkozas
+  whid                      varchar(12)     not null, -- Raktár
+  whzoneid                  int             null, -- Zóna
+  whlocid                   int             not null, -- Helykód
+  whpriotype                int             not null, -- Típus (1 - elsődleges, 2 - másodlagos)
+  refilllimit               numeric(19, 6)  null, -- Újratöltési limit
+  startdate                 datetime        not null, -- Érvényesség kezdete
+  enddate                   datetime        not null, -- Érvényesség vége
+  addusrid                  varchar(12)     not null, -- Rögzítő
+  adddate                   datetime        not null, -- Rögzítve
+  constraint pk_olc_whlocprio primary key (whlpid)
+)
+
+alter table olc_whlocprio add constraint fk_olc_whlocprio_itemid foreign key (itemid) references ols_item (itemid)
+alter table olc_whlocprio add constraint fk_olc_whlocprio_whid foreign key (whid) references ols_warehouse (whid)
+alter table olc_whlocprio add constraint fk_olc_whlocprio_whzoneid foreign key (whzoneid) references olc_whzone (whzoneid)
+alter table olc_whlocprio add constraint fk_olc_whlocprio_whlocid foreign key (whlocid) references olc_whlocation (whlocid)
+alter table olc_whlocprio add constraint fk_olc_whlocprio_addusrid foreign key (addusrid) references cfw_user (usrid)
+
+create index idx_olc_whlocprio_itemid on olc_whlocprio (itemid)
+create index idx_olc_whlocprio_whid on olc_whlocprio (whid)
+create index idx_olc_whlocprio_whzoneid on olc_whlocprio (whzoneid)
+create index idx_olc_whlocprio_whlocid on olc_whlocprio (whlocid)
 go

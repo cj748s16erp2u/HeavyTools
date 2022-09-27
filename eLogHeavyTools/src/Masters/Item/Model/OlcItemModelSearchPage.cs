@@ -1,4 +1,5 @@
 ﻿using eLog.Base.Common;
+using eLog.Base.Masters.Item;
 using eLog.HeavyTools.Masters.Item.ItemMatrix;
 using eLog.HeavyTools.Masters.Item.MainGroup;
 using eLog.HeavyTools.Masters.PriceTable;
@@ -25,11 +26,8 @@ namespace eLog.HeavyTools.Masters.Item.Model
             Tabs.AddTab(delegate { return OlcItemModelSearchTab.New(Setup); });
             Tabs.AddTab(delegate { return OlcItemModelSeasonSearchTab.New(); });
             Tabs.AddTab(delegate { return OlcItemSearchTab.New(); });
-
-            Tabs.AddTab(delegate { return ItemSearchTab3.New3(); });
-
+            Tabs.AddTab(delegate { return ItemSearchTab3.NewDetail(PageMode.Default, ItemSearchPage.Setup,"$nomodelselected"); });
             Tabs.AddTab(delegate { return OlcPrctableSearchTab2.New(OlcPrctableSearchPage.Setup); });
-
         }
     }
 

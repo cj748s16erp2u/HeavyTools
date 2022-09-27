@@ -41,7 +41,14 @@ $invalidcolor=Szín nem található
 
 $sessionsaveerror=Szezon mentési hiba: {0}
 $itemmaingroupsaveerror=Főcsoport mentési hiba: {0}
+$colorsaveerror=Színkódok mentési hiba: : {0}
 
 $colornamecannotfound=A szín nem határozható meg a cikkszámból: {0}
 
 $missingisrhid=Nincs méretsor
+
+$impcolorexceptionsaveerror=A színállás nem menthető: {0}
+
+$impcolorexceptionmissingtypeline=A típus táblából hiányik a megfeleltetés: {0}
+
+

@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Schema xmlns="http://tempuri.org/RenderableSchema.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://tempuri.org/RenderableSchema.xsd RenderableSchema.xsd">
+	<Search Name="RetailSalesSearchProvider">
+		<Column FieldName="cartid" PKFieldName="cartid" Hidden="true" Width="100"/>
+		<Column FieldName="itemcode" Width="130"/>
+		<Column FieldName="name01" Width="200"/>
+
+		<Column FieldName="loyaltyCardNo" Width="100" DecDigits="2"/>
+		<Column FieldName="cupon" Width="100" DecDigits="2"/>
+	
+	
+		<Column FieldName="orignalGrossPrc" Width="100" DecDigits="2"/>
+		<Column FieldName="grossPrc" Width="100" DecDigits="2"/>
+		<!--Column FieldName="totVal" Width="100" DecDigits="2" /-->
+ 
+		<!--Column FieldName="netVal" Width="100" DecDigits="2" /-->
+		<Column FieldName="orignalSelPrc" Width="100" DecDigits="2"/>
+		<Column FieldName="selPrc" Width="100" DecDigits="2"/>
+		<Column FieldName="taxVal" Width="100" DecDigits="2"/>
+		<!--Column FieldName="orignalTotVal" Width="20	0" DecDigits="2" /-->
+ 
+		<Column FieldName="name" Width="200"/>
+		<Column FieldName="partncode" Width="100"/>
+		<Column FieldName="pname" Width="200"/>
+	</Search>
+	<TabPage Name="RetailSalesSearchTab">
+		<SearchFilterBar ID="SrcBar">
+			<Textbox Field="barcode" Width="200"/>
+		</SearchFilterBar>
+		<Grid ID="searchResults" Label="$search_results" ColsToSpan="-1" MultiSelect="True" Height="70" AutoFocus="false"/>
+		<LayoutSimpleH ControlGroup="OlcCart" Columns="{80, None}; {160, None}" ID="EditGroupCustom" Label="$paysearch_results">
+			<Numberbox Field="originalValue" ColsToSpan="-1" Disabled="true" width="100"/>
+			<Numberbox Field="discValue" ColsToSpan="-1" Disabled="true" width="100"/>
+			<Numberbox Field="totValue" ColsToSpan="-1" Disabled="true" width="100"/>
+			<Numberbox Field="payValue" ColsToSpan="-1" Disabled="true" width="100"/>
+			<Numberbox Field="missingValue" ColsToSpan="-1" Disabled="true" width="100"/>
+		</LayoutSimpleH>
+		 
+		<Grid ID="paySearchResults" Height="400" ColsToSpan="-1" MultiSelect="True" AutoFocus="false"/>
+		
+	</TabPage>
+	
+	<Search Name="RetailSalesPaySearchProvider">
+		<Column FieldName="cartpayid" PKFieldName="cartpayid" Hidden="true" Width="100"/>
+		<Column FieldName="finpaymid" Width="80"/>
+		<Column FieldName="name" Width="100"/>
+		<Column FieldName="payvalue" Width="100"/>
+		<Column FieldName="barcode" Width="120"/>
+	</Search>
+	
+	
+</Schema>

@@ -1,0 +1,38 @@
+; Elsődleges helykód menü
+
+$pageName_OlcWhLocPrio=Elsődleges helykód
+
+;Aktív helykódok fül
+
+$OlcWhLocPrioSearchTab=Aktív helykódok
+
+$itemname01=Cikk megnevezése
+$whzoneid=Zóna
+$whlocid=Helykód
+$whpriotype=Helykód típusa
+$whzonecode=Zóna kódja
+$whzonename=Zóna neve
+$whlocname=Helykód neve
+$whloccode=Helykód kódja
+$date=Érvényesség
+$startdate=Érvényesség kezdete
+$enddate=Érvényesség vége
+$whlpid=Id
+
+$OlcWhLocPrioEditTab=Aktív helykódok
+
+$itemid_code=Cikk kódja
+$itemid_name1=Cikk megnevezése
+$refillimit=Utántöltési küszöb
+
+;Összes helykód fül
+
+$OlcWhLocPrioAllSearchTab=Összes helykód
+
+;Hibák
+
+$err_olcwhlocprio_whlocid=Ez a helykód ({0}) nem normál típusú helykód. Csak normál típusú helykód adható meg.
+$err_olcwhlocprio_startdate_enddate=Az érvényesség kezdetének ({0:yyyy.MM.dd}) az érvényesség vége ({1:yyyy.MM.dd}) előtt kell lennie.
+$err_olcwhlocprio_itemid=Ez a cikk ({0}) már szerepel ezen az érvényességi időn belül ({1:yyyy.MM.dd}-{2:yyyy.MM.dd}).
+$err_olcwhlocprio_location_ismulti=Ehhez a helykódhoz ({0}) csak egy cikk rendelhető egy adott érvényességi időn belül és már hozzá lett rendelve egy cikk erre az időtartamra ({1:yyyy.MM.dd}-{2:yyyy.MM.dd}).
+

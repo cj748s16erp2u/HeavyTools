@@ -1,0 +1,42 @@
+$pageName_ApprovedPackage=Szállítói jóváhagyás csomag
+$tabName_apprpackage=Szállítói jóváhagyás csomag
+$tabName_apprphpackage=Szállítói számla
+$tabName_apprplpackage=Jóváhagyás tétel
+$tabName_apprattachment=Csatolt dokumentumok
+
+$cmpcode=Vállalat
+$packagecode=Csomagkód
+$status=Státusz
+$paydate=Fizetés dátuma
+$genhomenet=Eredeti hazai érték
+$homenet=Aktuális hazai érték
+
+$apprpackage_group=Csomag adatok
+
+$doccode=Dok.kód
+$docnum=Dok.szám
+$net=Aktuális érték
+$descr=Sor leírás
+$extref1=Refrencia 1
+$pinvnum=Számlaszám
+$seqno=Sorrend
+$apprstat=Jóváhagyás státusz
+$apprdate=Döntés dátuma
+$apprusrid=Jóváhagyó
+$apprusrid_name=Név
+$costval=Jog. érték
+$curid=Pénznem
+$replausrid=Helyettesítő
+$replausrid_name=Név
+$costlinenote=Egyeztetés megjegyzés
+$apprnote=Jóváhagyás megjegyzés
+
+$apprattachment_search_results=Csatolt dokumentumok
+$filename=File név
+$mimetype=File tipus
+$adoctype=Dok.típus
+$def=Alap.
+$adddate=Dátum
+$action_upload=Feltöltés
+$action_preview=Előnézet
+$action_download=Letöltés
