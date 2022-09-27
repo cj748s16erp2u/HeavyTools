@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Schema xmlns="http://tempuri.org/RenderableSchema.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://tempuri.org/RenderableSchema.xsd ../../../../Releases/eLog.Base/v7.2.0.0/Site/Xml/RenderableSchema.xsd">
+	<ControlType Name="OlcWhLocLinkLineInfoPart" Label="$group_whloclinklineinfo">
+		<Textbox Field="whid" Label="$whid" Width="120" Disabled="true" />
+		<Textbox Field="whzonecode" Label="$whzoneid" Width="120" Disabled="true" />
+		<Textbox Field="whloccode" Label="$whloccode" Width="120" Disabled="true" />
+		<Textbox Field="whlname" Label="$whlname" Width="120" Disabled="True"/>
+		<ForceNextRow />
+		<Numberbox Field="volume" Label="$volume" Width="120" Disabled="true" />
+		<ForceNextRow />
+		<DatePickerbox Field="startdate" Width="150" Disabled="true" />
+		<DatePickerbox Field="enddate" Width="150" Disabled="true" />
+	</ControlType>
+		
+	<TabPage Name="OlcWhLocLinkSearchTab">
+		<SearchFilterBar ID="SrcBar">
+			<Combo Field="whid" Label="$whid" ListID="eLog.Base.Setup.Warehouse.WarehouseList#sessioncmp" ComboFlags="AllowBlank" ColsToSpan="1" />
+			<Combo Field="whzoneid" Label="$whzoneid" ListID="eLog.HeavyTools.Setup.Warehouse.OlcWhZoneList" DependentCtrlID="whid" DependentField="whid" DependentAllowNullField="whid"/>
+			<Textbox Field="whloccode" Width="100"></Textbox>
+			<Textbox Field="whlname" Width="100"></Textbox>
+			<ForceNextRow />
+			<DatePickerbox Field="startdate" Width="150"></DatePickerbox>
+			<DatePickerbox Field="enddate" Width="150"></DatePickerbox>
+		</SearchFilterBar>
+		<Grid ID="searchResults"></Grid>
+	</TabPage>
+
+	<TabPage Name="OlcWhLocLinkLineSearchTab">
+		<Control ID="olcWhLocLinkLineInfoPart" ControlType="OlcWhLocLinkLineInfoPart" />
+		<SearchFilterBar ID="SrcBar">
+			<Numberbox Field="whlocid" Width="100"/>
+		</SearchFilterBar>
+		<Grid ID="editableList"></Grid>
+		<LayoutCtrlSetup ID="IleLayout">
+			<Textbox Field="whlocid"/>
+		</LayoutCtrlSetup>
+	</TabPage>
+
+	<TabPage Name="OlcWhLocLinkEditTab">
+		<LayoutTable ControlGroup="OlcWhLocLink" Columns="{120, None}; {180, None}; {20, Empty}; {120, None}; {180, None};" ID="EditGroup1">
+			<Combo Field="whid" Label="$whid" ListID="eLog.Base.Setup.Warehouse.WarehouseList#sessioncmp" ComboFlags="AllowBlank" ColsToSpan="1" />
+			<Combo Field="whzoneid" Label="$whzoneid" ListID="eLog.HeavyTools.Setup.Warehouse.OlcWhZoneList" DependentCtrlID="whid" DependentField="whid"/>
+			<Textbox Field="whlocid" Width="100"/>
+			<ForceNextRow/>
+			<Numberbox Field="overfillthreshold" Width="100"/>
+			<ForceNextRow/>
+			<DatePickerbox Field="startdate" Width="150"></DatePickerbox>
+			<DatePickerbox Field="enddate" Width="150"></DatePickerbox>
+		</LayoutTable>
+	</TabPage>
+	
+	<Search Name="OlcWhLocLinkSearchProvider">
+		<Column FieldName="whllid" Hidden ="True" PKFieldName="whllid"/>
+		<Column FieldName="whid" Width="70"/>
+		<Column FieldName="whzoneid" Hidden="True"/>
+		<Column FieldName="whzonecode" Width="140"/>
+		<Column FieldName="whzname" Width="100"/>
+		<Column FieldName="whlocid" Hidden="True"/>
+		<Column FieldName="whloccode" Width="140"/>
+		<Column FieldName="whlname" Width="140"/>
+		<Column FieldName="whname" Width="140"/>
+		<Column FieldName="volume" Width="100"/>
+		<Column FieldName="overfillthreshold" Width="100"/>
+		<Column FieldName="startdate" Width="100"/>
+		<Column FieldName="enddate" Width="100"/>
+		<Column FieldName="addusrid" Hidden="True"/>
+		<Column FieldName="adddate" Hidden="True"/>
+	</Search>
+	<Search Name="OlcWhLocLinkLineSearchProvider">
+		<Column FieldName="whlllineid" Hidden="True" PKFieldName="whlllineid"/>
+		<Column FieldName="whllid" Hidden="True"/>
+		<Column FieldName="whlocid" Width="40" Editable="True"/>
+		<Column FieldName="whloccode" Width="100"/>
+		<Column FieldName="name" Width="100"/>
+		<Column FieldName="whlinktype" Hidden="True"/>
+		<Column FieldName="volume" Width="100"/>
+		<Column FieldName="startdate" Hidden="True"/>
+		<Column FieldName="enddate" Hidden="True"/>
+		<Column FieldName="addusrid" Hidden="True"/>
+		<Column FieldName="adddate" Hidden="True"/>
+	</Search>
+</Schema>
