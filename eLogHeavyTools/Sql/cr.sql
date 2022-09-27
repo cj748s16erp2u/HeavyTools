@@ -326,7 +326,7 @@ create table olc_partncmp (
     adddate                     datetime                null,
     constraint pk_olc_partncmp primary key (partnid, cmpid), -- composite primary key
     constraint fk_olc_partncmp_partnid foreign key (partnid) references ols_partner (partnid),
-    constraint fk_olc_partncmp_cmpid foreign key (cmpid) references ols_company (cmpid),
+	constraint fk_olc_partncmp_cmpid foreign key (cmpid) references ols_company (cmpid),
     constraint fk_olc_partncmp_partnid_cmpid foreign key (partnid, cmpid) references ols_partncmp (partnid, cmpid),
     constraint fk_olc_partncmp_secpaymid foreign key (secpaymid) references ols_paymethod (paymid),
     constraint fk_olc_partncmp_addusrid foreign key (addusrid) references cfw_user (usrid)
@@ -726,3 +726,34 @@ alter table olc_cart add constraint fk_olc_cart_itemid foreign key (itemid) refe
 
 
 
+
+/***************************************/
+/* Elsődleges helykód				   */
+/***************************************/
+
+create table olc_whlocprio (
+  whlpid                    int identity    not null, -- kulcs
+  itemid                    int             not null, -- cikk hivatkozas
+  whid                      varchar(12)     not null, -- Raktár
+  whzoneid                  int             null, -- Zóna
+  whlocid                   int             not null, -- Helykód
+  whpriotype                int             not null, -- Típus (1 - elsődleges, 2 - másodlagos)
+  refilllimit               numeric(19, 6)  null, -- Újratöltési limit
+  startdate                 datetime        not null, -- Érvényesség kezdete
+  enddate                   datetime        not null, -- Érvényesség vége
+  addusrid                  varchar(12)     not null, -- Rögzítő
+  adddate                   datetime        not null, -- Rögzítve
+  constraint pk_olc_whlocprio primary key (whlpid)
+)
+
+alter table olc_whlocprio add constraint fk_olc_whlocprio_itemid foreign key (itemid) references ols_item (itemid)
+alter table olc_whlocprio add constraint fk_olc_whlocprio_whid foreign key (whid) references ols_warehouse (whid)
+alter table olc_whlocprio add constraint fk_olc_whlocprio_whzoneid foreign key (whzoneid) references olc_whzone (whzoneid)
+alter table olc_whlocprio add constraint fk_olc_whlocprio_whlocid foreign key (whlocid) references olc_whlocation (whlocid)
+alter table olc_whlocprio add constraint fk_olc_whlocprio_addusrid foreign key (addusrid) references cfw_user (usrid)
+
+create index idx_olc_whlocprio_itemid on olc_whlocprio (itemid)
+create index idx_olc_whlocprio_whid on olc_whlocprio (whid)
+create index idx_olc_whlocprio_whzoneid on olc_whlocprio (whzoneid)
+create index idx_olc_whlocprio_whlocid on olc_whlocprio (whlocid)
+go
