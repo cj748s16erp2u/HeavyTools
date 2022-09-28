@@ -22,5 +22,6 @@ namespace eLog.HeavyTools.Warehouse.WhLocPrio
         {
             base.CreateBase();
         }
+
     }
 }

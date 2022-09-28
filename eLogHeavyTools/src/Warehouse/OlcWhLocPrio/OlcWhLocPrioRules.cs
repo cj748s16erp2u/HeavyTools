@@ -1,6 +1,7 @@
 ﻿using eLog.HeavyTools.Setup.Warehouse;
 using eProjectWeb.Framework.Data;
 using eProjectWeb.Framework.Rules;
+using OfficeOpenXml.FormulaParsing.Excel.Functions.Text;
 using System;
 using System.CodeDom;
 using System.Collections.Generic;
@@ -19,6 +20,7 @@ namespace eLog.HeavyTools.Warehouse.WhLocPrio
             this.AddCustomRule(this.CheckItemActivePeriodRule);
             this.AddCustomRule(this.CheckItemIsMultiRule);
             this.AddCustomRule(this.IsDateIntervalValidRule);
+            this.AddCustomRule(this.ValidatePrimaryLocation);
         }
 
         protected const string OLCWHLOC = nameof(OlcWhLocation);
@@ -114,6 +116,14 @@ namespace eLog.HeavyTools.Warehouse.WhLocPrio
             {
                 var loc = GetOlcWhLocation(ctx);
                 ctx.AddErrorField(OlcWhLocPrio.FieldWhlocid.Name, "$err_olcwhlocprio_location_ismulti", loc?.Whlocid, olcWhLocPrio.Startdate, olcWhLocPrio.Enddate);
+            }
+        }
+
+        private void ValidatePrimaryLocation(RuleValidateContext ctx, OlcWhLocPrio olcWhLocPrio)
+        {
+            if (olcWhLocPrio?.Whpriotype == (int)OlcWhLocPrio_PrioType.Primary)
+            {
+                this.CheckMandatory(ctx,olcWhLocPrio,OlcWhLocPrio.FieldRefilllimit);
             }
         }
     }
