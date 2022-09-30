@@ -6,17 +6,17 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ERP4U.Log.LayoutRenderers;
+namespace ERP2U.Log.LayoutRenderers;
 
 [System.Diagnostics.DebuggerStepThrough]
-[LayoutRenderer("clientIpAddress")]
-public class ClientIpAddressLayoutRenderer : LayoutRenderer
+[LayoutRenderer("action")]
+public class ActionLayoutRenderer : LayoutRenderer
 {
     protected override void Append(StringBuilder builder, LogEventInfo logEvent)
     {
-        if (logEvent.HasProperties && logEvent.Properties.ContainsKey("ClientIpAddress"))
+        if (logEvent.HasProperties && logEvent.Properties.ContainsKey("Action"))
         {
-            builder.Append(logEvent.Properties["ClientIpAddress"]);
+            builder.Append(logEvent.Properties["Action"]);
         }
     }
 }

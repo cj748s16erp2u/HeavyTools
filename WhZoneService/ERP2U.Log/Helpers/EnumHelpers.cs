@@ -6,7 +6,7 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ERP4U.Log.Helpers;
+namespace ERP2U.Log.Helpers;
 
 [System.Diagnostics.DebuggerStepThrough]
 public static class EnumHelpers

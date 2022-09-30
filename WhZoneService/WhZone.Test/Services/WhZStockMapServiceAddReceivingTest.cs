@@ -16,41 +16,8 @@ namespace eLog.HeavyTools.Services.WhZone.Test.Services;
 
 public class WhZStockMapServiceAddReceivingTest : Base.WhZStockMapServiceTestBase
 {
-    private readonly IUnitOfWork unitOfWork;
-
-    private readonly int itemId;
-    private readonly string whIdNoZoneNoLoc;
-    private readonly string whIdNoZoneWithLoc;
-    private readonly string whIdWithZoneNoLoc;
-    private readonly string whIdWithZoneWithLoc;
-    private readonly int whZoneIdNoLoc;
-    private readonly int whZoneIdWithLoc;
-    private readonly int whLocId;
-    private readonly int whLocIdNoZone;
-
     public WhZStockMapServiceAddReceivingTest(ITestOutputHelper testOutputHelper, TestFixture fixture) : base(testOutputHelper, fixture)
     {
-        this.unitOfWork = this._fixture.GetService<IUnitOfWork>(this._testOutputHelper) ?? throw new InvalidOperationException($"{nameof(IUnitOfWork)} is not found.");
-
-        this.itemId = this.GetFirstItemIdAsync().GetAwaiter().GetResult() ?? throw new InvalidOperationException();
-
-        this.whIdNoZoneNoLoc = this.GetFirstWarehouseIdAsync(false, false).GetAwaiter().GetResult() ?? throw new InvalidOperationException();
-        this.whIdNoZoneWithLoc = this.GetFirstWarehouseIdAsync(false, true).GetAwaiter().GetResult() ?? throw new InvalidOperationException();
-        this.whIdWithZoneNoLoc = this.GetFirstWarehouseIdAsync(true, false).GetAwaiter().GetResult() ?? throw new InvalidOperationException();
-        this.whIdWithZoneWithLoc = this.GetFirstWarehouseIdAsync(true, true).GetAwaiter().GetResult() ?? throw new InvalidOperationException();
-
-        this.whZoneIdNoLoc = this.GetFirstWhZoneIdAsync(this.whIdWithZoneNoLoc, true).GetAwaiter().GetResult() ?? throw new InvalidOperationException();
-        this.whZoneIdWithLoc = this.GetFirstWhZoneIdAsync(this.whIdWithZoneWithLoc, true).GetAwaiter().GetResult() ?? throw new InvalidOperationException();
-
-        this.whLocId = this.GetFirstWhLocIdAsync(this.whIdWithZoneWithLoc, this.whZoneIdWithLoc).GetAwaiter().GetResult() ?? throw new InvalidOperationException();
-        this.whLocIdNoZone = this.GetFirstWhLocIdAsync(this.whIdNoZoneWithLoc, null).GetAwaiter().GetResult() ?? throw new InvalidOperationException();
-    }
-
-    private async Task<OlcWhzstockmap?> GetCurrentEntryAsync(string whId, int? whZoneId, int? whLocId, CancellationToken cancellationToken = default)
-    {
-        return await this.dbContext
-            .OlcWhzstockmaps
-            .FirstOrDefaultAsync(s => s.Itemid == this.itemId && s.Whid == whId && s.Whzoneid == whZoneId && s.Whlocid == whLocId, cancellationToken);
     }
 
     #region AddReceivingWhStock
@@ -142,7 +109,7 @@ public class WhZStockMapServiceAddReceivingTest : Base.WhZStockMapServiceTestBas
     private async Task AddReceivingNullFailedTest01Async(string whId, int? whZoneId, int? whLocId)
     {
         var ex = await Assert.ThrowsAsync<WhZStockMapServiceException>(() => this.AddReceivingTest01Async(whId, whZoneId, whLocId, null));
-        Assert.Equal(WhZStockExceptionType.Stock_InvalidRequestQty, ex.Type);
+        Assert.Equal(WhZStockExceptionType.InvalidRequestQty, ex.Type);
         Assert.Equal("The add qty is not set", ex.Message);
     }
 
@@ -189,7 +156,7 @@ public class WhZStockMapServiceAddReceivingTest : Base.WhZStockMapServiceTestBas
     private async Task AddReceivingFailedTest01Async(string whId, int? whZoneId, int? whLocId, decimal? qty)
     {
         var ex = await Assert.ThrowsAsync<WhZStockMapServiceException>(() => this.AddReceivingTest01Async(whId, whZoneId, whLocId, qty));
-        Assert.Equal(WhZStockExceptionType.Stock_InvalidRequestQty, ex.Type);
+        Assert.Equal(WhZStockExceptionType.InvalidRequestQty, ex.Type);
         Assert.Equal("The add qty cannot be less or equal to 0", ex.Message);
     }
 
@@ -657,7 +624,7 @@ public class WhZStockMapServiceAddReceivingTest : Base.WhZStockMapServiceTestBas
             var data = await this.AddReceivingAsync(context, request, ct);
             await this.AddReservedAsync(context, request, ct);
             var ex = Assert.Throws<WhZStockMapServiceException>(() => this.Delete(context, data!));
-            Assert.Equal(WhZStockExceptionType.Stock_DeleteNotEnoughQty, ex.Type);
+            Assert.Equal(WhZStockExceptionType.DeleteNotEnoughQty, ex.Type);
             Assert.Equal("Unable to remove this request, cause the further requests uses its quantity", ex.Message);
             Assert.Contains(context.MovementList, l => l == data);
         }
@@ -732,7 +699,7 @@ public class WhZStockMapServiceAddReceivingTest : Base.WhZStockMapServiceTestBas
             using var context = this.service.CreateContext();
 
             var ex = await Assert.ThrowsAsync<WhZStockMapServiceException>(() => this.RemoveReceivingAsync(context, request, ct));
-            Assert.Equal(WhZStockExceptionType.Stock_InvalidRequestQty, ex.Type);
+            Assert.Equal(WhZStockExceptionType.InvalidRequestQty, ex.Type);
             Assert.Equal("The remove qty cannot be less or equal to 0", ex.Message);
         }
         finally
@@ -1111,7 +1078,7 @@ public class WhZStockMapServiceAddReceivingTest : Base.WhZStockMapServiceTestBas
             };
 
             var ex = await Assert.ThrowsAsync<WhZStockMapServiceException>(() => this.RemoveReceivingAsync(context, removeRequest, ct));
-            Assert.Equal(WhZStockExceptionType.Stock_RemoveReceivingQty, ex.Type);
+            Assert.Equal(WhZStockExceptionType.RemoveReceivingQty, ex.Type);
             Assert.Equal("Not enough receiving quantity to fulfill the remove request", ex.Message);
         }
         finally
@@ -1489,7 +1456,7 @@ public class WhZStockMapServiceAddReceivingTest : Base.WhZStockMapServiceTestBas
             };
 
             var ex = await Assert.ThrowsAsync<WhZStockMapServiceException>(() => this.CommitReceivingAsync(context, commitRequest, ct));
-            Assert.Equal(WhZStockExceptionType.Stock_CommitReceivingQty, ex.Type);
+            Assert.Equal(WhZStockExceptionType.CommitReceivingQty, ex.Type);
             Assert.Equal("Not enough receiving quantity to fulfill the commit request", ex.Message);
         }
         finally

@@ -22,12 +22,12 @@ namespace eLog.HeavyTools.Services.WhZone.DataAccess.Context
         /// The used transaction
         /// </summary>
         private IDbContextTransaction? transaction;
-        private readonly IConfiguration configuration = null!;
+        //private readonly IConfiguration configuration = null!;
 
-        public WhZoneDbContext(IConfiguration configuration)
-        {
-            this.configuration = configuration ?? throw new ArgumentNullException(nameof(configuration));
-        }
+        //public WhZoneDbContext(IConfiguration configuration)
+        //{
+        //    this.configuration = configuration ?? throw new ArgumentNullException(nameof(configuration));
+        //}
 
         public WhZoneDbContext(DbContextOptions options) : base(options)
         {
@@ -43,7 +43,7 @@ namespace eLog.HeavyTools.Services.WhZone.DataAccess.Context
         public virtual DbSet<OlcWhzstockmap> OlcWhzstockmaps { get; set; } = null!;
         public virtual DbSet<OlcWhztranhead> OlcWhztranheads { get; set; } = null!;
         public virtual DbSet<OlcWhztranline> OlcWhztranlines { get; set; } = null!;
-        public virtual DbSet<OlcWhztst> OlcWhztsts { get; set; } = null!;
+        //public virtual DbSet<OlcWhztst> OlcWhztsts { get; set; } = null!;
         public virtual DbSet<OlcWhztstdfstock> OlcWhztstdfstocks { get; set; } = null!;
         public virtual DbSet<OlsCompany> OlsCompanies { get; set; } = null!;
         public virtual DbSet<OlsItem> OlsItems { get; set; } = null!;
@@ -56,13 +56,13 @@ namespace eLog.HeavyTools.Services.WhZone.DataAccess.Context
         public virtual DbSet<OlsUnit> OlsUnits { get; set; } = null!;
         public virtual DbSet<OlsWarehouse> OlsWarehouses { get; set; } = null!;
 
-        protected override void OnConfiguring(DbContextOptionsBuilder options)
-        {
-            if (this.configuration is not null)
-            {
-                options.UseSqlServer(this.configuration.GetConnectionString(nameof(WhZoneDbContext)));
-            }
-        }
+        //protected override void OnConfiguring(DbContextOptionsBuilder options)
+        //{
+        //    if (this.configuration is not null)
+        //    {
+        //        options.UseSqlServer(this.configuration.GetConnectionString(nameof(WhZoneDbContext)));
+        //    }
+        //}
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -502,6 +502,10 @@ namespace eLog.HeavyTools.Services.WhZone.DataAccess.Context
                     .HasColumnType("numeric(19, 6)")
                     .HasColumnName("recqty");
 
+                entity.Property(e => e.Reqqty)
+                    .HasColumnType("numeric(19, 6)")
+                    .HasColumnName("reqqty");
+
                 entity.Property(e => e.Resqty)
                     .HasColumnType("numeric(19, 6)")
                     .HasColumnName("resqty");
@@ -656,6 +660,10 @@ namespace eLog.HeavyTools.Services.WhZone.DataAccess.Context
                     .IsUnicode(false)
                     .HasColumnName("addusrid");
 
+                entity.Property(e => e.Change)
+                    .HasColumnType("numeric(19, 6)")
+                    .HasColumnName("change");
+
                 entity.Property(e => e.Dispqty)
                     .HasColumnType("numeric(19, 6)")
                     .HasColumnName("dispqty");
@@ -746,47 +754,47 @@ namespace eLog.HeavyTools.Services.WhZone.DataAccess.Context
                     .HasConstraintName("fk_olc_whztranline_whztid");
             });
 
-            modelBuilder.Entity<OlcWhztst>(entity =>
-            {
-                entity.HasNoKey();
+            //modelBuilder.Entity<OlcWhztst>(entity =>
+            //{
+            //    entity.HasNoKey();
 
-                entity.ToTable("olc_whztst");
+            //    entity.ToTable("olc_whztst");
 
-                entity.HasIndex(e => new { e.Whztid, e.Whztlineid, e.Stid, e.Stlineid }, "uq_olc_whztst")
-                    .IsUnique();
+            //    entity.HasIndex(e => new { e.Whztid, e.Whztlineid, e.Stid, e.Stlineid }, "uq_olc_whztst")
+            //        .IsUnique();
 
-                entity.Property(e => e.Stid).HasColumnName("stid");
+            //    entity.Property(e => e.Stid).HasColumnName("stid");
 
-                entity.Property(e => e.Stlineid).HasColumnName("stlineid");
+            //    entity.Property(e => e.Stlineid).HasColumnName("stlineid");
 
-                entity.Property(e => e.Whztid).HasColumnName("whztid");
+            //    entity.Property(e => e.Whztid).HasColumnName("whztid");
 
-                entity.Property(e => e.Whztlineid).HasColumnName("whztlineid");
+            //    entity.Property(e => e.Whztlineid).HasColumnName("whztlineid");
 
-                entity.HasOne(d => d.St)
-                    .WithMany()
-                    .HasForeignKey(d => d.Stid)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("fk_olc_whztst_stid");
+            //    entity.HasOne(d => d.St)
+            //        .WithMany()
+            //        .HasForeignKey(d => d.Stid)
+            //        .OnDelete(DeleteBehavior.ClientSetNull)
+            //        .HasConstraintName("fk_olc_whztst_stid");
 
-                entity.HasOne(d => d.Stline)
-                    .WithMany()
-                    .HasForeignKey(d => d.Stlineid)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("fk_olc_whztst_stlineid");
+            //    entity.HasOne(d => d.Stline)
+            //        .WithMany()
+            //        .HasForeignKey(d => d.Stlineid)
+            //        .OnDelete(DeleteBehavior.ClientSetNull)
+            //        .HasConstraintName("fk_olc_whztst_stlineid");
 
-                entity.HasOne(d => d.Whzt)
-                    .WithMany()
-                    .HasForeignKey(d => d.Whztid)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("fk_olc_whztst_whztid");
+            //    entity.HasOne(d => d.Whzt)
+            //        .WithMany()
+            //        .HasForeignKey(d => d.Whztid)
+            //        .OnDelete(DeleteBehavior.ClientSetNull)
+            //        .HasConstraintName("fk_olc_whztst_whztid");
 
-                entity.HasOne(d => d.Whztline)
-                    .WithMany()
-                    .HasForeignKey(d => d.Whztlineid)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("fk_olc_whztst_whztlineid");
-            });
+            //    entity.HasOne(d => d.Whztline)
+            //        .WithMany()
+            //        .HasForeignKey(d => d.Whztlineid)
+            //        .OnDelete(DeleteBehavior.ClientSetNull)
+            //        .HasConstraintName("fk_olc_whztst_whztlineid");
+            //});
 
             modelBuilder.Entity<OlcWhztstdfstock>(entity =>
             {

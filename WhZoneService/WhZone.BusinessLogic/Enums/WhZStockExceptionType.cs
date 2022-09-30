@@ -12,15 +12,15 @@ namespace eLog.HeavyTools.Services.WhZone.BusinessLogic.Enums;
 public enum WhZStockExceptionType
 {
     /// <summary>
-    /// A megadott <see cref="IWhZStockContext"/> példány null vagy nem megfelelő osztályból lett példányosítva
+    /// A megadott <see cref="IWhZStockMapContext"/> példány null vagy nem megfelelő osztályból lett példányosítva
     /// </summary>
-    InvalidContext,
+    InvalidContext = 10000,
     /// <summary>
-    /// A megadott <see cref="WhZStockDto.Qty"/> értéke null vagy negatív érték
+    /// A megadott <see cref="WhZStockMapDto.Qty"/> értéke null vagy negatív érték
     /// </summary>
     InvalidRequestQty,
     /// <summary>
-    /// Nincs <see cref="IWhZStockData"/> példány megadva
+    /// Nincs <see cref="IWhZStockMapData"/> példány megadva
     /// </summary>
     InvalidRequestData,
     /// <summary>
@@ -52,11 +52,11 @@ public enum WhZStockExceptionType
     /// </summary>
     CantHandleNegativStock,
     /// <summary>
-    /// Új <see cref="OlcWhzstock"/> bejegyzés nem hozható létre, mert már létre lett hozva
+    /// Új <see cref="OlcWhzstockmap"/> bejegyzés nem hozható létre, mert már létre lett hozva
     /// </summary>
     AlreadyExists,
     /// <summary>
-    /// Meglévő <see cref="OlcWhzstock"/> bejegyzés nem módosítható, mert már módosítva lett
+    /// Meglévő <see cref="OlcWhzstockmap"/> bejegyzés nem módosítható, mert már módosítva lett
     /// </summary>
     AlreadyModified,
     /// <summary>

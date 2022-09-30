@@ -10,6 +10,7 @@ using eLog.HeavyTools.Services.WhZone.BusinessLogic.Enums;
 using eLog.HeavyTools.Services.WhZone.BusinessLogic.Services.Interfaces;
 using eLog.HeavyTools.Services.WhZone.Test.Base;
 using eLog.HeavyTools.Services.WhZone.Test.Fixtures;
+using Microsoft.EntityFrameworkCore;
 using Xunit;
 
 namespace eLog.HeavyTools.Services.WhZone.Test.Services.Base;
@@ -18,10 +19,32 @@ public abstract class WhZStockMapServiceTestBase : TestBase<OlcWhzstockmap, IWhZ
 {
     internal const int Precision = 6;
 
+    protected readonly int itemId;
+    protected readonly string whIdNoZoneNoLoc;
+    protected readonly string whIdNoZoneWithLoc;
+    protected readonly string whIdWithZoneNoLoc;
+    protected readonly string whIdWithZoneWithLoc;
+    protected readonly int whZoneIdNoLoc;
+    protected readonly int whZoneIdWithLoc;
+    protected readonly int whLocId;
+    protected readonly int whLocIdNoZone;
+
     protected WhZStockMapServiceTestBase(
         ITestOutputHelper testOutputHelper,
         TestFixture fixture) : base(testOutputHelper, fixture)
     {
+        this.itemId = this.GetFirstItemIdAsync().GetAwaiter().GetResult() ?? throw new InvalidOperationException();
+
+        this.whIdNoZoneNoLoc = this.GetFirstWarehouseIdAsync(false, false).GetAwaiter().GetResult() ?? throw new InvalidOperationException();
+        this.whIdNoZoneWithLoc = this.GetFirstWarehouseIdAsync(false, true).GetAwaiter().GetResult() ?? throw new InvalidOperationException();
+        this.whIdWithZoneNoLoc = this.GetFirstWarehouseIdAsync(true, false).GetAwaiter().GetResult() ?? throw new InvalidOperationException();
+        this.whIdWithZoneWithLoc = this.GetFirstWarehouseIdAsync(true, true).GetAwaiter().GetResult() ?? throw new InvalidOperationException();
+
+        this.whZoneIdNoLoc = this.GetFirstWhZoneIdAsync(this.whIdWithZoneNoLoc, true).GetAwaiter().GetResult() ?? throw new InvalidOperationException();
+        this.whZoneIdWithLoc = this.GetFirstWhZoneIdAsync(this.whIdWithZoneWithLoc, true).GetAwaiter().GetResult() ?? throw new InvalidOperationException();
+
+        this.whLocId = this.GetFirstWhLocIdAsync(this.whIdWithZoneWithLoc, this.whZoneIdWithLoc).GetAwaiter().GetResult() ?? throw new InvalidOperationException();
+        this.whLocIdNoZone = this.GetFirstWhLocIdAsync(this.whIdNoZoneWithLoc, null).GetAwaiter().GetResult() ?? throw new InvalidOperationException();
     }
 
     protected async Task StoreAsync(IWhZStockMapContext context, CancellationToken cancellationToken = default)
@@ -92,5 +115,12 @@ public abstract class WhZStockMapServiceTestBase : TestBase<OlcWhzstockmap, IWhZ
         Assert.Equal(request.Qty.GetValueOrDefault(), (reservedData?.Qty).GetValueOrDefault(), Precision);
 
         return reservedData;
+    }
+
+    protected async Task<OlcWhzstockmap?> GetCurrentEntryAsync(string whId, int? whZoneId, int? whLocId, CancellationToken cancellationToken = default)
+    {
+        return await this.dbContext
+            .OlcWhzstockmaps
+            .FirstOrDefaultAsync(s => s.Itemid == this.itemId && s.Whid == whId && s.Whzoneid == whZoneId && s.Whlocid == whLocId, cancellationToken);
     }
 }

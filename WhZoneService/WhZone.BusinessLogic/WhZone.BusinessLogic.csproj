@@ -9,13 +9,13 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="FluentValidation.DependencyInjectionExtensions" Version="11.1.0" />
+    <PackageReference Include="FluentValidation.DependencyInjectionExtensions" Version="11.2.2" />
     <PackageReference Include="Microsoft.AspNetCore.Http" Version="2.2.2" />
     <PackageReference Include="Microsoft.AspNetCore.Http.Abstractions" Version="2.2.0" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\ERP4U.Log\ERP4U.Log.csproj" />
+    <ProjectReference Include="..\ERP2U.Log\ERP2U.Log.csproj" />
     <ProjectReference Include="..\WhZone.DataAccess\WhZone.DataAccess.csproj" />
   </ItemGroup>
 

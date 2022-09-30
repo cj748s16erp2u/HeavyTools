@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -18,15 +19,12 @@ namespace eLog.HeavyTools.Services.WhZone.BusinessLogic.Validators;
 [RegisterDI(Interface = typeof(IOlcWhzstockmapValidator))]
 internal class OlcWhzstockmapValidator : EntityValidator<OlcWhzstockmap>, IOlcWhzstockmapValidator
 {
-    private readonly IServiceProvider serviceProvider;
     private readonly IWarehouseService warehouseService;
 
     public OlcWhzstockmapValidator(
         WhZoneDbContext dbContext,
-        IServiceProvider serviceProvider,
         IWarehouseService warehouseService) : base(dbContext)
     {
-        this.serviceProvider = serviceProvider ?? throw new ArgumentNullException(nameof(serviceProvider));
         this.warehouseService = warehouseService ?? throw new ArgumentNullException(nameof(warehouseService));
     }
 
@@ -37,28 +35,35 @@ internal class OlcWhzstockmapValidator : EntityValidator<OlcWhzstockmap>, IOlcWh
         this.RuleFor(stockMap => stockMap.Itemid).NotEmpty();
         this.RuleFor(stockMap => stockMap.Whid).NotEmpty();
 
-        this.RuleFor(stockMap => stockMap.Whzstockmapid).Custom((newValue, context) =>
+        this.RuleFor(stockMap => stockMap.Actqty).GreaterThanOrEqualTo(0)
+            .WithMessage(stockMap => $"The actual value is less than 0 (actQty: {stockMap.Actqty})");
+        this.RuleFor(stockMap => stockMap.Recqty).GreaterThanOrEqualTo(0)
+            .WithMessage(stockMap => $"The receiving value is less than 0 (recQty: {stockMap.Recqty})");
+        this.RuleFor(stockMap => stockMap.Resqty).GreaterThanOrEqualTo(0)
+            .WithMessage(stockMap => $"The reserved value is less than 0 (resQty: {stockMap.Resqty})");
+
+        this.RuleFor(stockMap => stockMap.Provqty).Custom((newValue, context) =>
         {
             var stockMap = context.InstanceToValidate;
-            if (stockMap!.Actqty < 0)
-            {
-                context.AddFailure(new FluentValidation.Results.ValidationFailure(nameof(OlcWhzstockmap.Whzstockmapid), $"The actual value is less than 0 (actQty: {stockMap.Actqty})"));
-            }
+            //if (stockMap!.Actqty < 0)
+            //{
+            //    context.AddFailure(new FluentValidation.Results.ValidationFailure(nameof(OlcWhzstockmap.Actqty), $"The actual value is less than 0 (actQty: {stockMap.Actqty})"));
+            //}
 
-            if (stockMap.Recqty < 0)
-            {
-                context.AddFailure(new FluentValidation.Results.ValidationFailure(nameof(OlcWhzstockmap.Whzstockmapid), $"The receiving value is less than 0 (recQty: {stockMap.Recqty})"));
-            }
+            //if (stockMap.Recqty < 0)
+            //{
+            //    context.AddFailure(new FluentValidation.Results.ValidationFailure(nameof(OlcWhzstockmap.Recqty), $"The receiving value is less than 0 (recQty: {stockMap.Recqty})"));
+            //}
 
-            if (stockMap.Resqty < 0)
-            {
-                context.AddFailure(new FluentValidation.Results.ValidationFailure(nameof(OlcWhzstockmap.Whzstockmapid), $"The reserved value is less than 0 (resQty: {stockMap.Resqty})"));
-            }
+            //if (stockMap.Resqty < 0)
+            //{
+            //    context.AddFailure(new FluentValidation.Results.ValidationFailure(nameof(OlcWhzstockmap.Resqty), $"The reserved value is less than 0 (resQty: {stockMap.Resqty})"));
+            //}
 
             var provQty = stockMap.Actqty + stockMap.Recqty - stockMap.Resqty;
             if (provQty < 0)
             {
-                context.AddFailure(new FluentValidation.Results.ValidationFailure(nameof(OlcWhzstockmap.Whzstockmapid), $"The provisioned value is less than 0 (actQty: {stockMap.Actqty}, recQty: {stockMap.Recqty}, resQty: {stockMap.Resqty})"));
+                context.AddFailure(new FluentValidation.Results.ValidationFailure(nameof(OlcWhzstockmap.Provqty), $"The provisioned value is less than 0 (actQty: {stockMap.Actqty}, recQty: {stockMap.Recqty}, resQty: {stockMap.Resqty})"));
             }
         });
     }
@@ -195,23 +200,30 @@ internal class OlcWhzstockmapValidator : EntityValidator<OlcWhzstockmap>, IOlcWh
     {
         base.AddDeleteRules();
 
-        this.RuleFor(stockMap => stockMap.Whzstockmapid).Custom((newValue, context) =>
-        {
-            var stock = context.InstanceToValidate;
-            if (stock!.Actqty != 0)
-            {
-                context.AddFailure(new FluentValidation.Results.ValidationFailure(nameof(OlcWhzstockmap.Whzstockmapid), $"Unable to delete stock if actual value is not 0 (actQty: {stock.Actqty})"));
-            }
+        this.RuleFor(stockMap => stockMap.Actqty).Equal(0)
+            .WithMessage(stockMap => $"Unable to delete stock if actual value is not 0 (actQty: {stockMap.Actqty})");
+        this.RuleFor(stockMap => stockMap.Recqty).Equal(0)
+            .WithMessage(stockMap => $"Unable to delete stock if receiving value is not 0 (recQty: {stockMap.Recqty})");
+        this.RuleFor(stockMap => stockMap.Resqty).Equal(0)
+            .WithMessage(stockMap => $"Unable to delete stock if reserved value is not 0 (resQty: {stockMap.Resqty})");
 
-            if (stock.Recqty != 0)
-            {
-                context.AddFailure(new FluentValidation.Results.ValidationFailure(nameof(OlcWhzstockmap.Whzstockmapid), $"Unable to delete stock if receiving value is not 0 (recQty: {stock.Recqty})"));
-            }
+        //this.RuleFor(stockMap => stockMap.Whzstockmapid).Custom((newValue, context) =>
+        //{
+        //    var stockMap = context.InstanceToValidate;
+        //    if (stockMap!.Actqty != 0)
+        //    {
+        //        context.AddFailure(new FluentValidation.Results.ValidationFailure(nameof(OlcWhzstockmap.Actqty), $"Unable to delete stock if actual value is not 0 (actQty: {stockMap.Actqty})"));
+        //    }
 
-            if (stock.Resqty < 0)
-            {
-                context.AddFailure(new FluentValidation.Results.ValidationFailure(nameof(OlcWhzstockmap.Whzstockmapid), $"Unable to delete stock if reserved value is not 0 (resQty: {stock.Resqty})"));
-            }
-        });
+        //    if (stockMap.Recqty != 0)
+        //    {
+        //        context.AddFailure(new FluentValidation.Results.ValidationFailure(nameof(OlcWhzstockmap.Recqty), $"Unable to delete stock if receiving value is not 0 (recQty: {stockMap.Recqty})"));
+        //    }
+
+        //    if (stockMap.Resqty < 0)
+        //    {
+        //        context.AddFailure(new FluentValidation.Results.ValidationFailure(nameof(OlcWhzstockmap.Resqty), $"Unable to delete stock if reserved value is not 0 (resQty: {stockMap.Resqty})"));
+        //    }
+        //});
     }
 }

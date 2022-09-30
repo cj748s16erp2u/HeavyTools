@@ -8,7 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ERP4U.Log;
+namespace ERP2U.Log;
 
 [System.Diagnostics.DebuggerStepThrough]
 public sealed class LoggerManager

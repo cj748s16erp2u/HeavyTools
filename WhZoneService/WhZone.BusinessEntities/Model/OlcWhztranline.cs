@@ -19,6 +19,7 @@ namespace eLog.HeavyTools.Services.WhZone.BusinessEntities.Model
         public decimal Inqty { get; set; }
         public decimal Outqty { get; set; }
         public string Unitid2 { get; set; } = null!;
+        public decimal Change { get; set; }
         public decimal Dispqty2 { get; set; }
         public decimal Movqty2 { get; set; }
         public string? Note { get; set; }

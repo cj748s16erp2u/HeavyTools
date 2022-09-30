@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
@@ -137,4 +138,6 @@ internal class EnvironmentService : IEnvironmentService
             return null;
         }
     }
+
+    public virtual ConcurrentDictionary<string, object> CustomData { get; } = new ConcurrentDictionary<string, object>();
 }

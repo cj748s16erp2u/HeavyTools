@@ -15,6 +15,7 @@ public class TestFixture : TestBedFixture
     protected override void AddServices(IServiceCollection services, IConfiguration? configuration)
     {
         services
+            .AddBusinessEntities()
             .AddDataAccess(configuration!)
             .AddBusinessLogic(configuration!);
 

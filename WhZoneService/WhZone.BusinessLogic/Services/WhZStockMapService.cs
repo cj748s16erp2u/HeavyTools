@@ -348,7 +348,7 @@ public class WhZStockMapService : LogicServiceBase<OlcWhzstockmap>, IWhZStockMap
         }
         catch (Exception ex)
         {
-            await ERP4U.Log.LoggerManager.Instance.LogErrorAsync<WhZStockMapService>(ex);
+            await ERP2U.Log.LoggerManager.Instance.LogErrorAsync<WhZStockMapService>(ex);
             throw;
         }
         finally

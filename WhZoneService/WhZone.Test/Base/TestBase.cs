@@ -8,6 +8,7 @@ using eLog.HeavyTools.Services.WhZone.BusinessEntities.Model.Interfaces;
 using eLog.HeavyTools.Services.WhZone.BusinessLogic.Enums;
 using eLog.HeavyTools.Services.WhZone.BusinessLogic.Services.Interfaces;
 using eLog.HeavyTools.Services.WhZone.DataAccess.Context;
+using eLog.HeavyTools.Services.WhZone.DataAccess.Repositories.Interfaces;
 using eLog.HeavyTools.Services.WhZone.Test.Fixtures;
 using Microsoft.EntityFrameworkCore;
 
@@ -19,12 +20,14 @@ public abstract class TestBase<TEntity, TService> : TestBed<TestFixture>
 {
     protected readonly WhZoneDbContext dbContext;
     protected readonly TService service;
+    protected readonly IUnitOfWork unitOfWork;
 
     protected TestBase(
         ITestOutputHelper testOutputHelper,
         TestFixture fixture) : base(testOutputHelper, fixture)
     {
         this.dbContext = this._fixture.GetService<WhZoneDbContext>(this._testOutputHelper) ?? throw new InvalidOperationException($"{nameof(WhZoneDbContext)} is not found.");
+        this.unitOfWork = this._fixture.GetService<IUnitOfWork>(this._testOutputHelper) ?? throw new InvalidOperationException($"{nameof(IUnitOfWork)} is not found.");
         this.service = this._fixture.GetService<TService>(this._testOutputHelper) ?? throw new InvalidOperationException($"{typeof(TService).Name} is not found.");
     }
 
@@ -129,6 +132,14 @@ public abstract class TestBase<TEntity, TService> : TestBed<TestFixture>
         return await query
             .Skip(skipCount)
             .Select(i => (int?)i.Whlocid)
+            .FirstOrDefaultAsync(cancellationToken);
+    }
+
+    protected async Task<int?> GetCmpIdAsync(string codaCode, CancellationToken cancellationToken = default)
+    {
+        return await this.dbContext.OlsCompanies
+            .Where(c => c.Codacode == codaCode)
+            .Select(c => c.Cmpid)
             .FirstOrDefaultAsync(cancellationToken);
     }
 }

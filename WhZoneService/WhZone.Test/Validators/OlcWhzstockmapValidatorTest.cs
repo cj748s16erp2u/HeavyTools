@@ -17,8 +17,6 @@ namespace eLog.HeavyTools.Services.WhZone.Test.Validators;
 
 public class OlcWhzstockmapValidatorTest : TestBase<OlcWhzstockmap, IWhZStockMapService>
 {
-    private readonly IUnitOfWork unitOfWork;
-
     private readonly int itemId;
     private readonly string whIdNoZoneNoLoc;
     private readonly string whIdNoZoneWithLoc;
@@ -33,8 +31,6 @@ public class OlcWhzstockmapValidatorTest : TestBase<OlcWhzstockmap, IWhZStockMap
         ITestOutputHelper testOutputHelper,
         TestFixture fixture) : base(testOutputHelper, fixture)
     {
-        this.unitOfWork = this._fixture.GetService<IUnitOfWork>(this._testOutputHelper) ?? throw new InvalidOperationException($"{nameof(IUnitOfWork)} is not found.");
-
         this.itemId = this.GetFirstItemIdAsync().GetAwaiter().GetResult() ?? throw new InvalidOperationException();
 
         this.whIdNoZoneNoLoc = this.GetFirstWarehouseIdAsync(false, false).GetAwaiter().GetResult() ?? throw new InvalidOperationException();

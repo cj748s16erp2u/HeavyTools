@@ -20,7 +20,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		.editorconfig = .editorconfig
 	EndProjectSection
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ERP4U.Log", "ERP4U.Log\ERP4U.Log.csproj", "{2B0C2CE7-FFF5-496A-AC35-17D6E30B1218}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ERP2U.Log", "ERP2U.Log\ERP2U.Log.csproj", "{2B0C2CE7-FFF5-496A-AC35-17D6E30B1218}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

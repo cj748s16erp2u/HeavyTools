@@ -39,7 +39,7 @@ namespace eLog.HeavyTools.Services.WhZone.Service.Handlers
                 return AuthenticateResult.Fail("Authorization code not formatted properly");
             }
 
-            var authBase64 = Encoding.UTF8.GetString(Convert.FromBase64String(authHeaderRegex.Replace(authorizationHeader, "$1")));
+            var authBase64 = Encoding.GetEncoding("ISO-8859-1").GetString(Convert.FromBase64String(authHeaderRegex.Replace(authorizationHeader, "$1")));
             var authSplit = authBase64.Split(new[] { ':' }, 2);
             var authUsername = authSplit[0];
             var authPassword = authSplit.Length > 1 ? authSplit[1] : throw new Exception("Unable to get password");

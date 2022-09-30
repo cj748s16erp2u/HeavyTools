@@ -1,0 +1,7 @@
+﻿$towhzid=Zóna
+
+$err_sthead_towhzid_mustbeset=A 'Zóna' megadása kötelező!
+$err_sthead_towhzid_cantbeset=A 'Zóna' nem adható meg!
+$err_unable_to_save_whztranhead=Hiba történt a zóna tranzakció mentése során.
+$err_cant_delete_whztranhead=A zóna nem törölhető!
+$err_whzone_optionmissing=Hiányzó beállítás: '{0}'

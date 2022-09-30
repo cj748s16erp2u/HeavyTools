@@ -6,17 +6,17 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ERP4U.Log.LayoutRenderers;
+namespace ERP2U.Log.LayoutRenderers;
 
 [System.Diagnostics.DebuggerStepThrough]
-[LayoutRenderer("category")]
-public class CategoryLayoutRenderer : LayoutRenderer
+[LayoutRenderer("userName")]
+public class UserNameLayoutRenderer : LayoutRenderer
 {
     protected override void Append(StringBuilder builder, LogEventInfo logEvent)
     {
-        if (logEvent.HasProperties && logEvent.Properties.ContainsKey("Category"))
+        if (logEvent.HasProperties && logEvent.Properties.ContainsKey("UserName"))
         {
-            builder.Append(Helpers.EnumHelpers.GetDescription((Enum)logEvent.Properties["Category"]));
+            builder.Append(logEvent.Properties["UserName"]);
         }
     }
 }

@@ -6,17 +6,17 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ERP4U.Log.LayoutRenderers;
+namespace ERP2U.Log.LayoutRenderers;
 
 [System.Diagnostics.DebuggerStepThrough]
-[LayoutRenderer("action")]
-public class ActionLayoutRenderer : LayoutRenderer
+[LayoutRenderer("requestBody")]
+public class RequestBodyLayoutRenderer : LayoutRenderer
 {
     protected override void Append(StringBuilder builder, LogEventInfo logEvent)
     {
-        if (logEvent.HasProperties && logEvent.Properties.ContainsKey("Action"))
+        if (logEvent.HasProperties && logEvent.Properties.ContainsKey("RequestBody"))
         {
-            builder.Append(logEvent.Properties["Action"]);
+            builder.Append(logEvent.Properties["RequestBody"]);
         }
     }
 }

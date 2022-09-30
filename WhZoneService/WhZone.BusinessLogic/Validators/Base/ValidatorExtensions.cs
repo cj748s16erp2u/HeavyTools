@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 using eLog.HeavyTools.Services.WhZone.BusinessEntities.Model.Interfaces;
@@ -9,6 +10,7 @@ using eLog.HeavyTools.Services.WhZone.DataAccess.Context;
 
 namespace FluentValidation;
 
+[System.Diagnostics.DebuggerStepThrough]
 public static class PrimaryKeyValidatorExtensions
 {
     public static IRuleBuilder<TEntity, TEntity> PrimaryKeyMustHaveValue<TEntity>(this IRuleBuilder<TEntity, TEntity> ruleBuilder, WhZoneDbContext dbContext)
@@ -63,4 +65,9 @@ public static class PrimaryKeyValidatorExtensions
     {
         return TryGetEntity<TEntity, TEntity>(context, EntityValidator<TEntity>.OriginalEntityKey);
     }
+
+    public static IRuleBuilderOptions<T, TProperty> ReadOnly<T, TProperty>(this IRuleBuilder<T, TProperty> ruleBuilder, Expression<Func<T, TProperty>> expression)
+        where T : class, IEntity
+        => ruleBuilder.SetValidator(new ReadOnlyValidator<T, TProperty>(expression))
+            .WithMessage("'{PropertyName}' is read-only.");
 }
