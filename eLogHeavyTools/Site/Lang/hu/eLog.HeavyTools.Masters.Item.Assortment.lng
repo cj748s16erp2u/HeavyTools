@@ -1,0 +1,11 @@
+$xx=
+$tabName_OlcItemAssortmentSearchTab=Gyüjtő
+$action_build=Mátrix megnyitása
+$action_savechange=Mátrix mentése
+$action_nosave=Mátrix bezárása
+$itemassorimentmatrixtitle=Gyüjtő mennyiségek
+
+
+ 
+$itemassorimentMatrixResultTitle=Gyüjtő
+$itemassorimentmodelMatrixResult={0} db gyüjtő változott, {1} db jött létre

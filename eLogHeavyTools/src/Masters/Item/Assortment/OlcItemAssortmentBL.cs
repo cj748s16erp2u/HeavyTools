@@ -8,9 +8,8 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace eLog.HeavyTools.Masters.Item.Assortment
-{ 
-
-    internal class OlcItemAssortmentBL : DefaultBL1<OlcItemAssortment, OlcItemAssortmentRules>
+{
+    public class OlcItemAssortmentBL : DefaultBL1<OlcItemAssortment, OlcItemAssortmentRules>
     {
         public static readonly string ID = typeof(OlcItemAssortmentBL).FullName;
 
@@ -34,7 +33,7 @@ namespace eLog.HeavyTools.Masters.Item.Assortment
         }
     }
 
-    internal class OlcItemAssortmentRules : TypedBaseRuleSet<OlcItemAssortment>
+    public class OlcItemAssortmentRules : TypedBaseRuleSet<OlcItemAssortment>
     {
         public OlcItemAssortmentRules()
             : base(true)
