@@ -1,70 +1,70 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <MenuRoot>
-    <RootMenu ID="eLog" Name="$eLog" CreateIfNotExists="true">
-        <Item ID="Setup" Name="$cmp_setup">
-            <Item ID="Setup_General" Name="$general">
-                <Item ID="Currency" Name="$currency" PageID="eLog.Base.Setup.Currency.CurrencyInlineEditPage" Img="defaultImg.jpg"/>
-                <Item ID="Unit" Name="$unit" PageID="eLog.Base.Setup.Unit.UnitInlineEditPage"/>
-                <Item ID="Country" Name="$country" PageID="eLog.Base.Setup.Country.CountryInlineEditPage"/>
-                <Item ID="PayMethod" Name="$paymethod" PageID="eLog.Base.Setup.PayMethod.PayMethodInlineEditPage"/>
-                <Item ID="ItemGroup" Name="$itemgroup" PageID="eLog.Base.Setup.ItemGroup.ItemGroupInlineEditPage"/>
-                <Item ID="CustTariff" Name="$custtariff" PageID="eLog.Base.Setup.CustTariff.CustTariffInlineEditPage"/>
-                <Item ID="SysPar" Name="$syspar" PageID="eLog.Base.Setup.Parameters.SysparEditPage"/>
-                <Item ID="TaxCode" Name="$taxcode" PageID="eLog.Base.Setup.Tax.TaxSearchPage"/>
-                <Item ID="BusType" Name="$bustype" PageID="eLog.Base.Setup.BusType.BusTypeInlineEditPage" />
-                <Item ID="Company" Name="$company" PageID="eLog.Base.Setup.Company.CompanySearchPage"/>
-                <Item ID="NAVRegParam" Name="$navregparam" PageID="eLog.Base.Setup.NAV.NAVRegParamSearchPage"/>
-                <Item ID="Calendar" Name="$calendar" PageID="eLog.Base.Setup.Calendar.CalendarInlineEditPage"/>
-                <Item ID="PartnVatTyp" Name="$partnvattyp" PageID="eLog.Base.Setup.PartnVatType.PartnVatTypSearchPage"/>
-            </Item>
-            <Item ID="Setup_SysVars" Name="$sysvars">
-                <Item ID="Type" Name="$type" PageID="eLog.Base.Setup.Type.TypeHeadSearchPage"/>
-                <Item ID="Property" Name="$property" PageID="eLog.Base.Setup.Property.PropHeadSearchPage"/>
-                <Item ID="Status" Name="$status" PageID="eLog.Base.Setup.Status.StatHeadSearchPage"/>
-            </Item>
-            <Item ID="Setup_Sales" Name="$setupsales">
+	<RootMenu ID="eLog" Name="$eLog" CreateIfNotExists="true">
+		<Item ID="Setup" Name="$cmp_setup">
+			<Item ID="Setup_General" Name="$general">
+				<Item ID="Currency" Name="$currency" PageID="eLog.Base.Setup.Currency.CurrencyInlineEditPage" Img="defaultImg.jpg"/>
+				<Item ID="Unit" Name="$unit" PageID="eLog.Base.Setup.Unit.UnitInlineEditPage"/>
+				<Item ID="Country" Name="$country" PageID="eLog.Base.Setup.Country.CountryInlineEditPage"/>
+				<Item ID="PayMethod" Name="$paymethod" PageID="eLog.Base.Setup.PayMethod.PayMethodInlineEditPage"/>
+				<Item ID="ItemGroup" Name="$itemgroup" PageID="eLog.Base.Setup.ItemGroup.ItemGroupInlineEditPage"/>
+				<Item ID="CustTariff" Name="$custtariff" PageID="eLog.Base.Setup.CustTariff.CustTariffInlineEditPage"/>
+				<Item ID="SysPar" Name="$syspar" PageID="eLog.Base.Setup.Parameters.SysparEditPage"/>
+				<Item ID="TaxCode" Name="$taxcode" PageID="eLog.Base.Setup.Tax.TaxSearchPage"/>
+				<Item ID="BusType" Name="$bustype" PageID="eLog.Base.Setup.BusType.BusTypeInlineEditPage" />
+				<Item ID="Company" Name="$company" PageID="eLog.Base.Setup.Company.CompanySearchPage"/>
+				<Item ID="NAVRegParam" Name="$navregparam" PageID="eLog.Base.Setup.NAV.NAVRegParamSearchPage"/>
+				<Item ID="Calendar" Name="$calendar" PageID="eLog.Base.Setup.Calendar.CalendarInlineEditPage"/>
+				<Item ID="PartnVatTyp" Name="$partnvattyp" PageID="eLog.Base.Setup.PartnVatType.PartnVatTypSearchPage"/>
+			</Item>
+			<Item ID="Setup_SysVars" Name="$sysvars">
+				<Item ID="Type" Name="$type" PageID="eLog.Base.Setup.Type.TypeHeadSearchPage"/>
+				<Item ID="Property" Name="$property" PageID="eLog.Base.Setup.Property.PropHeadSearchPage"/>
+				<Item ID="Status" Name="$status" PageID="eLog.Base.Setup.Status.StatHeadSearchPage"/>
+			</Item>
+			<Item ID="Setup_Sales" Name="$setupsales">
 				<Item ID="OlcPrcTypeSearchPage" Name="$prctypesearchpage" PageID="eLog.HeavyTools.Setup.PriceTable.OlcPrcTypeSearchPage"/>
-                <Item ID="PrcGroup" Name="$prcgroup" PageID="eLog.Base.Setup.PriceTable.PrcGroupInlineEditPage"/>
-                <Item ID="PrcPrior" Name="$prcprior" PageID="eLog.Base.Setup.PriceTable.PrcPriorInlineEditPage"/>
-                <Item ID="PrcCode" Name="$prccode" PageID="eLog.Base.Setup.PriceTable.PrcCodeInlineEditPage"/>
-                <Item ID="SContrDoc" Name="$scontrdoc" PageID="eLog.Base.Setup.SContrDoc.SContrDocSearchPage"/>
-                <Item ID="SordDoc" Name="$sorddoc" PageID="eLog.Base.Setup.SordDoc.SordDocSearchPage"/>
-                <Item ID="SinvDoc" Name="$sinvdoc" PageID="eLog.Base.Setup.SinvDoc.SinvDocSearchPage"/>
-                <Item ID="SinvFromNAVSettings" Name="$sinvfromnavsettings" PageID="eLog.Base.Sales.Sinv.SinvFromNAV.SinvFromNAVSettingsPage"/>
-            </Item>
-            <Item ID="Setup_Manufacture" Name="$setupmanufacture" Group="Manufacture">
-                <Item ID="MordDoc" Name="$morddoc" PageID="eLog.Base.Setup.MordDoc.MordDocSearchPage"/>
-                <Item ID="ProdRepDoc" Name="$prodrepdoc" PageID="eLog.Base.Setup.ProdRepDoc.ProdRepDocSearchPage"/>
-                <Item ID="ProdQtyType" Name="$prodqtytype" PageID="eLog.Base.Setup.ProdQtyType.ProdQtyTypeSearchPage"/>
-                <Item ID="MachType" Name="$machtype" PageID="eLog.Base.Setup.Machine.MachTypeSearchPage"/>
-                <Item ID="Process" Name="$process" PageID="eLog.Base.Setup.Process.ProcessSearchPage"/>
-            </Item>
-            <Item ID="Setup_Purchase" Name="$setuppurchase">
-                <Item ID="CostGroup" Name="$costgroup" PageID="eLog.Base.Setup.Cost.CostGroupSearchPage"/>
-                <Item ID="PordDoc" Name="$porddoc" PageID="eLog.Base.Setup.PordDoc.PordDocSearchPage"/>
-                <Item ID="PinvDoc" Name="$pinvdoc" PageID="eLog.Base.Setup.PinvDoc.PinvDocSearchPage"/>
-                <Item ID="PinvNAV" Name="$pinvnav" PageID="eLog.Base.Purchase.Pinv.PinvNAVSettingsPage"/>
-            </Item>
-            <Item ID="Setup_Warehouse" Name="$setupwarehouse">
-                <Item ID="WarehouseSetup" Name="$warehouse" PageID="eLog.Base.Setup.Warehouse.WarehouseSearchPage"/>
-                <Item ID="StDoc" Name="$stdoc" PageID="eLog.Base.Setup.StDoc.StDocSearchPage"/>
-                <Item ID="StPar" Name="$stpar" PageID="eLog.Base.Setup.StDoc.StParFullInlineEditPage"/>
-                <Item ID="Origin" Name="$origin" PageID="eLog.Base.Setup.Origin.OriginInlineEditPage"/>
-                <Item ID="Plant" Name="$plant" PageID="eLog.Base.Setup.Plant.PlantSearchPage" Group="Manufacture"/>
-                <Item ID="TranspDoc" Name="$transpdoc" PageID="eLog.Base.Setup.TranspDoc.TranspDocSearchPage" Group="WhTransport"/>
-                <Item ID="StockReplaceTemplate" Name="$stockreplacetemplate" PageID="eLog.Base.Warehouse.StockReplace.StockReplaceTemplateSearchPage"/>
-                <Item ID="PackDoc" Name="$packdoc" PageID="eLog.Base.Setup.PackDoc.PackDocPage"/>
-            </Item>
-            <Item ID="Setup_Service" Name="$setupservice">
-                <Item ID="SvcWorksheetDoc" Name="$svcworksheetdoc" PageID="eLog.Base.Setup.ServiceWorksheetDoc.SvcWorksheetDocSearchPage"/>
-            </Item>
-            <Item ID="Setup_Finance" Name="$setupfinance">
-                <Item ID="FtDoc" Name="$ftdoc" PageID="eLog.Base.Setup.FtDoc.FtDocSearchPage"/>
-            </Item>
-            <Item ID="Setup_Lists" Name="$setuplists">
-                <Item ID="Sti" Name="$sti" PageID="eLog.Base.Reports.Sti.StiHeadSearchPage"/>
-            </Item>
-            <Item ID="Container" Name="$container" PageID="eLog.Base.Setup.Container.ContainerInlineEditPage"/>
+				<Item ID="PrcGroup" Name="$prcgroup" PageID="eLog.Base.Setup.PriceTable.PrcGroupInlineEditPage"/>
+				<Item ID="PrcPrior" Name="$prcprior" PageID="eLog.Base.Setup.PriceTable.PrcPriorInlineEditPage"/>
+				<Item ID="PrcCode" Name="$prccode" PageID="eLog.Base.Setup.PriceTable.PrcCodeInlineEditPage"/>
+				<Item ID="SContrDoc" Name="$scontrdoc" PageID="eLog.Base.Setup.SContrDoc.SContrDocSearchPage"/>
+				<Item ID="SordDoc" Name="$sorddoc" PageID="eLog.Base.Setup.SordDoc.SordDocSearchPage"/>
+				<Item ID="SinvDoc" Name="$sinvdoc" PageID="eLog.Base.Setup.SinvDoc.SinvDocSearchPage"/>
+				<Item ID="SinvFromNAVSettings" Name="$sinvfromnavsettings" PageID="eLog.Base.Sales.Sinv.SinvFromNAV.SinvFromNAVSettingsPage"/>
+			</Item>
+			<Item ID="Setup_Manufacture" Name="$setupmanufacture" Group="Manufacture">
+				<Item ID="MordDoc" Name="$morddoc" PageID="eLog.Base.Setup.MordDoc.MordDocSearchPage"/>
+				<Item ID="ProdRepDoc" Name="$prodrepdoc" PageID="eLog.Base.Setup.ProdRepDoc.ProdRepDocSearchPage"/>
+				<Item ID="ProdQtyType" Name="$prodqtytype" PageID="eLog.Base.Setup.ProdQtyType.ProdQtyTypeSearchPage"/>
+				<Item ID="MachType" Name="$machtype" PageID="eLog.Base.Setup.Machine.MachTypeSearchPage"/>
+				<Item ID="Process" Name="$process" PageID="eLog.Base.Setup.Process.ProcessSearchPage"/>
+			</Item>
+			<Item ID="Setup_Purchase" Name="$setuppurchase">
+				<Item ID="CostGroup" Name="$costgroup" PageID="eLog.Base.Setup.Cost.CostGroupSearchPage"/>
+				<Item ID="PordDoc" Name="$porddoc" PageID="eLog.Base.Setup.PordDoc.PordDocSearchPage"/>
+				<Item ID="PinvDoc" Name="$pinvdoc" PageID="eLog.Base.Setup.PinvDoc.PinvDocSearchPage"/>
+				<Item ID="PinvNAV" Name="$pinvnav" PageID="eLog.Base.Purchase.Pinv.PinvNAVSettingsPage"/>
+			</Item>
+			<Item ID="Setup_Warehouse" Name="$setupwarehouse">
+				<Item ID="WarehouseSetup" Name="$warehouse" PageID="eLog.Base.Setup.Warehouse.WarehouseSearchPage"/>
+				<Item ID="StDoc" Name="$stdoc" PageID="eLog.Base.Setup.StDoc.StDocSearchPage"/>
+				<Item ID="StPar" Name="$stpar" PageID="eLog.Base.Setup.StDoc.StParFullInlineEditPage"/>
+				<Item ID="Origin" Name="$origin" PageID="eLog.Base.Setup.Origin.OriginInlineEditPage"/>
+				<Item ID="Plant" Name="$plant" PageID="eLog.Base.Setup.Plant.PlantSearchPage" Group="Manufacture"/>
+				<Item ID="TranspDoc" Name="$transpdoc" PageID="eLog.Base.Setup.TranspDoc.TranspDocSearchPage" Group="WhTransport"/>
+				<Item ID="StockReplaceTemplate" Name="$stockreplacetemplate" PageID="eLog.Base.Warehouse.StockReplace.StockReplaceTemplateSearchPage"/>
+				<Item ID="PackDoc" Name="$packdoc" PageID="eLog.Base.Setup.PackDoc.PackDocPage"/>
+			</Item>
+			<Item ID="Setup_Service" Name="$setupservice">
+				<Item ID="SvcWorksheetDoc" Name="$svcworksheetdoc" PageID="eLog.Base.Setup.ServiceWorksheetDoc.SvcWorksheetDocSearchPage"/>
+			</Item>
+			<Item ID="Setup_Finance" Name="$setupfinance">
+				<Item ID="FtDoc" Name="$ftdoc" PageID="eLog.Base.Setup.FtDoc.FtDocSearchPage"/>
+			</Item>
+			<Item ID="Setup_Lists" Name="$setuplists">
+				<Item ID="Sti" Name="$sti" PageID="eLog.Base.Reports.Sti.StiHeadSearchPage"/>
+			</Item>
+			<Item ID="Container" Name="$container" PageID="eLog.Base.Setup.Container.ContainerInlineEditPage"/>
 			<Item ID="SetupMasters" Name="$masters">
 				<Item ID="OlcItemMainGroupSearchPage" Name="$olcitemmaingroupsearchpage" PageID="eLog.HeavyTools.Masters.Item.MainGroup.OlcItemMainGroupSearchPage"/>
 				<Item ID="OlcItemColor" Name="$olcitemcolor" PageID="eLog.HeavyTools.Masters.Item.Color.OlcItemColorSearchPage"/>
@@ -72,473 +72,475 @@
 				<Item ID="OlcItemMainGroupType2" Name="$olcitemmaingrouptype2" PageID="eLog.HeavyTools.Masters.Item.MainGroup.OlcItemMainGroupType2SearchPage"/>
 				<Item ID="OlcItemSizeRangeSearchPage" Name="$olcitemsizerangesearchpage" PageID="eLog.HeavyTools.Masters.Item.MainGroup.OlcItemSizeRangeSearchPage"/>
 				<Item ID="OlcItemSeason" Name="$olcitemseason" PageID="eLog.HeavyTools.Masters.Item.Season.OlcItemSeasonSearchPage"/>
-        </Item>
+			</Item>
 		</Item>
-        <Item ID="Masters" Name="$masters">
-            <Item ID="Partner" Name="$partner" PageID="eLog.Base.Masters.Partner.PartnerSearchPage"/>
+		<Item ID="Masters" Name="$masters">
+			<Item ID="Partner" Name="$partner" PageID="eLog.Base.Masters.Partner.PartnerSearchPage"/>
 			<Item ID="OlcItemModel" Name="$olcitemmodel" PageID="eLog.HeavyTools.Masters.Item.Model.OlcItemModelSearchPage"/>
-            <Item ID="Item" Name="$item" PageID="eLog.Base.Masters.Item.ItemSearchPage"/>
-            <Item ID="ItemBOM" Name="$itemBOM" PageID="eLog.Base.Masters.Item.ItemBOMSearchPage" Group="Manufacture"/>
-            <Item ID="PrcSchema" Name="$prcschema" PageID="eLog.Base.Masters.PriceTable.PrcSchemaSearchPage"/>
-            <Item ID="PrcTable" Name="$prctable" PageID="eLog.Base.Masters.PriceTable.PrcTableSearchPage"/>
-            <Item ID="CostPrc" Name="$costprc" PageID="eLog.Base.Masters.Cost.CostPrcSearchPage"/>
-            <Item ID="Property2" Name="$property" PageID="eLog.Base.Setup.Property.PropHeadSearchPage2"/>
-            <Item ID="ItemImport" Name="$itemimport" PageID="eLog.Base.Masters.Import.Item.ItemImportPage"/>
+			<Item ID="Item" Name="$item" PageID="eLog.Base.Masters.Item.ItemSearchPage"/>
+			<Item ID="ItemBOM" Name="$itemBOM" PageID="eLog.Base.Masters.Item.ItemBOMSearchPage" Group="Manufacture"/>
+			<Item ID="PrcSchema" Name="$prcschema" PageID="eLog.Base.Masters.PriceTable.PrcSchemaSearchPage"/>
+			<Item ID="PrcTable" Name="$prctable" PageID="eLog.Base.Masters.PriceTable.PrcTableSearchPage"/>
+			<Item ID="CostPrc" Name="$costprc" PageID="eLog.Base.Masters.Cost.CostPrcSearchPage"/>
+			<Item ID="Property2" Name="$property" PageID="eLog.Base.Setup.Property.PropHeadSearchPage2"/>
+			<Item ID="ItemImport" Name="$itemimport" PageID="eLog.Base.Masters.Import.Item.ItemImportPage"/>
             <Item ID="ExcelItemImport" Name="$excelitemimport" PageID="eLog.HeavyTools.Masters.Item.Import.ItemImportPage"/>
-            <Item ID="UqCard" Name="$uqcard" PageID="eLog.Base.Masters.UniqueCard.UqCardSearchPage"/>
+			<Item ID="UqCard" Name="$uqcard" PageID="eLog.Base.Masters.UniqueCard.UqCardSearchPage"/>
 			<Item ID="PartnerImport3" Name="$partnerimport3" PageID="eLog.HeavyTools.Masters.Import.Partner.PartnerImportPage"/>
-        </Item>
-        <Item ID="ProjectG" Name="$projectG" Group="Project">
-            <Item ID="ProjProduct" Name="$projprod" PageID="eLog.Base.Project.ProjProductInlineEditPage"/>
-            <Item ID="Project" Name="$project" PageID="eLog.Base.Project.ProjectSearchPage"/>
-            <Item ID="ProjTask" Name="$projtask" PageID="eLog.Base.Project.ProjTaskSearchPage"/>
-            <Item ID="ProjActiv" Name="$projactiv" PageID="eLog.Base.Project.ProjActivityInlineEditPage"/>
-            <Item ID="ProjWorkTime" Name="$projworktime" PageID="eLog.Base.Project.ProjWorkTimeSearchPage"/>
-        </Item>
-        <Item ID="Sales" Name="$sales">
+		</Item>
+		<Item ID="ProjectG" Name="$projectG" Group="Project">
+			<Item ID="ProjProduct" Name="$projprod" PageID="eLog.Base.Project.ProjProductInlineEditPage"/>
+			<Item ID="Project" Name="$project" PageID="eLog.Base.Project.ProjectSearchPage"/>
+			<Item ID="ProjTask" Name="$projtask" PageID="eLog.Base.Project.ProjTaskSearchPage"/>
+			<Item ID="ProjActiv" Name="$projactiv" PageID="eLog.Base.Project.ProjActivityInlineEditPage"/>
+			<Item ID="ProjWorkTime" Name="$projworktime" PageID="eLog.Base.Project.ProjWorkTimeSearchPage"/>
+		</Item>
+		<Item ID="Sales" Name="$sales">
 			<Item ID="OlcPrctableSearchPage" Name="$olcprctablesearchpage" PageID="eLog.HeavyTools.Masters.PriceTable.OlcPrctableSearchPage"/>
 			<Item ID="Action" Name="$action" PageID="eLog.HeavyTools.Sales.Action.ActionSearchPage"/>			
 			<Item ID="SContract" Name="$scontract" PageID="eLog.Base.Sales.SContract.SContractSearchPage"/>
-            <Item ID="Sord" Name="$sord" PageID="eLog.Base.Sales.Sord.SordHeadSearchPage"/>
-            <Item ID="SordLineAll" Name="$sordlineall" PageID="eLog.Base.Sales.Sord.SordLineAllSearchPage"/>
-            <Item ID="SordUqCard" Name="$sorduqcard" PageID="eLog.Base.Sales.Sord.SordUqCardSearchPage"/>
-            <Item ID="Sinv" Name="$sinv" PageID="eLog.Base.Sales.Sinv.SinvHeadSearchPage"/>
-            <Item ID="SinvFromNAV" Name="$sinvfromnav" PageID="eLog.Base.Sales.Sinv.SinvFromNAV.SinvFromNAVPage"/>
-            <Item ID="Reserve" Name="$reserve" PageID="eLog.Base.Warehouse.Reserve.ReserveSearchPage"/>
-            <Item ID="Delivery" Name="$delivery" PageID="eLog.Base.Warehouse.Delivery.DgheadSearchPage"/>
-            <Item ID="Return" Name="$return" PageID="eLog.Base.Sales.Return.RetHeadSearchPage"/>
-            <Item ID="MarketStock" Name="$marketstock" PageID="eLog.Base.Sales.MarketStock.MarketStockSearchPage"/>
-        </Item>
-        <Item ID="Manufacture" Name="$manufacture" Group="Manufacture">
-            <Item ID="ProdPlan" Name="$prodplan" PageID="eLog.Base.Manufacture.ProdPlan.ProdPlanPage"/>
-            <Item ID="MRP" Name="$mrp" PageID="eLog.Base.Manufacture.MRP.MRPPage"/>
-            <Item ID="MordLineAll" Name="$mordlineall" PageID="eLog.Base.Manufacture.Mord.MordLineAllSearchPage"/>
-            <Item ID="MordReqAll" Name="$mordreqall" PageID="eLog.Base.Manufacture.Mord.MordReqAllSearchPage"/>
-            <Item ID="ProdReport" Name="$prodreport" PageID="eLog.Base.Manufacture.ProdReport.ProdReportPage"/>
-            <Item ID="ProdWIPStock" Name="$prodwipstock" PageID="eLog.Base.Manufacture.WIPStock.ProdWIPStockSearchPage"/>
-        </Item>
-        <Item ID="Purchase" Name="$purchase">
-            <Item ID="PordGen" Name="$pordgen" PageID="eLog.Base.Purchase.PordGen.PogHeadSearchPage"/>
-            <!--<Item ID="PordReq" Name="$preq" PageID="eLog.Base.Purchase.Preq.PordReqSearchPage"/>-->
-            <Item ID="Pord" Name="$pord" PageID="eLog.Base.Purchase.Pord.PordHeadSearchPage"/>
-            <Item ID="PordLineAll" Name="$pordlineall" PageID="eLog.Base.Purchase.Pord.PordLineAllSearchPage"/>
-            <Item ID="PinvB" Name="$pinvb" PageID="eLog.Base.Purchase.Pinv.PinvHeadSearchPageB"/>
-            <!--<Item ID="Pinv" Name="$pinv" PageID="eLog.Base.Purchase.Pinv.PinvHeadSearchPage"/>-->
-            <Item ID="PinvCostLine" Name="$pinvcostline" PageID="eLog.Base.Purchase.Pinv.PinvCostLineSearchPage"/>
-            <Item ID="PinvCostApproval" Name="$pinvcostapproval" PageID="eLog.Base.Purchase.Pinv.PinvCostApprovalSearchPage"/>
+			<Item ID="Sord" Name="$sord" PageID="eLog.Base.Sales.Sord.SordHeadSearchPage"/>
+			<Item ID="SordLineAll" Name="$sordlineall" PageID="eLog.Base.Sales.Sord.SordLineAllSearchPage"/>
+			<Item ID="SordUqCard" Name="$sorduqcard" PageID="eLog.Base.Sales.Sord.SordUqCardSearchPage"/>
+			<Item ID="Sinv" Name="$sinv" PageID="eLog.Base.Sales.Sinv.SinvHeadSearchPage"/>
+			<Item ID="SinvFromNAV" Name="$sinvfromnav" PageID="eLog.Base.Sales.Sinv.SinvFromNAV.SinvFromNAVPage"/>
+			<Item ID="Reserve" Name="$reserve" PageID="eLog.Base.Warehouse.Reserve.ReserveSearchPage"/>
+			<Item ID="Delivery" Name="$delivery" PageID="eLog.Base.Warehouse.Delivery.DgheadSearchPage"/>
+			<Item ID="Return" Name="$return" PageID="eLog.Base.Sales.Return.RetHeadSearchPage"/>
+			<Item ID="MarketStock" Name="$marketstock" PageID="eLog.Base.Sales.MarketStock.MarketStockSearchPage"/>
+		</Item>
+		<Item ID="Manufacture" Name="$manufacture" Group="Manufacture">
+			<Item ID="ProdPlan" Name="$prodplan" PageID="eLog.Base.Manufacture.ProdPlan.ProdPlanPage"/>
+			<Item ID="MRP" Name="$mrp" PageID="eLog.Base.Manufacture.MRP.MRPPage"/>
+			<Item ID="MordLineAll" Name="$mordlineall" PageID="eLog.Base.Manufacture.Mord.MordLineAllSearchPage"/>
+			<Item ID="MordReqAll" Name="$mordreqall" PageID="eLog.Base.Manufacture.Mord.MordReqAllSearchPage"/>
+			<Item ID="ProdReport" Name="$prodreport" PageID="eLog.Base.Manufacture.ProdReport.ProdReportPage"/>
+			<Item ID="ProdWIPStock" Name="$prodwipstock" PageID="eLog.Base.Manufacture.WIPStock.ProdWIPStockSearchPage"/>
+		</Item>
+		<Item ID="Purchase" Name="$purchase">
+			<Item ID="PordGen" Name="$pordgen" PageID="eLog.Base.Purchase.PordGen.PogHeadSearchPage"/>
+			<!--<Item ID="PordReq" Name="$preq" PageID="eLog.Base.Purchase.Preq.PordReqSearchPage"/>-->
+			<Item ID="Pord" Name="$pord" PageID="eLog.Base.Purchase.Pord.PordHeadSearchPage"/>
+			<Item ID="PordLineAll" Name="$pordlineall" PageID="eLog.Base.Purchase.Pord.PordLineAllSearchPage"/>
+			<Item ID="PinvB" Name="$pinvb" PageID="eLog.Base.Purchase.Pinv.PinvHeadSearchPageB"/>
+			<!--<Item ID="Pinv" Name="$pinv" PageID="eLog.Base.Purchase.Pinv.PinvHeadSearchPage"/>-->
+			<Item ID="PinvCostLine" Name="$pinvcostline" PageID="eLog.Base.Purchase.Pinv.PinvCostLineSearchPage"/>
+			<Item ID="PinvCostApproval" Name="$pinvcostapproval" PageID="eLog.Base.Purchase.Pinv.PinvCostApprovalSearchPage"/>
             <Item ID="ApprovedPackage" Name="$approvedpackage" PageID="eLog.HeavyTools.Purchase.PinvPackage.ApprovedPackageSearchPage"/>
-        </Item>
-        <Item ID="Warehouse" Name="$warehouse_root">
-            <Item ID="Stock" Name="$stock" PageID="eLog.Base.Warehouse.Stock.StockSearchPage"/>
-            <Item ID="StockMap" Name="$stockmap" PageID="eLog.Base.Warehouse.StockMap.StockMapSearchPage"/>
-            <Item ID="StockLot" Name="$stocklot" PageID="eLog.Base.Warehouse.StockLot.StockLotSearchPage"/>
-            <Item ID="StockLotMap" Name="$stocklotmap" PageID="eLog.Base.Warehouse.StockLotMap.StockLotMapSearchPage"/>
-            <Item ID="ItemWh" Name="$itemwh" PageID="eLog.Base.Masters.ItmWh.ItemWhSearchPage"/>
-            <Item ID="Receiving" Name="$receiving" PageID="eLog.Base.Warehouse.StockTran.ReceivingHeadSearchPage"/>
-            <Item ID="Issuing" Name="$issuing" PageID="eLog.Base.Warehouse.StockTran.IssuingHeadSearchPage"/>
-            <Item ID="StockTransfering" Name="$stocktransfering" PageID="eLog.Base.Warehouse.StockTran.TransferingHeadSearchPage"/>
-            <Item ID="PhysicalInventory" Name="$physicalinventory" PageID="eLog.Base.Warehouse.PhysicalInventory.PhiHeadSearchPage"/>
-            <Item ID="StockReplace" Name="$stockreplace" PageID="eLog.Base.Warehouse.StockReplace.StockReplaceSearchPage"/>
-            <Item ID="Pack" Name="$pack" PageID="eLog.Base.Warehouse.Pack.PackPage"/>
-            <Item ID="TranspHead" Name="$transphead" PageID="eLog.Base.Warehouse.Transport.TranspHeadSearchPage" Group="WhTransport"/>
+		</Item>
+		<Item ID="Warehouse" Name="$warehouse_root">
+			<Item ID="Stock" Name="$stock" PageID="eLog.Base.Warehouse.Stock.StockSearchPage"/>
+			<Item ID="StockMap" Name="$stockmap" PageID="eLog.Base.Warehouse.StockMap.StockMapSearchPage"/>
+			<Item ID="StockLot" Name="$stocklot" PageID="eLog.Base.Warehouse.StockLot.StockLotSearchPage"/>
+			<Item ID="StockLotMap" Name="$stocklotmap" PageID="eLog.Base.Warehouse.StockLotMap.StockLotMapSearchPage"/>
+			<Item ID="ItemWh" Name="$itemwh" PageID="eLog.Base.Masters.ItmWh.ItemWhSearchPage"/>
+			<Item ID="Receiving" Name="$receiving" PageID="eLog.Base.Warehouse.StockTran.ReceivingHeadSearchPage"/>
+			<Item ID="Issuing" Name="$issuing" PageID="eLog.Base.Warehouse.StockTran.IssuingHeadSearchPage"/>
+			<Item ID="StockTransfering" Name="$stocktransfering" PageID="eLog.Base.Warehouse.StockTran.TransferingHeadSearchPage"/>
+			<Item ID="PhysicalInventory" Name="$physicalinventory" PageID="eLog.Base.Warehouse.PhysicalInventory.PhiHeadSearchPage"/>
+			<Item ID="StockReplace" Name="$stockreplace" PageID="eLog.Base.Warehouse.StockReplace.StockReplaceSearchPage"/>
+			<Item ID="Pack" Name="$pack" PageID="eLog.Base.Warehouse.Pack.PackPage"/>
+			<Item ID="TranspHead" Name="$transphead" PageID="eLog.Base.Warehouse.Transport.TranspHeadSearchPage" Group="WhTransport"/>
 			<Item ID="OlcWhLocPrio" Name="$olcwhlocprio" PageID="eLog.HeavyTools.Warehouse.WhLocPrio.OlcWhLocPrioSearchPage"/>
-        </Item>
-        <Item ID="Service" Name="$service_root">
-            <Item ID="SvcWorksheet" Name="$svcworksheet" PageID="eLog.Base.ServiceSvc.ServiceWorksheet.SvcWorksheetHeadSearchPage"/>
-        </Item>
-        <Item ID="CostPrice" Name="$costprice" Group="CostPriceCalc">
-            <Item ID="CPAllocBase" Name="$costpriceallocbase" PageID="eLog.Base.CostPrice.AllocBase.CpcAllocBaseSearchPage"/>
-            <Item ID="CPStDoc" Name="$costpricestdoc" PageID="eLog.Base.CostPrice.StDoc.CpcStDocSearchPage"/>
-            <Item ID="CPParam" Name="$costpriceparam" PageID="eLog.Base.CostPrice.Param.CpcParamSearchPage"/>
-            <Item ID="CPAccounts" Name="$costpriceaccounts" PageID="eLog.Base.CostPrice.Accounts.CpcAccHeadSearchPage"/>
-            <Item ID="CostPriceCalculation" Name="$costpricecalculation" PageID="eLog.Base.CostPrice.Calculation.CpcHeadSearchPage"/>
-        </Item>
-        <Item ID="Coda" Name="$coda">
-            <Item ID="Setup_Coda" Name="$setupcoda">
-                <Item ID="Rule" Name="$setuprule" PageID="CodaInt.Base.Setup.Rule.RuleSearchPage"/>
-                <Item ID="OthTrLineDoc" Name="$othtrlinedoc" PageID="CodaInt.Base.Setup.OthTrLineDoc.OthTrLineDocSearchPage"/>
-                <Item ID="DrHead" Name="$setupdrhead" PageID="CodaInt.Base.Setup.Dr.DrHeadSearchPage"/>
-                <Item ID="CustSuppAcc" Name="$setupcustsuppacc" PageID="CodaInt.Base.Setup.CustSuppAcc.CustSuppAccSearchPage"/>
-                <Item ID="ElmRule" Name="$setupruleval" PageID="CodaInt.Base.Setup.ElmRule.ElmRuleSearchPage"/>
-                <Item ID="StPostType" Name="$setupstposttype" PageID="CodaInt.Base.Setup.StPostType.StPostTypeSearchPage"/>
-                <Item ID="CodaCompany" Name="$setupcodacompany" PageID="CodaInt.Base.Setup.Company.OfcCompanySearchPage"/>
-                <Item ID="OfcCurRate" Name="$ofccurrate" PageID="CodaInt.Base.Setup.CurRate.OfcCurRateInlineEditPage"/>
-            </Item>
-            <Item ID="Bookkeeping" Name="$bookkeeping">
-                <Item ID="PinvPost" Name="$bookkeepingpinvpost" PageID="CodaInt.Base.Bookkeeping.PinvPost.PinvPostSearchPage"/>
-                <Item ID="SinvPost" Name="$bookkeepingsinvpost" PageID="CodaInt.Base.Bookkeeping.SinvPost.SinvPostSearchPage"/>
-                <Item ID="StPost" Name="$bookkeepingstpost" PageID="CodaInt.Base.Bookkeeping.StPost.StPostSearchPage"/>
-                <Item ID="PCashPost" Name="$bookkeepingpcash" PageID="eLog.Finance.Coda.Bookkeeping.PcTran.PcTranPostSearchPage"/>
-                <Item ID="OthTrHeadPost" Name="$othtrhead" PageID="eLog.Base.OtherTran.OthTrHeadSearchPage"/>
-            </Item>
-            <Item ID="Matching" Name="$matching">
-                <Item ID="SinvStornoMatching" Name="$sinvstornomatching" PageID="CodaInt.Base.Matching.SinvStorno.SinvStornoMatchingSearchPage" />
-                <Item ID="SinvCashMatching" Name="$SinvCashmatching" PageID="CodaInt.Base.Matching.SinvCash.SinvCashMatchingSearchPage" />
-                <Item ID="PinvCashMatching" Name="$PinvCashmatching" PageID="CodaInt.Base.Matching.PinvCash.PinvCashMatchingSearchPage" />
-                <Item ID="CashAdvMatching" Name="$CashAdvmatching" PageID="CodaInt.Base.Matching.CashAdv.CashAdvMatchingSearchPage" />
-                <Item ID="PinvCashAdvMatching" Name="$PinvCashAdvmatching" PageID="CodaInt.Base.Matching.PinvCashAdv.PinvCashAdvMatchingSearchPage" />
-            </Item>
-            <Item ID="Synch" Name="$synch">
-                <Item ID="TaxSynch" Name="$taxsynchronization" PageID="CodaInt.Base.TaxSynchronization.TaxSynchronizationPage"/>
-                <Item ID="DocSynch" Name="$docsynchronization" PageID="CodaInt.Base.DocSynchronization.DocSynchronizationPage"/>
-                <Item ID="PaymSynch" Name="$paymsynchronization" PageID="CodaInt.Base.PayMSynchronization.PayMSynchronizationPage"/>
-            </Item>
-            <Item ID="Lists_Coda" Name="$listscoda">
-                <Item ID="ELogCoda" Name="$list_elogcoda" PageID="CodaInt.Base.Reports.ELogCoda"/>
-                <Item ID="ELogCodaDetail" Name="$list_elogcodadetail" PageID="CodaInt.Base.Reports.ELogCodaDetail"/>
-                <Item ID="ELogCodaSum" Name="$list_elogcodasum" PageID="CodaInt.Base.Reports.ELogCodaSum"/>
-                <Item ID="AccountCarrying" Name="$list_codaaccountcarrying" PageID="CodaInt.Base.Reports.AccountCarrying"/>
-                <Item ID="InvoicePostControl" Name="$list_invoicepostcontrol" PageID="CodaInt.Base.Reports.InvoicePostControl"/>
-                <Item ID="StockAccount" Name="$list_stockaccount" PageID="CodaInt.Base.Reports.StockAccount"/>
-                <Item ID="StockAccountingControl" Name="$list_stockaccountingcontrol" PageID="CodaInt.Base.Reports.StockAccountingControl"/>
-            </Item>
-        </Item>
-        <Item ID="Finance" Name="$finance">
-            <Item ID="Period" Name="$period" PageID="eLog.Base.Finance.Period.PeriodSearchPage"/>
-            <Item ID="OthTrHead" Name="$othtrhead" PageID="eLog.Base.OtherTran.OthTrHeadSearchPage"/>
-            <Item ID="FinanceTran" Name="$financetran" PageID="eLog.Base.Finance.FinanceTran.FtHeadSearchPage"/>
-            <Item ID="FtMatching" Name="$matching" PageID="eLog.Base.Finance.Matching.FtMatchMatchingPage"/>
-            <Item ID="Variable" Name="$variable" PageID="eLog.Base.Finance.Variable.FtVarSearchPage"/>
-            <Item ID="VarReplace" Name="$varreplace" PageID="eLog.Base.Finance.VarReplace.FtVarReplacePage"/>
-            <Item ID="ProcCost" Name="$prodcost" PageID="eLog.Base.Finance.ProdCost.PcostHeadSearchPage"/>
-            <Item ID="StCostPrcCalc" Name="$stcostprccalc" PageID="eLog.Base.Warehouse.StCostPriceCalc.StCostPriceCalculationPage"/>
-            <Item ID="StDeprHead" Name="$stdeprhead" PageID="eLog.Base.Finance.StockTranDepreciation.StDeprHeadSearchPage" />
-            <Item ID="FnPettyCash" Name="$pettycash">
-                <Item ID="FnPCashSelect" Name="$pcashselect" PageID="eLog.Finance.Base.PettyCash.PCashSearchPage"/>
-                <Item ID="FnPettyCash_Tran" Name="$pettycash_tran" PageID="eLog.Finance.Base.PettyCash.PcTran.PcTranHeadSearchPage"/>
-                <Item ID="FnPettyCash_Close" Name="$pettycash_close" PageID="eLog.Finance.Base.PettyCash.PctClose.PctCloseHeadSearchPage"/>
-                <Item ID="FnPettyCash_CurrencyDiff" Name="$pettycash_currencydiff" PageID="eLog.Finance.Base.PettyCash.CurrencyDiff.CurrencyDiffSearchPage"/>
-                <Item ID="FnPettyCash_TranBalance" Name="$pettycash_tranbalance" PageID="eLog.Finance.Base.PettyCash.PtcTranBalance.PtcTranBalanceSearchPage"/>
-                <Item ID="FnPettyCashLists" Name="$pettycashlists">
-                    <Item ID="List_FnPCashReport1" Name="$list_pcashreport" PageID="eLog.Finance.Base.Reports.PCashReport"/>
-                    <Item ID="List_FnPCashAdvDetail1" Name="$list_pcashadvdetail" PageID="eLog.Finance.Base.Reports.PCashAdvDetail"/>
-                    <Item ID="List_FnPCashAvgRate1" Name="$list_pcashavgrate" PageID="eLog.Finance.Base.Reports.PCashAvgRate"/>
-                    <Item ID="List_FnPCashAvgRateCheckList1" Name="$list_pcashavgratechecklist" PageID="eLog.Finance.Base.Reports.PCashAvgRateCheckList"/>
-                </Item>
-                <Item ID="FnPcMasterDatas" Name="$masterdatas">
-                    <Item ID="FnPettyCash_BaseData" Name="$pettycash_basedata" PageID="eLog.Finance.Base.PettyCash.PettyCashSearchPage"/>
-                    <Item ID="FnPettyCash_TitleGrp" Name="$pettycash_titlegrp" PageID="eLog.Finance.Base.PettyCash.PctLineDocGrp.PctLineDocGrpSearchPage"/>
-                    <Item ID="FnPettyCash_Title" Name="$pettycash_title" PageID="eLog.Finance.Base.PettyCash.PctLineDoc.PctLineSearchPage"/>
-                    <Item ID="FnPettyCash_PayMethod" Name="$pettycash_basepaymethod" PageID="eLog.Finance.Base.PettyCash.PayMethod.PayMethodSearchPage"/>
-                    <Item ID="FnPettyCash_BankNote" Name="$pettycash_banknote" PageID="eLog.Finance.Base.PettyCash.PcBankNote.PcBankNoteSearchPage"/>
-                </Item>
-            </Item>
-        </Item>
-        <Item ID="Queries" Name="$queries">
-            <Item ID="StockTrans" Name="$query_stocktrans" PageID="eLog.Base.Queries.StockTrans"/>
-            <Item ID="Invoices" Name="$query_invoices" PageID="eLog.Base.Queries.Invoices"/>
-            <Item ID="Invoice_StockTran" Name="$query_invoice_stocktran" PageID="eLog.Base.Queries.InvoiceStockTran"/>
-            <Item ID="Stock_Item" Name="$query_stock_item" PageID="eLog.Base.Queries.StockItem"/>
-            <Item ID="PordTranDetailed" Name="$query_pord" PageID="eLog.Base.Queries.PordTranDetailed"/>
-            <Item ID="SordTranDetailed" Name="$query_sordtype2issue" PageID="eLog.Base.Queries.SordTranDetailed"/>
-            <Item ID="StockAndStockTran" Name="$query_stockandstocktran" PageID="eLog.Base.Queries.StockAndStockTran"/>
-            <Item ID="StockReservation" Name="$query_stockreservation" PageID="eLog.Base.Queries.StockReservation"/>
-            <Item ID="SellingPrice" Name="$query_sellingprice" PageID="eLog.Base.Queries.SellingPrice"/>
-            <Item ID="UncostedReceipts" Name="$query_uncostedreceipts" PageID="eLog.Base.Queries.UncostedReceipts"/>
-            <Item ID="StockTranDiscount" Name="$query_stocktrandiscount" PageID="eLog.Base.Queries.StockTranDiscount"/>
-            <!--<Item ID="StockAndStockTranDemo" Name="$query_stockandstocktrandemo" PageID="DefaultQueries_eLog.Base.Queries.StockAndStockTran" />-->
-            <Item ID="SinvNAV" Name="$query_sinvNAV" PageID="eLog.Base.Queries.SinvNAV"/>
-            <Item ID="SinvNCorrs" Name="$query_sinvncorrs" PageID="eLog.Base.Queries.Sinvncorrs"/>
-            <Item ID="SavedRepparam" Name="$query_savedrepparam" PageID="eProjectWeb.Framework.Reports.SavedrepparamSearchPage"/>
-            <Item ID="GeneralQueries" Name="$query_genqry" PageID="eProjectWeb.Framework.UI.GeneralQuery.GenQrySearchPage"/>
-        </Item>
-        <Item ID="Lists" Name="$lists">
-            <!--<Item ID="List_Masters" Name="$list_masters">-->
-            <!--<Item ID="List_Masters_Items" Name="$list_items" PageID="about:blank"/>-->
-            <!--<Item ID="List_Masters_Partners" Name="$list_partners" PageID="about:blank"/>-->
-            <!--</Item>-->
-            <!--<Item ID="List_StockTran" Name="$list_stocktran">-->
-            <Item ID="List_StockTran_Detailed" Name="$list_stocktrandetailed" PageID="eLog.Base.Reports.StockTranDetailed"/>
-            <Item ID="List_StockTran_Summarized" Name="$list_stocktransummarized" PageID="eLog.Base.Reports.StockTranSummarized"/>
-            <Item ID="List_StockTran_Itemized" Name="$list_stocktranitemized" PageID="eLog.Base.Reports.StockTranItemized"/>
-            <!--<Item ID="List_StockTran_Issuing" Name="$list_delivery" PageID="about:blank"/>-->
-            <!--<Item ID="List_StockTran_Receiving" Name="$list_receiving" PageID="about:blank"/>-->
-            <!--<Item ID="List_StockTran_Transfering" Name="$list_whtransfer" PageID="about:blank="/>-->
-            <!--</Item>-->
-            <!--<Item ID="List_Invoice" Name="$list_invoice">-->
-            <Item ID="List_Invoice_Head" Name="$list_salesinvoicehead" PageID="eLog.Base.Reports.SalesInvoiceHead"/>
-            <Item ID="List_Invoice_Detailed" Name="$list_invoicedetailed" PageID="eLog.Base.Reports.InvoiceDetailed"/>
-            <Item ID="List_Invoice_Summarized" Name="$list_invoicesummarized" PageID="eLog.Base.Reports.InvoiceSummarized"/>
-            <!--</Item>-->
-            <!--<Item ID="List_Stock" Name="$list_stock">-->
-            <!--<Item ID="List_Stock_Lot" Name="$list_stock_lot" PageID="about:blank"/>-->
-            <Item ID="List_Stock_Normal" Name="$list_stock_normal" PageID="eLog.Base.Reports.Stock"/>
-            <Item ID="List_Purchase_Invoice_Head" Name="$list_purchaseinvoicehead" PageID="eLog.Base.Reports.PurchaseInvoiceHead"/>
-            <Item ID="List_StockTran_CostDetailed" Name="$list_stocktrancostdetailed" PageID="eLog.Base.Reports.StockTranCostDetailed"/>
-            <Item ID="List_ItemCard" Name="$list_itemcard" PageID="eLog.Base.Reports.ItemCard"/>
-            <!--</Item>-->
-            <!--<Item ID="List_Orders" Name="$list_orders">-->
-            <!--<Item ID="List_Orders_Purchase" Name="$list_purchase_order" PageID="about:blank"/>-->
-            <!--<Item ID="List_Orders_Sales" Name="$list_sales_order" PageID="about:blank"/>-->
-            <!--<Item ID="List_Orders_Production" Name="$list_production_order" PageID="about:blank"/>-->
-            <!--</Item>-->
-            <!--<Item ID="List_Production" Name="$list_production">-->
-            <!--<Item ID="List_Production_Report" Name="$list_production_report" PageID="about:blank"/>-->
-            <!--</Item>-->
-            <!--<Item ID="List_Logistics" Name="$list_logistics">-->
-            <!--<Item ID="List_Logistics_Loyalty" Name="$list_supplier_loyalty" PageID="about:blank"/>-->
-            <!--</Item>-->
-            <!--<Item ID="List_Management" Name="$list_management_reports">-->
-            <!--<Item ID="List_Management_PriceMargin" Name="$list_price_margin" PageID="about:blank"/>-->
-            <!--<Item ID="List_Management_WIP" Name="$list_wip" PageID="about:blank"/>-->
-            <!--</Item>-->
-            <!--<Item ID="List_Other" Name="$list_other">-->
-            <!--<Item ID="List_Other_Inventories" Name="$list_idle_inventories" PageID="about:blank"/>-->
-            <!--</Item>-->
-            <Item ID="List_PartnerCard" Name="$list_partnercard" PageID="eLog.Base.Reports.PartnerCard"/>
-            <Item ID="List_AccountBalance" Name="$list_accountbalance" PageID="eLog.Base.Reports.AccountBalance"/>
-            <!--<Item ID="List_ManReq" Name="$list_manreq" PageID="eLog.Base.Reports.ManReq"/>-->
-            <!--<Item ID="List_AccountCarrying" Name="$list_accountcarrying" PageID="eLog.Base.Reports.AccountQuerrying"/>-->
-            <Item ID="List_PriceMargin" Name="$list_pricemargin" PageID="eLog.Base.Reports.PriceMargin"/>
-            <Item ID="List_StockAgeing" Name="$list_stockageing" PageID="eLog.Base.Reports.StockAgeing"/>
-            <Item ID="List_ProdRepSummarized" Name="$list_prodrepsummarized" PageID="eLog.Base.Reports.ProdRepSummarized"/>
-            <Item ID="List_ProdRepDetailed" Name="$list_prodrepdetailed" PageID="eLog.Base.Reports.ProdRepDetailed"/>
-            <Item ID="StCostPrcCalc2" Name="$stcostprccalc" PageID="eLog.Base.Warehouse.StCostPriceCalc.StCostPriceCalculationPage"/>
-        </Item>
-        <Item ID="CustomReports" Name="$customreports">
-            <Item ID="CR1" Name="." PageID=""/>
-        </Item>
+		</Item>
+		<Item ID="Service" Name="$service_root">
+			<Item ID="SvcWorksheet" Name="$svcworksheet" PageID="eLog.Base.ServiceSvc.ServiceWorksheet.SvcWorksheetHeadSearchPage"/>
+		</Item>
+		<Item ID="CostPrice" Name="$costprice" Group="CostPriceCalc">
+			<Item ID="CPAllocBase" Name="$costpriceallocbase" PageID="eLog.Base.CostPrice.AllocBase.CpcAllocBaseSearchPage"/>
+			<Item ID="CPStDoc" Name="$costpricestdoc" PageID="eLog.Base.CostPrice.StDoc.CpcStDocSearchPage"/>
+			<Item ID="CPParam" Name="$costpriceparam" PageID="eLog.Base.CostPrice.Param.CpcParamSearchPage"/>
+			<Item ID="CPAccounts" Name="$costpriceaccounts" PageID="eLog.Base.CostPrice.Accounts.CpcAccHeadSearchPage"/>
+			<Item ID="CostPriceCalculation" Name="$costpricecalculation" PageID="eLog.Base.CostPrice.Calculation.CpcHeadSearchPage"/>
+		</Item>
+		<Item ID="Coda" Name="$coda">
+			<Item ID="Setup_Coda" Name="$setupcoda">
+				<Item ID="Rule" Name="$setuprule" PageID="CodaInt.Base.Setup.Rule.RuleSearchPage"/>
+				<Item ID="OthTrLineDoc" Name="$othtrlinedoc" PageID="CodaInt.Base.Setup.OthTrLineDoc.OthTrLineDocSearchPage"/>
+				<Item ID="DrHead" Name="$setupdrhead" PageID="CodaInt.Base.Setup.Dr.DrHeadSearchPage"/>
+				<Item ID="CustSuppAcc" Name="$setupcustsuppacc" PageID="CodaInt.Base.Setup.CustSuppAcc.CustSuppAccSearchPage"/>
+				<Item ID="ElmRule" Name="$setupruleval" PageID="CodaInt.Base.Setup.ElmRule.ElmRuleSearchPage"/>
+				<Item ID="StPostType" Name="$setupstposttype" PageID="CodaInt.Base.Setup.StPostType.StPostTypeSearchPage"/>
+				<Item ID="CodaCompany" Name="$setupcodacompany" PageID="CodaInt.Base.Setup.Company.OfcCompanySearchPage"/>
+				<Item ID="OfcCurRate" Name="$ofccurrate" PageID="CodaInt.Base.Setup.CurRate.OfcCurRateInlineEditPage"/>
+			</Item>
+			<Item ID="Bookkeeping" Name="$bookkeeping">
+				<Item ID="PinvPost" Name="$bookkeepingpinvpost" PageID="CodaInt.Base.Bookkeeping.PinvPost.PinvPostSearchPage"/>
+				<Item ID="SinvPost" Name="$bookkeepingsinvpost" PageID="CodaInt.Base.Bookkeeping.SinvPost.SinvPostSearchPage"/>
+				<Item ID="StPost" Name="$bookkeepingstpost" PageID="CodaInt.Base.Bookkeeping.StPost.StPostSearchPage"/>
+				<Item ID="PCashPost" Name="$bookkeepingpcash" PageID="eLog.Finance.Coda.Bookkeeping.PcTran.PcTranPostSearchPage"/>
+				<Item ID="OthTrHeadPost" Name="$othtrhead" PageID="eLog.Base.OtherTran.OthTrHeadSearchPage"/>
+			</Item>
+			<Item ID="Matching" Name="$matching">
+				<Item ID="SinvStornoMatching" Name="$sinvstornomatching" PageID="CodaInt.Base.Matching.SinvStorno.SinvStornoMatchingSearchPage" />
+				<Item ID="SinvCashMatching" Name="$SinvCashmatching" PageID="CodaInt.Base.Matching.SinvCash.SinvCashMatchingSearchPage" />
+				<Item ID="PinvCashMatching" Name="$PinvCashmatching" PageID="CodaInt.Base.Matching.PinvCash.PinvCashMatchingSearchPage" />
+				<Item ID="CashAdvMatching" Name="$CashAdvmatching" PageID="CodaInt.Base.Matching.CashAdv.CashAdvMatchingSearchPage" />
+				<Item ID="PinvCashAdvMatching" Name="$PinvCashAdvmatching" PageID="CodaInt.Base.Matching.PinvCashAdv.PinvCashAdvMatchingSearchPage" />
+			</Item>
+			<Item ID="Synch" Name="$synch">
+				<Item ID="TaxSynch" Name="$taxsynchronization" PageID="CodaInt.Base.TaxSynchronization.TaxSynchronizationPage"/>
+				<Item ID="DocSynch" Name="$docsynchronization" PageID="CodaInt.Base.DocSynchronization.DocSynchronizationPage"/>
+				<Item ID="PaymSynch" Name="$paymsynchronization" PageID="CodaInt.Base.PayMSynchronization.PayMSynchronizationPage"/>
+			</Item>
+			<Item ID="Lists_Coda" Name="$listscoda">
+				<Item ID="ELogCoda" Name="$list_elogcoda" PageID="CodaInt.Base.Reports.ELogCoda"/>
+				<Item ID="ELogCodaDetail" Name="$list_elogcodadetail" PageID="CodaInt.Base.Reports.ELogCodaDetail"/>
+				<Item ID="ELogCodaSum" Name="$list_elogcodasum" PageID="CodaInt.Base.Reports.ELogCodaSum"/>
+				<Item ID="AccountCarrying" Name="$list_codaaccountcarrying" PageID="CodaInt.Base.Reports.AccountCarrying"/>
+				<Item ID="InvoicePostControl" Name="$list_invoicepostcontrol" PageID="CodaInt.Base.Reports.InvoicePostControl"/>
+				<Item ID="StockAccount" Name="$list_stockaccount" PageID="CodaInt.Base.Reports.StockAccount"/>
+				<Item ID="StockAccountingControl" Name="$list_stockaccountingcontrol" PageID="CodaInt.Base.Reports.StockAccountingControl"/>
+			</Item>
+		</Item>
+		<Item ID="Finance" Name="$finance">
+			<Item ID="Period" Name="$period" PageID="eLog.Base.Finance.Period.PeriodSearchPage"/>
+			<Item ID="OthTrHead" Name="$othtrhead" PageID="eLog.Base.OtherTran.OthTrHeadSearchPage"/>
+			<Item ID="FinanceTran" Name="$financetran" PageID="eLog.Base.Finance.FinanceTran.FtHeadSearchPage"/>
+			<Item ID="FtMatching" Name="$matching" PageID="eLog.Base.Finance.Matching.FtMatchMatchingPage"/>
+			<Item ID="Variable" Name="$variable" PageID="eLog.Base.Finance.Variable.FtVarSearchPage"/>
+			<Item ID="VarReplace" Name="$varreplace" PageID="eLog.Base.Finance.VarReplace.FtVarReplacePage"/>
+			<Item ID="ProcCost" Name="$prodcost" PageID="eLog.Base.Finance.ProdCost.PcostHeadSearchPage"/>
+			<Item ID="StCostPrcCalc" Name="$stcostprccalc" PageID="eLog.Base.Warehouse.StCostPriceCalc.StCostPriceCalculationPage"/>
+			<Item ID="StDeprHead" Name="$stdeprhead" PageID="eLog.Base.Finance.StockTranDepreciation.StDeprHeadSearchPage" />
+			<Item ID="FnPettyCash" Name="$pettycash">
+				<Item ID="FnPCashSelect" Name="$pcashselect" PageID="eLog.Finance.Base.PettyCash.PCashSearchPage"/>
+				<Item ID="FnPettyCash_Tran" Name="$pettycash_tran" PageID="eLog.Finance.Base.PettyCash.PcTran.PcTranHeadSearchPage"/>
+				<Item ID="FnPettyCash_Close" Name="$pettycash_close" PageID="eLog.Finance.Base.PettyCash.PctClose.PctCloseHeadSearchPage"/>
+				<Item ID="FnPettyCash_CurrencyDiff" Name="$pettycash_currencydiff" PageID="eLog.Finance.Base.PettyCash.CurrencyDiff.CurrencyDiffSearchPage"/>
+				<Item ID="FnPettyCash_TranBalance" Name="$pettycash_tranbalance" PageID="eLog.Finance.Base.PettyCash.PtcTranBalance.PtcTranBalanceSearchPage"/>
+				<Item ID="FnPettyCashLists" Name="$pettycashlists">
+					<Item ID="List_FnPCashReport1" Name="$list_pcashreport" PageID="eLog.Finance.Base.Reports.PCashReport"/>
+					<Item ID="List_FnPCashAdvDetail1" Name="$list_pcashadvdetail" PageID="eLog.Finance.Base.Reports.PCashAdvDetail"/>
+					<Item ID="List_FnPCashAvgRate1" Name="$list_pcashavgrate" PageID="eLog.Finance.Base.Reports.PCashAvgRate"/>
+					<Item ID="List_FnPCashAvgRateCheckList1" Name="$list_pcashavgratechecklist" PageID="eLog.Finance.Base.Reports.PCashAvgRateCheckList"/>
+				</Item>
+				<Item ID="FnPcMasterDatas" Name="$masterdatas">
+					<Item ID="FnPettyCash_BaseData" Name="$pettycash_basedata" PageID="eLog.Finance.Base.PettyCash.PettyCashSearchPage"/>
+					<Item ID="FnPettyCash_TitleGrp" Name="$pettycash_titlegrp" PageID="eLog.Finance.Base.PettyCash.PctLineDocGrp.PctLineDocGrpSearchPage"/>
+					<Item ID="FnPettyCash_Title" Name="$pettycash_title" PageID="eLog.Finance.Base.PettyCash.PctLineDoc.PctLineSearchPage"/>
+					<Item ID="FnPettyCash_PayMethod" Name="$pettycash_basepaymethod" PageID="eLog.Finance.Base.PettyCash.PayMethod.PayMethodSearchPage"/>
+					<Item ID="FnPettyCash_BankNote" Name="$pettycash_banknote" PageID="eLog.Finance.Base.PettyCash.PcBankNote.PcBankNoteSearchPage"/>
+				</Item>
+			</Item>
+		</Item>
+		<Item ID="Queries" Name="$queries">
+			<Item ID="StockTrans" Name="$query_stocktrans" PageID="eLog.Base.Queries.StockTrans"/>
+			<Item ID="Invoices" Name="$query_invoices" PageID="eLog.Base.Queries.Invoices"/>
+			<Item ID="Invoice_StockTran" Name="$query_invoice_stocktran" PageID="eLog.Base.Queries.InvoiceStockTran"/>
+			<Item ID="Stock_Item" Name="$query_stock_item" PageID="eLog.Base.Queries.StockItem"/>
+			<Item ID="PordTranDetailed" Name="$query_pord" PageID="eLog.Base.Queries.PordTranDetailed"/>
+			<Item ID="SordTranDetailed" Name="$query_sordtype2issue" PageID="eLog.Base.Queries.SordTranDetailed"/>
+			<Item ID="StockAndStockTran" Name="$query_stockandstocktran" PageID="eLog.Base.Queries.StockAndStockTran"/>
+			<Item ID="StockReservation" Name="$query_stockreservation" PageID="eLog.Base.Queries.StockReservation"/>
+			<Item ID="SellingPrice" Name="$query_sellingprice" PageID="eLog.Base.Queries.SellingPrice"/>
+			<Item ID="UncostedReceipts" Name="$query_uncostedreceipts" PageID="eLog.Base.Queries.UncostedReceipts"/>
+			<Item ID="StockTranDiscount" Name="$query_stocktrandiscount" PageID="eLog.Base.Queries.StockTranDiscount"/>
+			<!--<Item ID="StockAndStockTranDemo" Name="$query_stockandstocktrandemo" PageID="DefaultQueries_eLog.Base.Queries.StockAndStockTran" />-->
+			<Item ID="SinvNAV" Name="$query_sinvNAV" PageID="eLog.Base.Queries.SinvNAV"/>
+			<Item ID="SinvNCorrs" Name="$query_sinvncorrs" PageID="eLog.Base.Queries.Sinvncorrs"/>
+			<Item ID="SavedRepparam" Name="$query_savedrepparam" PageID="eProjectWeb.Framework.Reports.SavedrepparamSearchPage"/>
+			<Item ID="GeneralQueries" Name="$query_genqry" PageID="eProjectWeb.Framework.UI.GeneralQuery.GenQrySearchPage"/>
+		</Item>
+		<Item ID="Lists" Name="$lists">
+			<!--<Item ID="List_Masters" Name="$list_masters">-->
+			<!--<Item ID="List_Masters_Items" Name="$list_items" PageID="about:blank"/>-->
+			<!--<Item ID="List_Masters_Partners" Name="$list_partners" PageID="about:blank"/>-->
+			<!--</Item>-->
+			<!--<Item ID="List_StockTran" Name="$list_stocktran">-->
+			<Item ID="List_StockTran_Detailed" Name="$list_stocktrandetailed" PageID="eLog.Base.Reports.StockTranDetailed"/>
+			<Item ID="List_StockTran_Summarized" Name="$list_stocktransummarized" PageID="eLog.Base.Reports.StockTranSummarized"/>
+			<Item ID="List_StockTran_Itemized" Name="$list_stocktranitemized" PageID="eLog.Base.Reports.StockTranItemized"/>
+			<!--<Item ID="List_StockTran_Issuing" Name="$list_delivery" PageID="about:blank"/>-->
+			<!--<Item ID="List_StockTran_Receiving" Name="$list_receiving" PageID="about:blank"/>-->
+			<!--<Item ID="List_StockTran_Transfering" Name="$list_whtransfer" PageID="about:blank="/>-->
+			<!--</Item>-->
+			<!--<Item ID="List_Invoice" Name="$list_invoice">-->
+			<Item ID="List_Invoice_Head" Name="$list_salesinvoicehead" PageID="eLog.Base.Reports.SalesInvoiceHead"/>
+			<Item ID="List_Invoice_Detailed" Name="$list_invoicedetailed" PageID="eLog.Base.Reports.InvoiceDetailed"/>
+			<Item ID="List_Invoice_Summarized" Name="$list_invoicesummarized" PageID="eLog.Base.Reports.InvoiceSummarized"/>
+			<!--</Item>-->
+			<!--<Item ID="List_Stock" Name="$list_stock">-->
+			<!--<Item ID="List_Stock_Lot" Name="$list_stock_lot" PageID="about:blank"/>-->
+			<Item ID="List_Stock_Normal" Name="$list_stock_normal" PageID="eLog.Base.Reports.Stock"/>
+			<Item ID="List_Purchase_Invoice_Head" Name="$list_purchaseinvoicehead" PageID="eLog.Base.Reports.PurchaseInvoiceHead"/>
+			<Item ID="List_StockTran_CostDetailed" Name="$list_stocktrancostdetailed" PageID="eLog.Base.Reports.StockTranCostDetailed"/>
+			<Item ID="List_ItemCard" Name="$list_itemcard" PageID="eLog.Base.Reports.ItemCard"/>
+			<!--</Item>-->
+			<!--<Item ID="List_Orders" Name="$list_orders">-->
+			<!--<Item ID="List_Orders_Purchase" Name="$list_purchase_order" PageID="about:blank"/>-->
+			<!--<Item ID="List_Orders_Sales" Name="$list_sales_order" PageID="about:blank"/>-->
+			<!--<Item ID="List_Orders_Production" Name="$list_production_order" PageID="about:blank"/>-->
+			<!--</Item>-->
+			<!--<Item ID="List_Production" Name="$list_production">-->
+			<!--<Item ID="List_Production_Report" Name="$list_production_report" PageID="about:blank"/>-->
+			<!--</Item>-->
+			<!--<Item ID="List_Logistics" Name="$list_logistics">-->
+			<!--<Item ID="List_Logistics_Loyalty" Name="$list_supplier_loyalty" PageID="about:blank"/>-->
+			<!--</Item>-->
+			<!--<Item ID="List_Management" Name="$list_management_reports">-->
+			<!--<Item ID="List_Management_PriceMargin" Name="$list_price_margin" PageID="about:blank"/>-->
+			<!--<Item ID="List_Management_WIP" Name="$list_wip" PageID="about:blank"/>-->
+			<!--</Item>-->
+			<!--<Item ID="List_Other" Name="$list_other">-->
+			<!--<Item ID="List_Other_Inventories" Name="$list_idle_inventories" PageID="about:blank"/>-->
+			<!--</Item>-->
+			<Item ID="List_PartnerCard" Name="$list_partnercard" PageID="eLog.Base.Reports.PartnerCard"/>
+			<Item ID="List_AccountBalance" Name="$list_accountbalance" PageID="eLog.Base.Reports.AccountBalance"/>
+			<!--<Item ID="List_ManReq" Name="$list_manreq" PageID="eLog.Base.Reports.ManReq"/>-->
+			<!--<Item ID="List_AccountCarrying" Name="$list_accountcarrying" PageID="eLog.Base.Reports.AccountQuerrying"/>-->
+			<Item ID="List_PriceMargin" Name="$list_pricemargin" PageID="eLog.Base.Reports.PriceMargin"/>
+			<Item ID="List_StockAgeing" Name="$list_stockageing" PageID="eLog.Base.Reports.StockAgeing"/>
+			<Item ID="List_ProdRepSummarized" Name="$list_prodrepsummarized" PageID="eLog.Base.Reports.ProdRepSummarized"/>
+			<Item ID="List_ProdRepDetailed" Name="$list_prodrepdetailed" PageID="eLog.Base.Reports.ProdRepDetailed"/>
+			<Item ID="StCostPrcCalc2" Name="$stcostprccalc" PageID="eLog.Base.Warehouse.StCostPriceCalc.StCostPriceCalculationPage"/>
+		</Item>
+		<Item ID="CustomReports" Name="$customreports">
+			<Item ID="CR1" Name="." PageID=""/>
+		</Item>
 
-        <Item ID="EDI" Name="$edi" Group="EDI">
-            <Item ID="EDI_Master" Name="$edi_master" PageID="eLog.Base.EDI.Master.EDIMasterSearchPage"/>
-        </Item>
-        <Item ID="Framework" Name="$maintenance">
-            <Item ID="MenuRights" Name="$menurightspage" PageID="eProjectWeb.Framework.Rights.MenuRightsPage"/>
-            <Item ID="Lang" Name="$lang" PageID="eProjectWeb.Framework.UI.Maintenance.Language.LanguageSearchPage"/>
-            <Item ID="Group" Name="$group" PageID="eProjectWeb.Framework.UI.Maintenance.Group.GroupSearchPage"/>
-            <Item ID="User" Name="$user" PageID="eProjectWeb.Framework.UI.Maintenance.User.UserSearchPage"/>
-            <!--<Item ID="UserCmp" Name="$usercmp" PageID="eLog.Base.Maintenance.UserCmp.UserCmpInlineEditPage"/>-->
-            <!--<Item ID="UserWh" Name="$userwh" PageID="eLog.Base.Maintenance.UserWh.UserWhInlineEditPage" />-->
-            <!--<Item ID="UserStDoc" Name="$userstdoc" PageID="eLog.Base.Maintenance.UserStDoc.UserStDocInlineEditPage" />-->
-            <Item ID="MaintCompany" Name="$maintcompany" PageID="eLog.Base.Maintenance.Company.MaintCompanySearchPage"/>
-            <Item ID="MaintWarehouse" Name="$maintwarehouse" PageID="eLog.Base.Maintenance.Warehouse.MaintWarehouseSearchPage"/>
-            <Item ID="MaintStDoc" Name="$maintstdoc" PageID="eLog.Base.Maintenance.StDoc.MaintStDocSearchPage"/>
-            <Item ID="ChangePwd" Name="$changePwd" PageID="eProjectWeb.Framework.UI.Maintenance.User.NewPasswordPage"/>
-            <!--<Item ID="GroupPg" Name="$grouppg" PageID="eLog.PrintGenerator.Maintenance.GroupPg.GroupPgInlineEditPage" />-->
-            <Item ID="Schedule" Name="$schedule" PageID="eProjectWeb.Framework.UI.Maintenance.Schedule.ScheduleHeadSearchPage"/>
-            <Item ID="NAVLog" Name="$navlog" PageID="eLog.Base.Setup.NAV.NAVLogSearchPage"/>
-            <Item ID="NAVSinvAutoSendMonitor" Name="$navsinvautosendmonitor" PageID="eLog.Base.Sales.Sinv.NAVIntf.NAVSinvAutoSendMonitorPage"/>
-            <Item ID="NAVParam" Name="$navparam" PageID="eLog.Base.Setup.NAV.NAVParamSearchPage"/>
-            <Item ID="DebugParameters" Name="$debugparameters" PageID="eProjectWeb.Framework.UI.Maintenance.Debug.ParametersPage"/>
-            <Item ID="BackgroundProcess" Name="$backgroundprocess" PageID="eProjectWeb.Framework.UI.Maintenance.BackgroundProcess.BackgroundProcessSearchPage"/>
-            <Item ID="SessionInfo" Name="$sessioninfo" PageID="eProjectWeb.Framework.UI.Maintenance.Debug.SessionInfoPage"/>
-            <Item ID="ProcessThreadInfo" Name="$processthreadinfo" PageID="eProjectWeb.Framework.UI.Maintenance.Debug.ProcessThreadInfoPage"/>
-            <Item ID="ModuleInfo" Name="$moduleinfo" PageID="eProjectWeb.Framework.UI.Maintenance.Debug.ModuleInfoPage"/>
-            <Item ID="LogDownloader" Name="$logdownloader" PageID="eProjectWeb.Framework.UI.Maintenance.Debug.LogDownloaderPage"/>
-        </Item>
-        <Item ID="HELP" Name="$help">
-            <Item ID="hlpChangePwd" Name="$changePwd" PageID="eProjectWeb.Framework.UI.Maintenance.User.NewPasswordPage"/>
-            <Item ID="About" Name="$about" PageID="url:About.htm"/>
-        </Item>
-    </RootMenu>
-    <RootMenu ID="Invocing" Name="$invoicing" CreateIfNotExists="true">
-        <Item ID="ISales" Name="$sales">
-            <Item ID="ISContract" Name="$scontract" PageID="eLog.Base.Sales.SContract.SContractSearchPage"/>
-            <Item ID="ISinv" Name="$sinv" PageID="eLog.Base.Sales.Sinv.SinvHeadSearchPage"/>
-        </Item>
-        <Item ID="IPurchase" Name="$purchase">
-            <Item ID="IPinvB" Name="$pinvb" PageID="eLog.Base.Purchase.Pinv.PinvHeadSearchPageB"/>
-            <!--<Item ID="IPinv" Name="$pinv" PageID="eLog.Base.Purchase.Pinv.PinvHeadSearchPage"/>-->
-            <Item ID="PinvCostLine2" Name="$pinvcostline" PageID="eLog.Base.Purchase.Pinv.PinvCostLineSearchPage"/>
-            <Item ID="PinvCostApproval2" Name="$pinvcostapproval" PageID="eLog.Base.Purchase.Pinv.PinvCostApprovalSearchPage"/>
-        </Item>
-    </RootMenu>
-    <RootMenu ID="PettyCash" Name="$epettycash" CreateIfNotExists="true">
-        <Item ID="PCashSelect" Name="$pcashselect" PageID="eLog.Finance.Base.PettyCash.PCashSearchPage"/>
-        <Item ID="PettyCash_Tran" Name="$pettycash_tran" PageID="eLog.Finance.Base.PettyCash.PcTran.PcTranHeadSearchPage"/>
-        <Item ID="PettyCash_Close" Name="$pettycash_close" PageID="eLog.Finance.Base.PettyCash.PctClose.PctCloseHeadSearchPage"/>
-        <Item ID="PettyCash_CurrencyDiff" Name="$pettycash_currencydiff" PageID="eLog.Finance.Base.PettyCash.CurrencyDiff.CurrencyDiffSearchPage"/>
-        <Item ID="PettyCash_TranBalance" Name="$pettycash_tranbalance" PageID="eLog.Finance.Base.PettyCash.PtcTranBalance.PtcTranBalanceSearchPage"/>
-        <Item ID="PettyCash_Revalution" Name="$pettycash_revalution" PageID="eLog.Finance.Base.PettyCash.Revalution.RevalueSearchPage"/>
-        <Item ID="PettyCashLists" Name="$pettycashlists">
-            <Item ID="List_PCashReport1" Name="$list_pcashreport" PageID="eLog.Finance.Base.Reports.PCashReport"/>
-            <Item ID="List_PCashAdvDetail1" Name="$list_pcashadvdetail" PageID="eLog.Finance.Base.Reports.PCashAdvDetail"/>
-            <Item ID="List_PCashAvgRate" Name="$list_pcashavgrate" PageID="eLog.Finance.Base.Reports.PCashAvgRate"/>
-            <Item ID="List_PCashAvgRateCheckList1" Name="$list_pcashavgratechecklist" PageID="eLog.Finance.Base.Reports.PCashAvgRateCheckList"/>
-        </Item>
-        <Item ID="MasterDatas" Name="$masterdatas">
-            <Item ID="PettyCash_BaseData" Name="$pettycash_basedata" PageID="eLog.Finance.Base.PettyCash.PettyCashSearchPage"/>
-            <Item ID="PettyCash_TitleGrp" Name="$pettycash_titlegrp" PageID="eLog.Finance.Base.PettyCash.PctLineDocGrp.PctLineDocGrpSearchPage"/>
-            <Item ID="PettyCash_Title" Name="$pettycash_title" PageID="eLog.Finance.Base.PettyCash.PctLineDoc.PctLineSearchPage"/>
-            <Item ID="PettyCash_PayMethod" Name="$pettycash_basepaymethod" PageID="eLog.Finance.Base.PettyCash.PayMethod.PayMethodSearchPage"/>
-            <Item ID="PettyCash_BankNote" Name="$pettycash_banknote" PageID="eLog.Finance.Base.PettyCash.PcBankNote.PcBankNoteSearchPage"/>
-        </Item>
-    </RootMenu>
-    <RootMenu ID="U4ExtBank" Name="$u4extbank" CreateIfNotExists="true">
-        <Item ID="U4ExtBankSetup" Name="$u4extbanksetup">
-            <Item ID="Bank" Name="$bank" PageID="U4Ext.Bank.Base.Setup.Bank.EfxBankSearchPage" />
-            <Item ID="MatchWOLimit" Name="$matchwolimit" PageID="U4Ext.Bank.Base.Setup.MatchWOLimit.EfxMatchWOLimitSearchPage" />
-            <Item ID="BankMatchRule" Name="$bankmatchrule" PageID="U4Ext.Bank.Base.Setup.BankMatchRule.EfxBankMatchRuleSearchPage" />
-        </Item>
-        <Item ID="U4ExtBankIncoming" Name="$u4extbankincoming">
-            <Item ID="BankTranHead" Name="$banktranhead" PageID="U4Ext.Bank.Base.Transaction.EfxBankTranHeadSearchPage" />
-        </Item>
-        <Item ID="U4ExtBankOutgoing" Name="$u4extbankoutgoing">
-            <Item ID="" />
-        </Item>
-    </RootMenu>
-    <RootMenu ID="RCoda" Name="$rcoda" CreateIfNotExists="true">
-        <Item ID="RSetup_Coda" Name="$setupcoda">
-            <Item ID="RRule" Name="$setuprule" PageID="CodaInt.Base.Setup.Rule.RuleSearchPage"/>
-            <Item ID="ROthTrLineDoc" Name="$othtrlinedoc" PageID="CodaInt.Base.Setup.OthTrLineDoc.OthTrLineDocSearchPage"/>
-            <Item ID="RDrHead" Name="$setupdrhead" PageID="CodaInt.Base.Setup.Dr.DrHeadSearchPage"/>
-            <Item ID="RCustSuppAcc" Name="$setupcustsuppacc" PageID="CodaInt.Base.Setup.CustSuppAcc.CustSuppAccSearchPage"/>
-            <Item ID="RElmRule" Name="$setupruleval" PageID="CodaInt.Base.Setup.ElmRule.ElmRuleSearchPage"/>
-            <Item ID="RStPostType" Name="$setupstposttype" PageID="CodaInt.Base.Setup.StPostType.StPostTypeSearchPage"/>
-            <Item ID="RCodaCompany" Name="$setupcodacompany" PageID="CodaInt.Base.Setup.Company.OfcCompanySearchPage"/>
-            <Item ID="ROfcCurRate" Name="$ofccurrate" PageID="CodaInt.Base.Setup.CurRate.OfcCurRateInlineEditPage"/>
-        </Item>
-        <Item ID="RBookkeeping" Name="$bookkeeping">
-            <Item ID="RPinvPost" Name="$bookkeepingpinvpost" PageID="CodaInt.Base.Bookkeeping.PinvPost.PinvPostSearchPage"/>
-            <Item ID="RSinvPost" Name="$bookkeepingsinvpost" PageID="CodaInt.Base.Bookkeeping.SinvPost.SinvPostSearchPage"/>
-            <Item ID="RStPost" Name="$bookkeepingstpost" PageID="CodaInt.Base.Bookkeeping.StPost.StPostSearchPage"/>
-            <Item ID="RPCash" Name="$bookkeepingpcash" PageID="eLog.Finance.Coda.Bookkeeping.PcTran.PcTranPostSearchPage"/>
-            <Item ID="ROthTrHead" Name="$othtrhead" PageID="eLog.Base.OtherTran.OthTrHeadSearchPage"/>
-        </Item>
-        <Item ID="RMatching" Name="$matching">
-            <Item ID="RSinvStornoMatching" Name="$sinvstornomatching" PageID="CodaInt.Base.Matching.SinvStorno.SinvStornoMatchingSearchPage" />
-            <Item ID="RSinvCashMatching" Name="$SinvCashmatching" PageID="CodaInt.Base.Matching.SinvCash.SinvCashMatchingSearchPage" />
-            <Item ID="RPinvCashMatching" Name="$PinvCashmatching" PageID="CodaInt.Base.Matching.PinvCash.PinvCashMatchingSearchPage" />
-            <Item ID="RCashAdvMatching" Name="$CashAdvmatching" PageID="CodaInt.Base.Matching.CashAdv.CashAdvMatchingSearchPage" />
-            <Item ID="RPinvCashAdvMatching" Name="$PinvCashAdvmatching" PageID="CodaInt.Base.Matching.PinvCashAdv.PinvCashAdvMatchingSearchPage" />
-        </Item>
-        <Item ID="RFinanceExt" Name="$FinanceExt">
-            <Item ID="RDocPropSearchPage" Name="$docpropsearchpage" PageID="CodaInt.Base.FinanceProp.DocPropSearchPage" />
-            <Item ID="RDocMatchHeadSearchPage" Name="$docmatchheadsearchpage" PageID="CodaInt.Base.DocMatching.DocMatchHeadSearchPage" />
-            <Item ID="AccRualHeadSearchPage" Name="$accrualheadsearchpage" PageID="CodaInt.Base.AccRual.AccRualHeadSearchPage" />
-            <Item ID="ElementReplaceSearchPage" Name="$elementreplacesearchpage" PageID="CodaInt.Base.ElementReplace.OfcElmReplHeadSearchPage" />
-            <Item ID="AutoMatching" Name="$automatching" PageID="CodaInt.Base.Matching.AutoMatching.AutoMatchingPage" />
-        </Item>
-        <Item ID="RAssetExt" Name="$AssetExt">
-            <Item ID="AssetDisposal" Name="$assetdisposal" PageID="CodaInt.Base.Asset.AssetDisposal.AssetDisposalSearchPage" />
-            <Item ID="RDeprMaster" Name="$deprmaster" PageID="CodaInt.Base.DeprMaster.DeprMasterFileSearchPage"/>
-            <Item ID="RAexTransDocSearchPage" Name="$aextransdocsearchpage" PageID="CodaInt.Base.FixedAsset.Transfer.AexTransDocSearchPage" />
-            <Item ID="RAexTransHeadSearchPage" Name="$aextransheadsearchpage" PageID="CodaInt.Base.FixedAsset.Transfer.AexTransHeadSearchPage" />
-            <Item ID="AssetLoader" Name="$assetloader" PageID="CodaInt.Base.Asset.AssetLoader.AssetLoaderSearchPage" />
-            <Item ID="AssetPhInventory" Name="$assetphinventory" PageID="CodaInt.Base.Asset.PhysicalInventory.PhiHeadSearchPage"/>
-        </Item>
-        <Item ID="RPaymentReports" Name="$paymentreports">
-            <Item ID="RBankPaymentFile" Name="$bankpaymentfile" PageID="CodaInt.Base.Reports.Financials.BankPaymentFile" />
+		<Item ID="EDI" Name="$edi" Group="EDI">
+			<Item ID="EDI_Master" Name="$edi_master" PageID="eLog.Base.EDI.Master.EDIMasterSearchPage"/>
+		</Item>
+		<Item ID="Framework" Name="$maintenance">
+			<Item ID="MenuRights" Name="$menurightspage" PageID="eProjectWeb.Framework.Rights.MenuRightsPage"/>
+			<Item ID="Lang" Name="$lang" PageID="eProjectWeb.Framework.UI.Maintenance.Language.LanguageSearchPage"/>
+			<Item ID="Group" Name="$group" PageID="eProjectWeb.Framework.UI.Maintenance.Group.GroupSearchPage"/>
+			<Item ID="User" Name="$user" PageID="eProjectWeb.Framework.UI.Maintenance.User.UserSearchPage"/>
+			<!--<Item ID="UserCmp" Name="$usercmp" PageID="eLog.Base.Maintenance.UserCmp.UserCmpInlineEditPage"/>-->
+			<!--<Item ID="UserWh" Name="$userwh" PageID="eLog.Base.Maintenance.UserWh.UserWhInlineEditPage" />-->
+			<!--<Item ID="UserStDoc" Name="$userstdoc" PageID="eLog.Base.Maintenance.UserStDoc.UserStDocInlineEditPage" />-->
+			<Item ID="MaintCompany" Name="$maintcompany" PageID="eLog.Base.Maintenance.Company.MaintCompanySearchPage"/>
+			<Item ID="MaintWarehouse" Name="$maintwarehouse" PageID="eLog.Base.Maintenance.Warehouse.MaintWarehouseSearchPage"/>
+			<Item ID="MaintStDoc" Name="$maintstdoc" PageID="eLog.Base.Maintenance.StDoc.MaintStDocSearchPage"/>
+			<Item ID="ChangePwd" Name="$changePwd" PageID="eProjectWeb.Framework.UI.Maintenance.User.NewPasswordPage"/>
+			<!--<Item ID="GroupPg" Name="$grouppg" PageID="eLog.PrintGenerator.Maintenance.GroupPg.GroupPgInlineEditPage" />-->
+			<Item ID="Schedule" Name="$schedule" PageID="eProjectWeb.Framework.UI.Maintenance.Schedule.ScheduleHeadSearchPage"/>
+			<Item ID="NAVLog" Name="$navlog" PageID="eLog.Base.Setup.NAV.NAVLogSearchPage"/>
+			<Item ID="NAVSinvAutoSendMonitor" Name="$navsinvautosendmonitor" PageID="eLog.Base.Sales.Sinv.NAVIntf.NAVSinvAutoSendMonitorPage"/>
+			<Item ID="NAVParam" Name="$navparam" PageID="eLog.Base.Setup.NAV.NAVParamSearchPage"/>
+			<Item ID="DebugParameters" Name="$debugparameters" PageID="eProjectWeb.Framework.UI.Maintenance.Debug.ParametersPage"/>
+			<Item ID="BackgroundProcess" Name="$backgroundprocess" PageID="eProjectWeb.Framework.UI.Maintenance.BackgroundProcess.BackgroundProcessSearchPage"/>
+			<Item ID="SessionInfo" Name="$sessioninfo" PageID="eProjectWeb.Framework.UI.Maintenance.Debug.SessionInfoPage"/>
+			<Item ID="ProcessThreadInfo" Name="$processthreadinfo" PageID="eProjectWeb.Framework.UI.Maintenance.Debug.ProcessThreadInfoPage"/>
+			<Item ID="ModuleInfo" Name="$moduleinfo" PageID="eProjectWeb.Framework.UI.Maintenance.Debug.ModuleInfoPage"/>
+			<Item ID="LogDownloader" Name="$logdownloader" PageID="eProjectWeb.Framework.UI.Maintenance.Debug.LogDownloaderPage"/>
+		</Item>
+		<Item ID="HELP" Name="$help">
+			<Item ID="hlpChangePwd" Name="$changePwd" PageID="eProjectWeb.Framework.UI.Maintenance.User.NewPasswordPage"/>
+			<Item ID="About" Name="$about" PageID="url:About.htm"/>
+		</Item>
+	</RootMenu>
+	<RootMenu ID="Invocing" Name="$invoicing" CreateIfNotExists="true">
+		<Item ID="ISales" Name="$sales">
+			<Item ID="ISContract" Name="$scontract" PageID="eLog.Base.Sales.SContract.SContractSearchPage"/>
+			<Item ID="ISinv" Name="$sinv" PageID="eLog.Base.Sales.Sinv.SinvHeadSearchPage"/>
+		</Item>
+		<Item ID="IPurchase" Name="$purchase">
+			<Item ID="IPinvB" Name="$pinvb" PageID="eLog.Base.Purchase.Pinv.PinvHeadSearchPageB"/>
+			<!--<Item ID="IPinv" Name="$pinv" PageID="eLog.Base.Purchase.Pinv.PinvHeadSearchPage"/>-->
+			<Item ID="PinvCostLine2" Name="$pinvcostline" PageID="eLog.Base.Purchase.Pinv.PinvCostLineSearchPage"/>
+			<Item ID="PinvCostApproval2" Name="$pinvcostapproval" PageID="eLog.Base.Purchase.Pinv.PinvCostApprovalSearchPage"/>
+		</Item>
+	</RootMenu>
+	<RootMenu ID="PettyCash" Name="$epettycash" CreateIfNotExists="true">
+		<Item ID="PCashSelect" Name="$pcashselect" PageID="eLog.Finance.Base.PettyCash.PCashSearchPage"/>
+		<Item ID="PettyCash_Tran" Name="$pettycash_tran" PageID="eLog.Finance.Base.PettyCash.PcTran.PcTranHeadSearchPage"/>
+		<Item ID="PettyCash_Close" Name="$pettycash_close" PageID="eLog.Finance.Base.PettyCash.PctClose.PctCloseHeadSearchPage"/>
+		<Item ID="PettyCash_CurrencyDiff" Name="$pettycash_currencydiff" PageID="eLog.Finance.Base.PettyCash.CurrencyDiff.CurrencyDiffSearchPage"/>
+		<Item ID="PettyCash_TranBalance" Name="$pettycash_tranbalance" PageID="eLog.Finance.Base.PettyCash.PtcTranBalance.PtcTranBalanceSearchPage"/>
+		<Item ID="PettyCash_Revalution" Name="$pettycash_revalution" PageID="eLog.Finance.Base.PettyCash.Revalution.RevalueSearchPage"/>
+		<Item ID="PettyCashLists" Name="$pettycashlists">
+			<Item ID="List_PCashReport1" Name="$list_pcashreport" PageID="eLog.Finance.Base.Reports.PCashReport"/>
+			<Item ID="List_PCashAdvDetail1" Name="$list_pcashadvdetail" PageID="eLog.Finance.Base.Reports.PCashAdvDetail"/>
+			<Item ID="List_PCashAvgRate" Name="$list_pcashavgrate" PageID="eLog.Finance.Base.Reports.PCashAvgRate"/>
+			<Item ID="List_PCashAvgRateCheckList1" Name="$list_pcashavgratechecklist" PageID="eLog.Finance.Base.Reports.PCashAvgRateCheckList"/>
+		</Item>
+		<Item ID="MasterDatas" Name="$masterdatas">
+			<Item ID="PettyCash_BaseData" Name="$pettycash_basedata" PageID="eLog.Finance.Base.PettyCash.PettyCashSearchPage"/>
+			<Item ID="PettyCash_TitleGrp" Name="$pettycash_titlegrp" PageID="eLog.Finance.Base.PettyCash.PctLineDocGrp.PctLineDocGrpSearchPage"/>
+			<Item ID="PettyCash_Title" Name="$pettycash_title" PageID="eLog.Finance.Base.PettyCash.PctLineDoc.PctLineSearchPage"/>
+			<Item ID="PettyCash_PayMethod" Name="$pettycash_basepaymethod" PageID="eLog.Finance.Base.PettyCash.PayMethod.PayMethodSearchPage"/>
+			<Item ID="PettyCash_BankNote" Name="$pettycash_banknote" PageID="eLog.Finance.Base.PettyCash.PcBankNote.PcBankNoteSearchPage"/>
+		</Item>
+	</RootMenu>
+	<RootMenu ID="U4ExtBank" Name="$u4extbank" CreateIfNotExists="true">
+		<Item ID="U4ExtBankSetup" Name="$u4extbanksetup">
+			<Item ID="Bank" Name="$bank" PageID="U4Ext.Bank.Base.Setup.Bank.EfxBankSearchPage" />
+			<Item ID="MatchWOLimit" Name="$matchwolimit" PageID="U4Ext.Bank.Base.Setup.MatchWOLimit.EfxMatchWOLimitSearchPage" />
+			<Item ID="BankMatchRule" Name="$bankmatchrule" PageID="U4Ext.Bank.Base.Setup.BankMatchRule.EfxBankMatchRuleSearchPage" />
+		</Item>
+		<Item ID="U4ExtBankIncoming" Name="$u4extbankincoming">
+			<Item ID="BankTranHead" Name="$banktranhead" PageID="U4Ext.Bank.Base.Transaction.EfxBankTranHeadSearchPage" />
+		</Item>
+		<Item ID="U4ExtBankOutgoing" Name="$u4extbankoutgoing">
+			<Item ID="" />
+		</Item>
+	</RootMenu>
+	<RootMenu ID="RCoda" Name="$rcoda" CreateIfNotExists="true">
+		<Item ID="RSetup_Coda" Name="$setupcoda">
+			<Item ID="RRule" Name="$setuprule" PageID="CodaInt.Base.Setup.Rule.RuleSearchPage"/>
+			<Item ID="ROthTrLineDoc" Name="$othtrlinedoc" PageID="CodaInt.Base.Setup.OthTrLineDoc.OthTrLineDocSearchPage"/>
+			<Item ID="RDrHead" Name="$setupdrhead" PageID="CodaInt.Base.Setup.Dr.DrHeadSearchPage"/>
+			<Item ID="RCustSuppAcc" Name="$setupcustsuppacc" PageID="CodaInt.Base.Setup.CustSuppAcc.CustSuppAccSearchPage"/>
+			<Item ID="RElmRule" Name="$setupruleval" PageID="CodaInt.Base.Setup.ElmRule.ElmRuleSearchPage"/>
+			<Item ID="RStPostType" Name="$setupstposttype" PageID="CodaInt.Base.Setup.StPostType.StPostTypeSearchPage"/>
+			<Item ID="RCodaCompany" Name="$setupcodacompany" PageID="CodaInt.Base.Setup.Company.OfcCompanySearchPage"/>
+			<Item ID="ROfcCurRate" Name="$ofccurrate" PageID="CodaInt.Base.Setup.CurRate.OfcCurRateInlineEditPage"/>
+		</Item>
+		<Item ID="RBookkeeping" Name="$bookkeeping">
+			<Item ID="RPinvPost" Name="$bookkeepingpinvpost" PageID="CodaInt.Base.Bookkeeping.PinvPost.PinvPostSearchPage"/>
+			<Item ID="RSinvPost" Name="$bookkeepingsinvpost" PageID="CodaInt.Base.Bookkeeping.SinvPost.SinvPostSearchPage"/>
+			<Item ID="RStPost" Name="$bookkeepingstpost" PageID="CodaInt.Base.Bookkeeping.StPost.StPostSearchPage"/>
+			<Item ID="RPCash" Name="$bookkeepingpcash" PageID="eLog.Finance.Coda.Bookkeeping.PcTran.PcTranPostSearchPage"/>
+			<Item ID="ROthTrHead" Name="$othtrhead" PageID="eLog.Base.OtherTran.OthTrHeadSearchPage"/>
+		</Item>
+		<Item ID="RMatching" Name="$matching">
+			<Item ID="RSinvStornoMatching" Name="$sinvstornomatching" PageID="CodaInt.Base.Matching.SinvStorno.SinvStornoMatchingSearchPage" />
+			<Item ID="RSinvCashMatching" Name="$SinvCashmatching" PageID="CodaInt.Base.Matching.SinvCash.SinvCashMatchingSearchPage" />
+			<Item ID="RPinvCashMatching" Name="$PinvCashmatching" PageID="CodaInt.Base.Matching.PinvCash.PinvCashMatchingSearchPage" />
+			<Item ID="RCashAdvMatching" Name="$CashAdvmatching" PageID="CodaInt.Base.Matching.CashAdv.CashAdvMatchingSearchPage" />
+			<Item ID="RPinvCashAdvMatching" Name="$PinvCashAdvmatching" PageID="CodaInt.Base.Matching.PinvCashAdv.PinvCashAdvMatchingSearchPage" />
+		</Item>
+		<Item ID="RFinanceExt" Name="$FinanceExt">
+			<Item ID="RDocPropSearchPage" Name="$docpropsearchpage" PageID="CodaInt.Base.FinanceProp.DocPropSearchPage" />
+			<Item ID="RDocMatchHeadSearchPage" Name="$docmatchheadsearchpage" PageID="CodaInt.Base.DocMatching.DocMatchHeadSearchPage" />
+			<Item ID="AccRualHeadSearchPage" Name="$accrualheadsearchpage" PageID="CodaInt.Base.AccRual.AccRualHeadSearchPage" />
+			<Item ID="ElementReplaceSearchPage" Name="$elementreplacesearchpage" PageID="CodaInt.Base.ElementReplace.OfcElmReplHeadSearchPage" />
+			<Item ID="AutoMatching" Name="$automatching" PageID="CodaInt.Base.Matching.AutoMatching.AutoMatchingPage" />
+            <Item ID="RFinRevalRuleHead" Name="$rfinrevalrulehead" PageID="CodaInt.Base.FinRevaluation.Rule.OfcFinRevalRuleHeadSearchPage" />
+            <Item ID="RFinRevalHead" Name="$rfinrevalhead" PageID="CodaInt.Base.FinRevaluation.OfcFinRevalHeadSearchPage" />
+		</Item>
+		<Item ID="RAssetExt" Name="$AssetExt">
+			<Item ID="AssetDisposal" Name="$assetdisposal" PageID="CodaInt.Base.Asset.AssetDisposal.AssetDisposalSearchPage" />
+			<Item ID="RDeprMaster" Name="$deprmaster" PageID="CodaInt.Base.DeprMaster.DeprMasterFileSearchPage"/>
+			<Item ID="RAexTransDocSearchPage" Name="$aextransdocsearchpage" PageID="CodaInt.Base.FixedAsset.Transfer.AexTransDocSearchPage" />
+			<Item ID="RAexTransHeadSearchPage" Name="$aextransheadsearchpage" PageID="CodaInt.Base.FixedAsset.Transfer.AexTransHeadSearchPage" />
+			<Item ID="AssetLoader" Name="$assetloader" PageID="CodaInt.Base.Asset.AssetLoader.AssetLoaderSearchPage" />
+			<Item ID="AssetPhInventory" Name="$assetphinventory" PageID="CodaInt.Base.Asset.PhysicalInventory.PhiHeadSearchPage"/>
+		</Item>
+		<Item ID="RPaymentReports" Name="$paymentreports">
+			<Item ID="RBankPaymentFile" Name="$bankpaymentfile" PageID="CodaInt.Base.Reports.Financials.BankPaymentFile" />
 			<Item ID="RBankCAvisoSaveToPdf" Name="$bankcavisosavetopdf" PageID="eLog.HeavyTools.Reports.Financials.BankCAvisoSaveToPdf" />
             <Item ID="RCompensationDraft" Name="$compensationdraft" PageID="eLog.HeavyTools.Reports.Financials.CompensationDraft" />
-        </Item>
-        <Item ID="RSynch" Name="$synch">
-            <Item ID="RPtnrSynch" Name="$partnersynchronization" PageID="CodaInt.Base.PartnerSynchronization.PartnerSynchronizationPage"/>
-            <Item ID="RTaxSynch" Name="$taxsynchronization" PageID="CodaInt.Base.TaxSynchronization.TaxSynchronizationPage"/>
-            <Item ID="RDocSynch" Name="$docsynchronization" PageID="CodaInt.Base.DocSynchronization.DocSynchronizationPage"/>
-            <Item ID="RPaymSynch" Name="$paymsynchronization" PageID="CodaInt.Base.PayMSynchronization.PayMSynchronizationPage"/>
-        </Item>
-        <Item ID="RLists_Coda" Name="$listscoda">
-            <Item ID="RELogCoda" Name="$list_elogcoda" PageID="CodaInt.Base.Reports.ELogCoda"/>
-            <Item ID="RELogCodaDetail" Name="$list_elogcodadetail" PageID="CodaInt.Base.Reports.ELogCodaDetail"/>
-            <Item ID="RELogCodaSum" Name="$list_elogcodasum" PageID="CodaInt.Base.Reports.ELogCodaSum"/>
-            <Item ID="RAccountCarrying" Name="$list_codaaccountcarrying" PageID="CodaInt.Base.Reports.AccountCarrying"/>
-            <Item ID="RInvoicePostControl" Name="$list_invoicepostcontrol" PageID="CodaInt.Base.Reports.InvoicePostControl"/>
-            <Item ID="RStockAccountingControl" Name="$list_stockaccountingcontrol" PageID="CodaInt.Base.Reports.StockAccountingControl"/>
-        </Item>
-        <Item ID="RInterface" Name="$interface">
-            <Item ID="RIntfImpTempl" Name="$intf_intfimptempl" PageID="U4Ext.Bank.Base.ImportDocHL.EfxIntfImpTemplSearchPage" />
-            <Item ID="RIntfImpLog" Name="$intf_intfimplog" PageID="U4Ext.Bank.Base.ImportDocHL.EfxIntfImpLogSearchPage" />
-        </Item>
-    </RootMenu>
-    <RootMenu ID="Reports" Name="$Reports" CreateIfNotExists="true">
-        <Item ID="StandardReports" Name="$standardreports">
-            <Item ID="AnalyticBalance" Name="$analyticbalance" PageID="CodaInt.Base.Reports.Financials.AnalyticBalance" />
-            <Item ID="AnalyticDetails" Name="$analyticdetails" PageID="CodaInt.Base.Reports.Financials.AnalyticDetails" />
-            <Item ID="WeightedAveragePrice" Name="$weightedaverageprice" PageID="CodaInt.Base.Reports.Financials.WeightedAveragePrice" />
-            <Item ID="MasterDataSettingsDocs" Name="$masterdatasettingsdocs" PageID="CodaInt.Base.Reports.Financials.MasterDataSettingsDocs" />
-            <Item ID="MasterDataSettingsElementGroup" Name="$masterdatasettingselementgroup" PageID="CodaInt.Base.Reports.Financials.MasterDataSettingsElementGroup" />
-            <Item ID="MasterDataSettingsLeftList" Name="$masterdatasettingsleftlist" PageID="CodaInt.Base.Reports.Financials.MasterDataSettingsLeftList" />
-            <Item ID="MasterDataSettingsRightList" Name="$masterdatasettingsrightlist" PageID="CodaInt.Base.Reports.Financials.MasterDataSettingsRightList" />
-            <Item ID="MatchingErrors" Name="$matchingerrors" PageID="CodaInt.Base.Reports.Financials.MatchingErrors" />
-            <Item ID="MissingDocumentNumbers" Name="$missingdocumentnumbers" PageID="CodaInt.Base.Reports.Financials.MissingDocumentNumbers" />
-            <Item ID="BalanceOnValuedate" Name="$balanceonvaluedate" PageID="CodaInt.Base.Reports.Financials.BalanceOnValuedate" />
-            <Item ID="BankTurnover" Name="$bankturnover" PageID="CodaInt.Base.Reports.Financials.BankTurnover" />
-            <Item ID="ElementList" Name="$elementlist" PageID="CodaInt.Base.Reports.Financials.ElementList" />
-            <Item ID="AttachmentNote" Name="$attachmentnote" PageID="CodaInt.Base.Reports.Financials.AttachmentNote" />
-        </Item>
-        <Item ID="GLReports" Name="$glreports">
-            <Item ID="RepLedgerBalance" Name="$repledgerbalance" PageID="CodaInt.Base.Reports.Financials.LedgerBalance" />
-            <Item ID="RepLedgerDetails" Name="$repledgerdetails" PageID="CodaInt.Base.Reports.Financials.LedgerDetails" />
-            <Item ID="RepLedgerDetailsCounterpart" Name="$repledgerdetailscounterpart" PageID="CodaInt.Base.Reports.Financials.LedgerDetailsCounterpart" />
-            <Item ID="RepStructuredTrialBalance" Name="$repstructuredtrialbalance" PageID="CodaInt.Base.Reports.Financials.StructuredTrialBalance" />
-        </Item>
-        <Item ID="PartnerReports" Name="$partnerreports">
-            <Item ID="PartnerBalance" Name="$partnerbalance" PageID="CodaInt.Base.Reports.Financials.PartnerBalance" />
-            <Item ID="PartnerDetailsDate" Name="$partnerdetailsdate" PageID="CodaInt.Base.Reports.Financials.PartnerDetailsDate" />
-            <Item ID="PartnerLookup" Name="$partnerlookup" PageID="CodaInt.Base.Reports.Financials.PartnerLookup" />
-            <Item ID="PaymentApproval" Name="$paymentapproval" PageID="CodaInt.Base.Reports.Financials.PaymentApproval" />
-            <Item ID="PaymentProposal" Name="$paymentproposal" PageID="CodaInt.Base.Reports.Financials.PaymentProposal" />
-            <Item ID="ReminderLetter" Name="$reminderletter" PageID="CodaInt.Base.Reports.Financials.ReminderLetter" />
-            <Item ID="ReminderProposal" Name="$reminderproposal" PageID="CodaInt.Base.Reports.Financials.ReminderProposal" />
-            <Item ID="StatementOfAccount" Name="$statementofaccount" PageID="CodaInt.Base.Reports.Financials.StatementOfAccount" />
-            <Item ID="Aging" Name="$aging" PageID="CodaInt.Base.Reports.Financials.Aging" />
-            <Item ID="PaymentDateMod" Name="$paymentdatemod" PageID="CodaInt.Base.Reports.Financials.PaymentDateMod" />
-        </Item>
-        <Item ID="AssetReports" Name="$assetreports">
-            <Item ID="AssetAlteration" Name="$assetalteration" PageID="CodaInt.Base.Reports.Financials.AssetAlteration" />
-            <Item ID="AssetMovementModify" Name="$assetmovementmodify" PageID="CodaInt.Base.Reports.Financials.AssetMovementModify" />
-            <Item ID="AssetPostrule" Name="$assetpostrule" PageID="CodaInt.Base.Reports.Financials.AssetPostrule" />
-            <Item ID="AssetPostruleDual" Name="$assetpostruledual" PageID="CodaInt.Base.Reports.Financials.AssetPostruleDual" />
-            <Item ID="AssetRegistration" Name="$assetregistration" PageID="CodaInt.Base.Reports.Financials.AssetRegistration" />
-            <Item ID="AssetTransactions" Name="$assettransactions" PageID="CodaInt.Base.Reports.Financials.AssetTransactions" />
-            <Item ID="AssetTransactionsDual" Name="$assettransactionsdual" PageID="CodaInt.Base.Reports.Financials.AssetTransactionsDual" />
-        </Item>
-        <Item ID="PaymentReports" Name="$paymentreports">
-            <Item ID="BankPaymentFile" Name="$bankpaymentfile" PageID="CodaInt.Base.Reports.Financials.BankPaymentFile" />
-        </Item>
-        <Item ID="VatReports" Name="$vatreports">
-            <Item ID="VatBooked" Name="$vatbooked" PageID="CodaInt.Base.Reports.Financials.VatBooked" />
-            <Item ID="RepVatStoreUser" Name="$repvatstoreuser" PageID="CodaInt.Base.Reports.Financials.VATStatement.RepVatStoreUser.RepVatStoreUserSearchPage" />
-            <Item ID="VatInsertStore" Name="$vatinsertstore" PageID="CodaInt.Base.Reports.Financials.VatInsertStore" />
-            <Item ID="VatStore" Name="$vatstore" PageID="CodaInt.Base.Reports.Financials.VatStore" />
-            <Item ID="VatReport2m" Name="$vatreport2m" PageID="CodaInt.Base.Reports.Financials.VatReport2m" />
-            <Item ID="VatNavPostedDate" Name="$vatnavposteddate" PageID="CodaInt.Base.Reports.Financials.VatNavPostedDate" />
-            <Item ID="VatNavPostedDateModify" Name="$vatnavposteddatemodify" PageID="CodaInt.Base.Reports.Financials.VatNavPostedDateModify" />
-            <Item ID="Vat65a0708" Name="$vat65a0708" PageID="CodaInt.Base.Reports.Financials.Vat65a0708" />
-            <Item ID="VatCheck" Name="$vatcheck" PageID="CodaInt.Base.Reports.Financials.VatCheck" />
-            <Item ID="VatCheckDocument" Name="$vatcheckdocument" PageID="CodaInt.Base.Reports.Financials.VatCheckDocument" />
-            <Item ID="VatCheckLedger" Name="$vatcheckledger" PageID="CodaInt.Base.Reports.Financials.VatCheckLedger" />
-            <Item ID="VatUnstore" Name="$vatunstore">
-                <Item ID="VatUnstoreSelect" Name="$vatunstoreselect" PageID="CodaInt.Base.Reports.Financials.VatUnstoreSelect" />
-                <Item ID="RepVatUnstoreUser" Name="$repvatunstoreuser" PageID="CodaInt.Base.Reports.Financials.VATStatement.RepVatUnstoreUser.RepVatUnstoreUserSearchPage" />
-                <Item ID="VatUnstoreDelete" Name="$vatunstoredelete" PageID="CodaInt.Base.Reports.Financials.VatUnstoreDelete" />
-            </Item>
-            <Item ID="VATReportsEU" Name="$vatreportseu">
-                <Item ID="VatReportEu" Name="$vatreporteu" PageID="CodaInt.Base.Reports.Financials.VatReportEu" />
-                <Item ID="VatReportEuEsl" Name="$vatreporteuesl" PageID="CodaInt.Base.Reports.Financials.VatReportEuEsl" />
-                <Item ID="VatReportEuEslVat" Name="$vatreporteueslvat" PageID="CodaInt.Base.Reports.Financials.VatReportEuEslVat" />
-            </Item>
-            <Item ID="VatReportAbev" Name="$vatreportabev">
-                <Item ID="VatReport65aAbevImp" Name="$vatreport65aabevimp" PageID="CodaInt.Base.Reports.Financials.VatReport65aAbevImp" />
-                <Item ID="VatReport2mAbevImp" Name="$vatreport2mabevimp" PageID="CodaInt.Base.Reports.Financials.VatReport2mAbevImp" />
-                <Item ID="VatReport60aAbevImp" Name="$vatreport60aabevimp" PageID="CodaInt.Base.Reports.Financials.VatReport60aAbevImp" />
-            </Item>
-            <Item ID="InterfaceAdmin" Name="$interfaceadmin">
-                <Item ID="VatStructCopy" Name="$vatstructcopy" PageID="CodaInt.Base.Reports.Financials.VatStructCopy" />
-                <Item ID="VatIntStructPrint" Name="$vatintstructprint" PageID="CodaInt.Base.Reports.Financials.VatIntStructPrint" />
-                <Item ID="VatParamsCopy" Name="$vatparamscopy" PageID="CodaInt.Base.Reports.Financials.VatParamsCopy" />
-            </Item>
-            <Item ID="VatParams" Name="$vatparams">
-                <Item ID="RepVatParams" Name="$repvatparams" PageID="CodaInt.Base.Reports.Financials.VATStatement.RepVatParams.RepVatParamsSearchPage" />
-                <Item ID="RepVatStructure" Name="$repvatstructure" PageID="CodaInt.Base.Reports.Financials.VATStatement.RepVatStructure.RepVatStructureMainSearchPage" />
-                <Item ID="VatOtherParams" Name="$vatotherparams">
-                    <Item ID="AbevImpReport65aFieldData" Name="$abevimpreport65afielddata" PageID="CodaInt.Base.Reports.Financials.VATStatement.AbevImpReport65aFieldData.AbevImpReport65aFieldDataSearchPage" />
-                    <Item ID="AbevImpReport60aFieldData" Name="$abevimpreport60afielddata" PageID="CodaInt.Base.Reports.Financials.VATStatement.AbevImpReport60aFieldData.AbevImpReport60aFieldDataSearchPage" />
-                    <Item ID="RepVat65mLimit" Name="$repvat65mlimit" PageID="CodaInt.Base.Reports.Financials.VATStatement.RepVat65mLimit.RepVat65mLimitSearchPage" />
-                    <Item ID="RepVat65mData" Name="$repvat65mdata" PageID="CodaInt.Base.Reports.Financials.VATStatement.RepVat65mData.RepVat65mDataSearchPage" />
-                    <Item ID="AbevImpBcpParam" Name="$abevimpbcpparam" PageID="CodaInt.Base.Reports.Financials.VATStatement.AbevImpBcpParam.AbevImpBcpParamSearchPage" />
-                </Item>
-                <Item ID="RepVatVamtarifaszam" Name="$repvatvamtarifaszam" PageID="CodaInt.Base.Reports.Financials.VATStatement.RepVatVamtarifaszam.RepVatVamtarifaszamSearchPage" />
-            </Item>
-        </Item>
-        <Item ID="CustomReports2" Name="$customreports2">
+		</Item>
+		<Item ID="RSynch" Name="$synch">
+			<Item ID="RPtnrSynch" Name="$partnersynchronization" PageID="CodaInt.Base.PartnerSynchronization.PartnerSynchronizationPage"/>
+			<Item ID="RTaxSynch" Name="$taxsynchronization" PageID="CodaInt.Base.TaxSynchronization.TaxSynchronizationPage"/>
+			<Item ID="RDocSynch" Name="$docsynchronization" PageID="CodaInt.Base.DocSynchronization.DocSynchronizationPage"/>
+			<Item ID="RPaymSynch" Name="$paymsynchronization" PageID="CodaInt.Base.PayMSynchronization.PayMSynchronizationPage"/>
+		</Item>
+		<Item ID="RLists_Coda" Name="$listscoda">
+			<Item ID="RELogCoda" Name="$list_elogcoda" PageID="CodaInt.Base.Reports.ELogCoda"/>
+			<Item ID="RELogCodaDetail" Name="$list_elogcodadetail" PageID="CodaInt.Base.Reports.ELogCodaDetail"/>
+			<Item ID="RELogCodaSum" Name="$list_elogcodasum" PageID="CodaInt.Base.Reports.ELogCodaSum"/>
+			<Item ID="RAccountCarrying" Name="$list_codaaccountcarrying" PageID="CodaInt.Base.Reports.AccountCarrying"/>
+			<Item ID="RInvoicePostControl" Name="$list_invoicepostcontrol" PageID="CodaInt.Base.Reports.InvoicePostControl"/>
+			<Item ID="RStockAccountingControl" Name="$list_stockaccountingcontrol" PageID="CodaInt.Base.Reports.StockAccountingControl"/>
+		</Item>
+		<Item ID="RInterface" Name="$interface">
+			<Item ID="RIntfImpTempl" Name="$intf_intfimptempl" PageID="U4Ext.Bank.Base.ImportDocHL.EfxIntfImpTemplSearchPage" />
+			<Item ID="RIntfImpLog" Name="$intf_intfimplog" PageID="U4Ext.Bank.Base.ImportDocHL.EfxIntfImpLogSearchPage" />
+		</Item>
+	</RootMenu>
+	<RootMenu ID="Reports" Name="$Reports" CreateIfNotExists="true">
+		<Item ID="StandardReports" Name="$standardreports">
+			<Item ID="AnalyticBalance" Name="$analyticbalance" PageID="CodaInt.Base.Reports.Financials.AnalyticBalance" />
+			<Item ID="AnalyticDetails" Name="$analyticdetails" PageID="CodaInt.Base.Reports.Financials.AnalyticDetails" />
+			<Item ID="WeightedAveragePrice" Name="$weightedaverageprice" PageID="CodaInt.Base.Reports.Financials.WeightedAveragePrice" />
+			<Item ID="MasterDataSettingsDocs" Name="$masterdatasettingsdocs" PageID="CodaInt.Base.Reports.Financials.MasterDataSettingsDocs" />
+			<Item ID="MasterDataSettingsElementGroup" Name="$masterdatasettingselementgroup" PageID="CodaInt.Base.Reports.Financials.MasterDataSettingsElementGroup" />
+			<Item ID="MasterDataSettingsLeftList" Name="$masterdatasettingsleftlist" PageID="CodaInt.Base.Reports.Financials.MasterDataSettingsLeftList" />
+			<Item ID="MasterDataSettingsRightList" Name="$masterdatasettingsrightlist" PageID="CodaInt.Base.Reports.Financials.MasterDataSettingsRightList" />
+			<Item ID="MatchingErrors" Name="$matchingerrors" PageID="CodaInt.Base.Reports.Financials.MatchingErrors" />
+			<Item ID="MissingDocumentNumbers" Name="$missingdocumentnumbers" PageID="CodaInt.Base.Reports.Financials.MissingDocumentNumbers" />
+			<Item ID="BalanceOnValuedate" Name="$balanceonvaluedate" PageID="CodaInt.Base.Reports.Financials.BalanceOnValuedate" />
+			<Item ID="BankTurnover" Name="$bankturnover" PageID="CodaInt.Base.Reports.Financials.BankTurnover" />
+			<Item ID="ElementList" Name="$elementlist" PageID="CodaInt.Base.Reports.Financials.ElementList" />
+			<Item ID="AttachmentNote" Name="$attachmentnote" PageID="CodaInt.Base.Reports.Financials.AttachmentNote" />
+		</Item>
+		<Item ID="GLReports" Name="$glreports">
+			<Item ID="RepLedgerBalance" Name="$repledgerbalance" PageID="CodaInt.Base.Reports.Financials.LedgerBalance" />
+			<Item ID="RepLedgerDetails" Name="$repledgerdetails" PageID="CodaInt.Base.Reports.Financials.LedgerDetails" />
+			<Item ID="RepLedgerDetailsCounterpart" Name="$repledgerdetailscounterpart" PageID="CodaInt.Base.Reports.Financials.LedgerDetailsCounterpart" />
+			<Item ID="RepStructuredTrialBalance" Name="$repstructuredtrialbalance" PageID="CodaInt.Base.Reports.Financials.StructuredTrialBalance" />
+		</Item>
+		<Item ID="PartnerReports" Name="$partnerreports">
+			<Item ID="PartnerBalance" Name="$partnerbalance" PageID="CodaInt.Base.Reports.Financials.PartnerBalance" />
+			<Item ID="PartnerDetailsDate" Name="$partnerdetailsdate" PageID="CodaInt.Base.Reports.Financials.PartnerDetailsDate" />
+			<Item ID="PartnerLookup" Name="$partnerlookup" PageID="CodaInt.Base.Reports.Financials.PartnerLookup" />
+			<Item ID="PaymentApproval" Name="$paymentapproval" PageID="CodaInt.Base.Reports.Financials.PaymentApproval" />
+			<Item ID="PaymentProposal" Name="$paymentproposal" PageID="CodaInt.Base.Reports.Financials.PaymentProposal" />
+			<Item ID="ReminderLetter" Name="$reminderletter" PageID="CodaInt.Base.Reports.Financials.ReminderLetter" />
+			<Item ID="ReminderProposal" Name="$reminderproposal" PageID="CodaInt.Base.Reports.Financials.ReminderProposal" />
+			<Item ID="StatementOfAccount" Name="$statementofaccount" PageID="CodaInt.Base.Reports.Financials.StatementOfAccount" />
+			<Item ID="Aging" Name="$aging" PageID="CodaInt.Base.Reports.Financials.Aging" />
+			<Item ID="PaymentDateMod" Name="$paymentdatemod" PageID="CodaInt.Base.Reports.Financials.PaymentDateMod" />
+		</Item>
+		<Item ID="AssetReports" Name="$assetreports">
+			<Item ID="AssetAlteration" Name="$assetalteration" PageID="CodaInt.Base.Reports.Financials.AssetAlteration" />
+			<Item ID="AssetMovementModify" Name="$assetmovementmodify" PageID="CodaInt.Base.Reports.Financials.AssetMovementModify" />
+			<Item ID="AssetPostrule" Name="$assetpostrule" PageID="CodaInt.Base.Reports.Financials.AssetPostrule" />
+			<Item ID="AssetPostruleDual" Name="$assetpostruledual" PageID="CodaInt.Base.Reports.Financials.AssetPostruleDual" />
+			<Item ID="AssetRegistration" Name="$assetregistration" PageID="CodaInt.Base.Reports.Financials.AssetRegistration" />
+			<Item ID="AssetTransactions" Name="$assettransactions" PageID="CodaInt.Base.Reports.Financials.AssetTransactions" />
+			<Item ID="AssetTransactionsDual" Name="$assettransactionsdual" PageID="CodaInt.Base.Reports.Financials.AssetTransactionsDual" />
+		</Item>
+		<Item ID="PaymentReports" Name="$paymentreports">
+			<Item ID="BankPaymentFile" Name="$bankpaymentfile" PageID="CodaInt.Base.Reports.Financials.BankPaymentFile" />
+		</Item>
+		<Item ID="VatReports" Name="$vatreports">
+			<Item ID="VatBooked" Name="$vatbooked" PageID="CodaInt.Base.Reports.Financials.VatBooked" />
+			<Item ID="RepVatStoreUser" Name="$repvatstoreuser" PageID="CodaInt.Base.Reports.Financials.VATStatement.RepVatStoreUser.RepVatStoreUserSearchPage" />
+			<Item ID="VatInsertStore" Name="$vatinsertstore" PageID="CodaInt.Base.Reports.Financials.VatInsertStore" />
+			<Item ID="VatStore" Name="$vatstore" PageID="CodaInt.Base.Reports.Financials.VatStore" />
+			<Item ID="VatReport2m" Name="$vatreport2m" PageID="CodaInt.Base.Reports.Financials.VatReport2m" />
+			<Item ID="VatNavPostedDate" Name="$vatnavposteddate" PageID="CodaInt.Base.Reports.Financials.VatNavPostedDate" />
+			<Item ID="VatNavPostedDateModify" Name="$vatnavposteddatemodify" PageID="CodaInt.Base.Reports.Financials.VatNavPostedDateModify" />
+			<Item ID="Vat65a0708" Name="$vat65a0708" PageID="CodaInt.Base.Reports.Financials.Vat65a0708" />
+			<Item ID="VatCheck" Name="$vatcheck" PageID="CodaInt.Base.Reports.Financials.VatCheck" />
+			<Item ID="VatCheckDocument" Name="$vatcheckdocument" PageID="CodaInt.Base.Reports.Financials.VatCheckDocument" />
+			<Item ID="VatCheckLedger" Name="$vatcheckledger" PageID="CodaInt.Base.Reports.Financials.VatCheckLedger" />
+			<Item ID="VatUnstore" Name="$vatunstore">
+				<Item ID="VatUnstoreSelect" Name="$vatunstoreselect" PageID="CodaInt.Base.Reports.Financials.VatUnstoreSelect" />
+				<Item ID="RepVatUnstoreUser" Name="$repvatunstoreuser" PageID="CodaInt.Base.Reports.Financials.VATStatement.RepVatUnstoreUser.RepVatUnstoreUserSearchPage" />
+				<Item ID="VatUnstoreDelete" Name="$vatunstoredelete" PageID="CodaInt.Base.Reports.Financials.VatUnstoreDelete" />
+			</Item>
+			<Item ID="VATReportsEU" Name="$vatreportseu">
+				<Item ID="VatReportEu" Name="$vatreporteu" PageID="CodaInt.Base.Reports.Financials.VatReportEu" />
+				<Item ID="VatReportEuEsl" Name="$vatreporteuesl" PageID="CodaInt.Base.Reports.Financials.VatReportEuEsl" />
+				<Item ID="VatReportEuEslVat" Name="$vatreporteueslvat" PageID="CodaInt.Base.Reports.Financials.VatReportEuEslVat" />
+			</Item>
+			<Item ID="VatReportAbev" Name="$vatreportabev">
+				<Item ID="VatReport65aAbevImp" Name="$vatreport65aabevimp" PageID="CodaInt.Base.Reports.Financials.VatReport65aAbevImp" />
+				<Item ID="VatReport2mAbevImp" Name="$vatreport2mabevimp" PageID="CodaInt.Base.Reports.Financials.VatReport2mAbevImp" />
+				<Item ID="VatReport60aAbevImp" Name="$vatreport60aabevimp" PageID="CodaInt.Base.Reports.Financials.VatReport60aAbevImp" />
+			</Item>
+			<Item ID="InterfaceAdmin" Name="$interfaceadmin">
+				<Item ID="VatStructCopy" Name="$vatstructcopy" PageID="CodaInt.Base.Reports.Financials.VatStructCopy" />
+				<Item ID="VatIntStructPrint" Name="$vatintstructprint" PageID="CodaInt.Base.Reports.Financials.VatIntStructPrint" />
+				<Item ID="VatParamsCopy" Name="$vatparamscopy" PageID="CodaInt.Base.Reports.Financials.VatParamsCopy" />
+			</Item>
+			<Item ID="VatParams" Name="$vatparams">
+				<Item ID="RepVatParams" Name="$repvatparams" PageID="CodaInt.Base.Reports.Financials.VATStatement.RepVatParams.RepVatParamsSearchPage" />
+				<Item ID="RepVatStructure" Name="$repvatstructure" PageID="CodaInt.Base.Reports.Financials.VATStatement.RepVatStructure.RepVatStructureMainSearchPage" />
+				<Item ID="VatOtherParams" Name="$vatotherparams">
+					<Item ID="AbevImpReport65aFieldData" Name="$abevimpreport65afielddata" PageID="CodaInt.Base.Reports.Financials.VATStatement.AbevImpReport65aFieldData.AbevImpReport65aFieldDataSearchPage" />
+					<Item ID="AbevImpReport60aFieldData" Name="$abevimpreport60afielddata" PageID="CodaInt.Base.Reports.Financials.VATStatement.AbevImpReport60aFieldData.AbevImpReport60aFieldDataSearchPage" />
+					<Item ID="RepVat65mLimit" Name="$repvat65mlimit" PageID="CodaInt.Base.Reports.Financials.VATStatement.RepVat65mLimit.RepVat65mLimitSearchPage" />
+					<Item ID="RepVat65mData" Name="$repvat65mdata" PageID="CodaInt.Base.Reports.Financials.VATStatement.RepVat65mData.RepVat65mDataSearchPage" />
+					<Item ID="AbevImpBcpParam" Name="$abevimpbcpparam" PageID="CodaInt.Base.Reports.Financials.VATStatement.AbevImpBcpParam.AbevImpBcpParamSearchPage" />
+				</Item>
+				<Item ID="RepVatVamtarifaszam" Name="$repvatvamtarifaszam" PageID="CodaInt.Base.Reports.Financials.VATStatement.RepVatVamtarifaszam.RepVatVamtarifaszamSearchPage" />
+			</Item>
+		</Item>
+		<Item ID="CustomReports2" Name="$customreports2">
             <Item ID="StatementOfAccount2" Name="$statementofaccount2" PageID="eLog.HeavyTools.Reports.Financials.StatementOfAccount2" />
             <Item ID="ReminderLetterHT" Name="$reminderletter2" PageID="eLog.HeavyTools.Reports.Financials.ReminderLetter.ReminderLetter2" />
             <Item ID="StatementOfAccountParams" Name="$statementofaccountparams" PageID="eLog.HeavyTools.Reports.Financials.StatementOfAccount.StatementOfAccountSearchPage" />
             <Item ID="ReminderLetterParams" Name="$reminderletterparams" PageID="eLog.HeavyTools.Reports.Financials.ReminderLetter.ReminderLetterSearchPage" />
-        </Item>
-    </RootMenu>
+		</Item>
+	</RootMenu>
     <RootMenu ID="Retail" Name="$retail" CreateIfNotExists="true">
 		<Item ID="RetailSalesSearchPage" Name="$retailsalessearchpage" PageID="eLog.HeavyTools.Sales.Retail.RetailSalesSearchPage"/> 
     </RootMenu>
