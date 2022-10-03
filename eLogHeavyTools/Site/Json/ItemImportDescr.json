@@ -438,5 +438,44 @@
 	],
     "Dictionaries": [
     ]
+  },
+  {
+    "Sheet": "Szortiment_tétel",
+    "HeaderRow": "1:1",
+    "ColumnNameRow": 1,
+    "Tables": [
+      {
+        "Table": "olc_itemassortment",
+        "Fields": 
+		[		  
+			{
+				"Field": "assortmentitemid", 
+				"ColumnName": "Gyujto_cikkszam",
+				"Type": "lookup",
+				"Lookup": {
+					"Table": "ols_item",
+					"KeyField": "itemcode",
+					"ValueField": "itemid"
+				}
+			},
+			{
+				"Field": "itemid", 
+				"ColumnName": "Termek",
+				"Type": "lookup",
+				"Lookup": {
+					"Table": "ols_item",
+					"KeyField": "itemcode",
+					"ValueField": "itemid"
+				}
+			},
+			{
+				"Field": "count", 
+				"ColumnName": "Mennyiseg"
+			},
+        ]
+      }
+	],
+    "Dictionaries": [
+    ]
   }
 ]

@@ -30,4 +30,7 @@ values (512, 'olc_partncmp.scontoinvoice', 'Skontó plusszos számlák után', 1
 
 insert into ols_typehead (typegrpid, typekey, descr, protect, multipl, addusrid, adddate, delstat)
 values (513, 'olc_partncmp.referencetype', 'Referencia típusa', 1, 0, 'dev', getdate(), 0)
-go
+
+
+insert into ols_typehead (typegrpid, typekey, descr, protect, multipl, addusrid, adddate, delstat)
+values (514, 'olc_whlocprio.priotype', 'Elsődleges vagy másodlagos helykód', 1, 1, 'dev', getdate(), 0)

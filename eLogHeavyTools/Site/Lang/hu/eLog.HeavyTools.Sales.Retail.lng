@@ -64,3 +64,150 @@ $action_PayDeleteAll=Összes fizetés törlése
 
 
 $action_refresh2=F10 | Frissít
+
+$sinvpaynotequal=A maradvány nem nulla
+
+
+$action_sinv=Számlázás...
+
+
+$itemcount=Kosár mennyiség
+$price=Fizetendő
+
+$missingretailpaymethod=Nincs megadva a fizetési mód
+$missingpartnid_partncode=Partner nincs kiválasztva
+$missingpartnid_addrid=Cím nincs kiválasztva
+
+$action_itemsearch=F4 | Cikk kereső
+
+
+$action_Select2=Enter | Választ
+
+
+$carrier=Hordozó
+$webpublisher=Web kiadó
+
+ 
+$search_results_items=Cikk kereső
+
+
+
+$discsnum=Lemezek
+
+$group_data=Számla
+ 
+$searchinv_results_items=Partner korábbi számlái
+
+$publisher=Kiadó
+
+
+
+$tabName_MoveToWebshop=Webshop készlet
+$action_movetowebshop=Áthelyezés webshop készletre
+ 
+$createSt=Átadás
+$createStok=Termékek átrakva, bizonylatszám: {0}
+ 
+
+$createRec=Bevételezés
+$createReceiving=Bevételezés elkészült, bizonylatszám: {0}
+
+$action_createreceiving=F9 | Bevételezés
+
+$tabName_IssuingWebshop=Webkiszállítás
+$search_results=Webkiszállítás lista
+
+$docnum=Bizonylat
+$stdate=Dátum
+$movqty=Tétel me.
+$readqty=Beolv. me.
+
+$action_printsinv=Számla nyomtatás
+
+$no_sinv_created=Nincs számla
+
+$msg_stocktran2sinv_title=Üzenet
+$NotReaded=Nincs minden tétel beolvasva
+$msg_stocktran2sinv_confirmtitle=Számlázás
+$msg_stocktran2sinv_confirm=Biztos elkészíti a számlát?
+
+$tabName_RetailStGenerate=Bolti készlet hiány
+
+$action_generate=Generálás
+
+@parent=eLog.Base.Sales.Sinv
+$ststat=St.
+$tabName_RetailReceiving=Bevételezés
+$tabName_tabName_edit2sinv=Kisker számla
+
+$action_ac=Visszárú
+$ac_result_title=Visszárú
+$ac_result_cannot_use=Visszárú nem használható
+
+$search_resultsretailstgeneratese=Számla lista
+
+$docnum2=Számlaszám
+
+$purchprc=Rendelés ár
+$sellprc=Bolt ár
+
+$recqty=Érkezett me.
+
+$spurchprc=Érkezett ért.
+$ordqty=Rendelt me.
+$movqty2=Szállított me.
+
+$partner_vatnummandatory=Az "Adószám" mező kitöltése kötelező
+$partner_vatnumforbidden=Az "Adószám" mező nem tölthető ki
+$partner_vatnumformat=Az "Adószám" nem felel meg a kívánt formátumnak
+$partner_vatnumhundigit=Az "Adószám" hibás, kérem ellenőrizze!
+$partner_vatnumeumandatory=Az "EU adószám" mező kitöltése kötelező
+$partner_vatnumeuforbidden=Az "EU adószám" mező nem tölthető ki
+$partner_vatnumeuformat=Az "EU adószám" nem felel meg a kívánt formátumnak
+$partner_groupvatnummandatory=A "Csoport adószám" mező kitöltése kötelező
+$partner_groupvatnumforbidden=A "Csoport adószám" mező nem tölthető ki
+$partner_groupvatnumformat=A "Csoport adószám" nem felel meg a kívánt formátumnak
+$partner_groupvatnumhundigit=A "Csoport adószám" hibás, kérem ellenőrizze!
+$partner_vatnumhungroupformat=A csoport adószám nem szerepelhet az adószám mezőben (külön mezőbe írandó)
+$partner_vatnumhunformat=Csoportos adózó csoporttag adószáma (adószám mező) nem megfelelő. Kívánt formátum: ????????-4-??
+$sinvhead_ptvattypemand=A "Partner adózás típusa" mező kitöltése kötelező
+$sinvhead_vatnummandatory=A partnernek nincs adószáma
+$sinvhead_vatnumforbidden=A partnernek nem lehet adószáma
+$sinvhead_vatnumformat=A partner adószáma nem felel meg a kívánt formátumnak
+$sinvhead_vatnumhundigit=A partner adószáma hibás, kérem ellenőrizze!
+$sinvhead_vatnumeumandatory=A partner EU adószáma hiányzik
+$sinvhead_vatnumeuforbidden=A partnernek nem lehet EU adószáma
+$sinvhead_vatnumeuformat=Az partner EU adószáma nem felel meg a kívánt formátumnak
+$sinvhead_groupvatnummandatory=A partner csoport adószáma hiányzik
+$sinvhead_groupvatnumforbidden=A partnernek nem lehet csoport adószáma
+$sinvhead_groupvatnumformat=A partner csoport adószáma nem felel meg a kívánt formátumnak
+$sinvhead_groupvatnumhundigit=A partner csoport adószáma hibás, kérem ellenőrizze!
+$sinvhead_vatnumhungroupformat=A partner csoport adószáma nem szerepelhet az adószám mezőben (külön mezőbe írandó)
+$sinvhead_vatnumhunformat=A partner csoportos adózó csoporttag adószáma (adószám mező) nem megfelelő. Kívánt formátum: ????????-4-??
+
+
+$partner_vatnumhungroupmissing=Az adószám mezőben csoport tag adószam van, a csoportadószámot kötelező megadni
+$postcode_req=Az 'Irányítószám' megadása kötelező
+$city_req=A 'Város' megadása kötelező
+$place_req= A 'Közterület' neve megadása kötelező
+$nopriceforallitem=Nincs ára minden terméknek
+$sinvtype=Számla típusa
+
+$partnname=Számla név
+$buyvatnum=Adószám
+$buygroupvatnum=Csoport adószám
+$buyvatnumeu=EU adószám
+$sinvdata=Számla adatok
+
+$retailpaymethod=Fizetési mód
+
+
+$action_createsinv=F9 | Számla
+$action_createsinv2=F10 | Számla
+$action_close2=ESC | Bezár
+$errortitle=Hiba
+$action_createsinv2=F10 | Számla
+$action_close2=ESC | Bezár
+$errortitle=Hiba
+
+$tabName_RetailSinv=Számla adatok

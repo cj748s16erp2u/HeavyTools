@@ -22,7 +22,7 @@ using eProjectWeb.Framework.UI.PageParts;
 
 namespace eLog.HeavyTools.Common.Matrix
 {
-    abstract class MatrixTabPage2<ItemModelSeasonBL, RootEntity, RowEntityCollection, ColEntityCollection> : TabPage2 
+    abstract public class MatrixTabPage2<ItemModelSeasonBL, RootEntity, RowEntityCollection, ColEntityCollection> : TabPage2 
             where RootEntity : Entity
             where RowEntityCollection : EntityCollection
             where ColEntityCollection : EntityCollection
@@ -329,25 +329,50 @@ namespace eLog.HeavyTools.Common.Matrix
                     {
                         FieldsEquals.Add(eqKey, true);
                     }
-                     
 
                     var value = ConvertUtils.ToBoolean(MatrixTabPageData.GetMatrixData(
-                        row[MatrixTabPageData.RowKey.Key.Name],
-                        col[MatrixTabPageData.ColKey.Key.Name],
-                        MatrixTabPageData.RootKey
-                        ));
+                              row[MatrixTabPageData.RowKey.Key.Name],
+                              col[MatrixTabPageData.ColKey.Key.Name],
+                              MatrixTabPageData.RootKey
+                              ));
 
                     var found = value.HasValue && value.Value;
 
+                    if (MatrixTabPageData.EditItemType == MatrixEditItemType.CheckBox)
+                    { 
+                        var c = new Checkbox(string.Format("cp_{0}_{1}", row[MatrixTabPageData.RowKey.Key], col[MatrixTabPageData.ColKey.Key]))
+                        {
+                            Checked = found,
+                            Disabled = found,
+                            LabelId = "$xx"
+                        };
 
-                    var c = new Checkbox(string.Format("cp_{0}_{1}", row[MatrixTabPageData.RowKey.Key], col[MatrixTabPageData.ColKey.Key]))
+                        matrixTableItems.AddControl(c);
+                    } else if (MatrixTabPageData.EditItemType == MatrixEditItemType.Intbox)
                     {
-                        Checked = found,
-                        Disabled = found,
-                        LabelId = "$xx"
-                    };
+                        var v = ConvertUtils.ToInt32(
+                                    MatrixTabPageData.GetMatrixData(
+                                    row[MatrixTabPageData.RowKey.Key.Name],
+                                    col[MatrixTabPageData.ColKey.Key.Name],
+                                    MatrixTabPageData.MatrixValueField)
+                                );
 
-                    matrixTableItems.AddControl(c);
+                        var c = new Intbox(string.Format("cp_{0}_{1}", row[MatrixTabPageData.RowKey.Key], col[MatrixTabPageData.ColKey.Key]))
+                        {
+                            LabelId = "$xx",
+                            Value = v,
+                            Width = 20
+                        };
+
+                        if (!found)
+                        {
+                            c.Disabled = true;
+                        } 
+                        matrixTableItems.AddControl(c);
+                    } else
+                    {
+                        throw new Exception();
+                    }
                 }
 
                 matrixTableItems.AddControl(new ForceNextRow());
@@ -442,9 +467,17 @@ namespace eLog.HeavyTools.Common.Matrix
         private void CreateLayout()
         { 
             var defwidth = 65;
+            var hederMatrixFirstCellWidth = MatrixFirstCellWidth;
+            var columnsHeader2Width = 125;
+            if (MatrixTabPageData.EditItemType == MatrixEditItemType.Intbox)
+            {
+                defwidth = 75;
+                //hederMatrixFirstCellWidth = 164;
+                columnsHeader2Width = 164;
+            }
             var columnsHeader = new[]
                                {
-                                        new TableColumn(MatrixFirstCellWidth),
+                                       new TableColumn(hederMatrixFirstCellWidth),
                                        new TableColumn(1, TableColumnFlags.None),
                                        new TableColumn(1, TableColumnFlags.None),
                                        new TableColumn(defwidth),
@@ -484,9 +517,12 @@ namespace eLog.HeavyTools.Common.Matrix
                                        new TableColumn(1, TableColumnFlags.None),
                                        new TableColumn(55),
                                     };
+
+ 
+
             var columnsHeader2 = new[]
                          {
-                                         new TableColumn(125),
+                                         new TableColumn(columnsHeader2Width),
                                         new TableColumn(1, TableColumnFlags.None),
                                         new TableColumn(defwidth),
                                         new TableColumn(1, TableColumnFlags.None),
@@ -609,10 +645,7 @@ namespace eLog.HeavyTools.Common.Matrix
             matrixTableItems.AddRenderable(c); */
         }
 
-        private const string ColorData = "ColorData";
         private const string RootKey = "RootKey";
-        private const string SeasonData = "SeasonData";
-        private const string MainGroupData = "MainGroupData";
         
         private Control CreatePropCombo(string preId, int propgrpid, object value, bool disabled)
         {
@@ -646,42 +679,104 @@ namespace eLog.HeavyTools.Common.Matrix
                     {
                         var eqKey = MatrixTabPageData.ColKey.Key.Name;
                         var colrId = col[eqKey];
- 
-                        var c = FindRenderable<Checkbox>(string.Format("cp_{0}_{1}", row[MatrixTabPageData.RowKey.Key.Name], col[MatrixTabPageData.ColKey.Key.Name]));
 
-                        if (c.Checked)
+                        if (MatrixTabPageData.EditItemType == MatrixEditItemType.CheckBox)
                         {
-                            checkedCount++;
-                            var stored = MatrixTabPageData.StoredEntitiesFinder(row, col);
-                            if (stored == null)
+                            var c = FindRenderable<Checkbox>(string.Format("cp_{0}_{1}", row[MatrixTabPageData.RowKey.Key.Name], col[MatrixTabPageData.ColKey.Key.Name]));
+
+                            if (c.Checked)
                             {
-                                var rek = (Dictionary<string, object>)args.PageData[Consts.RootEntityKey];
-                                var rootkey = (int)(long)rek[MatrixTabPageData.RootKey.Name];
-
-                                MatrixStoredEntityValues msev = MatrixTabPageData.CreateNew();
-
-                                var fs = new List<Field>();
-
-                                fs.Add(MatrixTabPageData.RowKey.Key);
-                                fs.Add(MatrixTabPageData.ColKey.Key);
-                                if (!SkipRootKey)
+                                checkedCount++;
+                                var stored = MatrixTabPageData.StoredEntitiesFinder(row, col);
+                                if (stored == null)
                                 {
-                                    fs.Add(MatrixTabPageData.RootKey); 
-                                }
-                                 
-                                var e = msev.FindEntity(fs.ToArray()); // new[] { MatrixTabPageData.RootKey, MatrixTabPageData.RowKey.Key, MatrixTabPageData.ColKey.Key });
-                                if (!SkipRootKey)
-                                {
-                                    e[MatrixTabPageData.RootKey.Name] = rootkey;
-                                }
+                                    var rek = (Dictionary<string, object>)args.PageData[Consts.RootEntityKey];
+                                    var rootkey = (int)(long)rek[MatrixTabPageData.RootKey.Name];
 
-                                e[MatrixTabPageData.RowKey.Key.Name] = row[MatrixTabPageData.RowKey.Key.Name];
-                                e[MatrixTabPageData.ColKey.Key.Name] = col[MatrixTabPageData.ColKey.Key.Name];
+                                    MatrixStoredEntityValues msev = MatrixTabPageData.CreateNew();
 
-                                MatrixTabPageData.Add(msev);
-                                createdCount++;
+                                    var fs = new List<Field>();
+
+                                    fs.Add(MatrixTabPageData.RowKey.Key);
+                                    fs.Add(MatrixTabPageData.ColKey.Key);
+                                    if (!SkipRootKey)
+                                    {
+                                        fs.Add(MatrixTabPageData.RootKey);
+                                    }
+
+                                    var e = msev.FindEntity(fs.ToArray());
+                                    if (!SkipRootKey)
+                                    {
+                                        e[MatrixTabPageData.RootKey.Name] = rootkey;
+                                    }
+
+                                    e[MatrixTabPageData.RowKey.Key.Name] = row[MatrixTabPageData.RowKey.Key.Name];
+                                    e[MatrixTabPageData.ColKey.Key.Name] = col[MatrixTabPageData.ColKey.Key.Name];
+
+                                    MatrixTabPageData.Add(msev);
+                                    createdCount++;
+                                }
                             }
+                        } else if (MatrixTabPageData.EditItemType == MatrixEditItemType.Intbox)
+                        {
+                            var c = FindRenderable<Intbox>(string.Format("cp_{0}_{1}", row[MatrixTabPageData.RowKey.Key.Name], col[MatrixTabPageData.ColKey.Key.Name]));
+
+                            if (!c.Disabled)
+                            {
+                                checkedCount++;
+                                var stored = MatrixTabPageData.StoredEntitiesFinder(row, col);
+
+                                var cnt = 0;
+                                var o = stored[MatrixTabPageData.MatrixValueField];
+                                if ( o!=null)
+                                {
+                                    cnt = int.Parse(o.ToString());
+                                }
+                                var newCnt = 0;
+                                if (c.Value != null)
+                                {
+                                    newCnt = int.Parse(c.Value.ToString());
+                                }
+                                if (cnt != newCnt)
+                                { 
+                                    stored[MatrixTabPageData.MatrixValueField] = newCnt;
+                                }
+
+                                if (stored == null)
+                                {
+                                    var rek = (Dictionary<string, object>)args.PageData[Consts.RootEntityKey];
+                                    var rootkey = (int)(long)rek[MatrixTabPageData.RootKey.Name];
+
+                                    MatrixStoredEntityValues msev = MatrixTabPageData.CreateNew();
+
+                                    var fs = new List<Field>();
+
+                                    fs.Add(MatrixTabPageData.RowKey.Key);
+                                    fs.Add(MatrixTabPageData.ColKey.Key);
+                                    if (!SkipRootKey)
+                                    {
+                                        fs.Add(MatrixTabPageData.RootKey);
+                                    }
+
+                                    var e = msev.FindEntity(fs.ToArray());
+                                    if (!SkipRootKey)
+                                    {
+                                        e[MatrixTabPageData.RootKey.Name] = rootkey;
+                                    }
+
+                                    e[MatrixTabPageData.RowKey.Key.Name] = row[MatrixTabPageData.RowKey.Key.Name];
+                                    e[MatrixTabPageData.ColKey.Key.Name] = col[MatrixTabPageData.ColKey.Key.Name];
+
+                                    MatrixTabPageData.Add(msev);
+                                    createdCount++;
+                                }
+                            }
+                        } else
+                        {
+                            throw new Exception();
                         }
+
+
 
                         var rowkey = row[MatrixTabPageData.RowKey.Key.Name].ToString();
 
@@ -758,8 +853,10 @@ namespace eLog.HeavyTools.Common.Matrix
                     }
                     var map = MatrixTabPageData.GetBLObjectMap(se.GetMapDefaultEntity());
                     se.FillNonDefaultEntity(map); 
-                    Presave(map); 
-                    MatrixTabPageData.Save(map);
+                    if (Presave(map, se))
+                    {
+                        MatrixTabPageData.Save(map);
+                    } 
                     Postsave(map);
                 }
                 db.Commit();
@@ -790,7 +887,7 @@ namespace eLog.HeavyTools.Common.Matrix
         {
         }
 
-        protected abstract void Presave(BLObjectMap map);
+        protected abstract bool Presave(BLObjectMap map, MatrixStoredEntityValues se);
 
     }
     public class MatrixControlHideList

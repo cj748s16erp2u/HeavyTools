@@ -142,6 +142,21 @@ namespace eLog.HeavyTools.Masters.Partner
         /// <para>Field</para>
         /// ? - varchar
         /// </summary>
+        [Field("taxid")]
+        public static Field FieldTaxid { get; protected set; }
+        /// <summary>
+        /// ? - varchar
+        /// </summary>
+        public StringN Taxid
+        {
+            get { return new StringN(this[FieldTaxid]); }
+            set { this[FieldTaxid] = value; }
+        }
+
+        /// <summary>
+        /// <para>Field</para>
+        /// ? - varchar
+        /// </summary>
         [Field("addusrid")]
         public static Field FieldAddusrid { get; protected set; }
         /// <summary>

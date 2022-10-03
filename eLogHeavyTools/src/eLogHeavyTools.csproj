@@ -173,6 +173,12 @@
     <Compile Include="InterfaceCaller\ResultDto.cs" />
     <Compile Include="Masters\Import\Partner\PartnerImportPage.cs" />
     <Compile Include="Masters\Import\Partner\PartnerImportTab.cs" />
+    <Compile Include="Masters\Item\Assortment\ItemAssortmentmatrixEntitry.cs" />
+    <Compile Include="Masters\Item\Assortment\OlcItemAssortment.cs" />
+    <Compile Include="Masters\Item\Assortment\OlcItemAssortmentBL.cs" />
+    <Compile Include="Masters\Item\Assortment\OlcItemAssortmentGenerated.cs" />
+    <Compile Include="Masters\Item\Assortment\OlcItemAssortments.cs" />
+    <Compile Include="Masters\Item\Assortment\OlcItemAssortmentSearchTab.cs" />
     <Compile Include="Masters\Item\Color\OlcItemColor.cs" />
     <Compile Include="Masters\Item\Color\OlcItemColorGenerated.cs" />
     <Compile Include="Masters\Item\Color\OlcItemColorList.cs" />
@@ -381,6 +387,9 @@
     <Compile Include="Sales\Retail\Cart\CartTotal.cs" />
     <Compile Include="Sales\Retail\Cart\OlcCartPay.cs" />
     <Compile Include="Sales\Retail\Cart\OlcCartPayGenerated.cs" />
+    <Compile Include="Sales\Retail\GenerateReceipt.cs" />
+    <Compile Include="Sales\Retail\RetailSinvPage.cs" />
+    <Compile Include="Sales\Retail\RetailVatnumCheck.cs" />
     <Compile Include="Sales\Sinv\SinvHeadBL3.cs" />
     <Compile Include="Sales\Sinv\SinvPrintBL3.cs" />
     <Compile Include="Sales\Sinv\SinvPrintCallback3.cs" />
@@ -420,6 +429,7 @@
     <Compile Include="Setup\Warehouse\OlcWhLocationEditPage.cs" />
     <Compile Include="Setup\Warehouse\OlcWhLocationEditTab.cs" />
     <Compile Include="Setup\Warehouse\OlcWhLocationGenerated.cs" />
+    <Compile Include="Setup\Warehouse\OlcWhLocationList.cs" />
     <Compile Include="Setup\Warehouse\OlcWhLocationRules.cs" />
     <Compile Include="Setup\Warehouse\OlcWhLocationSearchProvider.cs" />
     <Compile Include="Setup\Warehouse\OlcWhLocationSearchTab.cs" />
@@ -435,13 +445,21 @@
     <Compile Include="Setup\Warehouse\OlcWhZoneSearchTab.cs" />
     <Compile Include="Setup\Warehouse\WarehouseSearchPage3.cs" />
     <Compile Include="Setup\Warehouse\WarehouseSearchTab3.cs" />
+    <Compile Include="Warehouse\OlcWhLocPrio\OlcWhLocPrio.cs" />
+    <Compile Include="Warehouse\OlcWhLocPrio\OlcWhLocPrioBL.cs" />
+    <Compile Include="Warehouse\OlcWhLocPrio\OlcWhLocPrioAllSearchProvider.cs" />
+    <Compile Include="Warehouse\OlcWhLocPrio\OlcWhLocPrioAllSearchTab.cs" />
+    <Compile Include="Warehouse\OlcWhLocPrio\OlcWhLocPrioEditPage.cs" />
+    <Compile Include="Warehouse\OlcWhLocPrio\OlcWhLocPrioGenerated.cs" />
+    <Compile Include="Warehouse\OlcWhLocPrio\OlcWhLocPrioRules.cs" />
+    <Compile Include="Warehouse\OlcWhLocPrio\OlcWhLocPrioEditTab.cs" />
+    <Compile Include="Warehouse\OlcWhLocPrio\OlcWhLocPrioSearchPage.cs" />
+    <Compile Include="Warehouse\OlcWhLocPrio\OlcWhLocPrioSearchProvider.cs" />
+    <Compile Include="Warehouse\OlcWhLocPrio\OlcWhLocPrioSearchTab.cs" />
     <Compile Include="Webshop\OlcWebshop.cs" />
     <Compile Include="Webshop\OlcWebshopGenerated.cs" />
     <Compile Include="Webshop\WebshopList.cs" />
     <Compile Include="Webshop\WebshopType.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
