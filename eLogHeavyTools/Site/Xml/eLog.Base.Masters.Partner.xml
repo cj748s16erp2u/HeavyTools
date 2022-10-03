@@ -69,6 +69,7 @@
 			<Textbox Field="note" Rows="3" ColsToSpan="-1" />
 			<ForceNextRow />
 			<Textbox Field="wsemail" ColsToSpan="-1" CustomData="olc"/>
+			<Combo Field="taxid" ListID="eLog.Base.Setup.Tax.TaxList" ComboFlags="None" CustomData="olc" />
 			<!--CODA specifikus start-->
 			<ForceNextRow />
 			<Intbox Field="coda_cmpid" Visible="false" />
