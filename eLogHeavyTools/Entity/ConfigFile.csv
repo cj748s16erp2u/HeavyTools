@@ -23,3 +23,4 @@ olc_cart,eLog.HeavyTools.Sales.Retail.Cart,OlcCart
 imp_colorexception,eLog.HeavyTools.Masters.Item.Import,ImpColorException
 olc_cartpay,eLog.HeavyTools.Sales.Retail.Cart,OlcCartPay
 olc_whlocprio,eLog.HeavyTools.Warehouse.WhLocPrio,OlcWhLocPrio
+olc_itemassortment,eLog.HeavyTools.Masters.Item.Assortment,OlcItemAssortment

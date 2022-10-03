@@ -91,7 +91,12 @@ namespace eLog.HeavyTools.Masters.Item.Model
                 buildButton.Disabled = true;
                 saveChangeButton.Disabled = true;
                 noSaveButton.Disabled = true;
-            } 
+            }  else
+            {
+                buildButton.Disabled = false;
+                saveChangeButton.Disabled = false;
+                noSaveButton.Disabled = false;
+            }
         }
 
 
@@ -105,9 +110,9 @@ namespace eLog.HeavyTools.Masters.Item.Model
             return new MatrixStoredEntity(msec);
         }
 
-        protected override void Presave(BLObjectMap map)
+        protected override bool Presave(BLObjectMap map, MatrixStoredEntityValues se)
         {
-            
+            return true;
         }
 
         #region Title

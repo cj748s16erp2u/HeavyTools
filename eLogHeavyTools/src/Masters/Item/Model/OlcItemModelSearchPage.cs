@@ -1,5 +1,6 @@
 ﻿using eLog.Base.Common;
 using eLog.Base.Masters.Item;
+using eLog.HeavyTools.Masters.Item.Assortment;
 using eLog.HeavyTools.Masters.Item.ItemMatrix;
 using eLog.HeavyTools.Masters.Item.MainGroup;
 using eLog.HeavyTools.Masters.PriceTable;
@@ -26,8 +27,10 @@ namespace eLog.HeavyTools.Masters.Item.Model
             Tabs.AddTab(delegate { return OlcItemModelSearchTab.New(Setup); });
             Tabs.AddTab(delegate { return OlcItemModelSeasonSearchTab.New(); });
             Tabs.AddTab(delegate { return OlcItemSearchTab.New(); });
-            Tabs.AddTab(delegate { return ItemSearchTab3.NewDetail(PageMode.Default, ItemSearchPage.Setup,"$nomodelselected"); });
+            Tabs.AddTab(delegate { return ItemSearchTab3.NewDetail(PageMode.Default, ItemSearchPage.Setup, "$nomodelselected"); });
             Tabs.AddTab(delegate { return OlcPrctableSearchTab2.New(OlcPrctableSearchPage.Setup); });
+
+            Tabs.AddTab(delegate { return OlcItemAssortmentSearchTab.New(); });
         }
     }
 
@@ -149,6 +152,16 @@ namespace eLog.HeavyTools.Masters.Item.Model
             var t = (OlcItemModelSearchTab)ObjectFactory.New(typeof(OlcItemModelSearchTab));
             t.Initialize("OlcItemModel", setup, DefaultActions.Basic);
             return t;
+        }
+        protected override void CreateBase()
+        {
+            base.CreateBase();
+            OnPageLoad += this.OlcItemModelSearchTab_OnPageLoad;
+        }
+
+        private void OlcItemModelSearchTab_OnPageLoad(PageUpdateArgs args)
+        {
+            //SrcBar["code"].Value = "A1W22300";
         }
     }
 }

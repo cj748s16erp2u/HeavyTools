@@ -188,7 +188,7 @@ namespace eLog.HeavyTools.Common.Matrix
                 }
             }
             throw new ArgumentException();
-        }
+        } 
 
         public Entity GetMapDefaultEntity()
         {
