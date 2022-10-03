@@ -10,6 +10,7 @@ $itemname01=Cikk megnevezése
 $whzoneid=Zóna
 $whlocid=Helykód
 $whpriotype=Helykód típusa
+$priotype=Helykód típusa
 $whzonecode=Zóna kódja
 $whzonename=Zóna neve
 $whlocname=Helykód neve
@@ -23,7 +24,7 @@ $OlcWhLocPrioEditTab=Aktív helykódok
 
 $itemid_code=Cikk kódja
 $itemid_name1=Cikk megnevezése
-$refillimit=Utántöltési küszöb
+$refilllimit=Utántöltési küszöb (%)
 
 ;Összes helykód fül
 
@@ -36,3 +37,4 @@ $err_olcwhlocprio_startdate_enddate=Az érvényesség kezdetének ({0:yyyy.MM.dd
 $err_olcwhlocprio_itemid=Ez a cikk ({0}) már szerepel ezen az érvényességi időn belül ({1:yyyy.MM.dd}-{2:yyyy.MM.dd}).
 $err_olcwhlocprio_location_ismulti=Ehhez a helykódhoz ({0}) csak egy cikk rendelhető egy adott érvényességi időn belül és már hozzá lett rendelve egy cikk erre az időtartamra ({1:yyyy.MM.dd}-{2:yyyy.MM.dd}).
 
+$err_datefilterrequired=Nem adott meg érvényességi időt a keresésnél.
