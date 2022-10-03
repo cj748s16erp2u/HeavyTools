@@ -124,7 +124,6 @@ values (513, 30, 30, 'Rendelészám', 'RSZ', 'dev', getdate(), 0)
 insert into ols_typeline (typegrpid, value, seqno, name, abbr, addusrid, adddate, delstat)
 values (513, 40, 40, 'Dátum', 'DAT', 'dev', getdate(), 0)
 
-
 insert ols_typeline (typegrpid, value, seqno, name, abbr, addusrid, adddate, delstat)
 values (8001, 60, 60, 'K&H Bankkártya kivonat file', 'KHK', 'dev', getdate(), 0)
 
@@ -145,4 +144,9 @@ values (8001, 65, 65, 'Hervis avizó file', 'HER', 'dev', getdate(), 0)
 
 insert ols_typeline (typegrpid, value, seqno, name, abbr, addusrid, adddate, delstat)
 values (8001, 66, 66, 'Intersport avizó file', 'INT', 'dev', getdate(), 0)
-go
+
+insert into ols_typeline (typegrpid, value, name, abbr, addusrid, adddate, delstat)
+values (514, 1, 'Elsődleges helykód', 'E', 'dev', getdate(), 0)
+
+insert into ols_typeline (typegrpid, value, name, abbr, addusrid, adddate, delstat)
+values (514, 2, 'Másodlagos helykód', 'M', 'dev', getdate(), 0)
