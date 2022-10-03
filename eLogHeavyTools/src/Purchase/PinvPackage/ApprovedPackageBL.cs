@@ -61,6 +61,8 @@ Utils.SqlToString(k["packagecode"]));
             {
                 if (kv.Key == "pinvid")
                 {
+                    if (kv.Value == null)
+                        continue;
                     sql = sql.Replace("--$$morefields$$", @",
 ph.pinvid, ph.pinvnum--$$morefields$$");
                     sql = sql.Replace("--$$morejoins$$", @"
@@ -73,9 +75,17 @@ left outer join ols_pinvhead as ph (nolock) on ph.pinvid = dh.pinvid--$$morejoin
             sql = sql.Replace("/*u4findb*/", $"[{dbLinkFin.Database}]").
             Replace("--$$morefields$$", "").Replace("--$$morejoins$$", "").Replace("--$$morewhere$$", "");
 
-            DataRow row = new DataRow(SqlDataAdapter.GetSchema(DB.Main, "ApprovedPackageInfoPart2", sql));
-            SqlDataAdapter.FillSingleRow(DB.Main, row, sql);
-            return row;
+            try
+            {
+                DataRow row = new DataRow(SqlDataAdapter.GetSchema(DB.Main, "ApprovedPackageInfoPart2", sql));
+                SqlDataAdapter.FillSingleRow(DB.Main, row, sql);
+                return row;
+            }
+            catch (RecordNotFoundException)
+            {
+                return null;
+            }
+            
         }
 
     }
