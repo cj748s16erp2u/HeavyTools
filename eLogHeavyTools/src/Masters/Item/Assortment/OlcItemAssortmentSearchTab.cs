@@ -54,22 +54,30 @@ namespace eLog.HeavyTools.Masters.Item.Assortment
         }
         
         Textbox codetextbox = new Textbox("code") { Disabled = true };
-        Textbox nametextbox = new Textbox("name") { Disabled = true };
- 
+        Textbox nametextbox = new Textbox("name") { Disabled = true }; 
+        Intbox imidintbox = new Intbox("imid") { Disabled = true, Visible = false }; 
+        Combo session = new Combo("isid", OlcItemSeasonList.ID) { DependentField = "imid", DependentCtrlID = "imid" };
+
         protected override void SetupHeader(LayoutTable layout)
         {
             layout.AddControl(codetextbox);
-            layout.AddControl(nametextbox); 
+            layout.AddControl(nametextbox);
+            layout.AddControl(session);
+
+            layout.AddControl(imidintbox);
         }
 
         protected override void SetupRootKey(OlcItemModel rootentity)
         {
             codetextbox.Value = rootentity.Code;
             nametextbox.Value = rootentity.Name;
+            imidintbox.Value = rootentity.Imid;
         }
 
         protected override Items SetupRows(OlcItemModel im)
         {
+            var isid = ConvertUtils.ToString(Session.Current[sessionValue]);
+
             int? imid;
 
             if (im == null)
@@ -89,7 +97,7 @@ namespace eLog.HeavyTools.Masters.Item.Assortment
   from ols_item i
   join olc_item c on i.itemid=c.itemid
   join olc_itemmodelseason im on c.imsid=im.imsid
- where imid={imid}
+ where imid={imid} and isid='{isid}'
    and isnull(c.iscollectionarticlenumber,0)=1";
 
 
@@ -127,22 +135,43 @@ namespace eLog.HeavyTools.Masters.Item.Assortment
                     );
         }
 
+         
+        private const string sessionValue = "session.Value";
+
+
+        protected override void BeforeBuildMatrix(PageUpdateArgs args, bool save, bool renderControls)
+        {
+            if (session.Value != null)
+            {
+                Session.Current[sessionValue] = session.Value;
+            } else
+            {
+                Session.Current[sessionValue] = "";
+            }
+        }
+
         protected override MatrixStoredEntity GetStoredEntityCollection(Key key)
-        { 
-            var sql = $@"
+        {
+            var isid = ConvertUtils.ToString(Session.Current[sessionValue]);
+         
+
+        var sql = $@"
   select itemid2 tmpitemid, xx.isrlid, isoid, count, i.itemid, imid
   from ols_item i (nolock)
   join olc_item c (nolock) on i.itemid=c.itemid
   join olc_itemmodelseason im (nolock) on c.imsid=im.imsid
   outer apply (
-	select a.count, isoid, ii.itemid itemid2, isrlid
+		select a.count, isoid, ii.itemid itemid2, isrlid
 	  from olc_item cc (nolock)
 	  join ols_item ii (nolock) on ii.itemid=cc.itemid
+	  join olc_itemmodelseason iim (nolock) on cc.imsid=iim.imsid
 	  left join olc_itemassortment a  (nolock) on a.itemid=cc.itemid
 	  where cc.iscollectionarticlenumber=0
 		and cc.imsid=c.imsid
+		and iim.isid=im.isid
   ) xx
  where im.imid={key["imid"]}
+  and im.isid='{isid}'
    and c.iscollectionarticlenumber=1
 
 ";
