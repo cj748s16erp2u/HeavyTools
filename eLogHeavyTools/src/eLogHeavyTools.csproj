@@ -381,6 +381,9 @@
     <Compile Include="Sales\Retail\Cart\CartTotal.cs" />
     <Compile Include="Sales\Retail\Cart\OlcCartPay.cs" />
     <Compile Include="Sales\Retail\Cart\OlcCartPayGenerated.cs" />
+    <Compile Include="Sales\Retail\GenerateReceipt.cs" />
+    <Compile Include="Sales\Retail\RetailSinvPage.cs" />
+    <Compile Include="Sales\Retail\RetailVatnumCheck.cs" />
     <Compile Include="Sales\Sinv\SinvHeadBL3.cs" />
     <Compile Include="Sales\Sinv\SinvPrintBL3.cs" />
     <Compile Include="Sales\Sinv\SinvPrintCallback3.cs" />
