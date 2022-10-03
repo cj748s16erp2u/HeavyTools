@@ -161,7 +161,7 @@ namespace eLog.HeavyTools.Masters.Item.Model
 
         private void OlcItemModelSearchTab_OnPageLoad(PageUpdateArgs args)
         {
-            SrcBar["code"].Value = "A1W22300";
+            //SrcBar["code"].Value = "A1W22300";
         }
     }
 }
