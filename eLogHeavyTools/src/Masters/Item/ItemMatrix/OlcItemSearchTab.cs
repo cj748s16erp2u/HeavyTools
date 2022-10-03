@@ -167,7 +167,7 @@ namespace eLog.HeavyTools.Masters.Item.ItemMatrix
         Textbox codetextbox = new Textbox("code") { Disabled = true };
         Textbox nametextbox = new Textbox("name") { Disabled = true };
 
-        Intbox imidintbox = new Intbox("imid") { Disabled = true };
+        Intbox imidintbox = new Intbox("imid") { Disabled = true, Visible=false };
 
         Combo session = new Combo("isid", OlcItemSeasonList.ID) { DependentField = "imid", DependentCtrlID = "imid" };
       
