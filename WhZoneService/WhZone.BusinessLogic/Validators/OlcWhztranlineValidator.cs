@@ -31,6 +31,7 @@ public class OlcWhztranlineValidator : EntityValidator<OlcWhztranline>, IOlcWhzt
         this.RuleFor(line => line.Linenum).NotEmpty();
         this.RuleFor(line => line.Itemid).NotEmpty();
 
+        this.RuleFor(line => line.Ordqty).NotNull();
         this.RuleFor(line => line.Dispqty).NotNull();
         this.RuleFor(line => line.Movqty).NotNull();
         this.RuleFor(line => line.Inqty).NotNull();
@@ -38,6 +39,7 @@ public class OlcWhztranlineValidator : EntityValidator<OlcWhztranline>, IOlcWhzt
 
         this.RuleFor(line => line.Unitid2).NotEmpty();
         this.RuleFor(line => line.Change).NotNull();
+        this.RuleFor(line => line.Ordqty2).NotNull();
         this.RuleFor(line => line.Dispqty2).NotNull();
         this.RuleFor(line => line.Movqty2).NotNull();
 
@@ -229,6 +231,21 @@ public class OlcWhztranlineValidator : EntityValidator<OlcWhztranline>, IOlcWhzt
                 }
             });
 
+        this.RuleFor(line => line.Ordqty)
+            .Custom((newValue, context) =>
+            {
+                var line = context.InstanceToValidate;
+                var stLine = context.TryGetEntity<OlcWhztranline, OlsStline>();
+                if (stLine is null)
+                {
+                    context.AddFailure(new FluentValidation.Results.ValidationFailure(nameof(OlcWhztranline.Stlineid), $"The stock tran line can't be found"));
+                }
+                else if (stLine.Ordqty != newValue)
+                {
+                    context.AddFailure(new FluentValidation.Results.ValidationFailure(nameof(OlcWhztranline.Ordqty), $"The transaction line's ordqty must be the same as stock tran line's ordqty (stock tran: {stLine.Ordqty}, transaction: {newValue})"));
+                }
+            });
+
         this.RuleFor(line => line.Dispqty)
             .Custom((newValue, context) =>
             {
@@ -328,6 +345,21 @@ public class OlcWhztranlineValidator : EntityValidator<OlcWhztranline>, IOlcWhzt
                 else if (stLine.Change != newValue)
                 {
                     context.AddFailure(new FluentValidation.Results.ValidationFailure(nameof(OlcWhztranline.Change), $"The transaction line's change must be the same as stock tran line's change (stock tran: {stLine.Change}, transaction: {newValue})"));
+                }
+            });
+
+        this.RuleFor(line => line.Ordqty2)
+            .Custom((newValue, context) =>
+            {
+                var line = context.InstanceToValidate;
+                var stLine = context.TryGetEntity<OlcWhztranline, OlsStline>();
+                if (stLine is null)
+                {
+                    context.AddFailure(new FluentValidation.Results.ValidationFailure(nameof(OlcWhztranline.Stlineid), $"The stock tran line can't be found"));
+                }
+                else if (stLine.Ordqty2 != newValue)
+                {
+                    context.AddFailure(new FluentValidation.Results.ValidationFailure(nameof(OlcWhztranline.Ordqty2), $"The transaction line's ordqty2 must be the same as stock tran line's ordqty2 (stock tran: {stLine.Ordqty2}, transaction: {newValue})"));
                 }
             });
 

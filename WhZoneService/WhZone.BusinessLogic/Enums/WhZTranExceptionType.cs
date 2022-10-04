@@ -11,9 +11,13 @@ namespace eLog.HeavyTools.Services.WhZone.BusinessLogic.Enums;
 public enum WhZTranExceptionType
 {
     /// <summary>
+    /// A megadott <see cref="WhZTranHeadDto.Whztid"/> és <see cref="WhZReceivingTranHeadDto.Stid"/> alapján tranzakció nem található
+    /// </summary>
+    EntryNotFound = 10100,
+    /// <summary>
     /// A megadott <see cref="WhZTranHeadDto.Cmpid"/> értéke hibás
     /// </summary>
-    InvalidCmpid = 10100,
+    InvalidCmpid,
     /// <summary>
     /// A megadott <see cref="WhZTranHeadDto.Whztid"/> értéke null
     /// </summary>
@@ -34,8 +38,4 @@ public enum WhZTranExceptionType
     /// A megadott <see cref="WhZTranHeadDto.AuthUser"/> értéke null
     /// </summary>
     InvalidAuthUser,
-    /// <summary>
-    /// A megadott <see cref="WhZTranHeadDto.Whztid"/> alapján tranzakció nem található
-    /// </summary>
-    EntryNotFound,
 }

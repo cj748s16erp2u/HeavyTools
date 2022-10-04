@@ -152,6 +152,94 @@
           }
         }
       }
+    },
+    "/api/WhZTranLine/receiving/line/add": {
+      "post": {
+        "tags": [
+          "WhZTranLine"
+        ],
+        "operationId": "add2",
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/WhZReceivingTranLineDto"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/WhZReceivingTranLineDto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/WhZReceivingTranLineDto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/WhZReceivingTranLineDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/WhZReceivingTranLineDto"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/WhZTranLine/receiving/line/update": {
+      "post": {
+        "tags": [
+          "WhZTranLine"
+        ],
+        "operationId": "update2",
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/WhZReceivingTranLineDto"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/WhZReceivingTranLineDto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/WhZReceivingTranLineDto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/WhZReceivingTranLineDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/WhZReceivingTranLineDto"
+                }
+              }
+            }
+          }
+        }
+      }
     }
   },
   "components": {
@@ -205,6 +293,84 @@
           },
           "whzttype": {
             "$ref": "#/components/schemas/WhZTranHead_Whzttype"
+          }
+        }
+      },
+      "WhZReceivingTranLineDto": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "whztlineid": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "whztid": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "linenum": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "itemid": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "dispqty": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "movqty": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "inqty": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "outqty": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "unitid2": {
+            "type": "string",
+            "nullable": true
+          },
+          "change": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "dispqty2": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "movqty2": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "note": {
+            "type": "string",
+            "nullable": true
+          },
+          "authUser": {
+            "type": "string",
+            "nullable": true
+          },
+          "stlineid": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
           }
         }
       },

@@ -78,7 +78,7 @@ namespace eLog.HeavyTools.Warehouse.StockTran
             {
                 var needZoneTranHandling = this.CheckWhNeedZoneTranHandling(stHead.Towhid);
 
-                string message = null;
+                string message;
                 if (needZoneTranHandling)
                 {
                     b = e.CustomData?.ContainsKey("towhzid") == true && ConvertUtils.ToInt32(stHead.GetCustomData("towhzid")) != null;
@@ -119,10 +119,10 @@ namespace eLog.HeavyTools.Warehouse.StockTran
 
             var key = new Key
             {
-                [WhZone.WhZoneTran.OlcWhZTranHead.FieldStid.Name] = stid
+                [WhZone.WhZTran.OlcWhZTranHead.FieldStid.Name] = stid
             };
 
-            var sql = $"select top 1 1 from [{WhZone.WhZoneTran.OlcWhZTranHead._TableName}] (nolock) where {key.ToSql()}";
+            var sql = $"select top 1 1 from [{WhZone.WhZTran.OlcWhZTranHead._TableName}] (nolock) where {key.ToSql()}";
             return ConvertUtils.ToInt32(SqlDataAdapter.ExecuteSingleValue(DB.Main, sql)) == 1;
         }
 
@@ -161,13 +161,13 @@ where [wh].[whid] = {Utils.SqlToString(whid)}
             if (towhzid != null)
             {
                 //var authBase64 = Encoding.UTF8.GetString(Convert.FromBase64String(authHeaderRegex.Replace(authorizationHeader, "$1")));
-                var authBase64 = this.CreateAuthentication();
+                var authBase64 = WhZone.Common.WhZTranUtils.CreateAuthentication();
 
                 var httpClient = new System.Net.Http.HttpClient();
                 httpClient.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Basic", authBase64);
 
-                var url = this.GetCustomSettingsValue("WhZoneService-ServiceUrl");
-                var tranService = new WhZone.WhZTranService.ReceivingClient(url, httpClient);
+                var url = WhZone.Common.WhZTranUtils.GetServiceUrl();
+                var tranService = new WhZone.WhZTranService.WhZTranClient(url, httpClient);
                 var request = new WhZone.WhZTranService.WhZReceivingTranHeadDto
                 {
                     Stid = stHead.Stid.Value,
@@ -198,7 +198,7 @@ where [wh].[whid] = {Utils.SqlToString(whid)}
                     var response = ex.Response;
                     if (!string.IsNullOrWhiteSpace(response))
                     {
-                        response = response.Substring(1, response.Length - 2);
+                        response = WhZone.Common.WhZTranUtils.ParseErrorResponse(response);
                         throw new MessageException(response);
                     }
 
@@ -210,45 +210,6 @@ where [wh].[whid] = {Utils.SqlToString(whid)}
                     throw new MessageException("$err_unable_to_save_whztranhead");
                 }
             }
-        }
-
-        /// <summary>
-        /// Basic authentikacius kulcs eloallitasa
-        /// </summary>
-        /// <returns>Basic authentikacios kulcs</returns>
-        private string CreateAuthentication()
-        {
-            var userId = this.GetCustomSettingsValue("WhZoneService-UserID");
-            var password = this.GetCustomSettingsValue("WhZoneService-Password");
-            if (password.StartsWith("*"))
-            {
-                password = password.Substring(1);
-            }
-            else
-            {
-                // TODO decrypt
-            }
-
-            var auth = $"{userId}:{password}";
-            var authBase64 = Convert.ToBase64String(Encoding.GetEncoding("ISO-8859-1").GetBytes(auth));
-            return authBase64;
-        }
-
-        /// <summary>
-        /// Parameter kiolvasasa es validalasa a CustomSettings-bol
-        /// </summary>
-        /// <param name="key">Paremter kulcs</param>
-        /// <returns>Parameter ertek</returns>
-        /// <exception cref="MessageException">A parameter nincs megadva vagy nincs erteke</exception>
-        private string GetCustomSettingsValue(string key)
-        {
-            var value = CustomSettings.GetString(key);
-            if (string.IsNullOrWhiteSpace(value))
-            {
-                throw new MessageException("$err_whzone_optionmissing".eLogTransl(key));
-            }
-
-            return value;
         }
     }
 }

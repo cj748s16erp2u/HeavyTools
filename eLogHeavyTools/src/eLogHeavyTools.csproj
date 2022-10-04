@@ -322,8 +322,10 @@
     <Compile Include="Warehouse\StockTran\ReceivingHeadBL3.cs" />
     <Compile Include="Warehouse\StockTran\ReceivingHeadEditTab3.cs" />
     <Compile Include="Warehouse\StockTran\ReceivingHeadEditTab3.cs" />
-    <Compile Include="Warehouse\WhZone\WhZoneTran\OlcWhZTranHead.cs" />
-    <Compile Include="Warehouse\WhZone\WhZoneTran\OlcWhZTranHeadGenerated.cs" />
+    <Compile Include="Warehouse\StockTran\ReceivingLineBL3.cs" />
+    <Compile Include="Warehouse\WhZone\Common\WhZTranUtils.cs" />
+    <Compile Include="Warehouse\WhZone\WhZTran\OlcWhZTranHead.cs" />
+    <Compile Include="Warehouse\WhZone\WhZTran\OlcWhZTranHeadGenerated.cs" />
     <Compile Include="Webshop\OlcWebshop.cs" />
     <Compile Include="Webshop\OlcWebshopGenerated.cs" />
     <Compile Include="Webshop\WebshopType.cs" />

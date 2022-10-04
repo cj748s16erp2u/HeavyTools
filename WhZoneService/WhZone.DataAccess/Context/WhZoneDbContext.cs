@@ -695,6 +695,14 @@ namespace eLog.HeavyTools.Services.WhZone.DataAccess.Context
                     .IsUnicode(false)
                     .HasColumnName("note");
 
+                entity.Property(e => e.Ordqty)
+                    .HasColumnType("numeric(19, 6)")
+                    .HasColumnName("ordqty");
+
+                entity.Property(e => e.Ordqty2)
+                    .HasColumnType("numeric(19, 6)")
+                    .HasColumnName("ordqty2");
+
                 entity.Property(e => e.Outqty)
                     .HasColumnType("numeric(19, 6)")
                     .HasColumnName("outqty");

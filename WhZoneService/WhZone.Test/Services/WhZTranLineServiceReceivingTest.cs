@@ -77,9 +77,49 @@ public class WhZTranLineServiceReceivingTest : Base.WhZTranLineServiceTestBase
 
     protected async Task<OlcWhztranline?> GetCurrentEntryAsync(int whztlineid, CancellationToken cancellationToken = default)
     {
-        return await this.dbContext.OlcWhztranlines
+        var entity = await this.dbContext.OlcWhztranlines
             .Where(l => l.Whztlineid == whztlineid)
             .FirstOrDefaultAsync(cancellationToken);
+
+        if (entity is not null)
+        {
+            var entry = this.dbContext.Entry(entity);
+            if (entry is not null)
+            {
+                entry.State = EntityState.Detached;
+            }
+        }
+
+        return entity;
+    }
+
+    protected async Task RemoveExistingTranLinesAsync(int whztid, CancellationToken cancellationToken = default)
+    {
+        // a duplikált rögzítés elleni védelem miatt, törölni szükséges a meglévő bejegyzéseket
+        var existingWhztlines = await this.dbContext.OlcWhztranlines
+            .Where(l => l.Whztid == whztid)
+            .ToListAsync(cancellationToken);
+        foreach (var l in existingWhztlines)
+        {
+            if (l is not null)
+            {
+                this.dbContext.OlcWhztranlines.Remove(l!);
+            }
+        }
+
+        await this.unitOfWork.SaveChangesAsync(cancellationToken);
+
+        foreach (var l in existingWhztlines)
+        {
+            if (l is not null)
+            {
+                var entry = this.dbContext.Entry(l);
+                if (entry is not null)
+                {
+                    entry.State = EntityState.Detached;
+                }
+            }
+        }
     }
 
     [Fact]
@@ -96,6 +136,8 @@ public class WhZTranLineServiceReceivingTest : Base.WhZTranLineServiceTestBase
             Assert.NotNull(tranHead);
             Assert.NotNull(tranHead.Stid);
 
+            await this.RemoveExistingTranLinesAsync(tranHead.Whztid, ct);
+
             var stLine = await this.GetFirstStLineAsync(tranHead.Stid.Value, ct);
             Assert.NotNull(stLine);
 
@@ -110,10 +152,6 @@ public class WhZTranLineServiceReceivingTest : Base.WhZTranLineServiceTestBase
             Assert.NotEqual(0, tranLine!.Whztlineid);
             Assert.Equal(stLine.Linenum, tranLine.Linenum);
             Assert.Equal(stLine.Itemid, tranLine.Itemid);
-            Assert.Equal(stLine.Dispqty, tranLine.Dispqty);
-            Assert.Equal(stLine.Movqty, tranLine.Movqty);
-            Assert.Equal(stLine.Inqty, tranLine.Inqty);
-            Assert.Equal(stLine.Outqty, tranLine.Outqty);
             Assert.Equal(stLine.Unitid2, tranLine.Unitid2);
             Assert.Equal(stLine.Change, tranLine.Change);
             Assert.Equal(stLine.Dispqty2, tranLine.Dispqty2);
@@ -121,8 +159,75 @@ public class WhZTranLineServiceReceivingTest : Base.WhZTranLineServiceTestBase
 
             var currentTranLine = await this.GetCurrentEntryAsync(tranLine.Whztlineid.Value, ct);
             Assert.NotNull(currentTranLine);
+            Assert.Equal(stLine.Ordqty, currentTranLine.Ordqty);
+            Assert.Equal(stLine.Dispqty, currentTranLine.Dispqty);
+            Assert.Equal(stLine.Movqty, currentTranLine.Movqty);
+            Assert.Equal(stLine.Inqty, currentTranLine.Inqty);
+            Assert.Equal(stLine.Outqty, currentTranLine.Outqty);
 
             return currentTranLine.Whztlineid;
+        }
+        finally
+        {
+            tran.Rollback();
+        }
+    }
+
+    [Fact]
+    public async Task UpdateTranLineTestAsync()
+    {
+        var cts = new CancellationTokenSource();
+        cts.CancelAfter(TestFixture.TimeoutSeconds);
+        var ct = cts.Token;
+
+        using var tran = await this.unitOfWork.BeginTransactionAsync(ct);
+        try
+        {
+            var tranHead = await this.GetFirstWhZTranHeadAsync(3, true, ct);
+            Assert.NotNull(tranHead);
+            Assert.NotNull(tranHead.Stid);
+
+            await this.RemoveExistingTranLinesAsync(tranHead.Whztid, ct);
+
+            var whztlineid = await this.AddTranLineTestAsync();
+            var whzTranLine = await this.service.GetByIdAsync(new object[] { whztlineid }, ct);
+            Assert.NotNull(whzTranLine);
+
+            var stLine = await this.dbContext.OlsStlines
+                .Where(l => l.Stlineid == whzTranLine.Stlineid)
+                .FirstOrDefaultAsync(ct);
+            Assert.NotNull(stLine);
+            stLine.Ordqty += 3;
+            stLine.Ordqty2 += 3;
+            var entry = this.dbContext.OlsStlines.Update(stLine);
+            await this.unitOfWork.SaveChangesAsync(ct);
+
+            entry.State = EntityState.Detached;
+
+            var request = new BusinessEntities.Dto.WhZReceivingTranLineDto
+            {
+                Whztlineid = whztlineid,
+                Whztid = tranHead!.Whztid,
+                Stlineid = stLine.Stlineid,
+            };
+
+            var tranLine = await this.service.UpdateReceivingAsync(request, ct);
+            Assert.NotNull(tranLine?.Whztlineid);
+            Assert.NotEqual(0, tranLine!.Whztlineid);
+            Assert.Equal(stLine.Linenum, tranLine.Linenum);
+            Assert.Equal(stLine.Itemid, tranLine.Itemid);
+            Assert.Equal(stLine.Unitid2, tranLine.Unitid2);
+            Assert.Equal(stLine.Change, tranLine.Change);
+            Assert.Equal(stLine.Dispqty2, tranLine.Dispqty2);
+            Assert.Equal(stLine.Movqty2, tranLine.Movqty2);
+
+            var currentTranLine = await this.GetCurrentEntryAsync(tranLine.Whztlineid.Value, ct);
+            Assert.NotNull(currentTranLine);
+            Assert.Equal(stLine.Ordqty, currentTranLine.Ordqty);
+            Assert.Equal(stLine.Dispqty, currentTranLine.Dispqty);
+            Assert.Equal(stLine.Movqty, currentTranLine.Movqty);
+            Assert.Equal(stLine.Inqty, currentTranLine.Inqty);
+            Assert.Equal(stLine.Outqty, currentTranLine.Outqty);
         }
         finally
         {

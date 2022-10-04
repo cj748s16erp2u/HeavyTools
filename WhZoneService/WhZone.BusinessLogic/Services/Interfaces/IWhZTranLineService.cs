@@ -17,4 +17,11 @@ public interface IWhZTranLineService : ILogicService<OlcWhztranline>
     /// <param name="cancellationToken"></param>
     /// <returns>Rögzített tranzakció tétel</returns>
     Task<WhZReceivingTranLineDto> AddReceivingAsync(WhZReceivingTranLineDto request, CancellationToken cancellationToken = default);
+    /// <summary>
+    /// Bevételezés típusú tranzakció tétel módosítása
+    /// </summary>
+    /// <param name="request">Tranzakció tétel adatok</param>
+    /// <param name="cancellationToken"></param>
+    /// <returns>Módosított tranzakció tétel</returns>
+    Task<WhZReceivingTranLineDto> UpdateReceivingAsync(WhZReceivingTranLineDto request, CancellationToken cancellationToken = default);
 }

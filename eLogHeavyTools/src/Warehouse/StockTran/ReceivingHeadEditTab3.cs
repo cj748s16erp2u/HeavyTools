@@ -4,8 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using eLog.Base.Warehouse.Common;
-using eLog.Base.Warehouse.StockTran;
-using eLog.HeavyTools.Warehouse.WhZone.WhZoneTran;
+using eLog.HeavyTools.Warehouse.WhZone.WhZTran;
 using eProjectWeb.Framework;
 using eProjectWeb.Framework.BL;
 using eProjectWeb.Framework.Data;
@@ -45,7 +44,7 @@ namespace eLog.HeavyTools.Warehouse.StockTran
             this.ctrlTowhzid = this.EditGroup1["towhzid"];
         }
 
-        private OlcWhZTranHead LoadWhZTranHead(StHead stHead)
+        private OlcWhZTranHead LoadWhZTranHead(Base.Warehouse.StockTran.StHead stHead)
         {
             var key = new Key
             {
@@ -55,7 +54,7 @@ namespace eLog.HeavyTools.Warehouse.StockTran
             return OlcWhZTranHead.Load(key);
         }
 
-        protected override StHead DefaultPageLoad(PageUpdateArgs args)
+        protected override Base.Warehouse.StockTran.StHead DefaultPageLoad(PageUpdateArgs args)
         {
             var stHead = base.DefaultPageLoad(args);
             if (stHead == null)
@@ -83,7 +82,7 @@ namespace eLog.HeavyTools.Warehouse.StockTran
             return stHead;
         }
 
-        protected override BLObjectMap SaveControlsToBLObjectMap(PageUpdateArgs args, StHead stHead)
+        protected override BLObjectMap SaveControlsToBLObjectMap(PageUpdateArgs args, Base.Warehouse.StockTran.StHead stHead)
         {
             var map = base.SaveControlsToBLObjectMap(args, stHead);
 
@@ -120,8 +119,7 @@ namespace eLog.HeavyTools.Warehouse.StockTran
 
         private bool GetNeedWhZoneTranHandling(PageUpdateArgs args)
         {
-            object o;
-            if (args.PageData?.TryGetValue(NEEDWHZONETRANHANDLING, out o) == true)
+            if (args.PageData?.TryGetValue(NEEDWHZONETRANHANDLING, out var o) == true)
             {
                 return ConvertUtils.ToInt32(o).GetValueOrDefault() != 0;
             }
@@ -131,8 +129,7 @@ namespace eLog.HeavyTools.Warehouse.StockTran
 
         private int? GetWhztid(PageUpdateArgs args)
         {
-            object o;
-            if (args.PageData?.TryGetValue("whztid", out o) == true)
+            if (args.PageData?.TryGetValue("whztid", out var o) == true)
             {
                 return ConvertUtils.ToInt32(o);
             }

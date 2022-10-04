@@ -69,7 +69,7 @@ public class WhZTranService : LogicServiceBase<OlcWhztranhead>, IWhZTranService
     /// <summary>
     /// Bevételezés típusú tranzakció rögzítése
     /// </summary>
-    /// <param name="request">Tranzakciós adatok</param>
+    /// <param name="request">Tranzakció adatok</param>
     /// <param name="cancellationToken"></param>
     /// <returns>Rögzített tranzakció</returns>
     public async Task<WhZReceivingTranHeadDto> AddReceivingAsync(WhZReceivingTranHeadDto request, CancellationToken cancellationToken = default)
@@ -107,19 +107,17 @@ public class WhZTranService : LogicServiceBase<OlcWhztranhead>, IWhZTranService
     /// <summary>
     /// Bevételezés típusú tranzakció módosítása
     /// </summary>
-    /// <param name="request">Tranzakciós adatok</param>
+    /// <param name="request">Tranzakció adatok</param>
     /// <param name="cancellationToken"></param>
     /// <returns>Módosított tranzakció</returns>
     public async Task<WhZReceivingTranHeadDto> UpdateReceivingAsync(WhZReceivingTranHeadDto request, CancellationToken cancellationToken = default)
     {
         this.ValidateUpdateReceivingParameters(request);
 
-        var originalEntity = request.Whztid is not null && request.Whztid != 0
-            ? await this.GetByIdAsync(new object[] { request.Whztid }, cancellationToken)
-            : await this.GetAsync(e => e.Stid == request.Stid, cancellationToken);
+        var originalEntity = await this.LoadEntityAsync(request, cancellationToken);
         if (originalEntity is null)
         {
-            this.ThrowException(WhZTranExceptionType.EntryNotFound, $"The referenced transaction is not found (whztid: {request.Whztid})");
+            this.ThrowException(WhZTranExceptionType.EntryNotFound, $"The referenced transaction is not found (whztid: {request.Whztid}, stid: {request.Stid})");
         }
 
         var entity = this.MapUpdateDtoToEntity(request, originalEntity!);
@@ -148,6 +146,21 @@ public class WhZTranService : LogicServiceBase<OlcWhztranhead>, IWhZTranService
  
             this.EnvironmentService.CustomData.TryRemove("AuthUser", out _);
         }
+    }
+
+    /// <summary>
+    /// Bejegyzés betöltése azonosító vagy raktári tranzakció azonosító alapján
+    /// </summary>
+    /// <param name="request">Tranzakció adatok</param>
+    /// <param name="cancellationToken"></param>
+    /// <returns>Betöltött bejegyzés, ha nincs találat, akkor null</returns>
+    private async Task<OlcWhztranhead?> LoadEntityAsync(WhZReceivingTranHeadDto request, CancellationToken cancellationToken)
+    {
+        return request.Whztid is not null && request.Whztid != 0
+            ? await this.GetByIdAsync(new object[] { request.Whztid }, cancellationToken)
+            : request.Stid is not null && request.Stid != 0
+                ? await this.GetAsync(e => e.Stid == request.Stid, cancellationToken)
+                : null;
     }
 
     /// <summary>
@@ -302,7 +315,7 @@ public class WhZTranService : LogicServiceBase<OlcWhztranhead>, IWhZTranService
     /// <summary>
     /// <see cref="WhZReceivingTranHeadDto"/> request-ből <see cref="OlcWhztranhead"/> entity létrehozása
     /// </summary>
-    /// <param name="request">A rögzítendő tranzakciós adatok</param>
+    /// <param name="request">A rögzítendő tranzakció adatok</param>
     /// <returns>Az rögzítendő entity</returns>
     private OlcWhztranhead MapAddDtoToEntity(WhZReceivingTranHeadDto request)
     {
@@ -318,7 +331,7 @@ public class WhZTranService : LogicServiceBase<OlcWhztranhead>, IWhZTranService
     /// <summary>
     /// <see cref="WhZReceivingTranHeadDto"/> request-ből <see cref="OlcWhztranhead"/> entity létrehozása
     /// </summary>
-    /// <param name="request">A módosítandó tranzakciós adatok</param>
+    /// <param name="request">A módosítandó tranzakció adatok</param>
     /// <param name="originalEntity">A tárolt tranzakció</param>
     /// <returns>Az módosítandó entity</returns>
     private OlcWhztranhead MapUpdateDtoToEntity(WhZReceivingTranHeadDto request, OlcWhztranhead originalEntity)
@@ -344,18 +357,18 @@ public class WhZTranService : LogicServiceBase<OlcWhztranhead>, IWhZTranService
     }
 
     /// <summary>
-    /// Bevételezés típusú tranzakciós adatok validálása
+    /// Bevételezés típusú tranzakció adatok validálása
     /// </summary>
-    /// <param name="request">Tranzakciós adatok</param>
+    /// <param name="request">Tranzakció adatok</param>
     private void ValidateAddReceivingParameters(WhZReceivingTranHeadDto request)
     {
         this.ValidateReceivingBaseParameters(request);
     }
 
     /// <summary>
-    /// Bevételezés típusú tranzakciós adatok validálása
+    /// Bevételezés típusú tranzakció adatok validálása
     /// </summary>
-    /// <param name="request">Tranzakciós adatok</param>
+    /// <param name="request">Tranzakció adatok</param>
     private void ValidateUpdateReceivingParameters(WhZReceivingTranHeadDto request)
     {
         this.ValidateReceivingBaseParameters(request);
@@ -370,7 +383,7 @@ public class WhZTranService : LogicServiceBase<OlcWhztranhead>, IWhZTranService
     /// <summary>
     /// Alap bevételezés request validálások
     /// </summary>
-    /// <param name="request">Tranzakciós adatok</param>
+    /// <param name="request">Tranzakció adatok</param>
     private void ValidateReceivingBaseParameters(WhZReceivingTranHeadDto request)
     {
         this.ValidateBaseParameters(request);
@@ -394,7 +407,7 @@ public class WhZTranService : LogicServiceBase<OlcWhztranhead>, IWhZTranService
     /// <summary>
     /// Alap request validalasok
     /// </summary>
-    /// <param name="request">Tranzakciós adatok</param>
+    /// <param name="request">Tranzakció adatok</param>
     /// <exception cref="ArgumentNullException"><paramref name="request"/> értéke nincs megadva</exception>
     private void ValidateBaseParameters(WhZReceivingTranHeadDto request)
     {

@@ -26,6 +26,7 @@ public class OlcWhztranlineValidatorTest : TestBase<OlcWhztranline, IWhZTranLine
     {
         return await this.dbContext.OlcWhztranheads
             .Where(h => h.Whzttype == (int)whzttype)
+            .Where(h => h.St!.OlsStlines.Any())
             .FirstOrDefaultAsync();
     }
 
@@ -67,6 +68,12 @@ public class OlcWhztranlineValidatorTest : TestBase<OlcWhztranline, IWhZTranLine
     }
 
     //[Fact]
+    //public Task AddWrongTranLineOrdqty01Test()
+    //{
+    //    return this.AddWrongTranLineFieldNotEmptyTest(nameof(OlcWhztranline.Ordqty));
+    //}
+
+    //[Fact]
     //public Task AddWrongTranLineDispqty01Test()
     //{
     //    return this.AddWrongTranLineFieldNotEmptyTest(nameof(OlcWhztranline.Dispqty));
@@ -95,6 +102,12 @@ public class OlcWhztranlineValidatorTest : TestBase<OlcWhztranline, IWhZTranLine
     {
         return this.AddWrongTranLineFieldNotEmptyTest(nameof(OlcWhztranline.Unitid2));
     }
+
+    //[Fact]
+    //public Task AddWrongTranLineOrdqty201Test()
+    //{
+    //    return this.AddWrongTranLineFieldNotEmptyTest(nameof(OlcWhztranline.Ordqty2));
+    //}
 
     //[Fact]
     //public Task AddWrongTranLineDispqty201Test()
@@ -233,11 +246,13 @@ public class OlcWhztranlineValidatorTest : TestBase<OlcWhztranline, IWhZTranLine
             Linenum = -1,
             Itemid = stLine.Itemid,
             Stlineid = stLine.Stlineid,
+            Ordqty = -1,
             Dispqty = -1,
             Movqty = -1,
             Inqty = -1,
             Outqty = -1,
             Unitid2 = nameof(OlcWhztranline.Unitid2),
+            Ordqty2 = -1,
             Dispqty2 = -1,
             Movqty2 = -1,
             Gen = 1
@@ -271,11 +286,13 @@ public class OlcWhztranlineValidatorTest : TestBase<OlcWhztranline, IWhZTranLine
             Linenum = 1,
             Itemid = -1,
             Stlineid = stLine.Stlineid,
+            Ordqty = -1,
             Dispqty = -1,
             Movqty = -1,
             Inqty = -1,
             Outqty = -1,
             Unitid2 = nameof(OlcWhztranline.Unitid2),
+            Ordqty2 = -1,
             Dispqty2 = -1,
             Movqty2 = -1,
             Gen = 1
@@ -309,11 +326,13 @@ public class OlcWhztranlineValidatorTest : TestBase<OlcWhztranline, IWhZTranLine
             Linenum = 1,
             Itemid = -1,
             Stlineid = stLine.Stlineid,
+            Ordqty = -1,
             Dispqty = -1,
             Movqty = -1,
             Inqty = -1,
             Outqty = -1,
             Unitid2 = nameof(OlcWhztranline.Unitid2),
+            Ordqty2 = -1,
             Dispqty2 = -1,
             Movqty2 = -1,
             Gen = 1
@@ -327,6 +346,46 @@ public class OlcWhztranlineValidatorTest : TestBase<OlcWhztranline, IWhZTranLine
 
         var ex = await Assert.ThrowsAnyAsync<Exception>(() => this.service.ValidateAndThrowAsync(entity, ruleSets: ruleSets));
         var message = $"The item doesn't exists (item: {entity.Itemid})";
+        Assert.Contains(message, ex?.Message);
+    }
+
+    [Fact]
+    public async Task AddTranWrongLineOrdqty01Test()
+    {
+        var tranHead = await this.GetFirstTranHeadAsync(WhZTranHead_Whzttype.Receiving);
+        Assert.NotNull(tranHead);
+
+        var stLine = await this.dbContext.OlsStlines
+            .Where(sl => sl.Stid == tranHead.Stid)
+            .FirstOrDefaultAsync();
+        Assert.NotNull(stLine);
+
+        var entity = new OlcWhztranline
+        {
+            Whztid = tranHead.Whztid,
+            Linenum = 1,
+            Itemid = stLine.Itemid,
+            Stlineid = stLine.Stlineid,
+            Ordqty = -1,
+            Dispqty = -1,
+            Movqty = -1,
+            Inqty = -1,
+            Outqty = -1,
+            Unitid2 = nameof(OlcWhztranline.Unitid2),
+            Ordqty2 = -1,
+            Dispqty2 = -1,
+            Movqty2 = -1,
+            Gen = 1
+        };
+
+        var ruleSets = new[]
+        {
+            "Default",
+            "Add"
+        };
+
+        var ex = await Assert.ThrowsAnyAsync<Exception>(() => this.service.ValidateAndThrowAsync(entity, ruleSets: ruleSets));
+        var message = $"The transaction line's ordqty must be the same as stock tran line's ordqty (stock tran: {stLine.Ordqty}, transaction: {entity.Ordqty})";
         Assert.Contains(message, ex?.Message);
     }
 
@@ -347,11 +406,13 @@ public class OlcWhztranlineValidatorTest : TestBase<OlcWhztranline, IWhZTranLine
             Linenum = 1,
             Itemid = stLine.Itemid,
             Stlineid = stLine.Stlineid,
+            Ordqty = -1,
             Dispqty = -1,
             Movqty = -1,
             Inqty = -1,
             Outqty = -1,
             Unitid2 = nameof(OlcWhztranline.Unitid2),
+            Ordqty2 = -1,
             Dispqty2 = -1,
             Movqty2 = -1,
             Gen = 1
@@ -385,11 +446,13 @@ public class OlcWhztranlineValidatorTest : TestBase<OlcWhztranline, IWhZTranLine
             Linenum = 1,
             Itemid = stLine.Itemid,
             Stlineid = stLine.Stlineid,
+            Ordqty = -1,
             Dispqty = -1,
             Movqty = -1,
             Inqty = -1,
             Outqty = -1,
             Unitid2 = nameof(OlcWhztranline.Unitid2),
+            Ordqty2 = -1,
             Dispqty2 = -1,
             Movqty2 = -1,
             Gen = 1
@@ -423,11 +486,13 @@ public class OlcWhztranlineValidatorTest : TestBase<OlcWhztranline, IWhZTranLine
             Linenum = 1,
             Itemid = stLine.Itemid,
             Stlineid = stLine.Stlineid,
+            Ordqty = -1,
             Dispqty = -1,
             Movqty = -1,
             Inqty = -1,
             Outqty = -1,
             Unitid2 = nameof(OlcWhztranline.Unitid2),
+            Ordqty2 = -1,
             Dispqty2 = -1,
             Movqty2 = -1,
             Gen = 1
@@ -461,11 +526,13 @@ public class OlcWhztranlineValidatorTest : TestBase<OlcWhztranline, IWhZTranLine
             Linenum = 1,
             Itemid = stLine.Itemid,
             Stlineid = stLine.Stlineid,
+            Ordqty = -1,
             Dispqty = -1,
             Movqty = -1,
             Inqty = -1,
             Outqty = -1,
             Unitid2 = nameof(OlcWhztranline.Unitid2),
+            Ordqty2 = -1,
             Dispqty2 = -1,
             Movqty2 = -1,
             Gen = 1
@@ -499,11 +566,13 @@ public class OlcWhztranlineValidatorTest : TestBase<OlcWhztranline, IWhZTranLine
             Linenum = 1,
             Itemid = stLine.Itemid,
             Stlineid = stLine.Stlineid,
+            Ordqty = -1,
             Dispqty = -1,
             Movqty = -1,
             Inqty = -1,
             Outqty = -1,
             Unitid2 = nameof(OlcWhztranline.Unitid2),
+            Ordqty2 = -1,
             Dispqty2 = -1,
             Movqty2 = -1,
             Gen = 1
@@ -517,6 +586,46 @@ public class OlcWhztranlineValidatorTest : TestBase<OlcWhztranline, IWhZTranLine
 
         var ex = await Assert.ThrowsAnyAsync<Exception>(() => this.service.ValidateAndThrowAsync(entity, ruleSets: ruleSets));
         var message = $"The transaction line's unitid2 must be the same as stock tran line's unitid2 (stock tran: {stLine.Unitid2}, transaction: {entity.Unitid2})";
+        Assert.Contains(message, ex?.Message);
+    }
+
+    [Fact]
+    public async Task AddTranWrongLineOrdqty201Test()
+    {
+        var tranHead = await this.GetFirstTranHeadAsync(WhZTranHead_Whzttype.Receiving);
+        Assert.NotNull(tranHead);
+
+        var stLine = await this.dbContext.OlsStlines
+            .Where(sl => sl.Stid == tranHead.Stid)
+            .FirstOrDefaultAsync();
+        Assert.NotNull(stLine);
+
+        var entity = new OlcWhztranline
+        {
+            Whztid = tranHead.Whztid,
+            Linenum = 1,
+            Itemid = stLine.Itemid,
+            Stlineid = stLine.Stlineid,
+            Ordqty = -1,
+            Dispqty = -1,
+            Movqty = -1,
+            Inqty = -1,
+            Outqty = -1,
+            Unitid2 = nameof(OlcWhztranline.Unitid2),
+            Ordqty2 = -1,
+            Dispqty2 = -1,
+            Movqty2 = -1,
+            Gen = 1
+        };
+
+        var ruleSets = new[]
+        {
+            "Default",
+            "Add"
+        };
+
+        var ex = await Assert.ThrowsAnyAsync<Exception>(() => this.service.ValidateAndThrowAsync(entity, ruleSets: ruleSets));
+        var message = $"The transaction line's ordqty2 must be the same as stock tran line's ordqty2 (stock tran: {stLine.Ordqty2}, transaction: {entity.Ordqty2})";
         Assert.Contains(message, ex?.Message);
     }
 
@@ -537,11 +646,13 @@ public class OlcWhztranlineValidatorTest : TestBase<OlcWhztranline, IWhZTranLine
             Linenum = 1,
             Itemid = stLine.Itemid,
             Stlineid = stLine.Stlineid,
+            Ordqty = -1,
             Dispqty = -1,
             Movqty = -1,
             Inqty = -1,
             Outqty = -1,
             Unitid2 = nameof(OlcWhztranline.Unitid2),
+            Ordqty2 = -1,
             Dispqty2 = -1,
             Movqty2 = -1,
             Gen = 1
@@ -575,11 +686,13 @@ public class OlcWhztranlineValidatorTest : TestBase<OlcWhztranline, IWhZTranLine
             Linenum = 1,
             Itemid = stLine.Itemid,
             Stlineid = stLine.Stlineid,
+            Ordqty = -1,
             Dispqty = -1,
             Movqty = -1,
             Inqty = -1,
             Outqty = -1,
             Unitid2 = nameof(OlcWhztranline.Unitid2),
+            Ordqty2 = -1,
             Dispqty2 = -1,
             Movqty2 = -1,
             Gen = 1
@@ -607,29 +720,53 @@ public class OlcWhztranlineValidatorTest : TestBase<OlcWhztranline, IWhZTranLine
             .FirstOrDefaultAsync();
         Assert.NotNull(stLine);
 
-        var entity = new OlcWhztranline
+        using var tran = await this.unitOfWork.BeginTransactionAsync();
+        try
         {
-            Whztid = tranHead.Whztid,
-            Linenum = 1,
-            Itemid = stLine.Itemid,
-            Stlineid = stLine.Stlineid,
-            Dispqty = stLine.Dispqty,
-            Movqty = stLine.Movqty,
-            Inqty = stLine.Inqty,
-            Outqty = stLine.Outqty,
-            Unitid2 = stLine.Unitid2,
-            Dispqty2 = stLine.Dispqty2,
-            Movqty2 = stLine.Movqty2,
-            Gen = 1
-        };
+            var line = await this.service.GetAsync(l => l.Stlineid == stLine.Stlineid);
+            if (line is not null)
+            {
+                this.dbContext.OlcWhztranlines.Remove(line);
+                await this.unitOfWork.SaveChangesAsync();
 
-        var ruleSets = new[]
+                var entry = this.dbContext.Entry(line);
+                if (entry is not null)
+                {
+                    entry.State = EntityState.Detached;
+                }
+            }
+
+            var entity = new OlcWhztranline
+            {
+                Whztid = tranHead.Whztid,
+                Linenum = stLine.Linenum,
+                Itemid = stLine.Itemid,
+                Stlineid = stLine.Stlineid,
+                Ordqty = stLine.Ordqty,
+                Dispqty = stLine.Dispqty,
+                Movqty = stLine.Movqty,
+                Inqty = stLine.Inqty,
+                Outqty = stLine.Outqty,
+                Unitid2 = stLine.Unitid2,
+                Change = stLine.Change,
+                Ordqty2 = stLine.Ordqty2,
+                Dispqty2 = stLine.Dispqty2,
+                Movqty2 = stLine.Movqty2,
+                Gen = 1
+            };
+
+            var ruleSets = new[]
+            {
+                "Default",
+                "Add"
+            };
+
+            await this.service.ValidateAndThrowAsync(entity, ruleSets: ruleSets);
+        }
+        finally
         {
-            "Default",
-            "Add"
-        };
-
-        await this.service.ValidateAndThrowAsync(entity, ruleSets: ruleSets);
+            tran.Rollback();
+        }
     }
 
     #endregion

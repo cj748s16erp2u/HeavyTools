@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using AutoMapper;
 using eLog.HeavyTools.Services.WhZone.BusinessEntities.Dto;
@@ -87,6 +88,67 @@ public class WhZTranLineService : LogicServiceBase<OlcWhztranline>, IWhZTranLine
     }
 
     /// <summary>
+    /// Bevételezés típusú tranzakció tétel módosítása
+    /// </summary>
+    /// <param name="request">Tranzakció tétel adatok</param>
+    /// <param name="cancellationToken"></param>
+    /// <returns>Módosított tranzakció tétel</returns>
+    public async Task<WhZReceivingTranLineDto> UpdateReceivingAsync(WhZReceivingTranLineDto request, CancellationToken cancellationToken = default)
+    {
+        this.ValidateUpdateReceivingParameters(request);
+
+        var originalEntity = await this.LoadEntityAsync(request, cancellationToken);
+        if (originalEntity is null)
+        {
+            this.ThrowException(WhZTranLineExceptionType.EntryNotFound, $"The referenced transaction line is not found (whztlineid: {request.Whztlineid}, stlineid: {request.Stlineid})");
+        }
+
+        var tranHead = await this.tranHeadRepository.FindAsync(new object[] { originalEntity!.Whztid }, cancellationToken);
+
+        var entity = await this.MapUpdateDtoToEntityAsync(request, originalEntity, tranHead, cancellationToken);
+
+        this.EnvironmentService.CustomData.TryAdd("AuthUser", request.AuthUser);
+        using var tran = await this.UnitOfWork.BeginTransactionAsync(cancellationToken);
+        try
+        {
+            entity = await this.UpdateAsync(entity, cancellationToken);
+
+            tran.Commit();
+
+            return this.mapper.Map<WhZReceivingTranLineDto>(entity);
+        }
+        catch (Exception ex)
+        {
+            await ERP2U.Log.LoggerManager.Instance.LogErrorAsync<WhZTranLineService>(ex);
+            throw;
+        }
+        finally
+        {
+            if (tran.HasTransaction())
+            {
+                tran.Rollback();
+            }
+
+            this.EnvironmentService.CustomData.TryRemove("AuthUser", out _);
+        }
+    }
+
+    /// <summary>
+    /// Bejegyzés betöltése azonosító vagy raktári tranzakció tétel azonosító alapján
+    /// </summary>
+    /// <param name="request">Tranzakció tétel adatok</param>
+    /// <param name="cancellationToken"></param>
+    /// <returns>Betöltött bejegyzés, ha nincs találat, akkor null</returns>
+    private async Task<OlcWhztranline?> LoadEntityAsync(WhZReceivingTranLineDto request, CancellationToken cancellationToken)
+    {
+        return request.Whztlineid is not null && request.Whztlineid != 0
+            ? await this.GetByIdAsync(new object[] { request.Whztlineid }, cancellationToken)
+            : request.Stlineid is not null && request.Stlineid != 0
+                ? await this.GetAsync(e => e.Stlineid == request.Stlineid, cancellationToken)
+                : null;
+    }
+
+    /// <summary>
     /// <see cref="WhZReceivingTranLineDto"/> request-ből <see cref="OlcWhztranline"/> entity létrehozása
     /// </summary>
     /// <param name="request">A rögzítendő tranzakció tétel adatok</param>
@@ -118,6 +180,45 @@ public class WhZTranLineService : LogicServiceBase<OlcWhztranline>, IWhZTranLine
     }
 
     /// <summary>
+    /// <see cref="WhZReceivingTranLineDto"/> request-ből <see cref="OlcWhztranline"/> entity létrehozása
+    /// </summary>
+    /// <param name="request">A módosítandó tranzakció tétel adatok</param>
+    /// <returns>Az módosítandó entity</returns>
+    private async Task<OlcWhztranline> MapUpdateDtoToEntityAsync(WhZReceivingTranLineDto request, OlcWhztranline originalEntity, OlcWhztranhead? tranHead, CancellationToken cancellationToken)
+    {
+        var entity = this.mapper.Map<OlcWhztranline>(request);
+
+        if (entity.Stlineid is not null)
+        {
+            var stLine = await this.stLineRepository.FindAsync(new object[] { entity.Stlineid }, cancellationToken);
+            if (stLine is not null)
+            {
+                this.CopyDataFromStLine(request, stLine, entity);
+            }
+            else if ((tranHead?.Whztstat).GetValueOrDefault((int)WhZTranHead_Whztstat.Closed) < (int)WhZTranHead_Whztstat.Closed)
+            {
+                this.DetermineData(request, entity);
+            }
+        }
+        else if ((tranHead?.Whztstat).GetValueOrDefault((int)WhZTranHead_Whztstat.Closed) < (int)WhZTranHead_Whztstat.Closed)
+        {
+            this.DetermineData(request, entity);
+        }
+
+        entity.Whztid = originalEntity.Whztid;
+        if (request.Whztlineid is null || request.Whztlineid == 0)
+        {
+            entity.Whztlineid = originalEntity.Whztlineid;
+        }
+
+        entity.Gen = originalEntity.Gen;
+        entity.Addusrid = originalEntity.Addusrid;
+        entity.Adddate = originalEntity.Adddate;
+
+        return entity;
+    }
+
+    /// <summary>
     /// Készlet tétel adatok másolása
     /// </summary>
     /// <param name="request">Tranzakció tétel adatok</param>
@@ -143,10 +244,12 @@ public class WhZTranLineService : LogicServiceBase<OlcWhztranline>, IWhZTranLine
         entity.Linenum = request.Linenum ?? stLine.Linenum;
         entity.Itemid = request.Itemid ?? stLine.Itemid;
         // ezek az adatok már meghatározásra kerültek, így átvesszük őket
+        entity.Ordqty = stLine.Ordqty;
         entity.Dispqty = stLine.Dispqty;
         entity.Movqty = stLine.Movqty;
         entity.Inqty = stLine.Inqty;
         entity.Outqty = stLine.Outqty;
+        entity.Ordqty2 = request.Ordqty2 ?? stLine.Ordqty2;
         entity.Unitid2 = request.Unitid2 ?? stLine.Unitid2;
         entity.Change = request.Change ?? stLine.Change;
         entity.Dispqty2 = request.Dispqty2 ?? stLine.Dispqty2;
@@ -163,8 +266,19 @@ public class WhZTranLineService : LogicServiceBase<OlcWhztranline>, IWhZTranLine
     {
         entity.Dispqty2 = 0M;
 
+        entity.Ordqty = this.CalcOrdQty(entity);
         entity.Dispqty = this.CalcDispQty(entity);
         entity.Movqty = this.CalcMovQty(entity);
+    }
+
+    /// <summary>
+    /// Rendelt mennyiség számolása a cikk mértékegységére
+    /// </summary>
+    /// <param name="entity">Tétel adatok</param>
+    /// <returns>Számolt mennyiség</returns>
+    private decimal CalcOrdQty(OlcWhztranline entity)
+    {
+        return this.CalcQty(entity.Ordqty2, entity.Change);
     }
 
     /// <summary>
@@ -203,6 +317,15 @@ public class WhZTranLineService : LogicServiceBase<OlcWhztranline>, IWhZTranLine
     /// </summary>
     /// <param name="request">Tranzakció tétel adatok</param>
     private void ValidateAddReceivingParameters(WhZReceivingTranLineDto request)
+    {
+        this.ValidateReceivingBaseParameters(request);
+    }
+
+    /// <summary>
+    /// Bevételezés típusú tranzakció tétel adatok validálása
+    /// </summary>
+    /// <param name="request">Tranzakció tétel adatok</param>
+    private void ValidateUpdateReceivingParameters(WhZReceivingTranLineDto request)
     {
         this.ValidateReceivingBaseParameters(request);
     }
