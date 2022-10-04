@@ -4,7 +4,7 @@ using System.Text;
 using eProjectWeb.Framework;
 using eProjectWeb.Framework.Data;
 
-namespace eLog.HeavyTools.Warehouse.WhZone.WhZoneTran
+namespace eLog.HeavyTools.Warehouse.WhZone.WhZTran
 {
     /// <summary>
     /// <para>Generált Entity</para>
