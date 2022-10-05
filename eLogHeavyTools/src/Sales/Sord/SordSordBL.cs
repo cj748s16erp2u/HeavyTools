@@ -58,9 +58,10 @@ delete tt
 insert into olc_tmp_sordsord
 select '{guid}' ssid, slt.sordlineid, {sordid}, slt.linenum, slt.itemid, itemcode, name01, name02 ,sht.docnum, null qty, slt.reqdate, clt.confqty, clt.confdeldate, slt.ref2, 
 
+isnull(orderedqty,0)-isnull(slt.movqty,0),
 slt.ordqty, slt.movqty,
 
-    slt.ordqty-isnull(orderedqty,0) ordqty, 0 movqty, slt.selprc, slt.seltotprc, slt.selprctype, slt.selprcprcid, slt.discpercnt, slt.discpercntprcid, slt.discval, slt.disctotval, slt.taxid, slt.sordlinestat, slt.note, slt.resid, slt.ucdid, slt.pjpid, slt.gen,'{Session.UserID}', getdate()
+    slt.ordqty-isnull(orderedqty,0) ordqty, 0 movqty, slt.selprc, slt.seltotprc, slt.selprctype, slt.selprcprcid, slt.discpercnt, slt.discpercntprcid, slt.discval, slt.disctotval, slt.taxid, slt.sordlinestat, slt.note, null, slt.ucdid, slt.pjpid, slt.gen,'{Session.UserID}', getdate()
   from  ols_sordhead sht   
   join ols_sordline slt on slt.sordid=sht.sordid
   join ols_item i on i.itemid=slt.itemid

@@ -36,9 +36,8 @@
 		
         <Column FieldName="fullordqty" Width="68"/>
         <Column FieldName="fullmovqty" Width="68"/>
-		
+        <Column FieldName="pendingqty" Width="68"/>
         <Column FieldName="ordqty" Width="68"/>
-        <Column FieldName="movqty" Width="68"/>
 		<Column FieldName="confqty" Width="68"/>
         <Column FieldName="confdeldate" Width="80" Format="D"/>
         <Column FieldName="qty" Width="90" Format="C2"/>

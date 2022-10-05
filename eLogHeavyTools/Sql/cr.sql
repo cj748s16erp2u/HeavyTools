@@ -743,6 +743,7 @@ create table olc_tmp_sordsord (
    confqty				datetime             null,
    confdeldate			datetime             null,
    ref2                 varchar(30)          null,
+   pendingqty			numeric(19,6)        not null,
    fullordqty           numeric(19,6)        not null,
    fullmovqty           numeric(19,6)        not null,
    ordqty               numeric(19,6)        not null,
