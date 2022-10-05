@@ -1,4 +1,7 @@
-﻿;Excel import
+﻿$line_db= Tételszám
+$sum_origvalue=Eredeti érték összesen
+
+;Excel import
 $action_importfunc=Kivonat import
 $banktransaction_multi=Kivonat import
 $importfields=Mezők
