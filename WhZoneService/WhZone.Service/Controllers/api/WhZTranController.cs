@@ -19,6 +19,11 @@ public class WhZTranController : Controller
         this.tranService = tranService ?? throw new ArgumentNullException(nameof(tranService));
     }
 
+    /// <summary>
+    /// Zóna készlet tranzakciók lekérdezése
+    /// </summary>
+    /// <param name="query">Keresési paraméterek</param>
+    /// <returns>Lekérdezés eredménye</returns>
     [HttpPost("receiving/query")]
     public async Task<ActionResult<IEnumerable<WhZReceivingTranHeadDto>>> QueryReceivingAsync([FromBody] WhZTranHeadQueryDto query = null!)
     {
@@ -33,6 +38,11 @@ public class WhZTranController : Controller
         }
     }
 
+    /// <summary>
+    /// Új zóna készlet tranzakció rögzítése
+    /// </summary>
+    /// <param name="request">Tranzakció információk</param>
+    /// <returns>Létrehozott tranzakció</returns>
     [HttpPost("receiving/add")]
     public async Task<ActionResult<WhZReceivingTranHeadDto>> AddReceivingAsync([FromBody] WhZReceivingTranHeadDto request)
     {
@@ -52,6 +62,11 @@ public class WhZTranController : Controller
         }
     }
 
+    /// <summary>
+    /// Meglévő zóna készlet tranzakció módosítása
+    /// </summary>
+    /// <param name="request">Tranzakció információk</param>
+    /// <returns>Módosított tranzakció</returns>
     [HttpPost("receiving/update")]
     public async Task<ActionResult<WhZReceivingTranHeadDto>> UpdateReceivingAsync([FromBody] WhZReceivingTranHeadDto request)
     {

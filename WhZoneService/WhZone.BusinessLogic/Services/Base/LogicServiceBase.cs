@@ -4,6 +4,7 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
+using eLog.HeavyTools.Services.WhZone.BusinessEntities.Model;
 using eLog.HeavyTools.Services.WhZone.BusinessEntities.Model.Base;
 using eLog.HeavyTools.Services.WhZone.BusinessEntities.Model.Interfaces;
 using eLog.HeavyTools.Services.WhZone.BusinessLogic.Helpers;
@@ -320,5 +321,239 @@ public class LogicServiceBase<TEntity> : ILogicService<TEntity>
         }
 
         return ValueTask.FromResult(context);
+    }
+
+    /// <summary>
+    /// A két szűrési feltétel összekötése && logikai művelettel
+    /// </summary>
+    protected Expression CombineExpressions(Expression left, Expression right)
+    {
+        if (right is LambdaExpression lr)
+        {
+            right = lr.Body;
+        }
+
+        if (left is null)
+        {
+            return right;
+        }
+        else
+        {
+            if (left is LambdaExpression ll)
+            {
+                left = ll.Body;
+            }
+        }
+
+        if (right is null)
+        {
+            return left;
+        }
+
+        return Expression.AndAlso(left, right);
+    }
+
+    /// <summary>
+    /// A kapott kifejezésben kicseréli a Parameter expression-t a megadott paraméterre
+    /// Támogatott szűrési műveletek:
+    /// - <see cref="ExpressionType.Equal"/>
+    /// - <see cref="ExpressionType.NotEqual"/>
+    /// - <see cref="ExpressionType.GreaterThan"/>
+    /// - <see cref="ExpressionType.GreaterThanOrEqual"/>
+    /// - <see cref="ExpressionType.LessThanOrEqual"/>
+    /// - <see cref="ExpressionType.LessThanOrEqual"/>
+    /// - egyéb esetben, a <paramref name="func"/> kerül meghívásra
+    /// </summary>
+    /// <param name="expr">Kifejezés</param>
+    /// <param name="parm">Új paraméter</param>
+    /// <param name="func">A használt logikai művelet</param>
+    /// <returns>A módosított kifejezés</returns>
+    protected Expression ReplaceParameter(ParameterExpression parm, Expression expr, Func<Expression, Expression, Expression>? func = null!)
+    {
+        if (expr is not LambdaExpression expr1)
+        {
+            return expr;
+        }
+
+        if (expr1.Body is not BinaryExpression expr2)
+        {
+            return expr;
+        }
+
+        if (expr2.Left is not MemberExpression leftExpr)
+        {
+            return expr;
+        }
+
+        leftExpr = Expression.MakeMemberAccess(parm, leftExpr.Member);
+
+        return expr2.NodeType switch
+        {
+            ExpressionType.Equal => Expression.Equal(leftExpr, expr2.Right),
+            ExpressionType.NotEqual => Expression.NotEqual(leftExpr, expr2.Left),
+            ExpressionType.GreaterThan => Expression.GreaterThan(leftExpr, expr2.Right),
+            ExpressionType.GreaterThanOrEqual => Expression.GreaterThanOrEqual(leftExpr, expr2.Left),
+            ExpressionType.LessThan => Expression.LessThan(leftExpr, expr2.Right),
+            ExpressionType.LessThanOrEqual => Expression.LessThanOrEqual(leftExpr, expr2.Left),
+            _ => func?.Invoke(leftExpr, expr2.Right)!
+        };
+    }
+
+    /// <summary>
+    /// Szűrési feltétel létrehozása
+    /// Támogatott szűrési műveletek:
+    /// - <see cref="ExpressionType.Equal"/>
+    /// - <see cref="ExpressionType.NotEqual"/>
+    /// - <see cref="ExpressionType.GreaterThan"/>
+    /// - <see cref="ExpressionType.GreaterThanOrEqual"/>
+    /// - <see cref="ExpressionType.LessThanOrEqual"/>
+    /// - <see cref="ExpressionType.LessThanOrEqual"/>
+    /// - egyéb esetben, a <paramref name="func"/> kerül meghívásra
+    /// </summary>
+    /// <param name="parm">Tábla paraméter kifejezés</param>
+    /// <param name="predicate">Szűrési feltétel</param>
+    /// <param name="func">Egyedi szűrési művelet létrehozása</param>
+    /// <returns>Létrehozott szűrési feltétel</returns>
+    protected Expression CreateQueryPredicate(ParameterExpression parm, Expression<Func<TEntity, bool>> predicate, Func<Expression, Expression, Expression>? func = null!)
+    {
+        return this.ReplaceParameter(parm, predicate, func);
+    }
+
+    /// <summary>
+    /// Entity mező elérés kifejezés létrehozása
+    /// (ha a <paramref name="propertyType"/> nem egyezik meg a mező tíusával, akkor <see cref="UnaryExpression"/> kerül létrehozása)
+    /// </summary>
+    /// <param name="parm">Entity kifejezés</param>
+    /// <param name="name">Mező neve</param>
+    /// <param name="propertyType">Mező értékének konvertálási típusa</param>
+    /// <returns>Mező elérés kifejezés (<see cref="MemberExpression"/>)</returns>
+    private Expression CreateFieldAccessExpression(ParameterExpression parm, string name, Type propertyType)
+    {
+        var entityType = parm.Type;
+        var prop = entityType.GetProperty(name, System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.GetProperty);
+        if (prop is not null)
+        {
+            Expression expr = Expression.MakeMemberAccess(parm, prop);
+            if (prop.PropertyType != propertyType)
+            {
+                expr = Expression.Convert(expr, propertyType);
+            }
+
+            return expr;
+        }
+
+        return null!;
+    }
+
+    /// <summary>
+    /// Konstans érték kifejezés létrehozása
+    /// </summary>
+    /// <param name="value">Érték</param>
+    /// <param name="propertyType">Kovertálás típusa</param>
+    /// <returns>Konstans kifejezés (<see cref="UnaryExpression"/>)</returns>
+    private Expression CreateConstantExpression(object? value, Type propertyType)
+    {
+        return Expression.Convert(Expression.Constant(value), propertyType);
+    }
+
+    /// <summary>
+    /// Logikai kifejezés létrehozása
+    /// </summary>
+    /// <param name="parm">Entity kifejezés</param>
+    /// <param name="prop">Mező információk</param>
+    /// <param name="value">Szűrendő érték</param>
+    /// <param name="binaryType">Logikai művelet</param>
+    /// <param name="fieldName">Entity mező neve</param>
+    /// <returns>Egyenlő kifejezés (<see cref="BinaryExpression"/>)</returns>
+    private Expression CreateQueryBinaryExpr(ParameterExpression parm, System.Reflection.PropertyInfo prop, object? value, ExpressionType binaryType, string? fieldName)
+    {
+        fieldName = fieldName ?? prop.Name;
+        var left = this.CreateFieldAccessExpression(parm, fieldName, prop.PropertyType);
+        if (left != null)
+        {
+            var right = this.CreateConstantExpression(value, prop.PropertyType);
+            return Expression.MakeBinary(binaryType, left, right);
+        }
+
+        return null!;
+    }
+
+    /// <summary>
+    /// Szűrési kifejezés létrehozása
+    /// </summary>
+    /// <typeparam name="TQuery">Szűrési információkat tartalmazó konténer osztály típusa</typeparam>
+    /// <param name="parm">Entity kifejezés</param>
+    /// <param name="expr">Eddigi szűrési kifejezések</param>
+    /// <param name="prop">Mező információk</param>
+    /// <param name="query">Szűrési információk</param>
+    /// <param name="attr">Logikai mávelet információk</param>
+    /// <returns>Létrehozott szűrési művelet (<see cref="BinaryExpression"/>)</returns>
+    /// <exception cref="ArgumentOutOfRangeException">Nem támogatott szűrési művelet esetén</exception>
+    private Expression CreateQueryExpression<TQuery>(ParameterExpression parm, Expression expr, System.Reflection.PropertyInfo prop, TQuery query, BusinessEntities.Helpers.QueryOperationAttribute? attr = null)
+    {
+        var binaryType = attr?.ExpressionType;
+        if (binaryType is null)
+        {
+            binaryType = ExpressionType.Equal;
+        }
+
+        var value = prop.GetValue(query);
+        if (value is not null)
+        {
+            var expr2 = this.CreateQueryBinaryExpr(parm, prop, value, binaryType.Value, attr?.FieldName);
+            expr = this.CombineExpressions(expr, expr2);
+        }
+
+        return expr;
+    }
+
+    /// <summary>
+    /// Szűrési kifejezés létrehozása a <typeparamref name="TQuery"/> konténer össze adata alapján
+    /// </summary>
+    /// <typeparam name="TQuery">Szűrési információkat tartalmazó konténer osztály típusa</typeparam>
+    /// <param name="parm">Entity kifejezés</param>
+    /// <param name="query">Szűrési információk</param>
+    /// <returns>Létrehozott szűrési műveletek (<see cref="BinaryExpression"/>)</returns>
+    private Expression CreateQueryExpression<TQuery>(ParameterExpression parm, TQuery query)
+    {
+        Expression expr = null!;
+
+        var queryOperationAttrType = typeof(BusinessEntities.Helpers.QueryOperationAttribute);
+        var props = typeof(TQuery).GetProperties()
+            .Select(p => new
+            {
+                prop = p,
+                attr = p.GetCustomAttributes(queryOperationAttrType, true).FirstOrDefault() as BusinessEntities.Helpers.QueryOperationAttribute
+            });
+        foreach (var prop in props)
+        {
+            expr = this.CreateQueryExpression(parm, expr, prop.prop, query, prop.attr);
+        }
+
+        return expr;
+    }
+
+    /// <summary>
+    /// Szűrési kifejezés létrehozása a <typeparamref name="TQuery"/> konténer össze adata alapján
+    /// </summary>
+    /// <typeparam name="TQuery">Szűrési információkat tartalmazó konténer osztály típusa</typeparam>
+    /// <param name="query">Szűrési információk</param>
+    /// <returns>Létrehozott szűrési műveletek (<see cref="Expression{Func{TEntity, bool}}"/>)</returns>
+    protected Expression<Func<TEntity, bool>> CreatePredicate<TQuery>(TQuery query)
+    {
+        if (query is not null)
+        {
+            var parm = Expression.Parameter(typeof(TEntity), "entity");
+
+            var expr = this.CreateQueryExpression(parm, query);
+            if (expr is not null)
+            {
+                var lambda = Expression.Lambda<Func<TEntity, bool>>(expr, parm);
+                lambda.Reduce();
+                return lambda;
+            }
+        }
+
+        return null!;
     }
 }

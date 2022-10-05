@@ -656,6 +656,90 @@ namespace eLog.HeavyTools.Warehouse.WhZone.WhZTranService
         partial void ProcessResponse(System.Net.Http.HttpClient client, System.Net.Http.HttpResponseMessage response);
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
+        public System.Threading.Tasks.Task<System.Collections.Generic.ICollection<WhZReceivingTranLineDto>> QueryAsync(WhZTranLineQueryDto body)
+        {
+            return QueryAsync(body, System.Threading.CancellationToken.None);
+        }
+    
+        /// <returns>Success</returns>
+        /// <exception cref="ApiException">A server side error occurred.</exception>
+        public System.Collections.Generic.ICollection<WhZReceivingTranLineDto> Query(WhZTranLineQueryDto body)
+        {
+            return System.Threading.Tasks.Task.Run(async () => await QueryAsync(body, System.Threading.CancellationToken.None)).GetAwaiter().GetResult();
+        }
+    
+        /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
+        /// <returns>Success</returns>
+        /// <exception cref="ApiException">A server side error occurred.</exception>
+        public async System.Threading.Tasks.Task<System.Collections.Generic.ICollection<WhZReceivingTranLineDto>> QueryAsync(WhZTranLineQueryDto body, System.Threading.CancellationToken cancellationToken)
+        {
+            var urlBuilder_ = new System.Text.StringBuilder();
+            urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/api/WhZTranLine/receiving/query");
+    
+            var client_ = _httpClient;
+            var disposeClient_ = false;
+            try
+            {
+                using (var request_ = new System.Net.Http.HttpRequestMessage())
+                {
+                    var content_ = new System.Net.Http.StringContent(Newtonsoft.Json.JsonConvert.SerializeObject(body, _settings.Value));
+                    content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json-patch+json");
+                    request_.Content = content_;
+                    request_.Method = new System.Net.Http.HttpMethod("POST");
+                    request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
+    
+                    PrepareRequest(client_, request_, urlBuilder_);
+    
+                    var url_ = urlBuilder_.ToString();
+                    request_.RequestUri = new System.Uri(url_, System.UriKind.RelativeOrAbsolute);
+    
+                    PrepareRequest(client_, request_, url_);
+    
+                    var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
+                    var disposeResponse_ = true;
+                    try
+                    {
+                        var headers_ = System.Linq.Enumerable.ToDictionary(response_.Headers, h_ => h_.Key, h_ => h_.Value);
+                        if (response_.Content != null && response_.Content.Headers != null)
+                        {
+                            foreach (var item_ in response_.Content.Headers)
+                                headers_[item_.Key] = item_.Value;
+                        }
+    
+                        ProcessResponse(client_, response_);
+    
+                        var status_ = (int)response_.StatusCode;
+                        if (status_ == 200)
+                        {
+                            var objectResponse_ = await ReadObjectResponseAsync<System.Collections.Generic.ICollection<WhZReceivingTranLineDto>>(response_, headers_, cancellationToken).ConfigureAwait(false);
+                            if (objectResponse_.Object == null)
+                            {
+                                throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
+                            }
+                            return objectResponse_.Object;
+                        }
+                        else
+                        {
+                            var responseData_ = response_.Content == null ? null : await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
+                            throw new ApiException("The HTTP status code of the response was not expected (" + status_ + ").", status_, responseData_, headers_, null);
+                        }
+                    }
+                    finally
+                    {
+                        if (disposeResponse_)
+                            response_.Dispose();
+                    }
+                }
+            }
+            finally
+            {
+                if (disposeClient_)
+                    client_.Dispose();
+            }
+        }
+    
+        /// <returns>Success</returns>
+        /// <exception cref="ApiException">A server side error occurred.</exception>
         public System.Threading.Tasks.Task<WhZReceivingTranLineDto> AddAsync(WhZReceivingTranLineDto body)
         {
             return AddAsync(body, System.Threading.CancellationToken.None);
@@ -674,7 +758,7 @@ namespace eLog.HeavyTools.Warehouse.WhZone.WhZTranService
         public async System.Threading.Tasks.Task<WhZReceivingTranLineDto> AddAsync(WhZReceivingTranLineDto body, System.Threading.CancellationToken cancellationToken)
         {
             var urlBuilder_ = new System.Text.StringBuilder();
-            urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/api/WhZTranLine/receiving/line/add");
+            urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/api/WhZTranLine/receiving/add");
     
             var client_ = _httpClient;
             var disposeClient_ = false;
@@ -758,7 +842,7 @@ namespace eLog.HeavyTools.Warehouse.WhZone.WhZTranService
         public async System.Threading.Tasks.Task<WhZReceivingTranLineDto> UpdateAsync(WhZReceivingTranLineDto body, System.Threading.CancellationToken cancellationToken)
         {
             var urlBuilder_ = new System.Text.StringBuilder();
-            urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/api/WhZTranLine/receiving/line/update");
+            urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/api/WhZTranLine/receiving/update");
     
             var client_ = _httpClient;
             var disposeClient_ = false;
@@ -979,23 +1063,14 @@ namespace eLog.HeavyTools.Warehouse.WhZone.WhZTranService
         [Newtonsoft.Json.JsonProperty("itemid", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public int? Itemid { get; set; }
     
-        [Newtonsoft.Json.JsonProperty("dispqty", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public double? Dispqty { get; set; }
-    
-        [Newtonsoft.Json.JsonProperty("movqty", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public double? Movqty { get; set; }
-    
-        [Newtonsoft.Json.JsonProperty("inqty", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public double? Inqty { get; set; }
-    
-        [Newtonsoft.Json.JsonProperty("outqty", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public double? Outqty { get; set; }
-    
         [Newtonsoft.Json.JsonProperty("unitid2", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string Unitid2 { get; set; }
     
         [Newtonsoft.Json.JsonProperty("change", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public double? Change { get; set; }
+    
+        [Newtonsoft.Json.JsonProperty("ordqty2", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public double? Ordqty2 { get; set; }
     
         [Newtonsoft.Json.JsonProperty("dispqty2", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public double? Dispqty2 { get; set; }
@@ -1018,6 +1093,9 @@ namespace eLog.HeavyTools.Warehouse.WhZone.WhZTranService
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.5.2.0 (Newtonsoft.Json v13.0.1.0)")]
     public partial class WhZTranHeadQueryDto 
     {
+        [Newtonsoft.Json.JsonProperty("whztid", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int? Whztid { get; set; }
+    
         [Newtonsoft.Json.JsonProperty("cmpid", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public int? Cmpid { get; set; }
     
@@ -1058,6 +1136,27 @@ namespace eLog.HeavyTools.Warehouse.WhZone.WhZTranService
         _2 = 2,
     
         _3 = 3,
+    
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.5.2.0 (Newtonsoft.Json v13.0.1.0)")]
+    public partial class WhZTranLineQueryDto 
+    {
+        [Newtonsoft.Json.JsonProperty("whztid", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int? Whztid { get; set; }
+    
+        [Newtonsoft.Json.JsonProperty("whztlineid", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int? Whztlineid { get; set; }
+    
+        [Newtonsoft.Json.JsonProperty("stid", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int? Stid { get; set; }
+    
+        [Newtonsoft.Json.JsonProperty("stlineid", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int? Stlineid { get; set; }
+    
+        [Newtonsoft.Json.JsonProperty("itemid", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int? Itemid { get; set; }
+    
     
     }
 

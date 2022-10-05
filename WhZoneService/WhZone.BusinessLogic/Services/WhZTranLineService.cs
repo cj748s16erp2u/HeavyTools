@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -16,6 +17,7 @@ using eLog.HeavyTools.Services.WhZone.BusinessLogic.Validators.Interfaces;
 using eLog.HeavyTools.Services.WhZone.DataAccess.Repositories.Interfaces;
 using FluentValidation;
 using Microsoft.EntityFrameworkCore;
+using Newtonsoft.Json.Linq;
 
 namespace eLog.HeavyTools.Services.WhZone.BusinessLogic.Services;
 
@@ -44,6 +46,27 @@ public class WhZTranLineService : LogicServiceBase<OlcWhztranline>, IWhZTranLine
         this.itemRepository = itemRepository ?? throw new ArgumentNullException(nameof(itemRepository));
         this.unitRepository = unitRepository ?? throw new ArgumentNullException(nameof(unitRepository));
         this.mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
+    }
+
+    /// <summary>
+    /// Bevételezés típusú tranzakció tételek lekérdezése
+    /// </summary>
+    /// <param name="predicate">Szűrési feltétel</param>
+    /// <param name="cancellationToken"></param>
+    /// <returns>Tranzakció tételek listája</returns>
+    public async Task<IEnumerable<WhZReceivingTranLineDto>> QueryReceivingAsync(WhZTranLineQueryDto query, CancellationToken cancellationToken = default)
+    {
+        Expression<Func<OlcWhztranline, bool>> predicate = null!;
+        if (query is not null)
+        {
+            predicate = this.CreatePredicate(query);
+        }
+
+        var q = this.Query(predicate);
+        q = q.Where(l => l.Whzt.Whzttype == (int)WhZTranHead_Whzttype.Receiving);
+
+        var list = await q.ToListAsync(cancellationToken);
+        return this.mapper.Map<IEnumerable<WhZReceivingTranLineDto>>(list);
     }
 
     /// <summary>

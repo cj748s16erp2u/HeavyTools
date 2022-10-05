@@ -153,7 +153,54 @@
         }
       }
     },
-    "/api/WhZTranLine/receiving/line/add": {
+    "/api/WhZTranLine/receiving/query": {
+      "post": {
+        "tags": [
+          "WhZTranLine"
+        ],
+        "operationId": "query2",
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/WhZTranLineQueryDto"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/WhZTranLineQueryDto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/WhZTranLineQueryDto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/WhZTranLineQueryDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/WhZReceivingTranLineDto"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/WhZTranLine/receiving/add": {
       "post": {
         "tags": [
           "WhZTranLine"
@@ -197,7 +244,7 @@
         }
       }
     },
-    "/api/WhZTranLine/receiving/line/update": {
+    "/api/WhZTranLine/receiving/update": {
       "post": {
         "tags": [
           "WhZTranLine"
@@ -320,31 +367,16 @@
             "format": "int32",
             "nullable": true
           },
-          "dispqty": {
-            "type": "number",
-            "format": "double",
-            "nullable": true
-          },
-          "movqty": {
-            "type": "number",
-            "format": "double",
-            "nullable": true
-          },
-          "inqty": {
-            "type": "number",
-            "format": "double",
-            "nullable": true
-          },
-          "outqty": {
-            "type": "number",
-            "format": "double",
-            "nullable": true
-          },
           "unitid2": {
             "type": "string",
             "nullable": true
           },
           "change": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "ordqty2": {
             "type": "number",
             "format": "double",
             "nullable": true
@@ -378,6 +410,11 @@
         "type": "object",
         "additionalProperties": false,
         "properties": {
+          "whztid": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
           "cmpid": {
             "type": "integer",
             "format": "int32",
@@ -427,6 +464,37 @@
           2,
           3
         ]
+      },
+      "WhZTranLineQueryDto": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "whztid": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "whztlineid": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "stid": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "stlineid": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "itemid": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          }
+        }
       }
     }
   }

@@ -19,12 +19,31 @@ public class WhZTranLineController : Controller
         this.tranLineService = tranLineService ?? throw new ArgumentNullException(nameof(tranLineService));
     }
 
-    //[HttpPost("receiving/line/query")]
-    //public async Task<ActionResult<IEnumerable<WhZReceivingTranLineDto>>> QueryReceivingAsync([FromBody] WhZTranLineQueryDto query = null)
-    //{
-    //}
+    /// <summary>
+    /// Zóna készlet tranzakció tételek lekérdezése
+    /// </summary>
+    /// <param name="query">Keresési feltételek</param>
+    /// <returns>Lekérdezés eredménye</returns>
+    [HttpPost("receiving/query")]
+    public async Task<ActionResult<IEnumerable<WhZReceivingTranLineDto>>> QueryReceivingAsync([FromBody] WhZTranLineQueryDto query = null)
+    {
+        try
+        {
+            return this.Ok(await this.tranLineService.QueryReceivingAsync(query));
+        }
+        catch (Exception ex)
+        {
+            await ERP2U.Log.LoggerManager.Instance.LogErrorAsync<WhZTranLineController>(ex);
+            return this.BadRequest(ex.Message);
+        }
+    }
 
-    [HttpPost("receiving/line/add")]
+    /// <summary>
+    /// Új zóna készlet tranzakció tétel rögzítése
+    /// </summary>
+    /// <param name="request">Tétel információk</param>
+    /// <returns>Létrehozott tétel</returns>
+    [HttpPost("receiving/add")]
     public async Task<ActionResult<WhZReceivingTranLineDto>> AddReceivingAsync([FromBody] WhZReceivingTranLineDto request)
     {
         if (request is null)
@@ -43,7 +62,12 @@ public class WhZTranLineController : Controller
         }
     }
 
-    [HttpPost("receiving/line/update")]
+    /// <summary>
+    /// Meglévő zóna készlet tranzakció tétel módosítása
+    /// </summary>
+    /// <param name="request">Tétel információk</param>
+    /// <returns>Módosított tétel</returns>
+    [HttpPost("receiving/update")]
     public async Task<ActionResult<WhZReceivingTranLineDto>> UpdateReceivingAsync([FromBody] WhZReceivingTranLineDto request)
     {
         if (request is null)
