@@ -111,6 +111,7 @@
   <ItemGroup>
     <Compile Include="BankTran\CifEbankTransBL3.cs" />
     <Compile Include="BankTran\CifEbankTransImportFieldList.cs" />
+    <Compile Include="BankTran\EfxBankTranHeadSearchProvider3.cs" />
     <Compile Include="BankTran\EfxBankTranHeadSearchTab3.cs" />
     <Compile Include="BankTran\EfxBankTranLineSearchTab3.cs" />
     <Compile Include="BankTran\EfxBankTranHeadBL3.cs" />
