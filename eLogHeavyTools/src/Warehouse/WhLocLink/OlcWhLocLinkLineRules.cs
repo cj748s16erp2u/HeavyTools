@@ -13,7 +13,7 @@ namespace eLog.HeavyTools.Warehouse.WhLocLink
         public OlcWhLocLinkLineRules() : base(true, true)
         {
             this.AddCustomRule(CheckActiveLineRule);
-            this.AddCustomRule(CheckSameWarehouseandZoneRule);
+            this.AddCustomRule(CheckSameWarehouseAndZoneRule);
         }
 
         /// <summary>
@@ -26,11 +26,11 @@ namespace eLog.HeavyTools.Warehouse.WhLocLink
             if (loclinkline.Whlocid != null)
             {
                 var bl = OlcWhLocLinkLineBL.New();
+                var whloc = OlcWhLocation.Load(loclinkline.Whlocid);
 
                 if (bl.CheckActiveLinkByIDs(loclinkline.Whlocid, loclinkline.Whllid))
-                {
-                    var whloc = OlcWhLocation.Load(loclinkline.Whlocid);
-                    ctx.AddErrorField(OlcWhLocLink.FieldWhlocid, "$err_OlcWhLocLinkLine_WhLocIdHasActivePeriod", whloc?.Whloccode );
+                { 
+                    ctx.AddErrorField(OlcWhLocLink.FieldWhlocid, "$err_OlcWhLocLinkLine_WhLocIdHasActivePeriod", whloc?.Whloccode);
                 }
             }
         }
@@ -40,19 +40,20 @@ namespace eLog.HeavyTools.Warehouse.WhLocLink
         /// </summary>
         /// <param name="ctx"></param>
         /// <param name="locline"></param>
-        private void CheckSameWarehouseandZoneRule(RuleValidateContext ctx, OlcWhLocLinkLine locline)
+        private void CheckSameWarehouseAndZoneRule(RuleValidateContext ctx, OlcWhLocLinkLine locline)
         {
             var loc1 = OlcWhLocation.Load(locline.Whlocid);
             var temp = OlcWhLocLink.Load(locline.Whllid);
-            var loc2 = OlcWhLocation.Load(temp.Whlocid);
 
-            if (loc1.Whlocid != null && loc2.Whlocid != null)
+            if (locline.Whlocid != null)
             {
-                var bl = OlcWhLocLinkLineBL.New();
-
-                if(!bl.CheckWarehouseAndZone(loc1.Whid, loc2.Whid, loc1.Whzoneid, loc2.Whzoneid))
+                if(temp.Whid.Value != loc1.Whid.Value)
                 {
-                    ctx.AddErrorField(OlcWhLocLink.FieldWhlocid, "$err_OlcWhLocLink_WhidOrZoneIsDifferent", loc1.Whloccode, loc2.Whloccode);
+                    ctx.AddErrorField(OlcWhLocLink.FieldWhlocid, "$err_OlcWhLocLink_WhidIsDifferent", loc1.Whloccode);
+                }
+                if(temp.Whzoneid == null && loc1.Whzoneid != null || temp.Whzoneid != null && loc1.Whzoneid == null || temp.Whid.Value != loc1.Whid.Value)
+                {
+                    ctx.AddErrorField(OlcWhLocLink.FieldWhlocid, "$err_OlcWhLocLink_ZoneIsDifferent", loc1.Whloccode);
                 }
             }
         }

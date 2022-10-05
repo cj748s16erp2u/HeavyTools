@@ -30,7 +30,7 @@ namespace eLog.HeavyTools.Warehouse.WhLocLink
         {
             var sql = $@"select top 1 1
 from [olc_whloclinkline] [wlll] (nolock)
-  join [olc_whloclink] [wll] (nolock) on [wll].[whlocid] = [wlll].[whllid]
+  join [olc_whloclink] [wll] (nolock) on [wll].[whllid] = [wlll].[whllid]
 where [wlll].[whlocid] = {Utils.SqlToString(whlocid)}
   and [wll].[startdate] <= {Utils.SqlToString(enddate)}
   and [wll].[enddate] >= {Utils.SqlToString(startdate)}";
@@ -99,5 +99,28 @@ where {Utils.SqlToString(num)} = [wll].[whllid]";
 
             return row;
         }
+
+        /// <summary>
+        /// Kapjon a Túltöltési határ alapértéket a zóna vagy a helykód listákból.
+        /// </summary>
+        /// <param name="locid"></param>
+        /// <returns>decimal?</returns>
+        public decimal? GetLocationThreshold(int? locid)
+        {
+            if(locid == null)
+            {
+                return null;
+            }
+           
+            var sql = $@"select isnull([whl].[overfillthreshold], [whz].[locdefoverfillthreshold]) [overfilltreshold]
+from [olc_whlocation] [whl] (nolock)
+  left join [olc_whzone] [whz] (nolock) on [whz].[whzoneid] = [whl].[whzoneid]
+where [whl].[whlocid] = {Utils.SqlToString(locid)}";
+
+            var value = SqlDataAdapter.ExecuteSingleValue(DB.Main, sql);
+
+            return ConvertUtils.ToDecimal(value);
+        }
+
     }
 }

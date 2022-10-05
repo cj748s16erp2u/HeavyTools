@@ -26,10 +26,10 @@ namespace eLog.HeavyTools.Warehouse.WhLocLink
             if (loclink.Whlocid != null)
             {
                 var bl = OlcWhLocLinkBL.New();
+                var whloc = OlcWhLocation.Load(loclink.Whlocid);
 
-                if(bl.CheckActiveLinkPeriod(loclink.Whlocid, loclink.Startdate, loclink.Enddate, loclink.Whllid))
-                {
-                    var whloc = OlcWhLocation.Load(loclink.Whlocid);
+                if (bl.CheckActiveLinkPeriod(loclink.Whlocid, loclink.Startdate, loclink.Enddate, loclink.Whllid))
+                {       
                     ctx.AddErrorField(OlcWhLocLink.FieldWhlocid, "$err_OlcWhLocLink_WhLocIdHasActivePeriod", whloc?.Whloccode, loclink.Startdate, loclink.Enddate);
                 }
             }

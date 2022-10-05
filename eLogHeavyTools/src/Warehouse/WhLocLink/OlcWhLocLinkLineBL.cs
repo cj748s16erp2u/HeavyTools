@@ -1,7 +1,9 @@
-﻿using eLog.HeavyTools.Setup.Warehouse;
+﻿using eLog.HeavyTools.Reports.Financials.ReminderLetter;
+using eLog.HeavyTools.Setup.Warehouse;
 using eProjectWeb.Framework;
 using eProjectWeb.Framework.BL;
 using eProjectWeb.Framework.Data;
+using eProjectWeb.Framework.Extensions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,17 +21,20 @@ namespace eLog.HeavyTools.Warehouse.WhLocLink
             return ObjectFactory.New<OlcWhLocLinkLineBL>();
         }
 
+        protected static readonly string SQL_DeleteCheck = $@"
+select [whllinktype] from [dbo].[olc_whloclinkline] as [wlll] where [wlll].[whlllineid] = {{0}}";
+
         /// <summary>
         /// Ellenőrzés arra ID alapján, hogy dátumot is figyelembe véve, kapcsolt-e valahová a helykód.
         /// </summary>
         /// <param name="whlocid"></param>
         /// <param name="whllid"></param>
-        /// <returns></returns>
+        /// <returns>bool</returns>
         public bool CheckActiveLinkByIDs(int? whlocid, int? whllid)
         {
             var sql = $@"select top 1 1
 from [olc_whloclinkline] [wlll] (nolock)
-  join [olc_whloclink] [wll] (nolock) on [wll].[whlocid] = [wlll].[whllid]
+  join [olc_whloclink] [wll] (nolock) on [wll].[whllid] = [wlll].[whllid]
   join [olc_whloclink] [wllm] (nolock) on [wllm].[startdate] <= [wll].[enddate] and [wllm].[enddate] >= [wll].[startdate]
 where [wlll].[whlocid] = {Utils.SqlToString(whlocid)}
   and [wllm].[whllid] = {Utils.SqlToString(whllid)}";
@@ -40,23 +45,26 @@ where [wlll].[whlocid] = {Utils.SqlToString(whlocid)}
         }
 
         /// <summary>
-        /// Megnézi, hogy a master hely és a detail hely raktárai és zónái megegyeznek-e.
+        /// A fő helykódok nem törölhetőek a Kapcsolt helykódok felületen.
         /// </summary>
-        /// <param name="wh1"></param>
-        /// <param name="wh2"></param>
-        /// <param name="zone1"></param>
-        /// <param name="zone2"></param>
-        /// <returns></returns>
-        public bool CheckWarehouseAndZone(string wh1, string wh2, int? zone1, int? zone2)
+        /// <param name="k"></param>
+        /// <param name="reason"></param>
+        /// <returns>bool</returns>
+        public override bool IsDeletePossible(Key k, out string reason)
         {
-            var sql = $@"select top 1 1 from [olc_whloclinkline] [wlll] (nolock)
-join [olc_whloclink] [wll] (nolock) on [wll].[whlocid] = [wlll].[whllid]
-where [wll].[whid] = {Utils.SqlToString(wh1)} and {Utils.SqlToString(wh1)} = {Utils.SqlToString(wh2)}
-and [wll].[whzoneid] = {Utils.SqlToString(zone1)} and {Utils.SqlToString(zone1)} = {Utils.SqlToString(zone2)}";
+            var b = base.IsDeletePossible(k, out reason);
 
-            var obj = SqlDataAdapter.ExecuteSingleValue(DB.Main, sql);
-
-            return ConvertUtils.ToInt32(obj).GetValueOrDefault() != 0;
+            if (b)
+            {
+                var sql = string.Format(SQL_DeleteCheck, k.Values.First().ToString());
+                var num = SqlDataAdapter.ExecuteSingleValue(DB.Main, sql);
+                if ((int)num == 1)
+                {
+                    b = false;
+                    reason = "$err_masterloclinkline".eLogTransl();
+                }
+            }
+            return b;
         }
     }
 }

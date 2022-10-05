@@ -12,12 +12,20 @@ namespace eLog.HeavyTools.Warehouse.WhLocLink
             return tab;
         }
 
+        /// <summary>
+        /// Rendben kattintás esetén történjen InfoTab frissítés.
+        /// </summary>
+        /// <param name="args"></param>
         protected override void OnCmdIleOK(PageUpdateArgs args)
         {
             base.OnCmdIleOK(args);
             RefreshTabInfoPart(args);
         }
 
+        /// <summary>
+        /// Törlés megerősítése után történjen InfoTab frissítés.
+        /// </summary>
+        /// <param name="args"></param>
         protected override void Delete_ConfirmYes(PageUpdateArgs args)
         {
             base.Delete_ConfirmYes(args);
