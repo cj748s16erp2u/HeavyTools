@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Schema xmlns="http://tempuri.org/RenderableSchema.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://tempuri.org/RenderableSchema.xsd RenderableSchema.xsd">
+ 
+	<TabPage Name="SordSordInlineEditTab">
+		<Control ControlType="SordHeadInfoPart" ID="sordHeadInfoPart"/>
+		<SearchFilterBar ID="SrcBar">
+			<Textbox Field="docnum" Width="100"/>
+			<Textbox Field="itemcode" Width="100"/>
+			<Textbox Field="name01" Width="100"/>
+			<Textbox Field="name02" Width="100"/>
+			<ForceNextRow/>
+			<DatePickerbox Field="reqdatefrom" Width="100"/>
+			<DatePickerbox Field="reqdateto" Width="100"/>
+			<Textbox Field="ref2" Width="80"/>
+			<Checkbox Field="nonzero"/>
+			<Checkbox Field="missingselprc"/>
+		</SearchFilterBar>
+		<Grid ID="editableList" StatusBar="True" FilterBar="True" Label="$sordsord_search_results" MultiSelect="True"/>
+		<LayoutCtrlSetup ID="IleLayout">
+			<Numberbox Field="qty"/>
+		</LayoutCtrlSetup>
+	</TabPage>
+	
+	
+	<Search Name="SordSordSearchProvider">
+        <Column FieldName="sordlineid" Hidden="True" PKFieldName="sordlineid"/>
+        <Column FieldName="docnum" Width="85"/>
+        <Column FieldName="sordlinestat" Width="35" FieldFunction="listlookup" FieldFuncArg="eLog.Base.Sales.Sord.SordLineStatList,abbr"/>
+        <Column FieldName="itemcode" Width="120"/>
+        <!--<Column FieldName="itemid_name3" Width="200" />-->
+        <Column FieldName="name01" Width="200"/>
+        <Column FieldName="reqdate" Width="80" Format="D"/>
+        <Column FieldName="remqty" Width="90" Format="C2"/>
+        <Column FieldName="remnetval" Width="90" Format="C2"/>
+        <Column FieldName="selprc" Width="80"/>
+		
+        <Column FieldName="fullordqty" Width="68"/>
+        <Column FieldName="fullmovqty" Width="68"/>
+		
+        <Column FieldName="ordqty" Width="68"/>
+        <Column FieldName="movqty" Width="68"/>
+		<Column FieldName="confqty" Width="68"/>
+        <Column FieldName="confdeldate" Width="80" Format="D"/>
+        <Column FieldName="qty" Width="90" Format="C2"/>
+        <Column FieldName="ordered" Width="85"/>
+        <Column FieldName="unitid" Width="45"/>
+        <Column FieldName="taxid" Width="60"/>
+        <Column FieldName="discpercnt" Width="60"/>
+        <Column FieldName="discval" Width="60"/>
+        <Column FieldName="netval" Width="100"/>
+        <Column FieldName="taxval" Width="100"/>
+        <Column FieldName="totval" Width="100"/>
+        <Column FieldName="ref2" Width="100"/>
+        <Column FieldName="linenum" Width="60"/>
+        <Column FieldName="note" Width="150"/>
+        <Column FieldName="addusrid" Width="100"/>
+        <Column FieldName="adddate" Width="120" Format="DT"/>
+    </Search>
+	
+</Schema>

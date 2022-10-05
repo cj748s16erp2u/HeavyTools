@@ -399,6 +399,9 @@
     <Compile Include="Sales\Sord\OlcSordLine.cs" />
     <Compile Include="Sales\Sord\OlcSordLineGenerated.cs" />
     <Compile Include="Sales\Sord\OlcSordLineRules.cs" />
+    <Compile Include="Sales\Sord\OlcTmpSordSord.cs" />
+    <Compile Include="Sales\Sord\OlcTmpSordSordGenerated.cs" />
+    <Compile Include="Sales\Sord\OlcTmpSordSords.cs" />
     <Compile Include="Sales\Sord\SordHeadBL3.cs" />
     <Compile Include="Sales\Sord\SordHeadEditTab3.cs" />
     <Compile Include="Sales\Sord\SordHeadSearchProvider3.cs" />
@@ -410,6 +413,9 @@
     <Compile Include="Sales\Sord\SordLineBL3.cs" />
     <Compile Include="Sales\Sord\SordLineEditTab3.cs" />
     <Compile Include="Sales\Sord\SordLineSearchProvider3.cs" />
+    <Compile Include="Sales\Sord\SordLineSearchTab3.cs" />
+    <Compile Include="Sales\Sord\SordSordBL.cs" />
+    <Compile Include="Sales\Sord\SordSordPage.cs" />
     <Compile Include="Setup\PriceTable\OlcPrcType.cs" />
     <Compile Include="Setup\PriceTable\OlcPrcTypeGenerated.cs" />
     <Compile Include="Setup\PriceTable\OlcPrcTypeList.cs" />
@@ -435,6 +441,7 @@
     <Compile Include="Setup\Warehouse\OlcWhZoneSearchTab.cs" />
     <Compile Include="Setup\Warehouse\WarehouseSearchPage3.cs" />
     <Compile Include="Setup\Warehouse\WarehouseSearchTab3.cs" />
+    <Compile Include="Warehouse\StockTran\IssuingHeadBL3.cs" />
     <Compile Include="Webshop\OlcWebshop.cs" />
     <Compile Include="Webshop\OlcWebshopGenerated.cs" />
     <Compile Include="Webshop\WebshopList.cs" />

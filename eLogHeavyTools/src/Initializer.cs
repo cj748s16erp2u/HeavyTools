@@ -193,6 +193,9 @@ namespace eLog.HeavyTools
             // Warehouse
             ObjectFactory.AddRemap(typeof(Base.Setup.Warehouse.WarehouseSearchPage), typeof(Setup.Warehouse.WarehouseSearchPage3));
             ObjectFactory.AddRemap(typeof(Base.Setup.Warehouse.WarehouseSearchTab), typeof(Setup.Warehouse.WarehouseSearchTab3));
+            ObjectFactory.AddRemap(typeof(Base.Warehouse.StockTran.IssuingHeadBL), typeof(Warehouse.StockTran.IssuingHeadBL3));
+             
+
 
             // Item
             ObjectFactory.AddRemap(typeof(eLog.Base.Masters.Item.ItemEditTab), typeof(eLog.HeavyTools.Masters.Item.ItemEditTab3));
@@ -217,6 +220,7 @@ namespace eLog.HeavyTools
             ObjectFactory.AddRemap(typeof(Base.Sales.Sord.SordLineEditTab), typeof(Sales.Sord.SordLineEditTab3));
             ObjectFactory.AddRemap(typeof(Base.Sales.Sord.SordLineEditTab), typeof(Sales.Sord.SordLineEditTab3));
             ObjectFactory.AddRemap(typeof(Base.Sales.Sord.SordLineSearchProvider), typeof(Sales.Sord.SordLineSearchProvider3));
+            ObjectFactory.AddRemap(typeof(Base.Sales.Sord.SordLineSearchTab), typeof(Sales.Sord.SordLineSearchTab3));
 
             // Pord
             ObjectFactory.AddRemap(typeof(Base.Purchase.Pord.PordHeadBL), typeof(Purchase.Pord.PordHeadBL3));

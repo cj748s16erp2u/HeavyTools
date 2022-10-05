@@ -1,1 +1,9 @@
 @parent=eLog.Base.Sales.Sord
+
+$commitsordsord_err=Lehívás létrehozási hiba: {0}
+
+$qtyerror=Mennyiség hiba. Cikkszám: {2}, lehívandó: {0:#,##0.}, rendelt: {1:#,##0.}
+
+ 
+$fullordqty=Tej.rend.
+$fullmovqty=Tej.szá.
