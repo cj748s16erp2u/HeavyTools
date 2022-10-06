@@ -108,3 +108,7 @@ $PaymentFee=Fizetési
 
 
 $action_preorderButton=Előrendelések
+
+
+$movqtycannotbiggerordqty=Az átveendő mennyiség nem lehet több a rendelt mennyiségnél {0}/{1}, rendelt: {2:#,##0.}, átveendő: {3:#,##0.}
+ 

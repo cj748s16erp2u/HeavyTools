@@ -1,6 +1,8 @@
 ﻿using eLog.Base.Common;
 using eLog.Base.Masters.Item;
 using eLog.Base.Sales.Sord;
+using eLog.Base.Warehouse.Reserve;
+using eLog.Base.Warehouse.StockTran;
 using eProjectWeb.Framework;
 using eProjectWeb.Framework.BL;
 using eProjectWeb.Framework.Data;
@@ -127,6 +129,38 @@ outer apply(
                 var i = Item.Load(row.Itemid);
                 throw new MessageException("$qtyerror", row.Qty, row.Ordqty, i.Itemcode, row.Movqty);
             }
+            int? newResid = null;
+
+            var osl = SordLine.Load(row.Sordlineid);
+            if (osl.Resid.HasValue)
+            {
+                var rBl = ReserveBL.New();
+
+                var ores = Reserve.Load(osl.Resid);
+
+                var q = row.Qty;
+                if (ores.Resqty < q)
+                {
+                    q = ores.Resqty;
+                }
+                ores.Resqty = ores.Resqty - q;
+                SaveReserve(rBl, ores);
+
+                var nres = Reserve.CreateNew();
+                nres.Restype = 1;
+                nres.Resqty = q;
+                nres.Resdate = DateTime.Today;
+                nres.Cmpid = ores.Cmpid;
+                nres.Partnid = ores.Partnid;
+                nres.Addrid = ores.Addrid;
+                nres.Whid = ores.Whid;
+                nres.Itemid = ores.Itemid;
+
+
+                SaveReserve(rBl, nres);
+                newResid = nres.Resid;
+            }
+
 
             var sl = SordLine.CreateNew();
             var csl = OlcSordLine.CreateNew();
@@ -151,7 +185,7 @@ outer apply(
             sl.Taxid = row.Taxid;
             sl.Sordlinestat = 10;
             sl.Note = row.Note;
-            sl.Resid = row.Resid;
+            sl.Resid = newResid;
             sl.Ucdid = row.Ucdid;
             sl.Pjpid = row.Pjpid;
             sl.Gen = row.Gen;
@@ -164,8 +198,15 @@ outer apply(
             map.Default = sl;
             map.Add(csl);
             bl.Save(map);
-
+             
             return sl;
+        }
+
+        private void SaveReserve(ReserveBL rBl, Reserve res)
+        {
+            var map = rBl.CreateBLObjects();
+            map.Default = res;
+            rBl.Save(map);
         }
 
         internal void ClearOlcTmpSordSord(Key k, List<Key> selectedRowPKs)

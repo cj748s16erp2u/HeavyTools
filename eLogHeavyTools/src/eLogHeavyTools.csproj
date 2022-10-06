@@ -416,6 +416,7 @@
     <Compile Include="Sales\Sord\SordLineSearchTab3.cs" />
     <Compile Include="Sales\Sord\SordSordBL.cs" />
     <Compile Include="Sales\Sord\SordSordPage.cs" />
+    <Compile Include="Sales\Sord\SordStBL3.cs" />
     <Compile Include="Setup\PriceTable\OlcPrcType.cs" />
     <Compile Include="Setup\PriceTable\OlcPrcTypeGenerated.cs" />
     <Compile Include="Setup\PriceTable\OlcPrcTypeList.cs" />
@@ -442,6 +443,7 @@
     <Compile Include="Setup\Warehouse\WarehouseSearchPage3.cs" />
     <Compile Include="Setup\Warehouse\WarehouseSearchTab3.cs" />
     <Compile Include="Warehouse\StockTran\IssuingHeadBL3.cs" />
+    <Compile Include="Warehouse\StockTran\IssuingLineBL3.cs" />
     <Compile Include="Webshop\OlcWebshop.cs" />
     <Compile Include="Webshop\OlcWebshopGenerated.cs" />
     <Compile Include="Webshop\WebshopList.cs" />
