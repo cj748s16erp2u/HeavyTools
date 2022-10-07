@@ -1,5 +1,6 @@
 ﻿using eProjectWeb.Framework;
 using eProjectWeb.Framework.BL;
+using eProjectWeb.Framework.UI.Controls;
 using eProjectWeb.Framework.UI.Templates;
 using System;
 using System.Collections.Generic;
@@ -18,9 +19,30 @@ namespace eLog.HeavyTools.Warehouse.WhLocPrio
             return t;
         }
 
+        protected Control ctrlRefillLimit;
+        protected Control ctrlPrioType;
+
         protected override void CreateBase()
         {
             base.CreateBase();
+            this.ctrlRefillLimit = this.EditGroup1["refilllimit"];
+            this.ctrlPrioType = this.EditGroup1["whpriotype"];
+            if (ctrlPrioType != null)
+            {
+                ctrlPrioType.SetOnChanged(new ControlEvent(ctrlPrioTypeOnChanged));
+            }
+        }
+
+        private void ctrlPrioTypeOnChanged(PageUpdateArgs args)
+        {
+            if (ConvertUtils.ToInt32(ctrlPrioType.Value) == (int)OlcWhLocPrio_PrioType.Primary)
+            {
+                ctrlRefillLimit.SetMandatory(true);
+            }
+            else
+            {
+                ctrlRefillLimit.SetMandatory(false);
+            }
         }
 
         protected override OlcWhLocPrio DefaultPageLoad(PageUpdateArgs args)
@@ -33,5 +55,6 @@ namespace eLog.HeavyTools.Warehouse.WhLocPrio
         {
             return base.SaveControlsToBLObjectMap(args, e);
         }
+
     }
 }

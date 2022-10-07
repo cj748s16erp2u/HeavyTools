@@ -4,7 +4,8 @@
 		<SearchFilterBar ID="SrcBar">
 			<Textbox Field="itemcode" Width="120"/>
 			<Textbox Field="itemname01" Width="120"/>
-			<DatePickerbox Field="enddate" Label="$date" Width="120" />
+			<DatePickerbox Field="startdate" Width="120"/>
+			<DatePickerbox Field="enddate" Width="120" />
 			<ForceNextRow/>
 			<CheckedCombo Field="whid" Width="120" ListID="eLog.Base.Setup.Warehouse.WarehouseList" ComboFlags="None" />
 			<CheckedCombo Field="whzoneid" Width="120" ListID="eLog.HeavyTools.Setup.Warehouse.OlcWhZoneList" ComboFlags="None" DependentCtrlID="whid" DependentField="whid" DependentAllowNullField="whid"/>
@@ -15,20 +16,17 @@
 	<Search Name="OlcWhLocPrioSearchProvider">
 		<Column FieldName="itemcode" Width="120"/>
 		<Column FieldName="itemname01" Width="200"/>
-		<Column FieldName="whpriotype" Width="40" Align="Left"/>
-		<Column FieldName="refillimit" Width="100"/>
+		<Column FieldName="type" Width="40" Align="Left"/>
 		<Column FieldName="whid" Width="80" Align="Left"/>
-		<Column FieldName="whname" Width="200"/>
 		<Column FieldName="whzonecode" Width="200"/>
-		<Column FieldName="whzonename" Width="200"/>
-		<Column FieldName="whlocname" Width="200"/>
 		<Column FieldName="whloccode" Width="200"/>
+		<Column FieldName="refilllimit" Width="100" Format="C"/>
 		<Column FieldName="startdate" Format="D" Width="75"/>
 		<Column FieldName="enddate" Format="D" Width="75"/>
 		<Column FieldName="whlpid" PKFieldName="whlpid" Width="40"/>
 	</Search>
 	
-	<TabPage Name="OlcWhLocPrioEditTab" Label="Olc$WhLocPrioEditTab">
+	<TabPage Name="OlcWhLocPrioEditTab" Label="$OlcWhLocPrioEditTab">
 		<LayoutTable ID="EditGroup1" Columns="{140,None};{180,None};{20,Empty};{140,None};{180,None};" ControlGroup="OlcWhLocPrio">
 			<Selector Field="itemid" Label="$itemid_code" ValueField="itemid" TextField="itemcode" SelectionID="eLog.Base.Masters.Item.ItemSelectionProvider"/>
 			<ForceNextRow/>
@@ -36,10 +34,11 @@
 			<ForceNextRow/>
 			<Combo Field="whid" ListID="eLog.Base.Setup.Warehouse.WarehouseList" ComboFlags="None"/>
 			<Combo Field="whzoneid" ListID="eLog.HeavyTools.Setup.Warehouse.OlcWhZoneList" ComboFlags="None" DependentCtrlID="whid" DependentField="whid"/>
-			<Combo Field="whlocid" ListID="eLog.HeavyTools.Setup.Warehouse.OlcWhLocationList" ComboFlags="None" DependentCtrlID="whid,whzoneid" DependentField="whid,whzoneid" DependentAllowNullField="whzoneid"/>
+			<!--<Combo Field="whlocid" ListID="eLog.HeavyTools.Setup.Warehouse.OlcWhLocationList" ComboFlags="None" DependentCtrlID="whid,whzoneid" DependentField="whid,whzoneid" DependentAllowNullField="whzoneid"/>-->
+			<Selector Field="whlocid" ValueField="whlocid" TextField="whloccode" SelectionID="eLog.HeavyTools.Setup.Warehouse.OlcWhLocationSelectionProvider" DependentCtrlID="whid,whzoneid" DependentField="whid,whzoneid" DependentAllowNullField="whzoneid"/>
 			<ForceNextRow/>
 			<Combo Field="whpriotype" ListID="eProjectWeb.Framework.Data.TypeListProviderPublic#olc_whlocprio.priotype" />
-			<Textbox Field="refillimit"/>
+			<Numberbox Field="refilllimit" DecDigits="2" ThousandSep="True"/>
 			<DatePickerbox Field="startdate"/>
 			<DatePickerbox Field="enddate"/>	
 		</LayoutTable>
@@ -60,14 +59,11 @@
 	<Search Name="OlcWhLocPrioAllSearchProvider">
 		<Column FieldName="itemcode" Width="120" />
 		<Column FieldName="itemname01" Width="200"/>
-		<Column FieldName="whpriotype" Width="40" Align="Left"/>
-		<Column FieldName="refillimit" Width="100"/>
+		<Column FieldName="type" Width="40" Align="Left"/>
 		<Column FieldName="whid" Width="80" Align="Left"/>
-		<Column FieldName="whname" Width="200"/>
-		<Column FieldName="whzonename" Width="200"/>
 		<Column FieldName="whzonecode" Width="200"/>
-		<Column FieldName="whlocname" Width="200"/>
 		<Column FieldName="whloccode" Width="200"/>
+		<Column FieldName="refilllimit" Width="100" Format="C"/>
 		<Column FieldName="startdate" Format="D" Width="75"/>
 		<Column FieldName="enddate" Format="D" Width="75"/>
 		<Column FieldName="whlpid" PKFieldName="whlpid" Width="40"/>

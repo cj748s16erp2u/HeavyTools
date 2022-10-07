@@ -17,5 +17,6 @@ namespace eLog.HeavyTools.Masters.Item.Import
         public TableEntry ItemMainGroup { get; set; }
         public TableEntry TypeHeadColor { get; set; }
         public TableEntry ImpColorException { get; set; }
+        public TableEntry ItemAssortment { get; set; }
     }
 }

@@ -12,13 +12,16 @@ namespace eLog.HeavyTools.Warehouse.WhLocPrio
         public static readonly string ID = typeof(OlcWhLocPrioAllSearchProvider).FullName;
 
         protected static string queryString =
-            @"select prio.*,item.itemcode,item.name01 itemname01,wh.name whname,whzone.name whzonename, 
-whzone.whzonecode, loc.name whlocname,loc.whloccode --$$moreFields$$ 
+            @"select prio.*,
+(select line.abbr from ols_typeline line  
+left join ols_typehead head on head.typegrpid=line.typegrpid 
+where line.typegrpid=514 and prio.whpriotype=line.value) type,
+item.itemcode,item.name01 itemname01, whzone.whzonecode, loc.whloccode --$$moreFields$$ 
 from olc_whlocprio prio (nolock) 
 left join ols_item item (nolock) on prio.itemid=item.itemid 
 left join olc_whlocation loc (nolock) on prio.whlocid=loc.whlocid 
 left join olc_whzone whzone (nolock) on prio.whzoneid=whzone.whzoneid 
-left join ols_warehouse wh (nolock) on prio.whid=wh.whid --$$moreJoins$$
+ --$$moreJoins$$
 ";
 
         protected static QueryArg[] argsTemplate = new QueryArg[]
@@ -50,6 +53,11 @@ left join ols_warehouse wh (nolock) on prio.whid=wh.whid --$$moreJoins$$
         {
             var s = base.CreateQueryString(args, fmtonly);
             return s;
+        }
+
+        protected override string GetOrderByString(Dictionary<string, object> args)
+        {
+            return "\norder by prio.startdate";
         }
 
     }

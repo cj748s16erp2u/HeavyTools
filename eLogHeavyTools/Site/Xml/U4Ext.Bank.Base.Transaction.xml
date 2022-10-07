@@ -1,5 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
-<Schema xmlns="http://tempuri.org/RenderableSchema.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://tempuri.org/RenderableSchema.xsd ../../../../../eLog/Base/Site/Xml/RenderableSchema.xsd">
+<Schema xmlns="http://tempuri.org/RenderableSchema.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://tempuri.org/RenderableSchema.xsd ../../../../Releases/eLog.Base/v7.2.0.0/Site/Xml/RenderableSchema.xsd">
+
+    <Search Name="EfxBankTranHeadSearchProvider">
+      <Column FieldName="banktranstat" Align="Left" FieldFunction="listlookup" FieldFuncArg="eLog.Base.Setup.Status.StatListProviderPublic#efx_banktranhead.banktranstat,abbr" Width="50" />
+      <Column FieldName="filename" Width="200" />
+      <Column FieldName="bankid" Align="Left" FieldFunction="listlookup" FieldFuncArg="U4Ext.Bank.Base.Setup.Bank.EfxBankListProvider,bankcode" Width="100" />
+      <Column FieldName="banktype" Align="Left" Width="50" FieldFunction="listlookup" FieldFuncArg="eProjectWeb.Framework.Data.TypeListProviderPublic#efx_bank.banktype,abbr"/>
+      <Column FieldName="bankaccno" Width="180" />
+      <Column FieldName="fromdate" Width="90" />
+      <Column FieldName="todate" Width="90" />
+      <Column FieldName="fromvaldate" Width="90" />
+      <Column FieldName="tovaldate" Width="90" />
+      <Column FieldName="ref1" Width="100" />
+      <Column FieldName="line_db" Width="80" />
+      <Column FieldName="openval" Width="100" />
+      <Column FieldName="closeval" Width="100" />
+      <Column FieldName="sum_origvalue" Width="100" />
+      <Column FieldName="finopenval" Width="100" />
+      <Column FieldName="ledgercode" Width="80" />
+      <Column FieldName="ledgername" Width="150" />
+      <Column FieldName="ledgercur" Width="80" />
+      <Column FieldName="ownername" Width="150" />
+      <Column FieldName="ownerref" Width="80" />
+      <Column FieldName="addusrcode" Width="80"/>
+      <Column FieldName="cmpcode" Width="80" />
+      <Column FieldName="cmpsname" Width="180" />
+      <Column FieldName="banktranid" PKFieldName="true" />
+    </Search>
+
     <TabPage Name="EfxBankTranLineSearchTab">
       <Control ControlType="EfxBankTranHeadInfo" ID="efxBankTranHeadInfo1"/>
       <Control ControlType="EfxBankTranHeadInfo" ID="efxBankTranHeadInfo1"/>

@@ -25,3 +25,4 @@ olc_cartpay,eLog.HeavyTools.Sales.Retail.Cart,OlcCartPay
 olc_whlocprio,eLog.HeavyTools.Warehouse.WhLocPrio,OlcWhLocPrio
 olc_whloclink,eLog.HeavyTools.Warehouse.WhLocLink,OlcWhLocLink
 olc_whloclinkline,eLog.HeavyTools.Warehouse.WhLocLink,OlcWhLocLinkLine
+olc_itemassortment,eLog.HeavyTools.Masters.Item.Assortment,OlcItemAssortment

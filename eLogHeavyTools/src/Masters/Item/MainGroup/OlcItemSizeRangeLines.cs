@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace eLog.HeavyTools.Masters.Item.MainGroup
 {
-    class OlcItemSizeRangeLines : EntityCollection<OlcItemSizeRangeLine, OlcItemSizeRangeLines> 
+    public class OlcItemSizeRangeLines : EntityCollection<OlcItemSizeRangeLine, OlcItemSizeRangeLines> 
     {
     }
 }

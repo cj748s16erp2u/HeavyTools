@@ -17,6 +17,7 @@ namespace eLog.HeavyTools.Masters.Item.Import
         public TableEntry ItemMainGroup { get; internal set; }
         public TableEntry TypeHeadColor { get; internal set; }
         public TableEntry ImpColorException { get; internal set; }
+        public TableEntry ItemAssortment { get; internal set; }
 
         public override void Dispose()
         {
@@ -36,6 +37,7 @@ namespace eLog.HeavyTools.Masters.Item.Import
             this.ItemMainGroup = null;
             this.TypeHeadColor = null;
             this.ImpColorException = null;
+            this.ItemAssortment = null;
         }
     }
 }

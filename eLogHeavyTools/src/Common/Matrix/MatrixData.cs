@@ -93,7 +93,6 @@ namespace eLog.HeavyTools.Common.Matrix
 
     public class MatrixData
     {
-        private List<object> ColKeys = new List<object>();
         private List<object> RowKeys = new List<object>();
 
         private Rows Data = new Rows();

@@ -25,7 +25,11 @@ namespace eLog.HeavyTools.Common.Matrix
 
         bool GetReadOnly();
     }
-
+    public enum MatrixEditItemType
+    {
+        CheckBox=0,
+        Intbox=1
+    }
     public class MatrixEditItem <C> : IMatrixEditItem where C : Control 
     {
         private Field Field; 
@@ -110,7 +114,9 @@ namespace eLog.HeavyTools.Common.Matrix
         public Field RootKey;
         public MatrixField RowKey;
         public MatrixField ColKey;
-         
+        
+        public MatrixEditItemType EditItemType { get; private set; }
+        public Field MatrixValueField { get; private set; } = null;
 
         public List<IMatrixEditItem> EditItems = new List<IMatrixEditItem>();
         public List<IMatrixEditItem> EditItemsTop = new List<IMatrixEditItem>();
@@ -137,6 +143,17 @@ namespace eLog.HeavyTools.Common.Matrix
 
         internal void Setup(Field rootkey, MatrixField rowkey, MatrixField colkey, string businessLogicID)
         {
+            EditItemType = MatrixEditItemType.CheckBox;
+            RootKey = rootkey;
+            RowKey = rowkey;
+            ColKey = colkey;
+            bl = (StoredEntityBL)BusinessLogicServer.Create(businessLogicID);
+
+        }
+        internal void Setup(MatrixEditItemType matrixedititemtype, Field matrixValueField, Field rootkey,  MatrixField rowkey, MatrixField colkey, string businessLogicID)
+        {
+            MatrixValueField = matrixValueField;
+            EditItemType = matrixedititemtype;
             RootKey = rootkey;
             RowKey = rowkey;
             ColKey = colkey;
@@ -155,9 +172,39 @@ namespace eLog.HeavyTools.Common.Matrix
                 var e = msev.FindEntity(new[] { RowKey.Key, ColKey.Key }); 
                 var rowPk = e[RowKey.Key.Name];
                 var colPk = e[ColKey.Key.Name];
-     
-                MatrixData.AddValue(rowPk, colPk, RootKey, true);
-              
+
+                if (EditItemType == MatrixEditItemType.CheckBox)
+                {
+                    MatrixData.AddValue(rowPk, colPk, RootKey, true);
+                } else if (EditItemType == MatrixEditItemType.Intbox)
+                {
+                    var ce=msev.Entities[storeEntityCollection.MatrixDefaultEntity];
+                    if (ce != null)
+                    {
+                        try
+                        {
+                            var v = ce[MatrixValueField];
+                            if (v != null)
+                            {
+                                MatrixData.AddValue(rowPk, colPk, RootKey, true);
+                                MatrixData.AddValue(rowPk, colPk, MatrixValueField, v);
+                            } else
+                            {
+                                MatrixData.AddValue(rowPk, colPk, RootKey, true);
+                                MatrixData.AddValue(rowPk, colPk, MatrixValueField, 0);
+                            }
+                        }
+                        catch (Exception)
+                        {
+                            //Elsőre System.NullReferenceException-t dob, debugra összeomlik a iisexpress
+                        }
+
+                    }
+                } else
+                {
+                    throw new Exception();
+                }
+
                 foreach (var item in EditItems)
                 {
                     var f = item.GetField();

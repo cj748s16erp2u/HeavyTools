@@ -167,7 +167,7 @@ namespace eLog.HeavyTools.Masters.Item.ItemMatrix
         Textbox codetextbox = new Textbox("code") { Disabled = true };
         Textbox nametextbox = new Textbox("name") { Disabled = true };
 
-        Intbox imidintbox = new Intbox("imid") { Disabled = true };
+        Intbox imidintbox = new Intbox("imid") { Disabled = true, Visible=false };
 
         Combo session = new Combo("isid", OlcItemSeasonList.ID) { DependentField = "imid", DependentCtrlID = "imid" };
       
@@ -189,6 +189,11 @@ namespace eLog.HeavyTools.Masters.Item.ItemMatrix
                 buildButton.Disabled = true;
                 saveChangeButton.Disabled = true;
                 noSaveButton.Disabled = true;
+            } else
+            {
+                buildButton.Disabled = false;
+                saveChangeButton.Disabled = false;
+                noSaveButton.Disabled = false;
             }
         }
 
@@ -231,13 +236,13 @@ colortype1,colorname,colortype2,colortype3,materialtype,patterntype,patterntype2
             var msec = new MatrixStoredEntityConverter(typeof(OlcItem), typeof(Base.Masters.Item.Item));
             msec.Add(ics, typeof(OlcItem));
             msec.Add(ic, typeof(Base.Masters.Item.Item), typeof(OlcItem), Base.Masters.Item.Item.FieldItemid);
-
+            
             var mse = new MatrixStoredEntity(msec);
             return mse;
         }
          
 
-        protected override void Presave(BLObjectMap map)
+        protected override bool Presave(BLObjectMap map, MatrixStoredEntityValues se)
         {
             var item = (Base.Masters.Item.Item)map.Default;
             
@@ -298,6 +303,7 @@ colortype1,colorname,colortype2,colortype3,materialtype,patterntype,patterntype2
                 }
                 map.Add<ItemCmps>(ics);
             }
+            return true;
         }
 
         protected override void Postsave(BLObjectMap map)

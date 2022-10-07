@@ -276,6 +276,7 @@ create table olc_partnaddr (
     constraint fk_olc_partnaddr_addrid foreign key (addrid) references ols_partnaddr (addrid),
     constraint fk_olc_partnaddr_addusrid foreign key (addusrid) references cfw_user (usrid)
 )
+go
 
 /****************************/
 /* Partner kiegészítés      */
@@ -289,13 +290,16 @@ create table olc_partner (
 	loyaltydiscpercnt   numeric(9, 4)           null, -- torzsvevo kedvezmeny
 	loyaltyturnover     numeric(19, 6)          null, -- torzskartya forgalom
 	regreprempid        int                     null, -- teruleti kepviselo
+    taxid               varchar(12)             null,
     addusrid            varchar(12)				not null,
     adddate             datetime                null,
     constraint pk_olc_partner primary key (partnid),
     constraint fk_olc_partner_partnid foreign key (partnid) references ols_partner (partnid),
+    constraint fk_olc_partner_taxid foreign key (taxid) references ols_tax (taxid),
     constraint fk_olc_partner_addusrid foreign key (addusrid) references cfw_user (usrid),
-	constraint fk_olc_partner_regreprempid foreign key (regreprempid) references ols_employee (empid)
+    constraint fk_olc_partner_regreprempid foreign key (regreprempid) references ols_employee (empid)
 )
+go
 
 /*********************************/
 /* Partner-vállalat kiegészítés  */

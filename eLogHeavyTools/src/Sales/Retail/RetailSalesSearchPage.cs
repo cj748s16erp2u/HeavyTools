@@ -9,6 +9,7 @@ using eProjectWeb.Framework.Data;
 using eProjectWeb.Framework.UI.Actions;
 using eProjectWeb.Framework.UI.Controls;
 using eProjectWeb.Framework.UI.PageParts;
+using eProjectWeb.Framework.UI.Script;
 using eProjectWeb.Framework.UI.Templates;
 using System;
 using System.Collections.Generic;
@@ -285,8 +286,28 @@ select cp.*, m.name
 
             barcode = FindRenderable<Textbox>("barcode");
             barcode.SetOnEnterPressed(OnBarcode);
+             
+            var sinvbutton = new Button("sinv");
+            AddCmd(sinvbutton);
 
-            
+            SetButtonAction("sinv", new EditRecordCallbackAction(RetailSinvPage.ID, 
+                eEditRecordCallbackFlags.CheckForContinue), new ControlEvent(OnSinv));
+
+
+
+        }
+
+        private void OnSinv(PageUpdateArgs args)
+        {
+            var bl = GetCartBL();
+            var t = bl.GetCartTotal();
+            if (t.GetMissingValue() != 0)
+            {
+                throw new MessageException("$sinvpaynotequal");
+            } else
+            {
+                args.Continue = true;
+            }
         }
 
         private void OnPayDeleteAll(PageUpdateArgs args)
