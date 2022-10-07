@@ -22,12 +22,12 @@ public class OlcWhztranlineValidatorTest : TestBase<OlcWhztranline, IWhZTranLine
     {
     }
 
-    protected async Task<OlcWhztranhead?> GetFirstTranHeadAsync(WhZTranHead_Whzttype whzttype)
+    protected async Task<OlcWhztranhead?> GetFirstTranHeadAsync(WhZTranHead_Whzttype whzttype, CancellationToken cancellationToken = default)
     {
         return await this.dbContext.OlcWhztranheads
             .Where(h => h.Whzttype == (int)whzttype)
             .Where(h => h.St!.OlsStlines.Any())
-            .FirstOrDefaultAsync();
+            .FirstOrDefaultAsync(cancellationToken: cancellationToken);
     }
 
     #region Add...
@@ -46,7 +46,8 @@ public class OlcWhztranlineValidatorTest : TestBase<OlcWhztranline, IWhZTranLine
         };
 
         var ex = await Assert.ThrowsAnyAsync<Exception>(() => this.service.ValidateAndThrowAsync(entity, ruleSets: ruleSets));
-        Assert.NotEmpty(ex?.Message);
+        Assert.NotNull(ex?.Message);
+        Assert.NotEqual(ex?.Message, string.Empty);
     }
 
     [Fact]

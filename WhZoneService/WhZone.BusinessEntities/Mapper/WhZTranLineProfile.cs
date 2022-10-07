@@ -16,8 +16,8 @@ public class WhZTranLineProfile : Profile
         this.CreateMap<WhZReceivingTranLineDto, OlcWhztranline>()
             .ForMember(dest => dest.Item, opt => opt.Ignore())
             .ForMember(dest => dest.Stline, opt => opt.Ignore())
-            .ForMember(dest => dest.Pordline, opt => opt.Ignore())
-            .ForMember(dest => dest.Sordline, opt => opt.Ignore())
+            //.ForMember(dest => dest.Pordline, opt => opt.Ignore())
+            //.ForMember(dest => dest.Sordline, opt => opt.Ignore())
             .ForMember(dest => dest.Stline, opt => opt.Ignore())
             .ForMember(dest => dest.Unitid2Navigation, opt => opt.Ignore())
             .ForMember(dest => dest.Whzt, opt => opt.Ignore());

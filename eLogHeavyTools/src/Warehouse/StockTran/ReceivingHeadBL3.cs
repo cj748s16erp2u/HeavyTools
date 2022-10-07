@@ -24,6 +24,13 @@ namespace eLog.HeavyTools.Warehouse.StockTran
         /// <returns>Mentett keszlet tranzakcio azonosito (null eseten a mentes meghiusult)</returns>
         public override Key Save(BLObjectMap objects, string langnamespace, bool skipMerge)
         {
+            Base.Warehouse.StockTran.StHead originalStHead = null;
+            if (objects.SysParams.ActionID == ActionID.Modify)
+            {
+                var stHead = objects.Default as Base.Warehouse.StockTran.StHead;
+                originalStHead = Base.Warehouse.StockTran.StHead.Load(stHead?.Stid);
+            }
+
             try
             {
                 var key = base.Save(objects, langnamespace, skipMerge);
@@ -59,6 +66,28 @@ namespace eLog.HeavyTools.Warehouse.StockTran
                         this.Delete(stHead.PK);
                     }
                 }
+                else if (originalStHead != null)
+                {
+                    var stHead = objects.Default as Base.Warehouse.StockTran.StHead;
+                    if (stHead != null)
+                    {
+                        var fields = originalStHead.Schema.Fields.ToList();
+                        if (originalStHead.Schema.PKFields != null)
+                        {
+                            fields = fields.Except(originalStHead.Schema.PKFields).ToList();
+                        }
+
+                        stHead.RevertChanges();
+                        stHead.ReLoad();
+
+                        foreach (var f in fields)
+                        {
+                            stHead[f] = originalStHead[f];
+                        }
+
+                        stHead.Save();
+                    }
+                }
 
                 throw;
             }
@@ -84,9 +113,9 @@ namespace eLog.HeavyTools.Warehouse.StockTran
                     b = e.CustomData?.ContainsKey("towhzid") == true && ConvertUtils.ToInt32(stHead.GetCustomData("towhzid")) != null;
                     message = "$err_sthead_towhzid_mustbeset";
 
-                    if (b && objects.SysParams.ActionID == ActionID.Modify && stHead.Stid != null)
+                    if (!b && objects.SysParams.ActionID == ActionID.Modify && stHead.Stid != null)
                     {
-                        b = this.CheckWhZTranHeadExists(stHead.Stid);
+                        b = !this.CheckWhZTranHeadExists(stHead.Stid);
                         message = "$err_cant_delete_whztranhead";
                     }
                 }
@@ -177,19 +206,31 @@ where [wh].[whid] = {Utils.SqlToString(whid)}
                     AuthUser = Session.UserID,
                 };
 
+                var whZTranExists = this.CheckWhZTranHeadExists(stHead.Stid);
+
                 WhZone.WhZTranService.WhZReceivingTranHeadDto result = null;
                 try
                 {
+                    var addOrUpdate = true;
                     switch (actionID)
                     {
                         case ActionID.New:
-                            result = tranService.Add(request);
+                            addOrUpdate = true;
                             break;
                         case ActionID.Modify:
-                            result = tranService.Update(request);
+                            addOrUpdate = !whZTranExists;
                             break;
                         default:
                             throw new ArgumentOutOfRangeException(nameof(ActionID));
+                    };
+
+                    if (addOrUpdate)
+                    {
+                        result = tranService.Add(request);
+                    }
+                    else
+                    {
+                        result = tranService.Update(request);
                     }
                 }
                 catch (WhZone.WhZTranService.ApiException ex)

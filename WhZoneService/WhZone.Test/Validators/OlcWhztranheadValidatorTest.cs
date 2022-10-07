@@ -38,7 +38,8 @@ public class OlcWhztranheadValidatorTest : TestBase<OlcWhztranhead, IWhZTranServ
         };
 
         var ex = await Assert.ThrowsAnyAsync<Exception>(() => this.service.ValidateAndThrowAsync(entity, ruleSets: ruleSets));
-        Assert.NotEmpty(ex?.Message);
+        Assert.NotNull(ex?.Message);
+        Assert.NotEqual(ex?.Message, string.Empty);
     }
 
     [Fact]
@@ -391,7 +392,9 @@ public class OlcWhztranheadValidatorTest : TestBase<OlcWhztranhead, IWhZTranServ
         Assert.Contains(message, ex?.Message);
     }
 
+#pragma warning disable xUnit1004 // Test methods should not be skipped
     [Fact(Skip = "StHead bejegyzes nem letezik WhZTranHead bejegyzes nelkul")]
+#pragma warning restore xUnit1004 // Test methods should not be skipped
     public async Task AddTranHead01Test()
     {
         var stHead = await this.dbContext.OlsStheads

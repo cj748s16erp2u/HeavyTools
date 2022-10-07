@@ -138,7 +138,7 @@ public class LogicServiceBase<TEntity> : ILogicService<TEntity>
 
         await this.FillSystemFieldsOnAddAsync(entityToSave, cancellationToken);
 
-        await this.ValidateAndThrowAsync(entityToSave, ruleSets: LogicServiceBase<TEntity>.AddRuleSets);
+        await this.ValidateAndThrowAsync(entityToSave, ruleSets: LogicServiceBase<TEntity>.AddRuleSets, cancellationToken: cancellationToken);
 
         var entry = await this.Repository.AddAsync(entityToSave, cancellationToken);
         await this.UnitOfWork.SaveChangesAsync(cancellationToken);
@@ -189,7 +189,7 @@ public class LogicServiceBase<TEntity> : ILogicService<TEntity>
 
         await this.FillSystemFieldsOnUpdateAsync(entityToSave, cancellationToken);
 
-        await this.ValidateAndThrowAsync(entityToSave, knownEntity, UpdateRuleSets);
+        await this.ValidateAndThrowAsync(entityToSave, knownEntity, UpdateRuleSets, cancellationToken);
 
         var entry = this.Repository.Update(entityToSave);
         await this.UnitOfWork.SaveChangesAsync(cancellationToken);
@@ -247,7 +247,7 @@ public class LogicServiceBase<TEntity> : ILogicService<TEntity>
     {
         this.ValidateDeleteIntlParameters(entity);
 
-        await this.ValidateAndThrowAsync(entity, entity, DeleteRuleSets);
+        await this.ValidateAndThrowAsync(entity, entity, DeleteRuleSets, cancellationToken);
 
         EntityEntry<TEntity> entry;
         try
@@ -427,7 +427,9 @@ public class LogicServiceBase<TEntity> : ILogicService<TEntity>
     /// <param name="name">Mező neve</param>
     /// <param name="propertyType">Mező értékének konvertálási típusa</param>
     /// <returns>Mező elérés kifejezés (<see cref="MemberExpression"/>)</returns>
+#pragma warning disable CA1822 // Mark members as static
     private Expression CreateFieldAccessExpression(ParameterExpression parm, string name, Type propertyType)
+#pragma warning restore CA1822 // Mark members as static
     {
         var entityType = parm.Type;
         var prop = entityType.GetProperty(name, System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.GetProperty);
@@ -451,7 +453,9 @@ public class LogicServiceBase<TEntity> : ILogicService<TEntity>
     /// <param name="value">Érték</param>
     /// <param name="propertyType">Kovertálás típusa</param>
     /// <returns>Konstans kifejezés (<see cref="UnaryExpression"/>)</returns>
+#pragma warning disable CA1822 // Mark members as static
     private Expression CreateConstantExpression(object? value, Type propertyType)
+#pragma warning restore CA1822 // Mark members as static
     {
         return Expression.Convert(Expression.Constant(value), propertyType);
     }
@@ -467,7 +471,7 @@ public class LogicServiceBase<TEntity> : ILogicService<TEntity>
     /// <returns>Egyenlő kifejezés (<see cref="BinaryExpression"/>)</returns>
     private Expression CreateQueryBinaryExpr(ParameterExpression parm, System.Reflection.PropertyInfo prop, object? value, ExpressionType binaryType, string? fieldName)
     {
-        fieldName = fieldName ?? prop.Name;
+        fieldName ??= prop.Name;
         var left = this.CreateFieldAccessExpression(parm, fieldName, prop.PropertyType);
         if (left != null)
         {
@@ -492,10 +496,7 @@ public class LogicServiceBase<TEntity> : ILogicService<TEntity>
     private Expression CreateQueryExpression<TQuery>(ParameterExpression parm, Expression expr, System.Reflection.PropertyInfo prop, TQuery query, BusinessEntities.Helpers.QueryOperationAttribute? attr = null)
     {
         var binaryType = attr?.ExpressionType;
-        if (binaryType is null)
-        {
-            binaryType = ExpressionType.Equal;
-        }
+        binaryType ??= ExpressionType.Equal;
 
         var value = prop.GetValue(query);
         if (value is not null)

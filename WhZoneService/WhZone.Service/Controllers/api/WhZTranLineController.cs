@@ -25,7 +25,7 @@ public class WhZTranLineController : Controller
     /// <param name="query">Keresési feltételek</param>
     /// <returns>Lekérdezés eredménye</returns>
     [HttpPost("receiving/query")]
-    public async Task<ActionResult<IEnumerable<WhZReceivingTranLineDto>>> QueryReceivingAsync([FromBody] WhZTranLineQueryDto query = null)
+    public async Task<ActionResult<IEnumerable<WhZReceivingTranLineDto>>> QueryReceivingAsync([FromBody] WhZTranLineQueryDto query = null!)
     {
         try
         {

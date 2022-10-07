@@ -326,6 +326,8 @@
     <Compile Include="Warehouse\WhZone\Common\WhZTranUtils.cs" />
     <Compile Include="Warehouse\WhZone\WhZTran\OlcWhZTranHead.cs" />
     <Compile Include="Warehouse\WhZone\WhZTran\OlcWhZTranHeadGenerated.cs" />
+    <Compile Include="Warehouse\WhZone\WhZTran\OlcWhZTranLine.cs" />
+    <Compile Include="Warehouse\WhZone\WhZTran\OlcWhZTranLineGenerated.cs" />
     <Compile Include="Webshop\OlcWebshop.cs" />
     <Compile Include="Webshop\OlcWebshopGenerated.cs" />
     <Compile Include="Webshop\WebshopType.cs" />

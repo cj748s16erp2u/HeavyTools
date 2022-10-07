@@ -23,19 +23,17 @@ namespace eLog.HeavyTools.Services.WhZone.BusinessLogic.Services;
 [RegisterDI(Interface = typeof(IWhZStockMapService))]
 public class WhZStockMapService : LogicServiceBase<OlcWhzstockmap>, IWhZStockMapService
 {
+#pragma warning disable CA1822 // Mark members as static
     private readonly IWarehouseService warehouseService;
-    private readonly IWhZoneService whZoneService;
 
     public WhZStockMapService(
         IOlcWhzstockmapValidator validator,
         IRepository<OlcWhzstockmap> repository,
         IUnitOfWork unitOfWork,
         IEnvironmentService environmentService,
-        IWarehouseService warehouseService,
-        IWhZoneService whZoneService) : base(validator, repository, unitOfWork, environmentService)
+        IWarehouseService warehouseService) : base(validator, repository, unitOfWork, environmentService)
     {
         this.warehouseService = warehouseService ?? throw new ArgumentNullException(nameof(warehouseService));
-        this.whZoneService = whZoneService ?? throw new ArgumentNullException(nameof(whZoneService));
     }
 
     /// <summary>
@@ -118,7 +116,7 @@ public class WhZStockMapService : LogicServiceBase<OlcWhzstockmap>, IWhZStockMap
 
         if (recQty < request.Qty)
         {
-            this.ThrowException(WhZStockExceptionType.RemoveReceivingQty, "Not enough receiving quantity to fulfill the remove request", entity);
+            ThrowException(WhZStockExceptionType.RemoveReceivingQty, "Not enough receiving quantity to fulfill the remove request", entity);
         }
 
         var result = new WhZStockMapData
@@ -160,7 +158,7 @@ public class WhZStockMapService : LogicServiceBase<OlcWhzstockmap>, IWhZStockMap
 
         if (recQty < request.Qty)
         {
-            this.ThrowException(WhZStockExceptionType.CommitReceivingQty, "Not enough receiving quantity to fulfill the commit request", entity);
+            ThrowException(WhZStockExceptionType.CommitReceivingQty, "Not enough receiving quantity to fulfill the commit request", entity);
         }
 
         var result = new WhZStockMapData
@@ -202,7 +200,7 @@ public class WhZStockMapService : LogicServiceBase<OlcWhzstockmap>, IWhZStockMap
         var proposedQty = actQty + processedQty;
         if (proposedQty < request.Qty)
         {
-            this.ThrowException(WhZStockExceptionType.AddReservedQty, "Not enough stock to fulfill the reserve request", entity);
+            ThrowException(WhZStockExceptionType.AddReservedQty, "Not enough stock to fulfill the reserve request", entity);
         }
 
         var result = new WhZStockMapData
@@ -244,7 +242,7 @@ public class WhZStockMapService : LogicServiceBase<OlcWhzstockmap>, IWhZStockMap
 
         if (resQty < request.Qty)
         {
-            this.ThrowException(WhZStockExceptionType.RemoveReservedQty, "Not enough reserved quantity to fulfill the remove request", entity);
+            ThrowException(WhZStockExceptionType.RemoveReservedQty, "Not enough reserved quantity to fulfill the remove request", entity);
         }
 
         var result = new WhZStockMapData
@@ -286,7 +284,7 @@ public class WhZStockMapService : LogicServiceBase<OlcWhzstockmap>, IWhZStockMap
 
         if (resQty < request.Qty)
         {
-            this.ThrowException(WhZStockExceptionType.CommitReservedQty, "Not enough reserved quantity to fulfill the commit request", entity);
+            ThrowException(WhZStockExceptionType.CommitReservedQty, "Not enough reserved quantity to fulfill the commit request", entity);
         }
 
         var result = new WhZStockMapData
@@ -312,12 +310,12 @@ public class WhZStockMapService : LogicServiceBase<OlcWhzstockmap>, IWhZStockMap
 
         if (!ctx.ProbeRemoveMovement(request))
         {
-            this.ThrowException(WhZStockExceptionType.DeleteNotEnoughQty, "Unable to remove this request, cause the further requests uses its quantity");
+            ThrowException(WhZStockExceptionType.DeleteNotEnoughQty, "Unable to remove this request, cause the further requests uses its quantity");
         }
 
         if (!ctx.TryRemoveMovement(request))
         {
-            this.ThrowException(WhZStockExceptionType.DeleteNotEnoughQty, "Unable to remove this request, cause the further requests uses its quantity");
+            ThrowException(WhZStockExceptionType.DeleteNotEnoughQty, "Unable to remove this request, cause the further requests uses its quantity");
         }
     }
 
@@ -463,20 +461,20 @@ public class WhZStockMapService : LogicServiceBase<OlcWhzstockmap>, IWhZStockMap
 
         await this.FillSystemFieldsOnAddAsync(entityToSave, cancellationToken);
 
-        await this.ValidateAndThrowAsync(entityToSave, ruleSets: AddRuleSets);
+        await this.ValidateAndThrowAsync(entityToSave, ruleSets: AddRuleSets, cancellationToken: cancellationToken);
 
         var insertSql = this.CreateInsertSql(entityToSave);
         var affectedRows = await this.Repository.ExecuteSqlCommandAsync(insertSql, cancellationToken);
 
         if (affectedRows != 1)
         {
-            this.ThrowException(WhZStockExceptionType.AlreadyExists, $"Adding the current stock map was failed, cause it is already exists [Itemid: {entityToSave.Itemid}, Whid: {entityToSave.Whid}, Whzoneid: {entityToSave.Whzoneid}, Whlocid: {entityToSave.Whlocid}]");
+            ThrowException(WhZStockExceptionType.AlreadyExists, $"Adding the current stock map was failed, cause it is already exists [Itemid: {entityToSave.Itemid}, Whid: {entityToSave.Whid}, Whzoneid: {entityToSave.Whzoneid}, Whlocid: {entityToSave.Whlocid}]");
         }
 
         entity = (await this.GetAsync(entityToSave, cancellationToken))!;
         if (entity is null)
         {
-            this.ThrowException(WhZStockExceptionType.InsertFailed, $"Adding the current stock map was failed [Itemid: {entityToSave.Itemid}, Whid: {entityToSave.Whid}, Whzoneid: {entityToSave.Whzoneid}, Whlocid: {entityToSave.Whlocid}]");
+            ThrowException(WhZStockExceptionType.InsertFailed, $"Adding the current stock map was failed [Itemid: {entityToSave.Itemid}, Whid: {entityToSave.Whid}, Whzoneid: {entityToSave.Whzoneid}, Whlocid: {entityToSave.Whlocid}]");
         }
 
         var primaryKey = this.Repository.GetPrimaryKey(entity!);
@@ -512,14 +510,14 @@ public class WhZStockMapService : LogicServiceBase<OlcWhzstockmap>, IWhZStockMap
 
         await this.FillSystemFieldsOnUpdateAsync(entityToSave, cancellationToken);
 
-        await this.ValidateAndThrowAsync(entityToSave, knownEntity, UpdateRuleSets);
+        await this.ValidateAndThrowAsync(entityToSave, knownEntity, UpdateRuleSets, cancellationToken);
 
         var updateSql = this.CreateUpdateSql(entityToSave, knownEntity!);
         var affectedRows = await this.Repository.ExecuteSqlCommandAsync(updateSql, cancellationToken);
 
         if (affectedRows != 1)
         {
-            this.ThrowException(WhZStockExceptionType.AlreadyModified, $"Updating the current stock map was failed, cause it was modified [Itemid: {entityToSave.Itemid}, Whid: {entityToSave.Whid}, Whzoneid: {entityToSave.Whzoneid}, Whlocid: {entityToSave.Whlocid}]");
+            ThrowException(WhZStockExceptionType.AlreadyModified, $"Updating the current stock map was failed, cause it was modified [Itemid: {entityToSave.Itemid}, Whid: {entityToSave.Whid}, Whzoneid: {entityToSave.Whzoneid}, Whlocid: {entityToSave.Whlocid}]");
         }
 
         return await this.GetByIdAsync(primaryKey!.Values.ToArray(), cancellationToken);
@@ -557,7 +555,7 @@ public class WhZStockMapService : LogicServiceBase<OlcWhzstockmap>, IWhZStockMap
         sqlBldr.Append($"  values ({valuesSql})");
         var sql = sqlBldr.ToString();
 
-        var i = 0;
+        //var i = 0;
         var list = new List<object>();
         foreach (var p in whereParameters.Concat(insertParameters))
         {
@@ -597,7 +595,7 @@ public class WhZStockMapService : LogicServiceBase<OlcWhzstockmap>, IWhZStockMap
         sqlBldr.AppendLine($"  and {knownSql}");
         var sql = sqlBldr.ToString();
 
-        var i = 0;
+        //var i = 0;
         var list = new List<object>();
         foreach (var p in whereParameters.Concat(knownParameters).Concat(updateParameters))
         {
@@ -654,13 +652,13 @@ public class WhZStockMapService : LogicServiceBase<OlcWhzstockmap>, IWhZStockMap
         if (actQty < 0)
         {
             var key = movements.First().Key;
-            this.ThrowException(WhZStockExceptionType.CantHandleNegativStock, $"Unable to store movements, cause not enough stock is available (current: {actQty} + recQty: {recQty} < {resQty}) [key: {key.KeyString()}]");
+            ThrowException(WhZStockExceptionType.CantHandleNegativStock, $"Unable to store movements, cause not enough stock is available (current: {actQty} + recQty: {recQty} < {resQty}) [key: {key.KeyString()}]");
         }
 
         if (provQty < 0)
         {
             var key = movements.First().Key;
-            this.ThrowException(WhZStockExceptionType.CantHandleNegativStock, $"Unable to store movements, cause not enough stock is available (current: {actQty} + recQty: {recQty} < {resQty}) [key: {key.KeyString()}]");
+            ThrowException(WhZStockExceptionType.CantHandleNegativStock, $"Unable to store movements, cause not enough stock is available (current: {actQty} + recQty: {recQty} < {resQty}) [key: {key.KeyString()}]");
         }
     }
 
@@ -685,12 +683,12 @@ public class WhZStockMapService : LogicServiceBase<OlcWhzstockmap>, IWhZStockMap
     {
         if (context is null)
         {
-            this.ThrowException(WhZStockExceptionType.InvalidContext, "The context is not set");
+            ThrowException(WhZStockExceptionType.InvalidContext, "The context is not set");
         }
 
         if (context is not WhZStockMapContext)
         {
-            this.ThrowException(WhZStockExceptionType.InvalidContext, $"The given context is not a {typeof(WhZStockMapContext).FullName}");
+            ThrowException(WhZStockExceptionType.InvalidContext, $"The given context is not a {typeof(WhZStockMapContext).FullName}");
         }
     }
 
@@ -706,12 +704,12 @@ public class WhZStockMapService : LogicServiceBase<OlcWhzstockmap>, IWhZStockMap
 
         if (request.Qty is null)
         {
-            this.ThrowException(WhZStockExceptionType.InvalidRequestQty, "The add qty is not set", fieldName: nameof(WhZStockMapDto.Qty));
+            ThrowException(WhZStockExceptionType.InvalidRequestQty, "The add qty is not set", fieldName: nameof(WhZStockMapDto.Qty));
         }
 
         if (request.Qty <= 0M)
         {
-            this.ThrowException(WhZStockExceptionType.InvalidRequestQty, "The add qty cannot be less or equal to 0", fieldName: nameof(WhZStockMapDto.Qty));
+            ThrowException(WhZStockExceptionType.InvalidRequestQty, "The add qty cannot be less or equal to 0", fieldName: nameof(WhZStockMapDto.Qty));
         }
     }
 
@@ -727,12 +725,12 @@ public class WhZStockMapService : LogicServiceBase<OlcWhzstockmap>, IWhZStockMap
 
         if (request.Qty is null)
         {
-            this.ThrowException(WhZStockExceptionType.InvalidRequestQty, "The remove qty is not set", fieldName: nameof(WhZStockMapDto.Qty));
+            ThrowException(WhZStockExceptionType.InvalidRequestQty, "The remove qty is not set", fieldName: nameof(WhZStockMapDto.Qty));
         }
 
         if (request.Qty <= 0M)
         {
-            this.ThrowException(WhZStockExceptionType.InvalidRequestQty, "The remove qty cannot be less or equal to 0", fieldName: nameof(WhZStockMapDto.Qty));
+            ThrowException(WhZStockExceptionType.InvalidRequestQty, "The remove qty cannot be less or equal to 0", fieldName: nameof(WhZStockMapDto.Qty));
         }
     }
 
@@ -747,7 +745,7 @@ public class WhZStockMapService : LogicServiceBase<OlcWhzstockmap>, IWhZStockMap
 
         if (data is null)
         {
-            this.ThrowException(WhZStockExceptionType.InvalidRequestData, "The data is not set");
+            ThrowException(WhZStockExceptionType.InvalidRequestData, "The data is not set");
         }
     }
 
@@ -763,12 +761,12 @@ public class WhZStockMapService : LogicServiceBase<OlcWhzstockmap>, IWhZStockMap
 
         if (request.Qty is null)
         {
-            this.ThrowException(WhZStockExceptionType.InvalidRequestQty, "The commit qty is not set", fieldName: nameof(WhZStockMapDto.Qty));
+            ThrowException(WhZStockExceptionType.InvalidRequestQty, "The commit qty is not set", fieldName: nameof(WhZStockMapDto.Qty));
         }
 
         if (request.Qty <= 0M)
         {
-            this.ThrowException(WhZStockExceptionType.InvalidRequestQty, "The commit qty cannot be less or equal to 0", fieldName: nameof(WhZStockMapDto.Qty));
+            ThrowException(WhZStockExceptionType.InvalidRequestQty, "The commit qty cannot be less or equal to 0", fieldName: nameof(WhZStockMapDto.Qty));
         }
     }
 
@@ -788,7 +786,7 @@ public class WhZStockMapService : LogicServiceBase<OlcWhzstockmap>, IWhZStockMap
     /// <param name="message">Üzenet</param>
     /// <param name="entity">Érintett készlet bejegyzés példány</param>
     /// <param name="fieldName">Érintett mező neve</param>
-    private void ThrowException(WhZStockExceptionType type, string message, OlcWhzstockmap? entity = null, string? fieldName = null)
+    private static void ThrowException(WhZStockExceptionType type, string message, OlcWhzstockmap? entity = null, string? fieldName = null)
     {
         throw new WhZStockMapServiceException(type, message, entity, fieldName);
     }
@@ -804,7 +802,7 @@ public class WhZStockMapService : LogicServiceBase<OlcWhzstockmap>, IWhZStockMap
     /// <returns></returns>
     protected override async ValueTask<ValidationContext<OlcWhzstockmap>> CreateValidationContextAsync(OlcWhzstockmap entity, OlcWhzstockmap? originalEntity, string[] ruleSets, CancellationToken cancellationToken = default)
     {
-        var context = await base.CreateValidationContextAsync(entity, originalEntity, ruleSets);
+        var context = await base.CreateValidationContextAsync(entity, originalEntity, ruleSets, cancellationToken);
 
         if (!string.IsNullOrWhiteSpace(entity.Whid))
         {
@@ -820,4 +818,5 @@ public class WhZStockMapService : LogicServiceBase<OlcWhzstockmap>, IWhZStockMap
 
         return context;
     }
+#pragma warning restore CA1822 // Mark members as static
 }

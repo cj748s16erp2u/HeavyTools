@@ -10,6 +10,4 @@ public interface IBusinessEntity : IEntity
 {
     string Addusrid { get; set; }
     DateTime Adddate { get; set; }
-
-    CfwUser Addusr { get; set; }
 }

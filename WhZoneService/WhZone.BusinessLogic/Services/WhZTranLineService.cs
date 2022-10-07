@@ -24,6 +24,7 @@ namespace eLog.HeavyTools.Services.WhZone.BusinessLogic.Services;
 [RegisterDI(Interface = typeof(IWhZTranLineService))]
 public class WhZTranLineService : LogicServiceBase<OlcWhztranline>, IWhZTranLineService
 {
+#pragma warning disable CA1822 // Mark members as static
     private readonly IRepository<OlcWhztranhead> tranHeadRepository;
     private readonly IRepository<OlsStline> stLineRepository;
     private readonly IRepository<OlsItem> itemRepository;
@@ -123,7 +124,7 @@ public class WhZTranLineService : LogicServiceBase<OlcWhztranline>, IWhZTranLine
         var originalEntity = await this.LoadEntityAsync(request, cancellationToken);
         if (originalEntity is null)
         {
-            this.ThrowException(WhZTranLineExceptionType.EntryNotFound, $"The referenced transaction line is not found (whztlineid: {request.Whztlineid}, stlineid: {request.Stlineid})");
+            ThrowException(WhZTranLineExceptionType.EntryNotFound, $"The referenced transaction line is not found (whztlineid: {request.Whztlineid}, stlineid: {request.Stlineid})");
         }
 
         var tranHead = await this.tranHeadRepository.FindAsync(new object[] { originalEntity!.Whztid }, cancellationToken);
@@ -285,7 +286,9 @@ public class WhZTranLineService : LogicServiceBase<OlcWhztranline>, IWhZTranLine
     /// <param name="request">Tranzakció tétel adatok</param>
     /// <param name="entity">Létrehozandó tétel</param>
     /// <param name="stLine">Készlet tétel bejegyzés</param>
+#pragma warning disable IDE0060 // Remove unused parameter
     private void DetermineData(WhZReceivingTranLineDto request, OlcWhztranline entity)
+#pragma warning restore IDE0060 // Remove unused parameter
     {
         entity.Dispqty2 = 0M;
 
@@ -363,7 +366,7 @@ public class WhZTranLineService : LogicServiceBase<OlcWhztranline>, IWhZTranLine
 
         if (request.Stlineid is null)
         {
-            this.ThrowException(WhZTranLineExceptionType.InvalidStlineid, "The source stock tran line identifier is not set", fieldName: nameof(WhZReceivingTranLineDto.Stlineid));
+            ThrowException(WhZTranLineExceptionType.InvalidStlineid, "The source stock tran line identifier is not set", fieldName: nameof(WhZReceivingTranLineDto.Stlineid));
         }
     }
 
@@ -394,7 +397,7 @@ public class WhZTranLineService : LogicServiceBase<OlcWhztranline>, IWhZTranLine
         //}
     }
 
-    private void ThrowException(WhZTranLineExceptionType type, string message, OlcWhztranline? entity = null, string? fieldName = null)
+    private static void ThrowException(WhZTranLineExceptionType type, string message, OlcWhztranline? entity = null, string? fieldName = null)
     {
         throw new WhZTranLineServiceException(type, message, entity, fieldName);
     }
@@ -452,4 +455,5 @@ public class WhZTranLineService : LogicServiceBase<OlcWhztranline>, IWhZTranLine
 
         return context;
     }
+#pragma warning restore CA1822 // Mark members as static
 }

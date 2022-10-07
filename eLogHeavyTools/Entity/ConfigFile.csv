@@ -19,4 +19,5 @@ olc_webshop,eLog.HeavyTools.Webshop,OlcWebshop
 olc_sordhead,eLog.HeavyTools.Sales.Sord,OlcSordHead
 olc_sordline,eLog.HeavyTools.Sales.Sord,OlcSordLine
 olc_pordhead,eLog.HeavyTools.Purchase.Pord,OlcPordHead
-olc_whztranhead,eLog.HeavyTools.Warehouse.WhZone.WhZoneTran,OlcWhZTranHead
+olc_whztranhead,eLog.HeavyTools.Warehouse.WhZone.WhZTran,OlcWhZTranHead
+olc_whztranline,eLog.HeavyTools.Warehouse.WhZone.WhZTran,OlcWhZTranLine

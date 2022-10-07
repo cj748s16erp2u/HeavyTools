@@ -29,7 +29,9 @@ namespace eLog.HeavyTools
             eLog.Base.Sales.Sord.SordStGenCommon.GenType = eLog.Base.Sales.Sord.SordStGenType.More;
 
             // Lehessen Feladott statuszbol egybol Lezartba allitani a raktar tranzakciokat
-            eLog.Base.Warehouse.StockTran.StHeadBL.AllowDirectClose = true;
+            eLog.Base.Warehouse.StockTran.StHeadBL.AllowDirectClose = false;
+            // Lehessen Tranzakcio fejet torolni
+            eLog.Base.Warehouse.StockTran.StHeadBL.DeleteAllowed = true;
 
             // Szallito rendeles tetel felvitelnel jegyezze meg egy fejen belul a kert szallitas datumot es a kovetkezo felvitelnel kinalja fel
             eLog.Base.Purchase.Pord.PordLineEditCommon.RememberLastLineReqDate = true;
@@ -221,6 +223,7 @@ namespace eLog.HeavyTools
             ObjectFactory.AddRemap(typeof(Base.Purchase.Pord.PordHeadSearchTab), typeof(Purchase.Pord.PordHeadSearchTab3));
 
             // Warehouse
+            ObjectFactory.AddRemap(typeof(Base.Warehouse.StockTran.ReceivingHeadSearchPage), typeof(Warehouse.StockTran.ReceivingHeadSearchPage3));
             ObjectFactory.AddRemap(typeof(Base.Warehouse.StockTran.ReceivingHeadBL), typeof(Warehouse.StockTran.ReceivingHeadBL3));
             ObjectFactory.AddRemap(typeof(Base.Warehouse.StockTran.ReceivingHeadEditTab), typeof(Warehouse.StockTran.ReceivingHeadEditTab3));
             ObjectFactory.AddRemap(typeof(Base.Warehouse.StockTran.ReceivingLineBL), typeof(Warehouse.StockTran.ReceivingLineBL3));
