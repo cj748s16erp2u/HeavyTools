@@ -34,7 +34,8 @@
 			<ForceNextRow/>
 			<Combo Field="whid" ListID="eLog.Base.Setup.Warehouse.WarehouseList" ComboFlags="None"/>
 			<Combo Field="whzoneid" ListID="eLog.HeavyTools.Setup.Warehouse.OlcWhZoneList" ComboFlags="None" DependentCtrlID="whid" DependentField="whid"/>
-			<Combo Field="whlocid" ListID="eLog.HeavyTools.Setup.Warehouse.OlcWhLocationList" ComboFlags="None" DependentCtrlID="whid,whzoneid" DependentField="whid,whzoneid" DependentAllowNullField="whzoneid"/>
+			<!--<Combo Field="whlocid" ListID="eLog.HeavyTools.Setup.Warehouse.OlcWhLocationList" ComboFlags="None" DependentCtrlID="whid,whzoneid" DependentField="whid,whzoneid" DependentAllowNullField="whzoneid"/>-->
+			<Selector Field="whlocid" ValueField="whlocid" TextField="whloccode" SelectionID="eLog.HeavyTools.Setup.Warehouse.OlcWhLocationSelectionProvider" DependentCtrlID="whid,whzoneid" DependentField="whid,whzoneid" DependentAllowNullField="whzoneid"/>
 			<ForceNextRow/>
 			<Combo Field="whpriotype" ListID="eProjectWeb.Framework.Data.TypeListProviderPublic#olc_whlocprio.priotype" />
 			<Numberbox Field="refilllimit" DecDigits="2" ThousandSep="True"/>

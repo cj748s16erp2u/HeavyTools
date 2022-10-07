@@ -55,7 +55,7 @@ left join olc_whzone whzone (nolock) on prio.whzoneid=whzone.whzoneid
         protected override void PreSearch(Dictionary<string, object> args)
         {
             base.PreSearch(args);
-            if (!args.ContainsKey("startdate") && !args.ContainsKey("enddate"))
+            if (!args.ContainsKey("startdate") && !args.ContainsKey("enddate") && !args.ContainsKey("whlpid"))
             {
                 CustomClientMessage = "$err_datefilterrequired".eLogTransl();
                 args["__noresult"] = 1;

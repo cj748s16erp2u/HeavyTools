@@ -115,7 +115,7 @@ namespace eLog.HeavyTools.Warehouse.WhLocPrio
             if (checkResult)
             {
                 var loc = GetOlcWhLocation(ctx);
-                ctx.AddErrorField(OlcWhLocPrio.FieldWhlocid.Name, "$err_olcwhlocprio_location_ismulti", loc?.Whlocid, olcWhLocPrio.Startdate, olcWhLocPrio.Enddate);
+                ctx.AddErrorField(OlcWhLocPrio.FieldWhlocid.Name, "$err_olcwhlocprio_location_ismulti", loc?.Whloccode, olcWhLocPrio.Startdate, olcWhLocPrio.Enddate);
             }
         }
 
