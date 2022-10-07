@@ -88,8 +88,8 @@
       <SpecificVersion>False</SpecificVersion>
     </Reference>
     <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\..\..\Releases\eLog.Base\v7.3.0.0\Binaries\Newtonsoft.Json.dll</HintPath>
       <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\Releases\eLog.Base\v7.3.0.0\Binaries\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="System.Net.Http" />
     <Reference Include="U4Ext.Bank.Base, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
@@ -433,6 +433,9 @@
     <Compile Include="Setup\Warehouse\OlcWhLocationRules.cs" />
     <Compile Include="Setup\Warehouse\OlcWhLocationSearchProvider.cs" />
     <Compile Include="Setup\Warehouse\OlcWhLocationSearchTab.cs" />
+    <Compile Include="Setup\Warehouse\OlcWhLocationSelectionProvider.cs" />
+    <Compile Include="Setup\Warehouse\OlcWhLocationSelectPage.cs" />
+    <Compile Include="Setup\Warehouse\OlcWhLocationSelectTab.cs" />
     <Compile Include="Setup\Warehouse\OlcWhZone.cs" />
     <Compile Include="Setup\Warehouse\OlcWhZoneBL.cs" />
     <Compile Include="Setup\Warehouse\OlcWhZoneEditPage.cs" />

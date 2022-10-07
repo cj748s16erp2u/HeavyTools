@@ -56,7 +56,9 @@
 	<TabPage Name="OlcWhLocationSearchTab">
 		<Control ID="olcWhZoneInfoPart" ControlType="OlcWhZoneInfoPart" />
 		<SearchFilterBar ID="SrcBar">
-
+			<Textbox Field="whloccode" Width="120" />
+			<Textbox Field="name" Width="120"/>
+			<CheckedCombo Field="loctype" ListID="eProjectWeb.Framework.Data.TypeListProviderPublic#olc_whlocation.loctype" Width="120"/>
 		</SearchFilterBar>
 		<Grid ID="searchResults" />
 	</TabPage>
@@ -86,7 +88,7 @@
 
 	<Search Name="OlcWhLocationSearchProvider">
 		<Column FieldName="whid" Width="80" />
-		<Column FieldName="whzonecode" Width="80" />
+		<Column FieldName="whzonecode" DisplayName="$whzonecode_long" Width="80" />
 		<Column FieldName="whloccode" Width="80" />
 		<Column FieldName="loctype" Width="50" Align="Left" FieldFunction="listlookup" FieldFuncArg="eProjectWeb.Framework.Data.TypeListProviderPublic#olc_whlocation.loctype,abbr" />
 		<Column FieldName="movloctype" Width="50" Align="Left" FieldFunction="listlookup" FieldFuncArg="eProjectWeb.Framework.Data.TypeListProviderPublic#olc_whlocation.movloctype,abbr" />
@@ -99,4 +101,14 @@
 		<Column FieldName="name" Width="180" />
 		<Column FieldName="whlocid" PKFieldName="true" Width="80" />
 	</Search>
+	<TabPage Name="OlcWhLocationSelectTab">
+		<SearchFilterBar ID="SrcBar">
+			<CheckedCombo Field="whid" Width="120" ListID="eLog.Base.Setup.Warehouse.WarehouseList" ComboFlags="None" />
+			<CheckedCombo Field="whzoneid" Label="$whzoneid_long" Width="120" ListID="eLog.HeavyTools.Setup.Warehouse.OlcWhZoneList" ComboFlags="None" DependentCtrlID="whid" DependentField="whid" DependentAllowNullField="whid"/>
+			<Textbox Field="whloccode" Width="120" />
+			<Textbox Field="name" Width="120"/>
+			<CheckedCombo Field="loctype" ListID="eProjectWeb.Framework.Data.TypeListProviderPublic#olc_whlocation.loctype" Width="120"/>
+		</SearchFilterBar>
+		<Grid ID="searchResults" />
+	</TabPage>
 </Schema>
