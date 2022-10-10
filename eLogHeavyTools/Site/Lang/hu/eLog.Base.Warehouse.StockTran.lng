@@ -1,0 +1,14 @@
+$cannotuseonroadstdocidto=Felhaszáló nem hozhat létre ilyen mozgásnemű raktári mozgásnemet kézzel
+$cannotuseonroadwhidfrom=Felhaszáló nem hozhat létre ebből a raktárból készletmozgást kézzel
+
+$towhidnnotonroad=A átvevő raktár csak utonlévő lehet
+$fromwhidnnotonroad=A átadó aktár csak utonlévő lehet
+
+
+
+$towh2whid=Cél raktár
+$towh2name=Cél raktár neve
+
+
+$action_getfromonroad=Átvétel útonlévő raktárból
+

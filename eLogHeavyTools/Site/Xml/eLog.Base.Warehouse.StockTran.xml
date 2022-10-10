@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Schema xmlns="http://tempuri.org/RenderableSchema.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://tempuri.org/RenderableSchema.xsd RenderableSchema.xsd">
+    <TabPage Name="TransferingHeadEditTab">
+        <LayoutTable ControlGroup="StHead" Columns="{120, None}; {180, None}; {70, Empty}; {120, None}; {130, None}" ID="EditGroup1">
+            <Combo Field="cmpid" ListID="eLog.Base.Setup.Company.CompanyLoggedInList" ComboFlags="None"/>
+            <ForceNextRow/>
+            <Combo Field="stdocid" ListID="eLog.Base.Setup.StDoc.StDoc_TransferList" ComboFlags="None" DependentField="cmpid" DependentCtrlID="StHead.cmpid" ColsToSpan="2"/>
+            <ForceNextRow/>
+            <DatePickerbox Field="stdate"/>
+            <DatePickerbox Field="reldatemax"/>
+            <ForceNextRow/>
+            <Combo Field="taxdatetype" ListID="eLog.Base.Sales.Sinv.SinvHeadTaxDateTypeList" ComboFlags="AllowBlank"/>
+            <ForceNextRow/>
+            <Textbox Field="docnum" Disabled="True"/>
+            <ForceNextRow/>
+            <Combo Field="projid" ListID="eLog.Base.Project.ProjectList" ComboFlags="None" ColsToSpan="1" DependentField="cmpid" DependentCtrlID="StHead.cmpid" />
+            <ForceNextRow/>
+            <Combo Field="fromwhid" Label="$fromwhidtran" ListID="eLog.Base.Setup.Warehouse.WarehouseListForUser" ComboFlags="AllowBlank" DependentField="cmpid" DependentCtrlID="StHead.cmpid" ColsToSpan="2" Mandatory="True"/>
+            <ForceNextRow/>
+            <Combo Field="towhid" Label="$towhidtran" ListID="eLog.Base.Setup.Warehouse.WarehouseList" ComboFlags="AllowBlank" DependentField="cmpid" DependentCtrlID="StHead.cmpid" ColsToSpan="2" Mandatory="True"/>
+            <!--<ForceNextRow/>-->
+            <!--<Combo Field="intransitwhid" Label="$intransitwhid" ListID="eLog.Base.Setup.Warehouse.WarehouseList" ComboFlags="AllowBlank" DependentField="cmpid" DependentCtrlID="StHead.cmpid" ColsToSpan="2" />-->
+            <ForceNextRow/>
+            <Combo Field="curid" ListID="eLog.Base.Setup.Currency.CurrencyList" ComboFlags="None"/>
+            <ForceNextRow/>
+            <Combo Field="paymid" ListID="eLog.Base.Setup.PayMethod.PayMethodList" ComboFlags="None"/>
+            <Combo Field="paycid" ListID="eLog.Base.Setup.PayMethod.PayCondList" ComboFlags="AllowBlank" DependentField="paymid" DependentCtrlID="StHead.paymid"/>
+            <ForceNextRow/>
+            <Combo Field="bustypeid" ListID="eLog.Base.Setup.BusType.BusTypeList" ComboFlags="None" />
+            <ForceNextRow/>
+            <DatePickerbox Field="closedate" Disabled="True" ShowTime="true" />
+            <ForceNextRow/>
+            <Combo Field="ststat" ListID="eLog.Base.Warehouse.StockTran.StHeadStStatList" ComboFlags="None" Disabled="True"/>
+            <ForceNextRow/>
+            <Textbox Field="note" Rows="3" ColsToSpan="-1"/>
+        </LayoutTable>
+    </TabPage>
+</Schema>

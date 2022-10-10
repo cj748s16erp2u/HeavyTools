@@ -226,6 +226,12 @@ namespace eLog.HeavyTools
             // Pinv
             //ObjectFactory.AddRemap(typeof(Base.Purchase.Pinv.PinvHeadSearchPage), typeof(Purchase.Pinv.PinvHeadSearchPage3));
             ObjectFactory.AddRemap(typeof(Base.Purchase.Pinv.PinvHeadSearchProvider), typeof(Purchase.Pinv.PinvHeadSearchProvider3));
+
+            //StockTran
+            ObjectFactory.AddRemap(typeof(Base.Warehouse.StockTran.TransferingHeadRules), typeof(Warehouse.StockTran.TransferingHeadRules3));
+            ObjectFactory.AddRemap(typeof(Base.Warehouse.StockTran.TransferingHeadBL), typeof(Warehouse.StockTran.TransferingHeadBL3));
+            ObjectFactory.AddRemap(typeof(Base.Warehouse.StockTran.TransferingHeadEditTab), typeof(Warehouse.StockTran.TransferingHeadEditTab3));
+            ObjectFactory.AddRemap(typeof(Base.Warehouse.StockTran.TransferingHeadSearchProvider), typeof(Warehouse.StockTran.TransferingHeadSearchProvider3));
         }
     }
 }

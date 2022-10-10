@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Schema xmlns="http://tempuri.org/RenderableSchema.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://tempuri.org/RenderableSchema.xsd RenderableSchema.xsd">
+	<Search Name="TransferingHeadSearchProvider3">
+		<Column FieldName="stid" Hidden="True" PKFieldName="stid"/>
+		<Column FieldName="linecount" Width="30"/>
+		<Column FieldName="ststat" Width="30" FieldFunction="listlookup" FieldFuncArg="eLog.Base.Warehouse.StockTran.StHeadStStatList,abbr"/>
+		<Column FieldName="stdocid" Width="80"/>
+		<Column FieldName="docnum" Width="95"/>
+		<Column FieldName="stdate" Width="68" Format="D"/>
+		<Column FieldName="fromwhid2" DisplayName="$fromwhidtran" Width="70"/>
+		<Column FieldName="fromwhname" DisplayName="$fromwhnametran" Width="150"/>
+		<Column FieldName="towhid2" DisplayName="$towhidtran" Width="70"/>
+		<Column FieldName="towhname" DisplayName="$towhidtran" Width="150"/>
+		
+		<Column FieldName="towh2whid" Width="70" PKFieldName="false"/>
+		<Column FieldName="towh2name" Width="150"/>
+	
+		
+		<Column FieldName="curid" Width="50"/>
+		<Column FieldName="netval" Width="100" Format="C2"/>
+		<Column FieldName="totval" Width="100" Format="C2"/>
+		<Column FieldName="sinvdocnum" Width="100"/>
+		<Column FieldName="bustypeid" Width="60"/>
+		<Column FieldName="note" Width="150"/>
+		<Column FieldName="addusrid" Width="100"/>
+		<Column FieldName="adddate" Width="120" Format="DT"/>
+		<Column FieldName="projcode" Width="60"/>
+		<Column FieldName="projname" Width="150"/>
+		<Column FieldName="reldatemax" Width="68" Format="D"/>
+		<!--<Column FieldName="closeusrid" Width="80" />-->
+		<!--<Column FieldName="closedate" Width="110" Format="DT" />-->
+		<Column FieldName="cmpid" Width="80" Align="Left" FieldFunction="listlookup" FieldFuncArg="eLog.Base.Setup.Company.CompanyLoggedInList"/>
+	</Search>
+</Schema>
