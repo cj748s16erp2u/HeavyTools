@@ -5,8 +5,10 @@ using System.Text;
 using eLog.Base.Masters.Item;
 using eLog.Base.Masters.Partner;
 using eLog.Base.Sales.Sord;
+using eLog.Base.Setup.Company;
 using eLog.Base.Setup.ItemGroup;
 using eLog.HeavyTools.ImportBase;
+using eLog.HeavyTools.Masters.Partner;
 using eLog.HeavyTools.Masters.Partner.Import;
 using eProjectWeb.Framework;
 using eProjectWeb.Framework.BL;
@@ -14,6 +16,7 @@ using eProjectWeb.Framework.Data;
 using eProjectWeb.Framework.Extensions;
 using eProjectWeb.Framework.Lang;
 using eProjectWeb.Framework.Rules;
+using eProjectWeb.Framework.UI.Script;
 
 namespace eLog.HeavyTools.Sales.Sord.Import
 {
@@ -31,7 +34,7 @@ namespace eLog.HeavyTools.Sales.Sord.Import
             //SordHeadRules.ValidateExtcodeUnique = false;
 
             this.sordHeadBL = SordHeadBL.New();
-            Dictionary<int, int> partnerSordHeadIds = new Dictionary<int, int>();
+            List<SordHeadImportUnique> savedSordHeads = new List<SordHeadImportUnique>();
 
             var success = 0;
 
@@ -41,7 +44,7 @@ namespace eLog.HeavyTools.Sales.Sord.Import
                 var i = 0;
                 foreach (var r in results)
                 {
-                    var ret = this.SaveImport(r, partnerSordHeadIds, ++i, count);
+                    var ret = this.SaveImport(r, savedSordHeads, ++i, count);
                     if (ret)
                     {
                         success++;
@@ -130,7 +133,7 @@ namespace eLog.HeavyTools.Sales.Sord.Import
         }
 
 
-        private bool SaveImport(SordHeadImportResultSet result, Dictionary<int, int> partnerSordHeadIds, int? pos = null, int? count = null)
+        private bool SaveImport(SordHeadImportResultSet result, List<SordHeadImportUnique> savedSordHeads, int? pos = null, int? count = null)
         {
             var partnCode = result.SordHead?.Entity["partnid"]
                             ?? result.SordHead?.Entity["partnid"];
@@ -153,7 +156,7 @@ namespace eLog.HeavyTools.Sales.Sord.Import
                 using (var db = DB.GetConn(DB.Main, Transaction.Use))
                 {
                     entityType = typeof(SordHead).Name;
-                    this.SaveSordHeadAndSordLine(result, partnerSordHeadIds);
+                    this.SaveSordHeadAndSordLine(result, savedSordHeads);
                     
                     db.Commit();
 
@@ -186,7 +189,7 @@ namespace eLog.HeavyTools.Sales.Sord.Import
             return false;
         }
 
-        private void SaveSordHeadAndSordLine(SordHeadImportResultSet result, Dictionary<int, int> partnerSordHeadIds)
+        private void SaveSordHeadAndSordLine(SordHeadImportResultSet result, List<SordHeadImportUnique> savedSordHeads)
         {
             if (result.SordHead != null)
             {
@@ -196,24 +199,12 @@ namespace eLog.HeavyTools.Sales.Sord.Import
                 // sordhead
                 var sordHead = SordHead.CreateNew();
                 var sordLine = SordLine.CreateNew();
-
-                var addrKey = new Key
-                {
-                    [Base.Masters.Partner.PartnAddr.FieldPartnid.Name] = ConvertUtils.ToInt32(result.SordHead.Entity[SordHead.FieldPartnid.Name]),
-                    [Base.Masters.Partner.PartnAddr.FieldDef.Name] = 1,
-                };
-
+                
                 sordHead.Cmpid = ConvertUtils.ToInt32(result.SordHead.Entity[SordHead.FieldCmpid.Name]);
                 sordHead.Sorddocid = result.SordHead.Entity[SordHead.FieldSorddocid.Name]?.ToString();
                 sordHead.Sorddate = DateTime.Now;
                 sordHead.Partnid = ConvertUtils.ToInt32(result.SordHead.Entity[SordHead.FieldPartnid.Name]);
-
-                var defAddr = Base.Masters.Partner.PartnAddr.Load(addrKey);
-                if (defAddr != null)
-                {
-                    sordHead.Addrid = defAddr.Addrid;
-                }
-
+                
                 // get the default payment details for the partner if it's not included in the excel
                 var paymid = result.SordHead.Entity[SordHead.FieldPaymid.Name]?.ToString();
                 if (string.IsNullOrWhiteSpace(paymid))
@@ -222,18 +213,55 @@ namespace eLog.HeavyTools.Sales.Sord.Import
                     sordHead.Paycid = ConvertUtils.ToInt32(SqlDataAdapter.ExecuteSingleValue(DB.Main, $"SELECT paycid FROM ols_partncmp WHERE partnid = {Utils.SqlToString(sordHead.Partnid)} AND cmpid = {Utils.SqlToString(sordHead.Cmpid)}"));
                 }
 
-                sordHead.Curid = CustomSettings.GetString("SordheadImportDefaultCurid");
+                // alapertelmezett cim kivalasztasa, ha nem jott be excelbol
+                if (!sordHead.Addrid.HasValue)
+                {
+                    // partnerhez tartozo alapertelmezett cim megadasa ha van
+                    var addrKey = new Key
+                    {
+                        [Base.Masters.Partner.PartnAddr.FieldPartnid.Name] =
+                            ConvertUtils.ToInt32(result.SordHead.Entity[SordHead.FieldPartnid.Name]),
+                        [Base.Masters.Partner.PartnAddr.FieldDef.Name] = 1,
+                    };
+
+                    var defAddr = Base.Masters.Partner.PartnAddr.Load(addrKey);
+                    if (defAddr != null)
+                    {
+                        sordHead.Addrid = defAddr.Addrid;
+                    }
+                }
+
+                if (!sordHead.Addrid.HasValue)
+                {
+                    var ve = new List<ValidationError>
+                    {
+                        new ValidationError("$error_import_address_not_found")
+                    };
+
+                    throw new ValidateException(ve);
+                }
+
+                if (string.IsNullOrWhiteSpace(result.SordHead.Entity[SordHead.FieldCurid.Name]?.ToString()))
+                {
+                    sordHead.Curid = CustomSettings.GetString("SordheadImportDefaultCurid");
+                }
+                else
+                {
+                    sordHead.Curid = result.SordHead.Entity[SordHead.FieldCurid.Name].ToString();
+                }
+
                 sordHead.Paymid = paymid;
                 sordHead.Ref1 = result.SordHead.Entity[SordHead.FieldRef1.Name]?.ToString();
                 sordHead.Note = result.SordHead.Entity[SordHead.FieldNote.Name]?.ToString();
 
                 // ha ezt a fejet mar lementettuk, akkor azt hasznaljuk inkabb
+                var uniqueSh = new SordHeadImportUnique(sordHead);
                 if (sordHead.Partnid.HasValue)
                 {
-                    if (partnerSordHeadIds.ContainsKey(sordHead.Partnid.Value))
+                    if (savedSordHeads.Contains(uniqueSh))
                     {
-                        var sordId = partnerSordHeadIds[sordHead.Partnid.Value];
-                        sordHead = SordHead.Load(sordId);
+                        var savedBefore = savedSordHeads.First(x => x.Equals(uniqueSh));
+                        sordHead = SordHead.Load(savedBefore.SordHeadId);
                     }
                 }
 
@@ -256,6 +284,23 @@ namespace eLog.HeavyTools.Sales.Sord.Import
                 sordLine.Ordqty = ConvertUtils.ToInt32(result.SordLine.Entity[SordLine.FieldOrdqty.Name]);
                 sordLine.Selprc = ConvertUtils.ToInt32(result.SordLine.Entity[SordLine.FieldSelprc.Name]);
 
+                // csak egesz szam lehet
+                var validationErrors = new List<ValidationError>();
+                if (!sordLine.Ordqty.ToString().Equals(result.SordLine.Entity[SordLine.FieldOrdqty.Name].ToString()))
+                {
+                    validationErrors.Add(new ValidationError("$error_import_ordqty_notint"));
+                }
+
+                if (!sordLine.Selprc.ToString().Equals(result.SordLine.Entity[SordLine.FieldSelprc.Name].ToString()))
+                {
+                    validationErrors.Add(new ValidationError("$error_import_selprc_notint"));
+                }
+
+                if (validationErrors.Count > 0)
+                {
+                    throw new ValidateException(validationErrors);
+                }
+
                 var taxidSql = $@"SELECT tt.taxid FROM ols_taxtrans (nolock) tt
                                 JOIN ols_itemgroup (nolock) itmgrp on itmgrp.taxid = tt.taxid
                                 JOIN ols_item (nolock) itm on itm.itemgrpid = itmgrp.itemgrpid
@@ -268,12 +313,10 @@ namespace eLog.HeavyTools.Sales.Sord.Import
 
                 this.sordHeadBL.Save(map);
 
-                if (sordHead.Partnid.HasValue)
+                if (savedSordHeads.All(x => !x.Equals(uniqueSh)))
                 {
-                    if (!partnerSordHeadIds.ContainsKey(sordHead.Partnid.Value))
-                    {
-                        partnerSordHeadIds.Add(sordHead.Partnid.Value, sordHead.Sordid.Value);
-                    }
+                    uniqueSh.SordHeadId = sordHead.Sordid ?? 0;
+                    savedSordHeads.Add(uniqueSh);
                 }
             }
         }
@@ -337,32 +380,87 @@ namespace eLog.HeavyTools.Sales.Sord.Import
         {
             
             Entity entity = null;
+            var stringVal = value?.ToString(); // nem tudom, hogy int, vagy string, vagy mi es az Utils.SqlToString tipushoz merten general sql-t
 
             if (rowContext.CurrentField.Field.Equals(Partner.FieldPartnid.Name))
             {
-                var sql = $"SELECT * FROM ols_partner ols LEFT JOIN olc_partner olc on ols.partnid = olc.partnid WHERE ols.partncode = '{Utils.SqlToString(value)}' or olc.oldcode = '{Utils.SqlToString(value)}'";
+                var sql = $"SELECT * FROM ols_partner ols LEFT JOIN olc_partner olc on ols.partnid = olc.partnid WHERE ols.partncode = {Utils.SqlToString(stringVal)} or olc.oldcode = {Utils.SqlToString(stringVal)}";
                 var partners = SqlDataAdapter.GetList<Partner>(sql);
 
                 entity = partners.FirstOrDefault();
-            }
 
-            if (rowContext.CurrentField.Field.Equals(Item.FieldItemid.Name))
+                if (entity == null)
+                {
+                    var ve = new List<ValidationError>
+                    {
+                        new ValidationError("$error_import_partner_not_found", stringVal)
+                    };
+
+                    throw new ValidateException(ve);
+                }
+            }else if (rowContext.CurrentField.Field.Equals(Item.FieldItemid.Name))
             {
-                var sql = $"SELECT * FROM ols_item  WHERE itemcode = {Utils.SqlToString(value)}";
+                var sql = $"SELECT * FROM ols_item  WHERE itemcode = {Utils.SqlToString(stringVal)}";
 
                 var items = SqlDataAdapter.GetList<Item>(sql);
 
                 entity = items.FirstOrDefault();
+
+                if (entity == null)
+                {
+                    var ve = new List<ValidationError>
+                    {
+                        new ValidationError("$error_import_item_not_found", stringVal)
+                    };
+
+                    throw new ValidateException(ve);
+                }
+            }
+            else if (rowContext.CurrentField.Field.Equals(Partner.FieldCmpid.Name))
+            {
+                if (string.IsNullOrWhiteSpace(stringVal))
+                {
+                    stringVal = CustomSettings.GetString("SordheadImportDefaultCompany");
+                }
+
+                if (!string.IsNullOrWhiteSpace(stringVal))
+                {
+                    var sql = $"SELECT * FROM ols_company WHERE cmpcode = {Utils.SqlToString(stringVal)}";
+                    var companies = SqlDataAdapter.GetList<Company>(sql);
+
+                    entity = companies.FirstOrDefault();
+                }
+
+                if (entity == null)
+                {
+                    var ve = new List<ValidationError>
+                    {
+                        new ValidationError("$error_import_company_not_found", stringVal)
+                    };
+
+                    throw new ValidateException(ve);
+                }
+            } else if (rowContext.CurrentField.Field.Equals(SordHead.FieldAddrid.Name))
+            {
+                if (!string.IsNullOrWhiteSpace(stringVal))
+                {
+                    var opaQuery = $"SELECT * FROM olc_partnaddr opa (nolock) WHERE opa.oldcode = {Utils.SqlToString(stringVal)}";
+                    var opaResult = SqlDataAdapter.GetList<OlcPartnAddr>(opaQuery);
+
+                    if (opaResult != null && opaResult.Count > 0)
+                    {
+                        var opa = opaResult.FirstOrDefault();
+                        entity = opa;
+                    }
+                }
             }
 
             if (entity != null)
             {
                 return entity[rowContext.CurrentField.Lookup.ValueField];
             }
-            else
-            {
-                return null;
-            }
+
+            return null;
         }
     }
 }

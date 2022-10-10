@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using eLog.Base.Sales.Sinv;
 using eLog.Base.Sales.Sord;
+using eLog.HeavyTools.Masters.Partner;
 using eProjectWeb.Framework;
 using eProjectWeb.Framework.BL;
 using eProjectWeb.Framework.Extensions;
@@ -46,6 +47,12 @@ namespace eLog.HeavyTools.Sales.Sord
             this.m_duedate = this.EditGroup1[SinvHead.FieldDuedate.Name];
 
             this.m_common = new SordHeadWebShopEditCommon(this.m_webshopLayoutTable);
+
+            if (this.m_partncode != null)
+            {
+                this.m_partncode.RemoveOnChanged();
+                this.m_partncode.SetOnChanged(new ControlEvent(this.PartnidChanged3));
+            }
         }
 
         protected override SordHead DefaultPageLoad(PageUpdateArgs args)
@@ -125,9 +132,8 @@ namespace eLog.HeavyTools.Sales.Sord
                     SetTextBoxValue("PaymentId", olc.PaymentId);
                     SetTextBoxValue("Coupons", olc.Coupons);
                     SetTextBoxValue("GiftCardLogId", olc.GiftCardLogId);
-
                 }
-
+                
                 SordLine defSordLine = this.GetDefSordLine(args, true, e);
 
                 if (defSordLine != null)
@@ -153,6 +159,27 @@ namespace eLog.HeavyTools.Sales.Sord
 
             return e;
         }
+
+        protected virtual void PartnidChanged3(PageUpdateArgs args)
+        {
+            PartnidChanged(args);
+
+            if (args.ActionID == ActionID.New)
+            {
+                var partnCode = this.m_partncode.GetValueOrDefault<int>();
+
+                if (partnCode.HasValue)
+                {
+                    var partn = OlcPartner.Load(partnCode);
+
+                    if (partn != null)
+                    {
+                        this.EditGroup1["regreprempid"].SetValue(partn.Regreprempid ?? null);
+                    }
+                }
+            }
+        }
+
         private void SetTextBoxValue(string grp, string textBox, string newValue)
         {
             ((FindRenderable<LayoutTable>(grp))[textBox] as Textbox)?.SetValue(newValue);

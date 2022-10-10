@@ -401,6 +401,7 @@
     <Compile Include="Sales\Sord\Import\SordHeadImportResultSet.cs" />
     <Compile Include="Sales\Sord\Import\SordHeadImportResultSets.cs" />
     <Compile Include="Sales\Sord\Import\SordHeadImportService.cs" />
+    <Compile Include="Sales\Sord\Import\SordHeadImportUnique.cs" />
     <Compile Include="Sales\Sord\Import\SordHeadRowContext.cs" />
     <Compile Include="Sales\Sord\OlcSordHead.cs" />
     <Compile Include="Sales\Sord\OlcSordHeadGenerated.cs" />

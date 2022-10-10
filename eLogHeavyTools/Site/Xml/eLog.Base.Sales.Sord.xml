@@ -52,7 +52,7 @@
             <Combo Field="paymid" ListID="eLog.Base.Setup.PayMethod.PayMethodList" ComboFlags="None"/>
             <Combo Field="paycid" ListID="eLog.Base.Setup.PayMethod.PayCondList" ComboFlags="AllowBlank" DependentField="paymid" DependentCtrlID="SordHead.paymid"/>
             <ForceNextRow/>
-			<Combo Field="regreprempid" ListID="eLog.Base.Masters.Partner.EmployeeList" ComboFlags="AllowBlank" DependentCtrlID="SordHead.partnid_partncode,#16" DependentField="partnid,emptype" CustomData="olc" />
+			<Combo Field="regreprempid" ListID="eLog.Base.Masters.Partner.EmployeeList" ComboFlags="AllowBlank" DependentCtrlID="#3,#16" DependentField="cmpidfilter,emptype" CustomData="olc" />
 			<Combo Field="clerkempid" ListID="eLog.Base.Masters.Partner.EmployeeList" ComboFlags="AllowBlank" DependentCtrlID="SordHead.partnid_partncode" DependentField="partnid" CustomData="olc" />
 			<ForceNextRow/>
 			<Numberbox Field="advval" ColsToSpan="1" CustomData="olc"/>

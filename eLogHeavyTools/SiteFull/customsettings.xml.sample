@@ -129,8 +129,9 @@
   <!-- Vevoi rendeles betoltes import file leiro helye -->
   <add key="SordHeadImportDescrFileName" value="SordHeadImportDescr.json" />
   
-  <!-- Vevoi rendeles betoltes import file leiro helye -->
+  <!-- Vevoi rendeles betoltes import alapertelmezett adatok -->
   <add key="SordheadImportDefaultCurid" value="HUF" />  
+  <add key="SordheadImportDefaultCompany" value="A02" />  
   
   <!-- Szallitoi rendeles betoltes import file leiro helye -->
   <add key="PordHeadImportDescrFileName" value="PordHeadImportDescr.json" />
