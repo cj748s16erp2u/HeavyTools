@@ -31,4 +31,51 @@
 		<!--<Column FieldName="closedate" Width="110" Format="DT" />-->
 		<Column FieldName="cmpid" Width="80" Align="Left" FieldFunction="listlookup" FieldFuncArg="eLog.Base.Setup.Company.CompanyLoggedInList"/>
 	</Search>
+	
+
+	<TabPage Name="TransferingOnRoadTab">
+		<LayoutTable ControlGroup="StHead" Columns="{120, None}; {180, None}; {70, Empty}; {20, None}; {230, None}" ID="EditGroup1">
+			<Textbox Field="cmpid" Visible="false"/>
+			<ForceNextRow/>
+			<Combo Field="fromwhid" Label="$fromwhidtran" ListID="eLog.Base.Setup.Warehouse.WarehouseList#sessioncmp" ComboFlags="None" ColsToSpan="2" Disabled="True"/>
+			<ForceNextRow/>
+			<Combo Field="towhid" Label="$towhidtran" ListID="eLog.Base.Setup.Warehouse.WarehouseListForUser" ComboFlags="None" ColsToSpan="2" Disabled="True"/>
+			<Button Field="changeWh"/>
+			<ForceNextRow/>
+			<DatePickerbox Field="stdate"/>
+			<Empty/>
+			<ForceNextRow/>
+			<Textbox Field="note" Rows="3" ColsToSpan="-1"/>
+			<Textbox Field="curid" Visible="False"/>
+			<Textbox Field="paymid" Visible="False"/>
+			<Intbox Field="paycid" Visible="False"/>
+		</LayoutTable>
+		<Grid ID="StLineGrid" ControlGroup="StLineList2" ParamsCtrlGroup="q" Height="80" ColsToSpan="-1" MultiSelect="True"/>
+		
+	</TabPage>
+	
+	<Search Name="TransitSearchProvider">
+		<Column FieldName="stlineid" Hidden="True" PKFieldName="stlineid"/>
+		<Column FieldName="linenum" Width="50"/>
+		<Column FieldName="itemcode" Width="90"/>
+		<Column FieldName="name01" Width="200"/>
+		<Column FieldName="origid" Width="50"/>
+		<Column FieldName="unitid2" Width="40"/>
+		<!--Column FieldName="ordqty2" Format="C" Width="100" />
+    <Column FieldName="dispqty2" Format="C" Width="100" /-->
+		<Column FieldName="movqty2" DisplayName="$movqty2_calc" Format="C" Width="120"/>
+	</Search>
+	
+	<Search Name="TransferingOnRoadSearchProvider">
+		<Column FieldName="stlineid" Hidden="True" PKFieldName="stlineid"/>
+		<Column FieldName="linenum" Width="50"/>
+		<Column FieldName="itemcode" Width="90"/>
+		<Column FieldName="name01" Width="200"/>
+		<Column FieldName="origid" Width="50"/>
+		<Column FieldName="unitid2" Width="40"/>
+		<!--Column FieldName="ordqty2" Format="C" Width="100" />
+		<Column FieldName="dispqty2" Format="C" Width="100" /-->
+		<Column FieldName="movqty2" DisplayName="$movqty2_calc" Format="C" Width="120"/>
+	</Search>
+	
 </Schema>

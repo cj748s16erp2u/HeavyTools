@@ -22,7 +22,7 @@ namespace eLog.HeavyTools.Warehouse.StockTran
             {
                 throw new MessageException("$cannotuseonroadwhidfrom");
             }
-
+  
             if (value.Stdocid == TransferingHeadBL3.OnRoadStdocIdFrom && value.Gen!= TransferingHeadBL3.OnRoadGenId)
             {
                 throw new MessageException("$cannotuseonroadstdocidto");

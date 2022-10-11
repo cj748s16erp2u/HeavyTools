@@ -120,6 +120,7 @@
     <Compile Include="BankTran\Import\CifEbankTransRowContext.cs" />
     <Compile Include="Common\CommonUtils.cs" />
     <Compile Include="Common\MagyarPostaCheckQRCode.cs" />
+    <Compile Include="Common\RuleParentAccess.cs" />
     <Compile Include="Common\xcval\OfcXcval.cs" />
     <Compile Include="Common\xcval\OfcXcvalBL.cs" />
     <Compile Include="Common\xcval\OfcXcvalGenerated.cs" />
@@ -460,10 +461,18 @@
     <Compile Include="Warehouse\StockTran\OlcStHeadBL.cs" />
     <Compile Include="Warehouse\StockTran\OlcStHeadGenerated.cs" />
     <Compile Include="Warehouse\StockTran\OlcStHeadRules.cs" />
+    <Compile Include="Warehouse\StockTran\OlcStLine.cs" />
+    <Compile Include="Warehouse\StockTran\OlcStLineGenerated.cs" />
     <Compile Include="Warehouse\StockTran\TransferingHeadBL3.cs" />
     <Compile Include="Warehouse\StockTran\TransferingHeadEditTab3.cs" />
     <Compile Include="Warehouse\StockTran\TransferingHeadRules3.cs" />
     <Compile Include="Warehouse\StockTran\TransferingHeadSearchProvider3.cs" />
+    <Compile Include="Warehouse\StockTran\TransferingHeadSearchTab3.cs" />
+    <Compile Include="Warehouse\StockTran\TransferingLineBL3.cs" />
+    <Compile Include="Warehouse\StockTran\TransferingOnRoadBL.cs" />
+    <Compile Include="Warehouse\StockTran\TransferingOnRoadPage.cs" />
+    <Compile Include="Warehouse\StockTran\TransferingOnRoadSearchProvider.cs" />
+    <Compile Include="Warehouse\StockTran\TransferingOnRoadTab.cs" />
     <Compile Include="Webshop\OlcWebshop.cs" />
     <Compile Include="Webshop\OlcWebshopGenerated.cs" />
     <Compile Include="Webshop\WebshopList.cs" />

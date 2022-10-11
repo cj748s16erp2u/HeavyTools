@@ -6,7 +6,10 @@ using System.Threading.Tasks;
 
 namespace eLog.HeavyTools.Warehouse.StockTran
 {
-    internal class TransferingOnRoadRules
+    public partial class OlcStLine
     {
+        public override void SetDefaultValues()
+        {
+        }
     }
 }

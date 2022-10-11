@@ -44,11 +44,35 @@ namespace eLog.HeavyTools.Warehouse.StockTran
 
         private void OnGetfromonroad(PageUpdateArgs args)
         {
-            if (SearchResults.SelectedPKS.Count > 0)
-            {
+            if (SearchResults.SelectedPKS.Count == 1)
+            { 
+                StHead s = StHead.CreateNew();
+
+                string sql = string.Format("select * from {0} where {1} = {2} and {3} < {4} ",
+                        StHead._TableName,
+                        StHead.FieldStid.Name,
+                        Utils.SqlToString(SearchResults.SelectedPK[StHead.FieldStid.Name]),
+                        StHead.FieldStstat.Name,
+                        Utils.SqlToString((int)StHeadStStatList.Values.Closed));
+                try
+                {
+                    SqlDataAdapter.FillSingleRow(DB.Main, s, sql);
+
+                    if (s != null)
+                    {
+                        throw new MessageException("$transit_not_closed", StringN.ConvertToString(s.Docnum));
+                    }
+                }
+                catch (RecordNotFoundException)
+                {
+
+                }
+
+
+
                 args.Continue = true;
-                args.AddExecCommand(new StoreToArgsStep(Key.ToJSONKeyArray(SearchResults.SelectedPKS),
-                                        Consts.RootEntityKey));
+                args.AddExecCommand(new StoreToArgsStep(SearchResults.SelectedPK.ToJSON(),
+                                    Consts.RootEntityKey));
             }
         }
     }

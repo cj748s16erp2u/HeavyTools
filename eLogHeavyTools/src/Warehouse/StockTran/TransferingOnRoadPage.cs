@@ -6,7 +6,7 @@ namespace eLog.HeavyTools.Warehouse.StockTran
     {
         public static string ID = typeof(TransferingOnRoadPage).FullName;
 
-        public static DefaultPageSetup Setup = new DefaultPageSetup("TransferingOnRoad", TransferingOnRoadBL.ID, null, null, typeof(TransferingOnRoadRules));
+        public static DefaultPageSetup Setup = new DefaultPageSetup("TransferingOnRoad", TransferingOnRoadBL.ID, null, null, typeof(TransferingHeadRules3));
 
         public TransferingOnRoadPage()
             : base("TransferingOnRoad")

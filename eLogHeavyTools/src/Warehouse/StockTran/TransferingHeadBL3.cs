@@ -35,8 +35,8 @@ namespace eLog.HeavyTools.Warehouse.StockTran
         {
             base.Validate(objects);
 
-            var partner2 = objects.Get<OlcStHead>();
-            if (partner2 != null)
+            var csh = objects.Get<OlcStHead>();
+            if (csh != null)
                 eProjectWeb.Framework.RuleServer.Validate(objects, typeof(OlcStHeadRules));
         }
     }

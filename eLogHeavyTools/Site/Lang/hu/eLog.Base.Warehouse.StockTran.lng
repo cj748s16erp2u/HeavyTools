@@ -12,3 +12,11 @@ $towh2name=Cél raktár neve
 
 $action_getfromonroad=Átvétel útonlévő raktárból
 
+
+$transit_not_closed=Az '{0}' RKUT nincs lezárva
+
+$StLineGrid=Tételek
+$rule_not_enought_freeqty=Nincs elég szabad készlet (raktár: {0}, cikkszám: {1}, átadandó: {2}, szabad/átadható: {3})
+$movqty2_calc=Átvehető mennyiség
+
+

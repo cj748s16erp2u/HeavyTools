@@ -35,4 +35,40 @@
             <Textbox Field="note" Rows="3" ColsToSpan="-1"/>
         </LayoutTable>
     </TabPage>
+	
+	<TabPage Name="TransferingHeadSearchTab">
+        <Report>
+            <File Name="doc_transfering" Proc="sp_doc_transfering" Action="0"/>
+            <File Name="doc_receiving_loc" Proc="sp_doc_receiving_loc" Action="1"/>
+            <File Name="doc_issuing_loc" Proc="sp_doc_issuing_loc" Action="2"/>
+            <File Name="doc_transfering_delnote" Proc="sp_doc_transfering_delnote" Action="4"/>
+            <File Name="doc_transfering_delnote" Proc="sp_doc_transfering_delnote_prc" Action="5"/>
+            <File Name="doc_transfering_delnote" Proc="sp_doc_transfering_delnote" Action="6"/>
+            <File Name="doc_sinv" Proc="sp_doc_sinv" Action="101"/>
+        </Report>
+        <SearchFilterBar ID="SrcBar">
+            <Textbox Field="docnum" Width="100"/>
+            <CheckedCombo Field="stdocid" ListID="eLog.Base.Setup.StDoc.StDoc_TransferList" ComboFlags="None" Width="150"/>
+            <DatePickerbox Field="datefrom" Width="90"/>
+            <DatePickerbox Field="dateto" Width="90"/>
+            <CheckedCombo Field="fromwhid" Label="$fromwhidtran" ListID="eLog.Base.Setup.Warehouse.WarehouseList#sessioncmp" ComboFlags="AllowBlank" Width="150"/>
+            <ForceNextRow/>
+            <CheckedCombo Field="ststat" ListID="eLog.Base.Warehouse.StockTran.StHeadStStatList" ComboFlags="AllowBlank"/>
+            <CheckedCombo Field="cmpid" Width="150" ListID="eLog.Base.Setup.Company.CompanyGrantedList" ComboFlags="FlagValues"/>
+            <Combo Field="addusrid" ListID="eProjectWeb.Framework.UI.Maintenance.User.UserList" ComboFlags="None" ColsToSpan="3"/>
+            <CheckedCombo Field="towhid" Label="$towhidtran" ListID="eLog.Base.Setup.Warehouse.WarehouseList#sessioncmp" ComboFlags="AllowBlank" Width="150"/>
+            <ForceNextRow/>
+            <Intbox Field="retid"/>
+            <Textbox Field="itemcode_like" Width="150" Label="$itemcode" />
+            <Textbox Field="itemname" Label="$item__name" ColsToSpan="3" />
+			 <CheckedCombo Field="towh2whid" ListID="eLog.Base.Setup.Warehouse.WarehouseList#sessioncmp" ComboFlags="AllowBlank" Width="150"/>
+             <CheckedCombo Field="projid" ListID="eLog.Base.Project.ProjectList#cmploggedin" ComboFlags="AllowBlank" Width="150" />
+			 <ForceNextRow />
+            <Textbox Field="morddocnum" Width="100" />
+            <CheckedCombo Field="bustypeid" ListID="eLog.Base.Setup.BusType.BusTypeList" ComboFlags="AllowBlank" />
+            <Textbox Field="note" ColsToSpan="3" />
+        </SearchFilterBar>
+        <Grid ID="searchResults" StatusBar="True" FilterBar="True" Label="$sthead_transfer_search_results" MultiSelect="True" />
+    </TabPage>
+	
 </Schema>
