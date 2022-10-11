@@ -16,7 +16,7 @@ namespace eLog.HeavyTools.Warehouse.WhLocLink
         public static readonly string ID = typeof(OlcWhLocLinkSearchProvider).FullName;
 
         protected static string queryString = @"
-select [wll].*, [whz].[whzonecode], [whz].[name] [whzname], [whl].[whloccode], [wlll].[volume], [cnt].[cnt], [f_el].[el]
+select [wll].*, [whz].[whzonecode], [whz].[name] [whzname], [whl].[whloccode],[wlll].[volume], [cnt].[cnt], [f_el].[el]
 from [olc_whloclink] [wll] (nolock)
   left join [olc_whzone] [whz] (nolock) on [whz].[whzoneid] = [wll].[whzoneid]
   join [olc_whlocation] [whl] (nolock) on [whl].[whlocid] = [wll].[whlocid]

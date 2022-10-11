@@ -33,7 +33,7 @@ left join olc_whzone whzone (nolock) on prio.whzoneid=whzone.whzoneid
             new QueryArg("itemcode","item",FieldType.String,QueryFlags.Like),
             new QueryArg("whid","prio",FieldType.String,QueryFlags.Equals),
             new QueryArg("whzonecode","whzone",FieldType.String,QueryFlags.Equals),
-            new QueryArg("whloccode","loc",FieldType.String,QueryFlags.Equals),
+            new QueryArg("whloccode","loc",FieldType.String,QueryFlags.Like),
             new QueryArg("enddate","startdate","prio",FieldType.DateTime,QueryFlags.Equals | QueryFlags.Less),
             new QueryArg("startdate","enddate","prio",FieldType.DateTime,QueryFlags.Equals | QueryFlags.Greater),
             new QueryArg("__noresult",FieldType.Integer)

@@ -13,7 +13,7 @@ namespace eLog.HeavyTools.Warehouse.WhLocLink
     {
         public static readonly string ID = typeof(OlcWhLocLinkLineSearchProvider).FullName;
 
-        protected static string queryString = @"select whlll.*, whl.whloccode, whl.name, whl.volume from [dbo].[olc_whlocation] (nolock) as whl
+        protected static string queryString = @"select whlll.*, whl.whloccode whlocid_whloccode, whl.name whlocid_name, whl.volume from [dbo].[olc_whlocation] (nolock) as whl
  join[dbo].[olc_whloclinkline] (nolock) as whlll on whl.whlocid = whlll.whlocid
  join[dbo].[olc_whloclink] (nolock) as whll on whll.whllid = whlll.whllid";
 
@@ -25,6 +25,7 @@ namespace eLog.HeavyTools.Warehouse.WhLocLink
             new QueryArg("whlllineid", "whlll", FieldType.Integer, QueryFlags.MultipleAllowed),
             new QueryArg("whllid", "whll", FieldType.Integer, QueryFlags.Like),
             new QueryArg("whloccode", "whl", FieldType.String, QueryFlags.Like),
+            new QueryArg("whlname","name", "whl", FieldType.String, QueryFlags.Like),
             new QueryArg("whlinktype", "whlll", FieldType.Integer, QueryFlags.MultipleAllowed)
         };
 

@@ -31,7 +31,9 @@
 		</SearchFilterBar>
 		<Grid ID="editableList"></Grid>
 		<LayoutCtrlSetup ID="IleLayout">
-			<Combo Field="whlocid" Width="120" ListID="eLog.HeavyTools.Setup.Warehouse.OlcWhLocationList" ComboFlags="None"/>
+			<Selector Field="whlocid" ValueField="whlocid" TextField="whloccode" SelectionID="eLog.HeavyTools.Setup.Warehouse.OlcWhLocationSelectionProvider"/>
+			<Selector Field="whlocid" ValueField="whlocid" TextField="name" SelectionID="eLog.HeavyTools.Setup.Warehouse.OlcWhLocationSelectionProvider"/>
+			<!--<Combo Field="whlocid" Width="120" ListID="eLog.HeavyTools.Setup.Warehouse.OlcWhLocationList" ComboFlags="None"/>-->
 		</LayoutCtrlSetup>
 	</TabPage>
 
@@ -39,7 +41,8 @@
 		<LayoutTable ControlGroup="OlcWhLocLink" Columns="{120, None}; {180, None}; {20, Empty}; {120, None}; {180, None};" ID="EditGroup1">
 			<Combo Field="whid" Label="$whid" ListID="eLog.Base.Setup.Warehouse.WarehouseList#sessioncmp" ComboFlags="AllowBlank" ColsToSpan="1" />
 			<Combo Field="whzoneid" Label="$whzoneid" ListID="eLog.HeavyTools.Setup.Warehouse.OlcWhZoneList" DependentCtrlID="whid" DependentField="whid"/>
-			<CheckedCombo Field="whlocid" Width="120" ListID="eLog.HeavyTools.Setup.Warehouse.OlcWhLocationList" ComboFlags="None" DependentCtrlID="whid,whzoneid" DependentField="whid,whzoneid" DependentAllowNullField="whid,whzoneid" />
+			<!--<CheckedCombo Field="whlocid" Width="120" ListID="eLog.HeavyTools.Setup.Warehouse.OlcWhLocationList" ComboFlags="None" DependentCtrlID="whid,whzoneid" DependentField="whid,whzoneid" DependentAllowNullField="whid,whzoneid" />-->
+			<Selector Field="whlocid" ValueField="whlocid" TextField="whloccode" SelectionID="eLog.HeavyTools.Setup.Warehouse.OlcWhLocationSelectionProvider" DependentCtrlID="whid,whzoneid" DependentField="whid,whzoneid" DependentAllowNullField="whzoneid"/>
 			<ForceNextRow/>
 			<Numberbox Field="overfillthreshold" Width="100"/>
 			<ForceNextRow/>
@@ -67,9 +70,9 @@
 	<Search Name="OlcWhLocLinkLineSearchProvider">
 		<Column FieldName="whlllineid" Hidden="True" PKFieldName="whlllineid"/>
 		<Column FieldName="whllid" Hidden="True"/>
-		<Column FieldName="whlocid" Width="40"/>
-		<Column FieldName="whloccode" Width="100" Editable="True"/>
-		<Column FieldName="name" Width="100"/>
+		<Column FieldName="whlocid" Width="40" Hidden="True"/>
+		<Column FieldName="whlocid_whloccode" DisplayName="$whloccode" Width="150" Editable="True"/>
+		<Column FieldName="whlocid_name" DisplayName="$whlname" Width="150" Editable="True"/>
 		<Column FieldName="whlinktype" Hidden="True"/>
 		<Column FieldName="volume" Width="100"/>
 		<Column FieldName="startdate" Hidden="True"/>
