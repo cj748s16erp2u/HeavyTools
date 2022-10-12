@@ -1,8 +1,10 @@
 ﻿using eLog.Base.Common;
 using eLog.Base.Masters.Item;
 using eLog.Base.Sales.Sord;
+using eLog.Base.Setup.SordDoc;
 using eLog.Base.Warehouse.Reserve;
 using eLog.Base.Warehouse.StockTran;
+using eLog.HeavyTools.Setup.SordDoc;
 using eProjectWeb.Framework;
 using eProjectWeb.Framework.BL;
 using eProjectWeb.Framework.Data;
@@ -30,10 +32,7 @@ namespace eLog.HeavyTools.Sales.Sord
 
             using (DB dB = DB.GetConn(DB.Main, Transaction.Use))
             {
-                var sql = $@"declare @t table (
-	sordlineid int
-)
-insert into @t
+                var presql = $@"
 select slt.sordlineid
   from ols_sordhead shf
   join ols_sordhead sht on sht.curid=shf.curid and sht.partnid=shf.partnid and sht.addrid=shf.addrid and isnull(sht.whid,'')=isnull(shf.whid,'') and sht.curid=shf.curid
@@ -49,8 +48,41 @@ select slt.sordlineid
   where shf.sordid={sordid}
     and shf.sordstat=40
 	and af.c=0
+";
+                var sh = SordHead.Load(sordid);
+                var sd = OlcSordDoc.Load(sh.Sorddocid);
+                if (sd != null)
+                {
+                    if (!string.IsNullOrEmpty(sd.Frameordersorddocid))
+                    {
+                        presql = $@"select slt.sordlineid
+  from ols_sordhead shf
+  outer apply (
+	select h.* 
+	  from olc_sorddoc d 
+	  join ols_sordhead h on h.sorddocid=d.frameordersorddocid
+	  where d.sorddocid=shf.sorddocid
+	    --and h.sordtype=1 
+  ) sht 
+  join ols_sordline slt on slt.sordid=sht.sordid
+  left join olc_sordline clt on clt.sordlineid=slt.sordlineid
+  outer apply (
+		select count(0)  c
+		  from ols_sordline sl2 
+		 where sl2.itemid=slt.itemid and sl2.sordid=shf.sordid
+  ) af
+  where shf.sordid={sordid}
+    and shf.sordstat=40
+	and af.c=0";
+                    }
+                }
 
 
+                var sql = $@"declare @t table (
+	sordlineid int
+)
+insert into @t
+{presql}
 
 delete tt 
  from olc_tmp_sordsord tt

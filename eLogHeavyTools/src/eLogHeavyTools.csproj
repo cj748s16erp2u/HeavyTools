@@ -421,6 +421,13 @@
     <Compile Include="Setup\PriceTable\OlcPrcTypeGenerated.cs" />
     <Compile Include="Setup\PriceTable\OlcPrcTypeList.cs" />
     <Compile Include="Setup\PriceTable\OlcPrcTypeSearchPage.cs" />
+    <Compile Include="Setup\SordDoc\OlcSordDoc.cs" />
+    <Compile Include="Setup\SordDoc\OlcSordDocGenerated.cs" />
+    <Compile Include="Setup\SordDoc\OlcSordDocRules.cs" />
+    <Compile Include="Setup\SordDoc\SordDocBL3.cs" />
+    <Compile Include="Setup\SordDoc\SordDocEditTab3.cs" />
+    <Compile Include="Setup\SordDoc\SordDocPreorderList.cs" />
+    <Compile Include="Setup\SordDoc\SordDocSearchProvider3.cs" />
     <Compile Include="Setup\Type\TypeLineBL3.cs" />
     <Compile Include="Setup\Warehouse\OlcWhLocation.cs" />
     <Compile Include="Setup\Warehouse\OlcWhLocationBL.cs" />
@@ -444,6 +451,7 @@
     <Compile Include="Setup\Warehouse\WarehouseSearchTab3.cs" />
     <Compile Include="Warehouse\StockTran\IssuingHeadBL3.cs" />
     <Compile Include="Warehouse\StockTran\IssuingLineBL3.cs" />
+    <Compile Include="Warehouse\StockTran\IssuingLineEditTab3.cs" />
     <Compile Include="Webshop\OlcWebshop.cs" />
     <Compile Include="Webshop\OlcWebshopGenerated.cs" />
     <Compile Include="Webshop\WebshopList.cs" />
@@ -452,6 +460,7 @@
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

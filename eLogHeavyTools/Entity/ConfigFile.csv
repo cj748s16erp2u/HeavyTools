@@ -24,3 +24,4 @@ imp_colorexception,eLog.HeavyTools.Masters.Item.Import,ImpColorException
 olc_cartpay,eLog.HeavyTools.Sales.Retail.Cart,OlcCartPay
 olc_itemassortment,eLog.HeavyTools.Masters.Item.Assortment,OlcItemAssortment
 olc_tmp_sordsord,eLog.HeavyTools.Sales.Sord,OlcTmpSordSord
+olc_sorddoc,eLog.HeavyTools.Setup.SordDoc,OlcSordDoc

@@ -32,7 +32,8 @@ namespace eLog.HeavyTools.Sales.Sord
 
         protected override void PreDelete(Key k)
         {
-            
+
+          
             var sl = SordLine.Load(k);
             var sh = SordHead.Load(sl.Sordid);
 
@@ -63,9 +64,18 @@ namespace eLog.HeavyTools.Sales.Sord
 
                     if (newResQty.HasValue)
                     {
+                        var bl = ReserveBL.New();
+
+
+                        var rold = Reserve.Load(sl.Resid);
+                        rold.Resqty = 0;
+                        var map2 = bl.CreateBLObjects();
+                        map2.Default = rold;
+                        bl.Save(map2);
+
+
                         var r = Reserve.Load(resid);
                         r.Resqty = newResQty.Value;
-                        var bl = ReserveBL.New();
                         var map = bl.CreateBLObjects();
                         map.Default = r;
                         bl.Save(map);
@@ -80,7 +90,7 @@ namespace eLog.HeavyTools.Sales.Sord
                 olc.State = DataRowState.Deleted;
                 olc.Save();
             }
-
+              
             base.PreDelete(k);
         }
     }

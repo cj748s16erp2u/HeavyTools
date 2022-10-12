@@ -195,6 +195,7 @@ namespace eLog.HeavyTools
             ObjectFactory.AddRemap(typeof(Base.Setup.Warehouse.WarehouseSearchTab), typeof(Setup.Warehouse.WarehouseSearchTab3));
             ObjectFactory.AddRemap(typeof(Base.Warehouse.StockTran.IssuingHeadBL), typeof(Warehouse.StockTran.IssuingHeadBL3));
             ObjectFactory.AddRemap(typeof(Base.Warehouse.StockTran.IssuingLineBL), typeof(Warehouse.StockTran.IssuingLineBL3));
+            ObjectFactory.AddRemap(typeof(Base.Warehouse.StockTran.IssuingLineEditTab), typeof(Warehouse.StockTran.IssuingLineEditTab3));
 
 
             // Item
@@ -231,6 +232,12 @@ namespace eLog.HeavyTools
             // Pinv
             //ObjectFactory.AddRemap(typeof(Base.Purchase.Pinv.PinvHeadSearchPage), typeof(Purchase.Pinv.PinvHeadSearchPage3));
             ObjectFactory.AddRemap(typeof(Base.Purchase.Pinv.PinvHeadSearchProvider), typeof(Purchase.Pinv.PinvHeadSearchProvider3));
+
+            //StDoc
+            ObjectFactory.AddRemap(typeof(Base.Setup.SordDoc.SordDocBL), typeof(eLog.HeavyTools.Setup.SordDoc.SordDocBL3));
+            ObjectFactory.AddRemap(typeof(Base.Setup.SordDoc.SordDocEditTab), typeof(eLog.HeavyTools.Setup.SordDoc.SordDocEditTab3));
+            ObjectFactory.AddRemap(typeof(Base.Setup.SordDoc.SordDocSearchProvider), typeof(eLog.HeavyTools.Setup.SordDoc.SordDocSearchProvider3));
+
         }
     }
 }
