@@ -119,6 +119,7 @@
     <Compile Include="BankTran\Import\CifEbankTransImportResultSet.cs" />
     <Compile Include="BankTran\Import\CifEbankTransImportResultSets.cs" />
     <Compile Include="BankTran\Import\CifEbankTransRowContext.cs" />
+    <Compile Include="Common\CheckBankAccountNo.cs" />
     <Compile Include="Common\CommonUtils.cs" />
     <Compile Include="Common\MagyarPostaCheckQRCode.cs" />
     <Compile Include="Common\xcval\OfcXcval.cs" />
@@ -294,6 +295,11 @@
     <Compile Include="Masters\PriceTable\PrcType.cs" />
     <Compile Include="Module.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Purchase\Common\PurchaseSqlFunctions3.cs" />
+    <Compile Include="Purchase\Pinv\PinvCopyBL3.cs" />
+    <Compile Include="Purchase\Pinv\PinvCustomPartnerRules.cs" />
+    <Compile Include="Purchase\Pinv\PinvHeadBL3.cs" />
+    <Compile Include="Purchase\Pinv\PinvHeadEditTab3.cs" />
     <Compile Include="Purchase\Pinv\PinvHeadSearchProvider3.cs" />
     <Compile Include="Purchase\PinvPackage\ApprovedPackageAttachmentSearchProvider.cs" />
     <Compile Include="Purchase\PinvPackage\ApprovedPackageAttachmentSearchTab.cs" />
@@ -392,6 +398,7 @@
     <Compile Include="Sales\Retail\RetailSinvPage.cs" />
     <Compile Include="Sales\Retail\RetailVatnumCheck.cs" />
     <Compile Include="Sales\Sinv\SinvHeadBL3.cs" />
+    <Compile Include="Sales\Sinv\SinvHeadRules3.cs" />
     <Compile Include="Sales\Sinv\SinvPrintBL3.cs" />
     <Compile Include="Sales\Sinv\SinvPrintCallback3.cs" />
     <Compile Include="Sales\Retail\Cart\CartBL.cs" />

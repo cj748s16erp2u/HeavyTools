@@ -1,0 +1,4 @@
+﻿; umbrella cim
+$partnbankaccno=Számlaszám
+
+$rule_partnsbuyerbankaccno_checksum_error=A bankszámlaszám hibás!

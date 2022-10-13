@@ -1,0 +1,14 @@
+﻿$attacheddoc=Csatolt.dok.
+
+; umbrella cim
+$district=Kerület
+$place=Közterület neve
+$placetype=Közterület jellege
+$hnum=Házszám
+$building=Épület
+$stairway=Lépcsőház
+$floor=Emelet/szint
+$door=Ajtó
+$partnbankaccno=Számlaszám
+
+$rule_partnsellerbankaccno_checksum_error=A bankszámlaszám hibás!
