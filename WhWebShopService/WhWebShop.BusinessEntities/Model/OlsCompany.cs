@@ -12,6 +12,7 @@ namespace eLog.HeavyTools.Services.WhWebShop.BusinessEntities.Model
     {
         public OlsCompany()
         {
+            OlsReserve = new HashSet<OlsReserve>();
             OlsSinvhead = new HashSet<OlsSinvhead>();
             OlsSordhead = new HashSet<OlsSordhead>();
         }
@@ -111,6 +112,8 @@ namespace eLog.HeavyTools.Services.WhWebShop.BusinessEntities.Model
         [ForeignKey("Partnid")]
         [InverseProperty("OlsCompany")]
         public virtual OlsPartner Partn { get; set; } = null!;
+        [InverseProperty("Cmp")]
+        public virtual ICollection<OlsReserve> OlsReserve { get; set; }
         [InverseProperty("Cmp")]
         public virtual ICollection<OlsSinvhead> OlsSinvhead { get; set; }
         [InverseProperty("Cmp")]

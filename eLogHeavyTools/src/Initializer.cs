@@ -196,6 +196,7 @@ namespace eLog.HeavyTools
             ObjectFactory.AddRemap(typeof(Base.Warehouse.StockTran.IssuingHeadBL), typeof(Warehouse.StockTran.IssuingHeadBL3));
             ObjectFactory.AddRemap(typeof(Base.Warehouse.StockTran.IssuingLineBL), typeof(Warehouse.StockTran.IssuingLineBL3));
             ObjectFactory.AddRemap(typeof(Base.Warehouse.StockTran.IssuingLineEditTab), typeof(Warehouse.StockTran.IssuingLineEditTab3));
+            ObjectFactory.AddRemap(typeof(Base.Warehouse.Reserve.ReserveBL), typeof(Warehouse.Reserve.ReserveBL3));
 
 
             // Item

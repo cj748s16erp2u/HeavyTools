@@ -9,3 +9,10 @@ $fullordqty=Rendelt menny.
 $fullmovqty=Szállított menny.
 $ordqty=Különbség
 $pendingqty=Függö
+
+
+$preordersordlineidfound=Előrendelés miatt nem törölhető
+
+$sordlinenotfound=Készletmozgás tétel nem található
+
+$sordheadnotfound=Készletmozgás fej nem található

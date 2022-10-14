@@ -169,8 +169,13 @@
     <Compile Include="InterfaceCaller\CalcJsonParamsDto.cs" />
     <Compile Include="InterfaceCaller\CalcJsonResultDto.cs" />
     <Compile Include="InterfaceCaller\CalcResetJsonParamsDto.cs" />
+    <Compile Include="InterfaceCaller\ErrorMessageDto.cs" />
     <Compile Include="InterfaceCaller\InterfaceCallerBL.cs" />
+    <Compile Include="InterfaceCaller\MessageExceptionResultDto.cs" />
+    <Compile Include="InterfaceCaller\ReserveParamsDto.cs" />
+    <Compile Include="InterfaceCaller\ReserveResultDto.cs" />
     <Compile Include="InterfaceCaller\ResultDto.cs" />
+    <Compile Include="InterfaceCaller\SordLineDeleteParamDto.cs" />
     <Compile Include="Masters\Import\Partner\PartnerImportPage.cs" />
     <Compile Include="Masters\Import\Partner\PartnerImportTab.cs" />
     <Compile Include="Masters\Item\Color\OlcItemColor.cs" />
@@ -449,6 +454,7 @@
     <Compile Include="Setup\Warehouse\OlcWhZoneSearchTab.cs" />
     <Compile Include="Setup\Warehouse\WarehouseSearchPage3.cs" />
     <Compile Include="Setup\Warehouse\WarehouseSearchTab3.cs" />
+    <Compile Include="Warehouse\Reserve\ReserveBL3.cs" />
     <Compile Include="Warehouse\StockTran\IssuingHeadBL3.cs" />
     <Compile Include="Warehouse\StockTran\IssuingLineBL3.cs" />
     <Compile Include="Warehouse\StockTran\IssuingLineEditTab3.cs" />

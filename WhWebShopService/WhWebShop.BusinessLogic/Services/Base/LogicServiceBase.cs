@@ -246,17 +246,12 @@ public class LogicServiceBase<TEntity> : ILogicService<TEntity>
         this.ValidateDeleteIntlParameters(entity);
 
         await this.ValidateAndThrowAsync(entity, entity, DeleteRuleSets);
-
+        
         EntityEntry<TEntity> entry;
         try
         {
             entry = this.Repository.Remove(entity);
             await this.UnitOfWork.SaveChangesAsync(cancellationToken);
-
-            if (entry is not null)
-            {
-                entry.State = EntityState.Deleted;
-            }
         }
         catch (DbUpdateException ex)
         {
