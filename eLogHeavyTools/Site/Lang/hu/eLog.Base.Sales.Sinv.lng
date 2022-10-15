@@ -1,4 +1,5 @@
 ﻿; umbrella cim
-$partnbankaccno=Számlaszám
+$custompartnname=Partner
+$partnbankaccno=Bank számlaszám
 
 $rule_partnsbuyerbankaccno_checksum_error=A bankszámlaszám hibás!

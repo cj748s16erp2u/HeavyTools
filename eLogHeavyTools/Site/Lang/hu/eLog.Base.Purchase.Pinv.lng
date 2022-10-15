@@ -9,6 +9,6 @@ $building=Épület
 $stairway=Lépcsőház
 $floor=Emelet/szint
 $door=Ajtó
-$partnbankaccno=Számlaszám
+$partnbankaccno=Bank számlaszám
 
 $rule_partnsellerbankaccno_checksum_error=A bankszámlaszám hibás!

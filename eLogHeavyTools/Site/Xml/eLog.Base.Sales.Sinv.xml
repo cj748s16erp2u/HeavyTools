@@ -23,9 +23,9 @@
       <Selector Field="delpartnid" Label="$delpartnname" ValueField="partnid" TextField="name" SelectionID="eLog.Base.Masters.Partner.PartnerSelectionProvider" ColsToSpan="-1" Mandatory="True" />
       <ForceNextRow />
       <Combo Field="deladdrid" ListID="eLog.Base.Masters.Partner.PartnAddrList" ComboFlags="None AllowBlank FindAnywhere" DependentField="partnid" DependentCtrlID="SinvHead.delpartnid_partncode" ColsToSpan="-1" Mandatory="True" />
-      <ForceNextRow />
-      <Textbox Field="partnname" ColsToSpan="-1" CustomData="custompartner" />
 
+      <ForceNextRow />
+      <Textbox Field="partnname" Label="$custompartnname" ColsToSpan="-1" CustomData="custompartner" />
       <ForceNextRow />
       <Textbox Field="partnbankaccno" ColsToSpan="-3" CustomData="custompartner:buybankaccno" />
       <ForceNextRow />
