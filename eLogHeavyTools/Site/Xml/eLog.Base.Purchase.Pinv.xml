@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Schema xmlns="http://tempuri.org/RenderableSchema.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://tempuri.org/RenderableSchema.xsd ../../../../Releases/eLog.Base/v7.2.0.0/Site/Xml/RenderableSchema.xsd">
+  <TabPage Name="PinvHeadEditTab">
+    <LayoutTable ControlGroup="PinvHead" Columns="{120, None}; {160, None}; {20, Empty}; {120, None}; {160, None}; {20, Empty}; {120, None}; {160, None}" ID="EditGroup1">
+      <Combo Field="cmpid" ListID="eLog.Base.Setup.Company.CompanyLoggedInList" />
+      <Combo Field="pinvdocid" ListID="eLog.Base.Setup.PinvDoc.PinvDocList" DependentField="cmpid" DependentCtrlID="PinvHead.cmpid" Mandatory="True" />
+      <ForceNextRow />
+      <DatePickerbox Field="pinvdate" Mandatory="True" />
+      <!-- CODA spcifikus start -->
+      <Selector Field="coda_docnum" Label="$coda_docnum" ValueField="cmpdoccodenum" TextField="cmpdoccodenum" SelectionID="CodaInt.Base.Purchase.Pinv.CodaPinvSelectionProvider" DependentCtrlID="PinvHead.cmpid,PinvHead.pinvdocid" DependentField="cmpid,doccode" WaitLayer="true" />
+      <!-- CODA specifikus end -->
+      <ForceNextRow />
+      <Textbox Field="docnum" Label="$docnum_short" Disabled="true" />
+      <Textbox Field="pinvnum" Mandatory="True" />
+      <ForceNextRow />
+      <Selector Field="partnid" Label="$partn_code" ValueField="partnid" TextField="partncode" SelectionID="eLog.Base.Masters.Partner.PartnerSelectionProvider" DependentCtrlID="PinvHead.cmpid" DependentField="cmpid" />
+      <ForceNextRow />
+      <Selector Field="partnid" Label="$partn_name" ValueField="partnid" TextField="name" SelectionID="eLog.Base.Masters.Partner.PartnerSelectionProvider" ColsToSpan="-1" />
+      <ForceNextRow />
+      <Combo Field="addrid" ListID="eLog.Base.Masters.Partner.PartnAddrList" ComboFlags="FindAnywhere" DependentCtrlID="PinvHead.partnid_partncode" DependentField="partnid" ColsToSpan="-1" />
+      <ForceNextRow />
+      <Combo Field="bankid" ListID="eLog.Base.Masters.Partner.PartnBankList" ComboFlags="None AllowBlank FindAnywhere" DependentField="partnid" DependentCtrlID="PinvHead.partnid_partncode" ColsToSpan="-1" />
+
+      <ForceNextRow />
+      <Textbox Field="partnname" ColsToSpan="-1" CustomData="custompartner:partnname" />
+      <ForceNextRow />
+      <Textbox Field="partnbankaccno" ColsToSpan="-1" CustomData="custompartner:sellerbankaccno" />
+      <ForceNextRow />
+      <Textbox Field="vatnum" CustomData="custompartner:sellervatnum" />
+      <Textbox Field="vatnumeu" CustomData="custompartner:sellervatnumeu" />
+      <ForceNextRow />
+      <Combo Field="countryid" ListID="eLog.Base.Setup.Country.CountryList" ComboFlags="None" CustomData="custompartner:selleraddrcountrycode" />
+      <ForceNextRow />
+      <Textbox Field="postcode" CustomData="custompartner:selleraddrpostcode" />
+      <Textbox Field="add01" Label="$city" CustomData="custompartner:selleraddrcity" />
+      <ForceNextRow/>
+      <Textbox Field="add02" ColsToSpan="3" CustomData="custompartner:selleradd02" />
+      <ForceNextRow />
+      <Textbox Field="district" CustomData="custompartner:selleraddrdistrict" />
+      <ForceNextRow />
+      <Textbox Field="place" ColsToSpan="3" CustomData="custompartner:selleraddrplace" />
+      <ForceNextRow />
+      <Textbox Field="placetype" CustomData="custompartner:selleraddrplacetype" />
+      <ForceNextRow />
+      <Textbox Field="hnum" CustomData="custompartner:selleraddrhnum" />
+      <ForceNextRow />
+      <Textbox Field="building" CustomData="custompartner:selleraddrbuilding" />
+      <Textbox Field="stairway" CustomData="custompartner:selleraddrstairway" />
+      <ForceNextRow />
+      <Textbox Field="floor" CustomData="custompartner:selleraddrfloor" />
+      <Textbox Field="door" CustomData="custompartner:selleraddrdoor" />
+      
+      <ForceNextRow />
+      <Empty />
+      <Checkbox Field="doccustomrate" />
+      <Checkbox Field="dualcustomrate"/>
+      <ForceNextRow />
+      <Combo Field="curid" ListID="eLog.Base.Setup.Currency.CurrencyList" />
+      <Numberbox Field="docrate" DecDigits="4" />
+      <Numberbox Field="dualrate" DecDigits="4" />
+      <ForceNextRow />
+      <Numberbox Field="netval" />
+      <Numberbox Field="netvalhome" Disabled="True" />
+      <Numberbox Field="netvaldual" Disabled="True" />
+      <ForceNextRow />
+      <Numberbox Field="taxval" />
+      <Numberbox Field="taxvalhome" Disabled="true" />
+      <Numberbox Field="taxvaldual" Disabled="true" />
+      <ForceNextRow />
+      <Numberbox Field="totval" />
+      <Numberbox Field="totvalhome" Disabled="True" />
+      <Numberbox Field="totvaldual" Disabled="True" />
+      <ForceNextRow />
+      <DatePickerbox Field="taxdate" />
+      <DatePickerbox Field="duedate"/>
+      <ForceNextRow />
+      <DatePickerbox Field="docdate" />
+      <ForceNextRow />
+      <Combo Field="paymid" ListID="eLog.Base.Setup.PayMethod.PayMethodList" ComboFlags="None"/>
+      <ForceNextRow />
+      <Combo Field="bustypeid" ListID="eLog.Base.Setup.BusType.BusTypeList" ComboFlags="None" />
+      <GroupSeparator ID="x2" Label="_"/>
+      <DatePickerbox Field="closedate" Disabled="True" ShowTime="true" />
+      <Combo Field="pinvstat" ListID="eLog.Base.Purchase.Pinv.PinvHeadPinvStatList" Disabled="True" />
+      <ForceNextRow />
+      <Textbox Field="ref1" />
+      <Textbox Field="ref2" />
+      <ForceNextRow />
+      <Textbox Field="note" Rows="3" ColsToSpan="-1" />
+      <!-- CODA specifikus start -->
+      <ForceNextRow />
+      <Intbox Field="gen" Visible="false" />
+      <!-- CODA specifikus end -->
+    </LayoutTable>
+  </TabPage>
+
+
+</Schema>

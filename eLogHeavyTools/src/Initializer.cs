@@ -4,6 +4,7 @@ using System.Text;
 using System.Linq;
 using eProjectWeb.Framework;
 using eProjectWeb.Framework.Extensions;
+using eLog.HeavyTools.Sales.Sinv;
 
 namespace eLog.HeavyTools
 {
@@ -227,6 +228,13 @@ namespace eLog.HeavyTools
             // Pinv
             //ObjectFactory.AddRemap(typeof(Base.Purchase.Pinv.PinvHeadSearchPage), typeof(Purchase.Pinv.PinvHeadSearchPage3));
             ObjectFactory.AddRemap(typeof(Base.Purchase.Pinv.PinvHeadSearchProvider), typeof(Purchase.Pinv.PinvHeadSearchProvider3));
+            ObjectFactory.AddRemap(typeof(Base.Purchase.Pinv.PinvHeadEditTab), typeof(Purchase.Pinv.PinvHeadEditTab3));
+            ObjectFactory.AddRemap(typeof(Base.Purchase.Pinv.PinvHeadBL), typeof(Purchase.Pinv.PinvHeadBL3));
+            ObjectFactory.AddRemap(typeof(Base.Purchase.Pinv.PinvCopyBL), typeof(Purchase.Pinv.PinvCopyBL3));
+
+            // Sinv
+            ObjectFactory.AddRemap(typeof(Base.Sales.Sinv.SinvHeadRules), typeof(Sales.Sinv.SinvHeadRules3));
+
         }
     }
 }

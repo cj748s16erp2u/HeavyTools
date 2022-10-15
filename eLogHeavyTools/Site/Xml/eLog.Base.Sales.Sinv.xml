@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Schema xmlns="http://tempuri.org/RenderableSchema.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://tempuri.org/RenderableSchema.xsd ../../../../Releases/eLog.Base/v7.2.0.0/Site/Xml/RenderableSchema.xsd">
+
+  <TabPage Name="SinvHeadEditTab">
+    <LayoutTable ControlGroup="SinvHead" Columns="{185, None}; {180, None}; {20, Empty}; {135, None}; {180, None}" ID="EditGroup1" Label="$sinvhead_editgroup">
+      <Combo Field="cmpid" ListID="eLog.Base.Setup.Company.CompanyLoggedInList" ComboFlags="None" />
+      <ForceNextRow />
+      <Combo Field="sinvdocid" ListID="eLog.Base.Setup.SinvDoc.SinvDocList" ComboFlags="AutoSelectOne" DependentField="cmpid" DependentCtrlID="SinvHead.cmpid" Mandatory="True" />
+      <Textbox Field="docnum" Disabled="True" />
+      <ForceNextRow />
+      <Combo Field="whid" ListID="eLog.Base.Setup.Warehouse.WarehouseListForUser" ComboFlags="AllowBlank" DependentField="cmpid" DependentCtrlID="SinvHead.cmpid" />
+      <ForceNextRow />
+      <Combo Field="projid" ListID="eLog.Base.Project.ProjectList" ComboFlags="None" ColsToSpan="1" DependentField="cmpid" DependentCtrlID="SinvHead.cmpid" />
+      <ForceNextRow />
+      <Selector Field="partnid" Label="$partnid_code" ValueField="partnid" TextField="partncode" SelectionID="eLog.Base.Masters.Partner.PartnerSelectionProvider" DependentField="cmpid" DependentCtrlID="SinvHead.cmpid" Mandatory="True" />
+      <ForceNextRow />
+      <Selector Field="partnid" Label="$partnid_name" ValueField="partnid" TextField="name" SelectionID="eLog.Base.Masters.Partner.PartnerSelectionProvider" ColsToSpan="-1" Mandatory="True" />
+      <ForceNextRow />
+      <Combo Field="addrid" ListID="eLog.Base.Masters.Partner.PartnAddrList" ComboFlags="None AllowBlank FindAnywhere" DependentField="partnid" DependentCtrlID="SinvHead.partnid_partncode" ColsToSpan="-1" Mandatory="True" />
+      <ForceNextRow />
+      <Selector Field="delpartnid" Label="$delpartncode" ValueField="partnid" TextField="partncode" SelectionID="eLog.Base.Masters.Partner.PartnerSelectionProvider" DependentField="cmpid" DependentCtrlID="SinvHead.cmpid" Mandatory="True" />
+      <ForceNextRow />
+      <Selector Field="delpartnid" Label="$delpartnname" ValueField="partnid" TextField="name" SelectionID="eLog.Base.Masters.Partner.PartnerSelectionProvider" ColsToSpan="-1" Mandatory="True" />
+      <ForceNextRow />
+      <Combo Field="deladdrid" ListID="eLog.Base.Masters.Partner.PartnAddrList" ComboFlags="None AllowBlank FindAnywhere" DependentField="partnid" DependentCtrlID="SinvHead.delpartnid_partncode" ColsToSpan="-1" Mandatory="True" />
+
+      <ForceNextRow />
+      <Textbox Field="partnname" Label="$custompartnname" ColsToSpan="-1" CustomData="custompartner" />
+      <ForceNextRow />
+      <Textbox Field="partnbankaccno" ColsToSpan="-3" CustomData="custompartner:buybankaccno" />
+      <ForceNextRow />
+      <Textbox Field="vatnum" CustomData="custompartner:buyervatnum" />
+      <Textbox Field="vatnumeu" CustomData="custompartner:buyervatnumeu" />
+      <ForceNextRow />
+      <Combo Field="countryid" ListID="eLog.Base.Setup.Country.CountryList" ComboFlags="None" CustomData="custompartner:buyaddrcountrycode" />
+      <ForceNextRow />
+      <Textbox Field="postcode" CustomData="custompartner:buyaddrpostcode" />
+      <Textbox Field="add01" Label="$city" CustomData="custompartner:buyaddrcity" />
+      <Textbox Field="add02" ColsToSpan="-1" CustomData="custompartner:buyadd02" />
+      <Textbox Field="district" CustomData="custompartner:buyaddrdistrict" />
+      <ForceNextRow />
+      <Textbox Field="place" ColsToSpan="3" CustomData="custompartner:buyaddrplace" />
+      <ForceNextRow />
+      <Textbox Field="placetype" CustomData="custompartner:buyaddrplacetype" />
+      <ForceNextRow />
+      <Textbox Field="hnum" CustomData="custompartner:buyaddrhnum" />
+      <ForceNextRow />
+      <Textbox Field="building" CustomData="custompartner:buyaddrbuilding" />
+      <Textbox Field="stairway" CustomData="custompartner:buyaddrstairway" />
+      <Textbox Field="floor" CustomData="custompartner:buyaddrfloor" />
+      <Textbox Field="door" CustomData="custompartner:buyaddrdoor" />
+      <ForceNextRow />
+      
+      <GroupSeparator ID="x1" Label="_"/>
+      <Combo Field="taxdatetype" ListID="eLog.Base.Sales.Sinv.SinvHeadTaxDateTypeList" ComboFlags="AllowBlank" />
+      <DatePickerbox Field="taxdate" Disabled="True" />
+      <ForceNextRow />
+      <DatePickerbox Field="docdate" Mandatory="True" />
+      <DatePickerbox Field="sinvdate" Mandatory="True" />
+      <ForceNextRow />
+      <DatePickerbox Field="docstartdate" />
+      <DatePickerbox Field="docenddate" />
+      <ForceNextRow />
+      <Combo Field="curid" ListID="eLog.Base.Setup.Currency.CurrencyList" ComboFlags="AutoSelectOne" Mandatory="True" />
+      <ForceNextRow />
+      <Numberbox Field="docrate" Disabled="True" DecDigits="4"/>
+      <Numberbox Field="dualrate" Disabled="True" DecDigits="4"/>
+      <ForceNextRow />
+      <Combo Field="paymid" ListID="eLog.Base.Setup.PayMethod.PayMethodList" ComboFlags="None" Mandatory="True" />
+      <Combo Field="paycid" ListID="eLog.Base.Setup.PayMethod.PayCondList" ComboFlags="AllowBlank" DependentField="paymid" DependentCtrlID="SinvHead.paymid" />
+      <ForceNextRow />
+      <DatePickerbox Field="duedate" />
+      <Intbox Field="copycount" />
+      <ForceNextRow />
+      <Combo Field="supbankid" ListID="eLog.Base.Masters.Partner.PartnBankList" ComboFlags="AllowBlank" ColsToSpan="-1" DependentField="cmpid" DependentCtrlID="SinvHead.cmpid" />
+      <Combo Field="bustypeid" ListID="eLog.Base.Setup.BusType.BusTypeList" ComboFlags="None" />
+      <Combo Field="ptvattypid" ListID="eLog.Base.Setup.PartnVatType.PartnVatTypList#vistype=2" ComboFlags="AllowBlank" />
+      <GroupSeparator ID="x2" Label="_"/>
+      <DatePickerbox Field="closedate" Disabled="True" ShowTime="true" />
+      <Combo Field="sinvstat" ListID="eLog.Base.Sales.Sinv.SinvHeadSinvStatList" ComboFlags="None" Disabled="True" />
+      <ForceNextRow />
+      <Textbox Field="note" Rows="3" ColsToSpan="-1" />
+      <Textbox Field="footernote" Rows="3" ColsToSpan="-1" />
+      <Textbox Field="internalnote" Rows="3" ColsToSpan="-1" />
+    </LayoutTable>
+  </TabPage>
+
+</Schema>
