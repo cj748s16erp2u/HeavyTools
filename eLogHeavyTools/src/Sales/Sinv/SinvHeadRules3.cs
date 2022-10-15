@@ -30,7 +30,7 @@ namespace eLog.HeavyTools.Sales.Sinv
                 {
                     XElement partner = XElement.Parse(sinvHead.Xmldata);
                     countryCode = partner.Element("buyaddrcountrycode")?.Value;
-                    bankAccountNo = partner.Element("buyerbankaccno")?.Value;
+                    bankAccountNo = partner.Element("buybankaccno")?.Value;
                 }
 
                 var c = new CheckBankAccountNo();

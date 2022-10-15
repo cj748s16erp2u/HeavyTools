@@ -27,7 +27,7 @@
       <Textbox Field="partnname" ColsToSpan="-1" CustomData="custompartner" />
 
       <ForceNextRow />
-      <Textbox Field="partnbankaccno" ColsToSpan="-1" CustomData="custompartner:buyerbankaccno" />
+      <Textbox Field="partnbankaccno" ColsToSpan="-3" CustomData="custompartner:buybankaccno" />
       <ForceNextRow />
       <Textbox Field="vatnum" CustomData="custompartner:buyervatnum" />
       <Textbox Field="vatnumeu" CustomData="custompartner:buyervatnumeu" />
