@@ -214,7 +214,9 @@ namespace eLog.HeavyTools.Sales.Sord.Import
                 }
 
                 // alapertelmezett cim kivalasztasa, ha nem jott be excelbol
-                if (!sordHead.Addrid.HasValue)
+                var addrId = ConvertUtils.ToInt32(result.SordHead.Entity[SordHead.FieldAddrid.Name]);
+
+                if (!addrId.HasValue)
                 {
                     // partnerhez tartozo alapertelmezett cim megadasa ha van
                     var addrKey = new Key
@@ -229,6 +231,10 @@ namespace eLog.HeavyTools.Sales.Sord.Import
                     {
                         sordHead.Addrid = defAddr.Addrid;
                     }
+                }
+                else
+                {
+                    sordHead.Addrid = addrId;
                 }
 
                 if (!sordHead.Addrid.HasValue)
@@ -258,7 +264,7 @@ namespace eLog.HeavyTools.Sales.Sord.Import
                 var uniqueSh = new SordHeadImportUnique(sordHead);
                 if (sordHead.Partnid.HasValue)
                 {
-                    if (savedSordHeads.Contains(uniqueSh))
+                    if (savedSordHeads.Any(x => x.Equals(uniqueSh)))
                     {
                         var savedBefore = savedSordHeads.First(x => x.Equals(uniqueSh));
                         sordHead = SordHead.Load(savedBefore.SordHeadId);
