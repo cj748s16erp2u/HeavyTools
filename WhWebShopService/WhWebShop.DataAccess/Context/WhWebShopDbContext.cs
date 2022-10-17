@@ -14,7 +14,9 @@ namespace eLog.HeavyTools.Services.WhWebShop.DataAccess.Context
     {
         public virtual DbSet<OlcPriceCalcResult> OlcPriceCalcResults { get; set; } = null!;
 
-
         public virtual DbSet<SordReserveRecalcTmp> SordReserveRecalcTmp { get; set; } = null!;
+         
+        public virtual DbSet<B2BPartnerTmp> B2BPartnerTmp { get; set; } = null!;
+         
     }
 }
