@@ -50,6 +50,40 @@ namespace eLog.HeavyTools.InterfaceCaller
             return JsonParser.ParseObject<CalcJsonResultDto>(JObject.Parse(parms));
         }
 
+        internal SordLineDeleteResultDto SordlineDelete(SordLineDeleteParamDto p)
+        {
+            JsonSerializerSettings jsSettings = new JsonSerializerSettings();
+            jsSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
+
+            var json = @"{ ""SordLine"": " + JsonConvert.SerializeObject(p, Formatting.None, jsSettings) + @"}";
+            var parms = CallInterface("Sord/sordlinedelete", json);
+
+            return JsonParser.ParseObject<SordLineDeleteResultDto>(JObject.Parse(parms));
+        }
+
+        internal ReserveResultDto ReserveDelete(ReserveParamsDto p)
+        {
+            JsonSerializerSettings jsSettings = new JsonSerializerSettings();
+            jsSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
+
+            var json = @"{ ""Reserve"": " + JsonConvert.SerializeObject(p, Formatting.None, jsSettings) + @"}";
+            var parms = CallInterface("Reserve/reservedelete", json);
+
+            return JsonParser.ParseObject<ReserveResultDto>(JObject.Parse(parms));
+        }
+
+        internal ReserveResultDto Reserve(ReserveParamsDto p)
+        {
+
+            JsonSerializerSettings jsSettings = new JsonSerializerSettings();
+            jsSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
+
+            var json = @"{ ""Reserve"": " + JsonConvert.SerializeObject(p, Formatting.None, jsSettings) + @"}";
+            var parms = CallInterface("Reserve/reserve", json);
+
+            return JsonParser.ParseObject<ReserveResultDto>(JObject.Parse(parms)); 
+        }
+
         public void ResetAction(int? aid)
         {
             var t = new Thread(() => RealResetAction(aid));

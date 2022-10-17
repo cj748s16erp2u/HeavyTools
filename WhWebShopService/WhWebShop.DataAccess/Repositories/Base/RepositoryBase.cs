@@ -360,19 +360,27 @@ public class RepositoryBase<TEntity> : IRepository<TEntity> where TEntity : clas
         return this.dbSet.FromSqlRaw(sql, new object[0]);
     }
 
-    public Task ExecuteStoredProcedure(string name, Dictionary<string, object> parms)
+    public Task<int> ExecuteStoredProcedure(string name, Dictionary<string, object> parms)
     {
         var spl = new List<SqlParameter>();
         foreach (var parameter in parms)
         {
             spl.Add(new SqlParameter(parameter.Key, parameter.Value));
         }
-        
+        return ExecuteStoredProcedure(name, spl);
+    }
+
+    public Task<int> ExecuteStoredProcedure(string name, List<SqlParameter> spl)
+    { 
         var sql = name + " " + String.Join(", ", spl.Select(x =>
          $"@{x.ParameterName} = @{x.ParameterName}" +
          (x.Direction == ParameterDirection.Output ? " OUT" : "")
          ));
-        return dbContext.Database.ExecuteSqlRawAsync(sql, spl.ToArray());
+        return dbContext.Database.ExecuteSqlRawAsync(sql, spl.ToArray()); 
+    }
 
+    public Task<int> ExecuteSql(string sql, CancellationToken cancellationToken)
+    {
+        return dbContext.Database.ExecuteSqlRawAsync(sql, cancellationToken);
     }
 }

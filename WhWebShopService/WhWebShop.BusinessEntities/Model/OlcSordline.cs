@@ -18,6 +18,8 @@ namespace eLog.HeavyTools.Services.WhWebShop.BusinessEntities.Model
         public DateTime? Confdeldate { get; set; }
         [Column("data", TypeName = "xml")]
         public string? Data { get; set; }
+        [Column("preordersordlineid")]
+        public int? Preordersordlineid { get; set; }
         [Column("addusrid")]
         [StringLength(12)]
         [Unicode(false)]
@@ -28,8 +30,11 @@ namespace eLog.HeavyTools.Services.WhWebShop.BusinessEntities.Model
         [ForeignKey("Addusrid")]
         [InverseProperty("OlcSordline")]
         public virtual CfwUser Addusr { get; set; } = null!;
+        [ForeignKey("Preordersordlineid")]
+        [InverseProperty("OlcSordlinePreordersordline")]
+        public virtual OlsSordline? Preordersordline { get; set; }
         [ForeignKey("Sordlineid")]
-        [InverseProperty("OlcSordline")]
+        [InverseProperty("OlcSordlineSordline")]
         public virtual OlsSordline Sordline { get; set; } = null!;
     }
 }

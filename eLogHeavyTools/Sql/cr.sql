@@ -467,6 +467,8 @@ create table [olc_sordline] (
 
 alter table [olc_sordline] add constraint [fk_olc_sordline_sordlineid] foreign key ([sordlineid]) references [ols_sordline] ([sordlineid])
 alter table [olc_sordline] add constraint [fk_olc_sordline_addusrid] foreign key ([addusrid]) references [cfw_user] ([usrid])
+alter table olc_sordline add constraint fk_olc_sordline_preordersordlineid foreign key (preordersordlineid) references ols_sordline (sordlineid)
+
 go
 
 /* Ajándék kártya       */
