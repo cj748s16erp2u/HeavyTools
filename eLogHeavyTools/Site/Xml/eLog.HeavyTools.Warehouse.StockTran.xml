@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Schema xmlns="http://tempuri.org/RenderableSchema.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://tempuri.org/RenderableSchema.xsd RenderableSchema.xsd">
+	<Search Name="TransferingHeadSearchProvider3">
+		<Column FieldName="stid" Hidden="True" PKFieldName="stid"/>
+		<Column FieldName="linecount" Width="30"/>
+		<Column FieldName="ststat" Width="30" FieldFunction="listlookup" FieldFuncArg="eLog.Base.Warehouse.StockTran.StHeadStStatList,abbr"/>
+		<Column FieldName="stdocid" Width="80"/>
+		<Column FieldName="docnum" Width="95"/>
+		<Column FieldName="stdate" Width="68" Format="D"/>
+		<Column FieldName="fromwhid2" DisplayName="$fromwhidtran" Width="70"/>
+		<Column FieldName="fromwhname" DisplayName="$fromwhnametran" Width="150"/>
+		<Column FieldName="towhid2" DisplayName="$towhidtran" Width="70"/>
+		<Column FieldName="towhname" DisplayName="$towhidtran" Width="150"/>
+		
+		<Column FieldName="towh2whid" Width="70" PKFieldName="false"/>
+		<Column FieldName="towh2name" Width="150"/>
+	
+		
+		<Column FieldName="curid" Width="50"/>
+		<Column FieldName="netval" Width="100" Format="C2"/>
+		<Column FieldName="totval" Width="100" Format="C2"/>
+		<Column FieldName="sinvdocnum" Width="100"/>
+		<Column FieldName="bustypeid" Width="60"/>
+		<Column FieldName="note" Width="150"/>
+		<Column FieldName="addusrid" Width="100"/>
+		<Column FieldName="adddate" Width="120" Format="DT"/>
+		<Column FieldName="projcode" Width="60"/>
+		<Column FieldName="projname" Width="150"/>
+		<Column FieldName="reldatemax" Width="68" Format="D"/>
+		<!--<Column FieldName="closeusrid" Width="80" />-->
+		<!--<Column FieldName="closedate" Width="110" Format="DT" />-->
+		<Column FieldName="cmpid" Width="80" Align="Left" FieldFunction="listlookup" FieldFuncArg="eLog.Base.Setup.Company.CompanyLoggedInList"/>
+	</Search>
+	
+
+	<TabPage Name="TransferingOnRoadTab">
+		<LayoutTable ControlGroup="StHead" Columns="{120, None}; {180, None}; {70, Empty}; {20, None}; {230, None}" ID="EditGroup1">
+			<Textbox Field="cmpid" Visible="false"/>
+			<ForceNextRow/>
+			<Combo Field="fromwhid" Label="$fromwhidtran" ListID="eLog.Base.Setup.Warehouse.WarehouseList#sessioncmp" ComboFlags="None" ColsToSpan="2" Disabled="True"/>
+			<ForceNextRow/>
+			<Combo Field="towhid" Label="$towhidtran" ListID="eLog.Base.Setup.Warehouse.WarehouseListForUser" ComboFlags="None" ColsToSpan="2" Disabled="True"/>
+			<Button Field="changeWh"/>
+			<ForceNextRow/>
+			<DatePickerbox Field="stdate"/>
+			<Empty/>
+			<ForceNextRow/>
+			<Textbox Field="note" Rows="3" ColsToSpan="-1"/>
+			<Textbox Field="curid" Visible="False"/>
+			<Textbox Field="paymid" Visible="False"/>
+			<Intbox Field="paycid" Visible="False"/>
+		</LayoutTable>
+		<Grid ID="StLineGrid" ControlGroup="StLineList2" ParamsCtrlGroup="q" Height="80" ColsToSpan="-1" MultiSelect="True"/>
+		
+	</TabPage>
+	
+	<Search Name="TransitSearchProvider">
+		<Column FieldName="stlineid" Hidden="True" PKFieldName="stlineid"/>
+		<Column FieldName="linenum" Width="50"/>
+		<Column FieldName="itemcode" Width="90"/>
+		<Column FieldName="name01" Width="200"/>
+		<Column FieldName="origid" Width="50"/>
+		<Column FieldName="unitid2" Width="40"/>
+		<!--Column FieldName="ordqty2" Format="C" Width="100" />
+    <Column FieldName="dispqty2" Format="C" Width="100" /-->
+		<Column FieldName="movqty2" DisplayName="$movqty2_calc" Format="C" Width="120"/>
+	</Search>
+	
+	<Search Name="TransferingOnRoadSearchProvider">
+		<Column FieldName="stlineid" Hidden="True" PKFieldName="stlineid"/>
+		<Column FieldName="linenum" Width="50"/>
+		<Column FieldName="itemcode" Width="90"/>
+		<Column FieldName="name01" Width="200"/>
+		<Column FieldName="origid" Width="50"/>
+		<Column FieldName="unitid2" Width="40"/>
+		<!--Column FieldName="ordqty2" Format="C" Width="100" />
+		<Column FieldName="dispqty2" Format="C" Width="100" /-->
+		<Column FieldName="movqty2" DisplayName="$movqty2_calc" Format="C" Width="120"/>
+	</Search>
+	
+</Schema>
