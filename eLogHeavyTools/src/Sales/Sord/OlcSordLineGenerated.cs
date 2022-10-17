@@ -86,6 +86,21 @@ namespace eLog.HeavyTools.Sales.Sord
 
         /// <summary>
         /// <para>Field</para>
+        /// ? - int
+        /// </summary>
+        [Field("preordersordlineid")]
+        public static Field FieldPreordersordlineid { get; protected set; }
+        /// <summary>
+        /// ? - int
+        /// </summary>
+        public int? Preordersordlineid
+        {
+            get { return (int?)this[FieldPreordersordlineid]; }
+            set { this[FieldPreordersordlineid] = value; }
+        }
+
+        /// <summary>
+        /// <para>Field</para>
         /// ? - varchar
         /// </summary>
         [Field("addusrid")]

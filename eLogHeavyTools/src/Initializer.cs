@@ -194,6 +194,10 @@ namespace eLog.HeavyTools
             // Warehouse
             ObjectFactory.AddRemap(typeof(Base.Setup.Warehouse.WarehouseSearchPage), typeof(Setup.Warehouse.WarehouseSearchPage3));
             ObjectFactory.AddRemap(typeof(Base.Setup.Warehouse.WarehouseSearchTab), typeof(Setup.Warehouse.WarehouseSearchTab3));
+            ObjectFactory.AddRemap(typeof(Base.Warehouse.StockTran.IssuingHeadBL), typeof(Warehouse.StockTran.IssuingHeadBL3));
+            ObjectFactory.AddRemap(typeof(Base.Warehouse.StockTran.IssuingLineBL), typeof(Warehouse.StockTran.IssuingLineBL3));
+            ObjectFactory.AddRemap(typeof(Base.Warehouse.StockTran.IssuingLineEditTab), typeof(Warehouse.StockTran.IssuingLineEditTab3));
+
 
             // Item
             ObjectFactory.AddRemap(typeof(eLog.Base.Masters.Item.ItemEditTab), typeof(eLog.HeavyTools.Masters.Item.ItemEditTab3));
@@ -219,6 +223,8 @@ namespace eLog.HeavyTools
             ObjectFactory.AddRemap(typeof(Base.Sales.Sord.SordLineEditTab), typeof(Sales.Sord.SordLineEditTab3));
             ObjectFactory.AddRemap(typeof(Base.Sales.Sord.SordLineEditTab), typeof(Sales.Sord.SordLineEditTab3));
             ObjectFactory.AddRemap(typeof(Base.Sales.Sord.SordLineSearchProvider), typeof(Sales.Sord.SordLineSearchProvider3));
+            ObjectFactory.AddRemap(typeof(Base.Sales.Sord.SordLineSearchTab), typeof(Sales.Sord.SordLineSearchTab3));
+            ObjectFactory.AddRemap(typeof(Base.Sales.Sord.SordStBL), typeof(Sales.Sord.SordStBL3));
 
             // Pord
             ObjectFactory.AddRemap(typeof(Base.Purchase.Pord.PordHeadBL), typeof(Purchase.Pord.PordHeadBL3));
@@ -243,6 +249,12 @@ namespace eLog.HeavyTools
             ObjectFactory.AddRemap(typeof(Base.Warehouse.StockTran.TransferingHeadSearchProvider), typeof(Warehouse.StockTran.TransferingHeadSearchProvider3));
             ObjectFactory.AddRemap(typeof(Base.Warehouse.StockTran.TransferingHeadSearchTab), typeof(Warehouse.StockTran.TransferingHeadSearchTab3));
             ObjectFactory.AddRemap(typeof(Base.Warehouse.StockTran.TransferingLineBL), typeof(Warehouse.StockTran.TransferingLineBL3));
+
+            //StDoc
+            ObjectFactory.AddRemap(typeof(Base.Setup.SordDoc.SordDocBL), typeof(eLog.HeavyTools.Setup.SordDoc.SordDocBL3));
+            ObjectFactory.AddRemap(typeof(Base.Setup.SordDoc.SordDocEditTab), typeof(eLog.HeavyTools.Setup.SordDoc.SordDocEditTab3));
+            ObjectFactory.AddRemap(typeof(Base.Setup.SordDoc.SordDocSearchProvider), typeof(eLog.HeavyTools.Setup.SordDoc.SordDocSearchProvider3));
+
         }
     }
 }

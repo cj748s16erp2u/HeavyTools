@@ -297,7 +297,7 @@ create table olc_partner (
     constraint fk_olc_partner_partnid foreign key (partnid) references ols_partner (partnid),
     constraint fk_olc_partner_taxid foreign key (taxid) references ols_tax (taxid),
     constraint fk_olc_partner_addusrid foreign key (addusrid) references cfw_user (usrid),
-    constraint fk_olc_partner_regreprempid foreign key (regreprempid) references ols_employee (empid)
+	constraint fk_olc_partner_regreprempid foreign key (regreprempid) references ols_employee (empid)
 )
 go
 
@@ -330,7 +330,7 @@ create table olc_partncmp (
     adddate                     datetime                null,
     constraint pk_olc_partncmp primary key (partnid, cmpid), -- composite primary key
     constraint fk_olc_partncmp_partnid foreign key (partnid) references ols_partner (partnid),
-	constraint fk_olc_partncmp_cmpid foreign key (cmpid) references ols_company (cmpid),
+    constraint fk_olc_partncmp_cmpid foreign key (cmpid) references ols_company (cmpid),
     constraint fk_olc_partncmp_partnid_cmpid foreign key (partnid, cmpid) references ols_partncmp (partnid, cmpid),
     constraint fk_olc_partncmp_secpaymid foreign key (secpaymid) references ols_paymethod (paymid),
     constraint fk_olc_partncmp_addusrid foreign key (addusrid) references cfw_user (usrid)
@@ -459,6 +459,7 @@ create table [olc_sordline] (
   [sordlineid]                [int]             not null, -- primary key, foreign key
   [confqty]                   [numeric](19, 6)      null, -- visszaigazolt mennyiség
   [confdeldate]               [datetime]            null, -- visszaigazolt szállítási határidő
+  [preordersordlineid]        [int]                 null, -- előrendelés azonosító
   [addusrid]                  [varchar](12)     not null,
   [adddate]                   [datetime]        not null,
   constraint [pk_olc_sordline] primary key ([sordlineid])
@@ -727,9 +728,7 @@ create table olc_cart (
 alter table olc_cart add constraint fk_olc_cart_addusrid foreign key (addusrid) references cfw_user (usrid)
 alter table olc_cart add constraint fk_olc_cart_aid foreign key (aid) references olc_action (aid)
 alter table olc_cart add constraint fk_olc_cart_itemid foreign key (itemid) references ols_item (itemid)
-
-
-
+go
 
 /***************************************/
 /* Elsődleges helykód				   */
@@ -776,3 +775,42 @@ alter table olc_stline add constraint fk_olc_stline_addusrid foreign key (addusr
 alter table olc_stline add constraint fk_olc_stline_origstlineid foreign key (origstlineid) references ols_stline (stlineid)
 go
 
+create table olc_tmp_sordsord (
+   ssid                 uniqueidentifier     not null,
+   sordlineid           int                  not null,
+   sordid               int                  not null,
+   linenum              int                  not null, 
+   itemid               int                  not null,
+   itemcode				varchar(25)			 null,
+   name01				varchar(100)		 null,
+   name02				nvarchar(200)		 null,
+   qty                  numeric(19,6)        null,
+   reqdate              datetime             not null,
+   confqty				datetime             null,
+   confdeldate			datetime             null,
+   ref2                 varchar(30)          null,
+   pendingqty			numeric(19,6)        not null,
+   fullordqty           numeric(19,6)        not null,
+   fullmovqty           numeric(19,6)        not null,
+   ordqty               numeric(19,6)        not null,
+   movqty               numeric(19,6)        not null,
+   selprc               numeric(19,6)        not null,
+   seltotprc            numeric(19,6)        null,
+   selprctype           int                  null,
+   selprcprcid          int                  null,
+   discpercnt           numeric(9,4)         not null,
+   discpercntprcid      int                  null,
+   discval              numeric(19,6)        not null,
+   disctotval           numeric(19,6)        null,
+   taxid                varchar(12)          not null,
+   sordlinestat         int                  not null,
+   note                 varchar(200)         null,
+   resid                int                  null,
+   ucdid                int                  null,
+   pjpid                int                  null,
+   gen                  int                  not null,
+   addusrid             varchar(12)          not null,
+   adddate              datetime             not null,
+   constraint pk_tmp_sordsord_sordline primary key (sordlineid)
+)
+go

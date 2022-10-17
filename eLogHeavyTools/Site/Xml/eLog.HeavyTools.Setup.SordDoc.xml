@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Schema xmlns="http://tempuri.org/RenderableSchema.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://tempuri.org/RenderableSchema.xsd RenderableSchema.xsd">
+  
+	<TabPage Name="SordDocEditTab3">
+		<LayoutTable ControlGroup="SordDoc" Columns="{220, None}; {180, None}; {20, Empty}; {120, None}; {180, None}" ID="EditGroup1">
+			<Textbox Field="sorddocid"/>
+			<ForceNextRow/>
+			<Combo Field="type" ListID="eLog.Base.Setup.Parameters.SordDocTypeList" ComboFlags="AutoSelectOne"/>
+			<ForceNextRow/>
+			<CompanyCodesControl Field="cmpcodes" ListID="eLog.Base.Setup.Company.CompanyCodeList#grantedonly#showall" ComboFlags="AutoSelectOne" ColsToSpan="-1"/>
+			<ForceNextRow/>
+			<Textbox Field="name" ColsToSpan="2"/>
+			<ForceNextRow/>
+			<Combo Field="bomdecomptype" ListID="eProjectWeb.Framework.Data.TypeListProviderPublic#bom.decomptype" ComboFlags="AllowBlank" ColsToSpan="2"/>
+			<ForceNextRow/>
+			<Combo Field="visibleinsttype" ListID="eLog.Base.Setup.SordDoc.SordVisibleInStTypeList" ComboFlags="None"/>
+			<ForceNextRow/>
+			<Combo Field="autoreservetype" ListID="eProjectWeb.Framework.Data.TypeListProviderPublic#ols_sorddoc.autoreservetype" ComboFlags="None"/>
+			<ForceNextRow/>
+			<Combo Field="autoreseventtype" ListID="eProjectWeb.Framework.Data.TypeListProviderPublic#ols_sorddoc.autoreseventtype" ComboFlags="None"/>
+			<ForceNextRow/>
+			<Combo Field="stclosemovqtychtype" ListID="eLog.Base.Setup.SordDoc.SordDocStCloseMovQtyChTypeList" ComboFlags="None"/>
+			<ForceNextRow/>
+			<Combo Field="bustypeid" ListID="eLog.Base.Setup.BusType.BusTypeList" ComboFlags="None"/>
+			<ForceNextRow/>
+			<Combo Field="headdefstat" ListID="eLog.Base.Setup.Status.StatListProviderPublic#ols_sordhead.sordstat" ComboFlags="None"/>
+			<ForceNextRow/>
+			<Checkbox Field="hcreatedmod"/>
+			<ForceNextRow/>
+			<Combo Field="paymtype" ListID="eProjectWeb.Framework.Data.TypeListProviderPublic#ols_sorddoc.paymtype" ComboFlags="None"/>
+			<Combo Field="paymdeftype" ListID="eProjectWeb.Framework.Data.TypeListProviderPublic#ols_sorddoc.paymdeftype" ComboFlags="None"/>
+			<ForceNextRow/>
+			<Textbox Field="ref1"/>
+		</LayoutTable>
+		
+		<LayoutTable ControlGroup="EditGroupCustom" Columns="{220, None}; {180, None}; {20, Empty}; {120, None}; {180, None}" ID="EditGroupCustom">
+			<Combo Field="frameordersorddocid" ListID="eLog.HeavyTools.Setup.SordDoc.SordDocPreorderList" ComboFlags="None" DependentField="cmpcodes" DependentCtrlID="SordDoc.cmpcodes"/>
+		</LayoutTable>
+	</TabPage>
+	<Search Name="SordDocSearchProvider3">
+		<Column FieldName="sorddocid" PKFieldName="sorddocid" Width="120"/>
+		<Column FieldName="name" Width="200"/>
+		<Column FieldName="bomdecomptype" Width="50" Align="Left" FieldFunction="listlookup" FieldFuncArg="eProjectWeb.Framework.Data.TypeListProviderPublic#bom.decomptype,abbr"/>
+		<Column FieldName="type" Width="120" FieldFunction="listlookup" FieldFuncArg="eLog.Base.Setup.Parameters.SordDocTypeList" Align="Left"/>
+		<Column FieldName="cmpcodes_" DisplayName="$cmpcodes" Width="120"/>
+		<Column FieldName="lastnum" Width="100"/>
+		<Column FieldName="delstat" FieldFunction="listlookup" FieldFuncArg="eLog.Base.Setup.Parameters.DelstatTypeList,abbr" Align="Left" Width="30"/>
+		<Column FieldName="frameordersorddocid" Width="120"/>
+	</Search>
+
+</Schema>
