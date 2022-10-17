@@ -70,7 +70,7 @@ public class OlcWhzstocklocValidator : EntityValidator<OlcWhztranloc>, IOlcWhztr
                 }
             });
 
-        this.RuleFor(loc => loc.Whlocid)
+        this.RuleFor(loc => loc.Whid)
             .Custom((newValue, context) =>
             {
                 var loc = context.InstanceToValidate;
@@ -78,22 +78,80 @@ public class OlcWhzstocklocValidator : EntityValidator<OlcWhztranloc>, IOlcWhztr
                 var stHead = context.TryGetEntity<OlcWhztranloc, OlsSthead>();
                 if (tranHead is null)
                 {
-                    context.AddFailure(new FluentValidation.Results.ValidationFailure(nameof(OlcWhztranloc.Whlocid), $"The transaction doesn't exists (transaction: {loc.Whztid})"));
+                    context.AddFailure(x => x.Whid, $"The transaction doesn't exists (transaction: {newValue})");
                 }
-                else
+                else if (tranHead.Whzttype == (int)WhZTranHead_Whzttype.Receiving)
                 {
                     if (stHead is null && tranHead.Stid is not null)
                     {
-                        context.AddFailure(new FluentValidation.Results.ValidationFailure(nameof(OlcWhztranloc.Whlocid), $"The stock transaction doesn't exists (stock transaction: {tranHead.Stid})"));
+                        context.AddFailure(x => x.Whid, $"The stock transaction doesn't exists (stock transaction: {tranHead.Stid})");
                     }
-                    else if (stHead is not null && !string.Equals(stHead.Towhid, loc.Whid, StringComparison.InvariantCultureIgnoreCase))
+                    else if (stHead is not null && !string.Equals(stHead.Towhid, newValue, StringComparison.InvariantCultureIgnoreCase))
                     {
-                        context.AddFailure(new FluentValidation.Results.ValidationFailure(nameof(OlcWhztranloc.Whlocid), $"The location doesn't belongs to the stock tran destination warehouse (destination warehouse: {stHead.Towhid}, location: {newValue})"));
+                        context.AddFailure(x => x.Whid, $"The warehouse doesn't same as the stock tran destination warehouse (destination warehouse: {stHead.Towhid}, warehouse: {newValue})");
                     }
+                }
+                else
+                {
+                    context.AddFailure(x => x.Whid, "not implemented");
+                }
+            });
 
-                    if (tranHead.Towhzid != loc.Whzoneid)
+        this.RuleFor(loc => loc.Whzoneid)
+            .Custom((newValue, context) =>
+            {
+                var loc = context.InstanceToValidate;
+                var tranHead = context.TryGetEntity<OlcWhztranloc, OlcWhztranhead>();
+                if (tranHead is null)
+                {
+                    context.AddFailure(x => x.Whid, $"The transaction doesn't exists (transaction: {newValue})");
+                }
+                else if (tranHead.Whzttype == (int)WhZTranHead_Whzttype.Receiving && tranHead.Towhzid != newValue)
+                {
+                    context.AddFailure(x => x.Whid, $"The zone doesn't same as the tranzaction destination zone (destination zone: {tranHead.Towhzid}, zone: {newValue})");
+                }
+                else
+                {
+                    context.AddFailure(x => x.Whid, "not implemented");
+                }
+            });
+
+        this.RuleFor(loc => loc.Whlocid)
+            .Custom((newValue, context) =>
+            {
+                var location = context.TryGetEntity<OlcWhztranloc, OlcWhlocation>();
+                if (location is null)
+                {
+                    context.AddFailure(x => x.Whlocid, $"The location doesn't exists (location: {newValue})");
+                }
+                else
+                {
+                    var loc = context.InstanceToValidate;
+                    var tranHead = context.TryGetEntity<OlcWhztranloc, OlcWhztranhead>();
+                    var stHead = context.TryGetEntity<OlcWhztranloc, OlsSthead>();
+                    if (tranHead is null)
                     {
-                        context.AddFailure(new FluentValidation.Results.ValidationFailure(nameof(OlcWhztranloc.Whlocid), $"The location doesn't belongs to the transaction destination zone (destination zone: {tranHead.Towhzid}, location: {newValue})"));
+                        context.AddFailure(new FluentValidation.Results.ValidationFailure(nameof(OlcWhztranloc.Whlocid), $"The transaction doesn't exists (transaction: {loc.Whztid})"));
+                    }
+                    else if (tranHead.Whzttype == (int)WhZTranHead_Whzttype.Receiving)
+                    {
+                        if (stHead is null && tranHead.Stid is not null)
+                        {
+                            context.AddFailure(x => x.Whlocid, $"The stock transaction doesn't exists (stock transaction: {tranHead.Stid})");
+                        }
+                        else if (stHead is not null && !string.Equals(stHead.Towhid, location?.Whid, StringComparison.InvariantCultureIgnoreCase))
+                        {
+                            context.AddFailure(x => x.Whlocid, $"The location doesn't belongs to the stock tran destination warehouse (destination warehouse: {stHead.Towhid}, location: {location?.Whid})");
+                        }
+
+                        if (tranHead.Towhzid != location?.Whzoneid)
+                        {
+                            context.AddFailure(x => x.Whlocid, $"The location doesn't belongs to the transaction destination zone (destination zone: {tranHead.Towhzid}, location: {location?.Whzoneid})");
+                        }
+                    }
+                    else
+                    {
+                        context.AddFailure(x => x.Whlocid, "not implemented");
                     }
                 }
             });

@@ -254,11 +254,6 @@ public class LogicServiceBase<TEntity> : ILogicService<TEntity>
         {
             entry = this.Repository.Remove(entity);
             await this.UnitOfWork.SaveChangesAsync(cancellationToken);
-
-            if (entry is not null)
-            {
-                entry.State = EntityState.Deleted;
-            }
         }
         catch (DbUpdateException ex)
         {
