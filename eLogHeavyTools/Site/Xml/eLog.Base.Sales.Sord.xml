@@ -1,64 +1,64 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Schema xmlns="http://tempuri.org/RenderableSchema.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://tempuri.org/RenderableSchema.xsd RenderableSchema.xsd">
-	<TabPage Name="SordHeadSearchTab">
-		<Report>
-			<File Name="doc_sord" Proc="sp_doc_sord" Action="1"/>
-			<File Name="doc_offer" Proc="sp_doc_offer" Action="2"/>
-		</Report>
-		<SearchFilterBar ID="SrcBar">
-			<Textbox Field="docnum" Width="100"/>
-			<CheckedCombo Field="sorddocid" Width="150" ListID="eLog.Base.Setup.SordDoc.SordDocList" ComboFlags="None"/>
-			<DatePickerbox Field="datefrom" Label="$sorddate" Width="100"/>
-			<DatePickerbox Field="dateto" Label=" " Width="100"/>
-			<CheckedCombo Field="cmpid" Width="150" ListID="eLog.Base.Setup.Company.CompanyLoggedInList" ComboFlags="AutoSelectOne"/>
-			<ForceNextRow/>
-			<Textbox Field="partncode"/>
-			<Textbox Field="partnname" Width="100"/>
-			<Textbox Field="ref1" ColsToSpan="3"/>
-			<Combo Field="addusrid" Width="150" ListID="eProjectWeb.Framework.UI.Maintenance.User.UserList" ComboFlags="None"/>
-			<ForceNextRow/>
-			<CheckedCombo Field="sordstat" Width="100" ListID="eLog.Base.Sales.Sord.SordHeadStatList" ComboFlags="None"/>
-			<CheckedCombo Field="whid" Width="100" ListID="eLog.Base.Setup.Warehouse.WarehouseList#sessioncmp" ComboFlags="AllowBlank"/>
-			<CheckedCombo Field="sordtype" Width="100" ListID="eLog.Base.Setup.Parameters.SordDocTypeList" ComboFlags="None" ColsToSpan="3"/>
-			<Textbox Field="partnaddrname"/>
-			<ForceNextRow/>
+    <TabPage Name="SordHeadSearchTab">
+        <Report>
+            <File Name="doc_sord" Proc="sp_doc_sord" Action="1"/>
+            <File Name="doc_offer" Proc="sp_doc_offer" Action="2"/>
+        </Report>
+        <SearchFilterBar ID="SrcBar">
+            <Textbox Field="docnum" Width="100"/>
+            <CheckedCombo Field="sorddocid" Width="150" ListID="eLog.Base.Setup.SordDoc.SordDocList" ComboFlags="None"/>
+            <DatePickerbox Field="datefrom" Label="$sorddate" Width="100"/>
+            <DatePickerbox Field="dateto" Label=" " Width="100"/>
+            <CheckedCombo Field="cmpid" Width="150" ListID="eLog.Base.Setup.Company.CompanyLoggedInList" ComboFlags="AutoSelectOne"/>
+            <ForceNextRow/>
+            <Textbox Field="partncode"/>
+            <Textbox Field="partnname" Width="100"/>
+            <Textbox Field="ref1" ColsToSpan="3"/>
+            <Combo Field="addusrid" Width="150" ListID="eProjectWeb.Framework.UI.Maintenance.User.UserList" ComboFlags="None"/>
+            <ForceNextRow/>
+            <CheckedCombo Field="sordstat" Width="100" ListID="eLog.Base.Sales.Sord.SordHeadStatList" ComboFlags="None"/>
+            <CheckedCombo Field="whid" Width="100" ListID="eLog.Base.Setup.Warehouse.WarehouseList#sessioncmp" ComboFlags="AllowBlank"/>
+            <CheckedCombo Field="sordtype" Width="100" ListID="eLog.Base.Setup.Parameters.SordDocTypeList" ComboFlags="None" ColsToSpan="3"/>
+            <Textbox Field="partnaddrname"/>
+            <ForceNextRow/>
 			<CheckedCombo Field="sordapprovalstat" Width="120" Label="$sordapprovalstat_filter" ListID="eLog.Base.Setup.Status.StatListProviderPublic#olc_sordhead.sordapprovalstat" ComboFlags="None"/>
-			<CheckedCombo Field="projid" ListID="eLog.Base.Project.ProjectList" ComboFlags="None" DependentField="cmpid" DependentCtrlID="q.cmpid" Width="100"/>
+            <CheckedCombo Field="projid" ListID="eLog.Base.Project.ProjectList" ComboFlags="None" DependentField="cmpid" DependentCtrlID="q.cmpid" Width="100"/>
 			<CheckedCombo Field="curid" ListID="eLog.Base.Setup.Currency.CurrencyList" ComboFlags="None"/>
-		</SearchFilterBar>
-		<Grid ID="searchResults" StatusBar="True" FilterBar="True" Label="$sordhead_search_results"/>
-	</TabPage>
-	<TabPage Name="SordHeadEditTab2Base">
-		<LayoutTable ControlGroup="SordHead" Columns="{120, None}; {120, None}; {20, Empty}; {100, None}; {210, None}; {20, Empty}; {80, None}; {120, None}" ID="EditGroup1" Label="$sordhead_editgroup">
-			<Combo Field="cmpid" ListID="eLog.Base.Setup.Company.CompanyLoggedInList" ComboFlags="None"/>
-			<Combo Field="sorddocid" ListID="eLog.Base.Setup.SordDoc.SordDocList" ComboFlags="None" DependentField="cmpid" DependentCtrlID="SordHead.cmpid"/>
-			<ForceNextRow/>
-			<DatePickerbox Field="sorddate"/>
-			<Textbox Field="docnum" Disabled="True"/>
-			<ForceNextRow/>
-			<Combo Field="projid" ListID="eLog.Base.Project.ProjectList" ComboFlags="None" ColsToSpan="4" DependentField="cmpid" DependentCtrlID="SordHead.cmpid"/>
-			<ForceNextRow/>
-			<Selector Field="partnid" Label="$partnid_code" ValueField="partnid" TextField="partncode" SelectionID="eLog.Base.Masters.Partner.PartnerSelectionProvider" DependentField="cmpid" DependentCtrlID="SordHead.cmpid"/>
-			<Empty/>
-			<ForceNextRow/>
-			<Selector Field="partnid" Label="$partnid_name" ValueField="partnid" TextField="name" SelectionID="eLog.Base.Masters.Partner.PartnerSelectionProvider" ColsToSpan="4"/>
-			<ForceNextRow/>
-			<Combo Field="addrid" ListID="eLog.Base.Masters.Partner.PartnAddrList" ComboFlags="None AllowBlank AutoSelectFirst FindAnywhere" DependentField="partnid" DependentCtrlID="SordHead.partnid_partncode" ColsToSpan="4"/>
-			<ForceNextRow/>
-			<Combo Field="curid" ListID="eLog.Base.Setup.Currency.CurrencyList" ComboFlags="None"/>
-			<Combo Field="whid" ListID="eLog.Base.Setup.Warehouse.WarehouseListForUser" ComboFlags="AllowBlank" DependentField="cmpid" DependentCtrlID="SordHead.cmpid"/>
-			<Textbox Field="ref1"/>
-			<ForceNextRow/>
-			<Combo Field="paymid" ListID="eLog.Base.Setup.PayMethod.PayMethodList" ComboFlags="None"/>
-			<Combo Field="paycid" ListID="eLog.Base.Setup.PayMethod.PayCondList" ComboFlags="AllowBlank" DependentField="paymid" DependentCtrlID="SordHead.paymid"/>
-			<ForceNextRow/>
-			<Combo Field="regreprempid" ListID="eLog.Base.Masters.Partner.EmployeeList" ComboFlags="AllowBlank" DependentCtrlID="SordHead.partnid_partncode,#16" DependentField="partnid,emptype" CustomData="olc"/>
-			<Combo Field="clerkempid" ListID="eLog.Base.Masters.Partner.EmployeeList" ComboFlags="AllowBlank" DependentCtrlID="SordHead.partnid_partncode" DependentField="partnid" CustomData="olc"/>
+        </SearchFilterBar>
+        <Grid ID="searchResults" StatusBar="True" FilterBar="True" Label="$sordhead_search_results"/>
+    </TabPage>
+    <TabPage Name="SordHeadEditTab2Base">
+        <LayoutTable ControlGroup="SordHead" Columns="{120, None}; {120, None}; {20, Empty}; {100, None}; {210, None}; {20, Empty}; {80, None}; {120, None}" ID="EditGroup1" Label="$sordhead_editgroup">
+            <Combo Field="cmpid" ListID="eLog.Base.Setup.Company.CompanyLoggedInList" ComboFlags="None"/>
+            <Combo Field="sorddocid" ListID="eLog.Base.Setup.SordDoc.SordDocList" ComboFlags="None" DependentField="cmpid" DependentCtrlID="SordHead.cmpid"/>
+            <ForceNextRow/>
+            <DatePickerbox Field="sorddate"/>
+            <Textbox Field="docnum" Disabled="True"/>
+            <ForceNextRow/>
+            <Combo Field="projid" ListID="eLog.Base.Project.ProjectList" ComboFlags="None" ColsToSpan="4" DependentField="cmpid" DependentCtrlID="SordHead.cmpid"/>
+            <ForceNextRow/>
+            <Selector Field="partnid" Label="$partnid_code" ValueField="partnid" TextField="partncode" SelectionID="eLog.Base.Masters.Partner.PartnerSelectionProvider" DependentField="cmpid" DependentCtrlID="SordHead.cmpid"/>
+            <Empty/>
+            <ForceNextRow/>
+            <Selector Field="partnid" Label="$partnid_name" ValueField="partnid" TextField="name" SelectionID="eLog.Base.Masters.Partner.PartnerSelectionProvider" ColsToSpan="4"/>
+            <ForceNextRow/>
+            <Combo Field="addrid" ListID="eLog.Base.Masters.Partner.PartnAddrList" ComboFlags="None AllowBlank AutoSelectFirst FindAnywhere" DependentField="partnid" DependentCtrlID="SordHead.partnid_partncode" ColsToSpan="4"/>
+            <ForceNextRow/>
+            <Combo Field="curid" ListID="eLog.Base.Setup.Currency.CurrencyList" ComboFlags="None"/>
+            <Combo Field="whid" ListID="eLog.Base.Setup.Warehouse.WarehouseListForUser" ComboFlags="AllowBlank" DependentField="cmpid" DependentCtrlID="SordHead.cmpid"/>
+            <Textbox Field="ref1"/>
+            <ForceNextRow/>
+            <Combo Field="paymid" ListID="eLog.Base.Setup.PayMethod.PayMethodList" ComboFlags="None"/>
+            <Combo Field="paycid" ListID="eLog.Base.Setup.PayMethod.PayCondList" ComboFlags="AllowBlank" DependentField="paymid" DependentCtrlID="SordHead.paymid"/>
+            <ForceNextRow/>
+			<Combo Field="regreprempid" ListID="eLog.Base.Masters.Partner.EmployeeList" ComboFlags="AllowBlank" DependentCtrlID="#3,#16" DependentField="cmpidfilter,emptype" CustomData="olc" />
+			<Combo Field="clerkempid" ListID="eLog.Base.Masters.Partner.EmployeeList" ComboFlags="AllowBlank" DependentCtrlID="SordHead.partnid_partncode" DependentField="partnid" CustomData="olc" />
 			<ForceNextRow/>
 			<Numberbox Field="advval" ColsToSpan="1" CustomData="olc"/>
 			<ForceNextRow/>
-			<Textbox Field="note" Rows="2" ColsToSpan="4"/>
-		</LayoutTable>
+            <Textbox Field="note" Rows="2" ColsToSpan="4"/>
+        </LayoutTable>
 		
 		<LayoutTable ControlGroup="WebShop" Columns="{120, None}; {120, None}; {20, Empty}; {120, None}; {120, None}; {20, Empty}; {120, None}; {120, None}" ID="WebShopEditGroup" Label="$webshop_editgroup" Open="false">
 			<Combo Field="wid" ListID="eLog.HeavyTools.Webshop.WebshopList" ComboFlags="None" Disabled="True" CustomData="olc" ColsToSpan="4"/>
@@ -105,7 +105,7 @@
 			<ForceNextRow/>
 			<Textbox Field="Sinv_floor" ColsToSpan="2" Disabled="True"/>
 			<Textbox Field="Shipping_floor" ColsToSpan="2" Disabled="True"/>
-			<ForceNextRow/>
+			<ForceNextRow/>			
 			<Textbox Field="Sinv_door" ColsToSpan="2" Disabled="True"/>
 			<Textbox Field="Shipping_door" ColsToSpan="2" Disabled="True"/>
 			<ForceNextRow/>
@@ -139,41 +139,41 @@
 			<Textbox Field="GiftCardLogId" ColsToSpan="4" Disabled="True"/>
 			<ForceNextRow/>
  
-		</LayoutTable>
+        </LayoutTable>		
 		
-		<LayoutTable ControlGroup="SordLine" Columns="{120, None}; {120, None}; {20, Empty}; {120, None}; {120, None}; {20, Empty}; {120, None}; {120, None}" ID="EditGroup2" Label="$sordline_editgroup">
-			<Selector Field="itemid" Label="$itemid_code" ValueField="itemid" TextField="itemcode" SelectionID="eLog.Base.Masters.Item.ItemSelectionProvider"/>
-			<ForceNextRow/>
-			<!--<Selector Field="itemid" Label="$itemid_name3" ValueField="itemid" TextField="name03" SelectionID="eLog.Base.Masters.Item.ItemSelectionProvider" ColsToSpan="4" />			<ForceNextRow/>-->
-			<Selector Field="itemid" Label="$itemid_name1" ValueField="itemid" TextField="name01" SelectionID="eLog.Base.Masters.Item.ItemSelectionProvider" ColsToSpan="4"/>
-			<ForceNextRow/>
-			<DatePickerbox Field="reqdate"/>
+        <LayoutTable ControlGroup="SordLine" Columns="{120, None}; {120, None}; {20, Empty}; {120, None}; {120, None}; {20, Empty}; {120, None}; {120, None}" ID="EditGroup2" Label="$sordline_editgroup">
+            <Selector Field="itemid" Label="$itemid_code" ValueField="itemid" TextField="itemcode" SelectionID="eLog.Base.Masters.Item.ItemSelectionProvider"/>
+            <ForceNextRow/>
+            <!--<Selector Field="itemid" Label="$itemid_name3" ValueField="itemid" TextField="name03" SelectionID="eLog.Base.Masters.Item.ItemSelectionProvider" ColsToSpan="4" />			<ForceNextRow/>-->
+            <Selector Field="itemid" Label="$itemid_name1" ValueField="itemid" TextField="name01" SelectionID="eLog.Base.Masters.Item.ItemSelectionProvider" ColsToSpan="4"/>
+            <ForceNextRow/>
+            <DatePickerbox Field="reqdate"/>
 			<DatePickerbox Field="confdeldate"/>
-			<Textbox Field="ref2"/>
-			<ForceNextRow/>
-			<Numberbox Field="ordqty"/>
+            <Textbox Field="ref2"/>
+            <ForceNextRow/>
+            <Numberbox Field="ordqty"/>
 			<Numberbox Field="confqty"/>
-			<Numberbox Field="movqty" Disabled="True"/>
+            <Numberbox Field="movqty" Disabled="True"/>
 			<ForceNextRow/>
-			<Combo Field="taxid" ListID="eLog.Base.Setup.Tax.TaxList#sord" ComboFlags="None"/>
-			<ForceNextRow/>
-			<Combo Field="selprctype" ListID="eLog.Base.Setup.PriceTable.PrcGroupPrcTypeList" ComboFlags="None"/>
-			<ForceNextRow/>
-			<Numberbox Field="selprc" Label="$selprc_nettot"/>
-			<Numberbox Field="discpercnt"/>
-			<Numberbox Field="discval"/>
-			<ForceNextRow/>
-			<Textbox Field="note" ColsToSpan="6"/>
+            <Combo Field="taxid" ListID="eLog.Base.Setup.Tax.TaxList#sord" ComboFlags="None"/>
+            <ForceNextRow/>
+            <Combo Field="selprctype" ListID="eLog.Base.Setup.PriceTable.PrcGroupPrcTypeList" ComboFlags="None"/>
+            <ForceNextRow/>
+            <Numberbox Field="selprc" Label="$selprc_nettot"/>
+            <Numberbox Field="discpercnt"/>
+            <Numberbox Field="discval"/>
+            <ForceNextRow/>
+            <Textbox Field="note" ColsToSpan="6"/>
 			<ForceNextRow/>
 			<Intbox Field="selprcprcid" Visible="false"/>
 			<Intbox Field="discpercntprcid" Visible="false"/>
-		</LayoutTable>
+        </LayoutTable>
 		
 		<LayoutTable ControlGroup="SordLineWebShop" Columns="{120, None}; {120, None}; {20, Empty}; {120, None}; {120, None}; {20, Empty}; {120, None}; {120, None}" ID="SordlineWebShopEditGroup" Label="$sordlinewebshop_editgroup" Open="false">
 			<Textbox Field="OrignalSelPrc" Disabled="True"/>
 			<Textbox Field="OrignalTotprc" Disabled="True"/>
-			<ForceNextRow/>
-			<Textbox Field="SelPrc" Disabled="True"/>
+			<ForceNextRow/>			
+			<Textbox Field="SelPrc" Disabled="True"/> 
 			<Textbox Field="GrossPrc" Disabled="True"/>
 			<ForceNextRow/>
 			<Textbox Field="NetVal" Disabled="True"/>
@@ -182,76 +182,76 @@
 		</LayoutTable>
 		
 			
-		<LayoutTable ControlGroup="Reserve" Columns="{140, None}; {180, None}; {20, Empty}; {140, None}; {100, None}; {20, Empty}; {80, None}; {100, None}" ID="EditGroupReserve" Label="$reserve_editgroup">
-			<Numberbox Field="resid" Disabled="True" DecDigits="0"/>
-			<ForceNextRow/>
-			<Combo Field="whid" ListID="eLog.Base.Setup.Warehouse.WarehouseList" ComboFlags="AllowBlank" DependentField="cmpid" DependentCtrlID="SordHead.cmpid"/>
-			<Numberbox Field="resqty"/>
-			<Numberbox Field="stock_qty"/>
-			<ForceNextRow/>
-			<DatePickerbox Field="resdate"/>
-			<DatePickerbox Field="freedate"/>
-			<Numberbox Field="stock_resqty"/>
-			<ForceNextRow/>
-			<Empty/>
-			<Empty/>
-			<Numberbox Field="stock_freeqty"/>
-		</LayoutTable>
-	</TabPage>
-	<TabPage Name="SordLineSearchTab">
-		<Control ControlType="SordHeadInfoPart" ID="sordHeadInfoPart"/>
-		<LayoutTable ControlGroup="multi" Columns="{100, None}; {100, None}; {10, Empty}; {60, None}; {230, None}; {10, Empty}; {110, None}; {150, None}" ID="multi" Label="$sordhead_multi" Open="False">
-			<DatePickerbox Field="reqdate"/>
-			<Combo Field="importfields" ListID="eLog.Base.Sales.Sord.SordLineImportFieldsList" ComboFlags="None"/>
-			<Combo Field="importcodetype" ListID="eLog.Base.Sales.Sord.SordLineImportCodeTypeList" ComboFlags="None"/>
-			<ForceNextRow/>
-			<Textbox Field="multipaste" Rows="5" ColsToSpan="-1"/>
-		</LayoutTable>
-		<SearchFilterBar ID="SrcBar">
-			<Textbox Field="itemid_code" Width="100"/>
-			<!--<Textbox Field="itemid_name3" Width="100" />-->
-			<Textbox Field="itemid_name1" Width="100"/>
-			<CheckedCombo Field="sordlinestat" Width="100" ListID="eLog.Base.Sales.Sord.SordLineStatList" ComboFlags="None"/>
-		</SearchFilterBar>
-		<Grid ID="searchResults" StatusBar="True" FilterBar="True" Label="$sordline_search_results" MultiSelect="True"/>
-	</TabPage>
-	<TabPage Name="SordLineEditTab">
-		<Control ControlType="SordHeadInfoPart" ID="sordHeadInfoPart"/>
-		<LayoutTable ControlGroup="SordLine" Columns="{140, None}; {160, None}; {20, Empty}; {140, None}; {160, None}; {20, Empty}; {140, None}; {160, None}" ID="EditGroup1" Label="$sordline_editgroup">
-			<Selector Field="itemid" Label="$itemid_code" ValueField="itemid" TextField="itemcode" SelectionID="eLog.Base.Masters.Item.ItemSelectionProvider"/>
-			<Textbox Field="unitid" Disabled="True"/>
-			<ForceNextRow/>
-			<!--<Selector Field="itemid" Label="$itemid_name3" ValueField="itemid" TextField="name03" SelectionID="eLog.Base.Masters.Item.ItemSelectionProvider" ColsToSpan="4" />			<ForceNextRow/>-->
-			<Selector Field="itemid" Label="$itemid_name1" ValueField="itemid" TextField="name01" SelectionID="eLog.Base.Masters.Item.ItemSelectionProvider" ColsToSpan="4"/>
-			<ForceNextRow/>
-			<DatePickerbox Field="reqdate"/>
+        <LayoutTable ControlGroup="Reserve" Columns="{140, None}; {180, None}; {20, Empty}; {140, None}; {100, None}; {20, Empty}; {80, None}; {100, None}" ID="EditGroupReserve" Label="$reserve_editgroup">
+            <Numberbox Field="resid" Disabled="True" DecDigits="0"/>
+            <ForceNextRow/>
+            <Combo Field="whid" ListID="eLog.Base.Setup.Warehouse.WarehouseList" ComboFlags="AllowBlank" DependentField="cmpid" DependentCtrlID="SordHead.cmpid"/>
+            <Numberbox Field="resqty"/>
+            <Numberbox Field="stock_qty"/>
+            <ForceNextRow/>
+            <DatePickerbox Field="resdate"/>
+            <DatePickerbox Field="freedate"/>
+            <Numberbox Field="stock_resqty"/>
+            <ForceNextRow/>
+            <Empty/>
+            <Empty/>
+            <Numberbox Field="stock_freeqty"/>
+        </LayoutTable>
+    </TabPage>
+    <TabPage Name="SordLineSearchTab">
+        <Control ControlType="SordHeadInfoPart" ID="sordHeadInfoPart"/>
+        <LayoutTable ControlGroup="multi" Columns="{100, None}; {100, None}; {10, Empty}; {60, None}; {230, None}; {10, Empty}; {110, None}; {150, None}" ID="multi" Label="$sordhead_multi" Open="False">
+            <DatePickerbox Field="reqdate"/>
+            <Combo Field="importfields" ListID="eLog.Base.Sales.Sord.SordLineImportFieldsList" ComboFlags="None"/>
+            <Combo Field="importcodetype" ListID="eLog.Base.Sales.Sord.SordLineImportCodeTypeList" ComboFlags="None"/>
+            <ForceNextRow/>
+            <Textbox Field="multipaste" Rows="5" ColsToSpan="-1"/>
+        </LayoutTable>
+        <SearchFilterBar ID="SrcBar">
+            <Textbox Field="itemid_code" Width="100"/>
+            <!--<Textbox Field="itemid_name3" Width="100" />-->
+            <Textbox Field="itemid_name1" Width="100"/>
+            <CheckedCombo Field="sordlinestat" Width="100" ListID="eLog.Base.Sales.Sord.SordLineStatList" ComboFlags="None"/>
+        </SearchFilterBar>
+        <Grid ID="searchResults" StatusBar="True" FilterBar="True" Label="$sordline_search_results" MultiSelect="True"/>
+    </TabPage>
+    <TabPage Name="SordLineEditTab">
+        <Control ControlType="SordHeadInfoPart" ID="sordHeadInfoPart"/>
+        <LayoutTable ControlGroup="SordLine" Columns="{140, None}; {160, None}; {20, Empty}; {140, None}; {160, None}; {20, Empty}; {140, None}; {160, None}" ID="EditGroup1" Label="$sordline_editgroup">
+            <Selector Field="itemid" Label="$itemid_code" ValueField="itemid" TextField="itemcode" SelectionID="eLog.Base.Masters.Item.ItemSelectionProvider"/>
+            <Textbox Field="unitid" Disabled="True"/>
+            <ForceNextRow/>
+            <!--<Selector Field="itemid" Label="$itemid_name3" ValueField="itemid" TextField="name03" SelectionID="eLog.Base.Masters.Item.ItemSelectionProvider" ColsToSpan="4" />			<ForceNextRow/>-->
+            <Selector Field="itemid" Label="$itemid_name1" ValueField="itemid" TextField="name01" SelectionID="eLog.Base.Masters.Item.ItemSelectionProvider" ColsToSpan="4"/>
+            <ForceNextRow/>
+            <DatePickerbox Field="reqdate"/>
 			<DatePickerbox Field="confdeldate" CustomData="olc"/>
-			<ForceNextRow/>
-			<Numberbox Field="ordqty"/>
+            <ForceNextRow/>
+            <Numberbox Field="ordqty"/>
 			<Numberbox Field="confqty" CustomData="olc"/>
-			<Numberbox Field="movqty" Disabled="True"/>
-			<ForceNextRow/>
-			<Combo Field="selprctype" ListID="eLog.Base.Setup.PriceTable.PrcGroupPrcTypeList" ComboFlags="None"/>
-			<ForceNextRow/>
-			<Numberbox Field="selprc" Label="$selprc_nettot"/>
-			<Combo Field="taxid" ListID="eLog.Base.Setup.Tax.TaxList#sord" ComboFlags="None"/>
-			<ForceNextRow/>
-			<Numberbox Field="discpercnt"/>
-			<Numberbox Field="discval"/>
-			<ForceNextRow/>
-			<Textbox Field="ref2" ColsToSpan="4"/>
-			<ForceNextRow/>
-			<Textbox Field="note" ColsToSpan="4"/>
+            <Numberbox Field="movqty" Disabled="True"/>
+            <ForceNextRow/>
+            <Combo Field="selprctype" ListID="eLog.Base.Setup.PriceTable.PrcGroupPrcTypeList" ComboFlags="None"/>
+            <ForceNextRow/>
+            <Numberbox Field="selprc" Label="$selprc_nettot"/>
+            <Combo Field="taxid" ListID="eLog.Base.Setup.Tax.TaxList#sord" ComboFlags="None"/>
+            <ForceNextRow/>
+            <Numberbox Field="discpercnt"/>
+            <Numberbox Field="discval"/>
+            <ForceNextRow/>
+            <Textbox Field="ref2" ColsToSpan="4"/>
+            <ForceNextRow/>
+            <Textbox Field="note" ColsToSpan="4"/>
 			<ForceNextRow/>
 			<Intbox Field="selprcprcid" Visible="false"/>
 			<Intbox Field="discpercntprcid" Visible="false"/>
-		</LayoutTable>
+        </LayoutTable>
 				
 		<LayoutTable ControlGroup="SordLineWebShop" Columns="{120, None}; {120, None}; {20, Empty}; {120, None}; {120, None}; {20, Empty}; {120, None}; {120, None}" ID="SordlineWebShopEditGroup" Label="$sordlinewebshop_editgroup" Open="false">
 			<Textbox Field="OrignalSelPrc" Disabled="True"/>
 			<Textbox Field="OrignalTotprc" Disabled="True"/>
-			<ForceNextRow/>
-			<Textbox Field="SelPrc" Disabled="True"/>
+			<ForceNextRow/>			
+			<Textbox Field="SelPrc" Disabled="True"/> 
 			<Textbox Field="GrossPrc" Disabled="True"/>
 			<ForceNextRow/>
 			<Textbox Field="NetVal" Disabled="True"/>
@@ -259,190 +259,190 @@
 			<Textbox Field="TaxVal" Disabled="True"/>
 		</LayoutTable>
 		
-		<LayoutTable ControlGroup="Reserve" Columns="{140, None}; {180, None}; {20, Empty}; {140, None}; {100, None}; {20, Empty}; {100, None}; {100, None}" ID="EditGroupReserve" Label="$reserve_editgroup">
-			<Numberbox Field="resid" Disabled="True" DecDigits="0"/>
-			<ForceNextRow/>
-			<Combo Field="whid" ListID="eLog.Base.Setup.Warehouse.WarehouseList" ComboFlags="AllowBlank" DependentField="cmpid" DependentCtrlID="info.cmpid"/>
-			<Numberbox Field="resqty"/>
-			<Numberbox Field="stock_qty"/>
-			<ForceNextRow/>
-			<DatePickerbox Field="resdate"/>
-			<DatePickerbox Field="freedate"/>
-			<Numberbox Field="stock_resqty"/>
-			<ForceNextRow/>
-			<Empty/>
-			<Empty/>
-			<Numberbox Field="stock_freeqty"/>
-		</LayoutTable>
-	</TabPage>
-	<TabPage Name="SordLineAllSearchTab">
-		<SearchFilterBar ID="SrcBar">
-			<Textbox Field="docnum" Width="120"/>
-			<CheckedCombo Field="sorddocid" Width="120" ListID="eLog.Base.Setup.SordDoc.SordDocList" ComboFlags="None"/>
-			<CheckedCombo Field="cmpid" Width="120" ListID="eLog.Base.Setup.Company.CompanyLoggedInList" ComboFlags="AutoSelectOne"/>
-			<DatePickerbox Field="reqdatefrom" Label="$reqdate" Width="100"/>
-			<DatePickerbox Field="reqdateto" Label=" " Width="100"/>
-			<ForceNextRow/>
-			<Textbox Field="partncode" Width="120"/>
-			<Textbox Field="partnname" Width="120"/>
-			<Textbox Field="partnaddrname" Width="120"/>
-			<DatePickerbox Field="confdeldatefrom" Label="$confdeldatefrom" Width="100"/>
-			<DatePickerbox Field="confdeldateto" Label=" " Width="100"/>
-			<ForceNextRow/>
-			<Textbox Field="itemid_code" Width="120"/>
-			<!--<Textbox Field="itemid_name3" />-->
-			<Textbox Field="itemid_name1" Width="120"/>
-			<CheckedCombo Field="whid" ListID="eLog.Base.Setup.Warehouse.WarehouseList#sessioncmp" ComboFlags="AllowBlank" Width="120"/>
+        <LayoutTable ControlGroup="Reserve" Columns="{140, None}; {180, None}; {20, Empty}; {140, None}; {100, None}; {20, Empty}; {100, None}; {100, None}" ID="EditGroupReserve" Label="$reserve_editgroup">
+            <Numberbox Field="resid" Disabled="True" DecDigits="0"/>
+            <ForceNextRow/>
+            <Combo Field="whid" ListID="eLog.Base.Setup.Warehouse.WarehouseList" ComboFlags="AllowBlank" DependentField="cmpid" DependentCtrlID="info.cmpid"/>
+            <Numberbox Field="resqty"/>
+            <Numberbox Field="stock_qty"/>
+            <ForceNextRow/>
+            <DatePickerbox Field="resdate"/>
+            <DatePickerbox Field="freedate"/>
+            <Numberbox Field="stock_resqty"/>
+            <ForceNextRow/>
+            <Empty/>
+            <Empty/>
+            <Numberbox Field="stock_freeqty"/>
+        </LayoutTable>
+    </TabPage>
+    <TabPage Name="SordLineAllSearchTab">
+        <SearchFilterBar ID="SrcBar">
+            <Textbox Field="docnum" Width="120"/>
+            <CheckedCombo Field="sorddocid" Width="120" ListID="eLog.Base.Setup.SordDoc.SordDocList" ComboFlags="None"/>
+            <CheckedCombo Field="cmpid" Width="120" ListID="eLog.Base.Setup.Company.CompanyLoggedInList" ComboFlags="AutoSelectOne"/>
+            <DatePickerbox Field="reqdatefrom" Label="$reqdate" Width="100"/>
+            <DatePickerbox Field="reqdateto" Label=" " Width="100"/>
+            <ForceNextRow/>
+            <Textbox Field="partncode" Width="120"/>
+            <Textbox Field="partnname" Width="120"/>
+            <Textbox Field="partnaddrname" Width="120"/>
+            <DatePickerbox Field="confdeldatefrom" Label="$confdeldatefrom" Width="100"/>
+            <DatePickerbox Field="confdeldateto" Label=" " Width="100"/>
+            <ForceNextRow/>
+            <Textbox Field="itemid_code" Width="120"/>
+            <!--<Textbox Field="itemid_name3" />-->
+            <Textbox Field="itemid_name1" Width="120"/>
+            <CheckedCombo Field="whid" ListID="eLog.Base.Setup.Warehouse.WarehouseList#sessioncmp" ComboFlags="AllowBlank" Width="120"/>
 			<Combo Field="movablefilter" ListID="eLog.Base.Sales.Sord.SordLineMovableFilterType" ComboFlags="AllowBlank" ColsToSpan="3"/>
-			<ForceNextRow/>
-			<Textbox Field="ref1" Width="120"/>
-			<CheckedCombo Field="sordstat" Width="120" Label="$sordstat_filter" ListID="eLog.Base.Sales.Sord.SordHeadStatList" ComboFlags="None"/>
-			<CheckedCombo Field="sordlinestat" Width="120" Label="$sordlinestat_filter" ListID="eLog.Base.Sales.Sord.SordLineStatList" ComboFlags="None"/>
-			<Checkbox Field="partialdelivery" ColsToSpan="3"/>
+            <ForceNextRow/>
+            <Textbox Field="ref1" Width="120"/>
+            <CheckedCombo Field="sordstat" Width="120" Label="$sordstat_filter" ListID="eLog.Base.Sales.Sord.SordHeadStatList" ComboFlags="None"/>
+            <CheckedCombo Field="sordlinestat" Width="120" Label="$sordlinestat_filter" ListID="eLog.Base.Sales.Sord.SordLineStatList" ComboFlags="None"/>
+            <Checkbox Field="partialdelivery" ColsToSpan="3"/>
 			<ForceNextRow/>
 			<Textbox Field="ref2" Width="120"/>
-			<CheckedCombo Field="projid" ListID="eLog.Base.Project.ProjectList" ComboFlags="None" DependentField="cmpid" DependentCtrlID="q.cmpid" Width="120"/>
-			<Combo Field="pendingst" Label="$filter_pendingst" Width="120" ComboFlags="AllowBlank" ListID="xml:eLog.Base.Sales.Sord_PendingSt"/>
-			<Combo Field="addusrid" Width="120" ListID="eProjectWeb.Framework.UI.Maintenance.User.UserList" ComboFlags="None"/>
+            <CheckedCombo Field="projid" ListID="eLog.Base.Project.ProjectList" ComboFlags="None" DependentField="cmpid" DependentCtrlID="q.cmpid" Width="120"/>
+            <Combo Field="pendingst" Label="$filter_pendingst" Width="120" ComboFlags="AllowBlank" ListID="xml:eLog.Base.Sales.Sord_PendingSt"/>
+            <Combo Field="addusrid" Width="120" ListID="eProjectWeb.Framework.UI.Maintenance.User.UserList" ComboFlags="None"/>
 			<CheckedCombo Field="curid" ListID="eLog.Base.Setup.Currency.CurrencyList" ComboFlags="None" ColsToSpan="3"/>
-		</SearchFilterBar>
-		<Grid ID="searchResults" Label="$sordline_search_results" MultiSelect="True"/>
-	</TabPage>
-	<ComboItems Name="PendingSt">
-		<ComboItem Value="0" Caption="$filter_pendingst_0"/>
-		<ComboItem Value="1" Caption="$filter_pendingst_1"/>
-	</ComboItems>
-	<Search Name="SordHeadSearchProvider">
-		<Column FieldName="sordid" Hidden="True" PKFieldName="sordid"/>
-		<Column FieldName="sordstat" Width="35" FieldFunction="listlookup" FieldFuncArg="eLog.Base.Sales.Sord.SordHeadStatList,abbr"/>
+        </SearchFilterBar>
+        <Grid ID="searchResults" Label="$sordline_search_results" MultiSelect="True"/>
+    </TabPage>
+    <ComboItems Name="PendingSt">
+        <ComboItem Value="0" Caption="$filter_pendingst_0"/>
+        <ComboItem Value="1" Caption="$filter_pendingst_1"/>
+    </ComboItems>
+    <Search Name="SordHeadSearchProvider">
+        <Column FieldName="sordid" Hidden="True" PKFieldName="sordid"/>
+        <Column FieldName="sordstat" Width="35" FieldFunction="listlookup" FieldFuncArg="eLog.Base.Sales.Sord.SordHeadStatList,abbr"/>
 		<Column FieldName="sordapprovalstat" FieldFunction="listlookup" FieldFuncArg="eLog.Base.Setup.Status.StatListProviderPublic#olc_sordhead.sordapprovalstat,abbr" ComboFlags="None"/>
-		<Column FieldName="linecount" Width="30"/>
-		<Column FieldName="sorddocid" Width="80"/>
-		<Column FieldName="docnum" Width="90"/>
-		<Column FieldName="sorddate" Width="68" Format="D"/>
-		<Column FieldName="linereqdate" DisplayName="$reqdate" Width="68" Format="D"/>
-		<Column FieldName="partncode" Width="80"/>
-		<Column FieldName="partnname" Width="200"/>
-		<Column FieldName="whid" Width="50"/>
-		<Column FieldName="curid" Width="50"/>
-		<Column FieldName="netval" Width="100" Format="C2"/>
+        <Column FieldName="linecount" Width="30"/>
+        <Column FieldName="sorddocid" Width="80"/>
+        <Column FieldName="docnum" Width="90"/>
+        <Column FieldName="sorddate" Width="68" Format="D"/>
+        <Column FieldName="linereqdate" DisplayName="$reqdate" Width="68" Format="D"/>
+        <Column FieldName="partncode" Width="80"/>
+        <Column FieldName="partnname" Width="200"/>
+        <Column FieldName="whid" Width="50"/>
+        <Column FieldName="curid" Width="50"/>
+        <Column FieldName="netval" Width="100" Format="C2"/>
 		<Column FieldName="remnetval" Width="100" Format="C2"/>
-		<Column FieldName="totval" Width="100" Format="C2"/>
-		<Column FieldName="remtotval" Width="100" Format="C2"/>
-		<Column FieldName="note" Width="150"/>
-		<Column FieldName="ref1" Width="100"/>
-		<Column FieldName="projcode" Width="60"/>
-		<Column FieldName="projname" Width="150"/>
-		<Column FieldName="addusrid" Width="100"/>
-		<Column FieldName="adddate" Width="120" Format="DT"/>
-		<Column FieldName="cmpid" Width="80" Align="Left" FieldFunction="flaglookup" FieldFuncArg="eLog.Base.Setup.Company.CompanyLoggedInList"/>
-	</Search>
-	<Search Name="SordLineSearchProvider">
-		<Column FieldName="sordlineid" Hidden="True" PKFieldName="sordlineid"/>
-		<Column FieldName="sordlinestat" Width="35" FieldFunction="listlookup" FieldFuncArg="eLog.Base.Sales.Sord.SordLineStatList,abbr"/>
-		<Column FieldName="itemid_code" Width="100"/>
-		<!--<Column FieldName="itemid_name3" Width="200" />-->
-		<Column FieldName="itemid_name1" Width="200"/>
-		<Column FieldName="reqdate" Width="80" Format="D"/>
+        <Column FieldName="totval" Width="100" Format="C2"/>
+        <Column FieldName="remtotval" Width="100" Format="C2"/>
+        <Column FieldName="note" Width="150"/>
+        <Column FieldName="ref1" Width="100"/>
+        <Column FieldName="projcode" Width="60"/>
+        <Column FieldName="projname" Width="150"/>
+        <Column FieldName="addusrid" Width="100"/>
+        <Column FieldName="adddate" Width="120" Format="DT"/>
+        <Column FieldName="cmpid" Width="80" Align="Left" FieldFunction="flaglookup" FieldFuncArg="eLog.Base.Setup.Company.CompanyLoggedInList"/>
+    </Search>
+    <Search Name="SordLineSearchProvider">
+        <Column FieldName="sordlineid" Hidden="True" PKFieldName="sordlineid"/>
+        <Column FieldName="sordlinestat" Width="35" FieldFunction="listlookup" FieldFuncArg="eLog.Base.Sales.Sord.SordLineStatList,abbr"/>
+        <Column FieldName="itemid_code" Width="100"/>
+        <!--<Column FieldName="itemid_name3" Width="200" />-->
+        <Column FieldName="itemid_name1" Width="200"/>
+        <Column FieldName="reqdate" Width="80" Format="D"/>
 		<Column FieldName="confdeldate" Width="80"/>
-		<Column FieldName="remqty" Width="90" Format="C2"/>
-		<Column FieldName="remnetval" Width="90" Format="C2"/>
-		<Column FieldName="selprc" Width="80"/>
-		<Column FieldName="ordqty" Width="68"/>
-		<Column FieldName="confqty" Width="80"/>
-		<Column FieldName="movqty" Width="68"/>
-		<Column FieldName="ordered" Width="85"/>
-		<Column FieldName="unitid" Width="45"/>
-		<Column FieldName="taxid" Width="60"/>
-		<Column FieldName="discpercnt" Width="60"/>
-		<Column FieldName="discval" Width="60"/>
-		<Column FieldName="netval" Width="100"/>
-		<Column FieldName="taxval" Width="100"/>
-		<Column FieldName="totval" Width="100"/>
-		<Column FieldName="ref2" Width="100"/>
-		<Column FieldName="linenum" Width="60"/>
-		<Column FieldName="note" Width="150"/>
-		<Column FieldName="addusrid" Width="100"/>
-		<Column FieldName="adddate" Width="120" Format="DT"/>
-	</Search>
-	<Search Name="SordLineAllSearchProvider">
-		<Column FieldName="sordlineid" Hidden="true" PKFieldName="sordlineid"/>
-		<Column FieldName="sordstat" Width="20" DisplayName="$sordstat_grid" FieldFunction="listlookup" FieldFuncArg="eLog.Base.Sales.Sord.SordHeadStatList,abbr"/>
-		<Column FieldName="sordlinestat" Width="35" DisplayName="$sordlinestat_grid" Align="Left" FieldFunction="listlookup" FieldFuncArg="eLog.Base.Sales.Sord.SordLineStatList,abbr"/>
-		<Column FieldName="sordid" Hidden="true" PKFieldName="sordid"/>
-		<Column FieldName="sorddocid" Width="80"/>
-		<Column FieldName="docnum" Width="90"/>
-		<Column FieldName="linenum" Width="30"/>
-		<Column FieldName="partncode" Width="80"/>
-		<Column FieldName="partnname" Width="200"/>
-		<Column FieldName="itemid_code" Width="100"/>
-		<!--<Column FieldName="itemid_name3" Width="200" />-->
-		<Column FieldName="itemid_name1" Width="200"/>
-		<Column FieldName="reqdate" Width="80" Format="D"/>
+        <Column FieldName="remqty" Width="90" Format="C2"/>
+        <Column FieldName="remnetval" Width="90" Format="C2"/>
+        <Column FieldName="selprc" Width="80"/>
+        <Column FieldName="ordqty" Width="68"/>
+        <Column FieldName="confqty" Width="80"/>
+        <Column FieldName="movqty" Width="68"/>
+        <Column FieldName="ordered" Width="85"/>
+        <Column FieldName="unitid" Width="45"/>
+        <Column FieldName="taxid" Width="60"/>
+        <Column FieldName="discpercnt" Width="60"/>
+        <Column FieldName="discval" Width="60"/>
+        <Column FieldName="netval" Width="100"/>
+        <Column FieldName="taxval" Width="100"/>
+        <Column FieldName="totval" Width="100"/>
+        <Column FieldName="ref2" Width="100"/>
+        <Column FieldName="linenum" Width="60"/>
+        <Column FieldName="note" Width="150"/>
+        <Column FieldName="addusrid" Width="100"/>
+        <Column FieldName="adddate" Width="120" Format="DT"/>
+    </Search>
+    <Search Name="SordLineAllSearchProvider">
+        <Column FieldName="sordlineid" Hidden="true" PKFieldName="sordlineid"/>
+        <Column FieldName="sordstat" Width="20" DisplayName="$sordstat_grid" FieldFunction="listlookup" FieldFuncArg="eLog.Base.Sales.Sord.SordHeadStatList,abbr"/>
+        <Column FieldName="sordlinestat" Width="35" DisplayName="$sordlinestat_grid" Align="Left" FieldFunction="listlookup" FieldFuncArg="eLog.Base.Sales.Sord.SordLineStatList,abbr"/>
+        <Column FieldName="sordid" Hidden="true" PKFieldName="sordid"/>
+        <Column FieldName="sorddocid" Width="80"/>
+        <Column FieldName="docnum" Width="90"/>
+        <Column FieldName="linenum" Width="30"/>
+        <Column FieldName="partncode" Width="80"/>
+        <Column FieldName="partnname" Width="200"/>
+        <Column FieldName="itemid_code" Width="100"/>
+        <!--<Column FieldName="itemid_name3" Width="200" />-->
+        <Column FieldName="itemid_name1" Width="200"/>
+        <Column FieldName="reqdate" Width="80" Format="D"/>
 		<Column FieldName="confdeldate" Width="80" Format="D"/>
-		<Column FieldName="remqty2" DisplayName="$remqty" Width="90" Format="C2"/>
-		<Column FieldName="remnetval" Width="90" Format="C2"/>
-		<Column FieldName="selprc" Width="80"/>
-		<Column FieldName="ordqty" Width="68"/>
-		<Column FieldName="movqty" Width="68"/>
+        <Column FieldName="remqty2" DisplayName="$remqty" Width="90" Format="C2"/>
+        <Column FieldName="remnetval" Width="90" Format="C2"/>
+        <Column FieldName="selprc" Width="80"/>
+        <Column FieldName="ordqty" Width="68"/>
+        <Column FieldName="movqty" Width="68"/>
 		<Column FieldName="confqty" Width="68"/>
-		<Column FieldName="sl_resqty" Width="68"/>
-		<Column FieldName="freeqty" Width="68"/>
-		<Column FieldName="movableqty" Width="68"/>
-		<Column FieldName="whid" Width="100"/>
-		<Column FieldName="curid" Width="80"/>
-		<Column FieldName="taxid" Width="60"/>
-		<Column FieldName="discpercnt" Width="60"/>
-		<Column FieldName="discval" Width="60"/>
-		<Column FieldName="cmpid" Width="80" Align="Left" FieldFunction="flaglookup" FieldFuncArg="eLog.Base.Setup.Company.CompanyLoggedInList"/>
-		<Column FieldName="ref1" Width="100"/>
-		<Column FieldName="ref2" Width="100"/>
-		<Column FieldName="note" Width="150"/>
-		<Column FieldName="projcode" Width="60"/>
-		<Column FieldName="projname" Width="150"/>
-		<Column FieldName="addusrid" Width="100"/>
+        <Column FieldName="sl_resqty" Width="68"/>
+        <Column FieldName="freeqty" Width="68"/>
+        <Column FieldName="movableqty" Width="68"/>
+        <Column FieldName="whid" Width="100"/>
+        <Column FieldName="curid" Width="80"/>
+        <Column FieldName="taxid" Width="60"/>
+        <Column FieldName="discpercnt" Width="60"/>
+        <Column FieldName="discval" Width="60"/>
+        <Column FieldName="cmpid" Width="80" Align="Left" FieldFunction="flaglookup" FieldFuncArg="eLog.Base.Setup.Company.CompanyLoggedInList"/>
+        <Column FieldName="ref1" Width="100"/>
+        <Column FieldName="ref2" Width="100"/>
+        <Column FieldName="note" Width="150"/>
+        <Column FieldName="projcode" Width="60"/>
+        <Column FieldName="projname" Width="150"/>
+        <Column FieldName="addusrid" Width="100"/>
 		<Column FieldName="sorddate" Width="68" Format="D"/>
-		<Column FieldName="adddate" Width="120" Format="DT"/>
-	</Search>
+        <Column FieldName="adddate" Width="120" Format="DT"/>
+    </Search>
    
-	<TabPage Name="SordCopyEditTab">
-		<LayoutTable ControlGroup="SordHead" Columns="{120, None}; {120, None}; {20, Empty}; {140, None}; {210, None}" ID="EditGroup1" Label="$sordhead_editgroup">
-			<Combo Field="cmpid" ListID="eLog.Base.Setup.Company.CompanyLoggedInList" ComboFlags="None" Disabled="True"/>
-			<Combo Field="sorddocid" ListID="eLog.Base.Setup.SordDoc.SordDocList" ComboFlags="None" DependentField="cmpid" DependentCtrlID="SordHead.cmpid"/>
-			<ForceNextRow/>
-			<DatePickerbox Field="sorddate"/>
-			<Textbox Field="docnum" Label="$origdocnum" Disabled="True"/>
-			<ForceNextRow/>
-			<Combo Field="projid" ListID="eLog.Base.Project.ProjectList" ComboFlags="None" ColsToSpan="4" DependentField="cmpid" DependentCtrlID="SordHead.cmpid"/>
-			<ForceNextRow/>
-			<Selector Field="partnid" Label="$partnid_code" ValueField="partnid" TextField="partncode" SelectionID="eLog.Base.Masters.Partner.PartnerSelectionProvider" DependentField="cmpid" DependentCtrlID="SordHead.cmpid"/>
-			<ForceNextRow/>
-			<Selector Field="partnid" Label="$partnid_name" ValueField="partnid" TextField="name" SelectionID="eLog.Base.Masters.Partner.PartnerSelectionProvider" ColsToSpan="-1"/>
-			<ForceNextRow/>
-			<Combo Field="addrid" ListID="eLog.Base.Masters.Partner.PartnAddrList" ComboFlags="None AllowBlank AutoSelectFirst FindAnywhere" DependentField="partnid" DependentCtrlID="SordHead.partnid_partncode" ColsToSpan="-1"/>
-			<ForceNextRow/>
-			<Combo Field="curid" ListID="eLog.Base.Setup.Currency.CurrencyList" ComboFlags="None" Disabled="True"/>
-			<Combo Field="whid" ListID="eLog.Base.Setup.Warehouse.WarehouseListForUser" ComboFlags="AllowBlank" DependentField="cmpid" DependentCtrlID="SordHead.cmpid"/>
-			<ForceNextRow/>
-			<Combo Field="paymid" ListID="eLog.Base.Setup.PayMethod.PayMethodList" ComboFlags="None"/>
-			<Combo Field="paycid" ListID="eLog.Base.Setup.PayMethod.PayCondList" ComboFlags="AllowBlank" DependentField="paymid" DependentCtrlID="SordHead.paymid"/>
-			<ForceNextRow/>
-			<Numberbox Field="credval" Visible="False"/>
-			<Numberbox Field="debval" Visible="False"/>
-			<ForceNextRow/>
-			<Textbox Field="ref1"/>
-			<ForceNextRow/>
-			<Textbox Field="note" Rows="3" ColsToSpan="-1"/>
-		</LayoutTable>
-	</TabPage>
+    <TabPage Name="SordCopyEditTab">
+        <LayoutTable ControlGroup="SordHead" Columns="{120, None}; {120, None}; {20, Empty}; {140, None}; {210, None}" ID="EditGroup1" Label="$sordhead_editgroup">
+            <Combo Field="cmpid" ListID="eLog.Base.Setup.Company.CompanyLoggedInList" ComboFlags="None" Disabled="True"/>
+            <Combo Field="sorddocid" ListID="eLog.Base.Setup.SordDoc.SordDocList" ComboFlags="None" DependentField="cmpid" DependentCtrlID="SordHead.cmpid"/>
+            <ForceNextRow/>
+            <DatePickerbox Field="sorddate"/>
+            <Textbox Field="docnum" Label="$origdocnum" Disabled="True"/>
+            <ForceNextRow/>
+            <Combo Field="projid" ListID="eLog.Base.Project.ProjectList" ComboFlags="None" ColsToSpan="4" DependentField="cmpid" DependentCtrlID="SordHead.cmpid"/>
+            <ForceNextRow/>
+            <Selector Field="partnid" Label="$partnid_code" ValueField="partnid" TextField="partncode" SelectionID="eLog.Base.Masters.Partner.PartnerSelectionProvider" DependentField="cmpid" DependentCtrlID="SordHead.cmpid"/>
+            <ForceNextRow/>
+            <Selector Field="partnid" Label="$partnid_name" ValueField="partnid" TextField="name" SelectionID="eLog.Base.Masters.Partner.PartnerSelectionProvider" ColsToSpan="-1"/>
+            <ForceNextRow/>
+            <Combo Field="addrid" ListID="eLog.Base.Masters.Partner.PartnAddrList" ComboFlags="None AllowBlank AutoSelectFirst FindAnywhere" DependentField="partnid" DependentCtrlID="SordHead.partnid_partncode" ColsToSpan="-1"/>
+            <ForceNextRow/>
+            <Combo Field="curid" ListID="eLog.Base.Setup.Currency.CurrencyList" ComboFlags="None" Disabled="True"/>
+            <Combo Field="whid" ListID="eLog.Base.Setup.Warehouse.WarehouseListForUser" ComboFlags="AllowBlank" DependentField="cmpid" DependentCtrlID="SordHead.cmpid"/>
+            <ForceNextRow/>
+            <Combo Field="paymid" ListID="eLog.Base.Setup.PayMethod.PayMethodList" ComboFlags="None"/>
+            <Combo Field="paycid" ListID="eLog.Base.Setup.PayMethod.PayCondList" ComboFlags="AllowBlank" DependentField="paymid" DependentCtrlID="SordHead.paymid"/>
+            <ForceNextRow/>
+            <Numberbox Field="credval" Visible="False"/>
+            <Numberbox Field="debval" Visible="False"/>
+            <ForceNextRow/>
+            <Textbox Field="ref1"/>
+            <ForceNextRow/>
+            <Textbox Field="note" Rows="3" ColsToSpan="-1"/>
+        </LayoutTable>
+    </TabPage>    
 	
-	<ComboItems Name="transfcond">
+  <ComboItems Name="transfcond">
 		<ComboItem Value="0" Caption="$transfcond_gls"/>
 		<ComboItem Value="1" Caption="$transfcond_foxpost"/>
 		<ComboItem Value="2" Caption="$transfcond_store"/>
 		<ComboItem Value="3" Caption="$transfcond_address"/>
 		<ComboItem Value="4" Caption="$transfcond_ppp"/>
-	</ComboItems>
+  </ComboItems>
 
 	
 </Schema>
