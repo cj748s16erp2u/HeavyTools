@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using eProjectWeb.Framework;
 using eProjectWeb.Framework.Data;
 using eProjectWeb.Framework.Extensions;
+using eProjectWeb.Framework.Lang;
 
 namespace eLog.HeavyTools.Purchase.PinvPackage
 {
@@ -15,9 +16,22 @@ namespace eLog.HeavyTools.Purchase.PinvPackage
 
         protected static string m_queryString = @"
 select prl.cmpcode, prl.usrname, prl.prlcode, prl.pcmcode+'/'+prl.usrname+'/'+prl.prlcode as packagecode, 
-     prl.paydate, prl.genhomenet, prl.homenet, prl.status
+     prl.paydate, prl.genhomenet, prl.homenet, prl.status,
+	 case when b.curcode_db > 1 then null else prlsum.net_sum end net_summa,
+	 case when b.curcode_db > 1 then '$more_curcode' else prlsum.curcode end curid
 from /*u4findb*/..oas_prllist prl (nolock)
-";
+     outer apply (select max(prs.curcode) curcode, sum(prs.net) net_sum
+                    from /*u4findb*/..oas_prlsumm prs (nolock) 
+                   where prs.pcmcode+'/'+prs.usrname+'/'+prs.prlcode = prl.pcmcode+'/'+prl.usrname+'/'+prl.prlcode
+                         and prs.deleted = 0) prlsum
+     outer apply (select count(0) curcode_db
+                    from (select prs.pcmcode+'/'+prs.usrname+'/'+prs.prlcode code, COUNT(0) db
+                            from /*u4findb*/..oas_prlsumm prs (nolock)
+                           where prs.pcmcode+'/'+prs.usrname+'/'+prs.prlcode = prl.pcmcode+'/'+prl.usrname+'/'+prl.prlcode
+                                 and prs.deleted = 0
+                        group by prs.pcmcode+'/'+prs.usrname+'/'+prs.prlcode, curcode
+                        having count(curcode)>0) a
+                 group by a.code) b";
 
         protected static QueryArg[] m_filters = new QueryArg[] {
             new QueryArg("cmpcode", "prl", FieldType.String, QueryFlags.MultipleAllowed),
@@ -27,6 +41,18 @@ from /*u4findb*/..oas_prllist prl (nolock)
 
         protected ApprovedPackageSearchProvider() : base(m_queryString, m_filters, SearchProviderType.Default, 1000)
         {
+            ProcessRecordFunc = ProcessRecord;
+        }
+
+        protected void ProcessRecord(IDataReaderModifyable r)
+        {
+            var msgCurcode = eProjectWeb.Framework.ConvertUtils.ToString(r["curid"]);
+            var args = new object[0];
+
+            if (!string.IsNullOrEmpty(msgCurcode))
+            {
+                r["curid"] = string.Format(Translator.Translate(msgCurcode), args);
+            }
         }
 
         static ApprovedPackageSearchProvider()
