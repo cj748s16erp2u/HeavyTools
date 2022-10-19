@@ -18,6 +18,7 @@ namespace eLog.HeavyTools.Purchase.Pinv
         protected Control m_add02;
         protected List<Control> m_ctrlsCustomPartnerData;
         protected List<Control> m_ctrlsCustomPartnerAddrParts;
+        protected List<Control> m_ctrlCustomGroupSeparators;
 
         protected override void CreateBase()
         {
@@ -30,6 +31,9 @@ namespace eLog.HeavyTools.Purchase.Pinv
             var addrParts = "district-place-placetype-hnum-building-stairway-floor-door".Split('-');
             this.m_ctrlsCustomPartnerAddrParts = this.m_ctrlsCustomPartnerData.Where(c => addrParts.Contains(c.DataField)).ToList();
             this.m_ctrlsCustomPartnerAddrParts.ForEach(c => c.SetOnChanged(new ControlEvent(this.OnCustomAddrPartsChanged)));
+
+            this.m_ctrlCustomGroupSeparators = this.EditGroup1.ControlArray.Where(c => c.CustomData != null && c.DataField.StartsWith("gscustom")).GroupBy(c => c.DataField).Select(g => g.FirstOrDefault()).ToList();
+            this.m_ctrlCustomGroupSeparators.ForEach(c => c.Visible = false);
         }
 
         protected override PinvHead DefaultPageLoad(PageUpdateArgs args)
@@ -221,6 +225,8 @@ namespace eLog.HeavyTools.Purchase.Pinv
         {
             bool visible = Common.PurchaseSqlFunctions3.IsPinvCustomPartner(partnId);
             m_ctrlsCustomPartnerData.ForEach(c => c.Visible = visible);
+
+            m_ctrlCustomGroupSeparators.ForEach(c => c.Visible = visible);
 
             //var o = m_ctrlsCustomPartnerData.Find(c => c.Field == "vatnum");
             //if (o != null)

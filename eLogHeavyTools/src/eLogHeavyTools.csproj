@@ -404,6 +404,7 @@
     <Compile Include="Sales\Retail\RetailSinvPage.cs" />
     <Compile Include="Sales\Retail\RetailVatnumCheck.cs" />
     <Compile Include="Sales\Sinv\SinvHeadBL3.cs" />
+    <Compile Include="Sales\Sinv\SinvHeadEditTab3.cs" />
     <Compile Include="Sales\Sinv\SinvHeadRules3.cs" />
     <Compile Include="Sales\Sinv\SinvPrintBL3.cs" />
     <Compile Include="Sales\Sinv\SinvPrintCallback3.cs" />

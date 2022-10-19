@@ -241,6 +241,7 @@ namespace eLog.HeavyTools
 
             // Sinv
             ObjectFactory.AddRemap(typeof(Base.Sales.Sinv.SinvHeadRules), typeof(Sales.Sinv.SinvHeadRules3));
+            ObjectFactory.AddRemap(typeof(Base.Sales.Sinv.SinvHeadEditTab), typeof(Sales.Sinv.SinvHeadEditTab3));
 
 
             //StockTran
