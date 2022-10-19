@@ -20,12 +20,8 @@ namespace eLog.HeavyTools.Services.WhWebShop.BusinessLogic.Services;
 [RegisterDI(Interface = typeof(IItemService))]
 
 public class ItemService : LogicServiceBase<ItemTmp>, IItemService
-{
-    private readonly IOlcPrctableService prctableService;
-    private readonly IOlsItemService olsItemService;
-    private readonly IOlcItemService olcItemService;
-    private readonly WhWebShopDbContext whWebShopDbContext;
-    private readonly IOlcPrctableCurrentService olcPrctableCurrentService;
+{ 
+    private readonly WhWebShopDbContext whWebShopDbContext; 
 
     public ItemService(IValidator<ItemTmp> validator,
                        IRepository<ItemTmp> repository,
@@ -36,12 +32,8 @@ public class ItemService : LogicServiceBase<ItemTmp>, IItemService
                        IOlcItemService olcItemService,
                        WhWebShopDbContext whWebShopDbContext,
                        IOlcPrctableCurrentService olcPrctableCurrentService) : base(validator, repository, unitOfWork, environmentService)
-    {
-        this.prctableService = prctableService ?? throw new ArgumentNullException(nameof(prctableService));
-        this.olsItemService = olsItemService ?? throw new ArgumentNullException(nameof(olsItemService));
-        this.olcItemService = olcItemService ?? throw new ArgumentNullException(nameof(olcItemService));
+    { 
         this.whWebShopDbContext = whWebShopDbContext ?? throw new ArgumentNullException(nameof(whWebShopDbContext));
-        this.olcPrctableCurrentService = olcPrctableCurrentService ?? throw new ArgumentNullException(nameof(olcPrctableCurrentService));
     } 
 
     public async Task<ItemDto> GetItems(CancellationToken cancellationToken = default)
