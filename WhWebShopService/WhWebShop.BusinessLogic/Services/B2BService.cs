@@ -22,7 +22,7 @@ internal class B2BService : LogicServiceBase<B2BPartnerTmp>, IB2BService
     {
     }
 
-    public B2BDto GetPartners(OlcApilogger olcApilogger)
+    public B2BDto GetPartners()
     {
         var ps = new List<B2BPartnerDto>();
  

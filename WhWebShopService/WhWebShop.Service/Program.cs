@@ -17,8 +17,10 @@ builder.Host.ConfigureAppConfiguration((hostingContext, config) =>
         .AddJsonFile("appsettings.json", false, true)
         .AddJsonFile($"appsettings.{env.EnvironmentName}.json", true, true)
         .AddEnvironmentVariables()
-        .AddCommandLine(args);
+        .AddCommandLine(args); 
 });
+
+
 
 builder.Host.ConfigureLogging((hostingContext, logging) =>
 {

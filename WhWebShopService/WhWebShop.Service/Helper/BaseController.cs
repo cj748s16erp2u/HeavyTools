@@ -12,18 +12,19 @@ namespace eLog.HeavyTools.Services.WhWebShop.Service.Helper
     {
         private IOlcApiloggerService apiloggerservice;
 
+        public bool ApiLoggerEnabled = true;
         public OlcApilogger? apilogger;
 
         public BaseController(IOlcApiloggerService apiloggerservice)
         {
             this.apiloggerservice = apiloggerservice ?? throw new ArgumentNullException(nameof(apiloggerservice));
         }
+
         public override void OnActionExecuted(ActionExecutedContext context)
         {
             base.OnActionExecuted(context);
              
-
-            if (apilogger != null)
+            if (ApiLoggerEnabled && apilogger != null)
             {
                 apilogger.Response = JsonConvert.SerializeObject(context.Result);
                 apiloggerservice.UpdateAsync(apilogger).GetAwaiter().GetResult();
@@ -45,7 +46,10 @@ namespace eLog.HeavyTools.Services.WhWebShop.Service.Helper
         public override void OnActionExecuting(ActionExecutingContext context)
         {
             base.OnActionExecuting(context);
-          
+            if (!ApiLoggerEnabled)
+            {
+                return;
+            }
             var request = GetRequest(context.HttpContext.Request);
             var lg = new OlcApilogger
             {
@@ -54,9 +58,7 @@ namespace eLog.HeavyTools.Services.WhWebShop.Service.Helper
                 Response = JsonConvert.SerializeObject(context.Result)
             };
 
-            apilogger = apiloggerservice.AddAsync(lg).GetAwaiter().GetResult();
-
-
+            apilogger = apiloggerservice.AddAsync(lg).GetAwaiter().GetResult(); 
         }
          
     }
