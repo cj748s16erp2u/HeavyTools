@@ -13,6 +13,12 @@ namespace eLog.HeavyTools.Services.WhWebShop.BusinessEntities.Model
     [Index("Ucdid", Name = "idx_ols_sordline_ucdid")]
     public partial class OlsSordline : Entity
     {
+        public OlsSordline()
+        {
+            OlcSordlinePreordersordline = new HashSet<OlcSordline>();
+            OlsTmpSordst = new HashSet<OlsTmpSordst>();
+        }
+
         [Key]
         [Column("sordlineid")]
         public int Sordlineid { get; set; }
@@ -81,6 +87,9 @@ namespace eLog.HeavyTools.Services.WhWebShop.BusinessEntities.Model
         [ForeignKey("Itemid")]
         [InverseProperty("OlsSordline")]
         public virtual OlsItem Item { get; set; } = null!;
+        [ForeignKey("Resid")]
+        [InverseProperty("OlsSordline")]
+        public virtual OlsReserve? Res { get; set; }
         [ForeignKey("Sordid")]
         [InverseProperty("OlsSordline")]
         public virtual OlsSordhead Sord { get; set; } = null!;
@@ -88,6 +97,10 @@ namespace eLog.HeavyTools.Services.WhWebShop.BusinessEntities.Model
         [InverseProperty("OlsSordline")]
         public virtual OlsTax Tax { get; set; } = null!;
         [InverseProperty("Sordline")]
-        public virtual OlcSordline OlcSordline { get; set; } = null!;
+        public virtual OlcSordline OlcSordlineSordline { get; set; } = null!;
+        [InverseProperty("Preordersordline")]
+        public virtual ICollection<OlcSordline> OlcSordlinePreordersordline { get; set; }
+        [InverseProperty("Sordline")]
+        public virtual ICollection<OlsTmpSordst> OlsTmpSordst { get; set; }
     }
 }

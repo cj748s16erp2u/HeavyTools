@@ -44,10 +44,48 @@ namespace eLog.HeavyTools.InterfaceCaller
             var json = @"{ ""Cart"": " + JsonConvert.SerializeObject(c, Formatting.None, jsSettings) + @"}";
 
 
-            var parms = CallInterface("PriceCalc/calc", json).
-                Replace(@"""items""", @"""Items2""");
+           return CallInterface<CalcJsonResultDto>("PriceCalc/calc", json, UpdateResult);
 
-            return JsonParser.ParseObject<CalcJsonResultDto>(JObject.Parse(parms));
+        } 
+
+        public string UpdateResult(string result)
+        {
+            return result.Replace(@"""items""", @"""Items2""");
+        }
+
+        internal SordLineDeleteResultDto SordlineDelete(SordLineDeleteParamDto p)
+        {
+            JsonSerializerSettings jsSettings = new JsonSerializerSettings();
+            jsSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
+
+            var json = @"{ ""SordLine"": " + JsonConvert.SerializeObject(p, Formatting.None, jsSettings) + @"}";
+            return CallInterface<SordLineDeleteResultDto>("Sord/sordlinedelete", json);
+             
+        }
+
+        private T CallInterface<T>(string endpointurl, string json)
+        {
+            return CallInterface<T>(endpointurl, json, null);
+        }
+
+        internal ReserveResultDto ReserveDelete(ReserveParamsDto p)
+        {
+            JsonSerializerSettings jsSettings = new JsonSerializerSettings();
+            jsSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
+
+            var json = @"{ ""Reserve"": " + JsonConvert.SerializeObject(p, Formatting.None, jsSettings) + @"}";
+            return CallInterface<ReserveResultDto>("Reserve/reservedelete", json);
+        }
+
+        internal ReserveResultDto Reserve(ReserveParamsDto p)
+        {
+
+            JsonSerializerSettings jsSettings = new JsonSerializerSettings();
+            jsSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
+
+            var json = @"{ ""Reserve"": " + JsonConvert.SerializeObject(p, Formatting.None, jsSettings) + @"}";
+            return CallInterface<ReserveResultDto>("Reserve/reserve", json);
+
         }
 
         public void ResetAction(int? aid)
@@ -66,12 +104,16 @@ namespace eLog.HeavyTools.InterfaceCaller
             jsSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
 
             var json = @"{ ""Reset"": " + JsonConvert.SerializeObject(c, Formatting.None, jsSettings) + @"}";
-             
-            CallInterface("PriceCalc/reset", json).
-                Replace(@"""items""", @"""Items2""");
+
+            CallInterface<NullResult>("PriceCalc/reset", json, UpdateResult2);
         }
 
-        private string CallInterface(string endpointurl, string json)
+        private string UpdateResult2(string arg)
+        {
+            return arg.Replace(@"""items""", @"""Items2""");
+        }
+
+        private T CallInterface<T>(string endpointurl, string json, Func<string, string> updateResult)
         {
             var url = CustomSettings.GetString("WhWebShopServiceUrl") + endpointurl;
             System.Net.ServicePointManager.SecurityProtocol |= SecurityProtocolType.Tls12 | SecurityProtocolType.Tls11 | SecurityProtocolType.Tls;
@@ -90,8 +132,31 @@ namespace eLog.HeavyTools.InterfaceCaller
 
                 var request = GetRequestMessage(url, val, json);
                 var response = httpClient.SendAsync(request).Result;
-                return  response.Content.ReadAsStringAsync().Result;
+                var parms = response.Content.ReadAsStringAsync().Result;
+                if (updateResult != null)
+                {
+                    parms = UpdateResult(parms);
+                }
+                if (response.StatusCode == HttpStatusCode.OK)
+                {
+                    try
+                    {
+                        var t = typeof(T);
 
+                        if (t == typeof(NullResult))
+                        {
+                            return (T)Activator.CreateInstance(typeof(T));
+                        }
+                        return JsonParser.ParseObject<T>(JObject.Parse(parms));
+                    }
+                    catch (Exception)
+                    {
+                        throw new MessageException(parms);
+                    }
+                } else
+                {
+                    throw new MessageException(response.StatusCode.ToString() + " " + response);
+                }
             }
         }
 
@@ -109,14 +174,18 @@ namespace eLog.HeavyTools.InterfaceCaller
         internal void ClearCartCache()
         {
             var json = @"{}";
-            CallInterface("PriceCalc/cartcachereset", json);
+            CallInterface<NullResult>("PriceCalc/cartcachereset", json);
         }
 
         internal void ReloadActions()
         {
             var json = @"{""Reset"": {""Aid"": null}}";
 
-            CallInterface("PriceCalc/reset", json);
+            CallInterface<NullResult>("PriceCalc/reset", json);
         }
+    }
+    public class NullResult
+    {
+
     }
 }

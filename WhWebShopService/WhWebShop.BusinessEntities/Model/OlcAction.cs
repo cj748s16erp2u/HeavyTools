@@ -80,6 +80,10 @@ namespace eLog.HeavyTools.Services.WhWebShop.BusinessEntities.Model
         public string? Note { get; set; }
         [Column("netgoid")]
         public int? Netgoid { get; set; }
+        [Column("blockmessage")]
+        [StringLength(200)]
+        [Unicode(false)]
+        public string? Blockmessage { get; set; }
         [Column("addusrid")]
         [StringLength(12)]
         [Unicode(false)]

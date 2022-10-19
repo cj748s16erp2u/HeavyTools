@@ -14,8 +14,10 @@
     <Column FieldName="packagecode" Width="250" PKFieldName="true" />
     <Column FieldName="status" Width="150" FieldFunction="listlookup" FieldFuncArg="eLog.Base.Setup.Status.StatListProviderPublic#oas_prllist.status" Editable="false" />
     <Column FieldName="paydate" Width="100" Format="D" />
-    <Column FieldName="genhomenet" Width="150" Format="C"/>
-    <Column FieldName="homenet" Width="150" Format="C"/>
+    <!--<Column FieldName="genhomenet" Width="150" Format="C"/>-->
+    <Column FieldName="curid" Width="80"/>
+    <Column FieldName="net_summa" Width="120" Format="C"/>    
+    <Column FieldName="homenet" Width="120" Format="C"/>
   </Search>
 
   <ControlType Name="ApprovedPackageInfoPart" Label="$apprpackage_group">
@@ -40,6 +42,7 @@
     <Column FieldName="packagecode" Width="250" PKFieldName="true" />
     <Column FieldName="doccode" Width="100" />
     <Column FieldName="docnum" Width="100" />
+    <Column FieldName="curid" Width="80" />
     <Column FieldName="net" Width="120" Format="C"/>
     <Column FieldName="descr" Width="250" />
     <Column FieldName="extref1" Width="180" />

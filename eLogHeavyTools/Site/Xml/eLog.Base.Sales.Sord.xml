@@ -24,7 +24,7 @@
             <ForceNextRow/>
 			<CheckedCombo Field="sordapprovalstat" Width="120" Label="$sordapprovalstat_filter" ListID="eLog.Base.Setup.Status.StatListProviderPublic#olc_sordhead.sordapprovalstat" ComboFlags="None"/>
             <CheckedCombo Field="projid" ListID="eLog.Base.Project.ProjectList" ComboFlags="None" DependentField="cmpid" DependentCtrlID="q.cmpid" Width="100"/>
-            <CheckedCombo Field="curid" ListID="eLog.Base.Setup.Currency.CurrencyList" ComboFlags="None" />
+			<CheckedCombo Field="curid" ListID="eLog.Base.Setup.Currency.CurrencyList" ComboFlags="None"/>
         </SearchFilterBar>
         <Grid ID="searchResults" StatusBar="True" FilterBar="True" Label="$sordhead_search_results"/>
     </TabPage>
@@ -52,7 +52,7 @@
             <Combo Field="paymid" ListID="eLog.Base.Setup.PayMethod.PayMethodList" ComboFlags="None"/>
             <Combo Field="paycid" ListID="eLog.Base.Setup.PayMethod.PayCondList" ComboFlags="AllowBlank" DependentField="paymid" DependentCtrlID="SordHead.paymid"/>
             <ForceNextRow/>
-			<Combo Field="regreprempid" ListID="eLog.Base.Masters.Partner.EmployeeList" ComboFlags="AllowBlank" DependentCtrlID="SordHead.partnid_partncode,#16" DependentField="partnid,emptype" CustomData="olc" />
+			<Combo Field="regreprempid" ListID="eLog.Base.Masters.Partner.EmployeeList" ComboFlags="AllowBlank" DependentCtrlID="#3,#16" DependentField="cmpidfilter,emptype" CustomData="olc" />
 			<Combo Field="clerkempid" ListID="eLog.Base.Masters.Partner.EmployeeList" ComboFlags="AllowBlank" DependentCtrlID="SordHead.partnid_partncode" DependentField="partnid" CustomData="olc" />
 			<ForceNextRow/>
 			<Numberbox Field="advval" ColsToSpan="1" CustomData="olc"/>
@@ -164,14 +164,14 @@
             <Numberbox Field="discval"/>
             <ForceNextRow/>
             <Textbox Field="note" ColsToSpan="6"/>
-            <ForceNextRow />
-            <Intbox Field="selprcprcid" Visible="false" />
-            <Intbox Field="discpercntprcid" Visible="false" />
+			<ForceNextRow/>
+			<Intbox Field="selprcprcid" Visible="false"/>
+			<Intbox Field="discpercntprcid" Visible="false"/>
         </LayoutTable>
 		
 		<LayoutTable ControlGroup="SordLineWebShop" Columns="{120, None}; {120, None}; {20, Empty}; {120, None}; {120, None}; {20, Empty}; {120, None}; {120, None}" ID="SordlineWebShopEditGroup" Label="$sordlinewebshop_editgroup" Open="false">
 			<Textbox Field="OrignalSelPrc" Disabled="True"/>
-			<Textbox Field="OrignalTotprc"  Disabled="True"/>
+			<Textbox Field="OrignalTotprc" Disabled="True"/>
 			<ForceNextRow/>			
 			<Textbox Field="SelPrc" Disabled="True"/> 
 			<Textbox Field="GrossPrc" Disabled="True"/>
@@ -242,14 +242,14 @@
             <Textbox Field="ref2" ColsToSpan="4"/>
             <ForceNextRow/>
             <Textbox Field="note" ColsToSpan="4"/>
-            <ForceNextRow />
-            <Intbox Field="selprcprcid" Visible="false" />
-            <Intbox Field="discpercntprcid" Visible="false" />
+			<ForceNextRow/>
+			<Intbox Field="selprcprcid" Visible="false"/>
+			<Intbox Field="discpercntprcid" Visible="false"/>
         </LayoutTable>
 				
 		<LayoutTable ControlGroup="SordLineWebShop" Columns="{120, None}; {120, None}; {20, Empty}; {120, None}; {120, None}; {20, Empty}; {120, None}; {120, None}" ID="SordlineWebShopEditGroup" Label="$sordlinewebshop_editgroup" Open="false">
 			<Textbox Field="OrignalSelPrc" Disabled="True"/>
-			<Textbox Field="OrignalTotprc"  Disabled="True"/>
+			<Textbox Field="OrignalTotprc" Disabled="True"/>
 			<ForceNextRow/>			
 			<Textbox Field="SelPrc" Disabled="True"/> 
 			<Textbox Field="GrossPrc" Disabled="True"/>
@@ -293,7 +293,7 @@
             <!--<Textbox Field="itemid_name3" />-->
             <Textbox Field="itemid_name1" Width="120"/>
             <CheckedCombo Field="whid" ListID="eLog.Base.Setup.Warehouse.WarehouseList#sessioncmp" ComboFlags="AllowBlank" Width="120"/>
-            <Combo Field="movablefilter" ListID="eLog.Base.Sales.Sord.SordLineMovableFilterType" ComboFlags="AllowBlank" ColsToSpan="3" />
+			<Combo Field="movablefilter" ListID="eLog.Base.Sales.Sord.SordLineMovableFilterType" ComboFlags="AllowBlank" ColsToSpan="3"/>
             <ForceNextRow/>
             <Textbox Field="ref1" Width="120"/>
             <CheckedCombo Field="sordstat" Width="120" Label="$sordstat_filter" ListID="eLog.Base.Sales.Sord.SordHeadStatList" ComboFlags="None"/>
@@ -304,7 +304,7 @@
             <CheckedCombo Field="projid" ListID="eLog.Base.Project.ProjectList" ComboFlags="None" DependentField="cmpid" DependentCtrlID="q.cmpid" Width="120"/>
             <Combo Field="pendingst" Label="$filter_pendingst" Width="120" ComboFlags="AllowBlank" ListID="xml:eLog.Base.Sales.Sord_PendingSt"/>
             <Combo Field="addusrid" Width="120" ListID="eProjectWeb.Framework.UI.Maintenance.User.UserList" ComboFlags="None"/>
-            <CheckedCombo Field="curid" ListID="eLog.Base.Setup.Currency.CurrencyList" ComboFlags="None" ColsToSpan="3" />
+			<CheckedCombo Field="curid" ListID="eLog.Base.Setup.Currency.CurrencyList" ComboFlags="None" ColsToSpan="3"/>
         </SearchFilterBar>
         <Grid ID="searchResults" Label="$sordline_search_results" MultiSelect="True"/>
     </TabPage>
@@ -315,7 +315,7 @@
     <Search Name="SordHeadSearchProvider">
         <Column FieldName="sordid" Hidden="True" PKFieldName="sordid"/>
         <Column FieldName="sordstat" Width="35" FieldFunction="listlookup" FieldFuncArg="eLog.Base.Sales.Sord.SordHeadStatList,abbr"/>
-		<Column FieldName="sordapprovalstat" FieldFunction="listlookup" FieldFuncArg="eLog.Base.Setup.Status.StatListProviderPublic#olc_sordhead.sordapprovalstat,abbr" ComboFlags="None" />
+		<Column FieldName="sordapprovalstat" FieldFunction="listlookup" FieldFuncArg="eLog.Base.Setup.Status.StatListProviderPublic#olc_sordhead.sordapprovalstat,abbr" ComboFlags="None"/>
         <Column FieldName="linecount" Width="30"/>
         <Column FieldName="sorddocid" Width="80"/>
         <Column FieldName="docnum" Width="90"/>
@@ -437,11 +437,12 @@
     </TabPage>    
 	
   <ComboItems Name="transfcond">
-    <ComboItem Value="0" Caption="$transfcond_gls" />
-    <ComboItem Value="1" Caption="$transfcond_foxpost" />
-    <ComboItem Value="2" Caption="$transfcond_store" />
-    <ComboItem Value="3" Caption="$transfcond_address" />
-    <ComboItem Value="4" Caption="$transfcond_ppp" />
+		<ComboItem Value="0" Caption="$transfcond_gls"/>
+		<ComboItem Value="1" Caption="$transfcond_foxpost"/>
+		<ComboItem Value="2" Caption="$transfcond_store"/>
+		<ComboItem Value="3" Caption="$transfcond_address"/>
+		<ComboItem Value="4" Caption="$transfcond_ppp"/>
   </ComboItems>
 
+	
 </Schema>

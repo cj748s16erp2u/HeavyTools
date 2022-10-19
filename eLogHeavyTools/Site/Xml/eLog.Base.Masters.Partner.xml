@@ -5,6 +5,28 @@
 		<Textbox Field="name" Width="300" Disabled="True"/>
 	</ControlType>
 
+	    <TabPage Name="PartnerSearchTab">
+        <SearchFilterBar ID="SrcBar">
+            <Textbox Field="name" Width="150"/>
+            <Textbox Field="partncode" Width="100"/>
+            <Textbox Field="extcode" Width="100"/>
+			<Textbox Field="oldcode" Width="100"/>
+            <Textbox Field="vatnum" Width="120" Label="$vatnum_eu_group"/>
+            <ForceNextRow/>
+            <Textbox Field="grp_like" Width="150" Label="$grp"/>
+            <CheckedCombo Field="type" ListID="eLog.Base.Masters.Partner.PartnerTypeList" ComboFlags="AllowBlank" Width="100"/>
+            <Combo Field="delstat" Width="100" ListID="eLog.Base.Setup.Parameters.DelstatTypeList" ComboFlags="AllowBlank AutoSelectFirst"/>
+            <Textbox Field="bankaccno" Width="120"/>
+            <ForceNextRow/>
+            <CheckedCombo Field="cmpcodes" ListID="eLog.Base.Setup.Company.CompanyCodeList#loggedinonly" ComboFlags="AllowBlank" Width="150"/>
+        </SearchFilterBar>
+        <Grid ID="searchResults" StatusBar="True" FilterBar="True" Label="$partner_search_results" MultiSelect="true"/>
+        <!--<CommandBar>
+            <Button ID="unhide" Remove="True"/>
+            <Button ID="test" EventHandlerID="Partner.TestButton" Order="10"/>
+        </CommandBar>-->
+    </TabPage>
+
 	<Search Name="PartnerSearchProvider">
 		<Column FieldName="partnid" Hidden="True" PKFieldName="partnid"/>
 		<Column FieldName="partncode" Width="70"/>
@@ -61,7 +83,7 @@
 			<Textbox Field="extcode" />
 			<Textbox Field="grp" />
 			<Textbox Field="loyaltycardno" CustomData="olc" />
-			<Combo Field="regreprempid" ListID="eLog.Base.Masters.Partner.EmployeeList" CustomData="olc" />
+			<Combo Field="regreprempid" ListID="eLog.Base.Masters.Partner.EmployeeList" ComboFlags="AllowBlank" DependentCtrlID="#3,#16" DependentField="cmpidfilter,emptype" CustomData="olc" />
 			<Numberbox Field="loyaltydiscpercnt" CustomData="olc" />
 			<Numberbox Field="loyaltyturnover" Disabled="true" CustomData="olc" />
 			<ForceNextRow />

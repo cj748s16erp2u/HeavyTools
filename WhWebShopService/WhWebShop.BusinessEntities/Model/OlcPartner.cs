@@ -33,6 +33,10 @@ namespace eLog.HeavyTools.Services.WhWebShop.BusinessEntities.Model
         public decimal? Loyaltyturnover { get; set; }
         [Column("regreprempid")]
         public int? Regreprempid { get; set; }
+        [Column("taxid")]
+        [StringLength(12)]
+        [Unicode(false)]
+        public string? Taxid { get; set; }
         [Column("addusrid")]
         [StringLength(12)]
         [Unicode(false)]
@@ -46,5 +50,8 @@ namespace eLog.HeavyTools.Services.WhWebShop.BusinessEntities.Model
         [ForeignKey("Partnid")]
         [InverseProperty("OlcPartner")]
         public virtual OlsPartner Partn { get; set; } = null!;
+        [ForeignKey("Taxid")]
+        [InverseProperty("OlcPartner")]
+        public virtual OlsTax? Tax { get; set; }
     }
 }

@@ -15,7 +15,7 @@ namespace eLog.HeavyTools.Purchase.PinvPackage
 
         protected static string m_query = @"
 select pl.cmpcode, pl.pcmcode+'/'+pl.usrname+'/'+pl.prlcode as packagecode, pl.doccode, pl.docnum, pl.net, pl.descr, pl.extref1, 
-       ph.pinvnum, 
+       ph.pinvnum, ph.curid,
        dh.pinvid
 from /*u4findb*/..oas_prldetail pl (nolock)
      left outer join ofc_dochead as dh (nolock) on dh.cmpcode = pl.cmpcode and dh.doccode = pl.doccode and dh.docnum = pl.docnum

@@ -10,6 +10,8 @@ $status=Státusz
 $paydate=Fizetés dátuma
 $genhomenet=Eredeti hazai érték
 $homenet=Aktuális hazai érték
+$net_summa=Nettó
+$more_curcode=* Több *
 
 $apprpackage_group=Csomag adatok
 

@@ -88,8 +88,8 @@
       <SpecificVersion>False</SpecificVersion>
     </Reference>
     <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\..\..\Releases\eLog.Base\v7.3.0.0\Binaries\Newtonsoft.Json.dll</HintPath>
       <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\Releases\eLog.Base\v7.3.0.0\Binaries\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="System.Net.Http" />
     <Reference Include="U4Ext.Bank.Base, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
@@ -111,6 +111,7 @@
   <ItemGroup>
     <Compile Include="BankTran\CifEbankTransBL3.cs" />
     <Compile Include="BankTran\CifEbankTransImportFieldList.cs" />
+    <Compile Include="BankTran\EfxBankTranHeadSearchProvider3.cs" />
     <Compile Include="BankTran\EfxBankTranHeadSearchTab3.cs" />
     <Compile Include="BankTran\EfxBankTranLineSearchTab3.cs" />
     <Compile Include="BankTran\EfxBankTranHeadBL3.cs" />
@@ -118,8 +119,10 @@
     <Compile Include="BankTran\Import\CifEbankTransImportResultSet.cs" />
     <Compile Include="BankTran\Import\CifEbankTransImportResultSets.cs" />
     <Compile Include="BankTran\Import\CifEbankTransRowContext.cs" />
+    <Compile Include="Common\CheckBankAccountNo.cs" />
     <Compile Include="Common\CommonUtils.cs" />
     <Compile Include="Common\MagyarPostaCheckQRCode.cs" />
+    <Compile Include="Common\RuleParentAccess.cs" />
     <Compile Include="Common\xcval\OfcXcval.cs" />
     <Compile Include="Common\xcval\OfcXcvalBL.cs" />
     <Compile Include="Common\xcval\OfcXcvalGenerated.cs" />
@@ -169,8 +172,13 @@
     <Compile Include="InterfaceCaller\CalcJsonParamsDto.cs" />
     <Compile Include="InterfaceCaller\CalcJsonResultDto.cs" />
     <Compile Include="InterfaceCaller\CalcResetJsonParamsDto.cs" />
+    <Compile Include="InterfaceCaller\ErrorMessageDto.cs" />
     <Compile Include="InterfaceCaller\InterfaceCallerBL.cs" />
+    <Compile Include="InterfaceCaller\MessageExceptionResultDto.cs" />
+    <Compile Include="InterfaceCaller\ReserveParamsDto.cs" />
+    <Compile Include="InterfaceCaller\ReserveResultDto.cs" />
     <Compile Include="InterfaceCaller\ResultDto.cs" />
+    <Compile Include="InterfaceCaller\SordLineDeleteParamDto.cs" />
     <Compile Include="Masters\Import\Partner\PartnerImportPage.cs" />
     <Compile Include="Masters\Import\Partner\PartnerImportTab.cs" />
     <Compile Include="Masters\Item\Assortment\ItemAssortmentmatrixEntitry.cs" />
@@ -293,6 +301,11 @@
     <Compile Include="Masters\PriceTable\PrcType.cs" />
     <Compile Include="Module.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Purchase\Common\PurchaseSqlFunctions3.cs" />
+    <Compile Include="Purchase\Pinv\PinvCopyBL3.cs" />
+    <Compile Include="Purchase\Pinv\PinvCustomPartnerRules.cs" />
+    <Compile Include="Purchase\Pinv\PinvHeadBL3.cs" />
+    <Compile Include="Purchase\Pinv\PinvHeadEditTab3.cs" />
     <Compile Include="Purchase\Pinv\PinvHeadSearchProvider3.cs" />
     <Compile Include="Purchase\PinvPackage\ApprovedPackageAttachmentSearchProvider.cs" />
     <Compile Include="Purchase\PinvPackage\ApprovedPackageAttachmentSearchTab.cs" />
@@ -391,6 +404,7 @@
     <Compile Include="Sales\Retail\RetailSinvPage.cs" />
     <Compile Include="Sales\Retail\RetailVatnumCheck.cs" />
     <Compile Include="Sales\Sinv\SinvHeadBL3.cs" />
+    <Compile Include="Sales\Sinv\SinvHeadRules3.cs" />
     <Compile Include="Sales\Sinv\SinvPrintBL3.cs" />
     <Compile Include="Sales\Sinv\SinvPrintCallback3.cs" />
     <Compile Include="Sales\Retail\Cart\CartBL.cs" />
@@ -401,6 +415,7 @@
     <Compile Include="Sales\Sord\Import\SordHeadImportResultSet.cs" />
     <Compile Include="Sales\Sord\Import\SordHeadImportResultSets.cs" />
     <Compile Include="Sales\Sord\Import\SordHeadImportService.cs" />
+    <Compile Include="Sales\Sord\Import\SordHeadImportUnique.cs" />
     <Compile Include="Sales\Sord\Import\SordHeadRowContext.cs" />
     <Compile Include="Sales\Sord\OlcSordHead.cs" />
     <Compile Include="Sales\Sord\OlcSordHeadGenerated.cs" />
@@ -408,6 +423,9 @@
     <Compile Include="Sales\Sord\OlcSordLine.cs" />
     <Compile Include="Sales\Sord\OlcSordLineGenerated.cs" />
     <Compile Include="Sales\Sord\OlcSordLineRules.cs" />
+    <Compile Include="Sales\Sord\OlcTmpSordSord.cs" />
+    <Compile Include="Sales\Sord\OlcTmpSordSordGenerated.cs" />
+    <Compile Include="Sales\Sord\OlcTmpSordSords.cs" />
     <Compile Include="Sales\Sord\SordHeadBL3.cs" />
     <Compile Include="Sales\Sord\SordHeadEditTab3.cs" />
     <Compile Include="Sales\Sord\SordHeadSearchProvider3.cs" />
@@ -419,10 +437,21 @@
     <Compile Include="Sales\Sord\SordLineBL3.cs" />
     <Compile Include="Sales\Sord\SordLineEditTab3.cs" />
     <Compile Include="Sales\Sord\SordLineSearchProvider3.cs" />
+    <Compile Include="Sales\Sord\SordLineSearchTab3.cs" />
+    <Compile Include="Sales\Sord\SordSordBL.cs" />
+    <Compile Include="Sales\Sord\SordSordPage.cs" />
+    <Compile Include="Sales\Sord\SordStBL3.cs" />
     <Compile Include="Setup\PriceTable\OlcPrcType.cs" />
     <Compile Include="Setup\PriceTable\OlcPrcTypeGenerated.cs" />
     <Compile Include="Setup\PriceTable\OlcPrcTypeList.cs" />
     <Compile Include="Setup\PriceTable\OlcPrcTypeSearchPage.cs" />
+    <Compile Include="Setup\SordDoc\OlcSordDoc.cs" />
+    <Compile Include="Setup\SordDoc\OlcSordDocGenerated.cs" />
+    <Compile Include="Setup\SordDoc\OlcSordDocRules.cs" />
+    <Compile Include="Setup\SordDoc\SordDocBL3.cs" />
+    <Compile Include="Setup\SordDoc\SordDocEditTab3.cs" />
+    <Compile Include="Setup\SordDoc\SordDocPreorderList.cs" />
+    <Compile Include="Setup\SordDoc\SordDocSearchProvider3.cs" />
     <Compile Include="Setup\Type\TypeLineBL3.cs" />
     <Compile Include="Setup\Warehouse\OlcWhLocation.cs" />
     <Compile Include="Setup\Warehouse\OlcWhLocationBL.cs" />
@@ -433,6 +462,9 @@
     <Compile Include="Setup\Warehouse\OlcWhLocationRules.cs" />
     <Compile Include="Setup\Warehouse\OlcWhLocationSearchProvider.cs" />
     <Compile Include="Setup\Warehouse\OlcWhLocationSearchTab.cs" />
+    <Compile Include="Setup\Warehouse\OlcWhLocationSelectionProvider.cs" />
+    <Compile Include="Setup\Warehouse\OlcWhLocationSelectPage.cs" />
+    <Compile Include="Setup\Warehouse\OlcWhLocationSelectTab.cs" />
     <Compile Include="Setup\Warehouse\OlcWhZone.cs" />
     <Compile Include="Setup\Warehouse\OlcWhZoneBL.cs" />
     <Compile Include="Setup\Warehouse\OlcWhZoneEditPage.cs" />
@@ -456,6 +488,26 @@
     <Compile Include="Warehouse\OlcWhLocPrio\OlcWhLocPrioSearchPage.cs" />
     <Compile Include="Warehouse\OlcWhLocPrio\OlcWhLocPrioSearchProvider.cs" />
     <Compile Include="Warehouse\OlcWhLocPrio\OlcWhLocPrioSearchTab.cs" />
+    <Compile Include="Warehouse\Reserve\ReserveBL3.cs" />
+    <Compile Include="Warehouse\StockTran\OlcStHead.cs" />
+    <Compile Include="Warehouse\StockTran\OlcStHeadBL.cs" />
+    <Compile Include="Warehouse\StockTran\OlcStHeadGenerated.cs" />
+    <Compile Include="Warehouse\StockTran\OlcStHeadRules.cs" />
+    <Compile Include="Warehouse\StockTran\OlcStLine.cs" />
+    <Compile Include="Warehouse\StockTran\OlcStLineGenerated.cs" />
+    <Compile Include="Warehouse\StockTran\TransferingHeadBL3.cs" />
+    <Compile Include="Warehouse\StockTran\TransferingHeadEditTab3.cs" />
+    <Compile Include="Warehouse\StockTran\TransferingHeadRules3.cs" />
+    <Compile Include="Warehouse\StockTran\TransferingHeadSearchProvider3.cs" />
+    <Compile Include="Warehouse\StockTran\TransferingHeadSearchTab3.cs" />
+    <Compile Include="Warehouse\StockTran\TransferingLineBL3.cs" />
+    <Compile Include="Warehouse\StockTran\TransferingOnRoadBL.cs" />
+    <Compile Include="Warehouse\StockTran\TransferingOnRoadPage.cs" />
+    <Compile Include="Warehouse\StockTran\TransferingOnRoadSearchProvider.cs" />
+    <Compile Include="Warehouse\StockTran\TransferingOnRoadTab.cs" />
+    <Compile Include="Warehouse\StockTran\IssuingHeadBL3.cs" />
+    <Compile Include="Warehouse\StockTran\IssuingLineBL3.cs" />
+    <Compile Include="Warehouse\StockTran\IssuingLineEditTab3.cs" />
     <Compile Include="Webshop\OlcWebshop.cs" />
     <Compile Include="Webshop\OlcWebshopGenerated.cs" />
     <Compile Include="Webshop\WebshopList.cs" />

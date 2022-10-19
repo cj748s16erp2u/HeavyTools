@@ -43,7 +43,7 @@ $import_importresult=Beolvasás eredménye
 $action_sordheadimport=Import
 $import_importresult_ok=OK
 $sordheadimport=vevoi_rendeles_import
-$error_import_item_not_found=Cikk nem található!
+$error_import_item_not_found=Cikk : {0} nem található!
 
 $wid=Webshop
 
@@ -106,5 +106,12 @@ $TotVal=Bruttó érték
 
 $PaymentFee=Fizetési 
 
+$action_preorderButton=Előrendelések
 
-
+$movqtycannotbiggerordqty=Az átveendő mennyiség nem lehet több a rendelt mennyiségnél {0}/{1}, rendelt: {2:#,##0.}, átveendő: {3:#,##0.}
+ 
+$error_import_address_not_found=Cím nem található
+$error_import_ordqty_notint=Mennyiség csak egész szám lehet
+$error_import_selprc_notint=Ár csak egész szám lehet
+$error_import_partner_not_found=Partner : {0} nem található
+$error_import_company_not_found=A vállalat : {0} nem található

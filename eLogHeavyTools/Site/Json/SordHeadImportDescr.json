@@ -6,78 +6,85 @@
     "Ignore": false,
     "Tables": [
       {
-
         "Table": "ols_sordhead",
         "Fields": [
-		  {
+          {
             "Field": "cmpid",
-            "Const": 3
+            "Type": "selflookup",
+            "ColumnName": "Vállalat",
+            "Const": "A02",
+            "Lookup": {
+              "Alias": "ols",
+              "ValueField": "cmpid"
+            }
           },
-{
+          {
             "Field": "sorddocid",
-            "Const": "ELOREND"
+            "Const": "VRELO",
+            "ColumnName": "Document"
           },
-		  		  
-				  
-		  {
+          {
             "Field": "addrid",
-            "ColumnName": "Címkód"
+            "Type": "selflookup",
+            "ColumnName": "Címkód",
+            "Lookup": {
+              "Alias": "ols",
+              "ValueField": "addrid"
+            }
           },
-		  
-		  		  {
+          {
             "Field": "curid",
-			"Const": "HUF"
+            "Const": "HUF",
+            "ColumnName": "Pénznem"
           },
-		  
-		  		  {
+          {
             "Field": "paymid",
             "ColumnName": "Fiz.mód"
           },
-		  
-		  		  		  {
+          {
             "Field": "ref1",
             "ColumnName": "Vevői ref."
           },
-		  
-		  		  		  {
+          {
             "Field": "note",
             "ColumnName": "Megjegyzés"
           },
-		  	          {
+          {
             "Field": "partnid",
             "Type": "selflookup",
-			"ColumnName": "Partnerkód",
+            "ColumnName": "Partnerkód",
             "Lookup": {
               "Alias": "ols",
               "ValueField": "partnid"
             }
-					  }
+          }
         ]
       },
-	  {
+      {
         "Table": "ols_sordline",
         "Fields": [
-		  		  {
+          {
             "Field": "ordqty",
             "ColumnName": "Mennyiség"
           },
-		  {
+          {
             "Field": "selprc",
-            "Const": "0"
+            "Const": "0",
+            "ColumnName": "Ár"
           },
-		  {
+          {
             "Field": "reqdate",
             "ColumnName": "Száll.hidő"
           },
-		  {
+          {
             "Field": "itemid",
             "Type": "selflookup",
-			"ColumnName": "Cikkszám",
+            "ColumnName": "Cikkszám",
             "Lookup": {
               "Alias": "ols",
               "ValueField": "itemid"
             }
-		}
+          }
         ]
       }
     ]

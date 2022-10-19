@@ -1,4 +1,6 @@
 ﻿using eLog.Base.Sales.Sord;
+using eLog.Base.Warehouse.Reserve;
+using eLog.HeavyTools.InterfaceCaller;
 using eProjectWeb.Framework;
 using eProjectWeb.Framework.BL;
 using eProjectWeb.Framework.Data;
@@ -30,16 +32,18 @@ namespace eLog.HeavyTools.Sales.Sord
         }
 
         public override void Delete(Key k)
-        {
-            var olc = OlcSordLine.Load(k);
-
-            if (olc != null)
+        { 
+            if (!IsDeletePossible(k, out var reason))
             {
-                olc.State = DataRowState.Deleted;
-                olc.Save();
+                throw new MessageException(reason);
             }
-
-            base.Delete(k);
+             
+            var p = new SordLineDeleteParamDto();
+            p.Sordlineid = ConvertUtils.ToInt32(k["sordlineid"]);
+            var icbl = new InterfaceCallerBL();
+            var res = icbl.SordlineDelete(p);
+            res.CheckResult();
+            return;
         }
     }
 }

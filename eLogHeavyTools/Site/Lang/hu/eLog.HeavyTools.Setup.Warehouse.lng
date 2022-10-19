@@ -38,3 +38,5 @@ $crawlorder=Bejárási sorrend
 $capacity=Kapacitás
 $capunitid=M.egys.
 $whlocid=Azon.
+$whzonecode_long=Zóna kódja
+$whzoneid_long=Zóna

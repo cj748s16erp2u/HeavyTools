@@ -91,7 +91,7 @@
             <ForceNextRow />
             <Combo Field="partner_to" Label="$partnerto" ListID="CodaInt.Base.Common.OfcPrestoredQueryList#psqid=partner_reminder" ComboFlags="FindAnywhere" DependentCtrlID="ReminderLetter.cmpcode,ReminderLetter.pelementlevel,ReminderLetter.pcodelike,ReminderLetter.prlcode" DependentField="cmpcode,pelementlevel,pcodelike,prlcode" ColsToSpan="3" Mandatory="false" />
             <ForceNextRow />
-            <Combo Field="action" Label="$reportformat" ListID="xml:eLog.HeavyTools.Reports.Financials.ReminderLetter_rptfile" ComboFlags="FindAnywhere" Mandatory="True" />
+            <Combo Field="action" Label="$reportformat" ListID="xml:eLog.HeavyTools.Reports.Financials.ReminderLetter_rptfile" ComboFlags="FindAnywhere AutoSelectOne" Mandatory="True" />
             <ForceNextRow/>
             <GroupSeparator ID="gs2" Label="_" />
             <Combo Field="lngid" ListID="eProjectWeb.Framework.UI.Maintenance.Language.LanguageList" ComboFlags="FindAnywhere" Mandatory="true" />
@@ -100,7 +100,7 @@
 
     <ComboItems Name="rptfile">
         <ComboItem Caption="$rptfile_normal" Value="0" />
-        <ComboItem Caption="$rptfile_cheque" Value="1" />
+        <!--<ComboItem Caption="$rptfile_cheque" Value="1" />-->
     </ComboItems>
 
     <ReportLabels Name="doc_reminder_letter_hto">

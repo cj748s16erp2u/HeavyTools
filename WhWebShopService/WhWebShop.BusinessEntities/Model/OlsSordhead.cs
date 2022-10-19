@@ -18,6 +18,7 @@ namespace eLog.HeavyTools.Services.WhWebShop.BusinessEntities.Model
         public OlsSordhead()
         {
             OlsSordline = new HashSet<OlsSordline>();
+            OlsTmpSordst = new HashSet<OlsTmpSordst>();
         }
 
         [Key]
@@ -109,5 +110,7 @@ namespace eLog.HeavyTools.Services.WhWebShop.BusinessEntities.Model
         public virtual OlcSordhead OlcSordhead { get; set; } = null!;
         [InverseProperty("Sord")]
         public virtual ICollection<OlsSordline> OlsSordline { get; set; }
+        [InverseProperty("Sord")]
+        public virtual ICollection<OlsTmpSordst> OlsTmpSordst { get; set; }
     }
 }

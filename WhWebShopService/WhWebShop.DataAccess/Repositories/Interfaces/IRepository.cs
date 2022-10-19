@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using eLog.HeavyTools.Services.WhWebShop.BusinessEntities.Model.Interfaces;
+using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
 using Microsoft.EntityFrameworkCore.Metadata;
@@ -247,5 +248,9 @@ public interface IRepository<TEntity> where TEntity : class, IEntity
     /// <returns>An <see cref="IQueryable{T}" /> representing the interpolated string SQL query.</returns>
     IQueryable<TQuery> ExecuteSql<TQuery>(FormattableString sql) where TQuery : class;
      
-    Task ExecuteStoredProcedure(string v, Dictionary<string, object> dictionary);
+    Task<int> ExecuteStoredProcedure(string v, Dictionary<string, object> dictionary);
+
+    Task<int> ExecuteStoredProcedure(string name, List<SqlParameter> sps);
+
+    Task<int> ExecuteSql(string sql, CancellationToken cancellationToken);
 }
