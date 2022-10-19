@@ -26,7 +26,7 @@ namespace eLog.HeavyTools.Common
                 {
                     bankAccountNo = bankAccountNo.Replace("-", string.Empty).Replace(" ", string.Empty);
                     if (bankAccountNo.Length == 16)
-                        bankAccountNo.PadLeft(8, '0');
+                        bankAccountNo = bankAccountNo.PadRight(24, '0');
 
                     // first
                     var bankAccountFirstPart = bankAccountNo.Substring(0, 8);

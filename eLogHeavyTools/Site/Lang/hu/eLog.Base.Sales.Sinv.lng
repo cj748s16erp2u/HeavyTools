@@ -1,5 +1,6 @@
 ﻿; umbrella cim
+$gscustompartner=KP-s partner adatai
 $custompartnname=Partner
-$partnbankaccno=Bank számlaszám
+$partnbankaccno=Bankszámlaszám
 
 $rule_partnsbuyerbankaccno_checksum_error=A bankszámlaszám hibás!

@@ -20,19 +20,18 @@
       <Combo Field="addrid" ListID="eLog.Base.Masters.Partner.PartnAddrList" ComboFlags="FindAnywhere" DependentCtrlID="PinvHead.partnid_partncode" DependentField="partnid" ColsToSpan="-1" />
       <ForceNextRow />
       <Combo Field="bankid" ListID="eLog.Base.Masters.Partner.PartnBankList" ComboFlags="None AllowBlank FindAnywhere" DependentField="partnid" DependentCtrlID="PinvHead.partnid_partncode" ColsToSpan="-1" />
-
+      
+      <GroupSeparator ID="gscustom1" Label="$gscustompartner" />
       <ForceNextRow />
       <Textbox Field="partnname" ColsToSpan="-1" CustomData="custompartner:partnname" />
       <ForceNextRow />
       <Textbox Field="partnbankaccno" ColsToSpan="-1" CustomData="custompartner:sellerbankaccno" />
-      <ForceNextRow />
-      <Textbox Field="vatnum" CustomData="custompartner:sellervatnum" />
-      <Textbox Field="vatnumeu" CustomData="custompartner:sellervatnumeu" />
+      <!--<Textbox Field="vatnumeu" CustomData="custompartner:sellervatnumeu" />-->
       <ForceNextRow />
       <Combo Field="countryid" ListID="eLog.Base.Setup.Country.CountryList" ComboFlags="None" CustomData="custompartner:selleraddrcountrycode" />
       <ForceNextRow />
-      <Textbox Field="postcode" CustomData="custompartner:selleraddrpostcode" />
-      <Textbox Field="add01" Label="$city" CustomData="custompartner:selleraddrcity" />
+      <Selector Field="postcode" Label="$postcode" MasterKey="postcode" DoNotPropagateNullValue="True" ValueField="postcode" TextField="postcode" SelectionID="eLog.Base.Setup.Country.PostcodeSelectionProvider" DependentField="countryid" DependentCtrlID="countryid" CustomData="custompartner:selleraddrpostcode" />
+      <Selector Field="add01" Label="$city" MasterKey="postcode" DoNotPropagateNullValue="True" ValueField="city" TextField="city" SelectionID="eLog.Base.Setup.Country.PostcodeSelectionProvider" DependentField="countryid" DependentCtrlID="countryid" CustomData="custompartner:selleraddrcity" />
       <ForceNextRow/>
       <Textbox Field="add02" ColsToSpan="3" CustomData="custompartner:selleradd02" />
       <ForceNextRow />
@@ -49,8 +48,11 @@
       <ForceNextRow />
       <Textbox Field="floor" CustomData="custompartner:selleraddrfloor" />
       <Textbox Field="door" CustomData="custompartner:selleraddrdoor" />
-      
       <ForceNextRow />
+      <Textbox Field="vatnum" CustomData="custompartner:sellervatnum" />
+      <ForceNextRow />
+      
+      <GroupSeparator ID="gscustom2" Label="_" />
       <Empty />
       <Checkbox Field="doccustomrate" />
       <Checkbox Field="dualcustomrate"/>

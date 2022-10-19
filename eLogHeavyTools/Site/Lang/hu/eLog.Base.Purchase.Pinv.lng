@@ -1,6 +1,7 @@
 ﻿$attacheddoc=Csatolt.dok.
 
 ; umbrella cim
+$gscustompartner=KP-s partner adatai
 $district=Kerület
 $place=Közterület neve
 $placetype=Közterület jellege
@@ -9,6 +10,8 @@ $building=Épület
 $stairway=Lépcsőház
 $floor=Emelet/szint
 $door=Ajtó
-$partnbankaccno=Bank számlaszám
+$partnbankaccno=Bankszámlaszám
+
+$gsotherpinv=További szállítói számla adatok
 
 $rule_partnsellerbankaccno_checksum_error=A bankszámlaszám hibás!
