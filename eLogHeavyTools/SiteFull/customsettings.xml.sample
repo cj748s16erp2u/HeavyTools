@@ -145,5 +145,7 @@
   <add key="Retail-partnid" value="3" />
   <add key="Retail-addrid" value="3" />
   
-  
+  <!-- Ernyo elem, partner bankszamlaszam ellenorzese -->
+  <add key="HTO:PartnerBankAccountNumberCheck" value="yes" />
+
 </configuration>
