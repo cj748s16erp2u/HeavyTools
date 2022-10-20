@@ -65,6 +65,50 @@
         }
       }
     },
+    "/api/WhZTran/receiving/query_erp": {
+      "post": {
+        "tags": [
+          "WhZTran"
+        ],
+        "operationId": "query_erp",
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/WhZTranHeadQueryDto"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/WhZTranHeadQueryDto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/WhZTranHeadQueryDto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/WhZTranHeadQueryDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/WhZTran/receiving/add": {
       "post": {
         "tags": [
@@ -200,6 +244,50 @@
         }
       }
     },
+    "/api/WhZTranLine/receiving/query_erp": {
+      "post": {
+        "tags": [
+          "WhZTranLine"
+        ],
+        "operationId": "query_erp2",
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/WhZTranLineQueryDto"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/WhZTranLineQueryDto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/WhZTranLineQueryDto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/WhZTranLineQueryDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/WhZTranLine/receiving/add": {
       "post": {
         "tags": [
@@ -281,6 +369,49 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/WhZReceivingTranLineDto"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/WhZStockMap/query": {
+      "post": {
+        "tags": [
+          "WhZStockMap"
+        ],
+        "operationId": "query3",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/WhZStockMapQDto"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/WhZStockMap/query_erp": {
+      "post": {
+        "tags": [
+          "WhZStockMap"
+        ],
+        "operationId": "query_erp3",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string"
                 }
               }
             }
@@ -402,6 +533,82 @@
           "stlineid": {
             "type": "integer",
             "format": "int32",
+            "nullable": true
+          }
+        }
+      },
+      "WhZStockMapQDto": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "itemid": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "whid": {
+            "type": "string",
+            "nullable": true
+          },
+          "whzoneid": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "whlocid": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "recqty": {
+            "type": "number",
+            "format": "double"
+          },
+          "reqqty": {
+            "type": "number",
+            "format": "double"
+          },
+          "actqty": {
+            "type": "number",
+            "format": "double"
+          },
+          "resqty": {
+            "type": "number",
+            "format": "double"
+          },
+          "provqty": {
+            "type": "number",
+            "format": "double"
+          },
+          "whcode": {
+            "type": "string",
+            "nullable": true
+          },
+          "whname": {
+            "type": "string",
+            "nullable": true
+          },
+          "itemcode": {
+            "type": "string",
+            "nullable": true
+          },
+          "itemname": {
+            "type": "string",
+            "nullable": true
+          },
+          "whzonecode": {
+            "type": "string",
+            "nullable": true
+          },
+          "whzonename": {
+            "type": "string",
+            "nullable": true
+          },
+          "whloccode": {
+            "type": "string",
+            "nullable": true
+          },
+          "whlocname": {
+            "type": "string",
             "nullable": true
           }
         }
