@@ -1,2 +1,1 @@
-@parent=eLog.Base.Warehouse.StockTran
-
+@parent=CodaInt.Base.Warehouse.StockTran

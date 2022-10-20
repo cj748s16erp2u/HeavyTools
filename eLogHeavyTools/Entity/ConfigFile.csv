@@ -29,3 +29,5 @@ olc_stline,eLog.HeavyTools.Warehouse.StockTran,OlcStLine
 olc_itemassortment,eLog.HeavyTools.Masters.Item.Assortment,OlcItemAssortment
 olc_tmp_sordsord,eLog.HeavyTools.Sales.Sord,OlcTmpSordSord
 olc_sorddoc,eLog.HeavyTools.Setup.SordDoc,OlcSordDoc
+olc_whztranhead,eLog.HeavyTools.Warehouse.WhZone.WhZTran,OlcWhZTranHead
+olc_whztranline,eLog.HeavyTools.Warehouse.WhZone.WhZTran,OlcWhZTranLine

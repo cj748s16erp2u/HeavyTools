@@ -14,7 +14,7 @@ namespace eLog.HeavyTools.Setup.Warehouse
 
         protected static string queryString = $@"select top 1000 [t].*, [z].[whzonecode]
 from [{OlcWhLocation._TableName}] [t] (nolock)
-  join [{OlcWhZone._TableName}] [z] (nolock) on [z].[whzoneid] = [t].[whzoneid]
+  left join [{OlcWhZone._TableName}] [z] (nolock) on [z].[whzoneid] = [t].[whzoneid]
 ";
 
         protected static QueryArg[] argsTemplate = new[]
