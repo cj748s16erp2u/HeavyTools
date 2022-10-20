@@ -39,6 +39,25 @@ public class WhZTranLineController : Controller
     }
 
     /// <summary>
+    /// Zóna készlet tranzakció tételek lekérdezése (ERP)
+    /// </summary>
+    /// <param name="query">Keresési feltételek</param>
+    /// <returns>Lekérdezés eredménye</returns>
+    [HttpPost("receiving/query_erp")]
+    public async Task<ActionResult<string>> QueryReceivingERPAsync([FromBody] WhZTranLineQueryDto query = null!)
+    {
+        try
+        {
+            return this.Ok(await this.tranLineService.QueryReceivingAsync(query));
+        }
+        catch (Exception ex)
+        {
+            await ERP2U.Log.LoggerManager.Instance.LogErrorAsync<WhZTranLineController>(ex);
+            return this.BadRequest(ex.Message);
+        }
+    }
+
+    /// <summary>
     /// Új zóna készlet tranzakció tétel rögzítése
     /// </summary>
     /// <param name="request">Tétel információk</param>
