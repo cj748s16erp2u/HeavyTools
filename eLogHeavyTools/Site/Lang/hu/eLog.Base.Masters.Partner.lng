@@ -44,3 +44,5 @@ $import_invalidfieldvalue=A '{0}.{1}' mezőbe a '{2}' érték nem menthető\n{3}
 $import_invalidfield=A következő mező '{1}' nem található a '{0}' táblában
 $import_importresult=Beolvasás eredménye
 $import_importresult_ok=OK
+
+$rule_partnbankaccno_checksum_error=A számlaszám hibás!

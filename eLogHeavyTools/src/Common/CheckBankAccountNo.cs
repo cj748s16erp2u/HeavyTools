@@ -1,15 +1,9 @@
-﻿using eLog.Base.Masters.Partner;
-using eProjectWeb.Framework;
-using OfficeOpenXml;
-using OfficeOpenXml.FormulaParsing.Excel.Functions.Information;
-using OfficeOpenXml.FormulaParsing.Excel.Functions.Math;
-using OfficeOpenXml.FormulaParsing.Excel.Functions.Text;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using static eProjectWeb.Framework.UI.PageParts.LayoutTable;
+using eProjectWeb.Framework;
 
 namespace eLog.HeavyTools.Common
 {
@@ -61,7 +55,6 @@ namespace eLog.HeavyTools.Common
 
             return (Convert.ToInt32(chekNumber) % 10 == 0);
         }
-
 
         protected virtual int? GetHUAccountNoChecksum(string accNo)
         {
