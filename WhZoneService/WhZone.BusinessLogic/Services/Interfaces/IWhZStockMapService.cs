@@ -19,6 +19,13 @@ public interface IWhZStockMapService : ILogicService<OlcWhzstockmap>
     IWhZStockMapContext CreateContext();
 
     /// <summary>
+    /// Helykód készlet lekérdezése
+    /// </summary>
+    /// <param name="cancellationToken"></param>
+    /// <returns>Készlet lista</returns>
+    Task<IEnumerable<WhZStockMapQDto>> QueryStockMapAsync(CancellationToken cancellationToken = default);
+
+    /// <summary>
     /// 1 db készlet bejegyzés betöltése a megadott kulcs alapján.
     /// Több találat esetén kivétel kerül kiváltásra.
     /// </summary>

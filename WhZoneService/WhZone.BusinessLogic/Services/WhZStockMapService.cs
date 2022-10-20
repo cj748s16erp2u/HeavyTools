@@ -17,6 +17,8 @@ using eLog.HeavyTools.Services.WhZone.BusinessEntities.Dto;
 using eLog.HeavyTools.Services.WhZone.BusinessLogic.Enums;
 using eLog.HeavyTools.Services.WhZone.BusinessLogic.Helpers;
 using FluentValidation;
+using Microsoft.EntityFrameworkCore;
+using AutoMapper;
 
 namespace eLog.HeavyTools.Services.WhZone.BusinessLogic.Services;
 
@@ -25,15 +27,18 @@ public class WhZStockMapService : LogicServiceBase<OlcWhzstockmap>, IWhZStockMap
 {
 #pragma warning disable CA1822 // Mark members as static
     private readonly IWarehouseService warehouseService;
+    private readonly IMapper mapper;
 
     public WhZStockMapService(
         IOlcWhzstockmapValidator validator,
         IRepository<OlcWhzstockmap> repository,
         IUnitOfWork unitOfWork,
         IEnvironmentService environmentService,
-        IWarehouseService warehouseService) : base(validator, repository, unitOfWork, environmentService)
+        IWarehouseService warehouseService,
+        IMapper mapper) : base(validator, repository, unitOfWork, environmentService)
     {
         this.warehouseService = warehouseService ?? throw new ArgumentNullException(nameof(warehouseService));
+        this.mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
     }
 
     /// <summary>
@@ -43,6 +48,25 @@ public class WhZStockMapService : LogicServiceBase<OlcWhzstockmap>, IWhZStockMap
     public IWhZStockMapContext CreateContext()
     {
         return new WhZStockMapContext();
+    }
+
+    /// <summary>
+    /// Helykód készlet lekérdezése
+    /// </summary>
+    /// <param name="cancellationToken"></param>
+    /// <returns>Készlet lista</returns>
+    public async Task<IEnumerable<WhZStockMapQDto>> QueryStockMapAsync(CancellationToken cancellationToken = default)
+    {
+        var q = this.Query();
+
+        q = q
+            .Include(s => s.Item)
+            .Include(s => s.Wh)
+            .Include(s => s.Whzone)
+            .Include(s => s.Whloc);
+
+        var list = await q.ToListAsync(cancellationToken);
+        return this.mapper.Map<IEnumerable<WhZStockMapQDto>>(list);
     }
 
     /// <summary>

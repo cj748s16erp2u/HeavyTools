@@ -516,6 +516,7 @@
     <Compile Include="Warehouse\StockTran\ReceivingHeadBL3.cs" />
     <Compile Include="Warehouse\StockTran\ReceivingHeadEditTab3.cs" />
     <Compile Include="Warehouse\StockTran\ReceivingHeadEditTab3.cs" />
+    <Compile Include="Warehouse\StockTran\ReceivingHeadSearchPage3.cs" />
     <Compile Include="Warehouse\StockTran\ReceivingLineBL3.cs" />
     <Compile Include="Warehouse\WhZone\Common\WhZTranUtils.cs" />
     <Compile Include="Warehouse\WhZone\WhZTran\OlcWhZTranHead.cs" />
