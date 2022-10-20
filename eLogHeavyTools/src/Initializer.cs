@@ -185,6 +185,9 @@ namespace eLog.HeavyTools
             ObjectFactory.AddRemap(typeof(Base.Masters.Partner.PartnAddrEditTab), typeof(Masters.Partner.PartnAddrEditTab3));
             ObjectFactory.AddRemap(typeof(Base.Masters.Partner.PartnAddrSearchProvider), typeof(Masters.Partner.PartnAddrSearchProvider3));
 
+            // PartnBank
+            ObjectFactory.AddRemap(typeof(Base.Masters.Partner.PartnBankRules), typeof(Masters.Partner.PartnBankRules3));
+
             // Partner
             ObjectFactory.AddRemap(typeof(Base.Masters.Partner.PartnerBL), typeof(Masters.Partner.PartnerBL3));
             ObjectFactory.AddRemap(typeof(Base.Masters.Partner.PartnerEditTab), typeof(Masters.Partner.PartnerEditTab3));

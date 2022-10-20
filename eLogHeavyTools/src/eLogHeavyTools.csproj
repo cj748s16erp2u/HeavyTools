@@ -267,6 +267,7 @@
     <Compile Include="Masters\Partner\OlcPartnCmpCustEditTab.cs" />
     <Compile Include="Masters\Partner\OlcPartnCmpCustSearchProvider.cs" />
     <Compile Include="Masters\Partner\OlcPartnCmpCustTab.cs" />
+    <Compile Include="Masters\Partner\PartnBankRules3.cs" />
     <Compile Include="Masters\Partner\PartnerSearchPage3.cs" />
     <Compile Include="Masters\PriceTable\OlcPrctable.cs" />
     <Compile Include="Masters\PriceTable\OlcPrctableGenerated.cs" />
