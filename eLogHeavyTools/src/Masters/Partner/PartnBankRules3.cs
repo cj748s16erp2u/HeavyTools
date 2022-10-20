@@ -10,6 +10,7 @@ using System.Text;
 using System.Threading.Tasks;
 using eLog.HeavyTools.Common;
 using CodaInt.Base.Common.Mam;
+using System.Net.NetworkInformation;
 
 namespace eLog.HeavyTools.Masters.Partner
 {
@@ -27,8 +28,7 @@ namespace eLog.HeavyTools.Masters.Partner
             if (value is PartnBank)
             {
                 PartnBank pb = (PartnBank)value;
-
-                if (!pb.Partnid.HasValue || !pb.Bankid.HasValue)
+                if (pb == null)
                     return;
 
                 if (pb.State == eProjectWeb.Framework.Data.DataRowState.Modified ||
