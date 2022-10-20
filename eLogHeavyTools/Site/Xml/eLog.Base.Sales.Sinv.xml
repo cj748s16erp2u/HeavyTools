@@ -26,10 +26,9 @@
 
       <GroupSeparator ID="gscustom1" Label="$gscustompartner" />
       <ForceNextRow />
-      <Textbox Field="partnname" Label="$custompartnname" ColsToSpan="-1" CustomData="custompartner" />
+      <Textbox Field="partnname" Label="$custompartnname" ColsToSpan="-1" CustomData="custompartner:partnname" />
       <ForceNextRow />
       <Textbox Field="partnbankaccno" ColsToSpan="-3" CustomData="custompartner:buybankaccno" />
-      <!--<Textbox Field="vatnumeu" CustomData="custompartner:buyervatnumeu" />-->
       <ForceNextRow />
       <Combo Field="countryid" ListID="eLog.Base.Setup.Country.CountryList" ComboFlags="None" CustomData="custompartner:buyaddrcountrycode" />
       <ForceNextRow />
@@ -50,6 +49,7 @@
       <Textbox Field="door" CustomData="custompartner:buyaddrdoor" />
       <ForceNextRow />
       <Textbox Field="vatnum" CustomData="custompartner:buyervatnum" />
+      <!--<Textbox Field="vatnumeu" CustomData="custompartner:buyervatnumeu" />-->
       <ForceNextRow />
       
       <GroupSeparator ID="x1" Label="_"/>
