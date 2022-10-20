@@ -11,14 +11,14 @@ namespace eLog.HeavyTools.Warehouse.StockTran
     {
         private static Type baseType = typeof(Base.Warehouse.StockTran.ReceivingHeadSearchPage);
 
-        protected TabCreatorDelegate m_ReceivingLocCustomSearchTab;
+        //protected TabCreatorDelegate m_ReceivingLocCustomSearchTab;
 
         public ReceivingHeadSearchPage3()
         {
-            this.m_ReceivingLocCustomSearchTab = () => StockTranLocation.ReceivingStLocCustomSearchTab.New(StockTranLocation.ReceivingStLocCustomSearchTab.SetupStLocCustom);
+            //this.m_ReceivingLocCustomSearchTab = () => StockTranLocation.ReceivingStLocCustomSearchTab.New(StockTranLocation.ReceivingStLocCustomSearchTab.SetupStLocCustom);
 
-            this.Tabs.InsertTabAfter(this.m_ReceivingLocCustomSearchTab, this.m_ReceivingLocSearchTab);
-            this.Tabs.RemoveTab(this.m_ReceivingLocSearchTab);
+            //this.Tabs.InsertTabAfter(this.m_ReceivingLocCustomSearchTab, this.m_ReceivingLocSearchTab);
+            //this.Tabs.RemoveTab(this.m_ReceivingLocSearchTab);
         }
 
         public override string ACGetTypeFullName()
