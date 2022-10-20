@@ -14,5 +14,7 @@ namespace eLog.HeavyTools.Warehouse.WhLocLink
         {
 
         }
+
+        
     }
 }

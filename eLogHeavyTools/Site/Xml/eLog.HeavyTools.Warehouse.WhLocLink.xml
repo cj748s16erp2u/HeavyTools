@@ -10,6 +10,7 @@
 		<ForceNextRow />
 		<DatePickerbox Field="startdate" Width="150" Disabled="true" />
 		<DatePickerbox Field="enddate" Width="150" Disabled="true" />
+		<Textbox Field="whzoneid" Visible="False"/>
 	</ControlType>
 		
 	<TabPage Name="OlcWhLocLinkSearchTab">
@@ -31,8 +32,8 @@
 		</SearchFilterBar>
 		<Grid ID="editableList"></Grid>
 		<LayoutCtrlSetup ID="IleLayout">
-			<Selector Field="whlocid" ValueField="whlocid" TextField="whloccode" SelectionID="eLog.HeavyTools.Setup.Warehouse.OlcWhLocationSelectionProvider"/>
-			<Selector Field="whlocid" ValueField="whlocid" TextField="name" SelectionID="eLog.HeavyTools.Setup.Warehouse.OlcWhLocationSelectionProvider"/>
+			<Selector Field="whlocid" ValueField="whlocid" TextField="whloccode" SelectionID="eLog.HeavyTools.Setup.Warehouse.OlcWhLocationSelectionProvider" DependentCtrlID="info.whid,info.whzoneid" DependentField="whid,whzoneid" DependentAllowNullField="whzoneid"/>
+			<Selector Field="whlocid" ValueField="whlocid" TextField="name" SelectionID="eLog.HeavyTools.Setup.Warehouse.OlcWhLocationSelectionProvider" DependentCtrlID="info.whid,info.whzoneid" DependentField="whid,whzoneid" DependentAllowNullField="whzoneid"/>
 			<!--<Combo Field="whlocid" Width="120" ListID="eLog.HeavyTools.Setup.Warehouse.OlcWhLocationList" ComboFlags="None"/>-->
 		</LayoutCtrlSetup>
 	</TabPage>
