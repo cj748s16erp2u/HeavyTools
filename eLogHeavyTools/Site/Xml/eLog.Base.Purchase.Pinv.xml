@@ -96,5 +96,94 @@
     </LayoutTable>
   </TabPage>
 
+  <!-- Száll.szla jóváhagyás -->
+  <TabPage Name="PinvCostApprovalSearchTab">
+    <SearchFilterBar ID="SrcBar">
+      <CheckedCombo Field="apprstat" Width="100" ListID="eLog.Base.Setup.Status.StatListProviderPublic#ols_pinvapproval.apprstat" ComboFlags="AllowBlank" />
+      <Combo Field="usrid" Width="200" ListID="eProjectWeb.Framework.UI.Maintenance.User.UserList" ComboFlags="AutoSelectOne" />
+      <Textbox Field="pinvnum_like" Label="$pinvnum" Width="120" />
+      <CheckedCombo Field="cmpid" Width="100" ListID="eLog.Base.Setup.Company.CompanyGrantedList" ComboFlags="AllowBlank" />
+      <Checkbox Field="pinvheadappronly" />
+    </SearchFilterBar>
+    <Grid ID="searchResults" StatusBar="true" FilterBar="true" MultiSelect="true" Label="$pinvcostapproval_search_results" />
+  </TabPage>
+  <Search Name="PinvCostApprovalSearchProvider">
+    <Column FieldName="apprstat" Width="30" FieldFunction="listlookup" FieldFuncArg="eLog.Base.Setup.Status.StatListProviderPublic#ols_pinvapproval.apprstat,abbr" />
+    <Column FieldName="attacheddoc" Width="20" FieldFunction="bool1" />
+    <Column FieldName="pinvnum" Width="100" />
+    <Column FieldName="partncode" Width="100" />
+    <Column FieldName="partnname" Width="200" />
+    <Column FieldName="docdate" Width="80" Format="D" />
+    <Column FieldName="pinvdate" Width="80" Format="D" />
+    <Column FieldName="duedate" Width="80" Format="D" />
+    <Column FieldName="curid" Width="80" />
+    <Column FieldName="netval" Width="120" />
+    <Column FieldName="totval" Width="120" />
+    <Column FieldName="netvalhome" Width="120" />
+    <Column FieldName="totvalhome" Width="120" />
+    <Column FieldName="costlineid" Width="80" />
+    <Column FieldName="costtypeid" Width="80" />
+    <Column FieldName="realcostval" Width="120" />
+    <Column FieldName="realcostvalhome" Width="120" />
+    <Column FieldName="costlinenote" Width="200" />
+    <Column FieldName="apprnote" Width="200" />
+    <Column FieldName="usrid" Width="150" />
+    <Column FieldName="cmpid" Align="Left" Width="60" FieldFunction="listlookup" FieldFuncArg="eLog.Base.Setup.Company.CompanyGrantedList" />
+  </Search>
 
+  <!-- Száll.szla egyeztetés -->
+  <Search Name="PinvAssignmentSearchProvider">
+    <Column FieldName="docnum" DisplayName="$docnum_pa" Width="120" />
+    <Column FieldName="trandate" Width="90" Format="D" />
+    <Column FieldName="linenum" Align="Right" Width="40" />
+    <Column FieldName="itemcode" Width="140" />
+    <Column FieldName="headnote" DisplayName="$headnote_pa" Width="200" />
+    <Column FieldName="el3" DisplayName="$costlineel3" Width="120" />
+    <Column FieldName="el4" DisplayName="$costlineel4" Width="120" />
+    <Column FieldName="el5" DisplayName="$costlineel5" Width="120" />
+    <Column FieldName="qty" Width="80" />
+    <Column FieldName="unitid" Width="60" />
+    <Column FieldName="purchprc" Width="80" Format="C2" />
+    <Column FieldName="realcostval" DisplayName="$realcostval_pa" Width="80" />
+    <Column FieldName="realcostvalhome" DisplayName="$realcostvalhome_pa" Width="80" />
+    <Column FieldName="realcostvaldual" DisplayName="$realcostvaldual_pa" Width="80" />
+    <Column FieldName="itemname" DisplayName="$item_name" Width="170" />
+    <Column FieldName="linenote" DisplayName="$linenote_pa" Width="170" />
+    <Column FieldName="note" DisplayName="$costlinenote_pa" Width="170" />
+    <!--<Column FieldName="projcode" Width="80" />-->
+    <!--<Column FieldName="projname" Width="250" />-->
+    <Column FieldName="partncode" Width="80" />
+    <Column FieldName="partnname" Width="120" />
+    <Column FieldName="costlineid" PKFieldName="costlineid" Width="60" DisplayName="$costlineid_pa" />
+    <Column FieldName="costtypeid" DisplayName="$costtypeid_short" Width="54" />
+    <Column FieldName="docid" Width="80" />
+  </Search>
+
+  <TabPage Name="PinvAssignOtherEditTab">
+    <Control ID="pinvHeadInfoPart2" ControlType="PinvHeadInfoPart2" />
+    <LayoutTable ControlGroup="PinvAssignOther" Columns="{150, None}; {120, None}; {60, None}; {10, Empty}; {10, None}; {400, None}" ID="EditGroup1">
+      <Combo Field="costtypeid" ListID="eLog.Base.Setup.Cost.CostTypeList" ComboFlags="None" ColsToSpan="2" Visible="false" />
+      <ForceNextRow />
+      <Numberbox Field="realcostval" Label="$costval" />
+      <ForceNextRow />
+      <Selector Mandatory="true" Field="el3" Label="$costlineel3" ValueField="code" TextField="code" SelectionID="CodaInt.Base.Common.Element.ElementSelectionProvider" DependentField="cmpid,elmlevel,date" DependentAllowNullField="date" DependentCtrlID="info.cmpid,el3lvl,eldate" ColsToSpan="2" />
+      <Selector Mandatory="true" Field="el3" Label=" " ValueField="code" TextField="name" SelectionID="CodaInt.Base.Common.Element.ElementSelectionProvider" ColsToSpan="-1" />
+      <Selector Mandatory="false" Field="el4" Label="$costlineel4" ValueField="code" TextField="code" SelectionID="CodaInt.Base.Common.Element.ElementSelectionProvider" DependentField="cmpid,elmlevel,el3,date" DependentAllowNullField="el3,date" DependentCtrlID="info.cmpid,el4lvl,el3_code,eldate" ColsToSpan="2" />
+      <Selector Mandatory="false" Field="el4" Label=" " ValueField="code" TextField="name" SelectionID="CodaInt.Base.Common.Element.ElementSelectionProvider" ColsToSpan="-1" />
+      <Selector Mandatory="false" Field="el5" Label="$costlineel5" ValueField="code" TextField="code" SelectionID="CodaInt.Base.Common.Element.ElementSelectionProvider" DependentField="cmpid,elmlevel,el3,date" DependentAllowNullField="el3,date" DependentCtrlID="info.cmpid,el5lvl,el3_code,eldate" ColsToSpan="2" />
+      <Selector Mandatory="false" Field="el5" Label=" " ValueField="code" TextField="name" SelectionID="CodaInt.Base.Common.Element.ElementSelectionProvider" ColsToSpan="-1" />
+      <ForceNextRow />
+      <Selector Mandatory="False" Field="revothtrlinedocid" Label="$revothtrlinedocid" ValueField="othtrlinedocid" TextField="othtrlinedocid" SelectionID="CodaInt.Base.Setup.OthTrLineDoc.OthTrLineDocSelectionProvider" DependentCtrlID="info.cmpid" DependentField="refcmpid" ColsToSpan="2" WaitLayer="true" />
+      <Selector Mandatory="False" Field="revothtrlinedocid" Label=" " ValueField="othtrlinedocid" TextField="name" SelectionID="CodaInt.Base.Setup.OthTrLineDoc.OthTrLineDocSelectionProvider" ColsToSpan="2" WaitLayer="true" />
+      <ForceNextRow />
+      <Textbox Field="note" ColsToSpan="-1" Rows="3" />
+      <ForceNextRow />
+      <Checkbox Field="mediatedservices" />
+      <Intbox Field="el3lvl" Visible="False" />
+      <Intbox Field="el4lvl" Visible="False" />
+      <Intbox Field="el5lvl" Visible="False" />
+      <Datebox Field="eldate" Visible="False" />
+    </LayoutTable>
+  </TabPage>
+  
 </Schema>

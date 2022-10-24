@@ -40,7 +40,7 @@ namespace eLog.HeavyTools.Purchase.Pinv
        x01.attacheddoc --$$morefields$$");
 
             sql = sql.Replace("--$$morejoins$$", @"
-     cross apply ( select (case when exists(select 0 from ols_attachment a (nolock) where a.src = 'pinvhead' 
+    cross apply ( select (case when exists(select 0 from ols_attachment a (nolock) where a.src = 'pinvhead' 
 and a.refid = '{\""pinvid\"":'+convert(varchar(10), ph.pinvid)+'}' and a.delstat = 0) then 1 else 0 end) as attacheddoc) x01 --$$morejoins$$");
 
             return sql;

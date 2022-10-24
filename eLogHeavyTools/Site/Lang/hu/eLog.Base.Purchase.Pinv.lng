@@ -15,3 +15,10 @@ $partnbankaccno=Bankszámlaszám
 $gsotherpinv=További szállítói számla adatok
 
 $rule_partnsellerbankaccno_checksum_error=A bankszámlaszám hibás!
+
+$action_viewattachment=Dok. megnéz
+
+$costlineel3=Ért egys./ktghely (el3)
+$costlineel4=(el4)
+$costlineel5=(el5)
+$revothtrlinedocid=Egyéb dok. jogcím
