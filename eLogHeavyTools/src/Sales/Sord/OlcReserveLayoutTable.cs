@@ -54,16 +54,19 @@ namespace eLog.HeavyTools.Sales.Sord
                     if (slres.Resid.HasValue)
                     {
                         var r = Reserve.Load(slres.Resid);
-
-                        ds.Add(r.Resdate.Value, r);
+                        if (ds.ContainsKey(r.Resdate.Value))
+                        {
+                            ds[r.Resdate.Value].Resqty += r.Resqty;
+                        }
+                        else
+                        {
+                            ds.Add(r.Resdate.Value, r);
+                        }
                     }
                 }
             }
-
-
-
+             
             var ii = 0;
-
             foreach (KeyValuePair<DateTime, Reserve> item in ds)
             {
                 ii++;
@@ -77,8 +80,7 @@ namespace eLog.HeavyTools.Sales.Sord
                 var q = layoutTable.FindRenderable<Numberbox>("resqty" + ii);
                 q.Value = item.Value.Resqty;
             }
-
-
+            
             for (int i = 0; i < 10; i++)
             {
                 var w = layoutTable.FindRenderable<Combo>("whid" + i);

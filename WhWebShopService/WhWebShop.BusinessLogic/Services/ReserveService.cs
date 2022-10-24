@@ -401,7 +401,6 @@ internal class ReserveService : LogicServiceBase<OlsReserve>, IReserveService
                      
                     tran.Commit();
                 }
-                ordqty -= co;
             }
             catch (Exception ex)
             {
