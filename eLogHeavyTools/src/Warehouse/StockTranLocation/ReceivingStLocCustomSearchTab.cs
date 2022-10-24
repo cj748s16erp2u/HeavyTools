@@ -10,12 +10,12 @@ namespace eLog.HeavyTools.Warehouse.StockTranLocation
 {
     public class ReceivingStLocCustomSearchTab : DetailSearchTabTemplate1
     {
-        public static DefaultPageSetup SetupStLocCustom = new DefaultPageSetup("StLocCustom", ReceivingStLocCustomBL.ID, ReceivingStLocCustomSearchProvider.ID, null);
+        public static DefaultPageSetup SetupStLocCustom = new DefaultPageSetup("StLocCustom", ReceivingStLocCustomBL.ID, ReceivingStLocCustomSearchProvider.ID, ReceivingStLocCustomEditPage.ID);
 
         public static ReceivingStLocCustomSearchTab New(DefaultPageSetup setup)
         {
             var t = ObjectFactory.New<ReceivingStLocCustomSearchTab>();
-            t.Initialize("StLocCustom", setup, "$noroot_ReceivingStLocCustom", DefaultActions.Basic | DefaultActions.Delete);
+            t.Initialize("StLocCustom", setup, "$noroot_ReceivingStLocCustom", DefaultActions.View);
             return t;
         }
 

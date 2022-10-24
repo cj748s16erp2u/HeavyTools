@@ -143,9 +143,27 @@ public class WhZTranService : LogicServiceBase<OlcWhztranhead>, IWhZTranService
             {
                 tran.Rollback();
             }
- 
+
             this.EnvironmentService.CustomData.TryRemove("AuthUser", out _);
         }
+    }
+
+    public async Task<WhZTranHeadStatChangeResultDto> StatChangeAsync(WhZTranHeadStatChangeDto request, CancellationToken cancellationToken = default)
+    {
+        return new WhZTranHeadStatChangeResultDto
+        {
+            Result = -1,
+            Message = new NotImplementedException().Message
+        };
+    }
+
+    public async Task<WhZTranHeadCloseResultDto> CloseAsync(WhZTranHeadCloseDto request, CancellationToken cancellationToken = default)
+    {
+        return new WhZTranHeadCloseResultDto
+        {
+            Result = -1,
+            Message = new NotImplementedException().Message
+        };
     }
 
     /// <summary>

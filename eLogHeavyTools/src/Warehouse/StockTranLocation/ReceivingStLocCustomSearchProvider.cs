@@ -8,17 +8,19 @@ using eProjectWeb.Framework.Data;
 
 namespace eLog.HeavyTools.Warehouse.StockTranLocation
 {
-    public class ReceivingStLocCustomSearchProvider : DefaultSearchProvider
+    public class ReceivingStLocCustomSearchProvider : MemorySearchProvider<ReceivingStLocCustomDto>
     {
         public static readonly string ID = typeof(ReceivingStLocCustomSearchProvider).FullName;
 
-        protected static string queryString = $"select * from [{ReceivingLocCustom._TableName}] [t] (nolock) ";
-
-        protected static QueryArg[] argsTemplate = new[]
+        protected static QueryArg[] argsTemplate = new QueryArg[]
         {
-            new QueryArg("", FieldType.Integer)
         };
 
-        protected ReceivingStLocCustomSearchProvider() : base(queryString, argsTemplate, SearchProviderType.Default) { }
+        protected ReceivingStLocCustomSearchProvider() : base(string.Empty, argsTemplate, SearchProviderType.Default) { }
+
+        protected override IList<ReceivingStLocCustomDto> PrepareList(string sql, MSPCreateListArgs args)
+        {
+            return new List<ReceivingStLocCustomDto>();
+        }
     }
 }

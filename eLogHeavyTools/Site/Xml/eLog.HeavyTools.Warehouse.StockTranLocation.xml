@@ -1,0 +1,47 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema xmlns="http://tempuri.org/RenderableSchema.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://tempuri.org/RenderableSchema.xsd ../../../../Releases/eLog.Base/v7.2.0.0/Site/Xml/RenderableSchema.xsd">
+	<TabPage Name="ReceivingStLocCustomSearchTab">
+		<Control ID="info" ControlType="ReceivingLineInfoPart" />
+		<SearchFilterBar ID="SrcBar">
+			<Textbox Field="locid" Width="100" />
+			<Checkbox Field="showall"/>
+		</SearchFilterBar>
+		<Grid ID="searchResults" StatusBar="True" FilterBar="True" MultiSelect="True" Label="$stloc_in_search_results" />
+	</TabPage>
+	<TabPage Name="ReceivingStLocCustomEditTab">
+		<Control ID="info" ControlType="ReceivingLineInfoPart2" />
+		<LayoutTable ControlGroup="StLoc" Columns="{120, None}; {100, None}; {20, Empty}; {120, None}; {100, None}" ID="EditGroup1" >
+			<Intbox Field="stlocid" ThousandSep="False" />
+			<ForceNextRow />
+			<Combo Field="stltype" ListID="eLog.Base.Warehouse.StockTranLocation.StLocTypeList" ComboFlags="AllowBlank" DependentField="stid" DependentCtrlID="info.stid" />
+			<ForceNextRow />
+			<Combo Field="whid" ListID="eLog.Base.Setup.Warehouse.WarehouseList" ComboFlags="AllowBlank" ColsToSpan="3" />
+			<ForceNextRow />
+			<Combo Field="lotid" Label="$lotnum" ListID="eLog.Base.Warehouse.StockTranLocation.StLocFifoList" ComboFlags="AllowBlank" DependentCtrlID="info.stlineid" DependentField="stlineid" ColsToSpan="3" />
+			<ForceNextRow />
+			<Selector Field="locid" Label="$locid" ValueField="locid" TextField="locid" SelectionID="eLog.Base.Setup.Warehouse.LocationSelectionProvider" DependentCtrlID="info.cmpid,StLoc.whid" DependentField="cmpid,whid" />
+			<Numberbox Field="stock_actqty" DecDigits="2" ThousandSep="True" Disabled="True" />
+			<ForceNextRow />
+			<Numberbox Field="dispqty" DecDigits="2" ThousandSep="True" />
+			<Numberbox Field="stock_resqty" DecDigits="2" ThousandSep="True" Disabled="True" />
+			<ForceNextRow />
+			<Numberbox Field="movqty" DecDigits="2" ThousandSep="True" />
+			<Numberbox Field="stock_freeqty" DecDigits="2" ThousandSep="True" Disabled="True" />
+		</LayoutTable>
+	</TabPage>
+	<Search Name="ReceivingStLocCustomSearchProvider">
+		<Column FieldName="whid" Width="100" />
+		<Column FieldName="locid" Width="100" />
+		<Column FieldName="stltype" FieldFunction="listlookup" FieldFuncArg="eLog.Base.Warehouse.StockTranLocation.StLocTypeList,abbr" Width="80" />
+		<Column FieldName="dispqty" Format="C" Width="100" />
+		<Column FieldName="movqty" Format="C" Width="100" />
+		<Column FieldName="linenum" DisplayName="$line_linenum" Width="50"/>
+		<Column FieldName="itemcode" Width="90" />
+		<!--<Column FieldName="name03" Width="200" />-->
+		<Column FieldName="name01" Width="200" />
+		<Column FieldName="lotnum" Width="100" />
+		<Column FieldName="lotid" Width="80" />
+		<Column FieldName="uccode" Width="100" />
+		<Column FieldName="stlocid" PKFieldName="stlocid" Width="100"/>
+	</Search>
+</Schema>

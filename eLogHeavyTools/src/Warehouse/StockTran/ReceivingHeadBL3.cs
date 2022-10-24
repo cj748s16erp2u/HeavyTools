@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using eLog.Base.Warehouse.StockTran;
 using eProjectWeb.Framework;
 using eProjectWeb.Framework.BL;
 using eProjectWeb.Framework.Data;
@@ -184,19 +185,12 @@ where [wh].[whid] = {Utils.SqlToString(whid)}
         /// <param name="stHead">Akutalas keszlet tranzakcio fej</param>
         /// <exception cref="ArgumentOutOfRangeException">Nem megfelelo muvelet lett meghatarozva</exception>
         /// <exception cref="MessageException">Szolgaltatas soran eloallt hibauzenet</exception>
-        private void SaveWhZoneTran(string actionID, Base.Warehouse.StockTran.StHead stHead)
+        private void SaveWhZoneTran(string actionID, StHead stHead)
         {
             var towhzid = ConvertUtils.ToInt32(stHead.GetCustomData("towhzid"));
             if (towhzid != null)
             {
-                //var authBase64 = Encoding.UTF8.GetString(Convert.FromBase64String(authHeaderRegex.Replace(authorizationHeader, "$1")));
-                var authBase64 = WhZone.Common.WhZTranUtils.CreateAuthentication();
-
-                var httpClient = new System.Net.Http.HttpClient();
-                httpClient.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Basic", authBase64);
-
-                var url = WhZone.Common.WhZTranUtils.GetServiceUrl();
-                var tranService = new WhZone.WhZTranService.WhZTranClient(url, httpClient);
+                var tranService = WhZone.Common.WhZTranUtils.CreateTranService();
                 var request = new WhZone.WhZTranService.WhZReceivingTranHeadDto
                 {
                     Stid = stHead.Stid.Value,
@@ -250,6 +244,110 @@ where [wh].[whid] = {Utils.SqlToString(whid)}
                 {
                     throw new MessageException("$err_unable_to_save_whztranhead");
                 }
+            }
+        }
+
+        protected override int AfterClose(AfterCloseArgs args)
+        {
+            var num = base.AfterClose(args);
+
+            if (num == 0)
+            {
+                num = this.CloseWhZoneTran(args);
+            }
+
+            return num;
+        }
+
+        private int CloseWhZoneTran(AfterCloseArgs args)
+        {
+            var tranService = WhZone.Common.WhZTranUtils.CreateTranService();
+            var request = new WhZone.WhZTranService.WhZTranHeadCloseDto
+            {
+                Stid = args.StId,
+            };
+
+            try
+            {
+                var result = tranService.Close(request);
+                args.Message = result?.Message;
+
+                return result?.Result ?? -2;
+            }
+            catch (WhZone.WhZTranService.ApiException ex)
+            {
+                Log.Error(ex);
+                var response = ex.Response;
+                if (!string.IsNullOrWhiteSpace(response))
+                {
+                    response = WhZone.Common.WhZTranUtils.ParseErrorResponse(response);
+                    args.Message = response;
+                }
+                else
+                {
+                    args.Message = ex.ToString();
+                }
+
+                return -1;
+            }
+        }
+
+        public override int StatChange(int stId, int newStat, StatChangeExArgs exargs, out string msg)
+        {
+            if (newStat == 100)
+            {
+                // a close kulon le van kezelve
+                return base.StatChange(stId, newStat, exargs, out msg);
+            }
+
+            using (var db = DB.GetConn(DB.Main, Transaction.Use))
+            {
+                var num = base.StatChange(stId, newStat, exargs, out msg);
+                if (num == 0)
+                {
+                    num = this.StatChangeWhZoneTran(stId, newStat, exargs, out msg);
+                }
+
+                if (num == 0)
+                {
+                    db.Commit();
+                }
+
+                return num;
+            }
+        }
+
+        private int StatChangeWhZoneTran(int stId, int newStat, StatChangeExArgs exargs, out string msg)
+        {
+            var tranService = WhZone.Common.WhZTranUtils.CreateTranService();
+            var request = new WhZone.WhZTranService.WhZTranHeadStatChangeDto
+            {
+                Stid = stId,
+                NewStat = newStat,
+            };
+
+            try
+            {
+                var result = tranService.Statchange(request);
+                msg = result?.Message;
+
+                return result?.Result ?? -2;
+            }
+            catch (WhZone.WhZTranService.ApiException ex)
+            {
+                Log.Error(ex);
+                var response = ex.Response;
+                if (!string.IsNullOrWhiteSpace(response))
+                {
+                    response = WhZone.Common.WhZTranUtils.ParseErrorResponse(response);
+                    msg = response;
+                }
+                else
+                {
+                    msg = ex.ToString();
+                }
+
+                return -1;
             }
         }
     }

@@ -75,5 +75,20 @@ namespace eLog.HeavyTools.Warehouse.WhZone.Common
 
             return message;
         }
+
+        /// <summary>
+        /// Új szolgáltatás létrehozása
+        /// </summary>
+        /// <returns></returns>
+        public static WhZTranService.WhZTranClient CreateTranService()
+        {
+            var authBase64 = CreateAuthentication();
+
+            var httpClient = new System.Net.Http.HttpClient();
+            httpClient.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Basic", authBase64);
+
+            var url = GetServiceUrl();
+            return new WhZTranService.WhZTranClient(url, httpClient);
+        }
     }
 }
