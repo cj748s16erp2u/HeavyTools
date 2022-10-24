@@ -21,11 +21,14 @@ namespace eLog.HeavyTools.Services.WhWebShop.BusinessEntities.Model
             OlcGiftcard = new HashSet<OlcGiftcard>();
             OlcGiftcardlog = new HashSet<OlcGiftcardlog>();
             OlcItem = new HashSet<OlcItem>();
+            OlcItemmodel = new HashSet<OlcItemmodel>();
+            OlcItemmodelseason = new HashSet<OlcItemmodelseason>();
             OlcPartner = new HashSet<OlcPartner>();
             OlcPrctable = new HashSet<OlcPrctable>();
             OlcPrctype = new HashSet<OlcPrctype>();
             OlcSordhead = new HashSet<OlcSordhead>();
             OlcSordline = new HashSet<OlcSordline>();
+            OlcSordlineRes = new HashSet<OlcSordlineRes>();
             OlcTaxtransext = new HashSet<OlcTaxtransext>();
             OlsCompany = new HashSet<OlsCompany>();
             OlsCountry = new HashSet<OlsCountry>();
@@ -104,6 +107,10 @@ namespace eLog.HeavyTools.Services.WhWebShop.BusinessEntities.Model
         [InverseProperty("Addusr")]
         public virtual ICollection<OlcItem> OlcItem { get; set; }
         [InverseProperty("Addusr")]
+        public virtual ICollection<OlcItemmodel> OlcItemmodel { get; set; }
+        [InverseProperty("Addusr")]
+        public virtual ICollection<OlcItemmodelseason> OlcItemmodelseason { get; set; }
+        [InverseProperty("Addusr")]
         public virtual ICollection<OlcPartner> OlcPartner { get; set; }
         [InverseProperty("Addusr")]
         public virtual ICollection<OlcPrctable> OlcPrctable { get; set; }
@@ -113,6 +120,8 @@ namespace eLog.HeavyTools.Services.WhWebShop.BusinessEntities.Model
         public virtual ICollection<OlcSordhead> OlcSordhead { get; set; }
         [InverseProperty("Addusr")]
         public virtual ICollection<OlcSordline> OlcSordline { get; set; }
+        [InverseProperty("Addusr")]
+        public virtual ICollection<OlcSordlineRes> OlcSordlineRes { get; set; }
         [InverseProperty("Addusr")]
         public virtual ICollection<OlcTaxtransext> OlcTaxtransext { get; set; }
         [InverseProperty("Addusr")]

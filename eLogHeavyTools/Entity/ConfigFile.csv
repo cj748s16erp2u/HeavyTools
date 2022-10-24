@@ -29,3 +29,4 @@ olc_stline,eLog.HeavyTools.Warehouse.StockTran,OlcStLine
 olc_itemassortment,eLog.HeavyTools.Masters.Item.Assortment,OlcItemAssortment
 olc_tmp_sordsord,eLog.HeavyTools.Sales.Sord,OlcTmpSordSord
 olc_sorddoc,eLog.HeavyTools.Setup.SordDoc,OlcSordDoc
+olc_sordline_res,eLog.HeavyTools.Sales.Sord,OlcSordlineRes

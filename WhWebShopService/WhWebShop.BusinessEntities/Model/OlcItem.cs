@@ -54,5 +54,8 @@ namespace eLog.HeavyTools.Services.WhWebShop.BusinessEntities.Model
         [ForeignKey("Addusrid")]
         [InverseProperty("OlcItem")]
         public virtual CfwUser? Addusr { get; set; }
+        [ForeignKey("Imsid")]
+        [InverseProperty("OlcItem")]
+        public virtual OlcItemmodelseason? Ims { get; set; }
     }
 }

@@ -24,6 +24,7 @@ internal class SordLineService : LogicServiceBase<OlsSordline>, ISordLineService
     private readonly IOlsSordheadService olsSordheadService;
     private readonly IOlcTmpSordsordService olcTmpSordsordService;
     private readonly IOlsTmpSordstService olsTmpSordstService;
+    private readonly IOlcSordlineResService olcSordlineResService;
 
     public SordLineService(IValidator<OlsSordline> validator,
                            IRepository<OlsSordline> repository,
@@ -34,7 +35,8 @@ internal class SordLineService : LogicServiceBase<OlsSordline>, ISordLineService
                            IOlcSordlineService olcSordlineService,
                            IOlsSordheadService olsSordheadService,
                            IOlcTmpSordsordService olcTmpSordsordService,
-                           IOlsTmpSordstService olsTmpSordstService) : base(validator, repository, unitOfWork, environmentService)
+                           IOlsTmpSordstService olsTmpSordstService,
+                           IOlcSordlineResService olcSordlineResService) : base(validator, repository, unitOfWork, environmentService)
     {
         
         this.reserveService = reserveService ?? throw new ArgumentNullException(nameof(reserveService));
@@ -43,6 +45,7 @@ internal class SordLineService : LogicServiceBase<OlsSordline>, ISordLineService
         this.olsSordheadService = olsSordheadService ?? throw new ArgumentNullException(nameof(olsSordheadService));
         this.olcTmpSordsordService = olcTmpSordsordService ?? throw new ArgumentNullException(nameof(olcTmpSordsordService));
         this.olsTmpSordstService = olsTmpSordstService ?? throw new ArgumentNullException(nameof(olsTmpSordstService));
+        this.olcSordlineResService = olcSordlineResService ?? throw new ArgumentNullException(nameof(olcSordlineResService));
     }
 
     public async Task<SordLineDto> SordLineDeleteAsync(JObject value, CancellationToken cancellationToken = default)
@@ -74,6 +77,12 @@ internal class SordLineService : LogicServiceBase<OlsSordline>, ISordLineService
                     var resid = sl.Resid.Value; 
                     await reserveService.ReserveDeleteAsync(resid, cancellationToken);
                 }
+
+                foreach (var slr in await olcSordlineResService.QueryAsync(p => p.Sordlineid == sl.Sordlineid, cancellationToken))
+                {
+                    await reserveService.ReserveDeleteAsync(slr.Resid, cancellationToken);
+                }
+
                 var csl = await olcSordlineService.GetByIdAsync(sl.Sordlineid, cancellationToken); 
                 if (csl != null)
                 {
@@ -91,8 +100,6 @@ internal class SordLineService : LogicServiceBase<OlsSordline>, ISordLineService
                 {
                     await olsTmpSordstService.DeleteAsync(tt, cancellationToken);
                 }
-
-
 
                 await olsSordlineService.DeleteAsync(sl!, cancellationToken);
                 tran.Commit();
@@ -123,25 +130,27 @@ internal class SordLineService : LogicServiceBase<OlsSordline>, ISordLineService
         }
         if (sl.Resid.HasValue && sh.Sordtype == 2)
         {
-            FormattableString sql = $@"select r.resid, lll.ordqty-isnull(anotherresqty,0) newresqty, ll.adddate, ll.addusrid
-                        from ols_sordline ll
-                        join olc_sordline cc on cc.sordlineid=ll.sordlineid
-                        join ols_sordline lll on lll.sordlineid=cc.preordersordlineid
-                        left join ols_reserve r on r.resid=lll.resid
-                        outer apply (
-	                    select sum( isnull(dispqty,0)+isnull(resqty,0)) anotherresqty
-	                        from olc_sordline c
-	                        join ols_sordline l on l.sordlineid=c.sordlineid
-	                        left join ols_reserve r on r.resid=l.resid
-	                        outer apply (
-		                    select ordqty, dispqty
-		                        from ols_stline st
-		                        where st.sordlineid=l.sordlineid
-	                        ) x
-	                        where c.preordersordlineid=lll.sordlineid
-	                        and c.sordlineid<>ll.sordlineid
-                        ) x
-                        where ll.sordlineid={sl.Sordlineid}";
+            FormattableString sql = $@"
+  select r.resid, lll.ordqty-isnull(anotherresqty,0) newresqty, ll.adddate, ll.addusrid
+    from ols_sordline ll
+    join olc_sordline cc on cc.sordlineid=ll.sordlineid
+    join ols_sordline lll on lll.sordlineid=cc.preordersordlineid
+    left join ols_reserve r on r.resid=lll.resid
+    outer apply (
+	select sum( isnull(dispqty,0)+isnull(resqty,0)) anotherresqty
+	    from olc_sordline c
+	    join ols_sordline l on l.sordlineid=c.sordlineid
+		left join olc_sordline_res rr on rr.sordlineid=l.sordlineid
+	    left join ols_reserve r on r.resid in (rr.resid, l.resid)
+	    outer apply (
+		select ordqty, dispqty
+		    from ols_stline st
+		    where st.sordlineid=l.sordlineid
+	    ) x
+	    where c.preordersordlineid=lll.sordlineid
+	    and c.sordlineid<>ll.sordlineid
+    ) x
+  where ll.sordlineid={sl.Sordlineid}";
 
             var srrts = Repository.ExecuteSql<SordReserveRecalcTmp>(sql);
 

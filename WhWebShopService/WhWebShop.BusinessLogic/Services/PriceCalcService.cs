@@ -149,6 +149,13 @@ internal class PriceCalcService : LogicServiceBase<OlcPriceCalcResult>, IPriceCa
 
     public async Task<CalcJsonResultDto> CalculatePrice(CalcJsonParamsDto cart, PriceCalcActionResultDto pricecalcactionresult, CancellationToken cancellationToken = default)
     {
+        if (cart.ClearCache)
+        {
+            olcCartCacheService.Reset();
+            await olcActionCacheService.Reset(null!, cancellationToken);
+        }
+
+
         var hash = olcCartCacheService.GenerateHash(cart);
 
         if (olcCartCacheService.TryGet(hash, out var cjrd))

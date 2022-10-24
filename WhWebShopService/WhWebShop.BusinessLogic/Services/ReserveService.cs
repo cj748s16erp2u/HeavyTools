@@ -2,13 +2,16 @@
 using eLog.HeavyTools.Services.WhWebShop.BusinessEntities.Model;
 using eLog.HeavyTools.Services.WhWebShop.BusinessEntities.Other;
 using eLog.HeavyTools.Services.WhWebShop.BusinessLogic.Helpers;
+using eLog.HeavyTools.Services.WhWebShop.BusinessLogic.Options;
 using eLog.HeavyTools.Services.WhWebShop.BusinessLogic.Services.Base;
 using eLog.HeavyTools.Services.WhWebShop.BusinessLogic.Services.Interfaces;
+using eLog.HeavyTools.Services.WhWebShop.DataAccess.Context;
 using eLog.HeavyTools.Services.WhWebShop.DataAccess.Repositories.Base;
 using eLog.HeavyTools.Services.WhWebShop.DataAccess.Repositories.Interfaces;
 using FluentValidation;
 using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Options;
 using Newtonsoft.Json.Linq;
 
 namespace eLog.HeavyTools.Services.WhWebShop.BusinessLogic.Services;
@@ -19,6 +22,10 @@ internal class ReserveService : LogicServiceBase<OlsReserve>, IReserveService
     private readonly IOlsReserveService olsReserveService;
     private readonly IOlsRecidService olsRecidService;
     private readonly IOlcSpOlsReserveReservestockService olcSpOlsReserveReservestockService;
+    private readonly IOptions<ReserveOptions> reserveOption;
+    private readonly IOlsStockService olsStockService;
+    private readonly IOlcSordlineResService olcSordlineResService;
+    private readonly IRepository<TmpPresorder> tmpPresorderService;
 
     public ReserveService(IValidator<OlsReserve> validator, 
         IRepository<OlsReserve> repository, 
@@ -26,11 +33,19 @@ internal class ReserveService : LogicServiceBase<OlsReserve>, IReserveService
         IEnvironmentService environmentService,
         IOlsReserveService olsReserveService,
         IOlsRecidService olsRecidService,
-        IOlcSpOlsReserveReservestockService olcSpOlsReserveReservestockService) : base(validator, repository, unitOfWork, environmentService)
+        IOlcSpOlsReserveReservestockService olcSpOlsReserveReservestockService,
+        IOptions<Options.ReserveOptions> reserveOption,
+        IOlsStockService olsStockService,
+        IOlcSordlineResService olcSordlineResService,
+        IRepository<TmpPresorder> tmpPresorderService) : base(validator, repository, unitOfWork, environmentService)
     {
         this.olsReserveService = olsReserveService ?? throw new ArgumentNullException(nameof(olsReserveService));
         this.olsRecidService = olsRecidService ?? throw new ArgumentNullException(nameof(olsRecidService));
         this.olcSpOlsReserveReservestockService = olcSpOlsReserveReservestockService ?? throw new ArgumentNullException(nameof(olcSpOlsReserveReservestockService));
+        this.reserveOption = reserveOption ?? throw new ArgumentNullException(nameof(reserveOption));
+        this.olsStockService = olsStockService ?? throw new ArgumentNullException(nameof(olsStockService));
+        this.olcSordlineResService = olcSordlineResService ?? throw new ArgumentNullException(nameof(olcSordlineResService));
+        this.tmpPresorderService = tmpPresorderService ?? throw new ArgumentNullException(nameof(tmpPresorderService)); 
     }
 
     public async Task<ReserveDto> ReserveAsync(JObject value, CancellationToken cancellationToken = default)
@@ -279,6 +294,11 @@ internal class ReserveService : LogicServiceBase<OlsReserve>, IReserveService
                 await DeleteSordReserveReference(resid.Value, cancellationToken);
                 #endregion
 
+                foreach (var slr in await olcSordlineResService.QueryAsync(p => p.Resid == r.Resid, cancellationToken))
+                {
+                    await olcSordlineResService.DeleteAsync(slr, cancellationToken);
+                }
+
                 await olsReserveService.DeleteAsync(er!, cancellationToken);
             }
 
@@ -338,5 +358,143 @@ internal class ReserveService : LogicServiceBase<OlsReserve>, IReserveService
         reserve.ResQty = qty;
 
         return await ReserveInternalAsync(reserve, cancellationToken);
+    }
+      
+
+    public async Task<SordReserveResultDto> DoFrameOrderReserve(OlsSordhead sh, OlsSordline line, CancellationToken cancellationToken)
+    {
+        var ordqty = line.Ordqty;
+        var whid = reserveOption.Value.CentralWarehouse;
+
+        FormattableString sql = $@"
+ select r.resid, l.sordlineid, r.addusrid, r.adddate
+  from olc_sorddoc d
+  join ols_sordhead h on h.sorddocid=d.frameordersorddocid
+  join ols_sordline l on l.sordid=h.sordid
+  join ols_reserve r on r.resid=l.resid
+ where d.sorddocid={sh.Sorddocid}
+   and l.itemid={line.Itemid}
+   and resqty>0
+   and r.whid={whid}";
+ 
+        var rs = tmpPresorderService.ExecuteSql<TmpPresorder>(sql).ToList();
+
+        foreach (var tmppresorder in rs)
+        {
+            var olsReserve = await olsReserveService.GetByIdAsync(tmppresorder.Resid, cancellationToken);
+
+            var co = ordqty;
+            if (olsReserve!.Resqty < co)
+            {
+                co = olsReserve.Resqty;
+            }
+            try
+            {
+                using (var tran = await this.UnitOfWork.BeginTransactionAsync(cancellationToken))
+                {
+                    await ReserveStock2(olsReserve, -co, cancellationToken); 
+                    olsReserve.Resqty -= co;
+
+                    await olsReserveService.UpdateAsync(olsReserve, cancellationToken); 
+                    await CreateReserve(sh, line, whid, co, tmppresorder.Sordlineid, cancellationToken);
+                    ordqty -= co;
+                     
+                    tran.Commit();
+                }
+                ordqty -= co;
+            }
+            catch (Exception ex)
+            {
+                await ERP4U.Log.LoggerManager.Instance.LogErrorAsync<Exception>(ex);
+            }
+           
+            if (ordqty == 0)
+            {
+                break;
+            }
+        }
+
+        return new SordReserveResultDto()
+        {
+            RemnantQty = ordqty
+        };
+    }
+
+    public async Task<SordReserveResultDto> DoCentralWarehouseReserve(OlsSordhead sh, OlsSordline line, decimal remnantQty, CancellationToken cancellationToken)
+    {
+        var whid = reserveOption.Value.CentralWarehouse;
+        var ordqty = remnantQty;
+
+        var stock = await olsStockService.Query(p => p.Whid == whid && p.Itemid == line.Itemid).FirstOrDefaultAsync(cancellationToken);
+
+        if (stock != null)
+        {
+            var co = ordqty;
+            var max = stock.Actqty - stock.Resqty;
+            if (co > max)
+            {
+                co = max;
+            }
+            if (co > 0)
+            {
+                try
+                {
+                    using (var tran = await this.UnitOfWork.BeginTransactionAsync(cancellationToken))
+                    {
+                        await CreateReserve(sh, line, whid, co,null, cancellationToken);
+                        ordqty -= co;
+
+                        tran.Commit();
+                    }
+                }
+                catch (Exception ex)
+                {
+                    await ERP4U.Log.LoggerManager.Instance.LogErrorAsync<Exception>(ex);
+                }
+            }
+        }
+
+        return new SordReserveResultDto()
+        {
+            RemnantQty = ordqty
+        };
+    }
+
+    private async Task CreateReserve(OlsSordhead sh, OlsSordline line, string? whid, decimal co, int? preordersordlineid, CancellationToken cancellationToken)
+    {
+
+        var nr = new OlsReserve
+        {
+            Resid = (await olsRecidService.GetNewIdAsync("Reserve.ResID", cancellationToken))!.Lastid,
+            Cmpid = sh.Cmpid,
+            Partnid = sh.Partnid,
+            Addrid = sh.Addrid,
+            Whid = whid!,
+            Itemid = line.Itemid,
+            Restype = 3,
+            Resqty = co,
+            Resdate = DateTime.Today,
+            Addusrid = sh.Addusrid,
+            Adddate = DateTime.Now
+        };
+         
+        await olsReserveService.AddAsync(nr, cancellationToken);
+        await ReserveStock2(nr, nr.Resqty, cancellationToken);
+        await CreateOlcSordlineRes(line, nr.Resid, preordersordlineid, cancellationToken);
+          
+    }
+
+    private async Task CreateOlcSordlineRes(OlsSordline line, int resid, int? preordersordlineid, CancellationToken cancellationToken)
+    {
+        var slr = new OlcSordlineRes();
+
+        slr.Sordlineid = line.Sordlineid;
+        slr.Resid = resid;
+        slr.Preordersordlineid = preordersordlineid;
+        slr.Addusrid = line.Addusrid;
+        slr.Adddate = DateTime.Now;
+
+        await olcSordlineResService.AddAsync(slr, cancellationToken);
+
     }
 }

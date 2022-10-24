@@ -423,6 +423,8 @@
     <Compile Include="Sales\Sord\OlcSordHeadRules.cs" />
     <Compile Include="Sales\Sord\OlcSordLine.cs" />
     <Compile Include="Sales\Sord\OlcSordLineGenerated.cs" />
+    <Compile Include="Sales\Sord\OlcSordlineRes.cs" />
+    <Compile Include="Sales\Sord\OlcSordlineResGenerated.cs" />
     <Compile Include="Sales\Sord\OlcSordLineRules.cs" />
     <Compile Include="Sales\Sord\OlcTmpSordSord.cs" />
     <Compile Include="Sales\Sord\OlcTmpSordSordGenerated.cs" />

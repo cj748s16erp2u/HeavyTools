@@ -36,7 +36,6 @@ internal class PriceCalcGroupService : IPriceCalcGroupService
             {
                 newCarts.Add(i);
             }
-
         }
         res.Items = newCarts.ToArray();
     }
@@ -47,15 +46,25 @@ internal class PriceCalcGroupService : IPriceCalcGroupService
         foundCalcItemJsonResultDto.Quantity++;
         foundCalcItemJsonResultDto.RawSelVal = foundCalcItemJsonResultDto.RawSelPrc * foundCalcItemJsonResultDto.Quantity;
     }
-  
+
     private bool IsEqualCart(CalcItemJsonResultDto i, CalcItemJsonResultDto ni)
     {
-        if (i.ItemCode == ni.ItemCode &&
-              i.RawOrigSelPrc == ni.RawOrigSelPrc &&
-              i.RawSelPrc == ni.RawSelPrc &&
-              i.CartId == ni.CartId)
+        if (i.CartId.HasValue) {
+            if (i.ItemCode == ni.ItemCode &&
+                  i.RawOrigSelPrc == ni.RawOrigSelPrc &&
+                  i.RawSelPrc == ni.RawSelPrc &&
+                  i.CartId == ni.CartId)
+            {
+                return true;
+            }
+        } else
         {
-            return true;
+            if (i.ItemCode == ni.ItemCode &&
+                 i.RawOrigSelPrc == ni.RawOrigSelPrc &&
+                 i.RawSelPrc == ni.RawSelPrc)
+            {
+                return true;
+            }
         }
         return false;
     }
