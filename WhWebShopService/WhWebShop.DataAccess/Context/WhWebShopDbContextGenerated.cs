@@ -67,6 +67,7 @@ public partial class WhWebShopDbContext : DbContext
         public virtual DbSet<OlsRecid> OlsRecid { get; set; } = null!;
         public virtual DbSet<OlsReserve> OlsReserve { get; set; } = null!;
         public virtual DbSet<OlsSinvhead> OlsSinvhead { get; set; } = null!;
+        public virtual DbSet<OlsSorddoc> OlsSorddoc { get; set; } = null!;
         public virtual DbSet<OlsSordhead> OlsSordhead { get; set; } = null!;
         public virtual DbSet<OlsSordline> OlsSordline { get; set; } = null!;
         public virtual DbSet<OlsStock> OlsStock { get; set; } = null!;
@@ -714,6 +715,18 @@ public partial class WhWebShopDbContext : DbContext
                     .HasConstraintName("fk_ols_sinvhead_partnid");
             });
 
+            modelBuilder.Entity<OlsSorddoc>(entity =>
+            {
+                entity.HasKey(e => e.Sorddocid)
+                    .HasName("pk_ols_sorddoc");
+
+                entity.HasOne(d => d.Addusr)
+                    .WithMany(p => p.OlsSorddoc)
+                    .HasForeignKey(d => d.Addusrid)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("fk_ols_sorddoc_addusrid");
+            });
+
             modelBuilder.Entity<OlsSordhead>(entity =>
             {
                 entity.HasKey(e => e.Sordid)
@@ -750,6 +763,12 @@ public partial class WhWebShopDbContext : DbContext
                     .HasForeignKey(d => d.Partnid)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("fk_ols_sordhead_partnid");
+
+                entity.HasOne(d => d.Sorddoc)
+                    .WithMany(p => p.OlsSordhead)
+                    .HasForeignKey(d => d.Sorddocid)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("fk_ols_sordhead_sorddocid");
             });
 
             modelBuilder.Entity<OlsSordline>(entity =>

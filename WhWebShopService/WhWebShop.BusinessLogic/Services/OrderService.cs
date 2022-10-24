@@ -37,6 +37,7 @@ public class OrderService : LogicServiceBase<OlsSordhead>, IOrderService
     private readonly IPriceCalcService priceCalcService;
     private readonly IPriceCalcCuponUsageService priceCalcCuponUsageService;
     private readonly IReserveService reserveService;
+    private readonly IOlsSorddocCacheService olsSorddocCacheService;
 
     public OrderService(IValidator<OlsSordhead> validator,
                         IRepository<OlsSordhead> repository,
@@ -53,7 +54,8 @@ public class OrderService : LogicServiceBase<OlsSordhead>, IOrderService
                         IOlcSordlineService olcSordLineService,
                         IPriceCalcService priceCalcService,
                         IPriceCalcCuponUsageService priceCalcCuponUsageService,
-                        IReserveService reserveService) : base(validator, repository, unitOfWork, environmentService)
+                        IReserveService reserveService,
+                        IOlsSorddocCacheService olsSorddocCacheService) : base(validator, repository, unitOfWork, environmentService)
     {
         this.sordHeadService = sordHeadService ?? throw new ArgumentNullException(nameof(sordHeadService));
         this.sordLineService = sordLineService ?? throw new ArgumentNullException(nameof(sordLineService));
@@ -67,6 +69,7 @@ public class OrderService : LogicServiceBase<OlsSordhead>, IOrderService
         this.priceCalcService = priceCalcService ?? throw new ArgumentNullException(nameof(priceCalcService));
         this.priceCalcCuponUsageService = priceCalcCuponUsageService ?? throw new ArgumentNullException(nameof(priceCalcCuponUsageService));
         this.reserveService = reserveService ?? throw new ArgumentNullException(nameof(reserveService));
+        this.olsSorddocCacheService = olsSorddocCacheService ?? throw new ArgumentNullException(nameof(olsSorddocCacheService));
 
         /*orderServiceCSV = new OrderServiceCSV(validator, repository, unitOfWork, environmentService, sordHeadService, sordLineService, recIdService, itemCache, sordoptions, oSSService, countryService, olcSordHeadService);*/
     }
@@ -160,7 +163,10 @@ public class OrderService : LogicServiceBase<OlsSordhead>, IOrderService
         sh.Gen = this.sordoptions.Value.Gen!.Value;
         sh.Sorddocid = this.sordoptions.Value.SordDocId!;
         sh.Cmpid = this.sordoptions.Value.Cmpid!.Value;
-        sh.Sordtype = this.sordoptions.Value.SordType!.Value;
+
+        var sd = await olsSorddocCacheService.GetSorddocAsync(sh.Sorddocid, cancellationToken);
+
+        sh.Sordtype = sd.Type;
         sh.Partnid = this.sordoptions.Value.PartnId!.Value;
         sh.Addrid = this.sordoptions.Value.AddrId!.Value;
 

@@ -39,6 +39,7 @@ namespace eLog.HeavyTools.Services.WhWebShop.BusinessEntities.Model
             OlsReserve = new HashSet<OlsReserve>();
             OlsSinvheadAddusr = new HashSet<OlsSinvhead>();
             OlsSinvheadCloseusr = new HashSet<OlsSinvhead>();
+            OlsSorddoc = new HashSet<OlsSorddoc>();
             OlsSordhead = new HashSet<OlsSordhead>();
             OlsSordline = new HashSet<OlsSordline>();
             OlsTax = new HashSet<OlsTax>();
@@ -142,6 +143,8 @@ namespace eLog.HeavyTools.Services.WhWebShop.BusinessEntities.Model
         public virtual ICollection<OlsSinvhead> OlsSinvheadAddusr { get; set; }
         [InverseProperty("Closeusr")]
         public virtual ICollection<OlsSinvhead> OlsSinvheadCloseusr { get; set; }
+        [InverseProperty("Addusr")]
+        public virtual ICollection<OlsSorddoc> OlsSorddoc { get; set; }
         [InverseProperty("Addusr")]
         public virtual ICollection<OlsSordhead> OlsSordhead { get; set; }
         [InverseProperty("Addusr")]

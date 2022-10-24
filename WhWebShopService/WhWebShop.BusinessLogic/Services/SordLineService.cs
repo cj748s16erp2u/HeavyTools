@@ -128,29 +128,50 @@ internal class SordLineService : LogicServiceBase<OlsSordline>, ISordLineService
         { 
             throw new MessageException("$sordheadnotfound", "eLog.HeavyTools.Sales.Sord");
         }
-        if (sl.Resid.HasValue && sh.Sordtype == 2)
+        var resids = new List<int>();
+
+        if (sl.Resid.HasValue)
+        {
+            resids.Add(sl.Resid.Value);
+        }
+
+        foreach (var slr in await olcSordlineResService.QueryAsync(p => p.Sordlineid == sl.Sordlineid, cancellationToken))
+        {
+            resids.Add(slr.Resid);
+        }
+
+
+        if (resids.Count>0 && sh.Sordtype == 2)
         {
             FormattableString sql = $@"
-  select r.resid, lll.ordqty-isnull(anotherresqty,0) newresqty, ll.adddate, ll.addusrid
-    from ols_sordline ll
-    join olc_sordline cc on cc.sordlineid=ll.sordlineid
-    join ols_sordline lll on lll.sordlineid=cc.preordersordlineid
-    left join ols_reserve r on r.resid=lll.resid
-    outer apply (
-	select sum( isnull(dispqty,0)+isnull(resqty,0)) anotherresqty
-	    from olc_sordline c
-	    join ols_sordline l on l.sordlineid=c.sordlineid
-		left join olc_sordline_res rr on rr.sordlineid=l.sordlineid
-	    left join ols_reserve r on r.resid in (rr.resid, l.resid)
-	    outer apply (
-		select ordqty, dispqty
-		    from ols_stline st
-		    where st.sordlineid=l.sordlineid
-	    ) x
-	    where c.preordersordlineid=lll.sordlineid
-	    and c.sordlineid<>ll.sordlineid
-    ) x
-  where ll.sordlineid={sl.Sordlineid}";
+  select lll.resid , lll.ordqty- isnull(anotherresqty,0) newresqty, ll2.adddate, lll.addusrid
+		from ols_sordline ll2
+		left join olc_sordline_res cc2 on cc2.sordlineid=ll2.sordlineid
+		left join olc_sordline cc on cc.sordlineid=ll2.sordlineid
+		left join ols_sordline lll on lll.sordlineid=isnull(cc.preordersordlineid, cc2.preordersordlineid)
+		outer apply (
+			select sum( isnull(x.dispqty,0)+isnull(r.resqty,0)) anotherresqty
+			  from (
+				select r.sordlineid
+				  from olc_sordline_res r
+				 where r.preordersordlineid=lll.sordlineid
+				union all 
+				select r2.sordlineid
+				  from olc_sordline r2
+				 where r2.preordersordlineid=lll.sordlineid
+			) xx
+			join ols_sordline l2 on l2.sordlineid=xx.sordlineid
+			left join olc_sordline cl on cl.sordlineid=l2.sordlineid
+			left join olc_sordline_res clr on clr.sordlineid=l2.sordlineid
+			left join ols_reserve r on r.resid = isnull(clr.resid, l2.resid)
+			outer apply (
+				select dispqty
+					from ols_stline st
+					where st.sordlineid=l2.sordlineid
+			) x
+			where l2.sordlineid<>ll2.sordlineid
+		) x
+		where ll2.sordlineid = {sl.Sordlineid}";
 
             var srrts = Repository.ExecuteSql<SordReserveRecalcTmp>(sql);
 
@@ -169,7 +190,10 @@ internal class SordLineService : LogicServiceBase<OlsSordline>, ISordLineService
             }
             if (resid.HasValue && newresqty.HasValue)
             {
-                await reserveService.ReserveSetQtyAsync(sl.Resid.Value, 0, cancellationToken);
+                foreach (var rei in resids)
+                {
+                    await reserveService.ReserveSetQtyAsync(rei, 0, cancellationToken);
+                }
                 await reserveService.ReserveSetQtyAsync(resid.Value, newresqty.Value, cancellationToken);
             }
         }
