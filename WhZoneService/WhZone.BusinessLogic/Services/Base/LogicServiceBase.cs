@@ -4,6 +4,8 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Linq;
+using eLog.HeavyTools.Services.WhZone.BusinessEntities.Helpers;
 using eLog.HeavyTools.Services.WhZone.BusinessEntities.Model;
 using eLog.HeavyTools.Services.WhZone.BusinessEntities.Model.Base;
 using eLog.HeavyTools.Services.WhZone.BusinessEntities.Model.Interfaces;
@@ -422,8 +424,48 @@ public class LogicServiceBase<TEntity> : ILogicService<TEntity>
     /// <param name="name">Mező neve</param>
     /// <param name="propertyType">Mező értékének konvertálási típusa</param>
     /// <returns>Mező elérés kifejezés (<see cref="MemberExpression"/>)</returns>
+    private Expression CreateHierarcyMemberAccessExpression(Expression parm, string name, Type propertyType)
+    {
+        if (!string.IsNullOrWhiteSpace(name))
+        {
+            var names = name.Split(new[] { '.' });
+
+            Expression expr = parm;
+            var entityType = parm.Type;
+            System.Reflection.PropertyInfo? fProp = null;
+            for (var i = 0; i < names.Length; i++)
+            {
+                fProp = entityType.GetProperty(names[i], System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.GetProperty);
+                if (fProp is not null)
+                {
+                    expr = this.CreateMemberAccessExpression(expr, fProp.Name, fProp.PropertyType);
+                    entityType = fProp.PropertyType;
+                }
+                else
+                {
+                    break;
+                }
+            }
+
+            if (fProp is not null)
+            {
+                return expr;
+            }
+        }
+
+        return null!;
+    }
+
+    /// <summary>
+    /// Entity mező elérés kifejezés létrehozása
+    /// (ha a <paramref name="propertyType"/> nem egyezik meg a mező tíusával, akkor <see cref="UnaryExpression"/> kerül létrehozása)
+    /// </summary>
+    /// <param name="parm">Entity kifejezés</param>
+    /// <param name="name">Mező neve</param>
+    /// <param name="propertyType">Mező értékének konvertálási típusa</param>
+    /// <returns>Mező elérés kifejezés (<see cref="MemberExpression"/>)</returns>
 #pragma warning disable CA1822 // Mark members as static
-    private Expression CreateFieldAccessExpression(ParameterExpression parm, string name, Type propertyType)
+    private Expression CreateMemberAccessExpression(Expression parm, string name, Type propertyType)
 #pragma warning restore CA1822 // Mark members as static
     {
         var entityType = parm.Type;
@@ -467,7 +509,7 @@ public class LogicServiceBase<TEntity> : ILogicService<TEntity>
     private Expression CreateQueryBinaryExpr(ParameterExpression parm, System.Reflection.PropertyInfo prop, object? value, ExpressionType binaryType, string? fieldName)
     {
         fieldName ??= prop.Name;
-        var left = this.CreateFieldAccessExpression(parm, fieldName, prop.PropertyType);
+        var left = this.CreateHierarcyMemberAccessExpression(parm, fieldName, prop.PropertyType);
         if (left != null)
         {
             var right = this.CreateConstantExpression(value, prop.PropertyType);
@@ -490,17 +532,121 @@ public class LogicServiceBase<TEntity> : ILogicService<TEntity>
     /// <exception cref="ArgumentOutOfRangeException">Nem támogatott szűrési művelet esetén</exception>
     private Expression CreateQueryExpression<TQuery>(ParameterExpression parm, Expression expr, System.Reflection.PropertyInfo prop, TQuery query, BusinessEntities.Helpers.QueryOperationAttribute? attr = null)
     {
-        var binaryType = attr?.ExpressionType;
-        binaryType ??= ExpressionType.Equal;
+        var binaryType = attr?.OperationType;
+        binaryType ??= QueryOperationType.Equal;
+
+        var exprType = this.ConvertBinaryType(binaryType.Value);
 
         var value = prop.GetValue(query);
         if (value is not null)
         {
-            var expr2 = this.CreateQueryBinaryExpr(parm, prop, value, binaryType.Value, attr?.FieldName);
-            expr = this.CombineExpressions(expr, expr2);
+            if (exprType is not null)
+            {
+                var expr2 = this.CreateQueryBinaryExpr(parm, prop, value, exprType.Value, attr?.FieldName);
+                expr = this.CombineExpressions(expr, expr2);
+            }
+            else if (binaryType == QueryOperationType.Like)
+            {
+                var expr2 = this.CreateQueryLikeExpr(parm, prop, value, attr?.FieldName);
+                expr = this.CombineExpressions(expr, expr2);
+            }
+            else if (binaryType == QueryOperationType.MultipleAllowed)
+            {
+                var expr2 = this.CreateQueryMultipleAllowedExpr(parm, prop, value, attr?.FieldName);
+                expr = this.CombineExpressions(expr, expr2);
+            }
         }
 
         return expr;
+    }
+
+    /// <summary>
+    /// Tömb szűrés létrehozása
+    /// </summary>
+    /// <param name="parm">Entity kifejezés</param>
+    /// <param name="prop">Mező információk</param>
+    /// <param name="value">Szűrendő érték</param>
+    /// <param name="fieldName">Entity mező neve</param>
+    /// <returns>Tömb szűrés kifejezés (<see cref="BinaryExpression"/>)</returns>
+    private Expression CreateQueryMultipleAllowedExpr(ParameterExpression parm, System.Reflection.PropertyInfo prop, object value, string? fieldName)
+    {
+        if (value is string)
+        {
+            value = new[] { value };
+        }
+
+        if (value is System.Collections.IEnumerable enu)
+        {
+            fieldName ??= prop.Name;
+            var right = this.CreateHierarcyMemberAccessExpression(parm, fieldName, prop.PropertyType) as MemberExpression;
+            if (right is not null)
+            {
+                var member = right.Member as System.Reflection.PropertyInfo;
+                var enuType = typeof(Enumerable);
+                var ofTypeMethod = enuType.GetMethod(nameof(Enumerable.Cast), System.Reflection.BindingFlags.Static | System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.InvokeMethod);
+                var genOfTypeMethod = ofTypeMethod!.MakeGenericMethod(new Type[] { member!.PropertyType });
+                var genEnu = genOfTypeMethod.Invoke(null, new[] { enu });
+
+                if (genEnu is not null)
+                {
+                    var method = enuType.GetMethods()
+                        .Where(m => m.Name == nameof(Enumerable.Contains))
+                        .Single(m => m.GetParameters().Length == 2)
+                        .MakeGenericMethod(member.PropertyType);
+                    if (method is not null)
+                    {
+                        var enuExpr = Expression.Constant(genEnu);
+                        return Expression.Call(method, enuExpr, right);
+                    }
+                }
+            }
+        }
+
+        return null!;
+    }
+
+    /// <summary>
+    /// Like szűrés létrehozása
+    /// </summary>
+    /// <param name="parm">Entity kifejezés</param>
+    /// <param name="prop">Mező információk</param>
+    /// <param name="value">Szűrendő érték</param>
+    /// <param name="fieldName">Entity mező neve</param>
+    /// <returns>Like kifejezés (<see cref="BinaryExpression"/>)</returns>
+    private Expression CreateQueryLikeExpr(ParameterExpression parm, System.Reflection.PropertyInfo prop, object value, string? fieldName)
+    {
+        fieldName ??= prop.Name;
+        var left = this.CreateHierarcyMemberAccessExpression(parm, fieldName, prop.PropertyType);
+        if (left is not null)
+        {
+            value = $"{value}%";
+            var right = this.CreateConstantExpression(value, prop.PropertyType);
+            var type = typeof(DbFunctionsExtensions);
+            var method = type.GetMethod(nameof(DbFunctionsExtensions.Like), System.Reflection.BindingFlags.Static | System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.InvokeMethod, new[] { typeof(DbFunctions), typeof(string), typeof(string) });
+            if (method != null)
+            {
+                var efFunctionsProp = typeof(EF).GetProperty(nameof(EF.Functions), System.Reflection.BindingFlags.Static | System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.GetProperty);
+                var efFunctionsExpr = Expression.MakeMemberAccess(null, efFunctionsProp!);
+                return Expression.Call(method, efFunctionsExpr, left, right);
+            }
+        }
+
+        return null!;
+    }
+
+    /// <summary>
+    /// Szűrés típus konvertálása <see cref="ExpressionType"/> típusra
+    /// </summary>
+    /// <param name="operationType">Szűrés típus</param>
+    /// <returns>Ha nem sikerült konvertálni, akkor null</returns>
+    private ExpressionType? ConvertBinaryType(QueryOperationType operationType)
+    {
+        if (Enum.TryParse<ExpressionType>($"{operationType}", false, out var result))
+        {
+            return result;
+        }
+
+        return null;
     }
 
     /// <summary>

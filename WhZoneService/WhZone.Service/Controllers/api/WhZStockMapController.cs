@@ -24,11 +24,11 @@ public class WhZStockMapController : Controller
     /// </summary>
     /// <returns>Lekérdezés eredménye</returns>
     [HttpPost("query")]
-    public async Task<ActionResult<IEnumerable<WhZStockMapQDto>>> QueryStockMapAsync()
+    public async Task<ActionResult<IEnumerable<WhZStockMapQDto>>> QueryStockMapAsync([FromBody] WhZStockMapQueryDto query = null!)
     {
         try
         {
-            return this.Ok(await this.stockMapService.QueryStockMapAsync());
+            return this.Ok(await this.stockMapService.QueryStockMapAsync(query));
         }
         catch (Exception ex)
         {
@@ -42,11 +42,11 @@ public class WhZStockMapController : Controller
     /// </summary>
     /// <returns>Lekérdezés eredménye</returns>
     [HttpPost("query_erp")]
-    public async Task<ActionResult<string>> QueryStockMapERPAsync()
+    public async Task<ActionResult<string>> QueryStockMapERPAsync([FromBody] WhZStockMapQueryDto query = null!)
     {
         try
         {
-            return this.Ok(await this.stockMapService.QueryStockMapAsync());
+            return this.Ok(await this.stockMapService.QueryStockMapAsync(query));
         }
         catch (Exception ex)
         {

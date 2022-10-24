@@ -11,14 +11,26 @@ namespace eLog.HeavyTools.Services.WhZone.BusinessEntities.Helpers;
 [AttributeUsage(AttributeTargets.Property, AllowMultiple = false, Inherited = true)]
 public class QueryOperationAttribute : Attribute
 {
-    public ExpressionType ExpressionType { get; set; }
+    public QueryOperationType OperationType { get; set; }
     public string? FieldName { get; set; }
 
     public QueryOperationAttribute() { }
 
-    public QueryOperationAttribute(ExpressionType expressionType, string? fieldName)
+    public QueryOperationAttribute(QueryOperationType operationType, string? fieldName)
     {
-        this.ExpressionType = expressionType;
+        this.OperationType = operationType;
         this.FieldName = fieldName;
     }
+}
+
+public enum QueryOperationType
+{
+    Custom,
+    Equal,
+    GreaterThan,
+    GreaterThanOrEqual,
+    LessThan,
+    LessThanOrEqual,
+    Like,
+    MultipleAllowed
 }
