@@ -27,6 +27,7 @@ public class WhZStockMapService : LogicServiceBase<OlcWhzstockmap>, IWhZStockMap
 {
 #pragma warning disable CA1822 // Mark members as static
     private readonly IWarehouseService warehouseService;
+    private readonly IRepository<OlsCompany> companyRepository;
     private readonly IMapper mapper;
 
     public WhZStockMapService(
@@ -35,9 +36,11 @@ public class WhZStockMapService : LogicServiceBase<OlcWhzstockmap>, IWhZStockMap
         IUnitOfWork unitOfWork,
         IEnvironmentService environmentService,
         IWarehouseService warehouseService,
+        IRepository<OlsCompany> companyRepository,
         IMapper mapper) : base(validator, repository, unitOfWork, environmentService)
     {
         this.warehouseService = warehouseService ?? throw new ArgumentNullException(nameof(warehouseService));
+        this.companyRepository = companyRepository ?? throw new ArgumentNullException(nameof(companyRepository));
         this.mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
     }
 
@@ -55,15 +58,37 @@ public class WhZStockMapService : LogicServiceBase<OlcWhzstockmap>, IWhZStockMap
     /// </summary>
     /// <param name="cancellationToken"></param>
     /// <returns>Készlet lista</returns>
-    public async Task<IEnumerable<WhZStockMapQDto>> QueryStockMapAsync(CancellationToken cancellationToken = default)
+    public async Task<IEnumerable<WhZStockMapQDto>> QueryStockMapAsync(WhZStockMapQueryDto query = null!, CancellationToken cancellationToken = default)
     {
-        var q = this.Query();
+        Expression<Func<OlcWhzstockmap, bool>> predicate = null!;
+        if (query is not null)
+        {
+            predicate = this.CreatePredicate(query);
+        }
+
+        var q = this.Query(predicate);
 
         q = q
             .Include(s => s.Item)
             .Include(s => s.Wh)
             .Include(s => s.Whzone)
             .Include(s => s.Whloc);
+
+        if (query?.Cmpid is not null)
+        { 
+            q = q
+                .Where(s =>
+                    (s.Item.Cmpcodes == CompanyUtils.CMPCODEALL || this.companyRepository.Entities
+                        .Any(c => EF.Functions.Like(s.Item.Cmpcodes, "%" + c.Cmpcode + "%") && query.Cmpid.Contains(c.Cmpid))) &&
+                    (s.Wh.Cmpcodes == CompanyUtils.CMPCODEALL || this.companyRepository.Entities
+                        .Any(c => EF.Functions.Like(s.Wh.Cmpcodes, "%" + c.Cmpcode + "%") && query.Cmpid.Contains(c.Cmpid))));
+        }
+
+        if (query?.Nonzerostock == true)
+        {
+            q = q
+                .Where(s => s.Recqty != 0 || s.Actqty != 0 || s.Resqty != 0);
+        }
 
         var list = await q.ToListAsync(cancellationToken);
         return this.mapper.Map<IEnumerable<WhZStockMapQDto>>(list);
