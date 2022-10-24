@@ -297,7 +297,7 @@ create table olc_partner (
     constraint fk_olc_partner_partnid foreign key (partnid) references ols_partner (partnid),
     constraint fk_olc_partner_taxid foreign key (taxid) references ols_tax (taxid),
     constraint fk_olc_partner_addusrid foreign key (addusrid) references cfw_user (usrid),
-	constraint fk_olc_partner_regreprempid foreign key (regreprempid) references ols_employee (empid)
+    constraint fk_olc_partner_regreprempid foreign key (regreprempid) references ols_employee (empid)
 )
 go
 
@@ -330,7 +330,7 @@ create table olc_partncmp (
     adddate                     datetime                null,
     constraint pk_olc_partncmp primary key (partnid, cmpid), -- composite primary key
     constraint fk_olc_partncmp_partnid foreign key (partnid) references ols_partner (partnid),
-    constraint fk_olc_partncmp_cmpid foreign key (cmpid) references ols_company (cmpid),
+	constraint fk_olc_partncmp_cmpid foreign key (cmpid) references ols_company (cmpid),
     constraint fk_olc_partncmp_partnid_cmpid foreign key (partnid, cmpid) references ols_partncmp (partnid, cmpid),
     constraint fk_olc_partncmp_secpaymid foreign key (secpaymid) references ols_paymethod (paymid),
     constraint fk_olc_partncmp_addusrid foreign key (addusrid) references cfw_user (usrid)
@@ -763,7 +763,57 @@ create index idx_olc_whlocprio_whzoneid on olc_whlocprio (whzoneid)
 create index idx_olc_whlocprio_whlocid on olc_whlocprio (whlocid)
 go
 
- create table olc_stline (
+
+/***************************************/
+/* Helykód kapcsolás				   */
+/***************************************/
+
+create table olc_whloclink (
+  whllid                    int identity    not null, -- kulcs
+  whid                      varchar(12)     not null, -- Raktár
+  whzoneid                  int             null, -- Zóna
+  whlocid                   int             not null, -- Helykód
+  overfillthreshold         numeric(19, 6)  null, -- Túltöltési küszöb
+  startdate                 datetime        not null, -- Érvényesség kezdete
+  enddate                   datetime        not null, -- Érvényesség vége
+  addusrid                  varchar(12)     not null, -- Rögzítő
+  adddate                   datetime        not null, -- Rögzítve
+  constraint pk_olc_whloclink primary key (whllid)
+)
+
+alter table olc_whloclink add constraint fk_olc_whloclink_whid foreign key (whid) references ols_warehouse (whid)
+alter table olc_whloclink add constraint fk_olc_whloclink_whzoneid foreign key (whzoneid) references olc_whzone (whzoneid)
+alter table olc_whloclink add constraint fk_olc_whloclink_whlocid foreign key (whlocid) references olc_whlocation (whlocid)
+alter table olc_whloclink add constraint fk_olc_whloclink_addusrid foreign key (addusrid) references cfw_user (usrid)
+
+create index idx_olc_whloclink_whid on olc_whloclink (whid)
+create index idx_olc_whloclink_whzoneid on olc_whloclink (whzoneid)
+create index idx_olc_whloclink_whlocid on olc_whloclink (whlocid)
+go
+
+
+/***************************************/
+/* Helykód kapcsolás kiegészítés   	   */
+/***************************************/
+
+create table olc_whloclinkline (
+  whlllineid                    int identity    not null, -- kulcs
+  whllid                        int             not null, -- fej hivatkozás
+  whlocid                       int             not null, -- Helykód hivatkozás
+  whllinktype                   int             not null, -- Kapcsolat tipusa (1 - master, 2 - kapcsolt)
+  addusrid                      varchar(12)     not null, -- Rögzítő
+  adddate                       datetime        not null, -- Rögzítve
+  constraint pk_olc_whloclinkline primary key (whlllineid)
+)
+
+alter table olc_whloclinkline add constraint fk_olc_whloclinkline_whllid foreign key (whllid) references olc_whloclink (whllid)
+alter table olc_whloclinkline add constraint fk_olc_whloclinkline_whlocid foreign key (whlocid) references olc_whlocation (whlocid)
+alter table olc_whloclinkline add constraint fk_olc_whloclinkline_addusrid foreign key (addusrid) references cfw_user (usrid)
+
+create unique index ux_olc_whloclinkline_whllid_whlocid on olc_whloclinkline (whllid, whlocid)
+go
+
+create table olc_stline (
   stlineid					int				not null,  
   origstlineid				int			    null,
 
