@@ -1,0 +1,40 @@
+; Helykód Összekötés
+
+$olcwhloc=Helykód összekötés
+
+$pageName_OlcWhLoc=Helykód kapcsolás
+
+$tabName_OlcWhLocLink=Helykódok
+
+$tabName_OlcWhLocLinkLine=Kapcsolt helykódok
+
+;Helykódok
+$whzoneid=Zóna azon.
+$whlocid=Helykód azon.
+$volume=Térfogat
+$overfillthreshold=Túltöltési küszöb
+$startdate=Kezdő dátum
+$enddate=Záró dátum
+$cnt=Hozzá tartozó helykódok száma
+$el=Első hozzákapcsolt elem
+
+;Kapcsolt helykódok
+$noroot_olcwhloclinkline=Jelöljön ki egy helykódot!
+$whzonecode=Zóna
+$whzname=Zóna név
+$whloccode=Helykód
+$whlname=Helynév
+$capacity=Kapacitás
+$group_whloclinklineinfo=Helykód adatok
+
+$whlllineid=Kapcsolás vonal azon.
+$whllid=Kapcsolás azon.
+$whlinktype=Kapcsolás típus
+
+$err_OlcWhLocLink_WhLocIdHasActivePeriod=Ez a hely foglalt ebben az időben!
+$err_OlcWhLocLinkLine_WhLocIdHasActivePeriod=Ez a hely foglalt ebben az időben!
+$err_OlcWhLocLink_Enddate=A kezdő dátum nagyobb, mint a záró dátum!
+$err_olcwhloclink_whlocid=A helykód nem normál! Váltsa át normálra, hogy egyéb helykódokat kapcsolhasson hozzá!
+$err_OlcWhLocLink_WhidIsDifferent=Különböző raktár!
+$err_OlcWhLocLink_ZoneIsDifferent=Különböző zóna!
+$err_masterloclinkline=Mester helykód nem törölhető!

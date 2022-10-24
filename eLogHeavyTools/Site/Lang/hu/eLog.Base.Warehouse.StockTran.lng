@@ -20,3 +20,6 @@ $rule_not_enought_freeqty=Nincs elég szabad készlet (raktár: {0}, cikkszám: 
 $movqty2_calc=Átvehető mennyiség
 
 
+$tabName_Transit=Átvétel útonlévő raktárból
+
+$changeWh=Átvevő raktár módosítása

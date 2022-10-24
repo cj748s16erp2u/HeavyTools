@@ -1,11 +1,9 @@
-﻿using OfficeOpenXml;
-using OfficeOpenXml.FormulaParsing.Excel.Functions.Information;
-using OfficeOpenXml.FormulaParsing.Excel.Functions.Math;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using eProjectWeb.Framework;
 
 namespace eLog.HeavyTools.Common
 {
@@ -13,30 +11,36 @@ namespace eLog.HeavyTools.Common
     {
         public bool ValidateBankAccountNo(string countryCode, string bankAccountNo)
         {
-            bankAccountNo = bankAccountNo.ToUpper();
-
-            if (string.IsNullOrEmpty(countryCode) || string.IsNullOrEmpty(bankAccountNo))
-                return true;
-
-            var lngid = Convert.ToString(countryCode)?.Substring(0, 2).ToUpper();
-
-            if (lngid == "HU")
+            if (CustomSettings.GetBool("HTO:PartnerBankAccountNumberCheck", false)) // bankszamlaszam vizsgalata
             {
-                if (System.Text.RegularExpressions.Regex.IsMatch(bankAccountNo, "^[0-9]"))
+                bankAccountNo = bankAccountNo.ToUpper();
+
+                if (string.IsNullOrEmpty(countryCode) || string.IsNullOrEmpty(bankAccountNo))
+                    return true;
+
+                var lngid = Convert.ToString(countryCode)?.Substring(0, 2).ToUpper();
+
+                if (lngid == "HU")
                 {
-                    bankAccountNo = bankAccountNo.Replace("-", string.Empty).Replace(" ", string.Empty);
-                    if (bankAccountNo.Length == 16)
-                        bankAccountNo.PadLeft(8, '0');
+                    if (System.Text.RegularExpressions.Regex.IsMatch(bankAccountNo, "^[0-9]"))
+                    {
+                        bankAccountNo = bankAccountNo.Replace("-", string.Empty).Replace(" ", string.Empty);
+                        if (bankAccountNo.Length == 16)
+                            bankAccountNo = bankAccountNo.PadRight(24, '0');
 
-                    // first
-                    var bankAccountFirstPart = bankAccountNo.Substring(0, 8);
-                    if (!ValidateHUBankAccountNo(bankAccountFirstPart))
-                        return false;
+                        if (bankAccountNo.Length != 24)
+                            return false;
 
-                    // second
-                    var bankAccountSecondPart = bankAccountNo.Substring(8, 16);
-                    if (!ValidateHUBankAccountNo(bankAccountSecondPart))
-                        return false;
+                        // first
+                        var bankAccountFirstPart = bankAccountNo.Substring(0, 8);
+                        if (!ValidateHUBankAccountNo(bankAccountFirstPart))
+                            return false;
+
+                        // second
+                        var bankAccountSecondPart = bankAccountNo.Substring(8, 16);
+                        if (!ValidateHUBankAccountNo(bankAccountSecondPart))
+                            return false;
+                    }
                 }
             }
 
@@ -51,7 +55,6 @@ namespace eLog.HeavyTools.Common
 
             return (Convert.ToInt32(chekNumber) % 10 == 0);
         }
-
 
         protected virtual int? GetHUAccountNoChecksum(string accNo)
         {

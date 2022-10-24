@@ -23,6 +23,8 @@ olc_cart,eLog.HeavyTools.Sales.Retail.Cart,OlcCart
 imp_colorexception,eLog.HeavyTools.Masters.Item.Import,ImpColorException
 olc_cartpay,eLog.HeavyTools.Sales.Retail.Cart,OlcCartPay
 olc_whlocprio,eLog.HeavyTools.Warehouse.WhLocPrio,OlcWhLocPrio
+olc_whloclink,eLog.HeavyTools.Warehouse.WhLocLink,OlcWhLocLink
+olc_whloclinkline,eLog.HeavyTools.Warehouse.WhLocLink,OlcWhLocLinkLine
 olc_itemassortment,eLog.HeavyTools.Masters.Item.Assortment,OlcItemAssortment
 olc_sthead,eLog.HeavyTools.Warehouse.StockTran,OlcStHead
 olc_stline,eLog.HeavyTools.Warehouse.StockTran,OlcStLine

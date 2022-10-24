@@ -7,6 +7,7 @@ using eLog.HeavyTools.Services.WhWebShop.BusinessEntities.Model.Base;
 namespace eLog.HeavyTools.Services.WhWebShop.BusinessEntities.Model
 {
     [Table("olc_prctable")]
+    [Index("Ptid", "Prctype", "Curid", "Startdate", "Enddate", Name = "index_olc_prctable_ptid_prctype_curid_startdate_enddate")]
     public partial class OlcPrctable : Entity
     {
         [Key]
@@ -64,6 +65,9 @@ namespace eLog.HeavyTools.Services.WhWebShop.BusinessEntities.Model
         [ForeignKey("Curid")]
         [InverseProperty("OlcPrctable")]
         public virtual OlsCurrency? Cur { get; set; }
+        [ForeignKey("Imid")]
+        [InverseProperty("OlcPrctable")]
+        public virtual OlcItemmodel? Im { get; set; }
         [ForeignKey("Itemid")]
         [InverseProperty("OlcPrctable")]
         public virtual OlsItem? Item { get; set; }

@@ -9,7 +9,8 @@
 			<ForceNextRow/>
 			<CheckedCombo Field="whid" Width="120" ListID="eLog.Base.Setup.Warehouse.WarehouseList" ComboFlags="None" />
 			<CheckedCombo Field="whzoneid" Width="120" ListID="eLog.HeavyTools.Setup.Warehouse.OlcWhZoneList" ComboFlags="None" DependentCtrlID="whid" DependentField="whid" DependentAllowNullField="whid"/>
-			<CheckedCombo Field="whlocid" Width="120" ListID="eLog.HeavyTools.Setup.Warehouse.OlcWhLocationList" ComboFlags="None" DependentCtrlID="whid,whzoneid" DependentField="whid,whzoneid" DependentAllowNullField="whid,whzoneid" />
+			<!--<CheckedCombo Field="whlocid" Width="120" ListID="eLog.HeavyTools.Setup.Warehouse.OlcWhLocationList" ComboFlags="None" DependentCtrlID="whid,whzoneid" DependentField="whid,whzoneid" DependentAllowNullField="whid,whzoneid" />-->
+			<Textbox Field="whloccode" Width="120"/>
 		</SearchFilterBar>	
 		<Grid ID="searchResults"/>
 	</TabPage>
@@ -52,7 +53,8 @@
 			<ForceNextRow/>
 			<CheckedCombo Field="whid" Width="120" ListID="eLog.Base.Setup.Warehouse.WarehouseList" ComboFlags="None" />
 			<CheckedCombo Field="whzoneid" Width="120" ListID="eLog.HeavyTools.Setup.Warehouse.OlcWhZoneList" ComboFlags="None" DependentCtrlID="whid" DependentField="whid" DependentAllowNullField="whid"/>
-			<CheckedCombo Field="whlocid" Width="120" ListID="eLog.HeavyTools.Setup.Warehouse.OlcWhLocationList" ComboFlags="None" DependentCtrlID="whid,whzoneid" DependentField="whid,whzoneid" DependentAllowNullField="whid,whzoneid"/>
+			<!--<CheckedCombo Field="whlocid" Width="120" ListID="eLog.HeavyTools.Setup.Warehouse.OlcWhLocationList" ComboFlags="None" DependentCtrlID="whid,whzoneid" DependentField="whid,whzoneid" DependentAllowNullField="whid,whzoneid"/>-->
+			<Textbox Field="whloccode" Width="120"/>
 		</SearchFilterBar>
 		<Grid ID="searchResults"/>
 	</TabPage>

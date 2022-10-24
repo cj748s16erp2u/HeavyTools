@@ -152,4 +152,7 @@
   <add key="OnRoadStdocIdFrom" value="RKAT" />
   <add key="OnRoadWarehouse" value="HTUT" />
   
+  <!-- Ernyo elem, partner bankszamlaszam ellenorzese -->
+  <add key="HTO:PartnerBankAccountNumberCheck" value="yes" />
+    
 </configuration>

@@ -24,18 +24,16 @@
       <ForceNextRow />
       <Combo Field="deladdrid" ListID="eLog.Base.Masters.Partner.PartnAddrList" ComboFlags="None AllowBlank FindAnywhere" DependentField="partnid" DependentCtrlID="SinvHead.delpartnid_partncode" ColsToSpan="-1" Mandatory="True" />
 
+      <GroupSeparator ID="gscustom1" Label="$gscustompartner" />
       <ForceNextRow />
-      <Textbox Field="partnname" Label="$custompartnname" ColsToSpan="-1" CustomData="custompartner" />
+      <Textbox Field="partnname" Label="$custompartnname" ColsToSpan="-1" CustomData="custompartner:partnname" />
       <ForceNextRow />
       <Textbox Field="partnbankaccno" ColsToSpan="-3" CustomData="custompartner:buybankaccno" />
       <ForceNextRow />
-      <Textbox Field="vatnum" CustomData="custompartner:buyervatnum" />
-      <Textbox Field="vatnumeu" CustomData="custompartner:buyervatnumeu" />
-      <ForceNextRow />
       <Combo Field="countryid" ListID="eLog.Base.Setup.Country.CountryList" ComboFlags="None" CustomData="custompartner:buyaddrcountrycode" />
       <ForceNextRow />
-      <Textbox Field="postcode" CustomData="custompartner:buyaddrpostcode" />
-      <Textbox Field="add01" Label="$city" CustomData="custompartner:buyaddrcity" />
+      <Selector Field="postcode" Label="$postcode" MasterKey="postcode" DoNotPropagateNullValue="True" ValueField="postcode" TextField="postcode" SelectionID="eLog.Base.Setup.Country.PostcodeSelectionProvider" DependentField="countryid" DependentCtrlID="countryid" CustomData="custompartner:buyaddrpostcode" />
+      <Selector Field="add01" Label="$city" MasterKey="postcode" DoNotPropagateNullValue="True" ValueField="city" TextField="city" SelectionID="eLog.Base.Setup.Country.PostcodeSelectionProvider" DependentField="countryid" DependentCtrlID="countryid" CustomData="custompartner:buyaddrcity" />
       <Textbox Field="add02" ColsToSpan="-1" CustomData="custompartner:buyadd02" />
       <Textbox Field="district" CustomData="custompartner:buyaddrdistrict" />
       <ForceNextRow />
@@ -49,6 +47,9 @@
       <Textbox Field="stairway" CustomData="custompartner:buyaddrstairway" />
       <Textbox Field="floor" CustomData="custompartner:buyaddrfloor" />
       <Textbox Field="door" CustomData="custompartner:buyaddrdoor" />
+      <ForceNextRow />
+      <Textbox Field="vatnum" CustomData="custompartner:buyervatnum" />
+      <!--<Textbox Field="vatnumeu" CustomData="custompartner:buyervatnumeu" />-->
       <ForceNextRow />
       
       <GroupSeparator ID="x1" Label="_"/>
