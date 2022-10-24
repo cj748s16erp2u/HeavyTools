@@ -17,7 +17,7 @@ namespace eLog.HeavyTools.Warehouse.StockTran
         protected Grid stLineList;
         protected Control ctrlFromWhId;
         protected Control ctrlToWhId;
-        //private Button _changeWh;
+        protected Button _changeWh;
 
         public TransferingOnRoadTab()
             : base()
@@ -47,12 +47,18 @@ namespace eLog.HeavyTools.Warehouse.StockTran
             }
 
             OnPageActivate += this.TransferingOnRoadTab_OnPageLoad;
-            /*
+            
             _changeWh = (Button)FindRenderable("changeWh");
             _changeWh.SetOnClick(OnChangeWhClick);
-            */
+            AddCmd(_changeWh);
+            
             //OnPageActivate += OnOnPageActivate;
 
+        }
+
+        private void OnChangeWhClick(PageUpdateArgs args)
+        {
+            ctrlToWhId.Disabled = false;
         }
 
         private void TransferingOnRoadTab_OnPageLoad(PageUpdateArgs args)
