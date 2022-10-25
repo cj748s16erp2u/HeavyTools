@@ -494,6 +494,9 @@
     <Compile Include="Warehouse\OlcWhLocPrio\OlcWhLocPrioSearchProvider.cs" />
     <Compile Include="Warehouse\OlcWhLocPrio\OlcWhLocPrioSearchTab.cs" />
     <Compile Include="Warehouse\Reserve\ReserveBL3.cs" />
+    <Compile Include="Warehouse\WhZStockMap\WhZStockMapDto.cs" />
+    <Compile Include="Warehouse\WhZStockMap\WhZStockMapSearchPage.cs" />
+    <Compile Include="Warehouse\WhZStockMap\WhZStockMapSearchProvider.cs" />
     <Compile Include="Warehouse\StockTran\OlcStHead.cs" />
     <Compile Include="Warehouse\StockTran\OlcStHeadBL.cs" />
     <Compile Include="Warehouse\StockTran\OlcStHeadGenerated.cs" />
@@ -523,6 +526,7 @@
     <Compile Include="Warehouse\WhZone\WhZTran\OlcWhZTranHeadGenerated.cs" />
     <Compile Include="Warehouse\WhZone\WhZTran\OlcWhZTranLine.cs" />
     <Compile Include="Warehouse\WhZone\WhZTran\OlcWhZTranLineGenerated.cs" />
+    <Compile Include="Warehouse\WhZStockMap\WhZStockMapSearchTab.cs" />
     <Compile Include="Webshop\OlcWebshop.cs" />
     <Compile Include="Webshop\OlcWebshopGenerated.cs" />
     <Compile Include="Webshop\WebshopList.cs" />
@@ -537,6 +541,7 @@
   <ItemGroup>
     <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

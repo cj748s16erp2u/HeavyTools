@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Schema xmlns="http://tempuri.org/RenderableSchema.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://tempuri.org/RenderableSchema.xsd RenderableSchema.xsd">
+	<TabPage Name="WhZStockMapSearchTab">
+			<SearchFilterBar ID="SrcBar">
+				<Textbox Field="Itemcode" Width="150" />
+				<Textbox Field="Itemname" Width="150" />
+				<Textbox Field="Barcode" Width="100" />
+				<CheckedCombo Field="Cmpid" Width="100" ListID="eLog.Base.Setup.Company.CompanyLoggedInList" ComboFlags="None" />
+				<ForceNextRow/>
+				<CheckedCombo Field="Whid" ListID="eLog.Base.Setup.Warehouse.WarehouseList" ComboFlags="None" />
+				<Textbox Field="Whzonecode" Width="200" />
+				<Textbox Field="Whloccode"  Width="200"/>
+				<Combo Field="Delstat" ListID="eLog.Base.Setup.Parameters.DelstatTypeList" ComboFlags="AllowBlank AutoSelectFirst" />
+				<Checkbox Field="Nonzero" />
+			</SearchFilterBar>
+			<Grid ID="searchResults" Label="$whzstockmap_search_results" />
+	</TabPage>
+	<Search Name="WhZStockMapSearchProvider">
+		<Column FieldName="Itemid" Hidden="True" />
+		<Column FieldName="Whid" Width="70" />
+		<Column FieldName="Itemcode" Width="100" />
+		<Column FieldName="Itemname" Width="170" />
+		<Column FieldName="Whlocid" Width="100" />
+		<!--<Column FieldName="unitid" Width="45" />-->
+		<Column FieldName="Recqty" Width="80" Format="C2" />
+		<Column FieldName="Actqty" Width="80" Format="C2" />
+		<Column FieldName="Resqty" Width="80" Format="C2" />
+		<Column FieldName="Provqty" Width="80" Format="C2" />
+		<!--<Column FieldName="stactqty" Width="80" Format="C2" />
+		<Column FieldName="stresqty" Width="80" Format="C2" />-->
+		<!--<Column FieldName="barcode" Width="100" />-->
+		<!--<Column FieldName="cmpid" Width="100" Align="Left" FieldFunction="flaglookup" FieldFuncArg="eLog.Base.Setup.Company.CompanyGrantedList" />-->
+		<Column FieldName="Whname" Width="200" />
+	</Search>
+</Schema>

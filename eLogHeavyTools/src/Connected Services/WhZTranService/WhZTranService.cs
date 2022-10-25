@@ -1214,22 +1214,22 @@ namespace eLog.HeavyTools.Warehouse.WhZone.WhZTranService
         partial void ProcessResponse(System.Net.Http.HttpClient client, System.Net.Http.HttpResponseMessage response);
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public System.Threading.Tasks.Task<System.Collections.Generic.ICollection<WhZStockMapQDto>> QueryAsync()
+        public System.Threading.Tasks.Task<System.Collections.Generic.ICollection<WhZStockMapQDto>> QueryAsync(WhZStockMapQueryDto body)
         {
-            return QueryAsync(System.Threading.CancellationToken.None);
+            return QueryAsync(body, System.Threading.CancellationToken.None);
         }
     
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public System.Collections.Generic.ICollection<WhZStockMapQDto> Query()
+        public System.Collections.Generic.ICollection<WhZStockMapQDto> Query(WhZStockMapQueryDto body)
         {
-            return System.Threading.Tasks.Task.Run(async () => await QueryAsync(System.Threading.CancellationToken.None)).GetAwaiter().GetResult();
+            return System.Threading.Tasks.Task.Run(async () => await QueryAsync(body, System.Threading.CancellationToken.None)).GetAwaiter().GetResult();
         }
     
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public async System.Threading.Tasks.Task<System.Collections.Generic.ICollection<WhZStockMapQDto>> QueryAsync(System.Threading.CancellationToken cancellationToken)
+        public async System.Threading.Tasks.Task<System.Collections.Generic.ICollection<WhZStockMapQDto>> QueryAsync(WhZStockMapQueryDto body, System.Threading.CancellationToken cancellationToken)
         {
             var urlBuilder_ = new System.Text.StringBuilder();
             urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/api/WhZStockMap/query");
@@ -1240,7 +1240,9 @@ namespace eLog.HeavyTools.Warehouse.WhZone.WhZTranService
             {
                 using (var request_ = new System.Net.Http.HttpRequestMessage())
                 {
-                    request_.Content = new System.Net.Http.StringContent(string.Empty, System.Text.Encoding.UTF8, "application/json");
+                    var content_ = new System.Net.Http.StringContent(Newtonsoft.Json.JsonConvert.SerializeObject(body, _settings.Value));
+                    content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json-patch+json");
+                    request_.Content = content_;
                     request_.Method = new System.Net.Http.HttpMethod("POST");
                     request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
     
@@ -1296,22 +1298,22 @@ namespace eLog.HeavyTools.Warehouse.WhZone.WhZTranService
     
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public System.Threading.Tasks.Task<string> Query_erpAsync()
+        public System.Threading.Tasks.Task<string> Query_erpAsync(WhZStockMapQueryDto body)
         {
-            return Query_erpAsync(System.Threading.CancellationToken.None);
+            return Query_erpAsync(body, System.Threading.CancellationToken.None);
         }
     
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public string Query_erp()
+        public string Query_erp(WhZStockMapQueryDto body)
         {
-            return System.Threading.Tasks.Task.Run(async () => await Query_erpAsync(System.Threading.CancellationToken.None)).GetAwaiter().GetResult();
+            return System.Threading.Tasks.Task.Run(async () => await Query_erpAsync(body, System.Threading.CancellationToken.None)).GetAwaiter().GetResult();
         }
     
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public async System.Threading.Tasks.Task<string> Query_erpAsync(System.Threading.CancellationToken cancellationToken)
+        public async System.Threading.Tasks.Task<string> Query_erpAsync(WhZStockMapQueryDto body, System.Threading.CancellationToken cancellationToken)
         {
             var urlBuilder_ = new System.Text.StringBuilder();
             urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/api/WhZStockMap/query_erp");
@@ -1322,7 +1324,9 @@ namespace eLog.HeavyTools.Warehouse.WhZone.WhZTranService
             {
                 using (var request_ = new System.Net.Http.HttpRequestMessage())
                 {
-                    request_.Content = new System.Net.Http.StringContent(string.Empty, System.Text.Encoding.UTF8, "application/json");
+                    var content_ = new System.Net.Http.StringContent(Newtonsoft.Json.JsonConvert.SerializeObject(body, _settings.Value));
+                    content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json-patch+json");
+                    request_.Content = content_;
                     request_.Method = new System.Net.Http.HttpMethod("POST");
                     request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
     
@@ -1613,6 +1617,39 @@ namespace eLog.HeavyTools.Warehouse.WhZone.WhZTranService
     
         [Newtonsoft.Json.JsonProperty("whlocname", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string Whlocname { get; set; }
+    
+    
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.5.2.0 (Newtonsoft.Json v13.0.1.0)")]
+    public partial class WhZStockMapQueryDto 
+    {
+        [Newtonsoft.Json.JsonProperty("itemcode", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Itemcode { get; set; }
+    
+        [Newtonsoft.Json.JsonProperty("itemname", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Itemname { get; set; }
+    
+        [Newtonsoft.Json.JsonProperty("barcode", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Barcode { get; set; }
+    
+        [Newtonsoft.Json.JsonProperty("cmpid", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.Collections.Generic.ICollection<int> Cmpid { get; set; }
+    
+        [Newtonsoft.Json.JsonProperty("whid", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.Collections.Generic.ICollection<string> Whid { get; set; }
+    
+        [Newtonsoft.Json.JsonProperty("whzonecode", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Whzonecode { get; set; }
+    
+        [Newtonsoft.Json.JsonProperty("whloccode", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Whloccode { get; set; }
+    
+        [Newtonsoft.Json.JsonProperty("delstat", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int? Delstat { get; set; }
+    
+        [Newtonsoft.Json.JsonProperty("nonzerostock", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public bool? Nonzerostock { get; set; }
     
     
     }

@@ -131,6 +131,7 @@
 		<Item ID="Warehouse" Name="$warehouse_root">
 			<Item ID="Stock" Name="$stock" PageID="eLog.Base.Warehouse.Stock.StockSearchPage"/>
 			<Item ID="StockMap" Name="$stockmap" PageID="eLog.Base.Warehouse.StockMap.StockMapSearchPage"/>
+			<Item ID="WhZStockMap" Name="$whzstockmap" PageID="eLog.HeavyTools.Warehouse.WhZStockMap.WhZStockMapSearchPage"/>
 			<Item ID="StockLot" Name="$stocklot" PageID="eLog.Base.Warehouse.StockLot.StockLotSearchPage"/>
 			<Item ID="StockLotMap" Name="$stocklotmap" PageID="eLog.Base.Warehouse.StockLotMap.StockLotMapSearchPage"/>
 			<Item ID="ItemWh" Name="$itemwh" PageID="eLog.Base.Masters.ItmWh.ItemWhSearchPage"/>

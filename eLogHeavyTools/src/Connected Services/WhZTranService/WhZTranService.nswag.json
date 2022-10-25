@@ -382,6 +382,30 @@
           "WhZStockMap"
         ],
         "operationId": "query3",
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/WhZStockMapQueryDto"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/WhZStockMapQueryDto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/WhZStockMapQueryDto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/WhZStockMapQueryDto"
+              }
+            }
+          }
+        },
         "responses": {
           "200": {
             "description": "Success",
@@ -405,6 +429,30 @@
           "WhZStockMap"
         ],
         "operationId": "query_erp3",
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/WhZStockMapQueryDto"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/WhZStockMapQueryDto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/WhZStockMapQueryDto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/WhZStockMapQueryDto"
+              }
+            }
+          }
+        },
         "responses": {
           "200": {
             "description": "Success",
@@ -609,6 +657,56 @@
           },
           "whlocname": {
             "type": "string",
+            "nullable": true
+          }
+        }
+      },
+      "WhZStockMapQueryDto": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "itemcode": {
+            "type": "string",
+            "nullable": true
+          },
+          "itemname": {
+            "type": "string",
+            "nullable": true
+          },
+          "barcode": {
+            "type": "string",
+            "nullable": true
+          },
+          "cmpid": {
+            "type": "array",
+            "nullable": true,
+            "items": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          "whid": {
+            "type": "array",
+            "nullable": true,
+            "items": {
+              "type": "string"
+            }
+          },
+          "whzonecode": {
+            "type": "string",
+            "nullable": true
+          },
+          "whloccode": {
+            "type": "string",
+            "nullable": true
+          },
+          "delstat": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "nonzerostock": {
+            "type": "boolean",
             "nullable": true
           }
         }

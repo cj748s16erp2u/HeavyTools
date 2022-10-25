@@ -1,0 +1,30 @@
+;Zóna helykód készlet képernyő
+
+$pageName_WhZStockMapDto=Zóna helykód készlet
+
+$tabName_WhZStockMapDto=Zóna helykód készlet
+
+$whzstockmap_search_results=Keresési eredmények
+
+$Whid=Raktár
+$Itemcode=Cikkszám
+$Itemname=Megnevezés
+$Whlocid=Helykód
+$Recqty=Érkező
+$Actqty=Aktuális
+$Resqty=Foglalt
+$Whname=Raktár név
+$Whzoneid=Zóna
+$Whzonecode=Zóna
+$Barcode=Vonalkód
+$Cmpid=Vállalat
+$Whloccode=Helykód
+$Delstat=Állapot
+$Nonzero=Csak nem 0 készlet
+$Whcode=Raktár kódja
+$Itemid=Cikk kódja
+$Provqty=Előrejelzett mennyiség
+$Whlocname=Helykód neve
+$Whzonename=Zóna neve
+
+$err_empty_list=Nem érhető el adat
