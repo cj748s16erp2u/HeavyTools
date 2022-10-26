@@ -156,6 +156,6 @@
   <add key="HTO:PartnerBankAccountNumberCheck" value="yes" />
 
   <!-- Szallitoi szamla egyeztetes alapertelmezett koltseg tipus -->
-  <add key="PinvDefaultCostType" value="BAR" />
+  <add key="PINVASSIGNOTHERDefaultCostType" value="BAR" />
 
 </configuration>

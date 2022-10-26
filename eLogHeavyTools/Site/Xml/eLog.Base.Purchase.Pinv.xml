@@ -97,17 +97,7 @@
   </TabPage>
 
   <!-- Száll.szla jóváhagyás -->
-  <TabPage Name="PinvCostApprovalSearchTab">
-    <SearchFilterBar ID="SrcBar">
-      <CheckedCombo Field="apprstat" Width="100" ListID="eLog.Base.Setup.Status.StatListProviderPublic#ols_pinvapproval.apprstat" ComboFlags="AllowBlank" />
-      <Combo Field="usrid" Width="200" ListID="eProjectWeb.Framework.UI.Maintenance.User.UserList" ComboFlags="AutoSelectOne" />
-      <Textbox Field="pinvnum_like" Label="$pinvnum" Width="120" />
-      <CheckedCombo Field="cmpid" Width="100" ListID="eLog.Base.Setup.Company.CompanyGrantedList" ComboFlags="AllowBlank" />
-      <Checkbox Field="pinvheadappronly" />
-    </SearchFilterBar>
-    <Grid ID="searchResults" StatusBar="true" FilterBar="true" MultiSelect="true" Label="$pinvcostapproval_search_results" />
-  </TabPage>
-  <Search Name="PinvCostApprovalSearchProvider">
+    <Search Name="PinvCostApprovalSearchProvider">
     <Column FieldName="apprstat" Width="30" FieldFunction="listlookup" FieldFuncArg="eLog.Base.Setup.Status.StatListProviderPublic#ols_pinvapproval.apprstat,abbr" />
     <Column FieldName="attacheddoc" Width="20" FieldFunction="bool1" />
     <Column FieldName="pinvnum" Width="100" />
@@ -125,6 +115,9 @@
     <Column FieldName="costtypeid" Width="80" />
     <Column FieldName="realcostval" Width="120" />
     <Column FieldName="realcostvalhome" Width="120" />
+    <Column FieldName="el3" DisplayName="$costlineel3" Width="120" />
+    <Column FieldName="el4" DisplayName="$costlineel4" Width="120" />
+    <Column FieldName="el5" DisplayName="$costlineel5" Width="120" />
     <Column FieldName="costlinenote" Width="200" />
     <Column FieldName="apprnote" Width="200" />
     <Column FieldName="usrid" Width="150" />
@@ -141,6 +134,8 @@
     <Column FieldName="el3" DisplayName="$costlineel3" Width="120" />
     <Column FieldName="el4" DisplayName="$costlineel4" Width="120" />
     <Column FieldName="el5" DisplayName="$costlineel5" Width="120" />
+    <Column FieldName="othtrlinedocid" Width="120" />
+    <Column FieldName="othtrlinedocname" Width="150" />
     <Column FieldName="qty" Width="80" />
     <Column FieldName="unitid" Width="60" />
     <Column FieldName="purchprc" Width="80" Format="C2" />
@@ -173,8 +168,8 @@
       <Selector Mandatory="false" Field="el5" Label="$costlineel5" ValueField="code" TextField="code" SelectionID="CodaInt.Base.Common.Element.ElementSelectionProvider" DependentField="cmpid,elmlevel,el3,date" DependentAllowNullField="el3,date" DependentCtrlID="info.cmpid,el5lvl,el3_code,eldate" ColsToSpan="2" />
       <Selector Mandatory="false" Field="el5" Label=" " ValueField="code" TextField="name" SelectionID="CodaInt.Base.Common.Element.ElementSelectionProvider" ColsToSpan="-1" />
       <ForceNextRow />
-      <Selector Mandatory="False" Field="revothtrlinedocid" Label="$revothtrlinedocid" ValueField="othtrlinedocid" TextField="othtrlinedocid" SelectionID="CodaInt.Base.Setup.OthTrLineDoc.OthTrLineDocSelectionProvider" DependentCtrlID="info.cmpid" DependentField="refcmpid" ColsToSpan="2" WaitLayer="true" />
-      <Selector Mandatory="False" Field="revothtrlinedocid" Label=" " ValueField="othtrlinedocid" TextField="name" SelectionID="CodaInt.Base.Setup.OthTrLineDoc.OthTrLineDocSelectionProvider" ColsToSpan="2" WaitLayer="true" />
+      <Selector Mandatory="False" Field="othtrlinedocid" ValueField="othtrlinedocid" TextField="othtrlinedocid" SelectionID="CodaInt.Base.Setup.OthTrLineDoc.OthTrLineDocSelectionProvider" DependentCtrlID="info.cmpid" DependentField="refcmpid" ColsToSpan="2" WaitLayer="true" />
+      <Selector Mandatory="False" Field="othtrlinedocid" Label=" " ValueField="othtrlinedocid" TextField="name" SelectionID="CodaInt.Base.Setup.OthTrLineDoc.OthTrLineDocSelectionProvider" ColsToSpan="2" WaitLayer="true" />
       <ForceNextRow />
       <Textbox Field="note" ColsToSpan="-1" Rows="3" />
       <ForceNextRow />

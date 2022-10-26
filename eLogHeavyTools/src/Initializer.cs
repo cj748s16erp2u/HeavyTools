@@ -246,6 +246,8 @@ namespace eLog.HeavyTools
             ObjectFactory.AddRemap(typeof(Base.Purchase.Pinv.PinvCostApprovalSearchTab), typeof(Purchase.Pinv.PinvCostApprovalSearchTab3));
             ObjectFactory.AddRemap(typeof(Base.Purchase.Pinv.PinvCostApprovalSearchProvider), typeof(Purchase.Pinv.PinvCostApprovalSearchProvider3));
             ObjectFactory.AddRemap(typeof(Base.Purchase.Pinv.PinvAssignmentSearchProvider), typeof(Purchase.Pinv.PinvAssignmentSearchProvider3));
+            ObjectFactory.AddRemap(typeof(Base.Purchase.Pinv.PinvAssignmentTab), typeof(Purchase.Pinv.PinvAssignmentTab3));
+            ObjectFactory.AddRemap(typeof(Base.Purchase.Pinv.PinvAssignOtherEditTab), typeof(Purchase.Pinv.PinvAssignOtherEditTab3));
             ObjectFactory.AddRemap(typeof(Base.Purchase.Pinv.CostLineBL), typeof(Purchase.Pinv.CostLineBL3));
 
             // Sinv
