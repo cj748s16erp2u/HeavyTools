@@ -5,6 +5,7 @@ using System.Linq;
 using eProjectWeb.Framework;
 using eProjectWeb.Framework.Extensions;
 using eLog.HeavyTools.Sales.Sinv;
+using eLog.HeavyTools.Purchase.Pinv;
 
 namespace eLog.HeavyTools
 {
@@ -202,7 +203,6 @@ namespace eLog.HeavyTools
             ObjectFactory.AddRemap(typeof(Base.Warehouse.StockTran.IssuingLineEditTab), typeof(Warehouse.StockTran.IssuingLineEditTab3));
             ObjectFactory.AddRemap(typeof(Base.Warehouse.Reserve.ReserveBL), typeof(Warehouse.Reserve.ReserveBL3));
 
-
             // Item
             ObjectFactory.AddRemap(typeof(eLog.Base.Masters.Item.ItemEditTab), typeof(eLog.HeavyTools.Masters.Item.ItemEditTab3));
             ObjectFactory.AddRemap(typeof(eLog.Base.Masters.Item.ItemBL), typeof(eLog.HeavyTools.Masters.Item.ItemBL3));  
@@ -237,10 +237,18 @@ namespace eLog.HeavyTools
 
             // Pinv
             //ObjectFactory.AddRemap(typeof(Base.Purchase.Pinv.PinvHeadSearchPage), typeof(Purchase.Pinv.PinvHeadSearchPage3));
+            ObjectFactory.AddRemap(typeof(Base.Purchase.Pinv.PinvHeadSearchTab), typeof(Purchase.Pinv.PinvHeadSearchTab3));
             ObjectFactory.AddRemap(typeof(Base.Purchase.Pinv.PinvHeadSearchProvider), typeof(Purchase.Pinv.PinvHeadSearchProvider3));
             ObjectFactory.AddRemap(typeof(Base.Purchase.Pinv.PinvHeadEditTab), typeof(Purchase.Pinv.PinvHeadEditTab3));
             ObjectFactory.AddRemap(typeof(Base.Purchase.Pinv.PinvHeadBL), typeof(Purchase.Pinv.PinvHeadBL3));
             ObjectFactory.AddRemap(typeof(Base.Purchase.Pinv.PinvCopyBL), typeof(Purchase.Pinv.PinvCopyBL3));
+            ObjectFactory.AddRemap(typeof(Base.Purchase.Pinv.PinvCostApprovalSearchPage), typeof(Purchase.Pinv.PinvCostApprovalSearchPage3));
+            ObjectFactory.AddRemap(typeof(Base.Purchase.Pinv.PinvCostApprovalSearchTab), typeof(Purchase.Pinv.PinvCostApprovalSearchTab3));
+            ObjectFactory.AddRemap(typeof(Base.Purchase.Pinv.PinvCostApprovalSearchProvider), typeof(Purchase.Pinv.PinvCostApprovalSearchProvider3));
+            ObjectFactory.AddRemap(typeof(Base.Purchase.Pinv.PinvAssignmentSearchProvider), typeof(Purchase.Pinv.PinvAssignmentSearchProvider3));
+            ObjectFactory.AddRemap(typeof(Base.Purchase.Pinv.PinvAssignmentTab), typeof(Purchase.Pinv.PinvAssignmentTab3));
+            ObjectFactory.AddRemap(typeof(Base.Purchase.Pinv.PinvAssignOtherEditTab), typeof(Purchase.Pinv.PinvAssignOtherEditTab3));
+            ObjectFactory.AddRemap(typeof(Base.Purchase.Pinv.CostLineBL), typeof(Purchase.Pinv.CostLineBL3));
 
             // Sinv
             ObjectFactory.AddRemap(typeof(Base.Sales.Sinv.SinvHeadRules), typeof(Sales.Sinv.SinvHeadRules3));

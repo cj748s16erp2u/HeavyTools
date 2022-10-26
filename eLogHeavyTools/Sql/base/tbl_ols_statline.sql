@@ -1,4 +1,5 @@
-﻿insert into [ols_statline] ([statgrpid], [value], [seqno], [name], [abbr], [addusrid], [adddate], [delstat])
+﻿--#DBS-BatchSep:<el>
+insert into [ols_statline] ([statgrpid], [value], [seqno], [name], [abbr], [addusrid], [adddate], [delstat])
 values (500, 10, 10, 'Jóváhagyandó', 'JOV', 'dev', getdate(), 0)
 
 insert into [ols_statline] ([statgrpid], [value], [seqno], [name], [abbr], [addusrid], [adddate], [delstat])
@@ -63,4 +64,6 @@ values (501, 227, 170, 'Megszakítás', '227', 'dev', getdate(), 0)
 
 insert into [ols_statline] ([statgrpid], [value], [seqno], [name], [abbr], [addusrid], [adddate], [delstat])
 values (501, 228, 180, 'Érvénytelen', '228', 'dev', getdate(), 0)
-go
+
+insert ols_statline (statgrpid, value, seqno, name, abbr, addusrid, adddate, delstat)
+values (10, 50, 50, 'Szállítónak vissza', 'SZV', 'dev', getdate(), 0 ) 
