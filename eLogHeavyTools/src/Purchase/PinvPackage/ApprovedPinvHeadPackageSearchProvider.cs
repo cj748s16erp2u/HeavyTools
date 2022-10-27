@@ -26,6 +26,7 @@ from /*u4findb*/..oas_prldetail pl (nolock)
         {
             new QueryArg("packagecode", FieldType.String),
             new QueryArg("pinvnum", "ph", FieldType.String, QueryFlags.Like),
+            new QueryArg("curid", "ph", FieldType.String, QueryFlags.MultipleAllowed),
         };
 
         static ApprovedPinvHeadPackageSearchProvider()
