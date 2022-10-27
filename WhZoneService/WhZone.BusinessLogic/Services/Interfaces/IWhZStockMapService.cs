@@ -26,6 +26,14 @@ public interface IWhZStockMapService : ILogicService<OlcWhzstockmap>
     Task<IEnumerable<WhZStockMapQDto>> QueryStockMapAsync(WhZStockMapQueryDto query = null!, CancellationToken cancellationToken = default);
 
     /// <summary>
+    /// Helykód készlet lekérdezése
+    /// </summary>
+    /// <param name="query">Szűrési feltételek</param>
+    /// <param name="cancellationToken"></param>
+    /// <returns>Készlet bejegyzés</returns>
+    Task<WhZStockMapQDto> GetStockMapAsync(WhZStockMapQueryDto query = null!, CancellationToken cancellationToken = default);
+
+    /// <summary>
     /// 1 db készlet bejegyzés betöltése a megadott kulcs alapján.
     /// Több találat esetén kivétel kerül kiváltásra.
     /// </summary>

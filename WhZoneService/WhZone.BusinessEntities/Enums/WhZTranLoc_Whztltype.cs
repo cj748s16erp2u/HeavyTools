@@ -6,9 +6,11 @@ using System.Threading.Tasks;
 
 namespace eLog.HeavyTools.Services.WhZone.BusinessEntities.Enums;
 
-public enum WhZTranHead_Whztstat
+/// <summary>
+/// Zóna tranzakció helykód: Irány
+/// </summary>
+public enum WhZTranLoc_Whztltype
 {
-    Creating = 10,
-    Created = 40,
-    Closed = 100
+    Receiving = 1,
+    Issuing = 2,
 }

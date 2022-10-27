@@ -19,6 +19,7 @@ using eLog.HeavyTools.Services.WhZone.BusinessLogic.Helpers;
 using FluentValidation;
 using Microsoft.EntityFrameworkCore;
 using AutoMapper;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 
 namespace eLog.HeavyTools.Services.WhZone.BusinessLogic.Services;
 
@@ -56,42 +57,27 @@ public class WhZStockMapService : LogicServiceBase<OlcWhzstockmap>, IWhZStockMap
     /// <summary>
     /// Helykód készlet lekérdezése
     /// </summary>
+    /// <param name="query">Szűrési feltételek</param>
     /// <param name="cancellationToken"></param>
     /// <returns>Készlet lista</returns>
     public async Task<IEnumerable<WhZStockMapQDto>> QueryStockMapAsync(WhZStockMapQueryDto query = null!, CancellationToken cancellationToken = default)
     {
-        Expression<Func<OlcWhzstockmap, bool>> predicate = null!;
-        if (query is not null)
-        {
-            predicate = this.CreatePredicate(query);
-        }
-
-        var q = this.Query(predicate);
-
-        q = q
-            .Include(s => s.Item)
-            .Include(s => s.Wh)
-            .Include(s => s.Whzone)
-            .Include(s => s.Whloc);
-
-        if (query?.Cmpid is not null)
-        { 
-            q = q
-                .Where(s =>
-                    (s.Item.Cmpcodes == CompanyUtils.CMPCODEALL || this.companyRepository.Entities
-                        .Any(c => EF.Functions.Like(s.Item.Cmpcodes, "%" + c.Cmpcode + "%") && query.Cmpid.Contains(c.Cmpid))) &&
-                    (s.Wh.Cmpcodes == CompanyUtils.CMPCODEALL || this.companyRepository.Entities
-                        .Any(c => EF.Functions.Like(s.Wh.Cmpcodes, "%" + c.Cmpcode + "%") && query.Cmpid.Contains(c.Cmpid))));
-        }
-
-        if (query?.Nonzerostock == true)
-        {
-            q = q
-                .Where(s => s.Recqty != 0 || s.Actqty != 0 || s.Resqty != 0);
-        }
-
+        var q = this.QueryStockMap(query);
         var list = await q.ToListAsync(cancellationToken);
         return this.mapper.Map<IEnumerable<WhZStockMapQDto>>(list);
+    }
+
+    /// <summary>
+    /// Helykód készlet lekérdezése
+    /// </summary>
+    /// <param name="query">Szűrési feltételek</param>
+    /// <param name="cancellationToken"></param>
+    /// <returns>Készlet bejegyzés</returns>
+    public async Task<WhZStockMapQDto> GetStockMapAsync(WhZStockMapQueryDto query = null!, CancellationToken cancellationToken = default)
+    {
+        var q = this.QueryStockMap(query);
+        var entity = await q.FirstOrDefaultAsync(cancellationToken);
+        return this.mapper.Map<WhZStockMapQDto>(entity);
     }
 
     /// <summary>
@@ -381,7 +367,6 @@ public class WhZStockMapService : LogicServiceBase<OlcWhzstockmap>, IWhZStockMap
         var ctx = (WhZStockMapContext)context;
 
         using var tran = await this.UnitOfWork.BeginTransactionAsync(cancellationToken);
-
         try
         {
             foreach (var movements in ctx.MovementList.GroupBy(m => m.Key, WhZStockMapKey.Comparer))
@@ -670,6 +655,46 @@ public class WhZStockMapService : LogicServiceBase<OlcWhzstockmap>, IWhZStockMap
         }
 
         return entity => entity.Itemid == key.Itemid && entity.Whid == key.Whid && entity.Whzoneid == key.Whzoneid && entity.Whlocid == key.Whlocid;
+    }
+
+    /// <summary>
+    /// Helykód készlet lekérdezés előkészítése
+    /// </summary>
+    /// <param name="query">Szűrési feltételek</param>
+    /// <returns>Készlet lista lekérdezés</returns>
+    private IQueryable<OlcWhzstockmap> QueryStockMap(WhZStockMapQueryDto query)
+    {
+        Expression<Func<OlcWhzstockmap, bool>> predicate = null!;
+        if (query is not null)
+        {
+            predicate = this.CreatePredicate(query);
+        }
+
+        var q = this.Query(predicate);
+
+        q = q
+            .Include(s => s.Item)
+            .Include(s => s.Wh)
+            .Include(s => s.Whzone)
+            .Include(s => s.Whloc);
+
+        if (query?.Cmpid is not null)
+        {
+            q = q
+                .Where(s =>
+                    (s.Item.Cmpcodes == CompanyUtils.CMPCODEALL || this.companyRepository.Entities
+                        .Any(c => EF.Functions.Like(s.Item.Cmpcodes, "%" + c.Cmpcode + "%") && query.Cmpid.Contains(c.Cmpid))) &&
+                    (s.Wh.Cmpcodes == CompanyUtils.CMPCODEALL || this.companyRepository.Entities
+                        .Any(c => EF.Functions.Like(s.Wh.Cmpcodes, "%" + c.Cmpcode + "%") && query.Cmpid.Contains(c.Cmpid))));
+        }
+
+        if (query?.Nonzerostock == true)
+        {
+            q = q
+                .Where(s => s.Recqty != 0 || s.Actqty != 0 || s.Resqty != 0);
+        }
+
+        return q;
     }
 
     /// <summary>

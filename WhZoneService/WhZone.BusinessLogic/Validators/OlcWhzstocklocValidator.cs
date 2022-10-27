@@ -110,7 +110,7 @@ public class OlcWhzstocklocValidator : EntityValidator<OlcWhztranloc>, IOlcWhztr
                 {
                     context.AddFailure(x => x.Whid, $"The zone doesn't same as the tranzaction destination zone (destination zone: {tranHead.Towhzid}, zone: {newValue})");
                 }
-                else
+                else if (tranHead.Whzttype != (int)WhZTranHead_Whzttype.Receiving)
                 {
                     context.AddFailure(x => x.Whid, "not implemented");
                 }

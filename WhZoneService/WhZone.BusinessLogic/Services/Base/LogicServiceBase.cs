@@ -438,7 +438,13 @@ public class LogicServiceBase<TEntity> : ILogicService<TEntity>
                 fProp = entityType.GetProperty(names[i], System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.GetProperty);
                 if (fProp is not null)
                 {
-                    expr = this.CreateMemberAccessExpression(expr, fProp.Name, fProp.PropertyType);
+                    var fPropType = fProp.PropertyType;
+                    if (fPropType.IsGenericType && fPropType.GetGenericTypeDefinition() == typeof(Nullable<>))
+                    {
+                        fPropType = Nullable.GetUnderlyingType(fPropType);
+                    }
+
+                    expr = this.CreateMemberAccessExpression(expr, fProp.Name, fPropType);
                     entityType = fProp.PropertyType;
                 }
                 else
@@ -472,8 +478,14 @@ public class LogicServiceBase<TEntity> : ILogicService<TEntity>
         var prop = entityType.GetProperty(name, System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.GetProperty);
         if (prop is not null)
         {
+            var propType = prop.PropertyType;
+            //if (propType.IsGenericType && propType.GetGenericTypeDefinition() == typeof(Nullable<>))
+            //{
+            //    propType = Nullable.GetUnderlyingType(propType);
+            //}
+
             Expression expr = Expression.MakeMemberAccess(parm, prop);
-            if (prop.PropertyType != propertyType)
+            if (propType != propertyType)
             {
                 expr = Expression.Convert(expr, propertyType);
             }
@@ -512,7 +524,14 @@ public class LogicServiceBase<TEntity> : ILogicService<TEntity>
         var left = this.CreateHierarcyMemberAccessExpression(parm, fieldName, prop.PropertyType);
         if (left != null)
         {
-            var right = this.CreateConstantExpression(value, prop.PropertyType);
+            //var right = this.CreateConstantExpression(value, prop.PropertyType);
+            var propType = prop.PropertyType;
+            if (propType.IsGenericType && propType.GetGenericTypeDefinition() == typeof(Nullable<>))
+            {
+                propType = Nullable.GetUnderlyingType(propType);
+            }
+
+            var right = this.CreateConstantExpression(value, propType!);
             return Expression.MakeBinary(binaryType, left, right);
         }
 

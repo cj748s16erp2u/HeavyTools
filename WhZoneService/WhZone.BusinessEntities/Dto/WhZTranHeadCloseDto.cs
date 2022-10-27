@@ -8,5 +8,8 @@ namespace eLog.HeavyTools.Services.WhZone.BusinessEntities.Dto;
 
 public class WhZTranHeadCloseDto
 {
-    public int Stid { get; set; }
+    public int? Whztid { get; set; }
+    public int? Stid { get; set; }
+
+    public string AuthUser { get; set; } = null!;
 }

@@ -125,4 +125,13 @@
         </handlers>
         <validation validateIntegratedModeConfiguration="false" />
     </system.webServer>
+	<runtime>
+		<assemblyBinding xmlns="urn:schemas-microsoft-com:asm.v1">
+			<dependentAssembly>
+				<!-- Newtonsoft.Json, Version=7.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed -->
+				<assemblyIdentity name="Newtonsoft.Json" publicKeyToken="30ad4fe6b2a6aeed" culture="neutral" />
+				<bindingRedirect oldVersion="7.0.0.0-12.65535.65535.65535" newVersion="13.0.0.0" />
+			</dependentAssembly>
+		</assemblyBinding>
+	</runtime>
 </configuration>

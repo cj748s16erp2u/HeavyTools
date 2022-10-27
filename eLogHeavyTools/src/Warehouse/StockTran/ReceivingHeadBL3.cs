@@ -247,83 +247,41 @@ where [wh].[whid] = {Utils.SqlToString(whid)}
             }
         }
 
-        protected override int AfterClose(AfterCloseArgs args)
+        /// <summary>
+        /// Státusz váltás
+        /// </summary>
+        /// <param name="stId">Tranzakció azonosító</param>
+        /// <param name="newStat">Új státusz</param>
+        /// <param name="exargs"></param>
+        /// <param name="msg">Hibaüzenet</param>
+        /// <returns>0 esetén sikeres, ellenkező esetben a hiba a <paramref name="msg"/>-ben van meghatározva</returns>
+        public override int StatChange(int stId, int newStat, StatChangeExArgs exargs, out string msg)
         {
-            var num = base.AfterClose(args);
-
+            var num = this.StatChangeWhZoneTran(stId, newStat, exargs, out msg);
             if (num == 0)
             {
-                num = this.CloseWhZoneTran(args);
+                return base.StatChange(stId, newStat, exargs, out msg);
             }
 
             return num;
         }
 
-        private int CloseWhZoneTran(AfterCloseArgs args)
-        {
-            var tranService = WhZone.Common.WhZTranUtils.CreateTranService();
-            var request = new WhZone.WhZTranService.WhZTranHeadCloseDto
-            {
-                Stid = args.StId,
-            };
-
-            try
-            {
-                var result = tranService.Close(request);
-                args.Message = result?.Message;
-
-                return result?.Result ?? -2;
-            }
-            catch (WhZone.WhZTranService.ApiException ex)
-            {
-                Log.Error(ex);
-                var response = ex.Response;
-                if (!string.IsNullOrWhiteSpace(response))
-                {
-                    response = WhZone.Common.WhZTranUtils.ParseErrorResponse(response);
-                    args.Message = response;
-                }
-                else
-                {
-                    args.Message = ex.ToString();
-                }
-
-                return -1;
-            }
-        }
-
-        public override int StatChange(int stId, int newStat, StatChangeExArgs exargs, out string msg)
-        {
-            if (newStat == 100)
-            {
-                // a close kulon le van kezelve
-                return base.StatChange(stId, newStat, exargs, out msg);
-            }
-
-            using (var db = DB.GetConn(DB.Main, Transaction.Use))
-            {
-                var num = base.StatChange(stId, newStat, exargs, out msg);
-                if (num == 0)
-                {
-                    num = this.StatChangeWhZoneTran(stId, newStat, exargs, out msg);
-                }
-
-                if (num == 0)
-                {
-                    db.Commit();
-                }
-
-                return num;
-            }
-        }
-
+        /// <summary>
+        /// Státusz váltás meghívása
+        /// </summary>
+        /// <param name="stId">Tranzakció azonosító</param>
+        /// <param name="newStat">Új státusz</param>
+        /// <param name="exargs"></param>
+        /// <param name="msg">Hibaüzenet</param>
+        /// <returns>0 esetén sikeres, ellenkező esetben a hiba a <paramref name="msg"/>-ben van meghatározva</returns>
         private int StatChangeWhZoneTran(int stId, int newStat, StatChangeExArgs exargs, out string msg)
         {
             var tranService = WhZone.Common.WhZTranUtils.CreateTranService();
             var request = new WhZone.WhZTranService.WhZTranHeadStatChangeDto
             {
                 Stid = stId,
-                NewStat = newStat,
+                NewStat = (WhZone.WhZTranService.WhZTranHead_Whztstat)newStat,
+                AuthUser = Session.Current.UserID,
             };
 
             try

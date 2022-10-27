@@ -9,6 +9,7 @@ using eLog.HeavyTools.Services.WhZone.DataAccess.Repositories.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace eLog.HeavyTools.Services.WhZone.DataAccess.Repositories.Base
 {
@@ -23,6 +24,10 @@ namespace eLog.HeavyTools.Services.WhZone.DataAccess.Repositories.Base
         /// Get the database context
         /// </summary>
         private readonly WhZoneDbContext dbContext;
+        /// <summary>
+        /// Service provider for creating new instance in different scope
+        /// </summary>
+        private readonly IServiceProvider serviceProvider;
 
         /// <summary>
         /// Gets the database set
@@ -39,9 +44,13 @@ namespace eLog.HeavyTools.Services.WhZone.DataAccess.Repositories.Base
         /// </summary>
         /// <param name="dbContext">The database context</param>
         /// <exception cref="ArgumentNullException">dbContext</exception>
-        public RepositoryBase(WhZoneDbContext dbContext)
+        public RepositoryBase(
+            WhZoneDbContext dbContext,
+            IServiceProvider serviceProvider)
         {
             this.dbContext = dbContext ?? throw new ArgumentNullException(nameof(dbContext));
+            this.serviceProvider = serviceProvider ?? throw new ArgumentNullException(nameof(serviceProvider));
+            
             this.dbSet = this.dbContext.Set<TEntity>();
             this.Entities = this.dbSet.AsQueryable();
         }
@@ -86,6 +95,32 @@ namespace eLog.HeavyTools.Services.WhZone.DataAccess.Repositories.Base
             }
 
             return entity;
+        }
+
+        /// <summary>
+        /// Reloads the given entity from the database.
+        /// </summary>
+        /// <param name="entity">The entity which to be reloaded.</param>
+        /// <param name="cancellationToken">A <see cref="CancellationToken" /> to observe while waiting for the task to complete.</param>
+        /// <returns>The entity found, or <see langword="null" />.</returns>
+        /// <exception cref="ArgumentNullException">If the <paramref name="entity"/> is null.</exception>
+        /// <exception cref="OperationCanceledException">If the <see cref="CancellationToken" /> is canceled.</exception>
+        public virtual ValueTask<TEntity?> ReloadAsync(TEntity entity, CancellationToken cancellation = default)
+        {
+            if (entity is null)
+            {
+                throw new ArgumentNullException(nameof(entity));
+            }
+
+            this.Detach(entity);
+
+            var primaryKey = this.GetPrimaryKeyValues(entity);
+            if (primaryKey is not null)
+            {
+                return this.FindAsync(primaryKey.Cast<object>().ToArray(), cancellation);
+            }
+
+            return ValueTask.FromResult<TEntity?>(null);
         }
 
         /// <summary>
@@ -350,5 +385,16 @@ namespace eLog.HeavyTools.Services.WhZone.DataAccess.Repositories.Base
         public virtual IQueryable<TQuery> ExecuteSql<TQuery>(FormattableString sql)
             where TQuery : class
             => this.dbContext.Set<TQuery>().FromSqlInterpolated(sql);
+
+        /// <summary>
+        /// Creates a new instance in a different scope
+        /// </summary>
+        /// <returns>The created scope and the new instance of <see cref="IRepository{TEntity}"/></returns>
+        public virtual (IServiceScope scope, IRepository<TEntity> repository) CreateScopedCopy()
+        {
+            var scope = this.serviceProvider.CreateScope();
+            var repository = scope.ServiceProvider.GetRequiredService<IRepository<TEntity>>();
+            return (scope, repository);
+        }
     }
 }

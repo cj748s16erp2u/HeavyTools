@@ -38,4 +38,8 @@ public enum WhZTranExceptionType
     /// A megadott <see cref="WhZTranHeadDto.AuthUser"/> értéke null
     /// </summary>
     InvalidAuthUser,
+    /// <summary>
+    /// A megadott <see cref="WhZTranHeadStatChangeDto.Whztid"/> és <see cref="WhZTranHeadStatChangeDto.Stid"/> értéke null
+    /// </summary>
+    InvalidIdentifier,
 }

@@ -7,6 +7,7 @@ using eLog.HeavyTools.Services.WhZone.BusinessEntities.Model.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace eLog.HeavyTools.Services.WhZone.DataAccess.Repositories.Interfaces
 {
@@ -49,6 +50,16 @@ namespace eLog.HeavyTools.Services.WhZone.DataAccess.Repositories.Interfaces
         /// <returns>The entity found, or <see langword="null" />.</returns>
         /// <exception cref="OperationCanceledException">If the <see cref="CancellationToken" /> is canceled.</exception>
         ValueTask<TEntity?> FindAsync(object[] keyValues, CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// Reloads the given entity from the database.
+        /// </summary>
+        /// <param name="entity">The entity which to be reloaded.</param>
+        /// <param name="cancellationToken">A <see cref="CancellationToken" /> to observe while waiting for the task to complete.</param>
+        /// <returns>The entity found, or <see langword="null" />.</returns>
+        /// <exception cref="ArgumentNullException">If the <paramref name="entity"/> is null.</exception>
+        /// <exception cref="OperationCanceledException">If the <see cref="CancellationToken" /> is canceled.</exception>
+        ValueTask<TEntity?> ReloadAsync(TEntity entity, CancellationToken cancellation = default);
 
         /// <summary>
         ///     <para>
@@ -244,5 +255,11 @@ namespace eLog.HeavyTools.Services.WhZone.DataAccess.Repositories.Interfaces
         /// <param name="sql">The interpolated string representing a SQL query with parameters.</param>
         /// <returns>An <see cref="IQueryable{T}" /> representing the interpolated string SQL query.</returns>
         IQueryable<TQuery> ExecuteSql<TQuery>(FormattableString sql) where TQuery : class;
+
+        /// <summary>
+        /// Creates a new instance in a different scope
+        /// </summary>
+        /// <returns>The created scope and the new instance of <see cref="IRepository{TEntity}"/></returns>
+        (IServiceScope scope, IRepository<TEntity> repository) CreateScopedCopy();
     }
 }

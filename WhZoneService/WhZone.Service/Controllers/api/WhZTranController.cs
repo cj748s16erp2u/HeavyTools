@@ -48,7 +48,13 @@ public class WhZTranController : Controller
     {
         try
         {
-            return this.Ok(await this.tranService.QueryReceivingAsync(query));
+            var list = await this.tranService.QueryReceivingAsync(query);
+            if (list is null)
+            {
+                list = Array.Empty<WhZReceivingTranHeadDto>();
+            }
+
+            return this.Ok(Newtonsoft.Json.JsonConvert.SerializeObject(list));
         }
         catch (Exception ex)
         {

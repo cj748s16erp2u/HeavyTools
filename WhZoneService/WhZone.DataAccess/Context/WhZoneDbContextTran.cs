@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Storage;
 
 namespace eLog.HeavyTools.Services.WhZone.DataAccess.Context;
@@ -42,11 +43,11 @@ public partial class WhZoneDbContext
     /// </summary>
     /// <param name="cancellationToken">A <see cref="CancellationToken"/> to observe while waiting for the task to complete.</param>
     /// <returns>A task that represents the transaction wrapper.</returns>
-    public async Task<Transaction> BeginTransactionAsync(CancellationToken cancellationToken = default)
+    public async Task<Transaction> BeginTransactionAsync(System.Data.IsolationLevel isolationLevel = System.Data.IsolationLevel.ReadCommitted, CancellationToken cancellationToken = default)
     {
         if (this.transactionDepth == 0)
         {
-            this.transaction = await this.Database.BeginTransactionAsync(cancellationToken).ConfigureAwait(true);
+            this.transaction = await this.Database.BeginTransactionAsync(isolationLevel, cancellationToken).ConfigureAwait(true);
         }
 
         this.transactionDepth++;

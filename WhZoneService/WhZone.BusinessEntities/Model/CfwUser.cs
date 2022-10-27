@@ -20,6 +20,8 @@ namespace eLog.HeavyTools.Services.WhZone.BusinessEntities.Model
             OlcWhztranlocs = new HashSet<OlcWhztranloc>();
             OlsCompanies = new HashSet<OlsCompany>();
             OlsItems = new HashSet<OlsItem>();
+            OlsStatheads = new HashSet<OlsStathead>();
+            OlsStatlines = new HashSet<OlsStatline>();
             OlsStheadAddusrs = new HashSet<OlsSthead>();
             OlsStheadCloseusrs = new HashSet<OlsSthead>();
             OlsStlines = new HashSet<OlsStline>();
@@ -85,6 +87,10 @@ namespace eLog.HeavyTools.Services.WhZone.BusinessEntities.Model
         public virtual ICollection<OlsCompany> OlsCompanies { get; set; }
         [InverseProperty("Addusr")]
         public virtual ICollection<OlsItem> OlsItems { get; set; }
+        [InverseProperty("Addusr")]
+        public virtual ICollection<OlsStathead> OlsStatheads { get; set; }
+        [InverseProperty("Addusr")]
+        public virtual ICollection<OlsStatline> OlsStatlines { get; set; }
         [InverseProperty("Addusr")]
         public virtual ICollection<OlsSthead> OlsStheadAddusrs { get; set; }
         [InverseProperty("Closeusr")]

@@ -54,4 +54,22 @@ public class WhZStockMapController : Controller
             return this.BadRequest(ex.Message);
         }
     }
+
+    /// <summary>
+    /// Zóna helykód készlet lekérdezése
+    /// </summary>
+    /// <returns>Lekérdezés eredménye</returns>
+    [HttpPost("get")]
+    public async Task<ActionResult<WhZStockMapQDto>> GetStockMapAsync([FromBody] WhZStockMapQueryDto query = null!)
+    {
+        try
+        {
+            return this.Ok(await this.stockMapService.GetStockMapAsync(query));
+        }
+        catch (Exception ex)
+        {
+            await ERP2U.Log.LoggerManager.Instance.LogErrorAsync<WhZTranController>(ex);
+            return this.BadRequest(ex.Message);
+        }
+    }
 }

@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using eLog.HeavyTools.Services.WhZone.BusinessEntities.Dto;
 using eLog.HeavyTools.Services.WhZone.BusinessEntities.Model;
+using eLog.HeavyTools.Services.WhZone.BusinessLogic.Containers.Interfaces;
 
 namespace eLog.HeavyTools.Services.WhZone.BusinessLogic.Services.Interfaces;
 
@@ -33,4 +34,22 @@ public interface IWhZTranLineService : ILogicService<OlcWhztranline>
     /// <param name="cancellationToken"></param>
     /// <returns>Módosított tranzakció tétel</returns>
     Task<WhZReceivingTranLineDto> UpdateReceivingAsync(WhZReceivingTranLineDto request, CancellationToken cancellationToken = default);
+
+    /// <summary>
+    /// Bevételezés alapértelmezett helykód bejegyzések létrehozása
+    /// </summary>
+    /// <param name="whZTranHead">Bevételezés tranzakció adatok</param>
+    /// <param name="context">Készletmozgás csomag adatok</param>
+    /// <param name="cancellationToken"></param>
+    /// <returns>Létrehozott helykód bejegyzések listája</returns>
+    Task<IEnumerable<OlcWhztranloc>> GenerateReceivingLocAsync(OlcWhztranhead whZTranHead, IWhZStockMapContext context, CancellationToken cancellationToken = default);
+
+    /// <summary>
+    /// Bevételezés helykódok véglegesítése
+    /// </summary>
+    /// <param name="whZTranHead">Bevételezés tranzakció adatok</param>
+    /// <param name="context">Készletmozgás csomag adatok</param>
+    /// <param name="cancellationToken"></param>
+    /// <returns>Véglegesített helykód bejegyzések</returns>
+    Task<IEnumerable<OlcWhztranloc>> CommitReceivingLocAsync(OlcWhztranhead whZTranHead, IWhZStockMapContext context, CancellationToken cancellationToken = default);
 }

@@ -24,6 +24,14 @@ namespace eLog.HeavyTools.Services.WhZone.DataAccess.Repositories.Interfaces
         /// <returns>A task that represents the asynchronous start operation.</returns>
         Task<WhZoneDbContext.Transaction> BeginTransactionAsync(CancellationToken cancellationToken = default);
 
+        /// <summary>
+        /// Asyncronously starts a new transaction
+        /// </summary>
+        /// <param name="isolationLevel">The <see cref="System.Data.IsolationLevel" /> to use.</param>
+        /// <param name="cancellationToken">A <see cref="CancellationToken"/> to observe while waiting for the task to complete.</param>
+        /// <returns>A task that represents the asynchronous start operation.</returns>
+        Task<WhZoneDbContext.Transaction> BeginTransactionAsync(System.Data.IsolationLevel isolationLevel, CancellationToken cancellationToken = default);
+
         ///// <summary>
         ///// Commits the transaction.
         ///// </summary>

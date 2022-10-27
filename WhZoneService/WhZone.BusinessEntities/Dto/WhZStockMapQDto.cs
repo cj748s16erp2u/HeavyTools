@@ -20,8 +20,8 @@ public class WhZStockMapQDto
     public decimal Actqty { get; set; }
     public decimal Resqty { get; set; }
     public decimal Provqty { get; set; }
+    public decimal Freeqty { get; set; }
 
-    public string Whcode { get; set; } = null!;
     public string Whname { get; set; } = null!;
     public string Itemcode { get; set; } = null!;
     public string Itemname { get; set; } = null!;
