@@ -197,6 +197,10 @@
             <Empty/>
             <Numberbox Field="stock_freeqty"/>
         </LayoutTable>
+		
+		<LayoutTable ControlGroup="OlcReserve" Columns="{140, None}; {180, None}; {20, Empty}; {140, None}; {100, None}; {20, Empty}; {100, None}; {100, None}" ID="EditGroupOlcReserve" Label="$olcreserve_editgroup">
+   
+		</LayoutTable> 
     </TabPage>
     <TabPage Name="SordLineSearchTab">
         <Control ControlType="SordHeadInfoPart" ID="sordHeadInfoPart"/>
@@ -259,7 +263,7 @@
 			<Textbox Field="TaxVal" Disabled="True"/>
 		</LayoutTable>
 		
-        <LayoutTable ControlGroup="Reserve" Columns="{140, None}; {180, None}; {20, Empty}; {140, None}; {100, None}; {20, Empty}; {100, None}; {100, None}" ID="EditGroupReserve" Label="$reserve_editgroup">
+		<LayoutTable ControlGroup="Reserve" Columns="{140, None}; {180, None}; {20, Empty}; {140, None}; {100, None}; {20, Empty}; {100, None}; {100, None}" ID="EditGroupReserve" Label="$reserve_editgroup">
             <Numberbox Field="resid" Disabled="True" DecDigits="0"/>
             <ForceNextRow/>
             <Combo Field="whid" ListID="eLog.Base.Setup.Warehouse.WarehouseList" ComboFlags="AllowBlank" DependentField="cmpid" DependentCtrlID="info.cmpid"/>
@@ -274,6 +278,11 @@
             <Empty/>
             <Numberbox Field="stock_freeqty"/>
         </LayoutTable>
+		
+		<LayoutTable ControlGroup="OlcReserve" Columns="{140, None}; {180, None}; {20, Empty}; {140, None}; {100, None}; {20, Empty}; {100, None}; {100, None}" ID="EditGroupOlcReserve" Label="$olcreserve_editgroup">
+           
+        </LayoutTable>
+		
     </TabPage>
     <TabPage Name="SordLineAllSearchTab">
         <SearchFilterBar ID="SrcBar">

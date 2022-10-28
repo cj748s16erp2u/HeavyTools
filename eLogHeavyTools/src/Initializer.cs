@@ -202,6 +202,8 @@ namespace eLog.HeavyTools
             ObjectFactory.AddRemap(typeof(Base.Warehouse.StockTran.IssuingLineBL), typeof(Warehouse.StockTran.IssuingLineBL3));
             ObjectFactory.AddRemap(typeof(Base.Warehouse.StockTran.IssuingLineEditTab), typeof(Warehouse.StockTran.IssuingLineEditTab3));
             ObjectFactory.AddRemap(typeof(Base.Warehouse.Reserve.ReserveBL), typeof(Warehouse.Reserve.ReserveBL3));
+            ObjectFactory.AddRemap(typeof(Base.Warehouse.Reserve.ReserveSearchProvider), typeof(Warehouse.Reserve.ReserveSearchProvider3));
+            ObjectFactory.AddRemap(typeof(Base.Warehouse.Reserve.ItemReservesSearchProvider), typeof(Warehouse.Reserve.ItemReservesSearchProvider3));
 
             // Item
             ObjectFactory.AddRemap(typeof(eLog.Base.Masters.Item.ItemEditTab), typeof(eLog.HeavyTools.Masters.Item.ItemEditTab3));

@@ -16,6 +16,8 @@ namespace eLog.HeavyTools.Services.WhWebShop.BusinessEntities.Model
         public OlsSordline()
         {
             OlcSordlinePreordersordline = new HashSet<OlcSordline>();
+            OlcSordlineResPreordersordline = new HashSet<OlcSordlineRes>();
+            OlcSordlineResSordline = new HashSet<OlcSordlineRes>();
             OlsTmpSordst = new HashSet<OlsTmpSordst>();
         }
 
@@ -100,6 +102,10 @@ namespace eLog.HeavyTools.Services.WhWebShop.BusinessEntities.Model
         public virtual OlcSordline OlcSordlineSordline { get; set; } = null!;
         [InverseProperty("Preordersordline")]
         public virtual ICollection<OlcSordline> OlcSordlinePreordersordline { get; set; }
+        [InverseProperty("Preordersordline")]
+        public virtual ICollection<OlcSordlineRes> OlcSordlineResPreordersordline { get; set; }
+        [InverseProperty("Sordline")]
+        public virtual ICollection<OlcSordlineRes> OlcSordlineResSordline { get; set; }
         [InverseProperty("Sordline")]
         public virtual ICollection<OlsTmpSordst> OlsTmpSordst { get; set; }
     }

@@ -54,6 +54,7 @@ public partial class WhWebShopDbContext : DbContext
         public virtual DbSet<OlcPrctype> OlcPrctype { get; set; } = null!;
         public virtual DbSet<OlcSordhead> OlcSordhead { get; set; } = null!;
         public virtual DbSet<OlcSordline> OlcSordline { get; set; } = null!;
+        public virtual DbSet<OlcSordlineRes> OlcSordlineRes { get; set; } = null!;
         public virtual DbSet<OlcSpOlsReserveReservestock> OlcSpOlsReserveReservestock { get; set; } = null!;
         public virtual DbSet<OlcTaxtransext> OlcTaxtransext { get; set; } = null!;
         public virtual DbSet<OlcTmpSordsord> OlcTmpSordsord { get; set; } = null!;
@@ -66,8 +67,10 @@ public partial class WhWebShopDbContext : DbContext
         public virtual DbSet<OlsRecid> OlsRecid { get; set; } = null!;
         public virtual DbSet<OlsReserve> OlsReserve { get; set; } = null!;
         public virtual DbSet<OlsSinvhead> OlsSinvhead { get; set; } = null!;
+        public virtual DbSet<OlsSorddoc> OlsSorddoc { get; set; } = null!;
         public virtual DbSet<OlsSordhead> OlsSordhead { get; set; } = null!;
         public virtual DbSet<OlsSordline> OlsSordline { get; set; } = null!;
+        public virtual DbSet<OlsStock> OlsStock { get; set; } = null!;
         public virtual DbSet<OlsSysval> OlsSysval { get; set; } = null!;
         public virtual DbSet<OlsTax> OlsTax { get; set; } = null!;
         public virtual DbSet<OlsTaxtrans> OlsTaxtrans { get; set; } = null!;
@@ -417,6 +420,35 @@ public partial class WhWebShopDbContext : DbContext
                     .HasConstraintName("fk_olc_sordline_sordlineid");
             });
 
+            modelBuilder.Entity<OlcSordlineRes>(entity =>
+            {
+                entity.HasKey(e => e.Sordlineidres)
+                    .HasName("pk_olc_sordline_res");
+
+                entity.HasOne(d => d.Addusr)
+                    .WithMany(p => p.OlcSordlineRes)
+                    .HasForeignKey(d => d.Addusrid)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("fk_olc_sordline_res_addusrid");
+
+                entity.HasOne(d => d.Preordersordline)
+                    .WithMany(p => p.OlcSordlineResPreordersordline)
+                    .HasForeignKey(d => d.Preordersordlineid)
+                    .HasConstraintName("fk_olc_sordline_res_presordersordlineid");
+
+                entity.HasOne(d => d.Res)
+                    .WithMany(p => p.OlcSordlineRes)
+                    .HasForeignKey(d => d.Resid)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("fk_olc_sordline_res_resid");
+
+                entity.HasOne(d => d.Sordline)
+                    .WithMany(p => p.OlcSordlineResSordline)
+                    .HasForeignKey(d => d.Sordlineid)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("fk_olc_sordline_res_sordlineid");
+            });
+
             modelBuilder.Entity<OlcTaxtransext>(entity =>
             {
                 entity.HasKey(e => e.Tteid)
@@ -683,6 +715,18 @@ public partial class WhWebShopDbContext : DbContext
                     .HasConstraintName("fk_ols_sinvhead_partnid");
             });
 
+            modelBuilder.Entity<OlsSorddoc>(entity =>
+            {
+                entity.HasKey(e => e.Sorddocid)
+                    .HasName("pk_ols_sorddoc");
+
+                entity.HasOne(d => d.Addusr)
+                    .WithMany(p => p.OlsSorddoc)
+                    .HasForeignKey(d => d.Addusrid)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("fk_ols_sorddoc_addusrid");
+            });
+
             modelBuilder.Entity<OlsSordhead>(entity =>
             {
                 entity.HasKey(e => e.Sordid)
@@ -719,6 +763,12 @@ public partial class WhWebShopDbContext : DbContext
                     .HasForeignKey(d => d.Partnid)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("fk_ols_sordhead_partnid");
+
+                entity.HasOne(d => d.Sorddoc)
+                    .WithMany(p => p.OlsSordhead)
+                    .HasForeignKey(d => d.Sorddocid)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("fk_ols_sordhead_sorddocid");
             });
 
             modelBuilder.Entity<OlsSordline>(entity =>
@@ -756,6 +806,18 @@ public partial class WhWebShopDbContext : DbContext
                     .HasForeignKey(d => d.Taxid)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("fk_ols_sordline_taxid");
+            });
+
+            modelBuilder.Entity<OlsStock>(entity =>
+            {
+                entity.HasKey(e => new { e.Itemid, e.Whid })
+                    .HasName("pk_ols_stock");
+
+                entity.HasOne(d => d.Item)
+                    .WithMany(p => p.OlsStock)
+                    .HasForeignKey(d => d.Itemid)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("fk_ols_stock_itemid");
             });
 
             modelBuilder.Entity<OlsSysval>(entity =>
@@ -843,6 +905,7 @@ public partial class WhWebShopDbContext : DbContext
         });
 
                 this.OnModelCreatingPartial(modelBuilder); 
+
         }
 
         partial void OnModelCreatingPartial(ModelBuilder modelBuilder);

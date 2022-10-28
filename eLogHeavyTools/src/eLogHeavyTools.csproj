@@ -430,11 +430,15 @@
     <Compile Include="Sales\Sord\Import\SordHeadImportService.cs" />
     <Compile Include="Sales\Sord\Import\SordHeadImportUnique.cs" />
     <Compile Include="Sales\Sord\Import\SordHeadRowContext.cs" />
+    <Compile Include="Sales\Sord\OlcReserveLayoutTable.cs" />
     <Compile Include="Sales\Sord\OlcSordHead.cs" />
     <Compile Include="Sales\Sord\OlcSordHeadGenerated.cs" />
     <Compile Include="Sales\Sord\OlcSordHeadRules.cs" />
     <Compile Include="Sales\Sord\OlcSordLine.cs" />
     <Compile Include="Sales\Sord\OlcSordLineGenerated.cs" />
+    <Compile Include="Sales\Sord\OlcSordlineRes.cs" />
+    <Compile Include="Sales\Sord\OlcSordlineReses.cs" />
+    <Compile Include="Sales\Sord\OlcSordlineResGenerated.cs" />
     <Compile Include="Sales\Sord\OlcSordLineRules.cs" />
     <Compile Include="Sales\Sord\OlcTmpSordSord.cs" />
     <Compile Include="Sales\Sord\OlcTmpSordSordGenerated.cs" />
@@ -517,7 +521,9 @@
     <Compile Include="Warehouse\WhLocLink\OlcWhLocLinkSearchPage.cs" />
     <Compile Include="Warehouse\WhLocLink\OlcWhLocLinkSearchProvider.cs" />
     <Compile Include="Warehouse\WhLocLink\OlcWhLocLinkSearchTab.cs" />
+    <Compile Include="Warehouse\Reserve\ItemReservesSearchProvider.cs" />
     <Compile Include="Warehouse\Reserve\ReserveBL3.cs" />
+    <Compile Include="Warehouse\Reserve\ReserveSearchProvider3.cs" />
     <Compile Include="Warehouse\StockTran\OlcStHead.cs" />
     <Compile Include="Warehouse\StockTran\OlcStHeadBL.cs" />
     <Compile Include="Warehouse\StockTran\OlcStHeadGenerated.cs" />

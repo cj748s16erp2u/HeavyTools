@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Schema xmlns="http://tempuri.org/RenderableSchema.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://tempuri.org/RenderableSchema.xsd RenderableSchema.xsd">
+  <Search Name="ReserveSearchProvider3">
+        <Column FieldName="resid" Hidden="True" PKFieldName="resid" />
+        <Column FieldName="sorddocnum" Width="80" />
+        <Column FieldName="resdate" Width="68" Format="D" />
+        <Column FieldName="freedate" Width="68" Format="D" />
+        <Column FieldName="restype" Width="80" Align="Left" FieldFunction="listlookup" FieldFuncArg="eLog.Base.Warehouse.Reserve.ReserveTypeList,abbr" DisplayName="$restype_abbr" />
+        <Column FieldName="resqty" Width="80" />
+        <Column FieldName="partnaddr_extcode" Width="80" />
+        <Column FieldName="partnaddr_name" Width="200" />
+        <Column FieldName="itemcode" Width="80" />
+        <Column FieldName="itemname01" DisplayName="$name01" Width="150" />
+        <!--<Column FieldName="itemname03" DisplayName="$name03" Width="150" />-->
+        <Column FieldName="whid" Width="50"/>
+        <Column FieldName="whname" Width="150"/>
+        <Column FieldName="partncode" DisplayName="$partn_code" Width="100"/>
+        <Column FieldName="partnname" DisplayName="$partn_name" Width="200"/>
+        <Column FieldName="partreqlev" Width="150" />
+        <Column FieldName="fromreqlev" Width="150" />
+        <Column FieldName="sordid" Width="50"/>
+        <Column FieldName="sordlineid" Width="50"/>
+        <Column FieldName="lotnum" Width="80"/>
+        <Column FieldName="lotid" Width="70"/>
+        <Column FieldName="partreqid" Width="70" />
+        <Column FieldName="fromreqid" Width="70" />
+        <Column FieldName="uccode" Width="80"/>
+        <Column FieldName="cmpid" Width="80" Align="Left" FieldFunction="flaglookup" FieldFuncArg="eLog.Base.Setup.Company.CompanyLoggedInList"/>
+        <Column FieldName="note" Width="150"/>
+    </Search>
+</Schema>

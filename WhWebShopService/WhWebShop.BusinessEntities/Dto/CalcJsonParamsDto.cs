@@ -12,6 +12,11 @@ namespace eLog.HeavyTools.Services.WhWebShop.BusinessEntities.Dto
     [JsonObjectAttributes("Cart")]
     public class CalcJsonParamsDto
     {
+        [JsonField(MandotaryType.No, MandotaryType.No)]
+
+        public bool ClearCache { get; private set; } = false;
+
+
         [JsonField(MandotaryType.Yes, MandotaryType.No)]
         public bool FirstPurchase { get; private set; } = false;
 

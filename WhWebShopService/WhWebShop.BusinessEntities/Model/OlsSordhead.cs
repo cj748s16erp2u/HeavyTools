@@ -106,6 +106,9 @@ namespace eLog.HeavyTools.Services.WhWebShop.BusinessEntities.Model
         [ForeignKey("Partnid")]
         [InverseProperty("OlsSordhead")]
         public virtual OlsPartner Partn { get; set; } = null!;
+        [ForeignKey("Sorddocid")]
+        [InverseProperty("OlsSordhead")]
+        public virtual OlsSorddoc Sorddoc { get; set; } = null!;
         [InverseProperty("Sord")]
         public virtual OlcSordhead OlcSordhead { get; set; } = null!;
         [InverseProperty("Sord")]
