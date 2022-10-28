@@ -55,6 +55,7 @@ public partial class WhWebShopDbContext : DbContext
         public virtual DbSet<OlcSordhead> OlcSordhead { get; set; } = null!;
         public virtual DbSet<OlcSordline> OlcSordline { get; set; } = null!;
         public virtual DbSet<OlcSordlineRes> OlcSordlineRes { get; set; } = null!;
+        public virtual DbSet<OlcSpOlsGetnewsordnum> OlcSpOlsGetnewsordnum { get; set; } = null!;
         public virtual DbSet<OlcSpOlsReserveReservestock> OlcSpOlsReserveReservestock { get; set; } = null!;
         public virtual DbSet<OlcTaxtransext> OlcTaxtransext { get; set; } = null!;
         public virtual DbSet<OlcTmpSordsord> OlcTmpSordsord { get; set; } = null!;

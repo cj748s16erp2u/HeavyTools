@@ -543,5 +543,6 @@
 	</RootMenu>
     <RootMenu ID="Retail" Name="$retail" CreateIfNotExists="true">
 		<Item ID="RetailSalesSearchPage" Name="$retailsalessearchpage" PageID="eLog.HeavyTools.Sales.Retail.RetailSalesSearchPage"/> 
-    </RootMenu>
+    	<Item ID="RetailOrderSearchPage" Name="$retailordersearchpage" PageID="eLog.HeavyTools.Masters.ItmWh.RetailOrderSearchPage"/> 
+   </RootMenu>
 </MenuRoot>

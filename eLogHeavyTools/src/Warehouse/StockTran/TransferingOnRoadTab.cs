@@ -1,4 +1,5 @@
-﻿using eLog.Base.Warehouse.StockTran;
+﻿using eLog.Base.Masters.Item;
+using eLog.Base.Warehouse.StockTran;
 using eProjectWeb.Framework;
 using eProjectWeb.Framework.Data;
 using eProjectWeb.Framework.UI.Controls;

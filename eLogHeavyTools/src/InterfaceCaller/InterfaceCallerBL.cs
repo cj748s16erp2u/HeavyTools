@@ -46,7 +46,20 @@ namespace eLog.HeavyTools.InterfaceCaller
 
            return CallInterface<CalcJsonResultDto>("PriceCalc/calc", json, UpdateResult);
 
-        } 
+        }
+
+        internal RetailOrderResultDto CreateRetailOrder(string userID)
+        {
+            var r = new RetailOrderParamDto() { Addusrid = userID };
+
+            JsonSerializerSettings jsSettings = new JsonSerializerSettings();
+            jsSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
+
+            var json = @"{ ""Retail"": " + JsonConvert.SerializeObject(r, Formatting.None, jsSettings) + @"}";
+
+
+            return CallInterface<RetailOrderResultDto>("Retail/createorder", json, UpdateResult);
+        }
 
         public string UpdateResult(string result)
         {

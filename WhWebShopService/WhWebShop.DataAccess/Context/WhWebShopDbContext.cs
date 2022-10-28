@@ -17,6 +17,8 @@ public partial class WhWebShopDbContext : DbContext
     public virtual DbSet<SordReserveRecalcTmp> SordReserveRecalcTmp { get; set; } = null!;
 
     public virtual DbSet<TmpPresorder> TmpPresorder { get; set; } = null!;
+
+    public virtual DbSet<RetailOrderTmp> RetailOrderTmp { get; set; } = null!;
  
-  
+
 }

@@ -15,6 +15,7 @@ using eLog.HeavyTools.Services.WhWebShop.BusinessLogic.Services.Sord;
 using eLog.HeavyTools.Services.WhWebShop.BusinessLogic.Validators.Interfaces;
 using eLog.HeavyTools.Services.WhWebShop.DataAccess.Repositories.Interfaces;
 using FluentValidation;
+using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Options;
@@ -38,6 +39,7 @@ public class OrderService : LogicServiceBase<OlsSordhead>, IOrderService
     private readonly IPriceCalcCuponUsageService priceCalcCuponUsageService;
     private readonly IReserveService reserveService;
     private readonly IOlsSorddocCacheService olsSorddocCacheService;
+    private readonly IOlcSpOlsGetnewsordnumService olcSpOlsGetnewsordnumService;
 
     public OrderService(IValidator<OlsSordhead> validator,
                         IRepository<OlsSordhead> repository,
@@ -55,7 +57,8 @@ public class OrderService : LogicServiceBase<OlsSordhead>, IOrderService
                         IPriceCalcService priceCalcService,
                         IPriceCalcCuponUsageService priceCalcCuponUsageService,
                         IReserveService reserveService,
-                        IOlsSorddocCacheService olsSorddocCacheService) : base(validator, repository, unitOfWork, environmentService)
+                        IOlsSorddocCacheService olsSorddocCacheService,
+                        IOlcSpOlsGetnewsordnumService olcSpOlsGetnewsordnumService) : base(validator, repository, unitOfWork, environmentService)
     {
         this.sordHeadService = sordHeadService ?? throw new ArgumentNullException(nameof(sordHeadService));
         this.sordLineService = sordLineService ?? throw new ArgumentNullException(nameof(sordLineService));
@@ -70,6 +73,7 @@ public class OrderService : LogicServiceBase<OlsSordhead>, IOrderService
         this.priceCalcCuponUsageService = priceCalcCuponUsageService ?? throw new ArgumentNullException(nameof(priceCalcCuponUsageService));
         this.reserveService = reserveService ?? throw new ArgumentNullException(nameof(reserveService));
         this.olsSorddocCacheService = olsSorddocCacheService ?? throw new ArgumentNullException(nameof(olsSorddocCacheService));
+        this.olcSpOlsGetnewsordnumService = olcSpOlsGetnewsordnumService ?? throw new ArgumentNullException(nameof(olcSpOlsGetnewsordnumService));
 
         /*orderServiceCSV = new OrderServiceCSV(validator, repository, unitOfWork, environmentService, sordHeadService, sordLineService, recIdService, itemCache, sordoptions, oSSService, countryService, olcSordHeadService);*/
     }
@@ -153,7 +157,7 @@ public class OrderService : LogicServiceBase<OlsSordhead>, IOrderService
 
         sh.Sorddate = order.OrderDate!.Value;
         sh.Curid = order.Cart.Curid;
-        sh.Paymid = "KP";
+        sh.Paymid = order.PaymentId;
         sh.Paycid = null;
         sh.Sordstat = 10;
         sh.Note = order.Note;
@@ -380,6 +384,35 @@ public class OrderService : LogicServiceBase<OlsSordhead>, IOrderService
             throw new ArgumentException("Missing oss", countryid);
         }
         return oss;
+    }
+
+    public async Task<string> GetNewSordnum(OlsSordhead sh, CancellationToken cancellationToken = default)
+    {
+        var storeId = await recIdService.GetNewIdAsync("sp_ols_getnewsordnum", cancellationToken);
+
+        var sps = new List<SqlParameter>
+        {
+            new SqlParameter("storeId", storeId!.Lastid),
+            new SqlParameter("sordDocId", sh.Sorddocid!),
+            new SqlParameter("cmpId", sh.Cmpid),
+            new SqlParameter("date", sh.Sorddate),
+            new SqlParameter("store", 1)
+        };
+
+        await Repository.ExecuteStoredProcedure("sp_olc_sp_ols_getnewsordnum", sps);
+
+
+        var s = await olcSpOlsGetnewsordnumService.Query(p => p.Id == storeId!.Lastid).FirstOrDefaultAsync(cancellationToken);
+
+        if (s == null)
+        {
+            throw new Exception("Missing sp_olc_sp_ols_getnewsordnum record");
+        }
+        if (s.Result.HasValue && s.Result.Value != 0)
+        {
+            throw new Exception("Missing sp_olc_sp_ols_getnewsordnum record");
+        } 
+        return s.Docnum!;
     }
 }
  
