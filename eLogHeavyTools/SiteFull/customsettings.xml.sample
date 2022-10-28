@@ -154,5 +154,8 @@
   
   <!-- Ernyo elem, partner bankszamlaszam ellenorzese -->
   <add key="HTO:PartnerBankAccountNumberCheck" value="yes" />
-    
+
+  <!-- Szallitoi szamla egyeztetes alapertelmezett koltseg tipus -->
+  <add key="PINVASSIGNOTHERDefaultCostType" value="BAR" />
+
 </configuration>

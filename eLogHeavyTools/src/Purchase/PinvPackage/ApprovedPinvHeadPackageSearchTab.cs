@@ -20,5 +20,17 @@ namespace eLog.HeavyTools.Purchase.PinvPackage
             return t;
         }
 
+        protected override void CreateBase()
+        {
+            base.CreateBase();
+
+            SetupClientsideSum();
+        }
+
+        void SetupClientsideSum()
+        {
+            SearchResults.AddSumArray("net");
+        }
+
     }
 }

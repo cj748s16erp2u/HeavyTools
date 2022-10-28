@@ -11,6 +11,7 @@ namespace eLog.HeavyTools.Services.WhWebShop.BusinessEntities.Model
     {
         public OlsReserve()
         {
+            OlcSordlineRes = new HashSet<OlcSordlineRes>();
             OlsSordline = new HashSet<OlsSordline>();
         }
 
@@ -65,6 +66,8 @@ namespace eLog.HeavyTools.Services.WhWebShop.BusinessEntities.Model
         [ForeignKey("Partnid")]
         [InverseProperty("OlsReserve")]
         public virtual OlsPartner Partn { get; set; } = null!;
+        [InverseProperty("Res")]
+        public virtual ICollection<OlcSordlineRes> OlcSordlineRes { get; set; }
         [InverseProperty("Res")]
         public virtual ICollection<OlsSordline> OlsSordline { get; set; }
     }

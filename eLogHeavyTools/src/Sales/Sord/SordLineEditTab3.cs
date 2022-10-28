@@ -56,7 +56,7 @@ namespace eLog.HeavyTools.Sales.Sord
 
                 }
             }
-
+            olcreservelayouttable.SetSordlineId(e.Sordlineid);
             return e;
         }
 
@@ -98,5 +98,11 @@ namespace eLog.HeavyTools.Sales.Sord
             return o.ToString();
         }
 
+        OlcReserveLayoutTable olcreservelayouttable;
+        protected override void CreateBase()
+        {
+            base.CreateBase();
+            olcreservelayouttable =new OlcReserveLayoutTable(this, FindRenderable<LayoutTable>("EditGroupOlcReserve"));
+        }
     }
 }

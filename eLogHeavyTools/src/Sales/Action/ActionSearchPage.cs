@@ -535,6 +535,35 @@ namespace eLog.HeavyTools.Sales.Action
                 RuleServer.Validate(objects, typeof(ActionRules));
 
         }
+        protected override bool PreSave(BLObjectMap objects, Entity e)
+        {
+            var b=base.PreSave(objects, e);
+
+
+            var olcAction = (OlcAction)objects.Default;
+
+
+            var c = e as OlcActioncountry;
+            if (c!= null)
+            {
+                c.Aid = olcAction.Aid; 
+            }
+
+            var r = e as OlcActionRetail;
+            if (r != null)
+            {
+                r.Aid = olcAction.Aid;
+            }
+
+            var w = e as OlcActionWebhop;
+            if (w != null)
+            {
+                w.Aid = olcAction.Aid;
+            }
+
+
+            return b;
+        }
     }
 
     internal class ActionSearchTab : SearchTabTemplate1

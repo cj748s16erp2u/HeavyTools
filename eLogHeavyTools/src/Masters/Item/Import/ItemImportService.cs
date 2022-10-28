@@ -206,51 +206,41 @@ namespace eLog.HeavyTools.Masters.Item.Import
 
                     var prcs = OlcPrctables.New();
 
-                    prcs.Add(CreatePrc(ConvertUtils.ToDecimal(result.MultiplePrcTable.Entity["Ar1"]), 3, "HUF", PrcType.Actual, null, 27, 0));
-                    prcs.Add(CreatePrc(ConvertUtils.ToDecimal(result.MultiplePrcTable.Entity["Ar6"]), 3, "HUF", PrcType.Original, null, 27, 0));
-
-
-                    prcs.Add(CreatePrc(ConvertUtils.ToDecimal(result.MultiplePrcTable.Entity["Ar2"]), 4, "HUF", PrcType.Actual, null, 27, 0));
-                    prcs.Add(CreatePrc(ConvertUtils.ToDecimal(result.MultiplePrcTable.Entity["Ar3"]), 5, "EUR", PrcType.Actual));
-                    prcs.Add(CreatePrc(ConvertUtils.ToDecimal(result.MultiplePrcTable.Entity["Ar4"]), 6, "EUR", PrcType.Actual, WebshopType.sk, 20, 2));
-                    prcs.Add(CreatePrc(ConvertUtils.ToDecimal(result.MultiplePrcTable.Entity["Ar9"]), 6, "EUR", PrcType.Original, WebshopType.sk, 20, 2));
                     prcs.Add(CreatePrc(ConvertUtils.ToDecimal(result.MultiplePrcTable.Entity["Ar5"]), 2, "HUF", PrcType.Original));
-                    prcs.Add(CreatePrc(ConvertUtils.ToDecimal(result.MultiplePrcTable.Entity["Ar7"]), 6, "EUR", PrcType.Actual, WebshopType.com, 27, 0));
+                    prcs.Add(CreatePrc(ConvertUtils.ToDecimal(result.MultiplePrcTable.Entity["Ar0"]), 2, "HUF", PrcType.Actual));
+                    prcs.Add(CreatePrc(ConvertUtils.ToDecimal(result.MultiplePrcTable.Entity["Ar13"]), 2, "EUR", PrcType.Original, null, null, 2));
+                    prcs.Add(CreatePrc(ConvertUtils.ToDecimal(result.MultiplePrcTable.Entity["Ar14"]), 2, "EUR", PrcType.Actual, null, null, 2));
+                    prcs.Add(CreatePrc(ConvertUtils.ToDecimal(result.MultiplePrcTable.Entity["Ar16"]), 2, "RON", PrcType.Actual, null, null, 2));
+                    prcs.Add(CreatePrc(ConvertUtils.ToDecimal(result.MultiplePrcTable.Entity["Ar15"]), 2, "RON", PrcType.Original, null, null, 2));
+                    prcs.Add(CreatePrc(ConvertUtils.ToDecimal(result.MultiplePrcTable.Entity["Ar6"]), 3, "HUF", PrcType.Original, null, 27, 0));
+                    prcs.Add(CreatePrc(ConvertUtils.ToDecimal(result.MultiplePrcTable.Entity["Ar1"]), 3, "HUF", PrcType.Actual, null, 27, 0));
+                    prcs.Add(CreatePrc(ConvertUtils.ToDecimal(result.MultiplePrcTable.Entity["Ar9"]), 3, "EUR", PrcType.Original, null, 20, 2));
+                    prcs.Add(CreatePrc(ConvertUtils.ToDecimal(result.MultiplePrcTable.Entity["Ar4"]), 6, "EUR", PrcType.Actual, WebshopType.sk, 20, 2));
+                    prcs.Add(CreatePrc(ConvertUtils.ToDecimal(result.MultiplePrcTable.Entity["Ar11"]), 3, "CZK", PrcType.Original, null, 21, 2));
+                    prcs.Add(CreatePrc(ConvertUtils.ToDecimal(result.MultiplePrcTable.Entity["Ar12"]), 3, "CZK", PrcType.Actual, null, 21, 2));
+                    prcs.Add(CreatePrc(ConvertUtils.ToDecimal(result.MultiplePrcTable.Entity["Ar17"]), 3, "RON", PrcType.Original, null, 19, 2));
+                    prcs.Add(CreatePrc(ConvertUtils.ToDecimal(result.MultiplePrcTable.Entity["Ar18"]), 3, "RON", PrcType.Actual, null, 19, 2));
+                    prcs.Add(CreatePrc(ConvertUtils.ToDecimal(result.MultiplePrcTable.Entity["Ar9"]), 6, "EUR", PrcType.Original, WebshopType.sk, 20, 2));
+                    prcs.Add(CreatePrc(ConvertUtils.ToDecimal(result.MultiplePrcTable.Entity["Ar4"]), 3, "EUR", PrcType.Actual, WebshopType.sk, 20, 2));
                     prcs.Add(CreatePrc(ConvertUtils.ToDecimal(result.MultiplePrcTable.Entity["Ar10"]), 6, "EUR", PrcType.Original, WebshopType.com, 27, 0));
-                    prcs.Add(CreatePrc(ConvertUtils.ToDecimal(result.MultiplePrcTable.Entity["Ar8"]), 5, "EUR", PrcType.Original));
-
+                    prcs.Add(CreatePrc(ConvertUtils.ToDecimal(result.MultiplePrcTable.Entity["Ar7"]), 6, "EUR", PrcType.Actual, WebshopType.com, 27, 0));
                     prcs.Add(CreatePrc(ConvertUtils.ToDecimal(result.MultiplePrcTable.Entity["Ar11"]), 6, "CZK", PrcType.Original, WebshopType.cz, 21, 2));
                     prcs.Add(CreatePrc(ConvertUtils.ToDecimal(result.MultiplePrcTable.Entity["Ar12"]), 6, "CZK", PrcType.Actual, WebshopType.cz, 21, 2));
-
-
-                    prcs.Add(CreatePrc(ConvertUtils.ToDecimal(result.MultiplePrcTable.Entity["Ar13"]), 2, "EUR", PrcType.Original));
-                    prcs.Add(CreatePrc(ConvertUtils.ToDecimal(result.MultiplePrcTable.Entity["Ar14"]), 2, "EUR", PrcType.Actual));
-                    prcs.Add(CreatePrc(ConvertUtils.ToDecimal(result.MultiplePrcTable.Entity["Ar15"]), 2, "RON", PrcType.Original));
-                    prcs.Add(CreatePrc(ConvertUtils.ToDecimal(result.MultiplePrcTable.Entity["Ar16"]), 2, "RON", PrcType.Actual));
                     prcs.Add(CreatePrc(ConvertUtils.ToDecimal(result.MultiplePrcTable.Entity["Ar17"]), 6, "RON", PrcType.Original, WebshopType.ro, 19, 2));
                     prcs.Add(CreatePrc(ConvertUtils.ToDecimal(result.MultiplePrcTable.Entity["Ar18"]), 6, "RON", PrcType.Actual, WebshopType.ro, 19, 2));
+                    prcs.Add(CreatePrc(ConvertUtils.ToDecimal(result.MultiplePrcTable.Entity["Ar8"]), 5, "EUR", PrcType.Original, null, null, 2));
+                    prcs.Add(CreatePrc(ConvertUtils.ToDecimal(result.MultiplePrcTable.Entity["Ar3"]), 5, "EUR", PrcType.Actual, null, null, 2));
+                    prcs.Add(CreatePrc(ConvertUtils.ToDecimal(result.MultiplePrcTable.Entity["Ar2"]), 4, "HUF", PrcType.Actual, null, 27, 0));
 
-
-
-                    prcs.Add(CreatePrc(ConvertUtils.ToDecimal(result.MultiplePrcTable.Entity["Ar11"]), 3, "CZK", PrcType.Original));
-                    prcs.Add(CreatePrc(ConvertUtils.ToDecimal(result.MultiplePrcTable.Entity["Ar12"]), 3, "CZK", PrcType.Actual));
-
-                    prcs.Add(CreatePrc(ConvertUtils.ToDecimal(result.MultiplePrcTable.Entity["Ar17"]), 3, "RON", PrcType.Original));
-                    prcs.Add(CreatePrc(ConvertUtils.ToDecimal(result.MultiplePrcTable.Entity["Ar18"]), 3, "RON", PrcType.Actual));
-
-                    prcs.Add(CreatePrc(ConvertUtils.ToDecimal(result.MultiplePrcTable.Entity["Ar4"]), 3, "EUR", PrcType.Actual));
-                    prcs.Add(CreatePrc(ConvertUtils.ToDecimal(result.MultiplePrcTable.Entity["Ar9"]), 3, "EUR", PrcType.Original));
-
-
-                    prcs.Add(CreatePrc(ConvertUtils.ToDecimal(result.MultiplePrcTable.Entity["Ar0"]), 2, "HUF", PrcType.Actual));
 
 
                     foreach (OlcPrctable impPrc in prcs.AllRows)
                     {
                         var pk = new Key()
                             {
-                                { OlcPrctable.FieldPrc.Name, impPrc.Prc },
+                                //{ OlcPrctable.FieldPrc.Name, impPrc.Prc },
                                 { OlcPrctable.FieldPtid.Name, impPrc.Ptid },
+                                { OlcPrctable.FieldPrctype.Name, impPrc.Prctype },
                                 { OlcPrctable.FieldCurid.Name, impPrc.Curid },
                                 { OlcPrctable.FieldStartdate.Name, impPrc.Startdate },
                                 { OlcPrctable.FieldEnddate.Name, impPrc.Enddate },
@@ -259,14 +249,28 @@ namespace eLog.HeavyTools.Masters.Item.Import
 
                         if (ConvertUtils.ToInt32(itc.Iscollectionarticlenumber) == 0)
                         {
+                            var pbl = OlcPrctableBL.New();
+                            var pmap = pbl.CreateBLObjects();
                             var pt = OlcPrctable.Load(pk);
                             if (pt == null)
                             {
-                                var pbl = OlcPrctableBL.New();
-                                var pmap = pbl.CreateBLObjects();
+                             
                                 impPrc.Imid = its.Imid;
                                 pmap.Default = impPrc;
 
+                                try
+                                {
+                                    pbl.Save(pmap);
+                                }
+                                catch (Exception e)
+                                {
+                                    throw new ItemImportMessageException("$missing_prcerror".eLogTransl(e.Message));
+                                }
+
+                            } else
+                            {
+                                pt.Prc = impPrc.Prc;
+                                pmap.Default = pt;
                                 try
                                 {
                                     pbl.Save(pmap);
@@ -914,19 +918,19 @@ select color1, color2, color3, sample1, sample2,
         }
 
         private OlcPrctable CreatePrc(decimal? prc, int ptid, string curid, PrcType prcType, WebshopType? wt, int? gross, int? round)
-        {
-            var pt = OlcPrctable.CreateNew();
-
-            pt.Startdate = new DateTime(2001, 1, 1);
-            pt.Enddate = new DateTime(2099, 12, 31);
-            pt.Curid = curid;
-
+        { 
             if (gross.HasValue && prc.HasValue && round.HasValue)
             {
                 prc = prc / 100 * (100 + gross);
                 prc = decimal.Round(prc.Value, round.Value);
-            }
+            }          
+            
+            
+            var pt = OlcPrctable.CreateNew();
 
+            pt.Startdate = new DateTime(2001, 1, 1);
+            pt.Enddate = new DateTime(2099, 12, 31);
+            pt.Curid = curid; 
             pt.Prc = prc;
             pt.Ptid = ptid;
             pt.Prctype = (int)prcType;
@@ -934,6 +938,8 @@ select color1, color2, color3, sample1, sample2,
             {
                 pt.Wid = wt.ToString();
             }
+
+
 
 
             return pt;

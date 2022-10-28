@@ -37,6 +37,8 @@ namespace eLog.HeavyTools.Sales.Sord
 
         protected virtual IEnumerable<Control> OlcControlsWebShop => this.m_common.EditGroup?.ControlArray
             .Where(c => c.CustomData == "olc");
+        
+        OlcReserveLayoutTable olcreservelayouttable;
 
         protected override void CreateBase()
         {
@@ -53,6 +55,7 @@ namespace eLog.HeavyTools.Sales.Sord
                 this.m_partncode.RemoveOnChanged();
                 this.m_partncode.SetOnChanged(new ControlEvent(this.PartnidChanged3));
             }
+            olcreservelayouttable = new OlcReserveLayoutTable(this, FindRenderable<LayoutTable>("EditGroupOlcReserve"));
         }
 
         protected override SordHead DefaultPageLoad(PageUpdateArgs args)
@@ -154,9 +157,10 @@ namespace eLog.HeavyTools.Sales.Sord
                         SetTextBoxValue("SordlineWebShopEditGroup", "TotVal", defOlcSordLine.TotVal);
 
                     }
-                }
-            }
 
+                    olcreservelayouttable.SetSordlineId(defSordLine.Sordlineid);
+                }
+            } 
             return e;
         }
 

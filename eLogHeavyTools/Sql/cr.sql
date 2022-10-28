@@ -297,7 +297,7 @@ create table olc_partner (
     constraint fk_olc_partner_partnid foreign key (partnid) references ols_partner (partnid),
     constraint fk_olc_partner_taxid foreign key (taxid) references ols_tax (taxid),
     constraint fk_olc_partner_addusrid foreign key (addusrid) references cfw_user (usrid),
-    constraint fk_olc_partner_regreprempid foreign key (regreprempid) references ols_employee (empid)
+	constraint fk_olc_partner_regreprempid foreign key (regreprempid) references ols_employee (empid)
 )
 go
 
@@ -330,7 +330,7 @@ create table olc_partncmp (
     adddate                     datetime                null,
     constraint pk_olc_partncmp primary key (partnid, cmpid), -- composite primary key
     constraint fk_olc_partncmp_partnid foreign key (partnid) references ols_partner (partnid),
-	constraint fk_olc_partncmp_cmpid foreign key (cmpid) references ols_company (cmpid),
+    constraint fk_olc_partncmp_cmpid foreign key (cmpid) references ols_company (cmpid),
     constraint fk_olc_partncmp_partnid_cmpid foreign key (partnid, cmpid) references ols_partncmp (partnid, cmpid),
     constraint fk_olc_partncmp_secpaymid foreign key (secpaymid) references ols_paymethod (paymid),
     constraint fk_olc_partncmp_addusrid foreign key (addusrid) references cfw_user (usrid)
@@ -813,7 +813,7 @@ alter table olc_whloclinkline add constraint fk_olc_whloclinkline_addusrid forei
 create unique index ux_olc_whloclinkline_whllid_whlocid on olc_whloclinkline (whllid, whlocid)
 go
 
-create table olc_stline (
+ create table olc_stline (
   stlineid					int				not null,  
   origstlineid				int			    null,
 
@@ -867,6 +867,17 @@ create table olc_tmp_sordsord (
 )
 go
 
+create table olc_costline (
+  costlineid      int             not null,
+  othtrlinedocid  varchar(20)     not null,
+  addusrid        varchar(12)     not null,
+  adddate         datetime        not null,
+  constraint pk_olc_costline primary key (costlineid),
+  constraint fk_olc_costline_costlineid foreign key (costlineid) references ols_costline (costlineid),
+  constraint fk_olc_costline_othtrlinedocid foreign key (othtrlinedocid) references ofc_othtrlinedoc (othtrlinedocid),
+  constraint fk_olc_costline_addusrid foreign key (addusrid) references cfw_user (usrid)
+)
+go
 
 create table olc_prctable_current (
   prccid int identity not null, 
@@ -902,3 +913,21 @@ alter table olc_prctable_current
 go
 
 
+
+ -- drop table olc_sordline_res
+
+ create table olc_sordline_res (
+  sordlineidres				int identity    not null,
+  sordlineid				int				not null,  
+  resid						int			    not null,
+  preordersordlineid		int				null, 
+  addusrid                  varchar(12)     not null,
+  adddate                   datetime        not null,
+
+  constraint pk_olc_sordline_res primary key (sordlineidres)
+)
+
+alter table olc_sordline_res add constraint fk_olc_sordline_res_sordid foreign key (sordlineid) references ols_sordline (sordlineid)
+alter table olc_sordline_res add constraint fk_olc_sordline_res_addusrid foreign key (addusrid) references cfw_user (usrid)
+alter table olc_sordline_res add constraint fk_olc_sordline_res_resid foreign key (resid) references ols_reserve (resid)
+go

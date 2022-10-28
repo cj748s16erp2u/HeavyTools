@@ -115,3 +115,6 @@ $error_import_ordqty_notint=Mennyiség csak egész szám lehet
 $error_import_selprc_notint=Ár csak egész szám lehet
 $error_import_partner_not_found=Partner : {0} nem található
 $error_import_company_not_found=A vállalat : {0} nem található
+
+
+$olcreserve_editgroup=Foglalás II.

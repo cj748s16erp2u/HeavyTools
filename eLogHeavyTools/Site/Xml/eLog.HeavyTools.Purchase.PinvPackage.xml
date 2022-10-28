@@ -35,6 +35,7 @@
     <Control ControlType="ApprovedPackageInfoPart" ID="apprPinvHeadPackageInfoPart" />
     <SearchFilterBar ID="SrcBar">
       <Textbox Field="pinvnum" Width="150" />
+      <CheckedCombo Field="curid" ListID="eLog.Base.Setup.Currency.CurrencyList" ComboFlags="AllowBlank" Width="100" />
     </SearchFilterBar>
     <Grid ID="searchResults" Label="$apprphpackage_search_results" />
   </TabPage>

@@ -36,9 +36,26 @@ public class OrderService : LogicServiceBase<OlsSordhead>, IOrderService
     private readonly IOlcSordlineService olcSordLineService;
     private readonly IPriceCalcService priceCalcService;
     private readonly IPriceCalcCuponUsageService priceCalcCuponUsageService;
+    private readonly IReserveService reserveService;
+    private readonly IOlsSorddocCacheService olsSorddocCacheService;
 
- 
-    public OrderService(IValidator<OlsSordhead> validator, IRepository<OlsSordhead> repository, IUnitOfWork unitOfWork, IEnvironmentService environmentService, IOlsSordheadService sordHeadService, IOlsSordlineService sordLineService, IOlsRecidService recIdService, IItemCache itemCache, IOptions<Options.SordOptions> sordoptions, IOSSService oSSService, IOlsCountryService countryService, IOlcSordheadService olcSordHeadService, IOlcSordlineService olcSordLineService, IPriceCalcService priceCalcService, IPriceCalcCuponUsageService priceCalcCuponUsageService) : base(validator, repository, unitOfWork, environmentService)
+    public OrderService(IValidator<OlsSordhead> validator,
+                        IRepository<OlsSordhead> repository,
+                        IUnitOfWork unitOfWork,
+                        IEnvironmentService environmentService,
+                        IOlsSordheadService sordHeadService,
+                        IOlsSordlineService sordLineService,
+                        IOlsRecidService recIdService,
+                        IItemCache itemCache,
+                        IOptions<Options.SordOptions> sordoptions,
+                        IOSSService oSSService,
+                        IOlsCountryService countryService,
+                        IOlcSordheadService olcSordHeadService,
+                        IOlcSordlineService olcSordLineService,
+                        IPriceCalcService priceCalcService,
+                        IPriceCalcCuponUsageService priceCalcCuponUsageService,
+                        IReserveService reserveService,
+                        IOlsSorddocCacheService olsSorddocCacheService) : base(validator, repository, unitOfWork, environmentService)
     {
         this.sordHeadService = sordHeadService ?? throw new ArgumentNullException(nameof(sordHeadService));
         this.sordLineService = sordLineService ?? throw new ArgumentNullException(nameof(sordLineService));
@@ -51,6 +68,8 @@ public class OrderService : LogicServiceBase<OlsSordhead>, IOrderService
         this.olcSordLineService = olcSordLineService ?? throw new ArgumentNullException(nameof(olcSordLineService));
         this.priceCalcService = priceCalcService ?? throw new ArgumentNullException(nameof(priceCalcService));
         this.priceCalcCuponUsageService = priceCalcCuponUsageService ?? throw new ArgumentNullException(nameof(priceCalcCuponUsageService));
+        this.reserveService = reserveService ?? throw new ArgumentNullException(nameof(reserveService));
+        this.olsSorddocCacheService = olsSorddocCacheService ?? throw new ArgumentNullException(nameof(olsSorddocCacheService));
 
         /*orderServiceCSV = new OrderServiceCSV(validator, repository, unitOfWork, environmentService, sordHeadService, sordLineService, recIdService, itemCache, sordoptions, oSSService, countryService, olcSordHeadService);*/
     }
@@ -79,17 +98,33 @@ public class OrderService : LogicServiceBase<OlsSordhead>, IOrderService
             var sl = new List<OlsSordline>();
             var csl = new List<OlcSordline>();
 
+            var preordersordlineid = new Dictionary<int, int>();
+
+
             await FillLinesAsync(sl, csl, order, sh.Sordid, oss, cancellationToken);
 
             foreach (var line in sl)
             {
                 await sordLineService.AddAsync(line, cancellationToken);
-            }
+                var res = await reserveService.DoFrameOrderReserve(sh, line, cancellationToken);
 
+                if (res != null)
+                { 
+                    if (res.RemnantQty>0)
+                    {
+                        await reserveService.DoCentralWarehouseReserve(sh, line, res.RemnantQty, cancellationToken);
+                    }
+                }
+            }
+             
             foreach (var line in csl)
             {
                 line.Sordlineid = line.Sordline.Sordlineid;
                 line.Sordline = null!;
+                if (preordersordlineid.ContainsKey(line.Sordlineid))
+                {
+                    line.Preordersordlineid = preordersordlineid[line.Sordlineid];
+                }
                 await olcSordLineService.AddAsync(line, cancellationToken);
             }
 
@@ -115,6 +150,7 @@ public class OrderService : LogicServiceBase<OlsSordhead>, IOrderService
         sh.Sordid = sordid.Lastid;
         sh.Partnid = 1;
         sh.Docnum = order.OrderNumber;
+
         sh.Sorddate = order.OrderDate!.Value;
         sh.Curid = order.Cart.Curid;
         sh.Paymid = "KP";
@@ -127,7 +163,10 @@ public class OrderService : LogicServiceBase<OlsSordhead>, IOrderService
         sh.Gen = this.sordoptions.Value.Gen!.Value;
         sh.Sorddocid = this.sordoptions.Value.SordDocId!;
         sh.Cmpid = this.sordoptions.Value.Cmpid!.Value;
-        sh.Sordtype = this.sordoptions.Value.SordType!.Value;
+
+        var sd = await olsSorddocCacheService.GetSorddocAsync(sh.Sorddocid, cancellationToken);
+
+        sh.Sordtype = sd.Type;
         sh.Partnid = this.sordoptions.Value.PartnId!.Value;
         sh.Addrid = this.sordoptions.Value.AddrId!.Value;
 

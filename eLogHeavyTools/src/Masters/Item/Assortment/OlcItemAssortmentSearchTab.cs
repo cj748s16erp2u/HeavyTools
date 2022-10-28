@@ -166,7 +166,7 @@ namespace eLog.HeavyTools.Masters.Item.Assortment
 	  join ols_item ii (nolock) on ii.itemid=cc.itemid
 	  join olc_itemmodelseason iim (nolock) on cc.imsid=iim.imsid
 	  left join olc_itemassortment a  (nolock) on a.itemid=cc.itemid
-	  where cc.iscollectionarticlenumber=0
+	  where isnull(cc.iscollectionarticlenumber,0)=0
 		and cc.imsid=c.imsid
 		and iim.isid=im.isid
   ) xx
