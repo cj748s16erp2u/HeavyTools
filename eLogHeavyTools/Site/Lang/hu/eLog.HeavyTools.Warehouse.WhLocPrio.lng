@@ -6,6 +6,8 @@ $pageName_OlcWhLocPrio=Elsődleges helykód
 
 $OlcWhLocPrioSearchTab=Aktív helykódok
 
+$whlocprio_search_results=Keresési eredmények
+
 $itemname01=Cikk megnevezése
 $whzoneid=Zóna
 $whlocid=Helykód
@@ -29,6 +31,8 @@ $refilllimit=Utántöltési küszöb (%)
 ;Összes helykód fül
 
 $OlcWhLocPrioAllSearchTab=Összes helykód
+
+$whlocprioall_search_results=Keresési eredmények
 
 ;Hibák
 

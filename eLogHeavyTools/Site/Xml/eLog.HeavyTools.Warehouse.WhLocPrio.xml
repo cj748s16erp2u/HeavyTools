@@ -12,7 +12,7 @@
 			<!--<CheckedCombo Field="whlocid" Width="120" ListID="eLog.HeavyTools.Setup.Warehouse.OlcWhLocationList" ComboFlags="None" DependentCtrlID="whid,whzoneid" DependentField="whid,whzoneid" DependentAllowNullField="whid,whzoneid" />-->
 			<Textbox Field="whloccode" Width="120"/>
 		</SearchFilterBar>	
-		<Grid ID="searchResults"/>
+		<Grid ID="searchResults" Label="$whlocprio_search_results"/>
 	</TabPage>
 	<Search Name="OlcWhLocPrioSearchProvider">
 		<Column FieldName="itemcode" Width="120"/>
@@ -56,7 +56,7 @@
 			<!--<CheckedCombo Field="whlocid" Width="120" ListID="eLog.HeavyTools.Setup.Warehouse.OlcWhLocationList" ComboFlags="None" DependentCtrlID="whid,whzoneid" DependentField="whid,whzoneid" DependentAllowNullField="whid,whzoneid"/>-->
 			<Textbox Field="whloccode" Width="120"/>
 		</SearchFilterBar>
-		<Grid ID="searchResults"/>
+		<Grid ID="searchResults" Label="$whlocprioall_search_results"/>
 	</TabPage>
 	<Search Name="OlcWhLocPrioAllSearchProvider">
 		<Column FieldName="itemcode" Width="120" />
