@@ -12,7 +12,7 @@ namespace eLog.HeavyTools.Setup.Warehouse
     {
         public static readonly string ID = typeof(OlcWhLocationSearchProvider).FullName;
 
-        protected static string queryString = $@"select top 1000 [t].*, [z].[whzonecode]
+        protected static string queryString = $@"select top 10000 [t].*, [z].[whzonecode]
 from [{OlcWhLocation._TableName}] [t] (nolock)
   left join [{OlcWhZone._TableName}] [z] (nolock) on [z].[whzoneid] = [t].[whzoneid]
 ";

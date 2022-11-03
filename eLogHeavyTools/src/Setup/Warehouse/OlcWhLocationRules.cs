@@ -1,9 +1,12 @@
-﻿using eProjectWeb.Framework.Data;
+﻿using CODALink;
+using eProjectWeb.Framework;
+using eProjectWeb.Framework.Data;
 using eProjectWeb.Framework.Rules;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace eLog.HeavyTools.Setup.Warehouse
@@ -12,7 +15,9 @@ namespace eLog.HeavyTools.Setup.Warehouse
     {
         public OlcWhLocationRules() : base(true, false)
         {
+            ERules[OlcWhLocation.FieldWhloccode.Name].Mandatory = false;
             this.AddCustomRule(this.LocTypeRule);
+            this.AddCustomRule(this.LoccodeRule);
         }
 
         protected const string OLCWHZONE = nameof(OlcWhZone);
@@ -54,6 +59,27 @@ namespace eLog.HeavyTools.Setup.Warehouse
         protected OlcWhZone GetOlcWhZone(RuleValidateContext ctx)
         {
             return this.GetInternalCustomData(ctx, OLCWHZONE) as OlcWhZone;
+        }
+
+        private void LoccodeRule(RuleValidateContext ctx, OlcWhLocation loc)
+        {
+            string loccode = loc.Whloccode.ToString();
+            if (loc.Loctype == (int)OlcWhLocation_LocType.Moving)
+            { 
+                Regex rgx = new Regex("^[0-9]{3}\\.([0-9]{3}\\.[0-9]{3})$");
+                if (!rgx.IsMatch(loccode.ToString()))
+                {
+                    ctx.AddErrorField(OlcWhLocation.FieldWhloccode.Name, "$err_whloccode");
+                }
+            }
+            if (loc.State == DataRowState.Added)
+            {
+                if (string.IsNullOrEmpty(loccode))
+                {
+                    MandatoryRule r = new MandatoryRule();
+                    r.Validate(ctx, OlcWhLocation.FieldWhloccode, loc.Whloccode);
+                }
+            }
         }
 
         private void LocTypeRule(RuleValidateContext ctx, OlcWhLocation value)

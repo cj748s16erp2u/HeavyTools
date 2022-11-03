@@ -1,10 +1,15 @@
-﻿using eProjectWeb.Framework;
+﻿using eLog.Base.Masters.Item;
+using eProjectWeb.Framework;
+using eProjectWeb.Framework.Extensions;
+using eProjectWeb.Framework.UI.Controls;
+using eProjectWeb.Framework.UI.PageParts;
 using eProjectWeb.Framework.UI.Templates;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web.UI;
 
 namespace eLog.HeavyTools.Setup.Warehouse
 {
@@ -19,12 +24,44 @@ namespace eLog.HeavyTools.Setup.Warehouse
 
         protected OlcWhLocationSearchTab() { }
 
+        protected Button genNextCmd;
+        protected DialogBox dlgMessage;
+
+
         protected override void CreateBase()
         {
             this.ParentEntityKey = Consts.DetailEntityKey;
             this.DetailEntityKey = null;
 
             base.CreateBase();
+
+            this.dlgMessage = new DialogBox(DialogBoxType.Ok);
+            this.RegisterDialog(this.dlgMessage);
+
+            AddCmd(genNextCmd = new Button(OlcWhLocationBL.GENNEXT_ACTIONID, 90));
+            var loadArgs = "this.getObjectValue(\"" + SearchGridID + "\")";
+            SetButtonAction(genNextCmd.ID, new eProjectWeb.Framework.UI.Actions.NewRecordAction(Setup.EditPageName, Consts.DetailEntityKey,
+                loadArgs, true), new ControlEvent(m_ActionGenNextEventHandler));
+            genNextCmd.Shortcut = eProjectWeb.Framework.UI.Commands.ShortcutKeys.Key_F9;
+        }
+
+        private void m_ActionGenNextEventHandler(PageUpdateArgs args)
+        {
+            if (this.SearchResults.SelectedPK != null)
+            {
+                var selectedRow = OlcWhLocation.Load(this.SearchResults.SelectedPK);
+                if (selectedRow != null)
+                {
+                    if (selectedRow.Loctype != (int)OlcWhLocation_LocType.Moving)
+                    {
+                        args.ShowDialog(this.dlgMessage, "$msg_gennext_title", "$msg_gennext_message");
+                    }
+                    else
+                    {
+                        args.Continue = true;
+                    }
+                }
+            }
         }
 
         protected override void CreateCheckForRootEntityKey()
