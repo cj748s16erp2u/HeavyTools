@@ -2432,7 +2432,7 @@ namespace eLog.HeavyTools.Warehouse.WhZone.WhZTranService
     
     
     }
-    
+
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.5.2.0 (Newtonsoft.Json v13.0.1.0)")]
     public partial class WhZTranLocDto 
     {

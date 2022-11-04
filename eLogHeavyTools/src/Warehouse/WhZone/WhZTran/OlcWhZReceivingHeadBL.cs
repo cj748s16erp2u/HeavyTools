@@ -6,11 +6,8 @@ using System.Threading.Tasks;
 
 namespace eLog.HeavyTools.Warehouse.WhZone.WhZTran
 {
-    public partial class OlcWhZTranLine
+    public class OlcWhZReceivingHeadBL : OlcWhZTranHeadBL<OlcWhZReceivingHeadRules>
     {
-        public override void SetDefaultValues()
-        {
-            
-        }
+        public static readonly string ID = typeof(OlcWhZReceivingHeadBL).FullName;
     }
 }

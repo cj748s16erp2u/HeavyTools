@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Schema xmlns="http://tempuri.org/RenderableSchema.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://tempuri.org/RenderableSchema.xsd ../../../base/Site/Xml/RenderableSchema.xsd">
+	<TabPage Name="OlcWhZReceivingHeadSearchTab">	
+		<SearchFilterBar ID="SrcBar">
+			<Textbox Field="Whztid" Width="150"/>
+			<Textbox Field="Cmpid" Width="150"/>
+			<ForceNextRow />
+			<DatePickerbox Field="Fromdate" Width="150"/>
+			<DatePickerbox Field="Todate" Width="150"/>
+			<ForceNextRow />
+			<Textbox Field="Fromwhzid" Width="150"/>
+			<Textbox Field="Towhzid" Width="150"/>
+			<Textbox Field="Stid" Width="150"/>
+		</SearchFilterBar>
+		<Grid ID="searchResults"/>
+	</TabPage>
+
+	<TabPage Name="OlcWhZReceivingLineSearchTab">
+		<SearchFilterBar ID="SrcBar">
+			<Textbox Field="Whztid" Width="150"/>
+			<Textbox Field="Whztlineid" Width="150"/>
+			<ForceNextRow />
+			<Textbox Field="Stid" Width="150"/>
+			<Textbox Field="Stlineid" Width="150"/>
+			<Textbox Field="Itemid" Width="150"/>
+		</SearchFilterBar>
+		<Grid ID="searchResults"/>
+	</TabPage>
+
+	<TabPage Name="OlcWhZReceivingLocSearchTab">
+		<SearchFilterBar ID="SrcBar">
+			<Textbox Field="Whztlocid" Width="150"/>
+			<Textbox Field="Whztid" Width="150"/>
+			<Textbox Field="Whztlineid" Width="150"/>
+			<ForceNextRow />
+			<Textbox Field="Whid" Width="150"/>
+			<Textbox Field="Whlocid" Width="150"/>	
+			<Textbox Field="Whztltype" Width="150"/>
+			<ForceNextRow />
+			<Textbox Field="Ordqty" Width="150"/>
+			<Textbox Field="Dispqty" Width="150"/>
+			<Textbox Field="Movqty" Width="150"/>
+		</SearchFilterBar>
+		<Grid ID="searchResults"/>
+	</TabPage>
+
+	<TabPage Name="OlcWhZReceivingHeadEditTab">
+		<LayoutTable ControlGroup="OlcWhZTranHead" Columns="{120, None}; {180, None}; {20, Empty}; {120, None}; {180, None}" ID="EditGroup1">
+			<Textbox Field="whztid" Width="150"/>
+			<Textbox Field="cmpid" Width="150"/>
+			<Textbox Field="whzttype" Width="150"/>
+			<ForceNextRow />
+			<DatePickerbox Field="whztdate" Width="150"/>
+			<Textbox Field="fromwhzid" Width="150"/>
+			<Textbox Field="towhid"  Width="150"/>
+			<Textbox Field="closeusrid" Width="150"/>
+			<DatePickerbox Field="closedate" Width="150"/>
+			<Textbox Field="whztstat" Width="150"/>
+			<ForceNextRow />
+			<Textbox Field="note" Rows="3" ColsToSpan="-1"/>
+			<ForceNextRow />
+			<Textbox Field="whid" Width="150"/>
+			<Textbox Field="docnum" Width="150"/>
+			<Textbox Field="sordid" Width="150"/>
+			<Textbox Field="pordid" Width="150"/>
+			<Textbox Field="taskid" Width="150"/>
+			<Textbox Field="gen" Width="150"/>
+		</LayoutTable>
+	</TabPage>
+
+	<TabPage Name="OlcWhZReceivingLineEditTab">
+		<LayoutTable ControlGroup="OlcWhZTranLine" Columns="{120, None}; {180, None}; {20, Empty}; {120, None}; {180, None}" ID="EditGroup1">
+			<Textbox Field="whztlineid" Width="150"/>
+			<Textbox Field="whztid" Width="150"/>
+			<Textbox Field="linenum" Width="150"/>
+			<Textbox Field="itemid" Width="150"/>
+			<ForceNextRow />
+			<Textbox Field="ordqty" Width="150"/>
+			<Textbox Field="dispqty" Width="150"/>
+			<Textbox Field="movqty" Width="150"/>
+			<Textbox Field="inqty" Width="150"/>
+			<Textbox Field="outqty" Width="150"/>
+			<ForceNextRow />
+			<Textbox Field="change" Width="150"/>
+			<ForceNextRow />
+			<Textbox Field="unitid2" Width="150"/>			
+			<Textbox Field="ordqty2" Width="150" />
+			<Textbox Field="dispqty2" Width="150"/>
+			<Textbox Field="movqty2" Width="150"/>
+			<ForceNextRow />
+			<Textbox Field="note" Rows="3" ColsToSpan="-1"/>
+			<ForceNextRow />
+			<Textbox Field="stlineid" Width="150"/>
+			<Textbox Field="sordlineid" Width="150"/>
+			<ForceNextRow />
+			<Textbox Field="pordlineid" Width="150"/>
+			<Textbox Field="taskitemid" Width="150"/>
+			<ForceNextRow />
+			<Textbox Field="gen" Width="150"/>
+		</LayoutTable>
+	</TabPage>
+
+	<TabPage Name="OlcWhZReceivingLocEditTab">
+		<LayoutTable ControlGroup="OlcWhZTranLoc" Columns="{120, None}; {180, None}; {20, Empty}; {120, None}; {180, None}" ID="EditGroup1">
+			<Textbox Field="whztlocid" Width="150"/>
+			<Textbox Field="whztid" Width="150"/>
+			<Textbox Field="whztlineid" Width="150"/>
+			<ForceNextRow />
+			<Textbox Field="whid" Width="150"/>
+			<Textbox Field="whzoneid" Width="150"/>
+			<Textbox Field="whlocid" Width="150"/>
+			<ForceNextRow />
+			<Textbox Field="whztltype" Width="150"/>
+			<ForceNextRow />
+			<Textbox Field="ordqty" Width="150"/>
+			<Textbox Field="dispqty" Width="150"/>	
+			<Textbox Field="movqty" Width="150"/>
+		</LayoutTable>
+	</TabPage>
+	
+	<Search Name="OlcWhZReceivingHeadSearchProvider">
+		<Column FieldName="Whztid" Width="50"/>
+		<Column FieldName="Cmpid" Width="50" />
+		<Column FieldName="Whzttype" Width="50"/>
+		<Column FieldName="Whztdate" Format="D" Width="140" />
+		<Column FieldName="Fromwhzid" Width="50" />
+		<Column FieldName="Towhzid" Width="140" />
+		<Column FieldName="Closeusrid" Width="50" />
+		<Column FieldName="Closedate" Format="DT" Width="50" />
+		<Column FieldName="Whztstat" Width="50" />
+		<Column FieldName="Note" Width="140" />
+		<Column FieldName="Stid" Width="50" />
+		<Column FieldName="Sordid" Width="50" />
+		<Column FieldName="Pordid" Width="50" />
+		<Column FieldName="Taskid" Width="50" />
+		<Column FieldName="Gen" Width="50" />
+		<Column FieldName="Addusrid" Width="50" />
+		<Column FieldName="Adddate" Width="140" />
+	</Search>
+
+	<Search Name="OlcWhZReceivingLineSearchProvider">
+		<Column FieldName="Whztlineid" Width="50"/>
+		<Column FieldName="Whztid" Width="50" />
+		<Column FieldName="Linenum" Width="140" />
+		<Column FieldName="Itemid" Width="50" />
+		<Column FieldName="Ordqty" Width="140" />
+		<Column FieldName="Movqty" Width="100" />
+		<Column FieldName="Inqty" Width="100" />
+		<Column FieldName="Outqty" Width="50" />
+		<Column FieldName="Unitid2" Width="50" />
+		<Column FieldName="Change" Width="50" />
+		<Column FieldName="Ordqty2" Width="100" />
+		<Column FieldName="Dispqty2" Width="100" />
+		<Column FieldName="Movqty2" Width="100" />
+		<Column FieldName="Note" Width="140" />
+		<Column FieldName="Stlineid" Width="50" />
+		<Column FieldName="Sordlineid" Width="50"/>
+		<Column FieldName="Taskitemid" Width="50" />
+		<Column FieldName="Gen" Width="50" />
+		<Column FieldName="Addusrid" Width="50" />
+		<Column FieldName="Addedate" Width="140" />
+	</Search>
+	
+	<Search Name="OlcWhZReceivingLocSearchProvider">
+		<Column FieldName="Whztlocid" Width="50"/>
+		<Column FieldName="Whztid" Width="50"/>
+		<Column FieldName="Whztlineid" Width="50"/>
+		<Column FieldName="Whid" Width="50"/>
+		<Column FieldName="Whzoneid" Width="50"/>
+		<Column FieldName="Whlocid" Width="50"/>
+		<Column FieldName="Whztltype" Width="50"/>
+		<Column FieldName="Ordqty" Width="50"/>
+		<Column FieldName="Dispqty" Width="50"/>
+		<Column FieldName="Movqty" Width="50"/>
+		<Column FieldName="Addusrid" Width="50" />
+		<Column FieldName="Addedate" Width="140" />
+	</Search>
+</Schema>

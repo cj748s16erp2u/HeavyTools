@@ -21,7 +21,6 @@ namespace eLog.HeavyTools.Warehouse.WhZone.WhZTran
         {
             return Load(new Key(new Field[] { FieldWhztlineid }, new object[] { whztlineid }));
         }
-
         #region Field accessors
 
         /// <summary>

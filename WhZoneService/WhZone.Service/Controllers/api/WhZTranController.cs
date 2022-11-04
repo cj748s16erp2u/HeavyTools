@@ -52,7 +52,7 @@ public class WhZTranController : Controller
             if (list is null)
             {
                 list = Array.Empty<WhZReceivingTranHeadDto>();
-            }
+        	}
 
             return this.Ok(Newtonsoft.Json.JsonConvert.SerializeObject(list));
         }
@@ -117,7 +117,7 @@ public class WhZTranController : Controller
         if (request is null)
         {
             return this.BadRequest("'request' must be set");
-        }
+		}
 
         try
         {

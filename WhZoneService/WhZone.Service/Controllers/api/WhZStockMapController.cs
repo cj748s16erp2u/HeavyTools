@@ -46,7 +46,13 @@ public class WhZStockMapController : Controller
     {
         try
         {
-            return this.Ok(await this.stockMapService.QueryStockMapAsync(query));
+            var list = await this.stockMapService.QueryStockMapAsync(query);
+            if (list == null)
+            {
+                list = Array.Empty<WhZStockMapQDto>();
+        	}
+			
+            return this.Ok(Newtonsoft.Json.JsonConvert.SerializeObject(list));
         }
         catch (Exception ex)
         {
@@ -65,7 +71,7 @@ public class WhZStockMapController : Controller
         try
         {
             return this.Ok(await this.stockMapService.GetStockMapAsync(query));
-        }
+		}
         catch (Exception ex)
         {
             await ERP2U.Log.LoggerManager.Instance.LogErrorAsync<WhZTranController>(ex);

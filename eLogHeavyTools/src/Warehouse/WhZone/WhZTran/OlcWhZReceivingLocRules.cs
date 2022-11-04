@@ -6,11 +6,7 @@ using System.Threading.Tasks;
 
 namespace eLog.HeavyTools.Warehouse.WhZone.WhZTran
 {
-    public partial class OlcWhZTranLine
+    public class OlcWhZReceivingLocRules : OlcWhZTranLocRules
     {
-        public override void SetDefaultValues()
-        {
-            
-        }
     }
 }

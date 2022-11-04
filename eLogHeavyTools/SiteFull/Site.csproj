@@ -379,6 +379,7 @@
     <Content Include="..\..\..\Releases\eLog.Base\v7.3.0.0\SiteFull\Styles\vendor\summernote-0.8.1.min.css">
       <Link>styles\vendor\summernote-0.8.1.min.css</Link>
     </Content>
+    <Content Include="customsettings.xml" />
     <Content Include="HTMLEditor.aspx" />
     <Content Include="MSSRSViewer.aspx" />
     <Content Include="WSInterface\CODAElementWS.asmx" />

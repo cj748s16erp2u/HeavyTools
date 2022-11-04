@@ -6,11 +6,10 @@ using System.Threading.Tasks;
 
 namespace eLog.HeavyTools.Warehouse.WhZone.WhZTran
 {
-    public partial class OlcWhZTranLine
+    public partial class OlcWhZStockMap
     {
         public override void SetDefaultValues()
         {
-            
         }
     }
 }
