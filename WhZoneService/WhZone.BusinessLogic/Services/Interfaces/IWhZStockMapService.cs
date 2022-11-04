@@ -23,7 +23,7 @@ public interface IWhZStockMapService : ILogicService<OlcWhzstockmap>
     /// </summary>
     /// <param name="cancellationToken"></param>
     /// <returns>Készlet lista</returns>
-    Task<IEnumerable<WhZStockMapQDto>> QueryStockMapAsync(CancellationToken cancellationToken = default);
+    Task<IEnumerable<WhZStockMapQDto>> QueryStockMapAsync(WhZStockMapQueryDto query = null!, CancellationToken cancellationToken = default);
 
     /// <summary>
     /// 1 db készlet bejegyzés betöltése a megadott kulcs alapján.

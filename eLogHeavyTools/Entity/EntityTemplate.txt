@@ -1,0 +1,19 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Text;
+using eProjectWeb.Framework;
+using eProjectWeb.Framework.Data;
+
+namespace {namespace}
+{
+    /// <summary>
+    /// <para>Generált Entity</para>
+    /// {comment}
+    /// </summary>
+    [Table("{tablename}")]
+    public partial class {classname} : Entity<{classname}>
+    {
+{loadbypk}
+{fieldaccessors}
+    }
+}

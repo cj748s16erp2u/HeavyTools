@@ -31,3 +31,6 @@ olc_tmp_sordsord,eLog.HeavyTools.Sales.Sord,OlcTmpSordSord
 olc_sorddoc,eLog.HeavyTools.Setup.SordDoc,OlcSordDoc
 olc_whztranhead,eLog.HeavyTools.Warehouse.WhZone.WhZTran,OlcWhZTranHead
 olc_whztranline,eLog.HeavyTools.Warehouse.WhZone.WhZTran,OlcWhZTranLine
+olc_whztranloc,eLog.HeavyTools.Warehouse.WhZone.WhZTran,OlcWhZTranLoc
+olc_whzstockmap,eLog.HeavyTools.Warehouse.WhZone.WhZTran,OlcWhZStockMap
+ols_stockmap,eLog.HeavyTools.Warehouse.WhZone.WhZTran,OlsStockMap

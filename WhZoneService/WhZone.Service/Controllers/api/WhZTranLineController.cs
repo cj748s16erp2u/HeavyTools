@@ -48,7 +48,12 @@ public class WhZTranLineController : Controller
     {
         try
         {
-            return this.Ok(await this.tranLineService.QueryReceivingAsync(query));
+            var list = await this.tranLineService.QueryReceivingAsync(query);
+            if (list is null)
+            {
+                list = Array.Empty<WhZReceivingTranLineDto>();
+            }
+            return this.Ok(Newtonsoft.Json.JsonConvert.SerializeObject(list));
         }
         catch (Exception ex)
         {

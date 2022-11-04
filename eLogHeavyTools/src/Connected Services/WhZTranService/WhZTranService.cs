@@ -1485,10 +1485,10 @@ namespace eLog.HeavyTools.Warehouse.WhZone.WhZTranService
         [Newtonsoft.Json.JsonProperty("whztid", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public int? Whztid { get; set; }
     
-        [Newtonsoft.Json.JsonProperty("cmpid", Required = Newtonsoft.Json.Required.Always, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [Newtonsoft.Json.JsonProperty("cmpid", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public int Cmpid { get; set; }
     
-        [Newtonsoft.Json.JsonProperty("whztdate", Required = Newtonsoft.Json.Required.Always, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [Newtonsoft.Json.JsonProperty("whztdate", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.DateTimeOffset Whztdate { get; set; }
     
         [Newtonsoft.Json.JsonProperty("closeusrid", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
@@ -1497,7 +1497,7 @@ namespace eLog.HeavyTools.Warehouse.WhZone.WhZTranService
         [Newtonsoft.Json.JsonProperty("closedate", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.DateTimeOffset? Closedate { get; set; }
     
-        [Newtonsoft.Json.JsonProperty("whztstat", Required = Newtonsoft.Json.Required.Always, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [Newtonsoft.Json.JsonProperty("whztstat", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public WhZTranHead_Whztstat Whztstat { get; set; }
     
         [Newtonsoft.Json.JsonProperty("note", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
@@ -1512,7 +1512,7 @@ namespace eLog.HeavyTools.Warehouse.WhZone.WhZTranService
         [Newtonsoft.Json.JsonProperty("towhzid", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public int? Towhzid { get; set; }
     
-        [Newtonsoft.Json.JsonProperty("whzttype", Required = Newtonsoft.Json.Required.Always, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [Newtonsoft.Json.JsonProperty("whzttype", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public WhZTranHead_Whzttype Whzttype { get; set; }
     
     
@@ -1563,7 +1563,7 @@ namespace eLog.HeavyTools.Warehouse.WhZone.WhZTranService
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.5.2.0 (Newtonsoft.Json v13.0.1.0)")]
     public partial class WhZStockMapQDto 
     {
-        [Newtonsoft.Json.JsonProperty("itemid", Required = Newtonsoft.Json.Required.Always, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [Newtonsoft.Json.JsonProperty("itemid", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public int Itemid { get; set; }
     
         [Newtonsoft.Json.JsonProperty("whid", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
@@ -1575,19 +1575,19 @@ namespace eLog.HeavyTools.Warehouse.WhZone.WhZTranService
         [Newtonsoft.Json.JsonProperty("whlocid", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public int? Whlocid { get; set; }
     
-        [Newtonsoft.Json.JsonProperty("recqty", Required = Newtonsoft.Json.Required.Always, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [Newtonsoft.Json.JsonProperty("recqty", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public double Recqty { get; set; }
     
-        [Newtonsoft.Json.JsonProperty("reqqty", Required = Newtonsoft.Json.Required.Always, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [Newtonsoft.Json.JsonProperty("reqqty", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public double Reqqty { get; set; }
     
-        [Newtonsoft.Json.JsonProperty("actqty", Required = Newtonsoft.Json.Required.Always, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [Newtonsoft.Json.JsonProperty("actqty", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public double Actqty { get; set; }
     
-        [Newtonsoft.Json.JsonProperty("resqty", Required = Newtonsoft.Json.Required.Always, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [Newtonsoft.Json.JsonProperty("resqty", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public double Resqty { get; set; }
     
-        [Newtonsoft.Json.JsonProperty("provqty", Required = Newtonsoft.Json.Required.Always, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [Newtonsoft.Json.JsonProperty("provqty", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public double Provqty { get; set; }
     
         [Newtonsoft.Json.JsonProperty("whcode", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]

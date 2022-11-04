@@ -134,7 +134,7 @@
 			<Item ID="StockLot" Name="$stocklot" PageID="eLog.Base.Warehouse.StockLot.StockLotSearchPage"/>
 			<Item ID="StockLotMap" Name="$stocklotmap" PageID="eLog.Base.Warehouse.StockLotMap.StockLotMapSearchPage"/>
 			<Item ID="ItemWh" Name="$itemwh" PageID="eLog.Base.Masters.ItmWh.ItemWhSearchPage"/>
-			<Item ID="Receiving" Name="$receiving" PageID="eLog.Base.Warehouse.StockTran.ReceivingHeadSearchPage"/>
+			<Item ID="Receiving" Name="$receiving" PageID="eLog.HeavyTools.Warehouse.WhZone.WhZTran.OlcWhZReceivingSearchPage"/>
 			<Item ID="Issuing" Name="$issuing" PageID="eLog.Base.Warehouse.StockTran.IssuingHeadSearchPage"/>
 			<Item ID="StockTransfering" Name="$stocktransfering" PageID="eLog.Base.Warehouse.StockTran.TransferingHeadSearchPage"/>
 			<Item ID="PhysicalInventory" Name="$physicalinventory" PageID="eLog.Base.Warehouse.PhysicalInventory.PhiHeadSearchPage"/>

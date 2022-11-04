@@ -1,0 +1,434 @@
+<Model xmlns:a="attribute" xmlns:c="collection" xmlns:o="object">
+  <o:RootObject Id="o1">
+    <c:Children>
+      <o:Model Id="o2">
+        <c:Tables>
+          <o:Table Id="o3">
+            <a:Name>olc_whztranline</a:Name>
+            <a:Code>olc_whztranline</a:Code>
+            <a:Comment>?</a:Comment>
+            <c:Columns>
+              <o:Column Id="o4">
+                <a:Name>whztlineid</a:Name>
+                <a:Code>whztlineid</a:Code>
+                <a:Comment>?</a:Comment>
+                <a:DataType>int</a:DataType>
+                <a:Mandatory>1</a:Mandatory>
+              </o:Column>
+              <o:Column Id="o5">
+                <a:Name>whztid</a:Name>
+                <a:Code>whztid</a:Code>
+                <a:Comment>?</a:Comment>
+                <a:DataType>int</a:DataType>
+                <a:Mandatory>1</a:Mandatory>
+              </o:Column>
+              <o:Column Id="o6">
+                <a:Name>linenum</a:Name>
+                <a:Code>linenum</a:Code>
+                <a:Comment>?</a:Comment>
+                <a:DataType>int</a:DataType>
+                <a:Mandatory>1</a:Mandatory>
+              </o:Column>
+              <o:Column Id="o7">
+                <a:Name>itemid</a:Name>
+                <a:Code>itemid</a:Code>
+                <a:Comment>?</a:Comment>
+                <a:DataType>int</a:DataType>
+                <a:Mandatory>1</a:Mandatory>
+              </o:Column>
+              <o:Column Id="o8">
+                <a:Name>ordqty</a:Name>
+                <a:Code>ordqty</a:Code>
+                <a:Comment>?</a:Comment>
+                <a:DataType>numeric</a:DataType>
+                <a:Mandatory>1</a:Mandatory>
+              </o:Column>
+              <o:Column Id="o9">
+                <a:Name>dispqty</a:Name>
+                <a:Code>dispqty</a:Code>
+                <a:Comment>?</a:Comment>
+                <a:DataType>numeric</a:DataType>
+                <a:Mandatory>1</a:Mandatory>
+              </o:Column>
+              <o:Column Id="o10">
+                <a:Name>movqty</a:Name>
+                <a:Code>movqty</a:Code>
+                <a:Comment>?</a:Comment>
+                <a:DataType>numeric</a:DataType>
+                <a:Mandatory>1</a:Mandatory>
+              </o:Column>
+              <o:Column Id="o11">
+                <a:Name>inqty</a:Name>
+                <a:Code>inqty</a:Code>
+                <a:Comment>?</a:Comment>
+                <a:DataType>numeric</a:DataType>
+                <a:Mandatory>1</a:Mandatory>
+              </o:Column>
+              <o:Column Id="o12">
+                <a:Name>outqty</a:Name>
+                <a:Code>outqty</a:Code>
+                <a:Comment>?</a:Comment>
+                <a:DataType>numeric</a:DataType>
+                <a:Mandatory>1</a:Mandatory>
+              </o:Column>
+              <o:Column Id="o13">
+                <a:Name>unitid2</a:Name>
+                <a:Code>unitid2</a:Code>
+                <a:Comment>?</a:Comment>
+                <a:DataType>varchar</a:DataType>
+                <a:Mandatory>1</a:Mandatory>
+              </o:Column>
+              <o:Column Id="o14">
+                <a:Name>change</a:Name>
+                <a:Code>change</a:Code>
+                <a:Comment>?</a:Comment>
+                <a:DataType>numeric</a:DataType>
+                <a:Mandatory>1</a:Mandatory>
+              </o:Column>
+              <o:Column Id="o15">
+                <a:Name>ordqty2</a:Name>
+                <a:Code>ordqty2</a:Code>
+                <a:Comment>?</a:Comment>
+                <a:DataType>numeric</a:DataType>
+                <a:Mandatory>1</a:Mandatory>
+              </o:Column>
+              <o:Column Id="o16">
+                <a:Name>dispqty2</a:Name>
+                <a:Code>dispqty2</a:Code>
+                <a:Comment>?</a:Comment>
+                <a:DataType>numeric</a:DataType>
+                <a:Mandatory>1</a:Mandatory>
+              </o:Column>
+              <o:Column Id="o17">
+                <a:Name>movqty2</a:Name>
+                <a:Code>movqty2</a:Code>
+                <a:Comment>?</a:Comment>
+                <a:DataType>numeric</a:DataType>
+                <a:Mandatory>1</a:Mandatory>
+              </o:Column>
+              <o:Column Id="o18">
+                <a:Name>note</a:Name>
+                <a:Code>note</a:Code>
+                <a:Comment>?</a:Comment>
+                <a:DataType>varchar</a:DataType>
+              </o:Column>
+              <o:Column Id="o19">
+                <a:Name>stlineid</a:Name>
+                <a:Code>stlineid</a:Code>
+                <a:Comment>?</a:Comment>
+                <a:DataType>int</a:DataType>
+              </o:Column>
+              <o:Column Id="o20">
+                <a:Name>sordlineid</a:Name>
+                <a:Code>sordlineid</a:Code>
+                <a:Comment>?</a:Comment>
+                <a:DataType>int</a:DataType>
+              </o:Column>
+              <o:Column Id="o21">
+                <a:Name>pordlineid</a:Name>
+                <a:Code>pordlineid</a:Code>
+                <a:Comment>?</a:Comment>
+                <a:DataType>int</a:DataType>
+              </o:Column>
+              <o:Column Id="o22">
+                <a:Name>taskitemid</a:Name>
+                <a:Code>taskitemid</a:Code>
+                <a:Comment>?</a:Comment>
+                <a:DataType>int</a:DataType>
+              </o:Column>
+              <o:Column Id="o23">
+                <a:Name>gen</a:Name>
+                <a:Code>gen</a:Code>
+                <a:Comment>?</a:Comment>
+                <a:DataType>int</a:DataType>
+              </o:Column>
+              <o:Column Id="o24">
+                <a:Name>addusrid</a:Name>
+                <a:Code>addusrid</a:Code>
+                <a:Comment>?</a:Comment>
+                <a:DataType>varchar</a:DataType>
+                <a:Mandatory>1</a:Mandatory>
+              </o:Column>
+              <o:Column Id="o25">
+                <a:Name>adddate</a:Name>
+                <a:Code>adddate</a:Code>
+                <a:Comment>?</a:Comment>
+                <a:DataType>datetime</a:DataType>
+                <a:Mandatory>1</a:Mandatory>
+              </o:Column>
+            </c:Columns>
+            <c:Keys>
+              <o:Key Id="o26">
+                <a:Name>pk_olc_whztranline</a:Name>
+                <a:Code>pk_olc_whztranline</a:Code>
+                <a:ConstraintName>pk_olc_whztranline</a:ConstraintName>
+                <c:Key.Columns>
+                  <o:Column Ref="o4" />
+                </c:Key.Columns>
+              </o:Key>
+            </c:Keys>
+            <c:PrimaryKey>
+              <o:Key Ref="o26" />
+            </c:PrimaryKey>
+          </o:Table>
+          <o:Table Id="o27">
+            <a:Name>olc_whztranloc</a:Name>
+            <a:Code>olc_whztranloc</a:Code>
+            <a:Comment>?</a:Comment>
+            <c:Columns>
+              <o:Column Id="o28">
+                <a:Name>whztlocid</a:Name>
+                <a:Code>whztlocid</a:Code>
+                <a:Comment>?</a:Comment>
+                <a:DataType>int</a:DataType>
+                <a:Mandatory>1</a:Mandatory>
+              </o:Column>
+              <o:Column Id="o29">
+                <a:Name>whztid</a:Name>
+                <a:Code>whztid</a:Code>
+                <a:Comment>?</a:Comment>
+                <a:DataType>int</a:DataType>
+                <a:Mandatory>1</a:Mandatory>
+              </o:Column>
+              <o:Column Id="o30">
+                <a:Name>whztlineid</a:Name>
+                <a:Code>whztlineid</a:Code>
+                <a:Comment>?</a:Comment>
+                <a:DataType>int</a:DataType>
+                <a:Mandatory>1</a:Mandatory>
+              </o:Column>
+              <o:Column Id="o31">
+                <a:Name>whid</a:Name>
+                <a:Code>whid</a:Code>
+                <a:Comment>?</a:Comment>
+                <a:DataType>varchar</a:DataType>
+                <a:Mandatory>1</a:Mandatory>
+              </o:Column>
+              <o:Column Id="o32">
+                <a:Name>whzoneid</a:Name>
+                <a:Code>whzoneid</a:Code>
+                <a:Comment>?</a:Comment>
+                <a:DataType>int</a:DataType>
+                <a:Mandatory>1</a:Mandatory>
+              </o:Column>
+              <o:Column Id="o33">
+                <a:Name>whlocid</a:Name>
+                <a:Code>whlocid</a:Code>
+                <a:Comment>?</a:Comment>
+                <a:DataType>int</a:DataType>
+                <a:Mandatory>1</a:Mandatory>
+              </o:Column>
+              <o:Column Id="o34">
+                <a:Name>whztltype</a:Name>
+                <a:Code>whztltype</a:Code>
+                <a:Comment>?</a:Comment>
+                <a:DataType>int</a:DataType>
+                <a:Mandatory>1</a:Mandatory>
+              </o:Column>
+              <o:Column Id="o35">
+                <a:Name>ordqty</a:Name>
+                <a:Code>ordqty</a:Code>
+                <a:Comment>?</a:Comment>
+                <a:DataType>numeric</a:DataType>
+                <a:Mandatory>1</a:Mandatory>
+              </o:Column>
+              <o:Column Id="o36">
+                <a:Name>dispqty</a:Name>
+                <a:Code>dispqty</a:Code>
+                <a:Comment>?</a:Comment>
+                <a:DataType>numeric</a:DataType>
+                <a:Mandatory>1</a:Mandatory>
+              </o:Column>
+              <o:Column Id="o37">
+                <a:Name>movqty</a:Name>
+                <a:Code>movqty</a:Code>
+                <a:Comment>?</a:Comment>
+                <a:DataType>numeric</a:DataType>
+                <a:Mandatory>1</a:Mandatory>
+              </o:Column>
+              <o:Column Id="o38">
+                <a:Name>addusrid</a:Name>
+                <a:Code>addusrid</a:Code>
+                <a:Comment>?</a:Comment>
+                <a:DataType>varchar</a:DataType>
+                <a:Mandatory>1</a:Mandatory>
+              </o:Column>
+              <o:Column Id="o39">
+                <a:Name>adddate</a:Name>
+                <a:Code>adddate</a:Code>
+                <a:Comment>?</a:Comment>
+                <a:DataType>datetime</a:DataType>
+                <a:Mandatory>1</a:Mandatory>
+              </o:Column>
+            </c:Columns>
+            <c:Keys>
+              <o:Key Id="o40">
+                <a:Name>pk_olc_whztranloc</a:Name>
+                <a:Code>pk_olc_whztranloc</a:Code>
+                <a:ConstraintName>pk_olc_whztranloc</a:ConstraintName>
+                <c:Key.Columns>
+                  <o:Column Ref="o28" />
+                </c:Key.Columns>
+              </o:Key>
+            </c:Keys>
+            <c:PrimaryKey>
+              <o:Key Ref="o40" />
+            </c:PrimaryKey>
+          </o:Table>
+          <o:Table Id="o41">
+            <a:Name>olc_whzstockmap</a:Name>
+            <a:Code>olc_whzstockmap</a:Code>
+            <a:Comment>?</a:Comment>
+            <c:Columns>
+              <o:Column Id="o42">
+                <a:Name>whzstockmapid</a:Name>
+                <a:Code>whzstockmapid</a:Code>
+                <a:Comment>?</a:Comment>
+                <a:DataType>int</a:DataType>
+                <a:Mandatory>1</a:Mandatory>
+              </o:Column>
+              <o:Column Id="o43">
+                <a:Name>itemid</a:Name>
+                <a:Code>itemid</a:Code>
+                <a:Comment>?</a:Comment>
+                <a:DataType>int</a:DataType>
+                <a:Mandatory>1</a:Mandatory>
+              </o:Column>
+              <o:Column Id="o44">
+                <a:Name>whid</a:Name>
+                <a:Code>whid</a:Code>
+                <a:Comment>?</a:Comment>
+                <a:DataType>varchar</a:DataType>
+                <a:Mandatory>1</a:Mandatory>
+              </o:Column>
+              <o:Column Id="o45">
+                <a:Name>whzoneid</a:Name>
+                <a:Code>whzoneid</a:Code>
+                <a:Comment>?</a:Comment>
+                <a:DataType>int</a:DataType>
+              </o:Column>
+              <o:Column Id="o46">
+                <a:Name>whlocid</a:Name>
+                <a:Code>whlocid</a:Code>
+                <a:Comment>?</a:Comment>
+                <a:DataType>int</a:DataType>
+                <a:Mandatory>1</a:Mandatory>
+              </o:Column>
+              <o:Column Id="o47">
+                <a:Name>recqty</a:Name>
+                <a:Code>recqty</a:Code>
+                <a:Comment>?</a:Comment>
+                <a:DataType>numeric</a:DataType>
+                <a:Mandatory>1</a:Mandatory>
+              </o:Column>
+              <o:Column Id="o48">
+                <a:Name>reqqty</a:Name>
+                <a:Code>reqqty</a:Code>
+                <a:Comment>?</a:Comment>
+                <a:DataType>numeric</a:DataType>
+                <a:Mandatory>1</a:Mandatory>
+              </o:Column>
+              <o:Column Id="o49">
+                <a:Name>actqty</a:Name>
+                <a:Code>actqty</a:Code>
+                <a:Comment>?</a:Comment>
+                <a:DataType>numeric</a:DataType>
+                <a:Mandatory>1</a:Mandatory>
+              </o:Column>
+              <o:Column Id="o50">
+                <a:Name>resqty</a:Name>
+                <a:Code>resqty</a:Code>
+                <a:Comment>?</a:Comment>
+                <a:DataType>numeric</a:DataType>
+                <a:Mandatory>1</a:Mandatory>
+              </o:Column>
+              <o:Column Id="o51">
+                <a:Name>provqty</a:Name>
+                <a:Code>provqty</a:Code>
+                <a:Comment>?</a:Comment>
+                <a:DataType>numeric</a:DataType>
+              </o:Column>
+            </c:Columns>
+            <c:Keys>
+              <o:Key Id="o52">
+                <a:Name>pk_olc_whzstockmap</a:Name>
+                <a:Code>pk_olc_whzstockmap</a:Code>
+                <a:ConstraintName>pk_olc_whzstockmap</a:ConstraintName>
+                <c:Key.Columns>
+                  <o:Column Ref="o42" />
+                </c:Key.Columns>
+              </o:Key>
+            </c:Keys>
+            <c:PrimaryKey>
+              <o:Key Ref="o52" />
+            </c:PrimaryKey>
+          </o:Table>
+          <o:Table Id="o53">
+            <a:Name>ols_stockmap</a:Name>
+            <a:Code>ols_stockmap</a:Code>
+            <a:Comment>?</a:Comment>
+            <c:Columns>
+              <o:Column Id="o54">
+                <a:Name>whid</a:Name>
+                <a:Code>whid</a:Code>
+                <a:Comment>?</a:Comment>
+                <a:DataType>varchar</a:DataType>
+                <a:Mandatory>1</a:Mandatory>
+              </o:Column>
+              <o:Column Id="o55">
+                <a:Name>locid</a:Name>
+                <a:Code>locid</a:Code>
+                <a:Comment>?</a:Comment>
+                <a:DataType>varchar</a:DataType>
+                <a:Mandatory>1</a:Mandatory>
+              </o:Column>
+              <o:Column Id="o56">
+                <a:Name>itemid</a:Name>
+                <a:Code>itemid</a:Code>
+                <a:Comment>?</a:Comment>
+                <a:DataType>int</a:DataType>
+                <a:Mandatory>1</a:Mandatory>
+              </o:Column>
+              <o:Column Id="o57">
+                <a:Name>recqty</a:Name>
+                <a:Code>recqty</a:Code>
+                <a:Comment>?</a:Comment>
+                <a:DataType>numeric</a:DataType>
+                <a:Mandatory>1</a:Mandatory>
+              </o:Column>
+              <o:Column Id="o58">
+                <a:Name>actqty</a:Name>
+                <a:Code>actqty</a:Code>
+                <a:Comment>?</a:Comment>
+                <a:DataType>numeric</a:DataType>
+                <a:Mandatory>1</a:Mandatory>
+              </o:Column>
+              <o:Column Id="o59">
+                <a:Name>resqty</a:Name>
+                <a:Code>resqty</a:Code>
+                <a:Comment>?</a:Comment>
+                <a:DataType>numeric</a:DataType>
+                <a:Mandatory>1</a:Mandatory>
+              </o:Column>
+            </c:Columns>
+            <c:Keys>
+              <o:Key Id="o60">
+                <a:Name>pk_ols_stockmap</a:Name>
+                <a:Code>pk_ols_stockmap</a:Code>
+                <a:ConstraintName>pk_ols_stockmap</a:ConstraintName>
+                <c:Key.Columns>
+                  <o:Column Ref="o54" />
+                  <o:Column Ref="o55" />
+                  <o:Column Ref="o56" />
+                </c:Key.Columns>
+              </o:Key>
+            </c:Keys>
+            <c:PrimaryKey>
+              <o:Key Ref="o60" />
+            </c:PrimaryKey>
+          </o:Table>
+        </c:Tables>
+      </o:Model>
+    </c:Children>
+  </o:RootObject>
+</Model>
