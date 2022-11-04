@@ -219,6 +219,7 @@ select i.itemid ,itemcode productcode, img1.groupname cat1, img2.groupname cat2,
                 } 
             }
             await whWebShopDbContext.AddRangeAsync(newPrcs, cancellationToken);
+            await whWebShopDbContext.SaveChangesAsync();
             tran.Commit();
         }
          
