@@ -1,0 +1,54 @@
+; Bevételezés
+
+$pageName_OlcWhZTran=Bevételezés
+
+; 1 | Bevételezés
+
+$tabName_OlcWhZReceivingHead=Bevételezés
+$Whztid=whztid
+$Cmpid=Vállalat
+$Whzttype=Típus
+$Whztdate=Dátum
+$Fromwhzid=Raktár
+$Towhzid=Raktár
+$Closeusrid=Lezáró
+$Closedate=Lezárás dátuma
+$Whztstat=whztstat
+$Note=Megjegyzés
+$Stid=Tranzakció
+$Sordid=sordid
+$Pordid=pordid
+$Taskid=taskid
+$Gen=gen
+$Addusrid=addusrid
+$Adddate=adddate
+
+
+; 2 | Tétel
+
+$tabName_OlcWhZReceivingLine=Tétel
+$Whztlineid=whztlineid
+$Linenum=Pozíció
+$Itemid=Tétel
+$Ordqty=Rendelt mennyiség
+$Movqty=Valós mennyiség
+$Inqty=Bevételezett mennyiség
+$Outqty=Kiadott mennyiség
+$Unitid2=M.egys.
+$Change=Váltószám
+$Ordqty2=Rendelt mennyiség
+$Dispqty2=Kiírt mennyiség
+$Movqty2=Valós mennyiség
+$Stlineid=stlineid
+$Sordlineid=sordlineid
+$Taskitemid=taskitemid
+
+; 3 | Betárolás
+
+$tabName_OlcWhZReceivingLoc=Betárolás
+$Whztlocid=whztlocid
+$Whid=Raktár
+$Whzoneid=Zóna azon.
+$Whlocid=Hely azon.
+$Whztltype=Hely típus
+$Dispqty=Kiírt mennyiség
