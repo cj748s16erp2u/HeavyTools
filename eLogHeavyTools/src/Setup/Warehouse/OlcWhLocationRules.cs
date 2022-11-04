@@ -15,7 +15,6 @@ namespace eLog.HeavyTools.Setup.Warehouse
     {
         public OlcWhLocationRules() : base(true, false)
         {
-            ERules[OlcWhLocation.FieldWhloccode.Name].Mandatory = false;
             this.AddCustomRule(this.LocTypeRule);
             this.AddCustomRule(this.LoccodeRule);
         }
@@ -65,8 +64,9 @@ namespace eLog.HeavyTools.Setup.Warehouse
         {
             string loccode = loc.Whloccode.ToString();
             if (loc.Loctype == (int)OlcWhLocation_LocType.Moving)
-            { 
-                Regex rgx = new Regex("^[0-9]{3}\\.([0-9]{3}\\.[0-9]{3})$");
+            {
+                Regex rgx = new Regex("^[0-9]{3}\\.([0-9]{3}\\.[0-9]{3})$"); // csak 9 jegyű számot lehet megadni,
+                                                                             // minden 3. szám után ponttal elválasztva
                 if (!rgx.IsMatch(loccode.ToString()))
                 {
                     ctx.AddErrorField(OlcWhLocation.FieldWhloccode.Name, "$err_whloccode");
@@ -182,7 +182,8 @@ namespace eLog.HeavyTools.Setup.Warehouse
 
         protected class ForbiddenRule : RuleBase
         {
-            public string FieldNameLabelId = null; // Ha mezoatnevezesek vannak, akkor hibanal ne a Field.Name-t, hanem ezt irja ki
+            public string FieldNameLabelId = null; // Ha mezoatnevezesek vannak, akkor hibanal ne a Field.Name-t,
+                                                   // hanem ezt irja ki
 
             public ForbiddenRule()
             {

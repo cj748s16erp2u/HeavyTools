@@ -84,7 +84,7 @@ namespace eLog.HeavyTools.Setup.Warehouse
             if (args.ActionID == ActionID.New)
             {
                 var whZoneId = this.GetWhZoneId(args);
-                this.ctrlWhZoneId.SetValue(whZoneId);
+                this.ctrlWhZoneId.SetValue(whZoneId); //betölti a zónát EditTabon az előző fülről
             }
 
             if (isGenNext)
@@ -122,7 +122,7 @@ namespace eLog.HeavyTools.Setup.Warehouse
             }
             if (CanRenderControls)
                 RenderControls(args);
-            ctrlWhloccode.SetMandatory(!isGenNext);
+            ctrlWhloccode.SetMandatory(!isGenNext); // kötelező ha új helykódot írunk vagy ha módosítunk
             return loc;
         }
 
@@ -228,15 +228,13 @@ namespace eLog.HeavyTools.Setup.Warehouse
                 if (eProjectWeb.Framework.Data.StringN.IsNullOrEmpty(loc.Whloccode))
                 {
                     loc.Whloccode = OlcWhLocationBL.CreateNextLoccode((string)args.PageData[OlcWhLocationBL.GENNEXT_ORIGLOCCODE], 1);
+                    //megnöveli a helykódot 1-el, ha az F9 | Következőre kattintunk
                 }
-                else if (loc.Whloccode.Value.Contains("%"))
-                {
-                    loc.Whloccode = OlcWhLocationBL.CreateNextLoccode((string)args.PageData[OlcWhLocationBL.GENNEXT_ORIGLOCCODE], loc.Whloccode.Value, 1);
-                }
-                loc.Whlocid = null;
+                loc.Whlocid = null; //whlocid null-ra van állítva,
+                                    //mert az a whlocid ami ebben volt tárolva már létezik az adatbázisban
                 loc.State = eProjectWeb.Framework.Data.DataRowState.Added;
             }
-            
+
             return map;
         }
 

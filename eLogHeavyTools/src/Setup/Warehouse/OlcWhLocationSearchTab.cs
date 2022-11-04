@@ -24,7 +24,7 @@ namespace eLog.HeavyTools.Setup.Warehouse
 
         protected OlcWhLocationSearchTab() { }
 
-        protected Button genNextCmd;
+        protected Button genNextCmd; //F9 | Következő gomb
         protected DialogBox dlgMessage;
 
 
@@ -45,6 +45,10 @@ namespace eLog.HeavyTools.Setup.Warehouse
             genNextCmd.Shortcut = eProjectWeb.Framework.UI.Commands.ShortcutKeys.Key_F9;
         }
 
+        /// <summary>
+        /// Feldob egy dialog boxot hogyha a kiválasztott helykód típusa nem mozgó helykód
+        /// </summary>
+        /// <param name="args"></param>
         private void m_ActionGenNextEventHandler(PageUpdateArgs args)
         {
             if (this.SearchResults.SelectedPK != null)
@@ -58,7 +62,7 @@ namespace eLog.HeavyTools.Setup.Warehouse
                     }
                     else
                     {
-                        args.Continue = true;
+                        args.Continue = true; //kell hogy vegrehajtsa a számgenerálást, mert különben itt megállna
                     }
                 }
             }
