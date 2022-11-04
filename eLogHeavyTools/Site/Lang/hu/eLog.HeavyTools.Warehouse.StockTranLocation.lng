@@ -1,0 +1,6 @@
+﻿@parent=eLog.Base.Warehouse.StockTranLocation
+
+$tabName_ReceivingStLocCustom=Betárolás
+$noroot_ReceivingStLocCustom=Az utasítás megtekintéséhez válasszon egy bevételezést vagy tételt!
+
+$Whzonecode=Zóna

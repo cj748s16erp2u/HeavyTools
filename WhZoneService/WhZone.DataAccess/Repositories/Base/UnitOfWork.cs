@@ -69,9 +69,22 @@ namespace eLog.HeavyTools.Services.WhZone.DataAccess.Repositories.Base
         /// <returns>A task that represents the asynchronous start operation.</returns>
         public async Task<WhZoneDbContext.Transaction> BeginTransactionAsync(CancellationToken cancellationToken = default)
         {
-            var transaction = await this.dbContext.BeginTransactionAsync(cancellationToken).ConfigureAwait(true);
+            var transaction = await this.dbContext.BeginTransactionAsync(cancellationToken: cancellationToken).ConfigureAwait(true);
             this.transactions.Push(transaction);
-            return transaction;
+            return transaction!;
+        }
+
+        /// <summary>
+        /// Asyncronously starts a new transaction
+        /// </summary>
+        /// <param name="isolationLevel">The <see cref="System.Data.IsolationLevel" /> to use.</param>
+        /// <param name="cancellationToken">A <see cref="CancellationToken"/> to observe while waiting for the task to complete.</param>
+        /// <returns>A task that represents the asynchronous start operation.</returns>
+        public async Task<WhZoneDbContext.Transaction> BeginTransactionAsync(System.Data.IsolationLevel isolationLevel, CancellationToken cancellationToken = default)
+        {
+            var transaction = await this.dbContext.BeginTransactionAsync(isolationLevel, cancellationToken).ConfigureAwait(true);
+            this.transactions.Push(transaction);
+            return transaction!;
         }
 
         /// <summary>

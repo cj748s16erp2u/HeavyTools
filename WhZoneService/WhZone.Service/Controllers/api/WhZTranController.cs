@@ -48,7 +48,13 @@ public class WhZTranController : Controller
     {
         try
         {
-            return this.Ok(await this.tranService.QueryReceivingAsync(query));
+            var list = await this.tranService.QueryReceivingAsync(query);
+            if (list is null)
+            {
+                list = Array.Empty<WhZReceivingTranHeadDto>();
+            }
+
+            return this.Ok(Newtonsoft.Json.JsonConvert.SerializeObject(list));
         }
         catch (Exception ex)
         {
@@ -97,6 +103,44 @@ public class WhZTranController : Controller
         try
         {
             return this.Ok(await this.tranService.UpdateReceivingAsync(request));
+        }
+        catch (Exception ex)
+        {
+            await ERP2U.Log.LoggerManager.Instance.LogErrorAsync<WhZTranController>(ex);
+            return this.BadRequest(ex.Message);
+        }
+    }
+
+    [HttpPost("receiving/statchange")]
+    public async Task<ActionResult<WhZTranHeadStatChangeResultDto>> StatChangeAsync([FromBody] WhZTranHeadStatChangeDto request)
+    {
+        if (request is null)
+        {
+            return this.BadRequest("'request' must be set");
+        }
+
+        try
+        {
+            return this.Ok(await this.tranService.StatChangeAsync(request));
+        }
+        catch (Exception ex)
+        {
+            await ERP2U.Log.LoggerManager.Instance.LogErrorAsync<WhZTranController>(ex);
+            return this.BadRequest(ex.Message);
+        }
+    }
+
+    [HttpPost("receiving/close")]
+    public async Task<ActionResult<WhZTranHeadCloseResultDto>> CloseAsync([FromBody] WhZTranHeadCloseDto request)
+    {
+        if (request is null)
+        {
+            return this.BadRequest("'request' must be set");
+        }
+
+        try
+        {
+            return this.Ok(await this.tranService.CloseAsync(request));
         }
         catch (Exception ex)
         {

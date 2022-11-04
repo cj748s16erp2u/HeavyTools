@@ -24,6 +24,7 @@ namespace eLog.HeavyTools.Services.WhZone.BusinessLogic.Services;
 [RegisterDI(Interface = typeof(IWhZTranLineService))]
 public class WhZTranLineService : LogicServiceBase<OlcWhztranline>, IWhZTranLineService
 {
+    private readonly IWhZTranLocService whZTranLocService;
 #pragma warning disable CA1822 // Mark members as static
     private readonly IRepository<OlcWhztranhead> tranHeadRepository;
     private readonly IRepository<OlsStline> stLineRepository;
@@ -36,12 +37,14 @@ public class WhZTranLineService : LogicServiceBase<OlcWhztranline>, IWhZTranLine
         IRepository<OlcWhztranline> repository,
         IUnitOfWork unitOfWork,
         IEnvironmentService environmentService,
+        IWhZTranLocService whZTranLocService,
         IRepository<OlcWhztranhead> tranHeadRepository,
         IRepository<OlsStline> stLineRepository,
         IRepository<OlsItem> itemRepository,
         IRepository<OlsUnit> unitRepository,
         IMapper mapper) : base(validator, repository, unitOfWork, environmentService)
     {
+        this.whZTranLocService = whZTranLocService ?? throw new ArgumentNullException(nameof(whZTranLocService));
         this.tranHeadRepository = tranHeadRepository ?? throw new ArgumentNullException(nameof(tranHeadRepository));
         this.stLineRepository = stLineRepository ?? throw new ArgumentNullException(nameof(stLineRepository));
         this.itemRepository = itemRepository ?? throw new ArgumentNullException(nameof(itemRepository));
@@ -154,6 +157,90 @@ public class WhZTranLineService : LogicServiceBase<OlcWhztranline>, IWhZTranLine
             }
 
             this.EnvironmentService.CustomData.TryRemove("AuthUser", out _);
+        }
+    }
+
+    /// <summary>
+    /// Bevételezés alapértelmezett helykód bejegyzések létrehozása
+    /// </summary>
+    /// <param name="whZTranHead">Bevételezés tranzakció adatok</param>
+    /// <param name="context">Készletmozgás csomag adatok</param>
+    /// <param name="cancellationToken"></param>
+    /// <returns>Létrehozott helykód bejegyzések listája</returns>
+    public async Task<IEnumerable<OlcWhztranloc>> GenerateReceivingLocAsync(OlcWhztranhead whZTranHead, Containers.Interfaces.IWhZStockMapContext context, CancellationToken cancellationToken = default)
+    {
+        if (whZTranHead is null)
+        {
+            throw new ArgumentNullException(nameof(whZTranHead));
+        }
+
+        if (context is null)
+        {
+            throw new ArgumentNullException(nameof(context));
+        }
+
+        var list = new List<OlcWhztranloc>();
+        var lines = await this.QueryAsync(l => l.Whztid == whZTranHead.Whztid, cancellationToken);
+        foreach (var line in lines)
+        {
+            var loc = await this.whZTranLocService.AddReceivingDefaultIfNotExistsAsync(whZTranHead, line, context, cancellationToken);
+            if (loc is not null)
+            {
+                list.Add(loc);
+            }
+        }
+
+        return list;
+    }
+
+    /// <summary>
+    /// Bevételezés helykódok véglegesítése
+    /// </summary>
+    /// <param name="whZTranHead">Bevételezés tranzakció adatok</param>
+    /// <param name="context">Készletmozgás csomag adatok</param>
+    /// <param name="cancellationToken"></param>
+    /// <returns>Véglegesített helykód bejegyzések</returns>
+    public async Task<IEnumerable<OlcWhztranloc>> CommitReceivingLocAsync(OlcWhztranhead whZTranHead, Containers.Interfaces.IWhZStockMapContext context, CancellationToken cancellationToken = default)
+    {
+        if (whZTranHead is null)
+        {
+            throw new ArgumentNullException(nameof(whZTranHead));
+        }
+
+        if (context is null)
+        {
+            throw new ArgumentNullException(nameof(context));
+        }
+
+        using var tran = await this.UnitOfWork.BeginTransactionAsync(cancellationToken);
+        try
+        {
+            var list = new List<OlcWhztranloc>();
+            var lines = await this.QueryAsync(l => l.Whztid == whZTranHead.Whztid, cancellationToken);
+            foreach (var line in lines)
+            {
+                var locs = await this.whZTranLocService.CommitReceivingAsync(whZTranHead, line, context, cancellationToken);
+                if (locs?.Any() == true)
+                {
+                    list.AddRange(locs);
+                }
+
+                line.Inqty = line.Movqty;
+                line.Outqty = 0M;
+
+                await this.UpdateAsync(line, cancellationToken);
+            }
+
+            tran.Commit();
+
+            return list;
+        }
+        finally
+        {
+            if (tran.HasTransaction())
+            {
+                tran.Rollback();
+            }
         }
     }
 

@@ -75,5 +75,65 @@ namespace eLog.HeavyTools.Warehouse.WhZone.Common
 
             return message;
         }
+
+        /// <summary>
+        /// Új szolgáltatás létrehozása
+        /// </summary>
+        /// <returns></returns>
+        public static WhZTranService.WhZTranClient CreateTranService()
+        {
+            var authBase64 = CreateAuthentication();
+
+            var httpClient = new System.Net.Http.HttpClient();
+            httpClient.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Basic", authBase64);
+
+            var url = GetServiceUrl();
+            return new WhZTranService.WhZTranClient(url, httpClient);
+        }
+
+        /// <summary>
+        /// Új tétel szolgáltatás létrehozása
+        /// </summary>
+        /// <returns></returns>
+        public static WhZTranService.WhZTranLineClient CreateTranLineService()
+        {
+            var authBase64 = CreateAuthentication();
+
+            var httpClient = new System.Net.Http.HttpClient();
+            httpClient.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Basic", authBase64);
+
+            var url = GetServiceUrl();
+            return new WhZTranService.WhZTranLineClient(url, httpClient);
+        }
+
+        /// <summary>
+        /// Új helykód szolgáltatás létrehozása
+        /// </summary>
+        /// <returns></returns>
+        public static WhZTranService.WhZTranLocClient CreateTranLocService()
+        {
+            var authBase64 = CreateAuthentication();
+
+            var httpClient = new System.Net.Http.HttpClient();
+            httpClient.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Basic", authBase64);
+
+            var url = GetServiceUrl();
+            return new WhZTranService.WhZTranLocClient(url, httpClient);
+        }
+
+        /// <summary>
+        /// Új helykód készlet szolgáltatás létrehozása
+        /// </summary>
+        /// <returns></returns>
+        public static WhZTranService.WhZStockMapClient CreateStockMapService()
+        {
+            var authBase64 = CreateAuthentication();
+
+            var httpClient = new System.Net.Http.HttpClient();
+            httpClient.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Basic", authBase64);
+
+            var url = GetServiceUrl();
+            return new WhZTranService.WhZStockMapClient(url, httpClient);
+        }
     }
 }

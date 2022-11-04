@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using eLog.Base.Warehouse.StockTran;
 using eProjectWeb.Framework;
 using eProjectWeb.Framework.BL;
 using eProjectWeb.Framework.Data;
@@ -184,19 +185,12 @@ where [wh].[whid] = {Utils.SqlToString(whid)}
         /// <param name="stHead">Akutalas keszlet tranzakcio fej</param>
         /// <exception cref="ArgumentOutOfRangeException">Nem megfelelo muvelet lett meghatarozva</exception>
         /// <exception cref="MessageException">Szolgaltatas soran eloallt hibauzenet</exception>
-        private void SaveWhZoneTran(string actionID, Base.Warehouse.StockTran.StHead stHead)
+        private void SaveWhZoneTran(string actionID, StHead stHead)
         {
             var towhzid = ConvertUtils.ToInt32(stHead.GetCustomData("towhzid"));
             if (towhzid != null)
             {
-                //var authBase64 = Encoding.UTF8.GetString(Convert.FromBase64String(authHeaderRegex.Replace(authorizationHeader, "$1")));
-                var authBase64 = WhZone.Common.WhZTranUtils.CreateAuthentication();
-
-                var httpClient = new System.Net.Http.HttpClient();
-                httpClient.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Basic", authBase64);
-
-                var url = WhZone.Common.WhZTranUtils.GetServiceUrl();
-                var tranService = new WhZone.WhZTranService.WhZTranClient(url, httpClient);
+                var tranService = WhZone.Common.WhZTranUtils.CreateTranService();
                 var request = new WhZone.WhZTranService.WhZReceivingTranHeadDto
                 {
                     Stid = stHead.Stid.Value,
@@ -250,6 +244,68 @@ where [wh].[whid] = {Utils.SqlToString(whid)}
                 {
                     throw new MessageException("$err_unable_to_save_whztranhead");
                 }
+            }
+        }
+
+        /// <summary>
+        /// Státusz váltás
+        /// </summary>
+        /// <param name="stId">Tranzakció azonosító</param>
+        /// <param name="newStat">Új státusz</param>
+        /// <param name="exargs"></param>
+        /// <param name="msg">Hibaüzenet</param>
+        /// <returns>0 esetén sikeres, ellenkező esetben a hiba a <paramref name="msg"/>-ben van meghatározva</returns>
+        public override int StatChange(int stId, int newStat, StatChangeExArgs exargs, out string msg)
+        {
+            var num = this.StatChangeWhZoneTran(stId, newStat, exargs, out msg);
+            if (num == 0)
+            {
+                return base.StatChange(stId, newStat, exargs, out msg);
+            }
+
+            return num;
+        }
+
+        /// <summary>
+        /// Státusz váltás meghívása
+        /// </summary>
+        /// <param name="stId">Tranzakció azonosító</param>
+        /// <param name="newStat">Új státusz</param>
+        /// <param name="exargs"></param>
+        /// <param name="msg">Hibaüzenet</param>
+        /// <returns>0 esetén sikeres, ellenkező esetben a hiba a <paramref name="msg"/>-ben van meghatározva</returns>
+        private int StatChangeWhZoneTran(int stId, int newStat, StatChangeExArgs exargs, out string msg)
+        {
+            var tranService = WhZone.Common.WhZTranUtils.CreateTranService();
+            var request = new WhZone.WhZTranService.WhZTranHeadStatChangeDto
+            {
+                Stid = stId,
+                NewStat = (WhZone.WhZTranService.WhZTranHead_Whztstat)newStat,
+                AuthUser = Session.Current.UserID,
+            };
+
+            try
+            {
+                var result = tranService.Statchange(request);
+                msg = result?.Message;
+
+                return result?.Result ?? -2;
+            }
+            catch (WhZone.WhZTranService.ApiException ex)
+            {
+                Log.Error(ex);
+                var response = ex.Response;
+                if (!string.IsNullOrWhiteSpace(response))
+                {
+                    response = WhZone.Common.WhZTranUtils.ParseErrorResponse(response);
+                    msg = response;
+                }
+                else
+                {
+                    msg = ex.ToString();
+                }
+
+                return -1;
             }
         }
     }

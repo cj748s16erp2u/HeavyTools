@@ -44,6 +44,56 @@ public class OlcWhztranlineValidator : EntityValidator<OlcWhztranline>, IOlcWhzt
         this.RuleFor(line => line.Movqty2).NotNull();
 
         this.RuleFor(line => line.Gen).NotEmpty();
+
+        this.RuleFor(line => line.Inqty).Custom((newValue, context) =>
+        {
+            var line = context.InstanceToValidate;
+            var tranHead = context.TryGetEntity<OlcWhztranline, OlcWhztranhead>();
+            if (tranHead is null)
+            {
+                context.AddFailure(new FluentValidation.Results.ValidationFailure(nameof(OlcWhztranline.Whztid), $"The zone tran can't be found"));
+            }
+            else if (tranHead!.Whztstat == (int)WhZTranHead_Whztstat.Closed)
+            {
+                if (tranHead.Whzttype == (int)WhZTranHead_Whzttype.Receiving && line.Movqty != newValue)
+                {
+                    context.AddFailure(new FluentValidation.Results.ValidationFailure(nameof(OlcWhztranline.Inqty), $"The inqty must be same as movqty (inqty: {newValue}, movqty: {line.Movqty})"));
+                }
+                else if (tranHead.Whzttype != (int)WhZTranHead_Whzttype.Receiving && newValue != 0)
+                {
+                    context.AddFailure(new FluentValidation.Results.ValidationFailure(nameof(OlcWhztranline.Inqty), $"The inqty must be 0 (inqty: {newValue})"));
+                }
+            }
+            else if (newValue != 0)
+            {
+                context.AddFailure(new FluentValidation.Results.ValidationFailure(nameof(OlcWhztranline.Inqty), $"The inqty must be 0 (inqty: {newValue})"));
+            }
+        });
+
+        this.RuleFor(line => line.Outqty).Custom((newValue, context) =>
+        {
+            var line = context.InstanceToValidate;
+            var tranHead = context.TryGetEntity<OlcWhztranline, OlcWhztranhead>();
+            if (tranHead is null)
+            {
+                context.AddFailure(new FluentValidation.Results.ValidationFailure(nameof(OlcWhztranline.Whztid), $"The zone tran can't be found"));
+            }
+            else if (tranHead!.Whztstat == (int)WhZTranHead_Whztstat.Closed)
+            {
+                if (tranHead.Whzttype == (int)WhZTranHead_Whzttype.Issuing && line.Movqty != newValue)
+                {
+                    context.AddFailure(new FluentValidation.Results.ValidationFailure(nameof(OlcWhztranline.Outqty), $"The outqty must be same as movqty (outqty: {newValue}, movqty: {line.Movqty})"));
+                }
+                else if (tranHead.Whzttype != (int)WhZTranHead_Whzttype.Issuing && newValue != 0)
+                {
+                    context.AddFailure(new FluentValidation.Results.ValidationFailure(nameof(OlcWhztranline.Outqty), $"The outqty must be 0 (outqty: {newValue})"));
+                }
+            }
+            else if (newValue != 0)
+            {
+                context.AddFailure(new FluentValidation.Results.ValidationFailure(nameof(OlcWhztranline.Outqty), $"The outqty must be 0 (outqty: {newValue})"));
+            }
+        });
     }
 
     protected override void AddAddRules()
@@ -276,35 +326,35 @@ public class OlcWhztranlineValidator : EntityValidator<OlcWhztranline>, IOlcWhzt
                 }
             });
 
-        this.RuleFor(line => line.Inqty)
-            .Custom((newValue, context) =>
-            {
-                var line = context.InstanceToValidate;
-                var stLine = context.TryGetEntity<OlcWhztranline, OlsStline>();
-                if (stLine is null)
-                {
-                    context.AddFailure(new FluentValidation.Results.ValidationFailure(nameof(OlcWhztranline.Stlineid), $"The stock tran line can't be found"));
-                }
-                else if (stLine.Inqty != newValue)
-                {
-                    context.AddFailure(new FluentValidation.Results.ValidationFailure(nameof(OlcWhztranline.Inqty), $"The transaction line's inqty must be the same as stock tran line's inqty (stock tran: {stLine.Inqty}, transaction: {newValue})"));
-                }
-            });
+        //this.RuleFor(line => line.Inqty)
+        //    .Custom((newValue, context) =>
+        //    {
+        //        var line = context.InstanceToValidate;
+        //        var stLine = context.TryGetEntity<OlcWhztranline, OlsStline>();
+        //        if (stLine is null)
+        //        {
+        //            context.AddFailure(new FluentValidation.Results.ValidationFailure(nameof(OlcWhztranline.Stlineid), $"The stock tran line can't be found"));
+        //        }
+        //        else if (stLine.Inqty != newValue)
+        //        {
+        //            context.AddFailure(new FluentValidation.Results.ValidationFailure(nameof(OlcWhztranline.Inqty), $"The transaction line's inqty must be the same as stock tran line's inqty (stock tran: {stLine.Inqty}, transaction: {newValue})"));
+        //        }
+        //    });
 
-        this.RuleFor(line => line.Outqty)
-            .Custom((newValue, context) =>
-            {
-                var line = context.InstanceToValidate;
-                var stLine = context.TryGetEntity<OlcWhztranline, OlsStline>();
-                if (stLine is null)
-                {
-                    context.AddFailure(new FluentValidation.Results.ValidationFailure(nameof(OlcWhztranline.Stlineid), $"The stock tran line can't be found"));
-                }
-                else if (stLine.Outqty != newValue)
-                {
-                    context.AddFailure(new FluentValidation.Results.ValidationFailure(nameof(OlcWhztranline.Outqty), $"The transaction line's outqty must be the same as stock tran line's outqty (stock tran: {stLine.Outqty}, transaction: {newValue})"));
-                }
-            });
+        //this.RuleFor(line => line.Outqty)
+        //    .Custom((newValue, context) =>
+        //    {
+        //        var line = context.InstanceToValidate;
+        //        var stLine = context.TryGetEntity<OlcWhztranline, OlsStline>();
+        //        if (stLine is null)
+        //        {
+        //            context.AddFailure(new FluentValidation.Results.ValidationFailure(nameof(OlcWhztranline.Stlineid), $"The stock tran line can't be found"));
+        //        }
+        //        else if (stLine.Outqty != newValue)
+        //        {
+        //            context.AddFailure(new FluentValidation.Results.ValidationFailure(nameof(OlcWhztranline.Outqty), $"The transaction line's outqty must be the same as stock tran line's outqty (stock tran: {stLine.Outqty}, transaction: {newValue})"));
+        //        }
+        //    });
 
         this.RuleFor(line => line.Unitid2)
             .Custom((newValue, context) =>

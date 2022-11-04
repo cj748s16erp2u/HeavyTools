@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using eLog.HeavyTools.Services.WhZone.BusinessEntities.Model;
 using eLog.HeavyTools.Services.WhZone.Test.Fixtures;
@@ -122,6 +123,37 @@ public class WhZTranLineServiceReceivingTest : Base.WhZTranLineServiceTestBase
         }
     }
 
+    protected async Task<(OlsStline stLine, BusinessEntities.Dto.WhZReceivingTranLineDto tranLine)> AddTranLineAsync(int cmpId, bool hasStockTran, CancellationToken cancellationToken = default)
+    {
+        var tranHead = await this.GetFirstWhZTranHeadAsync(cmpId, hasStockTran, cancellationToken);
+        Assert.NotNull(tranHead);
+        Assert.NotNull(tranHead.Stid);
+
+        return await this.AddTranLineAsync(tranHead, cancellationToken);
+    }
+
+    public async Task<(OlsStline stLine, BusinessEntities.Dto.WhZReceivingTranLineDto tranLine)> AddTranLineAsync(OlcWhztranhead tranHead, CancellationToken cancellationToken = default)
+    {
+        if (tranHead is null)
+        {
+            throw new ArgumentNullException(nameof(tranHead));
+        }
+
+        await this.RemoveExistingTranLinesAsync(tranHead.Whztid, cancellationToken);
+
+        var stLine = await this.GetFirstStLineAsync(tranHead.Stid!.Value, cancellationToken);
+        Assert.NotNull(stLine);
+
+        var request = new BusinessEntities.Dto.WhZReceivingTranLineDto
+        {
+            Whztid = tranHead!.Whztid,
+            Stlineid = stLine.Stlineid,
+        };
+
+        var tranLine = await this.service.AddReceivingAsync(request, cancellationToken);
+        return (stLine, tranLine);
+    }
+
     [Fact]
     public async Task<int> AddTranLineTestAsync()
     {
@@ -132,22 +164,7 @@ public class WhZTranLineServiceReceivingTest : Base.WhZTranLineServiceTestBase
         using var tran = await this.unitOfWork.BeginTransactionAsync(ct);
         try
         {
-            var tranHead = await this.GetFirstWhZTranHeadAsync(3, true, ct);
-            Assert.NotNull(tranHead);
-            Assert.NotNull(tranHead.Stid);
-
-            await this.RemoveExistingTranLinesAsync(tranHead.Whztid, ct);
-
-            var stLine = await this.GetFirstStLineAsync(tranHead.Stid.Value, ct);
-            Assert.NotNull(stLine);
-
-            var request = new BusinessEntities.Dto.WhZReceivingTranLineDto
-            {
-                Whztid = tranHead!.Whztid,
-                Stlineid = stLine.Stlineid,
-            };
-
-            var tranLine = await this.service.AddReceivingAsync(request, ct);
+            var (stLine, tranLine) = await this.AddTranLineAsync(3, true, ct);
             Assert.NotNull(tranLine?.Whztlineid);
             Assert.NotEqual(0, tranLine!.Whztlineid);
             Assert.Equal(stLine.Linenum, tranLine.Linenum);

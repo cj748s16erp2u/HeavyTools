@@ -513,6 +513,13 @@
     <Compile Include="Warehouse\StockTran\IssuingHeadBL3.cs" />
     <Compile Include="Warehouse\StockTran\IssuingLineBL3.cs" />
     <Compile Include="Warehouse\StockTran\IssuingLineEditTab3.cs" />
+    <Compile Include="Warehouse\StockTranLocation\ReceivingStLocCustomBL.cs" />
+    <Compile Include="Warehouse\StockTranLocation\ReceivingStLocCustomDto.cs" />
+    <Compile Include="Warehouse\StockTranLocation\ReceivingStLocCustomEditPage.cs" />
+    <Compile Include="Warehouse\StockTranLocation\ReceivingStLocCustomEditTab.cs" />
+    <Compile Include="Warehouse\StockTranLocation\ReceivingStLocCustomRules.cs" />
+    <Compile Include="Warehouse\StockTranLocation\ReceivingStLocCustomSearchProvider.cs" />
+    <Compile Include="Warehouse\StockTranLocation\ReceivingStLocCustomSearchTab.cs" />
     <Compile Include="Warehouse\StockTran\ReceivingHeadBL3.cs" />
     <Compile Include="Warehouse\StockTran\ReceivingHeadEditTab3.cs" />
     <Compile Include="Warehouse\StockTran\ReceivingHeadEditTab3.cs" />

@@ -10,15 +10,29 @@ namespace eLog.HeavyTools.Warehouse.StockTranLocation
 {
     public class ReceivingStLocCustomSearchTab : DetailSearchTabTemplate1
     {
-        public static DefaultPageSetup SetupStLocCustom = new DefaultPageSetup("StLocCustom", ReceivingStLocCustomBL.ID, ReceivingStLocCustomSearchProvider.ID, null);
+        public static DefaultPageSetup SetupStLocCustom = new DefaultPageSetup("ReceivingStLocCustom", ReceivingStLocCustomBL.ID, ReceivingStLocCustomSearchProvider.ID, ReceivingStLocCustomEditPage.ID);
 
         public static ReceivingStLocCustomSearchTab New(DefaultPageSetup setup)
         {
             var t = ObjectFactory.New<ReceivingStLocCustomSearchTab>();
-            t.Initialize("StLocCustom", setup, "$noroot_ReceivingStLocCustom", DefaultActions.Basic | DefaultActions.Delete);
+            t.Initialize(setup.MainEntity, setup, $"$noroot_{setup.MainEntity}", DefaultActions.View);
             return t;
         }
 
         protected ReceivingStLocCustomSearchTab() { }
+
+        protected override void CreateBase()
+        {
+            this.ParentEntityKey = Consts.DetailEntityKey;
+            this.DetailEntityKey = null;
+
+            base.CreateBase();
+        }
+
+        protected override void CreateCheckForRootEntityKey()
+        {
+            this.OnActivate.AddStep(new eProjectWeb.Framework.UI.Script.CopyEntityKeyStep(Consts.RootEntityKey, Consts.DetailEntityKey));
+            this.OnActivate.AddStep(new eProjectWeb.Framework.UI.Script.CheckEntityKeyStep(TabID, ParentEntityKey));
+        }
     }
 }

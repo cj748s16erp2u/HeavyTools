@@ -191,7 +191,7 @@ public class OlcWhztranheadValidatorTest : TestBase<OlcWhztranhead, IWhZTranServ
             Towhzid = 1,
             Stid = stHead?.Stid,
             Whztdate = (stHead?.Stdate).GetValueOrDefault(DateTime.Today),
-            Whztstat = (int)WhZTranHead_Whztstat.Created,
+            Whztstat = (int)WhZTranHead_Whztstat.Creating,
             Gen = 1
         };
 
@@ -304,7 +304,7 @@ public class OlcWhztranheadValidatorTest : TestBase<OlcWhztranhead, IWhZTranServ
             Towhzid = zone?.Whzoneid,
             Stid = stHead?.Stid,
             Whztdate = (stHead?.Stdate).GetValueOrDefault(DateTime.Today),
-            Whztstat = (int)WhZTranHead_Whztstat.Created,
+            Whztstat = (int)WhZTranHead_Whztstat.Creating,
             Gen = 1
         };
 
@@ -337,7 +337,7 @@ public class OlcWhztranheadValidatorTest : TestBase<OlcWhztranhead, IWhZTranServ
             Towhzid = zone?.Whzoneid,
             Stid = stHead?.Stid,
             Whztdate = (stHead?.Stdate).GetValueOrDefault(DateTime.Today),
-            Whztstat = (int)WhZTranHead_Whztstat.Created,
+            Whztstat = (int)WhZTranHead_Whztstat.Creating,
             Gen = 1
         };
 
@@ -414,7 +414,7 @@ public class OlcWhztranheadValidatorTest : TestBase<OlcWhztranhead, IWhZTranServ
             Towhzid = whZone?.Whzoneid,
             Stid = stHead?.Stid,
             Whztdate = (stHead?.Stdate).GetValueOrDefault(DateTime.Today),
-            Whztstat = (int)WhZTranHead_Whztstat.Created,
+            Whztstat = (int)WhZTranHead_Whztstat.Creating,
             Gen = 1
         };
 
@@ -464,7 +464,7 @@ public class OlcWhztranheadValidatorTest : TestBase<OlcWhztranhead, IWhZTranServ
             e =>
             {
                 e.Whztdate = DateTime.Today.AddDays(-1);
-                e.Whztstat = (int)WhZTranHead_Whztstat.Created;
+                e.Whztstat = (int)WhZTranHead_Whztstat.Creating;
             },
             e =>
             {

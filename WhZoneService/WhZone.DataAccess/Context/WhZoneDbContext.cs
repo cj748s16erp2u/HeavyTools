@@ -28,6 +28,8 @@ namespace eLog.HeavyTools.Services.WhZone.DataAccess.Context
         public virtual DbSet<OlcWhztranloc> OlcWhztranlocs { get; set; } = null!;
         public virtual DbSet<OlsCompany> OlsCompanies { get; set; } = null!;
         public virtual DbSet<OlsItem> OlsItems { get; set; } = null!;
+        public virtual DbSet<OlsStathead> OlsStatheads { get; set; } = null!;
+        public virtual DbSet<OlsStatline> OlsStatlines { get; set; } = null!;
         public virtual DbSet<OlsSthead> OlsStheads { get; set; } = null!;
         public virtual DbSet<OlsStline> OlsStlines { get; set; } = null!;
         public virtual DbSet<OlsSysval> OlsSysvals { get; set; } = null!;
@@ -299,6 +301,38 @@ namespace eLog.HeavyTools.Services.WhZone.DataAccess.Context
                     .HasForeignKey(d => d.Unitid)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("fk_ols_item_unitid");
+            });
+
+            modelBuilder.Entity<OlsStathead>(entity =>
+            {
+                entity.HasKey(e => e.Statgrpid)
+                    .HasName("pk_ols_stathead");
+
+                entity.Property(e => e.Statgrpid).ValueGeneratedNever();
+
+                entity.HasOne(d => d.Addusr)
+                    .WithMany(p => p.OlsStatheads)
+                    .HasForeignKey(d => d.Addusrid)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("fk_ols_stathead_addusrid");
+            });
+
+            modelBuilder.Entity<OlsStatline>(entity =>
+            {
+                entity.HasKey(e => new { e.Statgrpid, e.Value })
+                    .HasName("pk_ols_statline");
+
+                entity.HasOne(d => d.Addusr)
+                    .WithMany(p => p.OlsStatlines)
+                    .HasForeignKey(d => d.Addusrid)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("fk_ols_statline_addusrid");
+
+                entity.HasOne(d => d.Statgrp)
+                    .WithMany(p => p.OlsStatlines)
+                    .HasForeignKey(d => d.Statgrpid)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("fk_ols_statline_statgrpid");
             });
 
             modelBuilder.Entity<OlsSthead>(entity =>

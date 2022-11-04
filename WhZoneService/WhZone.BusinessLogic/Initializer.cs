@@ -24,6 +24,9 @@ public static class InitializerBL
         services.Configure<eLog.HeavyTools.Services.WhZone.BusinessLogic.Options.CryptoOptions>(options => configuration
             .GetSection(eLog.HeavyTools.Services.WhZone.BusinessLogic.Options.CryptoOptions.NAME)
             .Bind(options));
+        services.Configure<eLog.HeavyTools.Services.WhZone.BusinessLogic.Options.WhZTranOptions>(options => configuration
+            .GetSection(eLog.HeavyTools.Services.WhZone.BusinessLogic.Options.WhZTranOptions.NAME)
+            .Bind(options));
 
         RegisterImplementations(services);
 
