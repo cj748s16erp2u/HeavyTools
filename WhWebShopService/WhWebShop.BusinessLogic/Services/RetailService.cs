@@ -32,6 +32,7 @@ public class RetailService : IRetailService
     private readonly IItemGroupCache itemGroupCache;
     private readonly IOlsSordlineService olsSordlineService;
     private readonly IOlcSordlineService olcSordlineService;
+    private readonly IReserveService reserveService;
 
     public RetailService(
         IOptions<Options.RetailOptions> retailOption,
@@ -45,7 +46,8 @@ public class RetailService : IRetailService
         IItemCache itemCache,
         IItemGroupCache itemGroupCache,
         IOlsSordlineService olsSordlineService,
-        IOlcSordlineService olcSordlineService)
+        IOlcSordlineService olcSordlineService,
+        IReserveService reserveService)
     {
         this.retailOption = retailOption ?? throw new ArgumentNullException(nameof(retailOption));
         this.repository = repository ?? throw new ArgumentNullException(nameof(repository));
@@ -59,6 +61,7 @@ public class RetailService : IRetailService
         this.itemGroupCache = itemGroupCache ?? throw new ArgumentNullException(nameof(itemGroupCache));
         this.olsSordlineService = olsSordlineService ?? throw new ArgumentNullException(nameof(olsSordlineService));
         this.olcSordlineService = olcSordlineService ?? throw new ArgumentNullException(nameof(olcSordlineService));
+        this.reserveService = reserveService ?? throw new ArgumentNullException(nameof(reserveService));
     }
 
     async Task<RetailOrderResultDto> IRetailService.CreateOrderAsync(JObject value, CancellationToken cancellationToken)
@@ -78,7 +81,7 @@ select ROW_NUMBER() OVER (ORDER BY CAST(GETDATE() AS TIMESTAMP)) id, wh.cmpid, w
 	select sum(l.ordqty-isnull(l.movqty,0)) ordqty
 	  from ols_sordhead h
 	  join ols_sordline l on l.sordid=h.sordid
-	 where h.sorddocid={retailOption.Value.OrderSordDocId} and l.sordlinestat<100 and h.sordstat<100 and l.itemid=i.itemid
+	 where h.sorddocid={retailOption.Value.OrderSordDocId} and l.sordlinestat<100 and h.sordstat<100 and l.itemid=i.itemid and h.addrid=wh.addrid
   ) sord
   where i.minqty>0
     and i.minqty-isnull(s.actqty,0)-isnull(ordqty,0)>0
@@ -197,7 +200,12 @@ select ROW_NUMBER() OVER (ORDER BY CAST(GETDATE() AS TIMESTAMP)) id, wh.cmpid, w
             Sordlineid = nsl.Sordlineid
         };
 
-        await olcSordlineService.AddAsync(ncsl, cancellationToken); 
+        await olcSordlineService.AddAsync(ncsl, cancellationToken);
+
+
+        var res = await reserveService.DoFrameOrderReserve(sordhead, nsl, cancellationToken);
+
+
     }
 
     private async Task<OlcSordhead> CreateOlcSordHead(OlsSordhead sh, RetailOrderParamDto retailOrderParam, CancellationToken cancellationToken)
