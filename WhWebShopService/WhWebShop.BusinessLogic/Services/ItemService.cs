@@ -109,6 +109,7 @@ select i.itemid ,itemcode productcode, img1.groupname cat1, img2.groupname cat2,
                  
                 EAN = item.EAN!,
                 Season = item.Season!,
+                PriceDate = item.Date
             };
             ps.Add(p);
         };

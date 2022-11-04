@@ -122,4 +122,8 @@ public class ItemTmp : BusinessEntity
 
     [Column("retailPriceSaleGrossRonRo", TypeName = "numeric(19, 6)")]
     public decimal? RetailPriceSaleGrossRonRo { get; set; }
+
+
+    [Column("date", TypeName = "dateteime")]
+    public DateTime? Date { get; set; }
 }
