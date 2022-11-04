@@ -63,6 +63,7 @@ public partial class WhWebShopDbContext : DbContext
         public virtual DbSet<OlsCountry> OlsCountry { get; set; } = null!;
         public virtual DbSet<OlsCurrency> OlsCurrency { get; set; } = null!;
         public virtual DbSet<OlsItem> OlsItem { get; set; } = null!;
+        public virtual DbSet<OlsItemgroup> OlsItemgroup { get; set; } = null!;
         public virtual DbSet<OlsPartnaddr> OlsPartnaddr { get; set; } = null!;
         public virtual DbSet<OlsPartner> OlsPartner { get; set; } = null!;
         public virtual DbSet<OlsRecid> OlsRecid { get; set; } = null!;
@@ -418,6 +419,7 @@ public partial class WhWebShopDbContext : DbContext
                 entity.HasOne(d => d.Sordline)
                     .WithOne(p => p.OlcSordlineSordline)
                     .HasForeignKey<OlcSordline>(d => d.Sordlineid)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("fk_olc_sordline_sordlineid");
             });
 
@@ -435,7 +437,7 @@ public partial class WhWebShopDbContext : DbContext
                 entity.HasOne(d => d.Preordersordline)
                     .WithMany(p => p.OlcSordlineResPreordersordline)
                     .HasForeignKey(d => d.Preordersordlineid)
-                    .HasConstraintName("fk_olc_sordline_res_presordersordlineid");
+                    .HasConstraintName("fk_olc_sordline_res_preordersordlineid");
 
                 entity.HasOne(d => d.Res)
                     .WithMany(p => p.OlcSordlineRes)
@@ -561,10 +563,34 @@ public partial class WhWebShopDbContext : DbContext
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("fk_ols_item_addusrid");
 
+                entity.HasOne(d => d.Itemgrp)
+                    .WithMany(p => p.OlsItem)
+                    .HasForeignKey(d => d.Itemgrpid)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("fk_ols_item_itemgrpid");
+
                 entity.HasOne(d => d.Rootitem)
                     .WithMany(p => p.InverseRootitem)
                     .HasForeignKey(d => d.Rootitemid)
                     .HasConstraintName("fk_ols_item_rootitemid");
+            });
+
+            modelBuilder.Entity<OlsItemgroup>(entity =>
+            {
+                entity.HasKey(e => e.Itemgrpid)
+                    .HasName("pk_ols_itemgroup");
+
+                entity.HasOne(d => d.Addusr)
+                    .WithMany(p => p.OlsItemgroup)
+                    .HasForeignKey(d => d.Addusrid)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("fk_ols_itemgroup_addusrid");
+
+                entity.HasOne(d => d.Tax)
+                    .WithMany(p => p.OlsItemgroup)
+                    .HasForeignKey(d => d.Taxid)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("fk_ols_itemgroup_taxid");
             });
 
             modelBuilder.Entity<OlsPartnaddr>(entity =>

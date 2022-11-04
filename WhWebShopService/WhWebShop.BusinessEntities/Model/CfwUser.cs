@@ -34,6 +34,7 @@ namespace eLog.HeavyTools.Services.WhWebShop.BusinessEntities.Model
             OlsCountry = new HashSet<OlsCountry>();
             OlsCurrency = new HashSet<OlsCurrency>();
             OlsItem = new HashSet<OlsItem>();
+            OlsItemgroup = new HashSet<OlsItemgroup>();
             OlsPartnaddr = new HashSet<OlsPartnaddr>();
             OlsPartner = new HashSet<OlsPartner>();
             OlsReserve = new HashSet<OlsReserve>();
@@ -133,6 +134,8 @@ namespace eLog.HeavyTools.Services.WhWebShop.BusinessEntities.Model
         public virtual ICollection<OlsCurrency> OlsCurrency { get; set; }
         [InverseProperty("Addusr")]
         public virtual ICollection<OlsItem> OlsItem { get; set; }
+        [InverseProperty("Addusr")]
+        public virtual ICollection<OlsItemgroup> OlsItemgroup { get; set; }
         [InverseProperty("Addusr")]
         public virtual ICollection<OlsPartnaddr> OlsPartnaddr { get; set; }
         [InverseProperty("Addusr")]

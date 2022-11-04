@@ -28,6 +28,10 @@ public class RetailService : IRetailService
     private readonly IOlsSordheadService olsSordheadService;
     private readonly IOlcSordheadService olcSordheadService;
     private readonly IOrderService orderService;
+    private readonly IItemCache itemCache;
+    private readonly IItemGroupCache itemGroupCache;
+    private readonly IOlsSordlineService olsSordlineService;
+    private readonly IOlcSordlineService olcSordlineService;
 
     public RetailService(
         IOptions<Options.RetailOptions> retailOption,
@@ -37,7 +41,11 @@ public class RetailService : IRetailService
         IUnitOfWork unitOfWork,
         IOlsSordheadService olsSordheadService,
         IOlcSordheadService olcSordheadService,
-        IOrderService orderService)
+        IOrderService orderService,
+        IItemCache itemCache,
+        IItemGroupCache itemGroupCache,
+        IOlsSordlineService olsSordlineService,
+        IOlcSordlineService olcSordlineService)
     {
         this.retailOption = retailOption ?? throw new ArgumentNullException(nameof(retailOption));
         this.repository = repository ?? throw new ArgumentNullException(nameof(repository));
@@ -47,6 +55,10 @@ public class RetailService : IRetailService
         this.olsSordheadService = olsSordheadService ?? throw new ArgumentNullException(nameof(olsSordheadService));
         this.olcSordheadService = olcSordheadService ?? throw new ArgumentNullException(nameof(olcSordheadService));
         this.orderService = orderService ?? throw new ArgumentNullException(nameof(orderService));
+        this.itemCache = itemCache ?? throw new ArgumentNullException(nameof(itemCache));
+        this.itemGroupCache = itemGroupCache ?? throw new ArgumentNullException(nameof(itemGroupCache));
+        this.olsSordlineService = olsSordlineService ?? throw new ArgumentNullException(nameof(olsSordlineService));
+        this.olcSordlineService = olcSordlineService ?? throw new ArgumentNullException(nameof(olcSordlineService));
     }
 
     async Task<RetailOrderResultDto> IRetailService.CreateOrderAsync(JObject value, CancellationToken cancellationToken)
@@ -108,7 +120,7 @@ select ROW_NUMBER() OVER (ORDER BY CAST(GETDATE() AS TIMESTAMP)) id, wh.cmpid, w
                 }
                 sordlinecount++;
 
-                var sl =  await CreateSordHead(item, retailOrderParam, cancellationToken);
+                await CreateSordLine(item, sordhead, retailOrderParam, cancellationToken);
 
 
 
@@ -116,9 +128,76 @@ select ROW_NUMBER() OVER (ORDER BY CAST(GETDATE() AS TIMESTAMP)) id, wh.cmpid, w
 
             }
 
-            //tran.Commit();
+            tran.Commit();
         }
         return new RetailOrderResultDto() { RetaulCount = sordheadcount };
+    }
+
+    private async Task CreateSordLine(RetailOrderTmp item, OlsSordhead sordhead, RetailOrderParamDto retailOrderParam, CancellationToken cancellationToken)
+    {
+        var nsl = new OlsSordline();
+
+        var nid = await this.olsRecidService.GetNewIdAsync("SordLine.SordLineID", cancellationToken);
+        if (nid == null)
+        {
+            throw new Exception("Cannot generate new id");
+        }
+
+        nsl.Sordlineid = nid.Lastid;
+        nsl.Sordid = sordhead.Sordid;
+        nsl.Linenum = ++sordhead.Lastlinenum;
+        nsl.Def = 1;
+
+     
+        nsl.Itemid = item.Itemid!.Value;
+       
+        nsl.Reqdate = DateTime.Today;
+        nsl.Ref2 = null;
+
+        nsl.Ordqty = item.Ordqty!.Value;
+        nsl.Movqty = 0;
+
+        /*
+        nsl.Selprctype = 2; // bruttó
+        nsl.Selprc = item.SelPrc.GetValueOrDefault(0);
+        nsl.Seltotprc = item.GrossPrc.GetValueOrDefault(0);
+        */
+        var i = await itemCache.GetItemAsync(item.Itemid, cancellationToken);
+        if (i == null)
+        {
+            throw new Exception("ItemNotFound");
+        }
+        var ig = await itemGroupCache.GetAsync(i.Itemgrpid, cancellationToken);
+        
+
+        nsl.Selprcprcid = null;
+        nsl.Discpercnt = 0;
+        nsl.Disctotval = 0;
+        nsl.Taxid = ig.Taxid;
+        nsl.Sordlinestat = 10;
+        nsl.Note = "";
+        nsl.Resid = null;
+        nsl.Ucdid = null;
+        nsl.Pjpid = null;
+
+        nsl.Gen = retailOption.Value.GenId!;
+        nsl.Adddate = DateTime.Now;
+        nsl.Addusrid = retailOrderParam.Addusrid!;
+
+        nsl = await olsSordlineService.AddAsync(nsl, cancellationToken);
+
+        if (nsl == null)
+        {
+            throw new Exception("Cannot save sordline");
+        }
+        var ncsl = new OlcSordline
+        {
+            Adddate = DateTime.Now,
+            Addusrid = retailOrderParam.Addusrid!,
+            Sordlineid = nsl.Sordlineid
+        };
+
+        await olcSordlineService.AddAsync(ncsl, cancellationToken); 
     }
 
     private async Task<OlcSordhead> CreateOlcSordHead(OlsSordhead sh, RetailOrderParamDto retailOrderParam, CancellationToken cancellationToken)

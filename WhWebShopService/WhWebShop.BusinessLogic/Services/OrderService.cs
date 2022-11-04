@@ -389,7 +389,11 @@ public class OrderService : LogicServiceBase<OlsSordhead>, IOrderService
     public async Task<string> GetNewSordnum(OlsSordhead sh, CancellationToken cancellationToken = default)
     {
         var storeId = await recIdService.GetNewIdAsync("sp_ols_getnewsordnum", cancellationToken);
+        if (storeId == null)
+        {
 
+            throw new Exception("Missing sp_ols_getnewsordnum storeId");
+        }
         var sps = new List<SqlParameter>
         {
             new SqlParameter("storeId", storeId!.Lastid),
