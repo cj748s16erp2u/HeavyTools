@@ -31,7 +31,9 @@ namespace eLog.HeavyTools
             eLog.Base.Sales.Sord.SordStGenCommon.GenType = eLog.Base.Sales.Sord.SordStGenType.More;
 
             // Lehessen Feladott statuszbol egybol Lezartba allitani a raktar tranzakciokat
-            eLog.Base.Warehouse.StockTran.StHeadBL.AllowDirectClose = true;
+            eLog.Base.Warehouse.StockTran.StHeadBL.AllowDirectClose = false;
+            // Lehessen Tranzakcio fejet torolni
+            eLog.Base.Warehouse.StockTran.StHeadBL.DeleteAllowed = true;
 
             // Szallito rendeles tetel felvitelnel jegyezze meg egy fejen belul a kert szallitas datumot es a kovetkezo felvitelnel kinalja fel
             eLog.Base.Purchase.Pord.PordLineEditCommon.RememberLastLineReqDate = true;
@@ -256,7 +258,6 @@ namespace eLog.HeavyTools
             ObjectFactory.AddRemap(typeof(Base.Sales.Sinv.SinvHeadRules), typeof(Sales.Sinv.SinvHeadRules3));
             ObjectFactory.AddRemap(typeof(Base.Sales.Sinv.SinvHeadEditTab), typeof(Sales.Sinv.SinvHeadEditTab3));
 
-
             //StockTran
             ObjectFactory.AddRemap(typeof(Base.Warehouse.StockTran.TransferingHeadRules), typeof(Warehouse.StockTran.TransferingHeadRules3));
             ObjectFactory.AddRemap(typeof(Base.Warehouse.StockTran.TransferingHeadBL), typeof(Warehouse.StockTran.TransferingHeadBL3));
@@ -264,12 +265,15 @@ namespace eLog.HeavyTools
             ObjectFactory.AddRemap(typeof(Base.Warehouse.StockTran.TransferingHeadSearchProvider), typeof(Warehouse.StockTran.TransferingHeadSearchProvider3));
             ObjectFactory.AddRemap(typeof(Base.Warehouse.StockTran.TransferingHeadSearchTab), typeof(Warehouse.StockTran.TransferingHeadSearchTab3));
             ObjectFactory.AddRemap(typeof(Base.Warehouse.StockTran.TransferingLineBL), typeof(Warehouse.StockTran.TransferingLineBL3));
+            ObjectFactory.AddRemap(typeof(Base.Warehouse.StockTran.ReceivingHeadSearchPage), typeof(Warehouse.StockTran.ReceivingHeadSearchPage3));
+            ObjectFactory.AddRemap(typeof(Base.Warehouse.StockTran.ReceivingHeadBL), typeof(Warehouse.StockTran.ReceivingHeadBL3));
+            ObjectFactory.AddRemap(typeof(Base.Warehouse.StockTran.ReceivingHeadEditTab), typeof(Warehouse.StockTran.ReceivingHeadEditTab3));
+            ObjectFactory.AddRemap(typeof(Base.Warehouse.StockTran.ReceivingLineBL), typeof(Warehouse.StockTran.ReceivingLineBL3));
 
             //StDoc
             ObjectFactory.AddRemap(typeof(Base.Setup.SordDoc.SordDocBL), typeof(eLog.HeavyTools.Setup.SordDoc.SordDocBL3));
             ObjectFactory.AddRemap(typeof(Base.Setup.SordDoc.SordDocEditTab), typeof(eLog.HeavyTools.Setup.SordDoc.SordDocEditTab3));
             ObjectFactory.AddRemap(typeof(Base.Setup.SordDoc.SordDocSearchProvider), typeof(eLog.HeavyTools.Setup.SordDoc.SordDocSearchProvider3));
-
         }
     }
 }

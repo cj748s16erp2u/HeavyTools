@@ -92,6 +92,10 @@
       <HintPath>..\..\..\Releases\eLog.Base\v7.3.0.0\Binaries\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="System.Net.Http" />
+    <Reference Include="System.Net.Http.Formatting, Version=5.2.9.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.5.2.9\lib\net45\System.Net.Http.Formatting.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="U4Ext.Bank.Base, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\..\Releases\Bank.Base\v7.3.0.0\Binaries\U4Ext.Bank.Base.dll</HintPath>
       <SpecificVersion>False</SpecificVersion>
@@ -133,6 +137,7 @@
     <Compile Include="Common\Json\JsonParser.cs" />
     <Compile Include="Common\Transate\ITranslateController.cs" />
     <Compile Include="Common\Transate\TranslateController.cs" />
+    <Compile Include="Connected Services\WhZTranService\WhZTranService.cs" />
     <Compile Include="ImportBase\DictionaryProxy.cs" />
     <Compile Include="ImportBase\FieldValue.cs" />
     <Compile Include="ImportBase\IImportExcelColumn.cs" />
@@ -543,10 +548,36 @@
     <Compile Include="Warehouse\StockTran\IssuingHeadBL3.cs" />
     <Compile Include="Warehouse\StockTran\IssuingLineBL3.cs" />
     <Compile Include="Warehouse\StockTran\IssuingLineEditTab3.cs" />
+    <Compile Include="Warehouse\StockTranLocation\ReceivingStLocCustomBL.cs" />
+    <Compile Include="Warehouse\StockTranLocation\ReceivingStLocCustomDto.cs" />
+    <Compile Include="Warehouse\StockTranLocation\ReceivingStLocCustomEditPage.cs" />
+    <Compile Include="Warehouse\StockTranLocation\ReceivingStLocCustomEditTab.cs" />
+    <Compile Include="Warehouse\StockTranLocation\ReceivingStLocCustomRules.cs" />
+    <Compile Include="Warehouse\StockTranLocation\ReceivingStLocCustomSearchProvider.cs" />
+    <Compile Include="Warehouse\StockTranLocation\ReceivingStLocCustomSearchTab.cs" />
+    <Compile Include="Warehouse\StockTran\ReceivingHeadBL3.cs" />
+    <Compile Include="Warehouse\StockTran\ReceivingHeadEditTab3.cs" />
+    <Compile Include="Warehouse\StockTran\ReceivingHeadSearchPage3.cs" />
+    <Compile Include="Warehouse\StockTran\ReceivingLineBL3.cs" />
+    <Compile Include="Warehouse\WhZone\Common\WhZTranUtils.cs" />
+    <Compile Include="Warehouse\WhZone\WhZTran\OlcWhZTranHead.cs" />
+    <Compile Include="Warehouse\WhZone\WhZTran\OlcWhZTranHeadGenerated.cs" />
+    <Compile Include="Warehouse\WhZone\WhZTran\OlcWhZTranLine.cs" />
+    <Compile Include="Warehouse\WhZone\WhZTran\OlcWhZTranLineGenerated.cs" />
     <Compile Include="Webshop\OlcWebshop.cs" />
     <Compile Include="Webshop\OlcWebshopGenerated.cs" />
     <Compile Include="Webshop\WebshopList.cs" />
     <Compile Include="Webshop\WebshopType.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\WhZTranService\ConnectedService.json" />
+    <None Include="Connected Services\WhZTranService\WhZTranService.nswag" />
+    <None Include="Connected Services\WhZTranService\WhZTranService.nswag.json" />
+    <None Include="packages.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

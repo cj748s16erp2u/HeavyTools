@@ -59,6 +59,7 @@
 			<Textbox Field="whloccode" Width="120" />
 			<Textbox Field="name" Width="120"/>
 			<CheckedCombo Field="loctype" ListID="eProjectWeb.Framework.Data.TypeListProviderPublic#olc_whlocation.loctype" Width="120"/>
+			<CheckedCombo Field="movloctype" ListID="eProjectWeb.Framework.Data.TypeListProviderPublic#olc_whlocation.movloctype" Width="120"/>
 		</SearchFilterBar>
 		<Grid ID="searchResults" />
 	</TabPage>
@@ -108,6 +109,7 @@
 			<Textbox Field="whloccode" Width="120" />
 			<Textbox Field="name" Width="120"/>
 			<CheckedCombo Field="loctype" ListID="eProjectWeb.Framework.Data.TypeListProviderPublic#olc_whlocation.loctype" Width="120"/>
+			<CheckedCombo Field="movloctype" ListID="eProjectWeb.Framework.Data.TypeListProviderPublic#olc_whlocation.movloctype" Width="120"/>
 		</SearchFilterBar>
 		<Grid ID="searchResults" />
 	</TabPage>

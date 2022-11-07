@@ -1,5 +1,7 @@
-﻿using eProjectWeb.Framework;
+﻿using eLog.Base.Masters.Item;
+using eProjectWeb.Framework;
 using eProjectWeb.Framework.BL;
+using eProjectWeb.Framework.Data;
 using eProjectWeb.Framework.Extensions;
 using eProjectWeb.Framework.UI.Controls;
 using eProjectWeb.Framework.UI.Templates;
@@ -22,6 +24,7 @@ namespace eLog.HeavyTools.Setup.Warehouse
 
         protected OlcWhLocationEditTab() { }
 
+        protected Control ctrlWhloccode;
         protected Control ctrlWhZoneId;
 
         protected Control ctrlName;
@@ -45,6 +48,8 @@ namespace eLog.HeavyTools.Setup.Warehouse
 
             this.ctrlWhZoneId = this.EditGroup1["whzoneid"];
 
+            this.ctrlWhloccode = this.EditGroup1["whloccode"];
+
             this.ctrlName = this.EditGroup1["name"];
 
             this.ctrlLocType = this.EditGroup1["loctype"];
@@ -60,22 +65,65 @@ namespace eLog.HeavyTools.Setup.Warehouse
             this.ctrlCapUnitId = this.EditGroup1["capunitid"];
         }
 
+        protected bool CanRenderControls = true;
         protected override OlcWhLocation DefaultPageLoad(PageUpdateArgs args)
         {
-            var e = base.DefaultPageLoad(args);
-
-            if (e == null)
+            var isGenNext = args.ActionID == OlcWhLocationBL.GENNEXT_ACTIONID;
+            if (isGenNext)
             {
-                return e;
+                args.ActionID = eProjectWeb.Framework.BL.ActionID.New;
+                CanRenderControls = false;
+            }
+            var loc = base.DefaultPageLoad(args);
+
+            if (loc == null)
+            {
+                return loc;
             }
 
             if (args.ActionID == ActionID.New)
             {
                 var whZoneId = this.GetWhZoneId(args);
-                this.ctrlWhZoneId.SetValue(whZoneId);
+                this.ctrlWhZoneId.SetValue(whZoneId); //betölti a zónát EditTabon az előző fülről
             }
 
-            return e;
+            if (isGenNext)
+            {
+                cmdNew.Visible = false;
+                args.ActionID = OlcWhLocationBL.GENNEXT_ACTIONID;
+                if (args.LoadArgs != null)
+                {
+                    Key origKey = null;
+                    if (args.LoadArgs is List<object>)
+                    {
+                        var list = (List<object>)args.LoadArgs;
+                        var first = list.FirstOrDefault();
+                        if (first != null && first is Dictionary<string, object>)
+                        {
+                            origKey = new eProjectWeb.Framework.Data.Key((Dictionary<string, object>)first);
+                        }
+                    }
+                    if (args.LoadArgs is Dictionary<string, object>)
+                    {
+                        origKey = new eProjectWeb.Framework.Data.Key((Dictionary<string, object>)args.LoadArgs);
+                    }
+                    if (origKey != null)
+                    {
+                        loc = eLog.HeavyTools.Setup.Warehouse.OlcWhLocation.Load(origKey);
+                        args.PageData[OlcWhLocationBL.GENNEXT_ORIGLOCCODE] = loc.Whloccode;
+                        loc.Whlocid = null;
+                        loc.Whloccode = null;
+                        loc.State = eProjectWeb.Framework.Data.DataRowState.Added;
+                        EditGroup1.DataBind(loc, false);
+                    }
+                }
+                CanRenderControls = true;
+                RenderControls(args);
+            }
+            if (CanRenderControls)
+                RenderControls(args);
+            ctrlWhloccode.SetMandatory(!isGenNext); // kötelező ha új helykódot írunk vagy ha módosítunk
+            return loc;
         }
 
         private int? GetWhZoneId(PageUpdateArgs args)
@@ -162,6 +210,47 @@ namespace eLog.HeavyTools.Setup.Warehouse
                 control.SetDisabled(false);
                 control.SetMandatory(mandatory.GetValueOrDefault(false));
             }
+        }
+
+        protected override BLObjectMap SaveControlsToBLObjectMap(PageUpdateArgs args, OlcWhLocation e)
+        {
+            var isGenNext = args.ActionID == OlcWhLocationBL.GENNEXT_ACTIONID;
+            if (isGenNext)
+            {
+                args.ActionID = eProjectWeb.Framework.BL.ActionID.New;
+            }
+
+            BLObjectMap map = base.SaveControlsToBLObjectMap(args, e);
+            OlcWhLocation loc = (OlcWhLocation)e;
+
+            if (isGenNext)
+            {
+                if (eProjectWeb.Framework.Data.StringN.IsNullOrEmpty(loc.Whloccode))
+                {
+                    loc.Whloccode = OlcWhLocationBL.CreateNextLoccode((string)args.PageData[OlcWhLocationBL.GENNEXT_ORIGLOCCODE], 1);
+                    //megnöveli a helykódot 1-el, ha az F9 | Következőre kattintunk
+                }
+                loc.Whlocid = null; //whlocid null-ra van állítva,
+                                    //mert az a whlocid ami ebben volt tárolva már létezik az adatbázisban
+                loc.State = eProjectWeb.Framework.Data.DataRowState.Added;
+            }
+
+            return map;
+        }
+
+        protected override OlcWhLocation GetCurrentEntity(PageUpdateArgs args, out OlcWhLocationBL bl)
+        {
+            var isGenNext = args.ActionID == OlcWhLocationBL.GENNEXT_ACTIONID;
+            if (isGenNext)
+            {
+                args.ActionID = eProjectWeb.Framework.BL.ActionID.New;
+            }
+            var loc = base.GetCurrentEntity(args, out bl);
+            if (isGenNext)
+            {
+                args.ActionID = OlcWhLocationBL.GENNEXT_ACTIONID;
+            }
+            return loc;
         }
     }
 }

@@ -13,6 +13,11 @@ namespace eLog.HeavyTools.Setup.Warehouse
     {
         public static readonly string ID = typeof(OlcWhZoneBL).FullName;
 
+        /// <summary>
+        /// <see cref="Base.Setup.Warehouse.Warehouse.Loctype"/> paramter erteke, mely esetben szukseges a zone keszlet kezeles
+        /// </summary>
+        public const int WAREHOUSE_LOCTYPE_NEEDZONETRANHANDLING = 501;
+
         public static T New<T>()
             where T : OlcWhZoneBL
         {
