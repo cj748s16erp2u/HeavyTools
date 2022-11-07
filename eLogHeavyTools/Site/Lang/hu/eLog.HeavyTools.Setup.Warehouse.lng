@@ -40,3 +40,8 @@ $capunitid=M.egys.
 $whlocid=Azon.
 $whzonecode_long=Zóna kódja
 $whzoneid_long=Zóna
+
+$action_genNextLoc=F9 | Következő
+$err_whloccode=A kódnak 9 jegyű számnak kell lennie
+$msg_gennext_title=Következő
+$msg_gennext_message=A Következő funkció csak mozgó helykódra működik
