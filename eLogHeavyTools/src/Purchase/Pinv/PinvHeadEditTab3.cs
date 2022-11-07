@@ -10,6 +10,11 @@ using eProjectWeb.Framework.Extensions;
 using eProjectWeb.Framework.UI.Controls;
 using eProjectWeb.Framework.Xml;
 using eLog.Base.Purchase.Pinv;
+using CodaInt.Base.Bookkeeping.Common;
+using OfficeOpenXml.FormulaParsing.Excel.Functions.Text;
+using eLog.Base.Masters.Partner;
+using eLog.Base.Sales.Sinv;
+using eLog.Base.Setup.Country;
 
 namespace eLog.HeavyTools.Purchase.Pinv
 {
@@ -19,6 +24,10 @@ namespace eLog.HeavyTools.Purchase.Pinv
         protected List<Control> m_ctrlsCustomPartnerData;
         protected List<Control> m_ctrlsCustomPartnerAddrParts;
         protected List<Control> m_ctrlCustomGroupSeparators;
+
+        protected Control ctrlCmpCode;
+        protected Control ctrlElmcode;
+        protected Control ctrlUmbrellaElementChooseKey;
 
         protected override void CreateBase()
         {
@@ -34,21 +43,47 @@ namespace eLog.HeavyTools.Purchase.Pinv
 
             this.m_ctrlCustomGroupSeparators = this.EditGroup1.ControlArray.Where(c => c.CustomData != null && c.DataField.StartsWith("gscustom")).GroupBy(c => c.DataField).Select(g => g.FirstOrDefault()).ToList();
             this.m_ctrlCustomGroupSeparators.ForEach(c => c.Visible = false);
+
+            ctrlCmpCode = EditGroup1["cmpcode"];
+            ctrlElmcode = EditGroup1["elmcode"];
+            ctrlUmbrellaElementChooseKey = EditGroup1["umbrellaelementchoosekey_umbrellaelementchoosekey"];
+
+            if (ctrlUmbrellaElementChooseKey != null)
+                ctrlUmbrellaElementChooseKey.SetOnChanged(new ControlEvent(ctrlUmbrellaElementChooseKey_OnChanged));
         }
 
         protected override PinvHead DefaultPageLoad(PageUpdateArgs args)
         {
-            var e = base.DefaultPageLoad(args);
+            var pinvHead = base.DefaultPageLoad(args);
 
-            if (e == null)
+            if (pinvHead == null)
             {
-                return e;
+                return pinvHead;
             }
 
-            // egyedi partner adatok visszatoltese az xmldata mezobol
-            this.RestoreCustomPartnerData(e);
+            var company = eLog.Base.Setup.Company.CompanyCache.Get(Convert.ToInt32(pinvHead?.Cmpid));
+            if (ctrlCmpCode != null) ctrlCmpCode.Value = company?.Codacode;
 
-            return e;
+            var partnerElmlevel = CodaInt.Base.Setup.Company.CompanyLineCache.Get(Convert.ToInt32(pinvHead?.Cmpid), (int)CODALink.Common.CompanyLineRecTypes.PartnerElmLevelType)?.ValueInt;
+            var partnId = this.m_partnCode.GetValue<int>();
+            DocLine dl = DocLine.CreateNew();
+            var partnCode = Partner.Load(partnId)?.Partncode;
+            dl.El2 = partnCode?.ToString();
+            SetCustomPartnerDataVisibility(args, dl, pinvHead.Cmpid, partnerElmlevel);
+            this.RestoreCustomPartnerData(pinvHead); // umbrella adatok visszatoltese az xml mezobol
+
+            // a RestoreUmbrellaData visszatolti az adatokat, de ha null, akkor felulirja a SetUmbrellaDataVisibility-ben
+            // beallitott elmlevel-t, elmcode-t is, ezert ujra megadjuk, ha umbrellaelem
+            var umbrellaElement = DocLineBL.GetUmbrellaElement(dl, partnerElmlevel);
+
+            if (DocLineBL.IsUmbrellaElement(umbrellaElement, pinvHead.Cmpid, partnerElmlevel))
+            {
+                var ctrlelmlevel = m_ctrlsCustomPartnerData.First(x => x.DataField == "elmlevel");
+                if (partnerElmlevel != null && ctrlelmlevel.GetValue() == null) ctrlelmlevel.SetValue(partnerElmlevel);
+                if (ctrlElmcode != null && ctrlElmcode.GetValue() == null) ctrlElmcode.SetValue(umbrellaElement);
+            }
+
+            return pinvHead;
         }
 
         protected override BLObjectMap SaveControlsToBLObjectMap(PageUpdateArgs args, PinvHead e)
@@ -79,27 +114,35 @@ namespace eLog.HeavyTools.Purchase.Pinv
         // egyedi partner adatok betoltese az xmldata mezobol
         protected void RestoreCustomPartnerData(PinvHead pinvHead)
         {
-            if (pinvHead?.Partnid != null && Common.PurchaseSqlFunctions3.IsPinvCustomPartner(pinvHead.Partnid))
+            if (pinvHead?.Partnid != null)
             {
-                var bl = PinvHeadBL3.New();
-                var xcVal = bl.LoadCustomPartnerData(pinvHead.Pinvid);
-
-                var xmlData = new XmlManiputeStr(() => xcVal?.Xmldata, value => xcVal.Xmldata = value, "pinvhead");
-                var xmlPartner = xmlData.GetX("Seller");
-
-                foreach (var c in this.m_ctrlsCustomPartnerData)
+                DocLine dl = DocLine.CreateNew();
+                var partnCode = Partner.Load(pinvHead.Partnid)?.Partncode;
+                dl.El2 = partnCode?.ToString();
+                var partnerElmlevel = CodaInt.Base.Setup.Company.CompanyLineCache.Get(pinvHead.Cmpid, (int)CODALink.Common.CompanyLineRecTypes.PartnerElmLevelType)?.ValueInt;
+                var umbrellaElement = DocLineBL.GetUmbrellaElement(dl, partnerElmlevel);
+                if (DocLineBL.IsUmbrellaElement(umbrellaElement, pinvHead.Cmpid, 2))
                 {
-                    var field = this.CustomPartnerDataField(c);
-                    if (string.IsNullOrWhiteSpace(field))
-                    {
-                        continue;
-                    }
+                    var bl = PinvHeadBL3.New();
+                    var xcVal = bl.LoadCustomPartnerData(pinvHead.Pinvid);
 
-                    var oldValue = (string)xmlPartner?.Element(field);
-                    var newValue = c.GetStringValue();
-                    if (!Utils.Equals(oldValue, newValue))
+                    var xmlData = new XmlManiputeStr(() => xcVal?.Xmldata, value => xcVal.Xmldata = value, "pinvhead");
+                    var xmlPartner = xmlData.GetX("Seller");
+
+                    foreach (var c in this.m_ctrlsCustomPartnerData)
                     {
-                        c.Value = oldValue;
+                        var field = this.CustomPartnerDataField(c);
+                        if (string.IsNullOrWhiteSpace(field))
+                        {
+                            continue;
+                        }
+
+                        var oldValue = (string)xmlPartner?.Element(field);
+                        var newValue = c.GetStringValue();
+                        if (!Utils.Equals(oldValue, newValue))
+                        {
+                            c.Value = oldValue;
+                        }
                     }
                 }
             }
@@ -113,7 +156,12 @@ namespace eLog.HeavyTools.Purchase.Pinv
                 var bl = PinvHeadBL3.New();
                 var xcVal = bl.LoadCustomPartnerData(pinvHead.Pinvid);
 
-                if (Common.PurchaseSqlFunctions3.IsPinvCustomPartner(pinvHead.Partnid))
+                DocLine dl = DocLine.CreateNew();
+                var partnCode = Partner.Load(pinvHead.Partnid)?.Partncode;
+                dl.El2 = partnCode?.ToString();
+                var partnerElmlevel = CodaInt.Base.Setup.Company.CompanyLineCache.Get(pinvHead.Cmpid, (int)CODALink.Common.CompanyLineRecTypes.PartnerElmLevelType)?.ValueInt;
+                var umbrellaElement = DocLineBL.GetUmbrellaElement(dl, partnerElmlevel);
+                if (DocLineBL.IsUmbrellaElement(umbrellaElement, pinvHead.Cmpid, partnerElmlevel))
                 {
                     if (xcVal == null)
                     {
@@ -123,6 +171,7 @@ namespace eLog.HeavyTools.Purchase.Pinv
                     var xmlData = new XmlManiputeStr(() => xcVal.Xmldata, value => xcVal.Xmldata = value, "pinvhead");
                     var xmlPartner = xmlData.GetX("Seller") ?? new System.Xml.Linq.XElement("Seller");
 
+                    bool changed = false;
                     foreach (var c in this.m_ctrlsCustomPartnerData)
                     {
                         var field = this.CustomPartnerDataField(c);
@@ -140,10 +189,62 @@ namespace eLog.HeavyTools.Purchase.Pinv
                         var newValue = c.GetStringValue();
                         if (!Utils.Equals(oldValue, newValue))
                         {
+                            changed = true;
                             var xmlField = xmlPartner.Element(field);
                             xmlField?.Remove();
                             xmlPartner.Add(new System.Xml.Linq.XElement(field, newValue));
                         }
+                    }
+
+                    // ha korabbi trader kodot hasznalunk, akkor beirjuk, hogy mar fel van adva
+                    var tradercode = xmlPartner.Element("TraderCode");
+                    if (tradercode != null && !tradercode.IsEmpty)
+                    {
+                        if (changed)
+                        {
+                            var prov = (UmbrellaPartnSelectSearchProvider)eProjectWeb.Framework.SearchServer.Get(UmbrellaPartnSelectSearchProvider.ID);
+
+                            var argstemplate = new Dictionary<string, object>()
+                                {
+                                    { "tradernamecode", tradercode.Value },
+                                };
+
+                            var lines = prov.SearchDataSet(argstemplate).Tables[0];
+                            var umbrelladata = lines.Rows.Cast<System.Data.DataRow>()
+                                .Select(x => new {
+                                    Name = ConvertUtils.ToString(x["name"]),
+                                    Country = ConvertUtils.ToString(x["countryid"]),
+                                    PostCode = ConvertUtils.ToString(x["postcode"]),
+                                    Add1 = ConvertUtils.ToString(x["add1"]),
+                                    Add2 = ConvertUtils.ToString(x["add2"]),
+                                    Vat = ConvertUtils.ToString(x["vat"]),
+                                    TraderCode = ConvertUtils.ToString(x["tradernamecode"])
+                                })?.FirstOrDefault();
+
+                            if (m_ctrlsCustomPartnerData.Find(x => x.Field == "postcode_postcode").GetStringValue() == umbrelladata.PostCode &&
+                                m_ctrlsCustomPartnerData.Find(x => x.Field == "add01_city").GetStringValue() == umbrelladata.Add1 &&
+                                m_ctrlsCustomPartnerData.Find(x => x.Field == "add02").GetStringValue() == umbrelladata.Add2 
+                                //&& m_ctrlsCustomPartnerData.Find(x => x.Field == "vatnum").GetStringValue() == umbrelladata.Vat
+                                )
+                            {
+                                xmlPartner.SetAttributeValue("Posted", true);
+                            }
+                            else
+                            {
+                                xmlPartner.Attribute("Posted")?.Remove();
+                                xmlPartner.Element("TraderCode")?.Remove();
+                            }
+                        }
+                        else
+                        {
+                            xmlPartner.SetAttributeValue("Posted", true);
+                        }
+                    }
+                    else
+                    {
+                        //xmlPartner.SetAttributeValue("Posted", false);
+                        xmlPartner.Attribute("Posted")?.Remove();
+                        xmlPartner.Element("TraderCode")?.Remove();
                     }
 
                     xmlData.SetX(xmlPartner);
@@ -168,7 +269,8 @@ namespace eLog.HeavyTools.Purchase.Pinv
 
         protected void OnAdd02Changed(PageUpdateArgs args)
         {
-            if (this.PageLoadDataBinding || args.ActionID == ActionID.View || this.m_add02.Disabled)
+            //if (this.PageLoadDataBinding || args.ActionID == ActionID.View || this.m_add02.Disabled)
+            if (this.PageLoadDataBinding || args.ActionID == ActionID.View)
             {
                 return;
             }
@@ -221,18 +323,51 @@ namespace eLog.HeavyTools.Purchase.Pinv
             return pinvHeadCorrType;
         }
 
-        protected void SetCustomPartnerDataVisibility(PageUpdateArgs args, int? partnId)
+        protected void SetCustomPartnerDataVisibility(PageUpdateArgs args, DocLine docLine, int? cmpid, int? elmlevel)
         {
-            bool visible = Common.PurchaseSqlFunctions3.IsPinvCustomPartner(partnId);
+            var umbrellaElement = DocLineBL.GetUmbrellaElement(docLine, elmlevel);
+            SetCustomPartnerDataVisibility(args, umbrellaElement, cmpid, elmlevel);
+        }
+
+        protected void SetCustomPartnerDataVisibility(PageUpdateArgs args, string umbrellaElement, int? cmpid, int? elmlevel)
+        {
+            var partnerElmlevel = CodaInt.Base.Setup.Company.CompanyLineCache.Get(cmpid, (int)CODALink.Common.CompanyLineRecTypes.PartnerElmLevelType)?.ValueInt;
+            if (elmlevel != partnerElmlevel) return;
+
+            bool visible = DocLineBL.IsUmbrellaElement(umbrellaElement, cmpid, elmlevel);
             m_ctrlsCustomPartnerData.ForEach(c => c.Visible = visible);
-
             m_ctrlCustomGroupSeparators.ForEach(c => c.Visible = visible);
+            ctrlUmbrellaElementChooseKey.SetVisible(visible);
 
-            //var o = m_ctrlsCustomPartnerData.Find(c => c.Field == "vatnum");
-            //if (o != null)
-            //    btnVatnumCheck.Visible = visible;
-            //else
-            //    btnVatnumCheck.Visible = false;
+            if (visible)
+            {
+                ctrlElmcode.SetValue(umbrellaElement);
+            }
+
+            // ha nem lathatoak az umbrella adatok, akkor null-ozuk oket
+            if (!visible)
+            {
+                m_ctrlsCustomPartnerData.ForEach(c => c.Value = null);
+                ctrlUmbrellaElementChooseKey.SetValue(null);
+                ctrlElmcode.SetValue(null);
+            }
+
+            // ha lathatoak az umbrella adatok, akkor beallitjuk az elmlevel-t
+            if (visible) m_ctrlsCustomPartnerData.Find(x => x.Field == "elmlevel").SetValue(elmlevel);
+
+            // az elmlevel soha nem lathato
+            m_ctrlsCustomPartnerData.Find(x => x.Field == "elmlevel").SetVisible(false);
+
+            // az elmcode soha nem lathato
+            m_ctrlsCustomPartnerData.Find(x => x.Field == "elmcode").SetVisible(false);
+
+            // a tradercode soha nem lathato
+            //m_ctrlsCustomPartnerData.Find(x => x.Field == "tradernamecode").SetVisible(false);
+
+            if (visible && args.ActionID == eProjectWeb.Framework.BL.ActionID.View)
+            {
+                m_ctrlsCustomPartnerData.ForEach(c => c.Disabled = true);
+            }
 
             if (visible && (args.ActionID == ActionID.New || args.ActionID == ActionID.Modify))
             {
@@ -250,15 +385,112 @@ namespace eLog.HeavyTools.Purchase.Pinv
                     m_ctrlsCustomPartnerAddrParts.ForEach(c => c.Disabled = !partsEnabled);
                 }
             }
+
+            return;
+        }
+
+        protected override void OnCmpIdChanged(PageUpdateArgs args)
+        {
+            base.OnCmpIdChanged(args);
+
+            var cmpId = this.m_cmpId.GetValue<int>();
+            var company = eLog.Base.Setup.Company.CompanyCache.Get(cmpId.Value);
+            if (ctrlCmpCode != null) ctrlCmpCode.Value = company?.Codacode;
         }
 
         protected override void OnPartnerChanged(PageUpdateArgs args)
         {
+            if (this.PageLoadDataBinding)
+                return;
+
             base.OnPartnerChanged(args);
 
             var partnId = this.m_partnCode.GetValue<int>();
-            this.SetCustomPartnerDataVisibility(args, partnId);
+            var partnCode = Partner.Load(partnId)?.Partncode;
+
+            this.SetCustomPartnerDataVisibility(args, partnCode?.ToString(), m_cmpId.GetInt32Value(), 2);
         }
+
+        private void ctrlUmbrellaElementChooseKey_OnChanged(PageUpdateArgs args)
+        {
+            if (this.PageLoadDataBinding)
+                return;
+
+            if (ctrlUmbrellaElementChooseKey != null)
+            {
+                var key = ctrlUmbrellaElementChooseKey.GetStringValue();
+
+                if (!string.IsNullOrWhiteSpace(key))
+                {
+                    var s = key.Split('|');
+                    Array.Resize(ref s, 4);
+
+                    var prov = (UmbrellaPartnSelectSearchProvider)eProjectWeb.Framework.SearchServer.Get(UmbrellaPartnSelectSearchProvider.ID);
+
+                    int? elmlevel = null;
+                    int? temporaryid = null;
+
+                    int o;
+                    if (int.TryParse(s[2], out o)) elmlevel = o;
+                    if (int.TryParse(s[3], out o)) temporaryid = o;
+
+                    var argstemplate = new Dictionary<string, object>() {
+                                           { "cmpcode", s[0] },
+                                           { "elmcode", s[1] },
+                                           { "elmlevel", elmlevel },
+                                           { "temporaryid", temporaryid },
+                                       };
+                    var lines = prov.SearchDataSet(argstemplate).Tables[0];
+                    var umbrelladata = lines.Rows.Cast<System.Data.DataRow>().
+                        Select(x => new { Name = ConvertUtils.ToString(x["name"]),
+                                            Country = ConvertUtils.ToString(x["countryid"]),
+                                            PostCode = ConvertUtils.ToString(x["postcode"]),
+                                            Add1 = ConvertUtils.ToString(x["add1"]),
+                                            Add2 = ConvertUtils.ToString(x["add2"]),
+                                            Vat = ConvertUtils.ToString(x["vat"]), 
+                                            BankAccno = ConvertUtils.ToString(x["sort_acnum"]).Replace("-",""),
+                                            TraderCode = ConvertUtils.ToString(x["tradernamecode"]) })?.FirstOrDefault();
+
+                    // trader
+                    m_ctrlsCustomPartnerData.Find(x => x.Field == "tradernamecode").SetValue(umbrelladata.TraderCode);
+                    // postcode selector!
+                    m_ctrlsCustomPartnerData.Find(x => x.Field == "postcode_postcode").SetValue(umbrelladata.PostCode);
+                    // partnname
+                    m_ctrlsCustomPartnerData.Find(x => x.Field == "partnname").SetValue(umbrelladata.Name);
+                    // iranyitoszam es varos orszagkod fuggoek
+                    m_ctrlsCustomPartnerData.Find(x => x.Field == "postcode_postcode").SetValue(umbrelladata.PostCode);
+                    if (!string.IsNullOrEmpty(umbrelladata.Country))
+                    {
+                        m_ctrlsCustomPartnerData.Find(x => x.Field == "countryid").SetValue(umbrelladata.Country);
+                        m_ctrlsCustomPartnerData.Find(x => x.Field == "add01_city").SetValue(umbrelladata.Add1);
+                    }
+                    else
+                    {
+                        m_ctrlsCustomPartnerData.Find(x => x.Field == "countryid").SetValue(null);
+                        m_ctrlsCustomPartnerData.Find(x => x.Field == "add01_city").SetValue(null);
+                    }
+                    // szamlaszam
+                    m_ctrlsCustomPartnerData.Find(x => x.Field == "partnbankaccno").SetValue(umbrelladata.BankAccno);
+                    // adoszam
+                    m_ctrlsCustomPartnerData.Find(x => x.Field == "vatnum").SetValue(umbrelladata.Vat);
+                    // cim => felbontas
+                    m_ctrlsCustomPartnerData.Find(x => x.Field == "add02").SetValue(umbrelladata.Add2, true);
+                }
+                else
+                {
+                    m_ctrlsCustomPartnerData.Find(x => x.Field == "tradernamecode").SetValue(null);
+                    m_ctrlsCustomPartnerData.Find(x => x.Field == "postcode_postcode").SetValue(null);
+                    m_ctrlsCustomPartnerData.Find(x => x.Field == "partnname").SetValue(null);
+                    m_ctrlsCustomPartnerData.Find(x => x.Field == "postcode").SetValue(null);
+                    m_ctrlsCustomPartnerData.Find(x => x.Field == "countryid").SetValue(null);
+                    m_ctrlsCustomPartnerData.Find(x => x.Field == "add01_city").SetValue(null);
+                    m_ctrlsCustomPartnerData.Find(x => x.Field == "partnbankaccno").SetValue(null);
+                    m_ctrlsCustomPartnerData.Find(x => x.Field == "vatnum").SetValue(null);
+                    m_ctrlsCustomPartnerData.Find(x => x.Field == "add02").SetValue(null);
+                }
+            }
+        }
+
 
     }
 }

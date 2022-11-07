@@ -119,6 +119,8 @@
     <Compile Include="BankTran\Import\CifEbankTransImportResultSet.cs" />
     <Compile Include="BankTran\Import\CifEbankTransImportResultSets.cs" />
     <Compile Include="BankTran\Import\CifEbankTransRowContext.cs" />
+    <Compile Include="Bookkeeping\Common\UmbrellaPartnSelectionProvider3.cs" />
+    <Compile Include="Bookkeeping\Common\UmbrellaPartnSelectSearchProvider3.cs" />
     <Compile Include="Common\CheckBankAccountNo.cs" />
     <Compile Include="Common\CommonUtils.cs" />
     <Compile Include="Common\MagyarPostaCheckQRCode.cs" />
@@ -542,6 +544,7 @@
     <Compile Include="Webshop\WebshopList.cs" />
     <Compile Include="Webshop\WebshopType.cs" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

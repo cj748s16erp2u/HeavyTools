@@ -11,6 +11,8 @@ $stairway=Lépcsőház
 $floor=Emelet/szint
 $door=Ajtó
 $partnbankaccno=Bankszámlaszám
+$tradernamecode=Ker.kód
+$umbrellaelementchoosekey=Korábbi partner
 
 $gsotherpinv=További szállítói számla adatok
 

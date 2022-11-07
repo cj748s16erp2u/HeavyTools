@@ -23,6 +23,13 @@
       
       <GroupSeparator ID="gscustom1" Label="$gscustompartner" />
       <ForceNextRow />
+      <Intbox Field="elmlevel" CustomData="custompartner:elmlevel"/>
+      <Textbox Field="elmcode" CustomData="custompartner:elmcode"/>
+      <Textbox Field="cmpcode" Visible="false"/>
+      <ForceNextRow />
+      <Selector Field="umbrellaelementchoosekey" Label="$umbrellaelementchoosekey" ValueField="umbrellaelementchoosekey" TextField="umbrellaelementchoosekey" SelectionID="CodaInt.Base.Bookkeeping.Common.UmbrellaPartnSelectionProvider" DependentField="cmpcode,elmlevel,elmcode" DependentCtrlID="cmpcode,elmlevel,elmcode" />
+      <Textbox Field="tradernamecode" CustomData="custompartner:TraderCode"/>
+      <ForceNextRow />
       <Textbox Field="partnname" ColsToSpan="-1" CustomData="custompartner:partnname" />
       <ForceNextRow />
       <Textbox Field="partnbankaccno" ColsToSpan="-1" CustomData="custompartner:sellerbankaccno" />

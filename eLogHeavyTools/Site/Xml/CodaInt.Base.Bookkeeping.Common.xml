@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Schema xmlns="http://tempuri.org/RenderableSchema.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://tempuri.org/RenderableSchema.xsd ../../../Base/Site/Xml/RenderableSchema.xsd">
+
+  <Search Name="UmbrellaPartnSelectSearchProvider">
+    <Column FieldName="tradernamecode"  Width="100" />
+    <Column FieldName="name"            Width="180" DisplayName="$name2" />
+    <Column FieldName="countryid"       Width="70" />
+    <Column FieldName="postcode"        Width="250" />
+    <Column FieldName="add1"            Width="250" DisplayName="$add1_2" />
+    <Column FieldName="add2"            Width="250" DisplayName="$add1_2" />
+    <Column FieldName="vat"             Width="100" />
+    <Column FieldName="temporaryid"     Width="70" />
+    <Column FieldName="sort_acnum"      Width="200" />
+    <Column FieldName="acname"          Width="180" />
+    <Column FieldName="elmcode"         Width="100" />
+    <Column FieldName="elmlevel"        Width="50" />
+    <Column FieldName="cmpcode"         Width="60" />
+    <Column FieldName="umbrellaelementchoosekey"       Width="100" PKFieldName="umbrellaelementchoosekey" Hidden="True"  />
+  </Search>
+
+</Schema>

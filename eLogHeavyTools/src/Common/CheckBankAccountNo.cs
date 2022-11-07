@@ -13,10 +13,10 @@ namespace eLog.HeavyTools.Common
         {
             if (CustomSettings.GetBool("HTO:PartnerBankAccountNumberCheck", false)) // bankszamlaszam vizsgalata
             {
-                bankAccountNo = bankAccountNo.ToUpper();
-
                 if (string.IsNullOrEmpty(countryCode) || string.IsNullOrEmpty(bankAccountNo))
                     return true;
+
+                bankAccountNo = bankAccountNo.ToUpper();
 
                 var lngid = Convert.ToString(countryCode)?.Substring(0, 2).ToUpper();
 

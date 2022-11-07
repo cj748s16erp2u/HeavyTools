@@ -6,6 +6,7 @@ using eProjectWeb.Framework;
 using eProjectWeb.Framework.Extensions;
 using eLog.HeavyTools.Sales.Sinv;
 using eLog.HeavyTools.Purchase.Pinv;
+using eLog.HeavyTools.Bookkeeping.Common;
 
 namespace eLog.HeavyTools
 {
@@ -254,7 +255,6 @@ namespace eLog.HeavyTools
             ObjectFactory.AddRemap(typeof(Base.Sales.Sinv.SinvHeadRules), typeof(Sales.Sinv.SinvHeadRules3));
             ObjectFactory.AddRemap(typeof(Base.Sales.Sinv.SinvHeadEditTab), typeof(Sales.Sinv.SinvHeadEditTab3));
 
-
             //StockTran
             ObjectFactory.AddRemap(typeof(Base.Warehouse.StockTran.TransferingHeadRules), typeof(Warehouse.StockTran.TransferingHeadRules3));
             ObjectFactory.AddRemap(typeof(Base.Warehouse.StockTran.TransferingHeadBL), typeof(Warehouse.StockTran.TransferingHeadBL3));
@@ -268,6 +268,10 @@ namespace eLog.HeavyTools
             ObjectFactory.AddRemap(typeof(Base.Setup.SordDoc.SordDocEditTab), typeof(eLog.HeavyTools.Setup.SordDoc.SordDocEditTab3));
             ObjectFactory.AddRemap(typeof(Base.Setup.SordDoc.SordDocSearchProvider), typeof(eLog.HeavyTools.Setup.SordDoc.SordDocSearchProvider3));
 
+            // CodaInt
+            ObjectFactory.AddRemap(typeof(CodaInt.Base.Bookkeeping.Common.UmbrellaPartnSelectionProvider), typeof(eLog.HeavyTools.Bookkeeping.Common.UmbrellaPartnSelectionProvider3));
+            ObjectFactory.AddRemap(typeof(CodaInt.Base.Bookkeeping.Common.UmbrellaPartnSelectSearchProvider), typeof(eLog.HeavyTools.Bookkeeping.Common.UmbrellaPartnSelectSearchProvider3));
+            
         }
     }
 }
