@@ -48,11 +48,6 @@ namespace eLog.HeavyTools.Common.Json
                         {
                             JToken outjk = null;
 
-                            if (item.Name=="Items")
-                            {
-                                var p = 1;
-                            }
-
                             var found = jo.ContainsKey(item.Name, out outjk);
 
                             if (ja.IsMandotary(deep) && !found)

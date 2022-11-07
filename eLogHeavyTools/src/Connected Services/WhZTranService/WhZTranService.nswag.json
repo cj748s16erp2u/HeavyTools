@@ -1,0 +1,1316 @@
+﻿{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "eLog.HeavyTools.Services.WhZone.Service",
+    "version": "1.0"
+  },
+  "paths": {
+    "/Home": {
+      "get": {
+        "tags": [
+          "Home"
+        ],
+        "operationId": "Home",
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/api/WhZTran/receiving/query": {
+      "post": {
+        "tags": [
+          "WhZTran"
+        ],
+        "operationId": "query",
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/WhZTranHeadQueryDto"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/WhZTranHeadQueryDto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/WhZTranHeadQueryDto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/WhZTranHeadQueryDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/WhZReceivingTranHeadDto"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/WhZTran/receiving/query_erp": {
+      "post": {
+        "tags": [
+          "WhZTran"
+        ],
+        "operationId": "query_erp",
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/WhZTranHeadQueryDto"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/WhZTranHeadQueryDto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/WhZTranHeadQueryDto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/WhZTranHeadQueryDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/WhZTran/receiving/add": {
+      "post": {
+        "tags": [
+          "WhZTran"
+        ],
+        "operationId": "add",
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/WhZReceivingTranHeadDto"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/WhZReceivingTranHeadDto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/WhZReceivingTranHeadDto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/WhZReceivingTranHeadDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/WhZReceivingTranHeadDto"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/WhZTran/receiving/update": {
+      "post": {
+        "tags": [
+          "WhZTran"
+        ],
+        "operationId": "update",
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/WhZReceivingTranHeadDto"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/WhZReceivingTranHeadDto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/WhZReceivingTranHeadDto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/WhZReceivingTranHeadDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/WhZReceivingTranHeadDto"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/WhZTran/receiving/statchange": {
+      "post": {
+        "tags": [
+          "WhZTran"
+        ],
+        "operationId": "statchange",
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/WhZTranHeadStatChangeDto"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/WhZTranHeadStatChangeDto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/WhZTranHeadStatChangeDto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/WhZTranHeadStatChangeDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/WhZTranHeadStatChangeResultDto"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/WhZTran/receiving/close": {
+      "post": {
+        "tags": [
+          "WhZTran"
+        ],
+        "operationId": "close",
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/WhZTranHeadCloseDto"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/WhZTranHeadCloseDto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/WhZTranHeadCloseDto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/WhZTranHeadCloseDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/WhZTranHeadCloseResultDto"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/WhZTranLine/receiving/query": {
+      "post": {
+        "tags": [
+          "WhZTranLine"
+        ],
+        "operationId": "query2",
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/WhZTranLineQueryDto"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/WhZTranLineQueryDto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/WhZTranLineQueryDto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/WhZTranLineQueryDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/WhZReceivingTranLineDto"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/WhZTranLine/receiving/query_erp": {
+      "post": {
+        "tags": [
+          "WhZTranLine"
+        ],
+        "operationId": "query_erp2",
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/WhZTranLineQueryDto"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/WhZTranLineQueryDto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/WhZTranLineQueryDto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/WhZTranLineQueryDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/WhZTranLine/receiving/add": {
+      "post": {
+        "tags": [
+          "WhZTranLine"
+        ],
+        "operationId": "add2",
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/WhZReceivingTranLineDto"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/WhZReceivingTranLineDto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/WhZReceivingTranLineDto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/WhZReceivingTranLineDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/WhZReceivingTranLineDto"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/WhZTranLine/receiving/update": {
+      "post": {
+        "tags": [
+          "WhZTranLine"
+        ],
+        "operationId": "update2",
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/WhZReceivingTranLineDto"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/WhZReceivingTranLineDto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/WhZReceivingTranLineDto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/WhZReceivingTranLineDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/WhZReceivingTranLineDto"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/WhZTranLoc/query": {
+      "post": {
+        "tags": [
+          "WhZTranLoc"
+        ],
+        "operationId": "query3",
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/WhZTranLocQueryDto"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/WhZTranLocQueryDto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/WhZTranLocQueryDto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/WhZTranLocQueryDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/WhZTranLocDto"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/WhZTranLoc/query_erp": {
+      "post": {
+        "tags": [
+          "WhZTranLoc"
+        ],
+        "operationId": "query_erp3",
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/WhZTranLocQueryDto"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/WhZTranLocQueryDto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/WhZTranLocQueryDto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/WhZTranLocQueryDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/WhZTranLoc/get/{whztlocid}": {
+      "get": {
+        "tags": [
+          "WhZTranLoc"
+        ],
+        "operationId": "getGET",
+        "parameters": [
+          {
+            "name": "whztlocid",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/WhZTranLocDto"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/WhZStockMap/query": {
+      "post": {
+        "tags": [
+          "WhZStockMap"
+        ],
+        "operationId": "query4",
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/WhZStockMapQueryDto"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/WhZStockMapQueryDto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/WhZStockMapQueryDto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/WhZStockMapQueryDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/WhZStockMapQDto"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/WhZStockMap/query_erp": {
+      "post": {
+        "tags": [
+          "WhZStockMap"
+        ],
+        "operationId": "query_erp4",
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/WhZStockMapQueryDto"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/WhZStockMapQueryDto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/WhZStockMapQueryDto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/WhZStockMapQueryDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/WhZStockMap/get": {
+      "post": {
+        "tags": [
+          "WhZStockMap"
+        ],
+        "operationId": "getPOST",
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/WhZStockMapQueryDto"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/WhZStockMapQueryDto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/WhZStockMapQueryDto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/WhZStockMapQueryDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/WhZStockMapQDto"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "WhZReceivingTranHeadDto": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "whztid": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "cmpid": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "whztdate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "closeusrid": {
+            "type": "string",
+            "nullable": true
+          },
+          "closedate": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "whztstat": {
+            "$ref": "#/components/schemas/WhZTranHead_Whztstat"
+          },
+          "note": {
+            "type": "string",
+            "nullable": true
+          },
+          "authUser": {
+            "type": "string",
+            "nullable": true
+          },
+          "stid": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "towhzid": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "whzttype": {
+            "$ref": "#/components/schemas/WhZTranHead_Whzttype"
+          }
+        }
+      },
+      "WhZReceivingTranLineDto": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "whztlineid": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "whztid": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "linenum": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "itemid": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "unitid2": {
+            "type": "string",
+            "nullable": true
+          },
+          "change": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "ordqty2": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "dispqty2": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "movqty2": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "note": {
+            "type": "string",
+            "nullable": true
+          },
+          "authUser": {
+            "type": "string",
+            "nullable": true
+          },
+          "stlineid": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          }
+        }
+      },
+      "WhZStockMapQDto": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "itemid": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "whid": {
+            "type": "string",
+            "nullable": true
+          },
+          "whzoneid": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "whlocid": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "recqty": {
+            "type": "number",
+            "format": "double"
+          },
+          "reqqty": {
+            "type": "number",
+            "format": "double"
+          },
+          "actqty": {
+            "type": "number",
+            "format": "double"
+          },
+          "resqty": {
+            "type": "number",
+            "format": "double"
+          },
+          "provqty": {
+            "type": "number",
+            "format": "double"
+          },
+          "freeqty": {
+            "type": "number",
+            "format": "double"
+          },
+          "whname": {
+            "type": "string",
+            "nullable": true
+          },
+          "itemcode": {
+            "type": "string",
+            "nullable": true
+          },
+          "itemname": {
+            "type": "string",
+            "nullable": true
+          },
+          "whzonecode": {
+            "type": "string",
+            "nullable": true
+          },
+          "whzonename": {
+            "type": "string",
+            "nullable": true
+          },
+          "whloccode": {
+            "type": "string",
+            "nullable": true
+          },
+          "whlocname": {
+            "type": "string",
+            "nullable": true
+          }
+        }
+      },
+      "WhZStockMapQueryDto": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "itemid": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "itemcode": {
+            "type": "string",
+            "nullable": true
+          },
+          "itemname": {
+            "type": "string",
+            "nullable": true
+          },
+          "barcode": {
+            "type": "string",
+            "nullable": true
+          },
+          "cmpid": {
+            "type": "array",
+            "nullable": true,
+            "items": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          "whid": {
+            "type": "array",
+            "nullable": true,
+            "items": {
+              "type": "string"
+            }
+          },
+          "whzoneid": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "whzonecode": {
+            "type": "string",
+            "nullable": true
+          },
+          "whlocid": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "whloccode": {
+            "type": "string",
+            "nullable": true
+          },
+          "delstat": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "nonzerostock": {
+            "type": "boolean",
+            "nullable": true
+          }
+        }
+      },
+      "WhZTranHeadCloseDto": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "whztid": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "stid": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "authUser": {
+            "type": "string",
+            "nullable": true
+          }
+        }
+      },
+      "WhZTranHeadCloseResultDto": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "result": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "message": {
+            "type": "string",
+            "nullable": true
+          }
+        }
+      },
+      "WhZTranHeadQueryDto": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "whztid": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "cmpid": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "fromdate": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "todate": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "fromwhzid": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "towhzid": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "stid": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          }
+        }
+      },
+      "WhZTranHeadStatChangeDto": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "whztid": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "stid": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "newStat": {
+            "$ref": "#/components/schemas/WhZTranHead_Whztstat"
+          },
+          "authUser": {
+            "type": "string",
+            "nullable": true
+          }
+        }
+      },
+      "WhZTranHeadStatChangeResultDto": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "result": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "message": {
+            "type": "string",
+            "nullable": true
+          }
+        }
+      },
+      "WhZTranHead_Whztstat": {
+        "type": "integer",
+        "format": "int32",
+        "enum": [
+          10,
+          40,
+          100
+        ]
+      },
+      "WhZTranHead_Whzttype": {
+        "type": "integer",
+        "format": "int32",
+        "enum": [
+          1,
+          2,
+          3
+        ]
+      },
+      "WhZTranLineQueryDto": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "whztid": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "whztlineid": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "stid": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "stlineid": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "itemid": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          }
+        }
+      },
+      "WhZTranLocDto": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "whztlocid": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "whztid": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "whztlineid": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "whid": {
+            "type": "string",
+            "nullable": true
+          },
+          "whname": {
+            "type": "string",
+            "nullable": true
+          },
+          "whzoneid": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "whzonecode": {
+            "type": "string",
+            "nullable": true
+          },
+          "whzonename": {
+            "type": "string",
+            "nullable": true
+          },
+          "whlocid": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "whloccode": {
+            "type": "string",
+            "nullable": true
+          },
+          "whlocname": {
+            "type": "string",
+            "nullable": true
+          },
+          "itemid": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "itemcode": {
+            "type": "string",
+            "nullable": true
+          },
+          "itemname01": {
+            "type": "string",
+            "nullable": true
+          },
+          "whztltype": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "ordqty": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "dispqty": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "movqty": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "addusrid": {
+            "type": "string",
+            "nullable": true
+          },
+          "adddate": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          }
+        }
+      },
+      "WhZTranLocQueryDto": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "whztlocid": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "whztid": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "stid": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "whztlineid": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "stlineid": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "whid": {
+            "type": "string",
+            "nullable": true
+          },
+          "whname": {
+            "type": "string",
+            "nullable": true
+          },
+          "whzoneid": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "whzonecode": {
+            "type": "string",
+            "nullable": true
+          },
+          "whzonename": {
+            "type": "string",
+            "nullable": true
+          },
+          "whlocid": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "whloccode": {
+            "type": "string",
+            "nullable": true
+          },
+          "whlocname": {
+            "type": "string",
+            "nullable": true
+          },
+          "itemcode": {
+            "type": "string",
+            "nullable": true
+          },
+          "itemname01": {
+            "type": "string",
+            "nullable": true
+          }
+        }
+      }
+    }
+  }
+}
