@@ -258,7 +258,7 @@ namespace eLog.HeavyTools
             ObjectFactory.AddRemap(typeof(Base.Sales.Sinv.SinvHeadRules), typeof(Sales.Sinv.SinvHeadRules3));
             ObjectFactory.AddRemap(typeof(Base.Sales.Sinv.SinvHeadEditTab), typeof(Sales.Sinv.SinvHeadEditTab3));
 
-            //StockTran
+            // StockTran
             ObjectFactory.AddRemap(typeof(Base.Warehouse.StockTran.TransferingHeadRules), typeof(Warehouse.StockTran.TransferingHeadRules3));
             ObjectFactory.AddRemap(typeof(Base.Warehouse.StockTran.TransferingHeadBL), typeof(Warehouse.StockTran.TransferingHeadBL3));
             ObjectFactory.AddRemap(typeof(Base.Warehouse.StockTran.TransferingHeadEditTab), typeof(Warehouse.StockTran.TransferingHeadEditTab3));
@@ -270,10 +270,14 @@ namespace eLog.HeavyTools
             ObjectFactory.AddRemap(typeof(Base.Warehouse.StockTran.ReceivingHeadEditTab), typeof(Warehouse.StockTran.ReceivingHeadEditTab3));
             ObjectFactory.AddRemap(typeof(Base.Warehouse.StockTran.ReceivingLineBL), typeof(Warehouse.StockTran.ReceivingLineBL3));
 
-            //StDoc
+            // StDoc
             ObjectFactory.AddRemap(typeof(Base.Setup.SordDoc.SordDocBL), typeof(eLog.HeavyTools.Setup.SordDoc.SordDocBL3));
             ObjectFactory.AddRemap(typeof(Base.Setup.SordDoc.SordDocEditTab), typeof(eLog.HeavyTools.Setup.SordDoc.SordDocEditTab3));
             ObjectFactory.AddRemap(typeof(Base.Setup.SordDoc.SordDocSearchProvider), typeof(eLog.HeavyTools.Setup.SordDoc.SordDocSearchProvider3));
+
+            // Bank
+            ObjectFactory.AddRemap(typeof(U4Ext.Bank.Base.Bookkeeping.Booking.BankBookingCreator), typeof(Bookkeeping.Booking.BankBookingCreator3));
+            ObjectFactory.AddRemap(typeof(U4Ext.Bank.Base.Bookkeeping.Booking.BankBookingRemover), typeof(Bookkeeping.Booking.BankBookingRemover3));
         }
     }
 }
