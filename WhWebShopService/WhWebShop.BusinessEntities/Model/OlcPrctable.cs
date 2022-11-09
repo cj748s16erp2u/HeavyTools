@@ -7,7 +7,6 @@ using eLog.HeavyTools.Services.WhWebShop.BusinessEntities.Model.Base;
 namespace eLog.HeavyTools.Services.WhWebShop.BusinessEntities.Model
 {
     [Table("olc_prctable")]
-    [Index("Ptid", "Prctype", "Curid", "Startdate", "Enddate", Name = "index_olc_prctable_ptid_prctype_curid_startdate_enddate")]
     public partial class OlcPrctable : Entity
     {
         [Key]

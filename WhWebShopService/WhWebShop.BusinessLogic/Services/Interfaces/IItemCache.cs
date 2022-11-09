@@ -11,5 +11,6 @@ namespace eLog.HeavyTools.Services.WhWebShop.BusinessLogic.Services.Interfaces
     {
         Task<int?> GetAsync(string? itemcode, CancellationToken cancellationToken = default);
         Task<string?> GetAsync(int? itemid, CancellationToken cancellationToken = default);
+        Task<OlsItem?> GetItemAsync(int? itemid, CancellationToken cancellationToken = default);
     }
 }

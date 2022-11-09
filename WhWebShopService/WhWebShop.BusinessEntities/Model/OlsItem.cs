@@ -87,6 +87,9 @@ namespace eLog.HeavyTools.Services.WhWebShop.BusinessEntities.Model
         [ForeignKey("Addusrid")]
         [InverseProperty("OlsItem")]
         public virtual CfwUser Addusr { get; set; } = null!;
+        [ForeignKey("Itemgrpid")]
+        [InverseProperty("OlsItem")]
+        public virtual OlsItemgroup Itemgrp { get; set; } = null!;
         [ForeignKey("Rootitemid")]
         [InverseProperty("InverseRootitem")]
         public virtual OlsItem? Rootitem { get; set; }

@@ -33,6 +33,10 @@ public static class InitializerBL
             .GetSection(eLog.HeavyTools.Services.WhWebShop.BusinessLogic.Options.ReserveOptions.NAME)
             .Bind(options));
 
+        services.Configure<eLog.HeavyTools.Services.WhWebShop.BusinessLogic.Options.RetailOptions>(options => configuration
+          .GetSection(eLog.HeavyTools.Services.WhWebShop.BusinessLogic.Options.RetailOptions.NAME)
+          .Bind(options));
+
         services.Configure<eLog.HeavyTools.Services.WhWebShop.BusinessLogic.Options.OSSOptions>(options => configuration
         .GetSection(eLog.HeavyTools.Services.WhWebShop.BusinessLogic.Options.OSSOptions.NAME)
         .Bind(options));

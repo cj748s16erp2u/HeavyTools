@@ -1,3 +1,4 @@
 cr.sql
 sp_olc_generatae_ean.sql
 fn_olc_prctable_order.sql
+sp_olc_sp_ols_getnewsordnum.sql
