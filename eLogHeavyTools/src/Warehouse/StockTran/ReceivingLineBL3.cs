@@ -134,7 +134,7 @@ namespace eLog.HeavyTools.Warehouse.StockTran
         /// Kulso WhZoneService meghivasa
         /// </summary>
         /// <param name="actionID">Aktualis muvelet (mentes, modositas, torles)</param>
-        /// <param name="stHead">Akutalas keszlet tranzakcio tetel</param>
+        /// <param name="stLine">Akutalas keszlet tranzakcio tetel</param>
         /// <exception cref="ArgumentOutOfRangeException">Nem megfelelo muvelet lett meghatarozva</exception>
         /// <exception cref="MessageException">Szolgaltatas soran eloallt hibauzenet</exception>
         private void SaveWhZoneTranLine(string actionID, Base.Warehouse.StockTran.StLine stLine)
@@ -142,13 +142,7 @@ namespace eLog.HeavyTools.Warehouse.StockTran
             var whztid = this.GetWhZTranHeadId(stLine.Stid);
             if (stLine.Stid != null && whztid != null)
             {
-                var authBase64 = WhZone.Common.WhZTranUtils.CreateAuthentication();
-
-                var httpClient = new System.Net.Http.HttpClient();
-                httpClient.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Basic", authBase64);
-
-                var url = WhZone.Common.WhZTranUtils.GetServiceUrl();
-                var tranLineService = new WhZone.WhZTranService.WhZTranLineClient(url, httpClient);
+                var tranLineService = WhZone.Common.WhZTranUtils.CreateTranLineService();
                 var request = new WhZone.WhZTranService.WhZReceivingTranLineDto
                 {
                     Whztid = whztid,
@@ -199,6 +193,53 @@ namespace eLog.HeavyTools.Warehouse.StockTran
                 if (result?.Whztlineid == null)
                 {
                     throw new MessageException("$err_unable_to_save_whztranline");
+                }
+            }
+        }
+
+        /// <summary>
+        /// Beavatkozas a torlesi folyamatba:
+        /// - ha hiba tortent a kulso szolgaltatas meghivasa soran, akkor az StLine bejegyzest nem kerul torlesre
+        /// </summary>
+        protected override void PreDelete(Key k)
+        {
+            base.PreDelete(k);
+
+            var stLine = Base.Warehouse.StockTran.StLine.Load(k);
+            this.DeleteWhZoneTranLine(stLine);
+        }
+
+        /// <summary>
+        /// Kulso WhZoneService meghivasa
+        /// </summary>
+        /// <param name="stLine">Akutalas keszlet tranzakcio tetel</param>
+        /// <exception cref="MessageException">Szolgaltatas soran eloallt hibauzenet</exception>
+        private void DeleteWhZoneTranLine(Base.Warehouse.StockTran.StLine stLine)
+        {
+            if (stLine?.Stlineid != null)
+            {
+                var tranLineService = WhZone.Common.WhZTranUtils.CreateTranLineService();
+                var request = new WhZone.WhZTranService.WhZTranLineDeleteDto
+                {
+                    Stlineid = stLine.Stlineid,
+                    DeleteLoc = true,
+                };
+
+                try
+                {
+                    tranLineService.Delete(request);
+                }
+                catch (WhZone.WhZTranService.ApiException ex)
+                {
+                    Log.Error(ex);
+                    var response = ex.Response;
+                    if (!string.IsNullOrWhiteSpace(response))
+                    {
+                        response = WhZone.Common.WhZTranUtils.ParseErrorResponse(response);
+                        throw new MessageException(response);
+                    }
+
+                    throw;
                 }
             }
         }

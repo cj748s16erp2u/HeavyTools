@@ -285,6 +285,43 @@
         }
       }
     },
+    "/api/WhZTran/receiving/delete": {
+      "post": {
+        "tags": [
+          "WhZTran"
+        ],
+        "operationId": "delete",
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/WhZTranHeadDeleteDto"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/WhZTranHeadDeleteDto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/WhZTranHeadDeleteDto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/WhZTranHeadDeleteDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
     "/api/WhZTranLine/receiving/query": {
       "post": {
         "tags": [
@@ -460,6 +497,43 @@
                 }
               }
             }
+          }
+        }
+      }
+    },
+    "/api/WhZTranLine/receiving/delete": {
+      "post": {
+        "tags": [
+          "WhZTranLine"
+        ],
+        "operationId": "delete2",
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/WhZTranLineDeleteDto"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/WhZTranLineDeleteDto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/WhZTranLineDeleteDto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/WhZTranLineDeleteDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success"
           }
         }
       }
@@ -1014,6 +1088,26 @@
           }
         }
       },
+      "WhZTranHeadDeleteDto": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "whztid": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "stid": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "deleteLine": {
+            "type": "boolean",
+            "nullable": true
+          }
+        }
+      },
       "WhZTranHeadQueryDto": {
         "type": "object",
         "additionalProperties": false,
@@ -1109,6 +1203,26 @@
           2,
           3
         ]
+      },
+      "WhZTranLineDeleteDto": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "whztlineid": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "stlineid": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "deleteLoc": {
+            "type": "boolean",
+            "nullable": true
+          }
+        }
       },
       "WhZTranLineQueryDto": {
         "type": "object",

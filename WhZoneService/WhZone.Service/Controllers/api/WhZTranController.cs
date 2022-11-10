@@ -111,6 +111,11 @@ public class WhZTranController : Controller
         }
     }
 
+    /// <summary>
+    /// Státusz váltás
+    /// </summary>
+    /// <param name="request">Státusz váltás paraméterek</param>
+    /// <returns>Státusz váltás eredménye</returns>
     [HttpPost("receiving/statchange")]
     public async Task<ActionResult<WhZTranHeadStatChangeResultDto>> StatChangeAsync([FromBody] WhZTranHeadStatChangeDto request)
     {
@@ -130,6 +135,11 @@ public class WhZTranController : Controller
         }
     }
 
+    /// <summary>
+    /// Lezárás
+    /// </summary>
+    /// <param name="request">Lezárás paraméterek</param>
+    /// <returns>Lezárás eredménye</returns>
     [HttpPost("receiving/close")]
     public async Task<ActionResult<WhZTranHeadCloseResultDto>> CloseAsync([FromBody] WhZTranHeadCloseDto request)
     {
@@ -141,6 +151,33 @@ public class WhZTranController : Controller
         try
         {
             return this.Ok(await this.tranService.CloseAsync(request));
+        }
+        catch (Exception ex)
+        {
+            await ERP2U.Log.LoggerManager.Instance.LogErrorAsync<WhZTranController>(ex);
+            return this.BadRequest(ex.Message);
+        }
+    }
+
+
+    /// <summary>
+    /// Meglévő zóna készlet tranzakció tétel törlése
+    /// </summary>
+    /// <param name="request">Tétel információk</param>
+    /// <returns>Módosított tétel</returns>
+    [HttpPost("receiving/delete")]
+    public async Task<IActionResult> DeletaAsync([FromBody] WhZTranHeadDeleteDto request)
+    {
+        if (request is null)
+        {
+            return this.BadRequest("'request' must be set");
+        }
+
+        try
+        {
+            await this.tranService.DeleteAsync(request);
+
+            return this.Ok();
         }
         catch (Exception ex)
         {
