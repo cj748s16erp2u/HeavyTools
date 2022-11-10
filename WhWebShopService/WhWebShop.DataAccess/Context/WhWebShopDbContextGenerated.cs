@@ -48,6 +48,7 @@ public partial class WhWebShopDbContext : DbContext
         public virtual DbSet<OlcItem> OlcItem { get; set; } = null!;
         public virtual DbSet<OlcItemmodel> OlcItemmodel { get; set; } = null!;
         public virtual DbSet<OlcItemmodelseason> OlcItemmodelseason { get; set; } = null!;
+        public virtual DbSet<OlcPartnaddr> OlcPartnaddr { get; set; } = null!;
         public virtual DbSet<OlcPartner> OlcPartner { get; set; } = null!;
         public virtual DbSet<OlcPrctable> OlcPrctable { get; set; } = null!;
         public virtual DbSet<OlcPrctableCurrent> OlcPrctableCurrent { get; set; } = null!;
@@ -65,7 +66,10 @@ public partial class WhWebShopDbContext : DbContext
         public virtual DbSet<OlsItem> OlsItem { get; set; } = null!;
         public virtual DbSet<OlsItemgroup> OlsItemgroup { get; set; } = null!;
         public virtual DbSet<OlsPartnaddr> OlsPartnaddr { get; set; } = null!;
+        public virtual DbSet<OlsPartnaddrcmp> OlsPartnaddrcmp { get; set; } = null!;
+        public virtual DbSet<OlsPartncmp> OlsPartncmp { get; set; } = null!;
         public virtual DbSet<OlsPartner> OlsPartner { get; set; } = null!;
+        public virtual DbSet<OlsPartnvattyp> OlsPartnvattyp { get; set; } = null!;
         public virtual DbSet<OlsRecid> OlsRecid { get; set; } = null!;
         public virtual DbSet<OlsReserve> OlsReserve { get; set; } = null!;
         public virtual DbSet<OlsSinvhead> OlsSinvhead { get; set; } = null!;
@@ -286,6 +290,26 @@ public partial class WhWebShopDbContext : DbContext
                     .WithMany(p => p.OlcItemmodelseason)
                     .HasForeignKey(d => d.Imid)
                     .HasConstraintName("fk_olc_itemmodelseason_imid");
+            });
+
+            modelBuilder.Entity<OlcPartnaddr>(entity =>
+            {
+                entity.HasKey(e => e.Addrid)
+                    .HasName("pk_olc_partnaddr");
+
+                entity.Property(e => e.Addrid).ValueGeneratedNever();
+
+                entity.HasOne(d => d.Addr)
+                    .WithOne(p => p.OlcPartnaddr)
+                    .HasForeignKey<OlcPartnaddr>(d => d.Addrid)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("fk_olc_partnaddr_addrid");
+
+                entity.HasOne(d => d.Addusr)
+                    .WithMany(p => p.OlcPartnaddr)
+                    .HasForeignKey(d => d.Addusrid)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("fk_olc_partnaddr_addusrid");
             });
 
             modelBuilder.Entity<OlcPartner>(entity =>
@@ -619,6 +643,59 @@ public partial class WhWebShopDbContext : DbContext
                     .HasConstraintName("fk_ols_partnaddr_partnid");
             });
 
+            modelBuilder.Entity<OlsPartnaddrcmp>(entity =>
+            {
+                entity.HasKey(e => new { e.Addrid, e.Cmpid })
+                    .HasName("pk_ols_partnaddrcmp");
+
+                entity.HasOne(d => d.Addr)
+                    .WithMany(p => p.OlsPartnaddrcmp)
+                    .HasForeignKey(d => d.Addrid)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("fk_ols_partnaddrcmp_addrid");
+
+                entity.HasOne(d => d.Addusr)
+                    .WithMany(p => p.OlsPartnaddrcmp)
+                    .HasForeignKey(d => d.Addusrid)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("fk_ols_partnaddrcmp_addusrid");
+
+                entity.HasOne(d => d.Cmp)
+                    .WithMany(p => p.OlsPartnaddrcmp)
+                    .HasForeignKey(d => d.Cmpid)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("fk_ols_partnaddrcmp_cmpid");
+            });
+
+            modelBuilder.Entity<OlsPartncmp>(entity =>
+            {
+                entity.HasKey(e => new { e.Partnid, e.Cmpid })
+                    .HasName("pk_ols_partncmp");
+
+                entity.HasOne(d => d.Addusr)
+                    .WithMany(p => p.OlsPartncmp)
+                    .HasForeignKey(d => d.Addusrid)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("fk_ols_partncmp_addusrid");
+
+                entity.HasOne(d => d.Cmp)
+                    .WithMany(p => p.OlsPartncmp)
+                    .HasForeignKey(d => d.Cmpid)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("fk_ols_partncmp_cmpid");
+
+                entity.HasOne(d => d.Cur)
+                    .WithMany(p => p.OlsPartncmp)
+                    .HasForeignKey(d => d.Curid)
+                    .HasConstraintName("fk_ols_partncmp_curid");
+
+                entity.HasOne(d => d.Partn)
+                    .WithMany(p => p.OlsPartncmp)
+                    .HasForeignKey(d => d.Partnid)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("fk_ols_partncmp_partnid");
+            });
+
             modelBuilder.Entity<OlsPartner>(entity =>
             {
                 entity.HasKey(e => e.Partnid)
@@ -631,6 +708,23 @@ public partial class WhWebShopDbContext : DbContext
                     .HasForeignKey(d => d.Addusrid)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("fk_ols_partner_addusrid");
+
+                entity.HasOne(d => d.Ptvattyp)
+                    .WithMany(p => p.OlsPartner)
+                    .HasForeignKey(d => d.Ptvattypid)
+                    .HasConstraintName("fk_ols_partner_ptvattypid");
+            });
+
+            modelBuilder.Entity<OlsPartnvattyp>(entity =>
+            {
+                entity.HasKey(e => e.Ptvattypid)
+                    .HasName("pk_ols_partnvattyp");
+
+                entity.HasOne(d => d.Addusr)
+                    .WithMany(p => p.OlsPartnvattyp)
+                    .HasForeignKey(d => d.Addusrid)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("fk_ols_partnvattyp_addusrid");
             });
 
             modelBuilder.Entity<OlsRecid>(entity =>
@@ -740,6 +834,11 @@ public partial class WhWebShopDbContext : DbContext
                     .HasForeignKey(d => d.Partnid)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("fk_ols_sinvhead_partnid");
+
+                entity.HasOne(d => d.Ptvattyp)
+                    .WithMany(p => p.OlsSinvhead)
+                    .HasForeignKey(d => d.Ptvattypid)
+                    .HasConstraintName("fk_ols_sinvhead_ptvattypid");
             });
 
             modelBuilder.Entity<OlsSorddoc>(entity =>

@@ -241,6 +241,9 @@ namespace eLog.HeavyTools.Services.WhWebShop.BusinessEntities.Model
         [ForeignKey("Partnid")]
         [InverseProperty("OlsSinvheadPartn")]
         public virtual OlsPartner Partn { get; set; } = null!;
+        [ForeignKey("Ptvattypid")]
+        [InverseProperty("OlsSinvhead")]
+        public virtual OlsPartnvattyp? Ptvattyp { get; set; }
         [InverseProperty("Corrsinv")]
         public virtual ICollection<OlsSinvhead> InverseCorrsinv { get; set; }
         [InverseProperty("Origsinv")]

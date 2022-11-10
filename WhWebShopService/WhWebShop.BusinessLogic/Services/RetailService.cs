@@ -28,8 +28,8 @@ public class RetailService : IRetailService
     private readonly IOlsSordheadService olsSordheadService;
     private readonly IOlcSordheadService olcSordheadService;
     private readonly IOrderService orderService;
-    private readonly IItemCache itemCache;
-    private readonly IItemGroupCache itemGroupCache;
+    private readonly IItemCacheService itemCache;
+    private readonly IItemGroupCacheService itemGroupCache;
     private readonly IOlsSordlineService olsSordlineService;
     private readonly IOlcSordlineService olcSordlineService;
     private readonly IReserveService reserveService;
@@ -43,8 +43,8 @@ public class RetailService : IRetailService
         IOlsSordheadService olsSordheadService,
         IOlcSordheadService olcSordheadService,
         IOrderService orderService,
-        IItemCache itemCache,
-        IItemGroupCache itemGroupCache,
+        IItemCacheService itemCache,
+        IItemGroupCacheService itemGroupCache,
         IOlsSordlineService olsSordlineService,
         IOlcSordlineService olcSordlineService,
         IReserveService reserveService)

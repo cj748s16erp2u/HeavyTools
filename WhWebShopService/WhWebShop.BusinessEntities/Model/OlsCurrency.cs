@@ -15,6 +15,7 @@ namespace eLog.HeavyTools.Services.WhWebShop.BusinessEntities.Model
             OlcPrctable = new HashSet<OlcPrctable>();
             OlsCompanyDualcur = new HashSet<OlsCompany>();
             OlsCompanyHomecur = new HashSet<OlsCompany>();
+            OlsPartncmp = new HashSet<OlsPartncmp>();
             OlsSinvhead = new HashSet<OlsSinvhead>();
             OlsSordhead = new HashSet<OlsSordhead>();
         }
@@ -50,6 +51,8 @@ namespace eLog.HeavyTools.Services.WhWebShop.BusinessEntities.Model
         public virtual ICollection<OlsCompany> OlsCompanyDualcur { get; set; }
         [InverseProperty("Homecur")]
         public virtual ICollection<OlsCompany> OlsCompanyHomecur { get; set; }
+        [InverseProperty("Cur")]
+        public virtual ICollection<OlsPartncmp> OlsPartncmp { get; set; }
         [InverseProperty("Cur")]
         public virtual ICollection<OlsSinvhead> OlsSinvhead { get; set; }
         [InverseProperty("Cur")]

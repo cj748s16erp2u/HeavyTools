@@ -23,6 +23,7 @@ namespace eLog.HeavyTools.Services.WhWebShop.BusinessEntities.Model
             OlcItem = new HashSet<OlcItem>();
             OlcItemmodel = new HashSet<OlcItemmodel>();
             OlcItemmodelseason = new HashSet<OlcItemmodelseason>();
+            OlcPartnaddr = new HashSet<OlcPartnaddr>();
             OlcPartner = new HashSet<OlcPartner>();
             OlcPrctable = new HashSet<OlcPrctable>();
             OlcPrctype = new HashSet<OlcPrctype>();
@@ -36,7 +37,10 @@ namespace eLog.HeavyTools.Services.WhWebShop.BusinessEntities.Model
             OlsItem = new HashSet<OlsItem>();
             OlsItemgroup = new HashSet<OlsItemgroup>();
             OlsPartnaddr = new HashSet<OlsPartnaddr>();
+            OlsPartnaddrcmp = new HashSet<OlsPartnaddrcmp>();
+            OlsPartncmp = new HashSet<OlsPartncmp>();
             OlsPartner = new HashSet<OlsPartner>();
+            OlsPartnvattyp = new HashSet<OlsPartnvattyp>();
             OlsReserve = new HashSet<OlsReserve>();
             OlsSinvheadAddusr = new HashSet<OlsSinvhead>();
             OlsSinvheadCloseusr = new HashSet<OlsSinvhead>();
@@ -113,6 +117,8 @@ namespace eLog.HeavyTools.Services.WhWebShop.BusinessEntities.Model
         [InverseProperty("Addusr")]
         public virtual ICollection<OlcItemmodelseason> OlcItemmodelseason { get; set; }
         [InverseProperty("Addusr")]
+        public virtual ICollection<OlcPartnaddr> OlcPartnaddr { get; set; }
+        [InverseProperty("Addusr")]
         public virtual ICollection<OlcPartner> OlcPartner { get; set; }
         [InverseProperty("Addusr")]
         public virtual ICollection<OlcPrctable> OlcPrctable { get; set; }
@@ -123,11 +129,11 @@ namespace eLog.HeavyTools.Services.WhWebShop.BusinessEntities.Model
         [InverseProperty("Addusr")]
         public virtual ICollection<OlcSordline> OlcSordline { get; set; }
         [InverseProperty("Addusr")]
+        public virtual ICollection<OlcSordlineRes> OlcSordlineRes { get; set; }
+        [InverseProperty("Addusr")]
         public virtual ICollection<OlcTaxtransext> OlcTaxtransext { get; set; }
         [InverseProperty("Addusr")]
         public virtual ICollection<OlsCompany> OlsCompany { get; set; }
-        [InverseProperty("Addusr")]
-        public virtual ICollection<OlcSordlineRes> OlcSordlineRes { get; set; }
         [InverseProperty("Addusr")]
         public virtual ICollection<OlsCountry> OlsCountry { get; set; }
         [InverseProperty("Addusr")]
@@ -139,7 +145,13 @@ namespace eLog.HeavyTools.Services.WhWebShop.BusinessEntities.Model
         [InverseProperty("Addusr")]
         public virtual ICollection<OlsPartnaddr> OlsPartnaddr { get; set; }
         [InverseProperty("Addusr")]
+        public virtual ICollection<OlsPartnaddrcmp> OlsPartnaddrcmp { get; set; }
+        [InverseProperty("Addusr")]
+        public virtual ICollection<OlsPartncmp> OlsPartncmp { get; set; }
+        [InverseProperty("Addusr")]
         public virtual ICollection<OlsPartner> OlsPartner { get; set; }
+        [InverseProperty("Addusr")]
+        public virtual ICollection<OlsPartnvattyp> OlsPartnvattyp { get; set; }
         [InverseProperty("Addusr")]
         public virtual ICollection<OlsReserve> OlsReserve { get; set; }
         [InverseProperty("Addusr")]
@@ -147,11 +159,11 @@ namespace eLog.HeavyTools.Services.WhWebShop.BusinessEntities.Model
         [InverseProperty("Closeusr")]
         public virtual ICollection<OlsSinvhead> OlsSinvheadCloseusr { get; set; }
         [InverseProperty("Addusr")]
+        public virtual ICollection<OlsSorddoc> OlsSorddoc { get; set; }
+        [InverseProperty("Addusr")]
         public virtual ICollection<OlsSordhead> OlsSordhead { get; set; }
         [InverseProperty("Addusr")]
         public virtual ICollection<OlsSordline> OlsSordline { get; set; }
-        [InverseProperty("Addusr")]
-        public virtual ICollection<OlsSorddoc> OlsSorddoc { get; set; }
         [InverseProperty("Addusr")]
         public virtual ICollection<OlsTax> OlsTax { get; set; }
         [InverseProperty("Addusr")]

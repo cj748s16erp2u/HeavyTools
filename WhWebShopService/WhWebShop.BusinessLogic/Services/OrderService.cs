@@ -29,7 +29,7 @@ public class OrderService : LogicServiceBase<OlsSordhead>, IOrderService
     private readonly IOlsSordheadService sordHeadService;
     private readonly IOlsSordlineService sordLineService;
     private readonly IOlsRecidService recIdService;
-    private readonly IItemCache itemCache;
+    private readonly IItemCacheService itemCache;
     private readonly IOptions<Options.SordOptions> sordoptions;
     private readonly IOSSService oSSService;
     private readonly IOlsCountryService countryService;
@@ -48,7 +48,7 @@ public class OrderService : LogicServiceBase<OlsSordhead>, IOrderService
                         IOlsSordheadService sordHeadService,
                         IOlsSordlineService sordLineService,
                         IOlsRecidService recIdService,
-                        IItemCache itemCache,
+                        IItemCacheService itemCache,
                         IOptions<Options.SordOptions> sordoptions,
                         IOSSService oSSService,
                         IOlsCountryService countryService,
@@ -188,45 +188,45 @@ public class OrderService : LogicServiceBase<OlsSordhead>, IOrderService
     {
         var root = new XElement("sordhead");
 
-        AddXElement(root, order, nameof(order.Sinv_name));
-        AddXElement(root, order, nameof(order.Sinv_countryid));
-        AddXElement(root, order, nameof(order.Sinv_postcode));
-        AddXElement(root, order, nameof(order.Sinv_city));
-        AddXElement(root, order, nameof(order.Sinv_building));
-        AddXElement(root, order, nameof(order.Sinv_district));
-        AddXElement(root, order, nameof(order.Sinv_door));
-        AddXElement(root, order, nameof(order.Sinv_hnum));
-        AddXElement(root, order, nameof(order.Sinv_floor));
-        AddXElement(root, order, nameof(order.Sinv_place));
-        AddXElement(root, order, nameof(order.Sinv_placetype));
-        AddXElement(root, order, nameof(order.Sinv_stairway));
+        Utils.AddXElement(root, order, nameof(order.Sinv_name));
+        Utils.AddXElement(root, order, nameof(order.Sinv_countryid));
+        Utils.AddXElement(root, order, nameof(order.Sinv_postcode));
+        Utils.AddXElement(root, order, nameof(order.Sinv_city));
+        Utils.AddXElement(root, order, nameof(order.Sinv_building));
+        Utils.AddXElement(root, order, nameof(order.Sinv_district));
+        Utils.AddXElement(root, order, nameof(order.Sinv_door));
+        Utils.AddXElement(root, order, nameof(order.Sinv_hnum));
+        Utils.AddXElement(root, order, nameof(order.Sinv_floor));
+        Utils.AddXElement(root, order, nameof(order.Sinv_place));
+        Utils.AddXElement(root, order, nameof(order.Sinv_placetype));
+        Utils.AddXElement(root, order, nameof(order.Sinv_stairway));
 
-        AddXElement(root, order, nameof(order.Shipping_name));
-        AddXElement(root, order, nameof(order.Shipping_countryid));
-        AddXElement(root, order, nameof(order.Shipping_postcode));
-        AddXElement(root, order, nameof(order.Shipping_city));
-        AddXElement(root, order, nameof(order.Shipping_building));
-        AddXElement(root, order, nameof(order.Shipping_district));
-        AddXElement(root, order, nameof(order.Shipping_door));
-        AddXElement(root, order, nameof(order.Shipping_hnum));
-        AddXElement(root, order, nameof(order.Shipping_floor));
-        AddXElement(root, order, nameof(order.Shipping_place));
-        AddXElement(root, order, nameof(order.Shipping_placetype));
-        AddXElement(root, order, nameof(order.Shipping_stairway));
-        AddXElement(root, order, nameof(order.Phone));
-        AddXElement(root, order, nameof(order.Email));
-        AddXElement(root, order, nameof(order.ShippinPrc));
-        AddXElement(root, order, nameof(order.PaymentFee));
-        AddXElement(root, order, nameof(order.Paymenttransaciondata));
-        AddXElement(root, order, nameof(order.Netgopartnid));
-        AddXElement(root, order, nameof(order.Pppid));
-        AddXElement(root, order, nameof(order.Glsid));
-        AddXElement(root, order, nameof(order.Foxpostid));
-        AddXElement(root, order, nameof(order.CentralRetailType));
-        AddXElement(root, order, nameof(order.Exchangepackagesnumber));
-        AddXElement(root, order, nameof(order.ShippingId));
-        AddXElement(root, order, nameof(order.PaymentId));
-        AddXElement(root, order, nameof(order.GiftCardLogId));
+        Utils.AddXElement(root, order, nameof(order.Shipping_name));
+        Utils.AddXElement(root, order, nameof(order.Shipping_countryid));
+        Utils.AddXElement(root, order, nameof(order.Shipping_postcode));
+        Utils.AddXElement(root, order, nameof(order.Shipping_city));
+        Utils.AddXElement(root, order, nameof(order.Shipping_building));
+        Utils.AddXElement(root, order, nameof(order.Shipping_district));
+        Utils.AddXElement(root, order, nameof(order.Shipping_door));
+        Utils.AddXElement(root, order, nameof(order.Shipping_hnum));
+        Utils.AddXElement(root, order, nameof(order.Shipping_floor));
+        Utils.AddXElement(root, order, nameof(order.Shipping_place));
+        Utils.AddXElement(root, order, nameof(order.Shipping_placetype));
+        Utils.AddXElement(root, order, nameof(order.Shipping_stairway));
+        Utils.AddXElement(root, order, nameof(order.Phone));
+        Utils.AddXElement(root, order, nameof(order.Email));
+        Utils.AddXElement(root, order, nameof(order.ShippinPrc));
+        Utils.AddXElement(root, order, nameof(order.PaymentFee));
+        Utils.AddXElement(root, order, nameof(order.Paymenttransaciondata));
+        Utils.AddXElement(root, order, nameof(order.Netgopartnid));
+        Utils.AddXElement(root, order, nameof(order.Pppid));
+        Utils.AddXElement(root, order, nameof(order.Glsid));
+        Utils.AddXElement(root, order, nameof(order.Foxpostid));
+        Utils.AddXElement(root, order, nameof(order.CentralRetailType));
+        Utils.AddXElement(root, order, nameof(order.Exchangepackagesnumber));
+        Utils.AddXElement(root, order, nameof(order.ShippingId));
+        Utils.AddXElement(root, order, nameof(order.PaymentId));
+        Utils.AddXElement(root, order, nameof(order.GiftCardLogId));
         
         if (order.Cart.Cupons.Length > 0)
         {
@@ -266,24 +266,7 @@ public class OrderService : LogicServiceBase<OlsSordhead>, IOrderService
         csh.Adddate = sh.Adddate;
     }
 
-    private void AddXElement(XElement root, object o, string fieldname)
-    {
-        if (o == null)
-        {
-            return;
-        }
-        var field = o.GetType().GetProperty(fieldname);
-        var value = field!.GetValue(o);
-
-        if (value != null)
-        {
-            var x = new XElement(fieldname)
-            {
-                Value = value.ToString()
-            };
-            root.Add(x);
-        }
-    }
+    
 
     private async Task FillLinesAsync(List<OlsSordline> sl, List<OlcSordline> csl, OrderJsonParamsDto order, int sordid, OSSResultDto oss, CancellationToken cancellationToken)
     {
@@ -341,13 +324,13 @@ public class OrderService : LogicServiceBase<OlsSordhead>, IOrderService
              
             var root = new XElement("sordline");
 
-            AddXElement(root, item, nameof(item.OrignalSelPrc));
-            AddXElement(root, item, nameof(item.OrignalTotprc));
-            AddXElement(root, item, nameof(item.SelPrc));
-            AddXElement(root, item, nameof(item.GrossPrc));
-            AddXElement(root, item, nameof(item.NetVal));
-            AddXElement(root, item, nameof(item.TaxVal));
-            AddXElement(root, item, nameof(item.TotVal));
+            Utils.AddXElement(root, item, nameof(item.OrignalSelPrc));
+            Utils.AddXElement(root, item, nameof(item.OrignalTotprc));
+            Utils.AddXElement(root, item, nameof(item.SelPrc));
+            Utils.AddXElement(root, item, nameof(item.GrossPrc));
+            Utils.AddXElement(root, item, nameof(item.NetVal));
+            Utils.AddXElement(root, item, nameof(item.TaxVal));
+            Utils.AddXElement(root, item, nameof(item.TotVal));
 
             var ncsl = new OlcSordline
             {

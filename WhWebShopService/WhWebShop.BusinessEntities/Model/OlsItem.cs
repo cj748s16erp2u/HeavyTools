@@ -104,8 +104,8 @@ namespace eLog.HeavyTools.Services.WhWebShop.BusinessEntities.Model
         [InverseProperty("Item")]
         public virtual ICollection<OlsSordline> OlsSordline { get; set; }
         [InverseProperty("Item")]
-        public virtual ICollection<OlsTmpSordst> OlsTmpSordst { get; set; }
-        [InverseProperty("Item")]
         public virtual ICollection<OlsStock> OlsStock { get; set; }
+        [InverseProperty("Item")]
+        public virtual ICollection<OlsTmpSordst> OlsTmpSordst { get; set; }
     }
 }
