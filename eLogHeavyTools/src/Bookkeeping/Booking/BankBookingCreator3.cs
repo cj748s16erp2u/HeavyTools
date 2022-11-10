@@ -211,7 +211,7 @@ namespace eLog.HeavyTools.Bookkeeping.Booking
             return base.CreateKeyForSimpleMatchingFilterSettings(context, docLines, sourceValue, srcValueRule, fieldRule, queryTableAlias);
         }
 
-        protected const string CONST_SrcNoteValuePattern = "([0-9]{4}\\s*\\/\\s*)?(0?[0-9]{4})(\\s*-\\s*(0?[0-9]{4}))?";
+        protected const string CONST_SrcNoteValuePattern = "([0-9]{4})?\\s*\\/?\\s*(0?[0-9]{4})(\\s*-\\s*(0?[0-9]{4}))?";
         protected static readonly Regex CONST_SrcNoteValueRegex = new Regex(CONST_SrcNoteValuePattern, RegexOptions.IgnoreCase);
 
         /// <summary>
