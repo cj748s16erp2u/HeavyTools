@@ -16,6 +16,7 @@ namespace eLog.HeavyTools.Services.WhWebShop.BusinessEntities.Model
             OlcPrctable = new HashSet<OlcPrctable>();
             OlsCompany = new HashSet<OlsCompany>();
             OlsPartnaddr = new HashSet<OlsPartnaddr>();
+            OlsPartncmp = new HashSet<OlsPartncmp>();
             OlsReserve = new HashSet<OlsReserve>();
             OlsSinvheadDelpartn = new HashSet<OlsSinvhead>();
             OlsSinvheadPartn = new HashSet<OlsSinvhead>();
@@ -99,6 +100,9 @@ namespace eLog.HeavyTools.Services.WhWebShop.BusinessEntities.Model
         [ForeignKey("Addusrid")]
         [InverseProperty("OlsPartner")]
         public virtual CfwUser Addusr { get; set; } = null!;
+        [ForeignKey("Ptvattypid")]
+        [InverseProperty("OlsPartner")]
+        public virtual OlsPartnvattyp? Ptvattyp { get; set; }
         [InverseProperty("Partn")]
         public virtual OlcPartner OlcPartner { get; set; } = null!;
         [InverseProperty("Partn")]
@@ -107,6 +111,8 @@ namespace eLog.HeavyTools.Services.WhWebShop.BusinessEntities.Model
         public virtual ICollection<OlsCompany> OlsCompany { get; set; }
         [InverseProperty("Partn")]
         public virtual ICollection<OlsPartnaddr> OlsPartnaddr { get; set; }
+        [InverseProperty("Partn")]
+        public virtual ICollection<OlsPartncmp> OlsPartncmp { get; set; }
         [InverseProperty("Partn")]
         public virtual ICollection<OlsReserve> OlsReserve { get; set; }
         [InverseProperty("Delpartn")]

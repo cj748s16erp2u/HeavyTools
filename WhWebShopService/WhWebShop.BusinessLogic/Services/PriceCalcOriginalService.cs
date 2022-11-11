@@ -29,7 +29,7 @@ public class PriceCalcOriginalService : LogicServiceBase<OlcPrctable>, IPriceCal
 
     private IOlcPrctypeService olcPrctypeService;
     private readonly IOlsCurrencyCacheService olsCurrencyCacheService;
-    private readonly IItemCache itemCache;
+    private readonly IItemCacheService itemCache;
     private readonly IOlsPartnerService olsPartnerService;
 
     public PriceCalcOriginalService(IValidator<OlcPrctable> validator,
@@ -38,7 +38,7 @@ public class PriceCalcOriginalService : LogicServiceBase<OlcPrctable>, IPriceCal
                                     IEnvironmentService environmentService,
                                     IOlcPrctypeService olcPrctypeService,
                                     IOlsCurrencyCacheService olsCurrencyCacheService, 
-                                    IItemCache itemCache,
+                                    IItemCacheService itemCache,
                                     IOlsPartnerService olsPartnerService) : base(validator, repository, unitOfWork, environmentService)
     {
         this.olcPrctypeService = olcPrctypeService ?? throw new ArgumentNullException(nameof(olcPrctypeService));

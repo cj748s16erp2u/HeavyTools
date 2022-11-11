@@ -927,6 +927,7 @@ go
   constraint pk_olc_sordline_res primary key (sordlineidres)
 )
 
+alter table olc_sordline_res add constraint fk_olc_sordline_res_preordersordlineid foreign key (preordersordlineid) references ols_sordline (sordlineid)
 alter table olc_sordline_res add constraint fk_olc_sordline_res_sordid foreign key (sordlineid) references ols_sordline (sordlineid)
 alter table olc_sordline_res add constraint fk_olc_sordline_res_addusrid foreign key (addusrid) references cfw_user (usrid)
 alter table olc_sordline_res add constraint fk_olc_sordline_res_resid foreign key (resid) references ols_reserve (resid)

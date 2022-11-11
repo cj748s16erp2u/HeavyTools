@@ -187,6 +187,8 @@
     <Compile Include="InterfaceCaller\ReserveParamsDto.cs" />
     <Compile Include="InterfaceCaller\ReserveResultDto.cs" />
     <Compile Include="InterfaceCaller\ResultDto.cs" />
+    <Compile Include="InterfaceCaller\RetailOrderResultDto.cs" />
+    <Compile Include="InterfaceCaller\RetailOrderParamDto.cs" />
     <Compile Include="InterfaceCaller\SordLineDeleteParamDto.cs" />
     <Compile Include="Masters\Import\Partner\PartnerImportPage.cs" />
     <Compile Include="Masters\Import\Partner\PartnerImportTab.cs" />
@@ -268,6 +270,7 @@
     <Compile Include="Masters\Item\Season\OlcItemSeasons.cs" />
     <Compile Include="Masters\Item\Season\OlcItemSeasonGenerated.cs" />
     <Compile Include="Masters\Item\Season\OlcItemSeasonSearchPage.cs" />
+    <Compile Include="Masters\ItmWh\RetailOrderSearchPage.cs" />
     <Compile Include="Masters\Partner\EmployeeList3.cs" />
     <Compile Include="Masters\Partner\OlcEmployeeRules.cs" />
     <Compile Include="Masters\Partner\OlcPartnAddrRules.cs" />

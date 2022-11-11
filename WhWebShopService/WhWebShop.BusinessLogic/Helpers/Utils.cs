@@ -7,6 +7,7 @@ using System.Linq.Expressions;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Linq;
 
 namespace eLog.HeavyTools.Services.WhWebShop.BusinessLogic.Helpers;
 
@@ -158,6 +159,30 @@ public static class Utils
 #pragma warning disable S112 // General exceptions should never be thrown
             throw new Exception($"Unhandled type of body: {expr.GetType().FullName}");
 #pragma warning restore S112 // General exceptions should never be thrown
+        }
+    }
+
+    public static void AddXElement(XElement root, object o, string fieldname)
+    {
+        AddXElement(root, o, fieldname, fieldname);
+    }
+
+    public static void AddXElement(XElement root, object o, string fieldname, string xmlfieldname)
+    {
+        if (o == null)
+        {
+            return;
+        }
+        var field = o.GetType().GetProperty(fieldname);
+        var value = field!.GetValue(o);
+
+        if (value != null)
+        {
+            var x = new XElement(xmlfieldname)
+            {
+                Value = value.ToString()
+            };
+            root.Add(x);
         }
     }
 }
