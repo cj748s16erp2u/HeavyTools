@@ -104,4 +104,30 @@ public class WhZTranLineController : Controller
             return this.BadRequest(ex.Message);
         }
     }
+
+    /// <summary>
+    /// Meglévő zóna készlet tranzakció tétel törlése
+    /// </summary>
+    /// <param name="request">Tétel információk</param>
+    /// <returns>Módosított tétel</returns>
+    [HttpPost("receiving/delete")]
+    public async Task<IActionResult> DeletaAsync([FromBody] WhZTranLineDeleteDto request)
+    {
+        if (request is null)
+        {
+            return this.BadRequest("'request' must be set");
+        }
+
+        try
+        {
+            await this.tranLineService.DeleteAsync(request);
+
+            return this.Ok();
+        }
+        catch (Exception ex)
+        {
+            await ERP2U.Log.LoggerManager.Instance.LogErrorAsync<WhZTranLineController>(ex);
+            return this.BadRequest(ex.Message);
+        }
+    }
 }

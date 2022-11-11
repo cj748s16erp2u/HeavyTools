@@ -245,6 +245,55 @@ public class WhZTranLocService : LogicServiceBase<OlcWhztranloc>, IWhZTranLocSer
     }
 
     /// <summary>
+    /// Lekérdezés, hogy az adott tétel azonosítóhoz tartozik-e helykód információ
+    /// </summary>
+    /// <param name="whztranlineid">Tétel azonosító</param>
+    /// <param name="cancellationToken"></param>
+    /// <returns>Igen / Name</returns>
+    public async Task<bool> AnyAsync(int whztranlineid, CancellationToken cancellationToken = default)
+    {
+        return await this.Repository.Entities.AnyAsync(l => l.Whztlineid == whztranlineid, cancellationToken);
+    }
+
+    /// <summary>
+    /// Tételhez tartozó helykód információk törlése
+    /// </summary>
+    /// <param name="whztlineid">Tétel azonosító</param>
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    public async Task<IEnumerable<WhZTranLocDto>> DeleteAllAsync(int whztlineid, CancellationToken cancellationToken = default)
+    {
+        using var tran = await this.UnitOfWork.BeginTransactionAsync(cancellationToken);
+        try
+        {
+            var entries = await this.QueryAsync(l => l.Whztlineid == whztlineid, cancellationToken);
+
+            var result = new List<WhZTranLocDto>();
+            foreach (var entry in entries)
+            {
+                var entity = await this.DeleteAsync(entry, cancellationToken);
+                result.Add(this.mapper.Map<WhZTranLocDto>(entity));
+            }
+
+            tran.Commit();
+
+            return result;
+        }
+        catch (Exception ex)
+        {
+            await ERP2U.Log.LoggerManager.Instance.LogErrorAsync<WhZTranLineService>(ex);
+            throw;
+        }
+        finally
+        {
+            if (tran.HasTransaction())
+            {
+                tran.Rollback();
+            }
+        }
+    }
+
+    /// <summary>
     /// Paraméterben átadott mennyiség eggyezőség vizsgálata
     /// </summary>
     /// <param name="lineQty">Tétel mennyiség</param>

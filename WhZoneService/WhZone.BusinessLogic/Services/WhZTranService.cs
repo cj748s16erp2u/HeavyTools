@@ -136,7 +136,7 @@ public class WhZTranService : LogicServiceBase<OlcWhztranhead>, IWhZTranService
         var originalEntity = await this.LoadEntityAsync(request.Whztid, request.Stid, cancellationToken);
         if (originalEntity is null)
         {
-            this.ThrowException(WhZTranExceptionType.EntryNotFound, $"The referenced transaction is not found (whztid: {request.Whztid}, stid: {request.Stid})");
+            ThrowException(WhZTranExceptionType.EntryNotFound, $"The referenced transaction is not found (whztid: {request.Whztid}, stid: {request.Stid})");
         }
 
         var entity = this.MapUpdateDtoToEntity(request, originalEntity!);
@@ -180,7 +180,7 @@ public class WhZTranService : LogicServiceBase<OlcWhztranhead>, IWhZTranService
         var entity = await this.LoadEntityAsync(request.Whztid, request.Stid, cancellationToken);
         if (entity is null)
         {
-            this.ThrowException(WhZTranExceptionType.EntryNotFound, $"The referenced transaction is not found (whztid: {request.Whztid}, stid: {request.Stid})");
+            ThrowException(WhZTranExceptionType.EntryNotFound, $"The referenced transaction is not found (whztid: {request.Whztid}, stid: {request.Stid})");
         }
 
         return this.IsStatChangeAllowed((WhZTranHead_Whztstat)entity!.Whztstat, request.NewStat);
@@ -199,7 +199,7 @@ public class WhZTranService : LogicServiceBase<OlcWhztranhead>, IWhZTranService
         var entity = await this.LoadEntityAsync(request.Whztid, request.Stid, cancellationToken);
         if (entity is null)
         {
-            this.ThrowException(WhZTranExceptionType.EntryNotFound, $"The referenced transaction is not found (whztid: {request.Whztid}, stid: {request.Stid})");
+            ThrowException(WhZTranExceptionType.EntryNotFound, $"The referenced transaction is not found (whztid: {request.Whztid}, stid: {request.Stid})");
         }
 
         var oldStat = (WhZTranHead_Whztstat)entity!.Whztstat;
@@ -298,7 +298,7 @@ public class WhZTranService : LogicServiceBase<OlcWhztranhead>, IWhZTranService
         var entity = await this.LoadEntityAsync(request.Whztid, request.Stid, cancellationToken);
         if (entity is null)
         {
-            this.ThrowException(WhZTranExceptionType.EntryNotFound, $"The referenced transaction is not found (whztid: {request.Whztid}, stid: {request.Stid})");
+            ThrowException(WhZTranExceptionType.EntryNotFound, $"The referenced transaction is not found (whztid: {request.Whztid}, stid: {request.Stid})");
         }
 
         var isStatChangeAllowed = this.IsStatChangeAllowed((WhZTranHead_Whztstat)entity!.Whztstat, WhZTranHead_Whztstat.Closed);
@@ -332,6 +332,50 @@ public class WhZTranService : LogicServiceBase<OlcWhztranhead>, IWhZTranService
             Result = -1,
             Message = $"Unable to close"
         };
+    }
+
+    /// <summary>
+    /// Bevételezés típusú tranzakció törlése
+    /// </summary>
+    /// <param name="request">Tranzakció adatok</param>
+    /// <param name="cancellationToken"></param>
+    /// <returns>Törölt tranzakció</returns>
+    public async Task<WhZReceivingTranHeadDto> DeleteAsync(WhZTranHeadDeleteDto request, CancellationToken cancellationToken = default)
+    {
+        this.ValidateDeleteParameters(request);
+
+        var entity = await this.LoadEntityAsync(request.Whztid, request.Stid, cancellationToken);
+        if (entity is null)
+        {
+            ThrowException(WhZTranExceptionType.EntryNotFound, $"The referenced transaction is not found (whztid: {request.Whztid}, stid: {request.Stid})");
+        }
+
+        using var tran = await this.UnitOfWork.BeginTransactionAsync(cancellationToken);
+        try
+        {
+            if (request.DeleteLine.GetValueOrDefault(false))
+            {
+                await this.whZTranLineService.DeleteAllAsync(entity!.Whztid, cancellationToken);
+            }
+
+            entity = await this.DeleteAsync(entity!, cancellationToken);
+
+            tran.Commit();
+
+            return this.mapper.Map<WhZReceivingTranHeadDto>(entity);
+        }
+        catch (Exception ex)
+        {
+            await ERP2U.Log.LoggerManager.Instance.LogErrorAsync<WhZTranService>(ex);
+            throw;
+        }
+        finally
+        {
+            if (tran.HasTransaction())
+            {
+                tran.Rollback();
+            }
+        }
     }
 
     /// <summary>
@@ -659,17 +703,17 @@ public class WhZTranService : LogicServiceBase<OlcWhztranhead>, IWhZTranService
 
         if (request.Whzttype != WhZTranHead_Whzttype.Receiving)
         {
-            this.ThrowException(WhZTranExceptionType.InvalidWhzttype, "The request's transaction type is invalid", fieldName: nameof(WhZReceivingTranHeadDto.Whzttype));
+            ThrowException(WhZTranExceptionType.InvalidWhzttype, "The request's transaction type is invalid", fieldName: nameof(WhZReceivingTranHeadDto.Whzttype));
         }
 
         if (request.Stid is null)
         {
-            this.ThrowException(WhZTranExceptionType.InvalidStid, "The source stock tran identifier is not set", fieldName: nameof(WhZReceivingTranHeadDto.Stid));
+            ThrowException(WhZTranExceptionType.InvalidStid, "The source stock tran identifier is not set", fieldName: nameof(WhZReceivingTranHeadDto.Stid));
         }
 
         if (request.Towhzid is null)
         {
-            this.ThrowException(WhZTranExceptionType.InvalidTowhzid, "The destination zone identifier is not set", fieldName: nameof(WhZReceivingTranHeadDto.Towhzid));
+            ThrowException(WhZTranExceptionType.InvalidTowhzid, "The destination zone identifier is not set", fieldName: nameof(WhZReceivingTranHeadDto.Towhzid));
         }
     }
 
@@ -687,12 +731,12 @@ public class WhZTranService : LogicServiceBase<OlcWhztranhead>, IWhZTranService
 
         if (request.Whztid is null && request.Stid is null)
         {
-            this.ThrowException(WhZTranExceptionType.InvalidIdentifier, $"One of the '{nameof(request.Whztid)}' or '{nameof(request.Stid)}' must be set");
+            ThrowException(WhZTranExceptionType.InvalidIdentifier, $"One of the '{nameof(request.Whztid)}' or '{nameof(request.Stid)}' must be set");
         }
 
         if (string.IsNullOrWhiteSpace(request.AuthUser))
         {
-            this.ThrowException(WhZTranExceptionType.InvalidAuthUser, $"The '{nameof(request.AuthUser)}' must be set", fieldName: nameof(WhZReceivingTranHeadDto.AuthUser));
+            ThrowException(WhZTranExceptionType.InvalidAuthUser, $"The '{nameof(request.AuthUser)}' must be set", fieldName: nameof(WhZReceivingTranHeadDto.AuthUser));
         }
     }
 
@@ -710,12 +754,12 @@ public class WhZTranService : LogicServiceBase<OlcWhztranhead>, IWhZTranService
 
         if (request.Whztid is null && request.Stid is null)
         {
-            this.ThrowException(WhZTranExceptionType.InvalidIdentifier, $"One of the '{nameof(request.Whztid)}' or '{nameof(request.Stid)}' must be set");
+            ThrowException(WhZTranExceptionType.InvalidIdentifier, $"One of the '{nameof(request.Whztid)}' or '{nameof(request.Stid)}' must be set");
         }
 
         if (string.IsNullOrWhiteSpace(request.AuthUser))
         {
-            this.ThrowException(WhZTranExceptionType.InvalidAuthUser, $"The '{nameof(request.AuthUser)}' must be set", fieldName: nameof(WhZReceivingTranHeadDto.AuthUser));
+            ThrowException(WhZTranExceptionType.InvalidAuthUser, $"The '{nameof(request.AuthUser)}' must be set", fieldName: nameof(WhZReceivingTranHeadDto.AuthUser));
         }
     }
 
@@ -733,12 +777,25 @@ public class WhZTranService : LogicServiceBase<OlcWhztranhead>, IWhZTranService
 
         if (request.Cmpid == 0)
         {
-            this.ThrowException(WhZTranExceptionType.InvalidCmpid, "The company identifier is not valid", fieldName: nameof(WhZReceivingTranHeadDto.Cmpid));
+            ThrowException(WhZTranExceptionType.InvalidCmpid, "The company identifier is not valid", fieldName: nameof(WhZReceivingTranHeadDto.Cmpid));
         }
 
         if (string.IsNullOrWhiteSpace(request.AuthUser))
         {
-            this.ThrowException(WhZTranExceptionType.InvalidAuthUser, $"The '{nameof(request.AuthUser)}' must be set", fieldName: nameof(WhZReceivingTranHeadDto.AuthUser));
+            ThrowException(WhZTranExceptionType.InvalidAuthUser, $"The '{nameof(request.AuthUser)}' must be set", fieldName: nameof(WhZReceivingTranHeadDto.AuthUser));
+        }
+    }
+
+    /// <summary>
+    /// Törlés request validalasok
+    /// </summary>
+    /// <param name="request">Tranzakció adatok</param>
+    /// <exception cref="ArgumentNullException"><paramref name="request"/> értéke nincs megadva</exception>
+    private void ValidateDeleteParameters(WhZTranHeadDeleteDto request)
+    {
+        if (request is null)
+        {
+            throw new ArgumentNullException(nameof(request));
         }
     }
 
@@ -764,7 +821,7 @@ public class WhZTranService : LogicServiceBase<OlcWhztranhead>, IWhZTranService
     /// <param name="entity">A feldolgozott entity</param>
     /// <param name="fieldName">A hiba mely mezőn érintett</param>
     /// <exception cref="WhZTranServiceException">A kiváltott Exception</exception>
-    private void ThrowException(WhZTranExceptionType type, string message, OlcWhztranhead? entity = null, string? fieldName = null)
+    private static void ThrowException(WhZTranExceptionType type, string message, OlcWhztranhead? entity = null, string? fieldName = null)
     {
         throw new WhZTranServiceException(type, message, entity, fieldName);
     }
@@ -831,6 +888,12 @@ public class WhZTranService : LogicServiceBase<OlcWhztranhead>, IWhZTranService
                     this.ThrowException("Unable to add destination warehouse to the validation context", entity);
                 }
             }
+        }
+
+        if (entity.Whztid != 0)
+        {
+            var tranLineExists = await this.whZTranLineService.AnyAsync(entity.Whztid, cancellationToken);
+            context.TryAddCustom(nameof(tranLineExists), tranLineExists);
         }
 
         return context;

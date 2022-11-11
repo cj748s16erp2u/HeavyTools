@@ -308,5 +308,52 @@ where [wh].[whid] = {Utils.SqlToString(whid)}
                 return -1;
             }
         }
+
+        /// <summary>
+        /// Beavatkozas a torlesi folyamatba:
+        /// - ha hiba tortent a kulso szolgaltatas meghivasa soran, akkor az StHead bejegyzest nem kerul torlesre
+        /// </summary>
+        protected override void PreDelete(Key k)
+        {
+            base.PreDelete(k);
+
+            var stHead = StHead.Load(k);
+            this.DeleteWhZoneTranHead(stHead);
+        }
+
+        /// <summary>
+        /// Kulso WhZoneService meghivasa
+        /// </summary>
+        /// <param name="stHead">Akutalas keszlet tranzakcio</param>
+        /// <exception cref="MessageException">Szolgaltatas soran eloallt hibauzenet</exception>
+        private void DeleteWhZoneTranHead(StHead stHead)
+        {
+            if (stHead?.Stid != null)
+            {
+                var tranService = WhZone.Common.WhZTranUtils.CreateTranService();
+                var request = new WhZone.WhZTranService.WhZTranHeadDeleteDto
+                {
+                    Stid = stHead.Stid,
+                    DeleteLine = true,
+                };
+
+                try
+                {
+                    tranService.Delete(request);
+                }
+                catch (WhZone.WhZTranService.ApiException ex)
+                {
+                    Log.Error(ex);
+                    var response = ex.Response;
+                    if (!string.IsNullOrWhiteSpace(response))
+                    {
+                        response = WhZone.Common.WhZTranUtils.ParseErrorResponse(response);
+                        throw new MessageException(response);
+                    }
+
+                    throw;
+                }
+            }
+        }
     }
 }

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using eLog.HeavyTools.Services.WhZone.BusinessEntities.Model.Interfaces;
@@ -40,6 +41,12 @@ public static class PrimaryKeyValidatorExtensions
         return context.RootContextData.TryAdd(key, entity);
     }
 
+    public static bool TryAddCustom<TEntity, T>(this ValidationContext<TEntity> context, string key, T value)
+        where TEntity : class, IEntity
+    {
+        return context.RootContextData.TryAdd(key, value);
+    }
+
     public static T? TryGetEntity<TEntity, T>(this ValidationContext<TEntity> context)
         where TEntity : class, IEntity
         where T : class, IEntity
@@ -58,6 +65,17 @@ public static class PrimaryKeyValidatorExtensions
         }
 
         return null;
+    }
+
+    public static T TryGetCustom<TEntity, T>(this ValidationContext<TEntity> context, string key)
+        where TEntity : class, IEntity
+    {
+        if (context.RootContextData.TryGetValue(key, out var o) && o is T t)
+        {
+            return t;
+        }
+
+        return default!;
     }
 
     public static TEntity? GetOriginalEntity<TEntity>(this ValidationContext<TEntity> context)

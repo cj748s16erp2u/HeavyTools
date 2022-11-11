@@ -124,7 +124,7 @@ public class WhZTranLineService : LogicServiceBase<OlcWhztranline>, IWhZTranLine
     {
         this.ValidateUpdateReceivingParameters(request);
 
-        var originalEntity = await this.LoadEntityAsync(request, cancellationToken);
+        var originalEntity = await this.LoadEntityAsync(request.Whztlineid, request.Stlineid, cancellationToken);
         if (originalEntity is null)
         {
             ThrowException(WhZTranLineExceptionType.EntryNotFound, $"The referenced transaction line is not found (whztlineid: {request.Whztlineid}, stlineid: {request.Stlineid})");
@@ -245,17 +245,111 @@ public class WhZTranLineService : LogicServiceBase<OlcWhztranline>, IWhZTranLine
     }
 
     /// <summary>
-    /// Bejegyzés betöltése azonosító vagy raktári tranzakció tétel azonosító alapján
+    /// Lekérdezés, hogy az adott fej azonosítóhoz tartozik-e tétel
+    /// </summary>
+    /// <param name="whztid">Fej azonosító</param>
+    /// <param name="cancellationToken"></param>
+    /// <returns>Igen / Name</returns>
+    public async Task<bool> AnyAsync(int whztid, CancellationToken cancellationToken = default)
+    {
+        return await this.Repository.Entities.AnyAsync(l => l.Whztid == whztid, cancellationToken);
+    }
+
+    /// <summary>
+    /// Bevételezés típusú tranzakció tétel törlése
     /// </summary>
     /// <param name="request">Tranzakció tétel adatok</param>
     /// <param name="cancellationToken"></param>
-    /// <returns>Betöltött bejegyzés, ha nincs találat, akkor null</returns>
-    private async Task<OlcWhztranline?> LoadEntityAsync(WhZReceivingTranLineDto request, CancellationToken cancellationToken)
+    /// <returns>Törölt tranzakció tétel</returns>
+    public async Task<WhZReceivingTranLineDto> DeleteAsync(WhZTranLineDeleteDto request, CancellationToken cancellationToken = default)
     {
-        return request.Whztlineid is not null && request.Whztlineid != 0
-            ? await this.GetByIdAsync(new object[] { request.Whztlineid }, cancellationToken)
-            : request.Stlineid is not null && request.Stlineid != 0
-                ? await this.GetAsync(e => e.Stlineid == request.Stlineid, cancellationToken)
+        this.ValidateDeleteParameters(request);
+
+        var entity = await this.LoadEntityAsync(request.Whztlineid, request.Stlineid, cancellationToken);
+        if (entity is null)
+        {
+            ThrowException(WhZTranLineExceptionType.EntryNotFound, $"The referenced transaction line is not found (whztlineid: {request.Whztlineid}, stlineid: {request.Stlineid})");
+        }
+
+        using var tran = await this.UnitOfWork.BeginTransactionAsync(cancellationToken);
+        try
+        {
+            if (request.DeleteLoc.GetValueOrDefault(false))
+            {
+                await this.whZTranLocService.DeleteAllAsync(entity!.Whztlineid, cancellationToken);
+            }
+
+            entity = await this.DeleteAsync(entity!, cancellationToken);
+
+            tran.Commit();
+
+            return this.mapper.Map<WhZReceivingTranLineDto>(entity);
+        }
+        catch (Exception ex)
+        {
+            await ERP2U.Log.LoggerManager.Instance.LogErrorAsync<WhZTranLineService>(ex);
+            throw;
+        }
+        finally
+        {
+            if (tran.HasTransaction())
+            {
+                tran.Rollback();
+            }
+        }
+    }
+
+    /// <summary>
+    /// Tranzakcióhoz tartozó tétel törlése
+    /// </summary>
+    /// <param name="whztid">Tranzakció azonosító</param>
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    public async Task<IEnumerable<WhZTranLineDto>> DeleteAllAsync(int whztid, CancellationToken cancellationToken = default)
+    {
+        using var tran = await this.UnitOfWork.BeginTransactionAsync(cancellationToken);
+        try
+        {
+            var entries = await this.QueryAsync(l => l.Whztid == whztid, cancellationToken);
+
+            var result = new List<WhZTranLineDto>();
+            foreach (var entry in entries)
+            {
+                var entity = await this.DeleteAsync(entry, cancellationToken);
+                result.Add(this.mapper.Map<WhZTranLineDto>(entity));
+            }
+
+            tran.Commit();
+
+            return result;
+        }
+        catch (Exception ex)
+        {
+            await ERP2U.Log.LoggerManager.Instance.LogErrorAsync<WhZTranLineService>(ex);
+            throw;
+        }
+        finally
+        {
+            if (tran.HasTransaction())
+            {
+                tran.Rollback();
+            }
+        }
+    }
+
+    /// <summary>
+    /// Bejegyzés betöltése azonosító vagy raktári tranzakció tétel azonosító alapján
+    /// </summary>
+    /// <param name="whztlineid">Tranzakció tétel azonosító</param>
+    /// <param name="stlineid">Készletmozgás tranzakció tétel azonosító</param>
+    /// <param name="cancellationToken"></param>
+    /// <returns>Betöltött bejegyzés, ha nincs találat, akkor null</returns>
+    private async Task<OlcWhztranline?> LoadEntityAsync(int? whztlineid, int? stlineid, CancellationToken cancellationToken)
+    {
+        return whztlineid is not null && whztlineid != 0
+            ? await this.GetByIdAsync(new object[] { whztlineid }, cancellationToken)
+            : stlineid is not null && stlineid != 0
+                ? await this.GetAsync(e => e.Stlineid == stlineid, cancellationToken)
                 : null;
     }
 
@@ -471,6 +565,19 @@ public class WhZTranLineService : LogicServiceBase<OlcWhztranline>, IWhZTranLine
     }
 
     /// <summary>
+    /// Törlés request validalasok
+    /// </summary>
+    /// <param name="request">Tranzakció tétel adatok</param>
+    /// <exception cref="ArgumentNullException"><paramref name="request"/> értéke nincs megadva</exception>
+    private void ValidateDeleteParameters(WhZTranLineDeleteDto request)
+    {
+        if (request is null)
+        {
+            throw new ArgumentNullException(nameof(request));
+        }
+    }
+
+    /// <summary>
     /// Új felvitel esetén, a <see cref="BusinessEntities.Model.Base.BusinessEntity.Addusrid"/> meghatározása a request-ben kapott <see cref="WhZTranLineDto.AuthUser"/> alapján
     /// </summary>
     /// <param name="entity">Mentendő bejegyzés</param>
@@ -538,6 +645,12 @@ public class WhZTranLineService : LogicServiceBase<OlcWhztranline>, IWhZTranLine
             {
                 this.ThrowException("Unable to add stock transaction line to the validation context", entity);
             }
+        }
+
+        if (entity.Whztlineid != 0)
+        {
+            var tranLocExists = await this.whZTranLocService.AnyAsync(entity.Whztlineid, cancellationToken);
+            context.TryAddCustom(nameof(tranLocExists), tranLocExists);
         }
 
         return context;
