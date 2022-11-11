@@ -36,15 +36,23 @@ public abstract class WhZStockMapServiceTestBase : TestBase<OlcWhzstockmap, IWhZ
         this.itemId = this.GetFirstItemIdAsync().GetAwaiter().GetResult() ?? throw new InvalidOperationException();
 
         this.whIdNoZoneNoLoc = this.GetFirstWarehouseIdAsync(false, false).GetAwaiter().GetResult() ?? throw new InvalidOperationException();
+        this._testOutputHelper.WriteLine($"whIdNoZoneNoLoc: {this.whIdNoZoneNoLoc}");
         this.whIdNoZoneWithLoc = this.GetFirstWarehouseIdAsync(false, true).GetAwaiter().GetResult() ?? throw new InvalidOperationException();
+        this._testOutputHelper.WriteLine($"whIdNoZoneWithLoc: {this.whIdNoZoneWithLoc}");
         this.whIdWithZoneNoLoc = this.GetFirstWarehouseIdAsync(true, false).GetAwaiter().GetResult() ?? throw new InvalidOperationException();
+        this._testOutputHelper.WriteLine($"whIdWithZoneNoLoc: {this.whIdWithZoneNoLoc}");
         this.whIdWithZoneWithLoc = this.GetFirstWarehouseIdAsync(true, true).GetAwaiter().GetResult() ?? throw new InvalidOperationException();
+        this._testOutputHelper.WriteLine($"whIdWithZoneWithLoc: {this.whIdWithZoneWithLoc}");
 
-        this.whZoneIdNoLoc = this.GetFirstWhZoneIdAsync(this.whIdWithZoneNoLoc, true).GetAwaiter().GetResult() ?? throw new InvalidOperationException();
+        this.whZoneIdNoLoc = this.GetFirstWhZoneIdAsync(this.whIdWithZoneNoLoc, false).GetAwaiter().GetResult() ?? throw new InvalidOperationException();
+        this._testOutputHelper.WriteLine($"whZoneIdNoLoc: {this.whZoneIdNoLoc}");
         this.whZoneIdWithLoc = this.GetFirstWhZoneIdAsync(this.whIdWithZoneWithLoc, true).GetAwaiter().GetResult() ?? throw new InvalidOperationException();
+        this._testOutputHelper.WriteLine($"whZoneIdWithLoc: {this.whZoneIdWithLoc}");
 
         this.whLocId = this.GetFirstWhLocIdAsync(this.whIdWithZoneWithLoc, this.whZoneIdWithLoc).GetAwaiter().GetResult() ?? throw new InvalidOperationException();
+        this._testOutputHelper.WriteLine($"whLocId: {this.whLocId}");
         this.whLocIdNoZone = this.GetFirstWhLocIdAsync(this.whIdNoZoneWithLoc, null).GetAwaiter().GetResult() ?? throw new InvalidOperationException();
+        this._testOutputHelper.WriteLine($"whLocIdNoZone: {this.whLocIdNoZone}");
     }
 
     protected async Task StoreAsync(IWhZStockMapContext context, CancellationToken cancellationToken = default)

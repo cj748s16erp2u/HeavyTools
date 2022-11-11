@@ -27,9 +27,12 @@ public class WhZTranServiceRecevingTest : Base.WhZTranServiceTestBase
         this.stHeadRepository =this._fixture.GetService<IRepository<OlsSthead>>(this._testOutputHelper) ?? throw new InvalidOperationException($"{typeof(IRepository<OlsSthead>).Name} is not found.");
 
         this.cmpId = this.GetCmpIdAsync("HUPS").GetAwaiter().GetResult() ?? throw new InvalidOperationException();
+        this._testOutputHelper.WriteLine($"cmpId: {this.cmpId}");
 
         this.stHead = this.GetFirstStHeadAsync(this.cmpId).GetAwaiter().GetResult() ?? throw new InvalidOperationException();
-        this.whZoneId = this.GetFirstWhZoneIdAsync(this.stHead.Towhid!, false).GetAwaiter().GetResult() ?? throw new InvalidOperationException();
+        this._testOutputHelper.WriteLine($"stHead: {this.stHead.Stid}");
+        this.whZoneId = this.GetWhZoneIdAsync(this.stHead.Towhid!, "I").GetAwaiter().GetResult() ?? throw new InvalidOperationException();
+        this._testOutputHelper.WriteLine($"whZoneId: {this.whZoneId}");
     }
 
     protected async Task<OlsSthead?> GetFirstStHeadAsync(int cmpId, CancellationToken cancellationToken = default)
@@ -93,16 +96,16 @@ public class WhZTranServiceRecevingTest : Base.WhZTranServiceTestBase
             var currentTranHead = await this.GetCurrentEntryAsync(tranHead.Whztid.Value, ct);
             Assert.NotNull(currentTranHead);
 
-#pragma warning disable CS8601 // Possible null reference assignment.
-            this.stHead = await this.stHeadRepository.ReloadAsync(this.stHead, ct);
-#pragma warning restore CS8601 // Possible null reference assignment.
-            Assert.NotNull(this.stHead);
-
             return currentTranHead.Whztid;
         }
         finally
         {
             tran.Rollback();
+
+#pragma warning disable CS8601 // Possible null reference assignment.
+            this.stHead = await this.stHeadRepository.ReloadAsync(this.stHead, ct);
+#pragma warning restore CS8601 // Possible null reference assignment.
+            Assert.NotNull(this.stHead);
         }
     }
 
@@ -150,6 +153,8 @@ public class WhZTranServiceRecevingTest : Base.WhZTranServiceTestBase
         finally
         {
             tran.Rollback();
+
+            await this.stHeadRepository.ReloadAsync(this.stHead, ct);
         }
     }
 

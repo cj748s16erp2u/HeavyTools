@@ -64,6 +64,13 @@ public class OlcWhztranlocValidatorTest : TestBase<OlcWhztranloc, IWhZTranLocSer
             .FirstOrDefaultAsync(cancellationToken: cancellationToken);
     }
 
+    protected async Task<OlcWhlocation?> GetFirstLocationNotForAsync(string whid, int whzoneid, CancellationToken cancellationToken = default)
+    {
+        return await this.dbContext.OlcWhlocations
+            .Where(h => h.Whid != whid || h.Whzoneid != whzoneid)
+            .FirstOrDefaultAsync(cancellationToken: cancellationToken);
+    }
+
     #region Add...
 
     [Fact]
@@ -212,7 +219,7 @@ public class OlcWhztranlocValidatorTest : TestBase<OlcWhztranloc, IWhZTranLocSer
     {
         var entity = new OlcWhztranloc
         {
-            Whztlocid = -1
+            Whlocid = -1
         };
 
         var ruleSets = new[]
@@ -222,7 +229,7 @@ public class OlcWhztranlocValidatorTest : TestBase<OlcWhztranloc, IWhZTranLocSer
         };
 
         var ex = await Assert.ThrowsAnyAsync<Exception>(() => this.service.ValidateAndThrowAsync(entity, ruleSets: ruleSets));
-        var message = $"The location doesn't exists (location: {entity.Whztlocid})";
+        var message = $"The location doesn't exists (location: {entity.Whlocid})";
         Assert.Contains(message, ex?.Message);
     }
 
@@ -234,16 +241,21 @@ public class OlcWhztranlocValidatorTest : TestBase<OlcWhztranloc, IWhZTranLocSer
         Assert.NotNull(tranHead.Stid);
         Assert.NotNull(tranHead.Towhzid);
 
+        var tranLine = await this.GetFirstTranLineAsync(tranHead.Whztid);
+        Assert.NotNull(tranLine);
+
         var stHead = await this.GetStHeadAsync(tranHead.Stid.Value);
         Assert.NotNull(stHead);
         Assert.NotNull(stHead.Towhid);
 
-        var loc = await this.GetFirstLocationAsync(stHead.Towhid, tranHead.Towhzid.Value);
+        var loc = await this.GetFirstLocationNotForAsync(stHead.Towhid, tranHead.Towhzid.Value);
         Assert.NotNull(loc);
 
         var entity = new OlcWhztranloc
         {
-            Whztlocid = loc.Whlocid
+            Whztid = tranHead.Whztid,
+            Whztlineid = tranLine.Whztlineid,
+            Whlocid = loc.Whlocid
         };
 
         var ruleSets = new[]
@@ -253,40 +265,40 @@ public class OlcWhztranlocValidatorTest : TestBase<OlcWhztranloc, IWhZTranLocSer
         };
 
         var ex = await Assert.ThrowsAnyAsync<Exception>(() => this.service.ValidateAndThrowAsync(entity, ruleSets: ruleSets));
-        var message = $"The location doesn't belongs to the warehouse (location: {entity.Whztlocid}, warehouse: {stHead.Towhid})";
+        var message = $"The location doesn't belongs to the transaction destination zone (destination zone: {tranHead.Towhzid}, location: {entity.Whlocid})";
         Assert.Contains(message, ex?.Message);
     }
 
-    [Fact]
-    public async Task AddWrongTranLocWhlocid04Test()
-    {
-        var tranHead = await this.GetFirstTranHeadAsync(WhZTranHead_Whzttype.Receiving, true);
-        Assert.NotNull(tranHead);
-        Assert.NotNull(tranHead.Stid);
-        Assert.NotNull(tranHead.Towhzid);
+    //[Fact]
+    //public async Task AddWrongTranLocWhlocid04Test()
+    //{
+    //    var tranHead = await this.GetFirstTranHeadAsync(WhZTranHead_Whzttype.Receiving, true);
+    //    Assert.NotNull(tranHead);
+    //    Assert.NotNull(tranHead.Stid);
+    //    Assert.NotNull(tranHead.Towhzid);
 
-        var stHead = await this.GetStHeadAsync(tranHead.Stid.Value);
-        Assert.NotNull(stHead);
-        Assert.NotNull(stHead.Towhid);
+    //    var stHead = await this.GetStHeadAsync(tranHead.Stid.Value);
+    //    Assert.NotNull(stHead);
+    //    Assert.NotNull(stHead.Towhid);
 
-        var loc = await this.GetFirstLocationAsync(stHead.Towhid, tranHead.Towhzid.Value);
-        Assert.NotNull(loc);
+    //    var loc = await this.GetFirstLocationAsync(stHead.Towhid, tranHead.Towhzid.Value);
+    //    Assert.NotNull(loc);
 
-        var entity = new OlcWhztranloc
-        {
-            Whztlocid = loc.Whlocid
-        };
+    //    var entity = new OlcWhztranloc
+    //    {
+    //        Whztlocid = loc.Whlocid
+    //    };
 
-        var ruleSets = new[]
-        {
-            "Default",
-            "Add"
-        };
+    //    var ruleSets = new[]
+    //    {
+    //        "Default",
+    //        "Add"
+    //    };
 
-        var ex = await Assert.ThrowsAnyAsync<Exception>(() => this.service.ValidateAndThrowAsync(entity, ruleSets: ruleSets));
-        var message = $"The location doesn't belongs to the zone (location: {entity.Whztlocid}, zone: {tranHead.Towhzid})";
-        Assert.Contains(message, ex?.Message);
-    }
+    //    var ex = await Assert.ThrowsAnyAsync<Exception>(() => this.service.ValidateAndThrowAsync(entity, ruleSets: ruleSets));
+    //    var message = $"The location doesn't belongs to the zone (location: {entity.Whztlocid}, zone: {tranHead.Towhzid})";
+    //    Assert.Contains(message, ex?.Message);
+    //}
 
     #endregion
 }

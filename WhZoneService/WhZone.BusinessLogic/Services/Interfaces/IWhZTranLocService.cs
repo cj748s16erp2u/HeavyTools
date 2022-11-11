@@ -35,7 +35,7 @@ public interface IWhZTranLocService : ILogicService<OlcWhztranloc>
     /// <param name="context">Készletmozgás csomag adatok</param>
     /// <param name="cancellationToken"></param>
     /// <returns>Létrehozott helykód bejegyzés</returns>
-    Task<OlcWhztranloc?> AddReceivingDefaultIfNotExistsAsync(OlcWhztranhead whZTranHead, OlcWhztranline whZTranLine, IWhZStockMapContext context, CancellationToken cancellationToken = default);
+    Task<WhZTranLocDto> AddReceivingDefaultIfNotExistsAsync(OlcWhztranhead whZTranHead, OlcWhztranline whZTranLine, IWhZStockMapContext context, CancellationToken cancellationToken = default);
 
     /// <summary>
     /// Bevételezés helykódok véglegesítése
@@ -45,7 +45,7 @@ public interface IWhZTranLocService : ILogicService<OlcWhztranloc>
     /// <param name="context">Készletmozgás csomag adatok</param>
     /// <param name="cancellationToken"></param>
     /// <returns>Véglegesített helykód bejegyzések</returns>
-    Task<IEnumerable<OlcWhztranloc>> CommitReceivingAsync(OlcWhztranhead whZTranHead, OlcWhztranline whZTranLine, IWhZStockMapContext context, CancellationToken cancellationToken = default);
+    Task<IEnumerable<WhZTranLocDto>> CommitReceivingAsync(OlcWhztranhead whZTranHead, OlcWhztranline whZTranLine, IWhZStockMapContext context, CancellationToken cancellationToken = default);
 
     /// <summary>
     /// Lekérdezés, hogy az adott tétel azonosítóhoz tartozik-e helykód információ

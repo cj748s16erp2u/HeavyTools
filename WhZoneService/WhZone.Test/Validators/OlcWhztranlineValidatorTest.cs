@@ -26,6 +26,7 @@ public class OlcWhztranlineValidatorTest : TestBase<OlcWhztranline, IWhZTranLine
     {
         return await this.dbContext.OlcWhztranheads
             .Where(h => h.Whzttype == (int)whzttype)
+            .Where(h => h.Whztstat < (int)WhZTranHead_Whztstat.Closed)
             .Where(h => h.St!.OlsStlines.Any())
             .FirstOrDefaultAsync(cancellationToken: cancellationToken);
     }
@@ -506,7 +507,8 @@ public class OlcWhztranlineValidatorTest : TestBase<OlcWhztranline, IWhZTranLine
         };
 
         var ex = await Assert.ThrowsAnyAsync<Exception>(() => this.service.ValidateAndThrowAsync(entity, ruleSets: ruleSets));
-        var message = $"The transaction line's inqty must be the same as stock tran line's inqty (stock tran: {stLine.Inqty}, transaction: {entity.Inqty})";
+        //var message = $"The transaction line's inqty must be the same as stock tran line's inqty (stock tran: {stLine.Inqty}, transaction: {entity.Inqty})";
+        var message = $"The inqty must be 0 (inqty: {entity.Inqty})";
         Assert.Contains(message, ex?.Message);
     }
 
@@ -546,7 +548,8 @@ public class OlcWhztranlineValidatorTest : TestBase<OlcWhztranline, IWhZTranLine
         };
 
         var ex = await Assert.ThrowsAnyAsync<Exception>(() => this.service.ValidateAndThrowAsync(entity, ruleSets: ruleSets));
-        var message = $"The transaction line's outqty must be the same as stock tran line's outqty (stock tran: {stLine.Outqty}, transaction: {entity.Outqty})";
+        //var message = $"The transaction line's outqty must be the same as stock tran line's outqty (stock tran: {stLine.Outqty}, transaction: {entity.Outqty})";
+        var message = $"The outqty must be 0 (outqty: {entity.Inqty})";
         Assert.Contains(message, ex?.Message);
     }
 

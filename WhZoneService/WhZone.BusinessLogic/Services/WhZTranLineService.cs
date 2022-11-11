@@ -167,7 +167,7 @@ public class WhZTranLineService : LogicServiceBase<OlcWhztranline>, IWhZTranLine
     /// <param name="context">Készletmozgás csomag adatok</param>
     /// <param name="cancellationToken"></param>
     /// <returns>Létrehozott helykód bejegyzések listája</returns>
-    public async Task<IEnumerable<OlcWhztranloc>> GenerateReceivingLocAsync(OlcWhztranhead whZTranHead, Containers.Interfaces.IWhZStockMapContext context, CancellationToken cancellationToken = default)
+    public async Task<IEnumerable<WhZTranLocDto>> GenerateReceivingLocAsync(OlcWhztranhead whZTranHead, Containers.Interfaces.IWhZStockMapContext context, CancellationToken cancellationToken = default)
     {
         if (whZTranHead is null)
         {
@@ -179,7 +179,7 @@ public class WhZTranLineService : LogicServiceBase<OlcWhztranline>, IWhZTranLine
             throw new ArgumentNullException(nameof(context));
         }
 
-        var list = new List<OlcWhztranloc>();
+        var list = new List<WhZTranLocDto>();
         var lines = await this.QueryAsync(l => l.Whztid == whZTranHead.Whztid, cancellationToken);
         foreach (var line in lines)
         {
@@ -200,7 +200,7 @@ public class WhZTranLineService : LogicServiceBase<OlcWhztranline>, IWhZTranLine
     /// <param name="context">Készletmozgás csomag adatok</param>
     /// <param name="cancellationToken"></param>
     /// <returns>Véglegesített helykód bejegyzések</returns>
-    public async Task<IEnumerable<OlcWhztranloc>> CommitReceivingLocAsync(OlcWhztranhead whZTranHead, Containers.Interfaces.IWhZStockMapContext context, CancellationToken cancellationToken = default)
+    public async Task<IEnumerable<WhZTranLocDto>> CommitReceivingLocAsync(OlcWhztranhead whZTranHead, Containers.Interfaces.IWhZStockMapContext context, CancellationToken cancellationToken = default)
     {
         if (whZTranHead is null)
         {
@@ -215,7 +215,7 @@ public class WhZTranLineService : LogicServiceBase<OlcWhztranline>, IWhZTranLine
         using var tran = await this.UnitOfWork.BeginTransactionAsync(cancellationToken);
         try
         {
-            var list = new List<OlcWhztranloc>();
+            var list = new List<WhZTranLocDto>();
             var lines = await this.QueryAsync(l => l.Whztid == whZTranHead.Whztid, cancellationToken);
             foreach (var line in lines)
             {

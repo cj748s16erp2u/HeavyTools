@@ -290,12 +290,14 @@ public class OlcWhztranheadValidatorTest : TestBase<OlcWhztranhead, IWhZTranServ
     public async Task AddWrongTranHeadTowhzid06Test()
     {
         var stHead = await this.dbContext.OlsStheads
-            .Where(st => st.Stid == 1)
+            .Where(st => st.Sttype == (int)WhZTranHead_Whzttype.Receiving)
             .FirstOrDefaultAsync();
+        Assert.NotNull(stHead);
 
         var zone = await this.dbContext.OlcWhzones
-            .Where(z => z.Whzoneid == 3)
+            .Where(z => z.Whid != stHead.Towhid)
             .FirstOrDefaultAsync();
+        Assert.NotNull(zone);
 
         var entity = new OlcWhztranhead
         {

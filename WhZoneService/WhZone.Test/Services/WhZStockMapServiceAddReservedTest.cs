@@ -74,25 +74,25 @@ public class WhZStockMapServiceAddReservedTest : Base.WhZStockMapServiceTestBase
         }
     }
 
-    [Theory]
-    [InlineData(1.0)]
-    [InlineData(15.0)]
-    [InlineData(0.25)]
-    [InlineData(5.25)]
-    public Task AddReserve01TestAsync(double qty)
-    {
-        return this.AddReserveTest01Async(this.whIdNoZoneNoLoc, null, null, (decimal)qty);
-    }
+    //[Theory]
+    //[InlineData(1.0)]
+    //[InlineData(15.0)]
+    //[InlineData(0.25)]
+    //[InlineData(5.25)]
+    //public Task AddReserve01TestAsync(double qty)
+    //{
+    //    return this.AddReserveTest01Async(this.whIdNoZoneNoLoc, null, null, (decimal)qty);
+    //}
 
-    [Theory]
-    [InlineData(1.0)]
-    [InlineData(15.0)]
-    [InlineData(0.25)]
-    [InlineData(5.25)]
-    public Task AddReserve02TestAsync(double qty)
-    {
-        return this.AddReserveTest01Async(this.whIdWithZoneNoLoc, this.whZoneIdNoLoc, null, (decimal)qty);
-    }
+    //[Theory]
+    //[InlineData(1.0)]
+    //[InlineData(15.0)]
+    //[InlineData(0.25)]
+    //[InlineData(5.25)]
+    //public Task AddReserve02TestAsync(double qty)
+    //{
+    //    return this.AddReserveTest01Async(this.whIdWithZoneNoLoc, this.whZoneIdNoLoc, null, (decimal)qty);
+    //}
 
     [Theory]
     [InlineData(1.0)]
@@ -144,25 +144,25 @@ public class WhZStockMapServiceAddReservedTest : Base.WhZStockMapServiceTestBase
         }
     }
 
-    [Theory]
-    [InlineData(1.0)]
-    [InlineData(15.0)]
-    [InlineData(0.25)]
-    [InlineData(5.25)]
-    public Task AddAfterReceivingWhStock01TestAsync(double? qty)
-    {
-        return this.AddAfterReceivingTest01Async(this.whIdNoZoneNoLoc, null, null, (decimal?)qty);
-    }
+    //[Theory]
+    //[InlineData(1.0)]
+    //[InlineData(15.0)]
+    //[InlineData(0.25)]
+    //[InlineData(5.25)]
+    //public Task AddAfterReceivingWhStock01TestAsync(double? qty)
+    //{
+    //    return this.AddAfterReceivingTest01Async(this.whIdNoZoneNoLoc, null, null, (decimal?)qty);
+    //}
 
-    [Theory]
-    [InlineData(1.0)]
-    [InlineData(15.0)]
-    [InlineData(0.25)]
-    [InlineData(5.25)]
-    public Task AddAfterReceivingWhStock02TestAsync(double? qty)
-    {
-        return this.AddAfterReceivingTest01Async(this.whIdWithZoneNoLoc, this.whZoneIdNoLoc, null, (decimal?)qty);
-    }
+    //[Theory]
+    //[InlineData(1.0)]
+    //[InlineData(15.0)]
+    //[InlineData(0.25)]
+    //[InlineData(5.25)]
+    //public Task AddAfterReceivingWhStock02TestAsync(double? qty)
+    //{
+    //    return this.AddAfterReceivingTest01Async(this.whIdWithZoneNoLoc, this.whZoneIdNoLoc, null, (decimal?)qty);
+    //}
 
     [Theory]
     [InlineData(1.0)]
@@ -292,25 +292,25 @@ public class WhZStockMapServiceAddReservedTest : Base.WhZStockMapServiceTestBase
         Assert.Equal("The add qty cannot be less or equal to 0", ex.Message);
     }
 
-    [Theory]
-    [InlineData(1.0)]
-    [InlineData(15.0)]
-    [InlineData(0.25)]
-    [InlineData(5.25)]
-    public Task AddAndStoreWhStock01TestAsync(double? qty)
-    {
-        return this.AddAndStoreWhStockTest01Async(this.whIdNoZoneNoLoc, null, null, (decimal?)qty);
-    }
+    //[Theory]
+    //[InlineData(1.0)]
+    //[InlineData(15.0)]
+    //[InlineData(0.25)]
+    //[InlineData(5.25)]
+    //public Task AddAndStoreWhStock01TestAsync(double? qty)
+    //{
+    //    return this.AddAndStoreWhStockTest01Async(this.whIdNoZoneNoLoc, null, null, (decimal?)qty);
+    //}
 
-    [Theory]
-    [InlineData(1.0)]
-    [InlineData(15.0)]
-    [InlineData(0.25)]
-    [InlineData(5.25)]
-    public Task AddAndStoreWhStock02TestAsync(double? qty)
-    {
-        return this.AddAndStoreWhStockTest01Async(this.whIdWithZoneNoLoc, this.whZoneIdNoLoc, null, (decimal?)qty);
-    }
+    //[Theory]
+    //[InlineData(1.0)]
+    //[InlineData(15.0)]
+    //[InlineData(0.25)]
+    //[InlineData(5.25)]
+    //public Task AddAndStoreWhStock02TestAsync(double? qty)
+    //{
+    //    return this.AddAndStoreWhStockTest01Async(this.whIdWithZoneNoLoc, this.whZoneIdNoLoc, null, (decimal?)qty);
+    //}
 
     [Theory]
     [InlineData(1.0)]
@@ -487,25 +487,25 @@ public class WhZStockMapServiceAddReservedTest : Base.WhZStockMapServiceTestBase
         }
     }
 
-    [Theory]
-    [InlineData(1.0)]
-    [InlineData(15.0)]
-    [InlineData(0.25)]
-    [InlineData(5.25)]
-    public Task AddAndRemoveAndStoreWhStock01TestAsync(double? qty)
-    {
-        return this.AddAndRemoveAndStoreWhStockTest01Async(this.whIdNoZoneNoLoc, null, null, (decimal?)qty);
-    }
+    //[Theory]
+    //[InlineData(1.0)]
+    //[InlineData(15.0)]
+    //[InlineData(0.25)]
+    //[InlineData(5.25)]
+    //public Task AddAndRemoveAndStoreWhStock01TestAsync(double? qty)
+    //{
+    //    return this.AddAndRemoveAndStoreWhStockTest01Async(this.whIdNoZoneNoLoc, null, null, (decimal?)qty);
+    //}
 
-    [Theory]
-    [InlineData(1.0)]
-    [InlineData(15.0)]
-    [InlineData(0.25)]
-    [InlineData(5.25)]
-    public Task AddAndRemoveAndStoreWhStock02TestAsync(double? qty)
-    {
-        return this.AddAndRemoveAndStoreWhStockTest01Async(this.whIdWithZoneNoLoc, this.whZoneIdNoLoc, null, (decimal?)qty);
-    }
+    //[Theory]
+    //[InlineData(1.0)]
+    //[InlineData(15.0)]
+    //[InlineData(0.25)]
+    //[InlineData(5.25)]
+    //public Task AddAndRemoveAndStoreWhStock02TestAsync(double? qty)
+    //{
+    //    return this.AddAndRemoveAndStoreWhStockTest01Async(this.whIdWithZoneNoLoc, this.whZoneIdNoLoc, null, (decimal?)qty);
+    //}
 
     [Theory]
     [InlineData(1.0)]
@@ -581,25 +581,25 @@ public class WhZStockMapServiceAddReservedTest : Base.WhZStockMapServiceTestBase
         }
     }
 
-    [Theory]
-    [InlineData(1.0)]
-    [InlineData(15.0)]
-    [InlineData(0.25)]
-    [InlineData(5.25)]
-    public Task AddAndRemoveAndStoreWhStock05TestAsync(double? qty)
-    {
-        return this.AddAndRemoveAndStoreWhStockTest02Async(this.whIdNoZoneNoLoc, null, null, (decimal?)qty);
-    }
+    //[Theory]
+    //[InlineData(1.0)]
+    //[InlineData(15.0)]
+    //[InlineData(0.25)]
+    //[InlineData(5.25)]
+    //public Task AddAndRemoveAndStoreWhStock05TestAsync(double? qty)
+    //{
+    //    return this.AddAndRemoveAndStoreWhStockTest02Async(this.whIdNoZoneNoLoc, null, null, (decimal?)qty);
+    //}
 
-    [Theory]
-    [InlineData(1.0)]
-    [InlineData(15.0)]
-    [InlineData(0.25)]
-    [InlineData(5.25)]
-    public Task AddAndRemoveAndStoreWhStock06TestAsync(double? qty)
-    {
-        return this.AddAndRemoveAndStoreWhStockTest02Async(this.whIdWithZoneNoLoc, this.whZoneIdNoLoc, null, (decimal?)qty);
-    }
+    //[Theory]
+    //[InlineData(1.0)]
+    //[InlineData(15.0)]
+    //[InlineData(0.25)]
+    //[InlineData(5.25)]
+    //public Task AddAndRemoveAndStoreWhStock06TestAsync(double? qty)
+    //{
+    //    return this.AddAndRemoveAndStoreWhStockTest02Async(this.whIdWithZoneNoLoc, this.whZoneIdNoLoc, null, (decimal?)qty);
+    //}
 
     [Theory]
     [InlineData(1.0)]
@@ -678,17 +678,17 @@ public class WhZStockMapServiceAddReservedTest : Base.WhZStockMapServiceTestBase
         }
     }
 
-    [Fact]
-    public Task AddAndRemoveAndStoreWhStockTo001TestAsync()
-    {
-        return this.AddAndRemoveAndStoreWhStockTo0TestAsync(this.whIdNoZoneNoLoc, null, null);
-    }
+    //[Fact]
+    //public Task AddAndRemoveAndStoreWhStockTo001TestAsync()
+    //{
+    //    return this.AddAndRemoveAndStoreWhStockTo0TestAsync(this.whIdNoZoneNoLoc, null, null);
+    //}
 
-    [Fact]
-    public Task AddAndRemoveAndStoreWhStockTo002TestAsync()
-    {
-        return this.AddAndRemoveAndStoreWhStockTo0TestAsync(this.whIdWithZoneNoLoc, this.whZoneIdNoLoc, null);
-    }
+    //[Fact]
+    //public Task AddAndRemoveAndStoreWhStockTo002TestAsync()
+    //{
+    //    return this.AddAndRemoveAndStoreWhStockTo0TestAsync(this.whIdWithZoneNoLoc, this.whZoneIdNoLoc, null);
+    //}
 
     [Fact]
     public Task AddAndRemoveAndStoreWhStockTo003TestAsync()
@@ -759,17 +759,17 @@ public class WhZStockMapServiceAddReservedTest : Base.WhZStockMapServiceTestBase
         }
     }
 
-    [Fact]
-    public Task AddAndRemoveAndStoreWhStockFailed01TestAsync()
-    {
-        return this.AddAndRemoveAndStoreWhStockFailedTestAsync(this.whIdNoZoneNoLoc, null, null);
-    }
+    //[Fact]
+    //public Task AddAndRemoveAndStoreWhStockFailed01TestAsync()
+    //{
+    //    return this.AddAndRemoveAndStoreWhStockFailedTestAsync(this.whIdNoZoneNoLoc, null, null);
+    //}
 
-    [Fact]
-    public Task AddAndRemoveAndStoreWhStockFailed02TestAsync()
-    {
-        return this.AddAndRemoveAndStoreWhStockFailedTestAsync(this.whIdWithZoneNoLoc, this.whZoneIdNoLoc, null);
-    }
+    //[Fact]
+    //public Task AddAndRemoveAndStoreWhStockFailed02TestAsync()
+    //{
+    //    return this.AddAndRemoveAndStoreWhStockFailedTestAsync(this.whIdWithZoneNoLoc, this.whZoneIdNoLoc, null);
+    //}
 
     [Fact]
     public Task AddAndRemoveAndStoreWhStockFailed03TestAsync()
@@ -832,25 +832,25 @@ public class WhZStockMapServiceAddReservedTest : Base.WhZStockMapServiceTestBase
         }
     }
 
-    [Theory]
-    [InlineData(1.0)]
-    [InlineData(15.0)]
-    [InlineData(0.25)]
-    [InlineData(5.25)]
-    public Task AddAndCommitAndStoreWhStock01TestAsync(double? qty)
-    {
-        return this.AddAndCommitAndStoreWhStockTest01Async(this.whIdNoZoneNoLoc, null, null, (decimal?)qty);
-    }
+    //[Theory]
+    //[InlineData(1.0)]
+    //[InlineData(15.0)]
+    //[InlineData(0.25)]
+    //[InlineData(5.25)]
+    //public Task AddAndCommitAndStoreWhStock01TestAsync(double? qty)
+    //{
+    //    return this.AddAndCommitAndStoreWhStockTest01Async(this.whIdNoZoneNoLoc, null, null, (decimal?)qty);
+    //}
 
-    [Theory]
-    [InlineData(1.0)]
-    [InlineData(15.0)]
-    [InlineData(0.25)]
-    [InlineData(5.25)]
-    public Task AddAndCommitAndStoreWhStock02TestAsync(double? qty)
-    {
-        return this.AddAndCommitAndStoreWhStockTest01Async(this.whIdWithZoneNoLoc, this.whZoneIdNoLoc, null, (decimal?)qty);
-    }
+    //[Theory]
+    //[InlineData(1.0)]
+    //[InlineData(15.0)]
+    //[InlineData(0.25)]
+    //[InlineData(5.25)]
+    //public Task AddAndCommitAndStoreWhStock02TestAsync(double? qty)
+    //{
+    //    return this.AddAndCommitAndStoreWhStockTest01Async(this.whIdWithZoneNoLoc, this.whZoneIdNoLoc, null, (decimal?)qty);
+    //}
 
     [Theory]
     [InlineData(1.0)]
@@ -927,25 +927,25 @@ public class WhZStockMapServiceAddReservedTest : Base.WhZStockMapServiceTestBase
         }
     }
 
-    [Theory]
-    [InlineData(1.0)]
-    [InlineData(15.0)]
-    [InlineData(0.25)]
-    [InlineData(5.25)]
-    public Task AddAndCommitAndStoreWhStock05TestAsync(double? qty)
-    {
-        return this.AddAndCommitAndStoreWhStockTest02Async(this.whIdNoZoneNoLoc, null, null, (decimal?)qty);
-    }
+    //[Theory]
+    //[InlineData(1.0)]
+    //[InlineData(15.0)]
+    //[InlineData(0.25)]
+    //[InlineData(5.25)]
+    //public Task AddAndCommitAndStoreWhStock05TestAsync(double? qty)
+    //{
+    //    return this.AddAndCommitAndStoreWhStockTest02Async(this.whIdNoZoneNoLoc, null, null, (decimal?)qty);
+    //}
 
-    [Theory]
-    [InlineData(1.0)]
-    [InlineData(15.0)]
-    [InlineData(0.25)]
-    [InlineData(5.25)]
-    public Task AddAndCommitAndStoreWhStock06TestAsync(double? qty)
-    {
-        return this.AddAndCommitAndStoreWhStockTest02Async(this.whIdWithZoneNoLoc, this.whZoneIdNoLoc, null, (decimal?)qty);
-    }
+    //[Theory]
+    //[InlineData(1.0)]
+    //[InlineData(15.0)]
+    //[InlineData(0.25)]
+    //[InlineData(5.25)]
+    //public Task AddAndCommitAndStoreWhStock06TestAsync(double? qty)
+    //{
+    //    return this.AddAndCommitAndStoreWhStockTest02Async(this.whIdWithZoneNoLoc, this.whZoneIdNoLoc, null, (decimal?)qty);
+    //}
 
     [Theory]
     [InlineData(1.0)]
@@ -1025,17 +1025,17 @@ public class WhZStockMapServiceAddReservedTest : Base.WhZStockMapServiceTestBase
         }
     }
 
-    [Fact]
-    public Task AndAndCommitAndStoreWhStockTo001TestAsync()
-    {
-        return this.AddAndCommitAndStoreWhStockTo0TestAsync(this.whIdNoZoneNoLoc, null, null);
-    }
+    //[Fact]
+    //public Task AndAndCommitAndStoreWhStockTo001TestAsync()
+    //{
+    //    return this.AddAndCommitAndStoreWhStockTo0TestAsync(this.whIdNoZoneNoLoc, null, null);
+    //}
 
-    [Fact]
-    public Task AndAndCommitAndStoreWhStockTo002TestAsync()
-    {
-        return this.AddAndCommitAndStoreWhStockTo0TestAsync(this.whIdWithZoneNoLoc, this.whZoneIdNoLoc, null);
-    }
+    //[Fact]
+    //public Task AndAndCommitAndStoreWhStockTo002TestAsync()
+    //{
+    //    return this.AddAndCommitAndStoreWhStockTo0TestAsync(this.whIdWithZoneNoLoc, this.whZoneIdNoLoc, null);
+    //}
 
     [Fact]
     public Task AndAndCommitAndStoreWhStockTo003TestAsync()
@@ -1106,17 +1106,17 @@ public class WhZStockMapServiceAddReservedTest : Base.WhZStockMapServiceTestBase
         }
     }
 
-    [Fact]
-    public Task AddAndCommitAndStoreWhStockFailed01TestAsync()
-    {
-        return this.AddAndCommitAndStoreWhStockFailedTestAsync(this.whIdNoZoneNoLoc, null, null);
-    }
+    //[Fact]
+    //public Task AddAndCommitAndStoreWhStockFailed01TestAsync()
+    //{
+    //    return this.AddAndCommitAndStoreWhStockFailedTestAsync(this.whIdNoZoneNoLoc, null, null);
+    //}
 
-    [Fact]
-    public Task AddAndCommitAndStoreWhStockFailed02TestAsync()
-    {
-        return this.AddAndCommitAndStoreWhStockFailedTestAsync(this.whIdWithZoneNoLoc, this.whZoneIdNoLoc, null);
-    }
+    //[Fact]
+    //public Task AddAndCommitAndStoreWhStockFailed02TestAsync()
+    //{
+    //    return this.AddAndCommitAndStoreWhStockFailedTestAsync(this.whIdWithZoneNoLoc, this.whZoneIdNoLoc, null);
+    //}
 
     [Fact]
     public Task AddAndCommitAndStoreWhStockFailed03TestAsync()

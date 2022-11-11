@@ -653,7 +653,7 @@ public class WhZTranService : LogicServiceBase<OlcWhztranhead>, IWhZTranService
     /// <param name="entity">Bevételezés tranzakció adatok</param>
     /// <param name="context">Készletmozgás csomag adatok</param>
     /// <param name="cancellationToken"></param>
-    private Task GenerateReceivingLocAsync(OlcWhztranhead entity, Containers.Interfaces.IWhZStockMapContext context, CancellationToken cancellationToken = default)
+    private Task<IEnumerable<WhZTranLocDto>> GenerateReceivingLocAsync(OlcWhztranhead entity, Containers.Interfaces.IWhZStockMapContext context, CancellationToken cancellationToken = default)
     {
         return this.whZTranLineService.GenerateReceivingLocAsync(entity, context, cancellationToken);
     }
@@ -664,7 +664,7 @@ public class WhZTranService : LogicServiceBase<OlcWhztranhead>, IWhZTranService
     /// <param name="entity">Bevételezés tranzakció adatok</param>
     /// <param name="context">Készletmozgás csomag adatok</param>
     /// <param name="cancellationToken"></param>
-    private Task CommitReceivingLocAsync(OlcWhztranhead entity, Containers.Interfaces.IWhZStockMapContext context, CancellationToken cancellationToken = default)
+    private Task<IEnumerable<WhZTranLocDto>> CommitReceivingLocAsync(OlcWhztranhead entity, Containers.Interfaces.IWhZStockMapContext context, CancellationToken cancellationToken = default)
     {
         return this.whZTranLineService.CommitReceivingLocAsync(entity, context, cancellationToken);
     }

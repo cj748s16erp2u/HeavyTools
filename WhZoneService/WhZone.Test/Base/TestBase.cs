@@ -76,6 +76,23 @@ public abstract class TestBase<TEntity, TService> : TestBed<TestFixture>
         {
             query = query.Where(i => i.OlcWhlocations.Any());
         }
+        else
+        {
+            query = query.Where(i => !i.OlcWhlocations.Any());
+        }
+
+        return await query
+            .OrderBy(i => i.Whzoneid)
+            .Select(i => (int?)i.Whzoneid)
+            .FirstOrDefaultAsync(cancellationToken);
+    }
+
+    protected async Task<int?> GetWhZoneIdAsync(string whid, string zoneCode, CancellationToken cancellationToken = default)
+    {
+        var query = this.dbContext.OlcWhzones
+            .AsQueryable()
+            .Where(i => i.Whid == whid)
+            .Where(i => i.Whzonecode == zoneCode);
 
         return await query
             .OrderBy(i => i.Whzoneid)

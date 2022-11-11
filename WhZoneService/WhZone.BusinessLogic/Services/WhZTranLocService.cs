@@ -109,7 +109,7 @@ public class WhZTranLocService : LogicServiceBase<OlcWhztranloc>, IWhZTranLocSer
     /// <param name="context">Készletmozgás csomag adatok</param>
     /// <param name="cancellationToken"></param>
     /// <returns>Létrehozott helykód bejegyzés</returns>
-    public async Task<OlcWhztranloc?> AddReceivingDefaultIfNotExistsAsync(OlcWhztranhead whZTranHead, OlcWhztranline whZTranLine, Containers.Interfaces.IWhZStockMapContext context, CancellationToken cancellationToken = default)
+    public async Task<WhZTranLocDto> AddReceivingDefaultIfNotExistsAsync(OlcWhztranhead whZTranHead, OlcWhztranline whZTranLine, Containers.Interfaces.IWhZStockMapContext context, CancellationToken cancellationToken = default)
     {
         if (whZTranHead is null)
         {
@@ -162,7 +162,7 @@ public class WhZTranLocService : LogicServiceBase<OlcWhztranloc>, IWhZTranLocSer
 
             entity = await this.AddAsync(entity, cancellationToken);
 
-            var request = new BusinessEntities.Dto.WhZStockMapDto
+            var request = new WhZStockMapDto
             {
                 Itemid = whZTranLine.Itemid,
                 Whid = entity!.Whid,
@@ -174,7 +174,7 @@ public class WhZTranLocService : LogicServiceBase<OlcWhztranloc>, IWhZTranLocSer
             await this.whZStockMapService.AddReceivingAsync(context, request, cancellationToken);
         }
 
-        return entity;
+        return this.mapper.Map<WhZTranLocDto>(entity);
     }
 
     /// <summary>
@@ -185,7 +185,7 @@ public class WhZTranLocService : LogicServiceBase<OlcWhztranloc>, IWhZTranLocSer
     /// <param name="context">Készletmozgás csomag adatok</param>
     /// <param name="cancellationToken"></param>
     /// <returns>Véglegesített helykód bejegyzések</returns>
-    public async Task<IEnumerable<OlcWhztranloc>> CommitReceivingAsync(OlcWhztranhead whZTranHead, OlcWhztranline whZTranLine, Containers.Interfaces.IWhZStockMapContext context, CancellationToken cancellationToken = default)
+    public async Task<IEnumerable<WhZTranLocDto>> CommitReceivingAsync(OlcWhztranhead whZTranHead, OlcWhztranline whZTranLine, Containers.Interfaces.IWhZStockMapContext context, CancellationToken cancellationToken = default)
     {
         if (whZTranHead is null)
         {
@@ -226,7 +226,7 @@ public class WhZTranLocService : LogicServiceBase<OlcWhztranloc>, IWhZTranLocSer
             var groupped = list.GroupBy(l => l.Whlocid);
             foreach (var g in groupped)
             {
-                BusinessEntities.Dto.WhZStockMapDto request = new BusinessEntities.Dto.WhZStockMapDto
+                var request = new WhZStockMapDto
                 {
                     Itemid = whZTranLine.Itemid,
                     Whid = stHead?.Towhid!,
@@ -238,7 +238,7 @@ public class WhZTranLocService : LogicServiceBase<OlcWhztranloc>, IWhZTranLocSer
                 await this.whZStockMapService.CommitReceivingAsync(context, request, cancellationToken);
             }
 
-            return list.AsEnumerable();
+            return this.mapper.Map<IEnumerable<WhZTranLocDto>>(list);
         }
 
         return null!;

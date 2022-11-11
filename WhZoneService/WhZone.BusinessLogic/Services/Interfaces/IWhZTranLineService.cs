@@ -42,7 +42,7 @@ public interface IWhZTranLineService : ILogicService<OlcWhztranline>
     /// <param name="context">Készletmozgás csomag adatok</param>
     /// <param name="cancellationToken"></param>
     /// <returns>Létrehozott helykód bejegyzések listája</returns>
-    Task<IEnumerable<OlcWhztranloc>> GenerateReceivingLocAsync(OlcWhztranhead whZTranHead, IWhZStockMapContext context, CancellationToken cancellationToken = default);
+    Task<IEnumerable<WhZTranLocDto>> GenerateReceivingLocAsync(OlcWhztranhead whZTranHead, IWhZStockMapContext context, CancellationToken cancellationToken = default);
 
     /// <summary>
     /// Bevételezés helykódok véglegesítése
@@ -51,7 +51,7 @@ public interface IWhZTranLineService : ILogicService<OlcWhztranline>
     /// <param name="context">Készletmozgás csomag adatok</param>
     /// <param name="cancellationToken"></param>
     /// <returns>Véglegesített helykód bejegyzések</returns>
-    Task<IEnumerable<OlcWhztranloc>> CommitReceivingLocAsync(OlcWhztranhead whZTranHead, IWhZStockMapContext context, CancellationToken cancellationToken = default);
+    Task<IEnumerable<WhZTranLocDto>> CommitReceivingLocAsync(OlcWhztranhead whZTranHead, IWhZStockMapContext context, CancellationToken cancellationToken = default);
 
     /// <summary>
     /// Lekérdezés, hogy az adott fej azonosítóhoz tartozik-e tétel
