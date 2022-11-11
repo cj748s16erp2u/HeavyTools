@@ -46,4 +46,20 @@ public interface IWhZTranLocService : ILogicService<OlcWhztranloc>
     /// <param name="cancellationToken"></param>
     /// <returns>Véglegesített helykód bejegyzések</returns>
     Task<IEnumerable<OlcWhztranloc>> CommitReceivingAsync(OlcWhztranhead whZTranHead, OlcWhztranline whZTranLine, IWhZStockMapContext context, CancellationToken cancellationToken = default);
+
+    /// <summary>
+    /// Lekérdezés, hogy az adott tétel azonosítóhoz tartozik-e helykód információ
+    /// </summary>
+    /// <param name="whztranlineid">Tétel azonosító</param>
+    /// <param name="cancellationToken"></param>
+    /// <returns>Igen / Name</returns>
+    Task<bool> AnyAsync(int whztranlineid, CancellationToken cancellationToken = default);
+
+    /// <summary>
+    /// Tételhez tartozó helykód információk törlése
+    /// </summary>
+    /// <param name="whztlineid">Tétel azonosító</param>
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    Task<IEnumerable<WhZTranLocDto>> DeleteAllAsync(int whztlineid, CancellationToken cancellationToken = default);
 }

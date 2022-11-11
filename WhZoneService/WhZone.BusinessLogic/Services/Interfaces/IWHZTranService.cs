@@ -50,4 +50,12 @@ public interface IWhZTranService : ILogicService<OlcWhztranhead>
     /// <param name="cancellationToken"></param>
     /// <returns>Státusz váltás eredménye (siker=0, vagy hibaüzenet)</returns>
     Task<WhZTranHeadCloseResultDto> CloseAsync(WhZTranHeadCloseDto request, CancellationToken cancellationToken = default);
+
+    /// <summary>
+    /// Bevételezés típusú tranzakció törlése
+    /// </summary>
+    /// <param name="request">Tranzakció adatok</param>
+    /// <param name="cancellationToken"></param>
+    /// <returns>Törölt tranzakció</returns>
+    Task<WhZReceivingTranHeadDto> DeleteAsync(WhZTranHeadDeleteDto request, CancellationToken cancellationToken = default);
 }

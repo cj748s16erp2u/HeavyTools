@@ -28,11 +28,6 @@ namespace eLog.HeavyTools.Services.WhZone.BusinessEntities.Model
         [Column("addusrid")]
         [StringLength(12)]
         [Unicode(false)]
-        public string Addusrid { get; set; } = null!;
-        [Column("adddate", TypeName = "datetime")]
-        public DateTime Adddate { get; set; }
-        [Column("delstat")]
-        public int Delstat { get; set; }
 
         [ForeignKey("Addusrid")]
         [InverseProperty("OlsStatlines")]

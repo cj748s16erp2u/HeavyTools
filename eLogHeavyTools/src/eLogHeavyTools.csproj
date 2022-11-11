@@ -58,38 +58,38 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="CodaInt.Base, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\..\Releases\CodaInt.Base\v7.3.0.0\Binaries\CodaInt.Base.dll</HintPath>
+      <HintPath>..\..\..\Releases\CodaInt.Base\v7.3.2.0\Binaries\CodaInt.Base.dll</HintPath>
       <SpecificVersion>False</SpecificVersion>
     </Reference>
     <Reference Include="CODALink, Version=7.0.8201.29967, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\..\Releases\CodaInt.Base\v7.3.0.0\Binaries\CODALink.dll</HintPath>
+      <HintPath>..\..\..\Releases\CodaInt.Base\v7.3.2.0\Binaries\CODALink.dll</HintPath>
       <SpecificVersion>False</SpecificVersion>
     </Reference>
     <Reference Include="eFwIntf.Interf">
-      <HintPath>..\..\..\Releases\Bank.Base\v7.3.0.0\Binaries\eFwIntf.Interf.dll</HintPath>
+      <HintPath>..\..\..\Releases\Bank.Base\v7.3.2.0\Binaries\eFwIntf.Interf.dll</HintPath>
     </Reference>
     <Reference Include="eLog.Base, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\..\Releases\eLog.Base\v7.3.0.0\Binaries\eLog.Base.dll</HintPath>
+      <HintPath>..\..\..\Releases\eLog.Base\v7.3.2.0\Binaries\eLog.Base.dll</HintPath>
       <SpecificVersion>False</SpecificVersion>
     </Reference>
     <Reference Include="eLog.Finance.Base, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\..\Releases\eLog.Finance.Base\v7.3.0.0\Binaries\eLog.Finance.Base.dll</HintPath>
+      <HintPath>..\..\..\Releases\eLog.Finance.Base\v7.3.2.0\Binaries\eLog.Finance.Base.dll</HintPath>
       <SpecificVersion>False</SpecificVersion>
     </Reference>
     <Reference Include="eLog.Finance.Coda, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\..\Releases\eLog.Finance.CODA\v7.3.0.0\Binaries\eLog.Finance.Coda.dll</HintPath>
+      <HintPath>..\..\..\Releases\eLog.Finance.CODA\v7.3.2.0\Binaries\eLog.Finance.Coda.dll</HintPath>
       <SpecificVersion>False</SpecificVersion>
     </Reference>
     <Reference Include="EPPlus, Version=4.5.3.1, Culture=neutral, PublicKeyToken=ea159fdaa78159a1, processorArchitecture=MSIL">
-      <HintPath>..\..\..\Releases\eLog.Base\v7.3.0.0\Binaries\EPPlus.dll</HintPath>
+      <HintPath>..\..\..\Releases\eLog.Base\v7.3.2.0\Binaries\EPPlus.dll</HintPath>
     </Reference>
     <Reference Include="eProjectWeb.Framework, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\..\Releases\eLog.Base\v7.3.0.0\Binaries\eProjectWeb.Framework.dll</HintPath>
+      <HintPath>..\..\..\Releases\eLog.Base\v7.3.2.0\Binaries\eProjectWeb.Framework.dll</HintPath>
       <SpecificVersion>False</SpecificVersion>
     </Reference>
-    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+    <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\Releases\eLog.Base\v7.3.0.0\Binaries\Newtonsoft.Json.dll</HintPath>
+      <HintPath>..\..\..\Releases\eLog.Base\v7.3.2.0\Binaries\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Net.Http.Formatting, Version=5.2.9.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
@@ -97,7 +97,7 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="U4Ext.Bank.Base, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\..\Releases\Bank.Base\v7.3.0.0\Binaries\U4Ext.Bank.Base.dll</HintPath>
+      <HintPath>..\..\..\Releases\Bank.Base\v7.3.2.0\Binaries\U4Ext.Bank.Base.dll</HintPath>
       <SpecificVersion>False</SpecificVersion>
     </Reference>
     <Reference Include="System" />
@@ -123,6 +123,10 @@
     <Compile Include="BankTran\Import\CifEbankTransImportResultSet.cs" />
     <Compile Include="BankTran\Import\CifEbankTransImportResultSets.cs" />
     <Compile Include="BankTran\Import\CifEbankTransRowContext.cs" />
+    <Compile Include="Bookkeeping\Booking\BankBookingCreator3.cs" />
+    <Compile Include="Bookkeeping\Booking\BankBookingCreator3_Classes.cs" />
+    <Compile Include="Bookkeeping\Booking\BankBookingRemover3.cs" />
+    <Compile Include="Bookkeeping\Booking\BankCreationContext3.cs" />
     <Compile Include="Common\CheckBankAccountNo.cs" />
     <Compile Include="Common\CommonUtils.cs" />
     <Compile Include="Common\MagyarPostaCheckQRCode.cs" />
@@ -183,6 +187,8 @@
     <Compile Include="InterfaceCaller\ReserveParamsDto.cs" />
     <Compile Include="InterfaceCaller\ReserveResultDto.cs" />
     <Compile Include="InterfaceCaller\ResultDto.cs" />
+    <Compile Include="InterfaceCaller\RetailOrderResultDto.cs" />
+    <Compile Include="InterfaceCaller\RetailOrderParamDto.cs" />
     <Compile Include="InterfaceCaller\SordLineDeleteParamDto.cs" />
     <Compile Include="Masters\Import\Partner\PartnerImportPage.cs" />
     <Compile Include="Masters\Import\Partner\PartnerImportTab.cs" />
@@ -264,6 +270,7 @@
     <Compile Include="Masters\Item\Season\OlcItemSeasons.cs" />
     <Compile Include="Masters\Item\Season\OlcItemSeasonGenerated.cs" />
     <Compile Include="Masters\Item\Season\OlcItemSeasonSearchPage.cs" />
+    <Compile Include="Masters\ItmWh\RetailOrderSearchPage.cs" />
     <Compile Include="Masters\Partner\EmployeeList3.cs" />
     <Compile Include="Masters\Partner\OlcEmployeeRules.cs" />
     <Compile Include="Masters\Partner\OlcPartnAddrRules.cs" />

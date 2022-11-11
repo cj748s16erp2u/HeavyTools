@@ -246,6 +246,12 @@ public class OlcWhztranlineValidator : EntityValidator<OlcWhztranline>, IOlcWhzt
                 {
                     context.AddFailure(new FluentValidation.Results.ValidationFailure(nameof(OlcWhztranline.Whztlineid), $"Unable to delete a closed transaction's line (transaction: {tranHead.Whztid}, line: {newValue})"));
                 }
+
+                var locExists = context.TryGetCustom<OlcWhztranline, bool>("tranLocExists");
+                if (locExists)
+                {
+                    context.AddFailure(new FluentValidation.Results.ValidationFailure(nameof(OlcWhztranline.Whztlineid), $"Unable to delete line while location information are exists (transaction: {tranHead?.Whztid}, line: {newValue})"));
+                }
             });
     }
 

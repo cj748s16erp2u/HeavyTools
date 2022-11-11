@@ -145,15 +145,18 @@ namespace eLog.HeavyTools.Common.Json
                                 } else if (t.BaseType == typeof(Array))
                                 {
                                     var subitem = outjk.ToObject<JArray>();
+                                    var ttt = t.GetGenericArguments();
 
-                                    var m = t.GetMethod("Add");
-                                    Type itemType = t.GetGenericArguments()[0];
-
-                                    foreach (var item2 in subitem)
+                                    if (ttt.Length > 0)
                                     {
-                                        var oo = Parse(itemType, item2.ToObject<JObject>(), root + "/" + item.Name, deep);
-                                        m.Invoke(item.GetValue(o, null), new[] { oo });
-                                    }
+                                        var m = t.GetMethod("Add");
+                                        Type itemType = t.GetGenericArguments()[0];
+                                        foreach (var item2 in subitem)
+                                        {
+                                            var oo = Parse(itemType, item2.ToObject<JObject>(), root + "/" + item.Name, deep);
+                                            m.Invoke(item.GetValue(o, null), new[] { oo });
+                                        }
+                                    } 
                                     continue;
                                 }
                                 else
